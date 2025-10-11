@@ -1,134 +1,102 @@
-import {create} from 'zustand';
-import {persist} from 'zustand/middleware';
-import type {Budget, CreateBudgetInput, CreateTransactionInput, Transaction} from '../types';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { Transaction, Budget, CreateTransactionInput, CreateBudgetInput } from '../types';
+
+// ============================================
+// ИНТЕРФЕЙС STORE
+// ============================================
 
 interface FinanceStore {
+    // ===== STATE =====
     transactions: Transaction[];
     budgets: Budget[];
+
+    // ===== ACTIONS - TRANSACTIONS =====
     addTransaction: (transaction: CreateTransactionInput) => void;
+    updateTransaction: (id: string, data: Partial<Transaction>) => void;
     deleteTransaction: (id: string) => void;
-    updateTransaction: (id: string, data: Partial<CreateTransactionInput>) => void;
+
+    // ===== ACTIONS - BUDGETS =====
     addBudget: (budget: CreateBudgetInput) => void;
+    updateBudget: (id: string, data: Partial<Budget>) => void;
     deleteBudget: (id: string) => void;
-    updateBudget: (id: string, data: Partial<CreateBudgetInput>) => void;
+
+    // ===== UTILITY =====
     clearAllData: () => void;
 }
+
+// ============================================
+// СОЗДАНИЕ STORE
+// ============================================
 
 export const useFinanceStore = create<FinanceStore>()(
     persist(
         (set) => ({
+            // ===== НАЧАЛЬНОЕ СОСТОЯНИЕ =====
             transactions: [],
             budgets: [],
-            addTransaction: (transaction: CreateTransactionInput) =>
+
+            // ===== МЕТОДЫ ДЛЯ ТРАНЗАКЦИЙ =====
+
+            addTransaction: (transaction) =>
                 set((state) => ({
                     transactions: [
                         ...state.transactions,
-                        {id: crypto.randomUUID(), date: new Date(), ...transaction},
+                        {
+                            ...transaction,
+                            id: crypto.randomUUID(),
+                            createdAt: new Date(),
+                        },
                     ],
                 })),
-            deleteTransaction: (id: string) =>
+
+            updateTransaction: (id, data) =>
+                set((state) => ({
+                    transactions: state.transactions.map((t) =>
+                        t.id === id ? { ...t, ...data } : t
+                    ),
+                })),
+
+            deleteTransaction: (id) =>
                 set((state) => ({
                     transactions: state.transactions.filter((t) => t.id !== id),
                 })),
-            updateTransaction: (id: string, data: Partial<CreateTransactionInput>) =>
+
+            // ===== МЕТОДЫ ДЛЯ БЮДЖЕТОВ =====
+
+            addBudget: (budget) =>
                 set((state) => ({
-                    transactions: state.transactions.map((t) =>
-                        t.id === id ? {...t, ...data, date: new Date(t.date)} : t
+                    budgets: [
+                        ...state.budgets,
+                        {
+                            ...budget,
+                            id: crypto.randomUUID(),
+                        },
+                    ],
+                })),
+
+            updateBudget: (id, data) =>
+                set((state) => ({
+                    budgets: state.budgets.map((b) =>
+                        b.id === id ? { ...b, ...data } : b
                     ),
                 })),
-            addBudget: (budget: CreateBudgetInput) =>
-                set((state) => ({
-                    budgets: [...state.budgets, {id: crypto.randomUUID(), ...budget}],
-                })),
-            deleteBudget: (id: string) =>
+
+            deleteBudget: (id) =>
                 set((state) => ({
                     budgets: state.budgets.filter((b) => b.id !== id),
                 })),
-            updateBudget: (id: string, data: Partial<CreateBudgetInput>) =>
-                set((state) => ({
-                    budgets: state.budgets.map((b) => (b.id === id ? {...b, ...data} : b)),
+
+            // ===== UTILITY =====
+
+            clearAllData: () =>
+                set(() => ({
+                    transactions: [],
+                    budgets: [],
                 })),
-            clearAllData: () => set({transactions: [], budgets: []}),
         }),
         {
-            name: 'finflow-storage'import {create} from 'zustand';
-            import {persist} from 'zustand/middleware';
-            import type {Budget, CreateBudgetInput, CreateTransactionInput, Transaction} from '../types';
-
-            interface FinanceStore {
-                transactions: Transaction[];
-                budgets: Budget[];
-                addTransaction: (transaction: CreateTransactionInput) => void;
-                deleteTransaction: (id: string) => void;
-                updateTransaction: (id: string, data: Partial<CreateTransactionInput>) => void;
-                addBudget: (budget: CreateBudgetInput) => void;
-                deleteBudget: (id: string) => void;
-                updateBudget: (id: string, data: Partial<CreateBudgetInput>) => void;
-                clearAllData: () => void;
-            }
-
-            type State = {
-                transactions: Transaction[];
-                budgets: Budget[];
-            }
-
-            type Actions = {
-                addTransaction: (transaction: CreateTransactionInput) => void;
-                deleteTransaction: (id: string) => void;
-                updateTransaction: (id: string, data: Partial<CreateTransactionInput>) => void;
-                addBudget: (budget: CreateBudgetInput) => void;
-                deleteBudget: (id: string) => void;
-                updateBudget: (id: string, data: Partial<CreateBudgetInput>) => void;
-                clearAllData: () => void;
-            }
-
-            export const useFinanceStore = create<FinanceStore>()(
-                persist(
-                    (set: (fn: (state: State) => State) => void) => ({
-                        transactions: [],
-                        budgets: [],
-                        addTransaction: (transaction: CreateTransactionInput) =>
-                            set((state: State) => ({
-                                ...state,
-                                transactions: [
-                                    ...state.transactions,
-                                    {id: crypto.randomUUID(), ...transaction, date: new Date()},
-                                ],
-                            })),
-                        deleteTransaction: (id: string) =>
-                            set((state: State) => ({
-                                ...state,
-                                transactions: state.transactions.filter((t: Transaction) => t.id !== id),
-                            })),
-                        updateTransaction: (id: string, data: Partial<CreateTransactionInput>) =>
-                            set((state: State) => ({
-                                ...state,
-                                transactions: state.transactions.map((t: Transaction) =>
-                                    t.id === id ? {...t, ...data, date: new Date(t.date)} : t
-                                ),
-                            })),
-                        addBudget: (budget: CreateBudgetInput) =>
-                            set((state: State) => ({
-                                ...state,
-                                budgets: [...state.budgets, {id: crypto.randomUUID(), ...budget}],
-                            })),
-                        deleteBudget: (id: string) =>
-                            set((state: State) => ({
-                                ...state,
-                                budgets: state.budgets.filter((b: Budget) => b.id !== id),
-                            })),
-                        updateBudget: (id: string, data: Partial<CreateBudgetInput>) =>
-                            set((state: State) => ({
-                                ...state,
-                                budgets: state.budgets.map((b: Budget) => (b.id === id ? {...b, ...data} : b)),
-                            })),
-                        clearAllData: () => set(() => ({transactions: [], budgets: []})),
-                    }),
-                    {
-                        name: 'finflow-storage',
-                    }
-                )
-            );,
+            name: 'finflow-storage',
         }
     )
 );
