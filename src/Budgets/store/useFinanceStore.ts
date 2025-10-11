@@ -6,7 +6,7 @@ import type { Transaction, Budget, CreateTransactionInput, CreateBudgetInput } f
 // ИНТЕРФЕЙС STORE
 // ============================================
 
-interface FinanceStore {
+export interface FinanceStore {
     // ===== STATE =====
     transactions: Transaction[];
     budgets: Budget[];

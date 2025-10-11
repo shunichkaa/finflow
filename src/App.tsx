@@ -1,22 +1,11 @@
-import { useEffect } from 'react';
-import {
-    Container,
-    Typography,
-    Box,
-    Button,
-    Paper,
-    List,
-    ListItem,
-    ListItemText,
-    Divider,
-    Chip,
-} from '@mui/material';
+import {useEffect} from 'react';
+import {Box, Button, Chip, Container, Divider, List, ListItem, ListItemText, Paper, Typography,} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useFinanceStore } from './store/useFinanceStore';
-import type { FinanceStore } from './store/useFinanceStore';
-import { formatCurrency, formatDate } from './utils/formatters';
-import type { Transaction } from './types';
+import {useFinanceStore} from './store/useFinanceStore';
+import {formatCurrency, formatDate} from './utils/formatters';
+import type {Transaction} from './types';
+import type {FinanceStore} from "./Budgets/store/useFinanceStore.ts";
 
 function App() {
     const transactions = useFinanceStore((state: FinanceStore) => state.transactions);
@@ -39,9 +28,9 @@ function App() {
     };
 
     return (
-        <Container maxWidth="md" sx={{ py: 4 }}>
+        <Container maxWidth="md" sx={{py: 4}}>
             {/* Header */}
-            <Box sx={{ mb: 4, textAlign: 'center' }}>
+            <Box sx={{mb: 4, textAlign: 'center'}}>
                 <Typography variant="h3" gutterBottom color="primary" fontWeight="bold">
                     💰 FinFlow
                 </Typography>
@@ -51,15 +40,15 @@ function App() {
             </Box>
 
             {/* Actions */}
-            <Paper sx={{ p: 3, mb: 3 }}>
+            <Paper sx={{p: 3, mb: 3}}>
                 <Typography variant="h6" gutterBottom>
                     Транзакций: {transactions.length}
                 </Typography>
 
-                <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+                <Box sx={{display: 'flex', gap: 2, mt: 2}}>
                     <Button
                         variant="contained"
-                        startIcon={<AddIcon />}
+                        startIcon={<AddIcon/>}
                         onClick={handleAddTest}
                         fullWidth
                     >
@@ -69,7 +58,7 @@ function App() {
                     <Button
                         variant="outlined"
                         color="error"
-                        startIcon={<DeleteIcon />}
+                        startIcon={<DeleteIcon/>}
                         onClick={clearAllData}
                         fullWidth
                     >
@@ -79,13 +68,13 @@ function App() {
             </Paper>
 
             {/* Transaction List */}
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{p: 2}}>
                 <Typography variant="h6" gutterBottom>
                     Список транзакций
                 </Typography>
 
                 {transactions.length === 0 ? (
-                    <Box sx={{ textAlign: 'center', py: 4 }}>
+                    <Box sx={{textAlign: 'center', py: 4}}>
                         <Typography color="text.secondary">
                             Транзакций пока нет
                         </Typography>
@@ -94,7 +83,7 @@ function App() {
                     <List>
                         {transactions.map((transaction: Transaction, index: number) => (
                             <Box key={transaction.id}>
-                                {index > 0 && <Divider />}
+                                {index > 0 && <Divider/>}
                                 <ListItem
                                     secondaryAction={
                                         <Button
@@ -108,7 +97,7 @@ function App() {
                                 >
                                     <ListItemText
                                         primary={
-                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
                                                 <span>{transaction.description}</span>
                                                 <Chip
                                                     label={transaction.type === 'income' ? 'Доход' : 'Расход'}
