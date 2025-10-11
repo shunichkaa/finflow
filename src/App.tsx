@@ -19,7 +19,9 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {useFinanceStore} from './store/useFinanceStore';
 import {formatCurrency, formatDate} from './utils/formatters';
-import {useThemeMode} from './theme/ThemeContext';
+import {useThemeMode} from "./Budgets/theme/ThemeContext.tsx";
+
+;
 
 function App() {
     const transactions = useFinanceStore((state) => state.transactions);

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeContextProvider } from './theme/ThemeContext';
 import App from './App';
+import {ThemeContextProvider} from "./Budgets/theme/ThemeContext.tsx";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -11,8 +11,8 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <ThemeContextProvider>
-            <CssBaseline />
-            <App />
+            <CssBaseline/>
+            <App/>
         </ThemeContextProvider>
     </React.StrictMode>
 );

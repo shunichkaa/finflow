@@ -1,6 +1,6 @@
-import { createTheme, ThemeOptions } from '@mui/material/styles';
+import type {ThemeOptions} from "@mui/material";
+import {createTheme} from "@mui/material/styles";
 
-// Светлая тема с пастельными цветами
 const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
@@ -70,7 +70,6 @@ const lightThemeOptions: ThemeOptions = {
     },
 };
 
-// Тёмная тема с пастельными цветами
 const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
