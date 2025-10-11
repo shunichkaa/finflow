@@ -1,6 +1,5 @@
 import { createTheme } from '@mui/material/styles';
 
-// Кастомная цветовая палитра для финансового приложения
 export const theme = createTheme({
     palette: {
         primary: {
@@ -47,13 +46,13 @@ export const theme = createTheme({
         },
     },
     shape: {
-        borderRadius: 12, // Более округлые углы
+        borderRadius: 12,
     },
     components: {
         MuiButton: {
             styleOverrides: {
                 root: {
-                    textTransform: 'none', // Убираем КАПС
+                    textTransform: 'none',
                     fontWeight: 600,
                 },
             },
