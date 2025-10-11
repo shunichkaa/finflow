@@ -1,4 +1,4 @@
-export const formatCurrency = (amount: number, currency = '€') => {
+export const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('ru-RU', {
         style: 'currency',
         currency: 'EUR',
