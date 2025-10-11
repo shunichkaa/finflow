@@ -1,6 +1,6 @@
 import {create} from 'zustand';
 import {persist} from 'zustand/middleware';
-import {Budget, CreateBudgetInput, CreateTransactionInput, Transaction} from "../types";
+import type {Budget, CreateBudgetInput, CreateTransactionInput, Transaction} from "../types";
 
 
 // ============================================
