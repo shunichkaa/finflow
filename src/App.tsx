@@ -1,17 +1,33 @@
 import {useEffect} from 'react';
-import {Box, Button, Chip, Container, Divider, List, ListItem, ListItemText, Paper, Typography,} from '@mui/material';
+import {
+    Box,
+    Button,
+    Chip,
+    Container,
+    Divider,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Paper,
+    Stack,
+    Typography,
+} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {useFinanceStore} from './store/useFinanceStore';
 import {formatCurrency, formatDate} from './utils/formatters';
-import type {Transaction} from './types';
-import type {FinanceStore} from "./Budgets/store/useFinanceStore.ts";
+import {useThemeMode} from './theme/ThemeContext';
 
 function App() {
-    const transactions = useFinanceStore((state: FinanceStore) => state.transactions);
-    const addTransaction = useFinanceStore((state: FinanceStore) => state.addTransaction);
-    const deleteTransaction = useFinanceStore((state: FinanceStore) => state.deleteTransaction);
-    const clearAllData = useFinanceStore((state: FinanceStore) => state.clearAllData);
+    const transactions = useFinanceStore((state) => state.transactions);
+    const addTransaction = useFinanceStore((state) => state.addTransaction);
+    const deleteTransaction = useFinanceStore((state) => state.deleteTransaction);
+    const clearAllData = useFinanceStore((state) => state.clearAllData);
+
+    const {mode, toggleTheme} = useThemeMode();
 
     useEffect(() => {
         console.log('Current transactions:', transactions);
@@ -29,8 +45,16 @@ function App() {
 
     return (
         <Container maxWidth="md" sx={{py: 4}}>
-            {/* Header */}
-            <Box sx={{mb: 4, textAlign: 'center'}}>
+            {/* Header with Theme Toggle */}
+            <Box sx={{mb: 4, textAlign: 'center', position: 'relative'}}>
+                <IconButton
+                    onClick={toggleTheme}
+                    sx={{position: 'absolute', right: 0, top: 0}}
+                    color="inherit"
+                >
+                    {mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
+                </IconButton>
+
                 <Typography variant="h3" gutterBottom color="primary" fontWeight="bold">
                     💰 FinFlow
                 </Typography>
@@ -45,7 +69,7 @@ function App() {
                     Транзакций: {transactions.length}
                 </Typography>
 
-                <Box sx={{display: 'flex', gap: 2, mt: 2}}>
+                <Stack direction="row" spacing={2} sx={{mt: 2}}>
                     <Button
                         variant="contained"
                         startIcon={<AddIcon/>}
@@ -64,7 +88,7 @@ function App() {
                     >
                         Очистить всё
                     </Button>
-                </Box>
+                </Stack>
             </Paper>
 
             {/* Transaction List */}
@@ -81,24 +105,23 @@ function App() {
                     </Box>
                 ) : (
                     <List>
-                        {transactions.map((transaction: Transaction, index: number) => (
+                        {transactions.map((transaction, index) => (
                             <Box key={transaction.id}>
                                 {index > 0 && <Divider/>}
                                 <ListItem
-                                    secondaryAction={
-                                        <Button
-                                            size="small"
-                                            color="error"
-                                            onClick={() => deleteTransaction(transaction.id)}
-                                        >
-                                            Удалить
-                                        </Button>
-                                    }
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        py: 2,
+                                        gap: 2,
+                                    }}
                                 >
                                     <ListItemText
                                         primary={
-                                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-                                                <span>{transaction.description}</span>
+                                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap'}}>
+                                                <Typography variant="body1" component="span">
+                                                    {transaction.description}
+                                                </Typography>
                                                 <Chip
                                                     label={transaction.type === 'income' ? 'Доход' : 'Расход'}
                                                     color={transaction.type === 'income' ? 'success' : 'error'}
@@ -107,18 +130,36 @@ function App() {
                                             </Box>
                                         }
                                         secondary={formatDate(transaction.date)}
+                                        sx={{flexGrow: 1, minWidth: 0}}
                                     />
-                                    <Typography
-                                        variant="h6"
-                                        sx={{
-                                            color: transaction.type === 'income' ? 'success.main' : 'error.main',
-                                            fontWeight: 'bold',
-                                            mr: 2,
-                                        }}
-                                    >
-                                        {transaction.type === 'income' ? '+' : '-'}
-                                        {formatCurrency(transaction.amount)}
-                                    </Typography>
+
+                                    <Box sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 1,
+                                        flexShrink: 0,
+                                    }}>
+                                        <Typography
+                                            variant="h6"
+                                            sx={{
+                                                color: transaction.type === 'income' ? 'success.main' : 'error.main',
+                                                fontWeight: 'bold',
+                                                whiteSpace: 'nowrap',
+                                            }}
+                                        >
+                                            {transaction.type === 'income' ? '+' : '-'}
+                                            {formatCurrency(transaction.amount)}
+                                        </Typography>
+
+                                        <IconButton
+                                            size="small"
+                                            color="error"
+                                            onClick={() => deleteTransaction(transaction.id)}
+                                            sx={{ml: 1}}
+                                        >
+                                            <DeleteIcon fontSize="small"/>
+                                        </IconButton>
+                                    </Box>
                                 </ListItem>
                             </Box>
                         ))}
