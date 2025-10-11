@@ -14,13 +14,15 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useFinanceStore } from './store/useFinanceStore';
+import type { FinanceStore } from './store/useFinanceStore';
 import { formatCurrency, formatDate } from './utils/formatters';
+import type { Transaction } from './types';
 
 function App() {
-    const transactions = useFinanceStore((state) => state.transactions);
-    const addTransaction = useFinanceStore((state) => state.addTransaction);
-    const deleteTransaction = useFinanceStore((state) => state.deleteTransaction);
-    const clearAllData = useFinanceStore((state) => state.clearAllData);
+    const transactions = useFinanceStore((state: FinanceStore) => state.transactions);
+    const addTransaction = useFinanceStore((state: FinanceStore) => state.addTransaction);
+    const deleteTransaction = useFinanceStore((state: FinanceStore) => state.deleteTransaction);
+    const clearAllData = useFinanceStore((state: FinanceStore) => state.clearAllData);
 
     useEffect(() => {
         console.log('Current transactions:', transactions);
@@ -90,7 +92,7 @@ function App() {
                     </Box>
                 ) : (
                     <List>
-                        {transactions.map((transaction, index) => (
+                        {transactions.map((transaction: Transaction, index: number) => (
                             <Box key={transaction.id}>
                                 {index > 0 && <Divider />}
                                 <ListItem

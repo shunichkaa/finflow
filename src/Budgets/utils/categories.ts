@@ -1,4 +1,4 @@
-import { Category } from '../types';
+import type { Category } from '../types';
 
 export const EXPENSE_CATEGORIES: Category[] = [
     { id: '1', name: 'Еда и продукты', type: 'expense', icon: '🍔', color: '#ef4444' },

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Transaction, Budget, CreateTransactionInput, CreateBudgetInput } from '../types';
+import type { Transaction, Budget, CreateTransactionInput, CreateBudgetInput } from '../types';
 
 // ============================================
 // ИНТЕРФЕЙС STORE
