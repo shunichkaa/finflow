@@ -29,11 +29,11 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                                                                           onReset,
                                                                       }) => {
     return (
-        <Paper sx={{ p: 2, mb: 3 }}>
+        <Paper sx={{p: 2, mb: 3}}>
             <Stack spacing={2}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                    <FilterListIcon color="primary" />
-                    <Box sx={{ flexGrow: 1 }}>
+                <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mb: 1}}>
+                    <FilterListIcon color="primary"/>
+                    <Box sx={{flexGrow: 1}}>
                         <TextField
                             select
                             size="small"
@@ -50,14 +50,14 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     <Button
                         variant="outlined"
                         size="small"
-                        startIcon={<ClearIcon />}
+                        startIcon={<ClearIcon/>}
                         onClick={onReset}
                     >
                         Сбросить
                     </Button>
                 </Box>
 
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <Stack direction={{xs: 'column', sm: 'row'}} spacing={2}>
                     <TextField
                         select
                         size="small"
@@ -80,7 +80,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         type="date"
                         value={dateFrom}
                         onChange={(e) => onDateFromChange(e.target.value)}
-                        InputLabelProps={{ shrink: true }}
+                        InputLabelProps={{shrink: true}}
                         fullWidth
                     />
 
@@ -90,7 +90,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         type="date"
                         value={dateTo}
                         onChange={(e) => onDateToChange(e.target.value)}
-                        InputLabelProps={{ shrink: true }}
+                        InputLabelProps={{shrink: true}}
                         fullWidth
                     />
                 </Stack>
