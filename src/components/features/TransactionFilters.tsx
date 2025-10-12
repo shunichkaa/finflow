@@ -9,10 +9,10 @@ import {
 } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ClearIcon from '@mui/icons-material/Clear';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useTranslation } from 'react-i18next';
 import { TransactionType } from '../../Budgets/types';
-import { ALL_CATEGORIES } from '../../Budgets/utils/categories';
+import { ALL_CATEGORIES, getCategoryIcon, getCategoryName } from '../../Budgets/utils/categories';
+import { DatePickerField } from '../ui/DatePickerField';
 
 interface TransactionFiltersProps {
     type: TransactionType | 'all';
@@ -78,35 +78,26 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         fullWidth
                     >
                         <MenuItem value="">{t('allCategories')}</MenuItem>
-                        {ALL_CATEGORIES.map((cat) => {
-                            const Icon = cat.icon || MoreHorizIcon;
-                            return (
-                                <MenuItem key={cat.id} value={cat.id}>
-                                    <Icon sx={{ fontSize: 20, mr: 1 }} />
-                                    {cat.name}
-                                </MenuItem>
-                            );
-                        })}
+                        {ALL_CATEGORIES.map((cat) => (
+                            <MenuItem key={cat.id} value={cat.id}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    {getCategoryIcon(cat.icon, 20)}
+                                    <span>{getCategoryName(cat.id, t)}</span>
+                                </Box>
+                            </MenuItem>
+                        ))}
                     </TextField>
 
-                    <TextField
-                        size="small"
+                    <DatePickerField
                         label={t('from')}
-                        type="date"
                         value={dateFrom}
-                        onChange={(e) => onDateFromChange(e.target.value)}
-                        InputLabelProps={{ shrink: true }}
-                        fullWidth
+                        onChange={onDateFromChange}
                     />
 
-                    <TextField
-                        size="small"
+                    <DatePickerField
                         label={t('to')}
-                        type="date"
                         value={dateTo}
-                        onChange={(e) => onDateToChange(e.target.value)}
-                        InputLabelProps={{ shrink: true }}
-                        fullWidth
+                        onChange={onDateToChange}
                     />
                 </Stack>
             </Stack>

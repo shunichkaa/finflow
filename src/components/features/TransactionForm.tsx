@@ -10,10 +10,11 @@ import {
     Typography,
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { TransactionType } from '../../Budgets/types';
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
-import { getCategoriesByType } from '../../Budgets/utils/categories';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { getCategoriesByType, getCategoryIcon, getCategoryName } from '../../Budgets/utils/categories.tsx';
+import {DatePickerField} from "../ui/DatePickerField.tsx";
 
 interface TransactionFormData {
     amount: string;
@@ -27,6 +28,7 @@ interface TransactionFormProps {
 }
 
 export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) => {
+    const { t } = useTranslation();
     const [type, setType] = useState<TransactionType>('expense');
     const addTransaction = useFinanceStore((state) => state.addTransaction);
 
@@ -54,7 +56,6 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
             description: data.description,
             date: new Date(data.date),
         });
-
         reset();
         onSuccess?.();
     };
@@ -64,7 +65,7 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
             <Stack spacing={3}>
                 <Box>
                     <Typography variant="subtitle2" gutterBottom>
-                        Тип транзакции
+                        {t('type')}
                     </Typography>
                     <ToggleButtonGroup
                         value={type}
@@ -73,8 +74,8 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                         fullWidth
                         color={type === 'income' ? 'success' : 'error'}
                     >
-                        <ToggleButton value="expense">Расход</ToggleButton>
-                        <ToggleButton value="income">Доход</ToggleButton>
+                        <ToggleButton value="expense">{t('expense')}</ToggleButton>
+                        <ToggleButton value="income">{t('income')}</ToggleButton>
                     </ToggleButtonGroup>
                 </Box>
 
@@ -82,22 +83,20 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                     name="amount"
                     control={control}
                     rules={{
-                        required: 'Укажите сумму',
+                        required: t('amountRequired'),
                         pattern: {
                             value: /^\d+(\.\d{1,2})?$/,
-                            message: 'Введите корректную сумму',
+                            message: t('invalidAmount'),
                         },
                         validate: (value) =>
-                            parseFloat(value) > 0 || 'Сумма должна быть больше 0',
+                            parseFloat(value) > 0 || t('amountMustBePositive'),
                     }}
                     render={({ field }) => (
                         <TextField
                             {...field}
-                            label="Сумма"
+                            label={t('amount')}
                             type="number"
-                            slotProps={{
-                                input: { inputProps: { step: 0.01, min: 0 } },
-                            }}
+                            inputProps={{ step: '0.01', min: '0' }}
                             error={!!errors.amount}
                             helperText={errors.amount?.message}
                             fullWidth
@@ -109,12 +108,12 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                 <Controller
                     name="category"
                     control={control}
-                    rules={{ required: 'Выберите категорию' }}
+                    rules={{ required: t('categoryRequired') }}
                     render={({ field }) => (
                         <TextField
                             {...field}
                             select
-                            label="Категория"
+                            label={t('category')}
                             error={!!errors.category}
                             helperText={errors.category?.message}
                             fullWidth
@@ -122,8 +121,10 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                         >
                             {categories.map((cat) => (
                                 <MenuItem key={cat.id} value={cat.id}>
-                                    {cat.icon ? <cat.icon sx={{ fontSize: 20, mr: 1 }} /> : <MoreHorizIcon sx={{ fontSize: 20, mr: 1 }} />}
-                                    {cat.name}
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                        {getCategoryIcon(cat.icon, 20)}
+                                        <span>{getCategoryName(cat.id, t)}</span>
+                                    </Box>
                                 </MenuItem>
                             ))}
                         </TextField>
@@ -136,8 +137,8 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                     render={({ field }) => (
                         <TextField
                             {...field}
-                            label="Описание"
-                            placeholder="Например: Покупка продуктов"
+                            label={t('description')}
+                            placeholder={t('descriptionPlaceholder')}
                             multiline
                             rows={2}
                             fullWidth
@@ -148,17 +149,12 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                 <Controller
                     name="date"
                     control={control}
-                    rules={{ required: 'Укажите дату' }}
+                    rules={{ required: t('dateRequired') }}
                     render={({ field }) => (
-                        <TextField
-                            {...field}
-                            label="Дата"
-                            type="date"
-                            slotProps={{ inputLabel: { shrink: true } }}
-                            error={!!errors.date}
-                            helperText={errors.date?.message}
-                            fullWidth
-                            required
+                        <DatePickerField
+                            label={t('date')}
+                            value={field.value}
+                            onChange={field.onChange}
                         />
                     )}
                 />
@@ -170,7 +166,7 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                     color={type === 'income' ? 'success' : 'error'}
                     fullWidth
                 >
-                    Добавить {type === 'income' ? 'доход' : 'расход'}
+                    {t('addTransaction')}
                 </Button>
             </Stack>
         </Box>

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
 import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
-import { getCategoryById } from '../../Budgets/utils/categories';
+import { getCategoryById } from '../../Budgets/utils/categories.tsx';
 import { formatCurrency, formatDate } from '../../Budgets/utils/formatters';
 import { Transaction } from '../../Budgets/types';
 

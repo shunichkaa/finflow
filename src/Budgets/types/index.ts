@@ -46,7 +46,7 @@ export interface Category {
     id: string;
     name: string;
     type: 'income' | 'expense';
-    icon: React.ElementType;
+    icon: string;
     color: string;
 }
 
