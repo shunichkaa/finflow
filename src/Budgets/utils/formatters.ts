@@ -1,9 +1,17 @@
-export const formatCurrency = (amount: number) => {
+import { Currency } from '../store/useSettingsStore';
+
+export const formatCurrency = (amount: number, currency: Currency = 'EUR') => {
+    const currencySymbols: Record<Currency, string> = {
+        EUR: '€',
+        USD: '$',
+        RUB: '₽',
+    };
+
     return new Intl.NumberFormat('ru-RU', {
-        style: 'currency',
-        currency: 'EUR',
+        style: 'decimal',
         minimumFractionDigits: 2,
-    }).format(amount);
+        maximumFractionDigits: 2,
+    }).format(amount) + ' ' + currencySymbols[currency];
 };
 
 export const formatDate = (date: Date) => {
