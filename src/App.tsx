@@ -11,9 +11,9 @@ import { Modal } from './components/ui/Modal';
 import { SettingsMenu } from './components/features/SettingsMenu';
 import { useFinanceStore } from './Budgets/store/useFinanceStore.ts';
 import { useTransactionFilters } from './Budgets/hooks/useTransactionFilters.ts';
-import { useThemeMode } from './theme/themeContext';
 import { useSettingsStore } from './Budgets/store/useSettingsStore';
-import { translations } from './translations';
+import {useThemeMode} from "./Budgets/theme/ThemeProvider.tsx";
+import {translations} from "./Budgets/utils/i18n.ts";
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +29,6 @@ function App() {
         filteredTransactions,
     } = useTransactionFilters(transactions);
 
-    // === Новое для темы и настроек ===
     const { mode, toggleTheme } = useThemeMode();
     const { language, currency } = useSettingsStore();
     const t = translations[language];
@@ -38,7 +37,6 @@ function App() {
         <Container maxWidth="lg" sx={{ py: 4 }}>
             {/* Header */}
             <Box sx={{ textAlign: 'center', mb: 4, position: 'relative' }}>
-                {/* Кнопки управления справа */}
                 <Box sx={{ position: 'absolute', right: 0, top: 0, display: 'flex', gap: 1 }}>
                     <IconButton onClick={toggleTheme} color="inherit">
                         {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
