@@ -1,13 +1,26 @@
 import React from 'react';
-import {Box, Chip, Divider, IconButton, List, ListItem, Typography,} from '@mui/material';
+import {Box, Chip, Divider, IconButton, List, ListItem, Typography} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {useFinanceStore} from "../../Budgets/store/useFinanceStore";
-import {getCategoryById} from "../../Budgets/utils/categories";
-import {formatCurrency, formatDate} from "../../Budgets/utils/formatters";
+import {useTranslation} from 'react-i18next';
+import {useTheme} from '@mui/material/styles';
+import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
+import {useSettingsStore} from '../../Budgets/store/useSettingsStore';
+import {getCategoryById} from '../../Budgets/utils/categories';
+import {formatCurrency, formatDate} from '../../Budgets/utils/formatters';
+import {Transaction} from '../../Budgets/types';
 
-export const TransactionList: React.FC = () => {
-    const transactions = useFinanceStore((state) => state.transactions);
+interface TransactionListProps {
+    transactions?: Transaction[];
+}
+
+export const TransactionList: React.FC<TransactionListProps> = ({transactions: propTransactions}) => {
+    const {t} = useTranslation();
+    const theme = useTheme();
+    const storeTransactions = useFinanceStore((state) => state.transactions);
     const deleteTransaction = useFinanceStore((state) => state.deleteTransaction);
+    const {currency} = useSettingsStore();
+
+    const transactions = propTransactions || storeTransactions;
 
     const sortedTransactions = [...transactions].sort(
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -17,17 +30,17 @@ export const TransactionList: React.FC = () => {
         return (
             <Box sx={{textAlign: 'center', py: 8}}>
                 <Typography variant="h6" color="text.secondary" gutterBottom>
-                    📝 Транзакций пока нет
+                    📝 {t('noTransactions')}
                 </Typography>
                 <Typography variant="body2" color="text.disabled">
-                    Добавьте первую транзакцию
+                    {t('addFirst')}
                 </Typography>
             </Box>
         );
     }
 
     const handleDelete = (id: string) => {
-        if (window.confirm('Удалить транзакцию?')) {
+        if (window.confirm(t('confirmDelete'))) {
             deleteTransaction(id);
         }
     };
@@ -37,9 +50,12 @@ export const TransactionList: React.FC = () => {
             {sortedTransactions.map((transaction, index) => {
                 const category = getCategoryById(transaction.category);
 
+                const categoryName = category?.name ? t(category.name) : t('uncategorized');
+                const categoryIcon = category?.icon || 'MoreHoriz'; // пример, можно заменить на нужную иконку
+
                 return (
                     <React.Fragment key={transaction.id}>
-                        {index > 0 && <Divider/>}
+                        {index > 0 && <Divider />}
                         <ListItem
                             sx={{
                                 display: 'flex',
@@ -52,22 +68,33 @@ export const TransactionList: React.FC = () => {
                             {/* Иконка категории */}
                             <Box
                                 sx={{
-                                    fontSize: 32,
-                                    lineHeight: 1,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: 48,
+                                    height: 48,
+                                    borderRadius: 2,
+                                    bgcolor: theme.palette.mode === 'dark'
+                                        ? category?.color + '40'
+                                        : category?.color,
+                                    color: theme.palette.mode === 'dark'
+                                        ? category?.color
+                                        : '#4a5568',
                                     flexShrink: 0,
                                 }}
                             >
-                                {category?.icon}
+                                {/* Простейший вариант: рендерим текст иконки */}
+                                {categoryIcon}
                             </Box>
 
                             {/* Информация о транзакции */}
                             <Box sx={{flexGrow: 1, minWidth: 0}}>
                                 <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mb: 0.5}}>
                                     <Typography variant="body1" fontWeight={600} noWrap>
-                                        {category?.name}
+                                        {categoryName}
                                     </Typography>
                                     <Chip
-                                        label={transaction.type === 'income' ? 'Доход' : 'Расход'}
+                                        label={t(transaction.type)}
                                         color={transaction.type === 'income' ? 'success' : 'error'}
                                         size="small"
                                     />
@@ -90,6 +117,7 @@ export const TransactionList: React.FC = () => {
                                 </Typography>
                             </Box>
 
+                            {/* Сумма и кнопка удаления */}
                             <Box
                                 sx={{
                                     display: 'flex',
@@ -105,14 +133,14 @@ export const TransactionList: React.FC = () => {
                                     sx={{whiteSpace: 'nowrap'}}
                                 >
                                     {transaction.type === 'income' ? '+' : '-'}
-                                    {formatCurrency(transaction.amount)}
+                                    {formatCurrency(transaction.amount, currency)}
                                 </Typography>
                                 <IconButton
                                     size="small"
                                     color="error"
                                     onClick={() => handleDelete(transaction.id)}
                                 >
-                                    <DeleteIcon fontSize="small"/>
+                                    <DeleteIcon fontSize="small" />
                                 </IconButton>
                             </Box>
                         </ListItem>

@@ -11,13 +11,13 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LanguageIcon from '@mui/icons-material/Language';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CheckIcon from '@mui/icons-material/Check';
-import {Currency, Language, useSettingsStore} from "../../Budgets/store/useSettingsStore.ts";
-
-;
+import { useTranslation } from 'react-i18next';
+import { useSettingsStore, Currency } from '../../Budgets/store/useSettingsStore';
 
 export const SettingsMenu: React.FC = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const { language, currency, setLanguage, setCurrency } = useSettingsStore();
+    const { i18n } = useTranslation();
+    const { currency, setCurrency } = useSettingsStore();
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -27,9 +27,12 @@ export const SettingsMenu: React.FC = () => {
         setAnchorEl(null);
     };
 
-    const languages: { code: Language; label: string; flag: string }[] = [
+    const languages = [
         { code: 'ru', label: 'Русский', flag: '🇷🇺' },
         { code: 'en', label: 'English', flag: '🇬🇧' },
+        { code: 'fr', label: 'Français', flag: '🇫🇷' },
+        { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
+        { code: 'es', label: 'Español', flag: '🇪🇸' },
         { code: 'me', label: 'Crnogorski', flag: '🇲🇪' },
     ];
 
@@ -52,22 +55,22 @@ export const SettingsMenu: React.FC = () => {
                     <ListItemIcon>
                         <LanguageIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Язык / Language</ListItemText>
+                    <ListItemText>Language</ListItemText>
                 </MenuItem>
 
                 {languages.map((lang) => (
                     <MenuItem
                         key={lang.code}
                         onClick={() => {
-                            setLanguage(lang.code);
+                            i18n.changeLanguage(lang.code);
                             handleClose();
                         }}
-                        selected={language === lang.code}
+                        selected={i18n.language === lang.code}
                     >
                         <ListItemText inset>
                             {lang.flag} {lang.label}
                         </ListItemText>
-                        {language === lang.code && (
+                        {i18n.language === lang.code && (
                             <CheckIcon fontSize="small" color="primary" />
                         )}
                     </MenuItem>
@@ -79,7 +82,7 @@ export const SettingsMenu: React.FC = () => {
                     <ListItemIcon>
                         <AttachMoneyIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Валюта / Currency</ListItemText>
+                    <ListItemText>Currency</ListItemText>
                 </MenuItem>
 
                 {currencies.map((curr) => (

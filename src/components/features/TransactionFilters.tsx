@@ -1,9 +1,17 @@
 import React from 'react';
-import {Box, Button, MenuItem, Paper, Stack, TextField,} from '@mui/material';
+import {
+    Box,
+    TextField,
+    MenuItem,
+    Stack,
+    Button,
+    Paper,
+} from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ClearIcon from '@mui/icons-material/Clear';
-import {TransactionType} from "../../Budgets/types";
-import {ALL_CATEGORIES} from "../../Budgets/utils/categories";
+import { useTranslation } from 'react-i18next';
+import { TransactionType } from '../../Budgets/types';
+import { ALL_CATEGORIES } from '../../Budgets/utils/categories';
 
 interface TransactionFiltersProps {
     type: TransactionType | 'all';
@@ -28,45 +36,47 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                                                                           onDateToChange,
                                                                           onReset,
                                                                       }) => {
+    const { t } = useTranslation();
+
     return (
-        <Paper sx={{p: 2, mb: 3}}>
+        <Paper sx={{ p: 2, mb: 3 }}>
             <Stack spacing={2}>
-                <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mb: 1}}>
-                    <FilterListIcon color="primary"/>
-                    <Box sx={{flexGrow: 1}}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                    <FilterListIcon color="primary" />
+                    <Box sx={{ flexGrow: 1 }}>
                         <TextField
                             select
                             size="small"
-                            label="Тип"
+                            label={t('type')}
                             value={type}
                             onChange={(e) => onTypeChange(e.target.value as TransactionType | 'all')}
                             fullWidth
                         >
-                            <MenuItem value="all">Все типы</MenuItem>
-                            <MenuItem value="expense">Расходы</MenuItem>
-                            <MenuItem value="income">Доходы</MenuItem>
+                            <MenuItem value="all">{t('allTypes')}</MenuItem>
+                            <MenuItem value="expense">{t('expense')}</MenuItem>
+                            <MenuItem value="income">{t('income')}</MenuItem>
                         </TextField>
                     </Box>
                     <Button
                         variant="outlined"
                         size="small"
-                        startIcon={<ClearIcon/>}
+                        startIcon={<ClearIcon />}
                         onClick={onReset}
                     >
-                        Сбросить
+                        {t('reset')}
                     </Button>
                 </Box>
 
-                <Stack direction={{xs: 'column', sm: 'row'}} spacing={2}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                     <TextField
                         select
                         size="small"
-                        label="Категория"
+                        label={t('category')}
                         value={category}
                         onChange={(e) => onCategoryChange(e.target.value)}
                         fullWidth
                     >
-                        <MenuItem value="">Все категории</MenuItem>
+                        <MenuItem value="">{t('allCategories')}</MenuItem>
                         {ALL_CATEGORIES.map((cat) => (
                             <MenuItem key={cat.id} value={cat.id}>
                                 {cat.icon} {cat.name}
@@ -76,21 +86,21 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
 
                     <TextField
                         size="small"
-                        label="От даты"
+                        label={t('from')}
                         type="date"
                         value={dateFrom}
                         onChange={(e) => onDateFromChange(e.target.value)}
-                        InputLabelProps={{shrink: true}}
+                        InputLabelProps={{ shrink: true }}
                         fullWidth
                     />
 
                     <TextField
                         size="small"
-                        label="До даты"
+                        label={t('to')}
                         type="date"
                         value={dateTo}
                         onChange={(e) => onDateToChange(e.target.value)}
-                        InputLabelProps={{shrink: true}}
+                        InputLabelProps={{ shrink: true }}
                         fullWidth
                     />
                 </Stack>
