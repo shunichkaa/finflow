@@ -38,22 +38,22 @@ export const StatsCards: React.FC = () => {
             icon: <AccountBalanceWalletIcon sx={{fontSize: 40}}/>,
             color: balance >= 0 ? 'primary' : 'error',
             bgGradient: balance >= 0
-                ? 'linear-gradient(135deg, #da6580 0%, #d7ede2 100%)'
-                : 'linear-gradient(135deg, #fcd9df 0%, #cfe0f8 100%)',
+                ? 'linear-gradient(135deg, #BDE3FB 0%, #92BCFA 100%)'
+                : 'linear-gradient(135deg, #FDF0EC 0%, #AEE1F9 100%)',
         },
         {
             title: t('income'),
             value: totalIncome,
             icon: <TrendingUpIcon sx={{fontSize: 40}}/>,
             color: 'success',
-            bgGradient: 'linear-gradient(135deg, #DEE8FF 0%, #f8ad7c 100%)',
+            bgGradient: 'linear-gradient(135deg, #C2D1EC 0%, #6A92C8 100%)',
         },
         {
             title: t('expense'),
             value: totalExpense,
             icon: <TrendingDownIcon sx={{fontSize: 40}}/>,
             color: 'error',
-            bgGradient: 'linear-gradient(135deg, #9fa5d5 0%, #e8f5c8 100%)',
+            bgGradient: 'linear-gradient(135deg, #9DB2DC 0%, #0E2D6C 100%)',
         },
     ];
 

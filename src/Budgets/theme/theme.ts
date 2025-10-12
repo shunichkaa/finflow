@@ -5,9 +5,9 @@ const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
         primary: {
-            main: '#7c3aed',
-            light: '#a78bfa',
-            dark: '#5b21b6',
+            main: '#6A92C8',
+            light: '#92bcfa',
+            dark: '#0E2D6C',
         },
         secondary: {
             main: '#10b981',
@@ -74,9 +74,9 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#a78bfa',
-            light: '#c4b5fd',
-            dark: '#7c3aed',
+            main: '#92bcfa',
+            light: '#c2d1ec',
+            dark: '#6a92c8',
         },
         secondary: {
             main: '#6ee7b7',
