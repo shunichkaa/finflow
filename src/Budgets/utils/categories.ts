@@ -1,4 +1,5 @@
-import { Category } from '../types';
+import * as React from 'react';
+import { SvgIconProps } from '@mui/material/SvgIcon';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import HomeIcon from '@mui/icons-material/Home';
@@ -14,8 +15,14 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
-export const getCategoryIcon = (iconName: string, size: 'small' | 'medium' | 'large' = 'medium') => {
-    const iconMap: Record<string, any> = {
+import { Category } from '../types';
+
+
+export const getCategoryIcon = (
+    iconName: string,
+    size: 'small' | 'medium' | 'large' = 'medium'
+): React.ReactElement => {
+    const iconMap: Record<string, React.ComponentType<SvgIconProps>> = {
         restaurant: RestaurantIcon,
         car: DirectionsCarIcon,
         home: HomeIcon,
@@ -32,10 +39,38 @@ export const getCategoryIcon = (iconName: string, size: 'small' | 'medium' | 'la
         wallet: AccountBalanceWalletIcon,
     };
 
-    const Icon = iconMap[iconName] || MoreHorizIcon;
+    const IconComponent = iconMap[iconName] || MoreHorizIcon;
     const fontSize = size === 'small' ? 20 : size === 'large' ? 32 : 24;
 
-    return <Icon sx={{ fontSize }} />;
+    return React.createElement(IconComponent, { sx: { fontSize } });
+};
+
+// Или используем более простой подход с объектом готовых иконок
+export const CategoryIcons: Record<string, React.ReactElement> = {
+    restaurant: React.createElement(RestaurantIcon),
+    car: React.createElement(DirectionsCarIcon),
+    home: React.createElement(HomeIcon),
+    gaming: React.createElement(SportsEsportsIcon),
+    hospital: React.createElement(LocalHospitalIcon),
+    school: React.createElement(SchoolIcon),
+    clothes: React.createElement(CheckroomIcon),
+    subscriptions: React.createElement(SubscriptionsIcon),
+    more: React.createElement(MoreHorizIcon),
+    work: React.createElement(WorkIcon),
+    laptop: React.createElement(LaptopIcon),
+    trending: React.createElement(TrendingUpIcon),
+    gift: React.createElement(CardGiftcardIcon),
+    wallet: React.createElement(AccountBalanceWalletIcon),
+};
+
+export const getCategoryIconAlt = (
+    iconName: string,
+    size: 'small' | 'medium' | 'large' = 'medium'
+): React.ReactElement => {
+    const fontSize = size === 'small' ? 20 : size === 'large' ? 32 : 24;
+    const baseIcon = CategoryIcons[iconName] || CategoryIcons.more;
+
+    return React.cloneElement(baseIcon, { sx: { fontSize } });
 };
 
 export const EXPENSE_CATEGORIES: Category[] = [
