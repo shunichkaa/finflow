@@ -32,10 +32,8 @@ function App() {
 
     const { mode, toggleTheme } = useThemeMode();
 
-    // Функция для фильтрации при клике на карточки
     const handleStatsCardClick = (type: TransactionType | 'all') => {
         setType(type);
-        // Опционально: скролл к списку транзакций
         document.getElementById('transactions-list')?.scrollIntoView({ behavior: 'smooth' });
     };
 
