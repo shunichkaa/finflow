@@ -1,13 +1,19 @@
 import { useState } from 'react';
-import { Container, Box, Typography, Button, Paper } from '@mui/material';
+import { Container, Box, Typography, Button, Paper, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { TransactionForm } from './components/features/TransactionForm';
 import { TransactionList } from './components/features/TransactionList';
 import { TransactionFilters } from './components/features/TransactionFilters';
 import { StatsCards } from './components/features/StatsCards';
 import { Modal } from './components/ui/Modal';
-import {useFinanceStore} from "./Budgets/store/useFinanceStore.ts";
+import { SettingsMenu } from './components/features/SettingsMenu';
+import { useFinanceStore } from './Budgets/store/useFinanceStore.ts';
 import { useTransactionFilters } from './Budgets/hooks/useTransactionFilters.ts';
+import { useThemeMode } from './theme/themeContext';
+import { useSettingsStore } from './Budgets/store/useSettingsStore';
+import { translations } from './translations';
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,14 +29,28 @@ function App() {
         filteredTransactions,
     } = useTransactionFilters(transactions);
 
+    // === Новое для темы и настроек ===
+    const { mode, toggleTheme } = useThemeMode();
+    const { language, currency } = useSettingsStore();
+    const t = translations[language];
+
     return (
         <Container maxWidth="lg" sx={{ py: 4 }}>
-            <Box sx={{ textAlign: 'center', mb: 4 }}>
+            {/* Header */}
+            <Box sx={{ textAlign: 'center', mb: 4, position: 'relative' }}>
+                {/* Кнопки управления справа */}
+                <Box sx={{ position: 'absolute', right: 0, top: 0, display: 'flex', gap: 1 }}>
+                    <IconButton onClick={toggleTheme} color="inherit">
+                        {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                    </IconButton>
+                    <SettingsMenu />
+                </Box>
+
                 <Typography variant="h3" gutterBottom color="primary" fontWeight="bold">
-                    💰 FinFlow
+                    💰 {t.appName}
                 </Typography>
                 <Typography variant="h6" color="text.secondary" gutterBottom>
-                    Умное управление финансами
+                    {t.tagline}
                 </Typography>
                 <Button
                     variant="contained"
@@ -39,7 +59,7 @@ function App() {
                     size="large"
                     sx={{ mt: 2 }}
                 >
-                    Добавить транзакцию
+                    {t.addTransaction}
                 </Button>
             </Box>
 
@@ -67,7 +87,7 @@ function App() {
             <Modal
                 open={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                title="Новая транзакция"
+                title={t.newTransaction}
             >
                 <TransactionForm onSuccess={() => setIsModalOpen(false)} />
             </Modal>
