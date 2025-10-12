@@ -45,10 +45,11 @@ export interface Budget {
 export interface Category {
     id: string;
     name: string;
-    type: TransactionType;
-    icon: string;
+    type: 'income' | 'expense';
+    icon: React.ElementType;
     color: string;
 }
+
 
 // ============================================
 // UTILITY TYPES

@@ -1,24 +1,25 @@
 import React from 'react';
-import {Box, Chip, Divider, IconButton, List, ListItem, Typography} from '@mui/material';
+import { Box, Chip, Divider, IconButton, List, ListItem, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {useTranslation} from 'react-i18next';
-import {useTheme} from '@mui/material/styles';
-import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
-import {useSettingsStore} from '../../Budgets/store/useSettingsStore';
-import {getCategoryById} from '../../Budgets/utils/categories';
-import {formatCurrency, formatDate} from '../../Budgets/utils/formatters';
-import {Transaction} from '../../Budgets/types';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from '@mui/material/styles';
+import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
+import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
+import { getCategoryById } from '../../Budgets/utils/categories';
+import { formatCurrency, formatDate } from '../../Budgets/utils/formatters';
+import { Transaction } from '../../Budgets/types';
 
 interface TransactionListProps {
     transactions?: Transaction[];
 }
 
-export const TransactionList: React.FC<TransactionListProps> = ({transactions: propTransactions}) => {
-    const {t} = useTranslation();
+export const TransactionList: React.FC<TransactionListProps> = ({ transactions: propTransactions }) => {
+    const { t } = useTranslation();
     const theme = useTheme();
     const storeTransactions = useFinanceStore((state) => state.transactions);
     const deleteTransaction = useFinanceStore((state) => state.deleteTransaction);
-    const {currency} = useSettingsStore();
+    const { currency } = useSettingsStore();
 
     const transactions = propTransactions || storeTransactions;
 
@@ -28,7 +29,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({transactions: p
 
     if (transactions.length === 0) {
         return (
-            <Box sx={{textAlign: 'center', py: 8}}>
+            <Box sx={{ textAlign: 'center', py: 8 }}>
                 <Typography variant="h6" color="text.secondary" gutterBottom>
                     📝 {t('noTransactions')}
                 </Typography>
@@ -46,12 +47,11 @@ export const TransactionList: React.FC<TransactionListProps> = ({transactions: p
     };
 
     return (
-        <List sx={{p: 0}}>
+        <List sx={{ p: 0 }}>
             {sortedTransactions.map((transaction, index) => {
                 const category = getCategoryById(transaction.category);
 
                 const categoryName = category?.name ? t(category.name) : t('uncategorized');
-                const categoryIcon = category?.icon || 'MoreHoriz'; // пример, можно заменить на нужную иконку
 
                 return (
                     <React.Fragment key={transaction.id}>
@@ -74,22 +74,27 @@ export const TransactionList: React.FC<TransactionListProps> = ({transactions: p
                                     width: 48,
                                     height: 48,
                                     borderRadius: 2,
-                                    bgcolor: theme.palette.mode === 'dark'
-                                        ? category?.color + '40'
-                                        : category?.color,
-                                    color: theme.palette.mode === 'dark'
-                                        ? category?.color
-                                        : '#4a5568',
+                                    bgcolor:
+                                        theme.palette.mode === 'dark'
+                                            ? category?.color + '40'
+                                            : category?.color,
+                                    color:
+                                        theme.palette.mode === 'dark'
+                                            ? category?.color
+                                            : '#4a5568',
                                     flexShrink: 0,
                                 }}
                             >
-                                {/* Простейший вариант: рендерим текст иконки */}
-                                {categoryIcon}
+                                {category?.icon ? (
+                                    <category.icon sx={{ fontSize: 24 }} />
+                                ) : (
+                                    <MoreHorizIcon sx={{ fontSize: 24 }} />
+                                )}
                             </Box>
 
                             {/* Информация о транзакции */}
-                            <Box sx={{flexGrow: 1, minWidth: 0}}>
-                                <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mb: 0.5}}>
+                            <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
                                     <Typography variant="body1" fontWeight={600} noWrap>
                                         {categoryName}
                                     </Typography>
@@ -130,7 +135,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({transactions: p
                                     variant="h6"
                                     fontWeight="bold"
                                     color={transaction.type === 'income' ? 'success.main' : 'error.main'}
-                                    sx={{whiteSpace: 'nowrap'}}
+                                    sx={{ whiteSpace: 'nowrap' }}
                                 >
                                     {transaction.type === 'income' ? '+' : '-'}
                                     {formatCurrency(transaction.amount, currency)}

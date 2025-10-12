@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ClearIcon from '@mui/icons-material/Clear';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useTranslation } from 'react-i18next';
 import { TransactionType } from '../../Budgets/types';
 import { ALL_CATEGORIES } from '../../Budgets/utils/categories';
@@ -77,11 +78,15 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         fullWidth
                     >
                         <MenuItem value="">{t('allCategories')}</MenuItem>
-                        {ALL_CATEGORIES.map((cat) => (
-                            <MenuItem key={cat.id} value={cat.id}>
-                                {cat.icon} {cat.name}
-                            </MenuItem>
-                        ))}
+                        {ALL_CATEGORIES.map((cat) => {
+                            const Icon = cat.icon || MoreHorizIcon;
+                            return (
+                                <MenuItem key={cat.id} value={cat.id}>
+                                    <Icon sx={{ fontSize: 20, mr: 1 }} />
+                                    {cat.name}
+                                </MenuItem>
+                            );
+                        })}
                     </TextField>
 
                     <TextField

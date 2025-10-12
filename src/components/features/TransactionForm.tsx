@@ -13,6 +13,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { TransactionType } from '../../Budgets/types';
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
 import { getCategoriesByType } from '../../Budgets/utils/categories';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 interface TransactionFormData {
     amount: string;
@@ -95,9 +96,7 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                             label="Сумма"
                             type="number"
                             slotProps={{
-                                input: {
-                                    inputProps: { step: 0.01, min: 0 },
-                                },
+                                input: { inputProps: { step: 0.01, min: 0 } },
                             }}
                             error={!!errors.amount}
                             helperText={errors.amount?.message}
@@ -106,7 +105,6 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                         />
                     )}
                 />
-
 
                 <Controller
                     name="category"
@@ -124,7 +122,8 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                         >
                             {categories.map((cat) => (
                                 <MenuItem key={cat.id} value={cat.id}>
-                                    {cat.icon} {cat.name}
+                                    {cat.icon ? <cat.icon sx={{ fontSize: 20, mr: 1 }} /> : <MoreHorizIcon sx={{ fontSize: 20, mr: 1 }} />}
+                                    {cat.name}
                                 </MenuItem>
                             ))}
                         </TextField>
