@@ -11,7 +11,9 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LanguageIcon from '@mui/icons-material/Language';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CheckIcon from '@mui/icons-material/Check';
-import { useSettingsStore, Language, Currency } from '../../store/useSettingsStore';
+import {Currency, Language, useSettingsStore} from "../../Budgets/store/useSettingsStore.ts";
+
+;
 
 export const SettingsMenu: React.FC = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
