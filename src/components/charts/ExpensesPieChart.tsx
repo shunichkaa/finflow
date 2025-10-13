@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-    PieChart,
-    Pie,
-    Cell,
-    ResponsiveContainer,
-    Legend,
-    Tooltip,
-    PieLabelRenderProps,
-} from 'recharts';
-import type { TooltipProps } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
@@ -16,27 +7,12 @@ import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
 import { getCategoryById, getCategoryName } from '../../Budgets/utils/categories';
 import { formatCurrency } from '../../Budgets/utils/formatters';
 
-// Update the interface to match recharts expectations
-interface ChartDataItem {
-    name: string;
-    value: number;
-    color: string;
-    [key: string]: any; // Add index signature to satisfy recharts
-}
-
-// Alternative approach - use a type instead of interface
-// type ChartDataItem = {
-//     name: string;
-//     value: number;
-//     color: string;
-// }
-
 export const ExpensesPieChart: React.FC = () => {
     const { t } = useTranslation();
     const transactions = useFinanceStore((state) => state.transactions);
     const { currency } = useSettingsStore();
 
-    // Считаем расходы по категориям
+    // Группировка расходов по категориям
     const expensesByCategory = transactions
         .filter((t) => t.type === 'expense')
         .reduce((acc, t) => {
@@ -44,8 +20,8 @@ export const ExpensesPieChart: React.FC = () => {
             return acc;
         }, {} as Record<string, number>);
 
-    // Формируем данные для чарта
-    const chartData: ChartDataItem[] = Object.entries(expensesByCategory)
+    // Преобразование в формат для Recharts
+    const chartData = Object.entries(expensesByCategory)
         .map(([categoryId, amount]) => {
             const category = getCategoryById(categoryId);
             return {
@@ -54,32 +30,24 @@ export const ExpensesPieChart: React.FC = () => {
                 color: category?.color || '#6b7280',
             };
         })
-        .sort((a, b) => b.value - a.value);
+        .sort((a, b) => b.value - a.value); // Сортировка по убыванию
 
-    // Если нет данных — показываем заглушку
     if (chartData.length === 0) {
         return (
-            <Box
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: 300,
-                    color: 'text.secondary',
-                }}
-            >
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: 300,
+                color: 'text.secondary'
+            }}>
                 <Typography>{t('noData')}</Typography>
             </Box>
         );
     }
 
-    // Кастомный тултип
-    const CustomTooltip: React.FC<TooltipProps<number, string>> = ({ active, payload }) => {
+    const CustomTooltip = ({ active, payload }: any) => {
         if (active && payload && payload.length) {
-            const data = payload[0].payload as ChartDataItem;
-            const totalValue = chartData.reduce((sum: number, item) => sum + item.value, 0);
-            const percentage = ((data.value / totalValue) * 100).toFixed(1);
-
             return (
                 <Box
                     sx={{
@@ -92,26 +60,18 @@ export const ExpensesPieChart: React.FC = () => {
                     }}
                 >
                     <Typography variant="body2" fontWeight="bold">
-                        {data.name}
+                        {payload[0].name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {formatCurrency(data.value, currency)}
+                        {formatCurrency(payload[0].value, currency)}
                     </Typography>
                     <Typography variant="caption" color="text.disabled">
-                        {percentage}%
+                        {((payload[0].value / chartData.reduce((sum, item) => sum + item.value, 0)) * 100).toFixed(1)}%
                     </Typography>
                 </Box>
             );
         }
         return null;
-    };
-
-    // Подписи на секторах
-    const renderLabel = (props: PieLabelRenderProps): string => {
-        const { name, percent } = props;
-        if (!name || percent == null) return '';
-        const percentage = typeof percent === 'number' ? percent : 0;
-        return `${name} ${(percentage * 100).toFixed(0)}%`;
     };
 
     return (
@@ -121,10 +81,11 @@ export const ExpensesPieChart: React.FC = () => {
                     data={chartData}
                     cx="50%"
                     cy="50%"
-                    outerRadius={100}
-                    dataKey="value"
                     labelLine={false}
-                    label={renderLabel}
+                    outerRadius={100}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                 >
                     {chartData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />

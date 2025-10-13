@@ -1,15 +1,23 @@
 import React from 'react';
-import { Container, Box, Typography, Grid, Paper, Card, CardContent } from '@mui/material';
+import {
+    Container,
+    Box,
+    Typography,
+    Grid,
+    Paper,
+    Card,
+    CardContent,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
-import { ExpensesPieChart } from '../components/charts/ExpensesPieChart';
-import { BalanceLineChart } from '../components/charts/BalanceLineChart';
-import { IncomeExpenseBarChart } from '../components/charts/IncomeExpenseBarChart';
-import { useFinanceStore } from '../Budgets/store/useFinanceStore';
-import { useSettingsStore } from '../Budgets/store/useSettingsStore';
-import { getCategoryById, getCategoryName } from '../Budgets/utils/categories';
-import { formatCurrency } from '../Budgets/utils/formatters';
+import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
+import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
+import { getCategoryById, getCategoryName } from '../../Budgets/utils/categories';
+import { ExpensesPieChart } from '../../components/charts/ExpensesPieChart';
+import { formatCurrency } from '../../Budgets/utils/formatters';
+import { BalanceLineChart } from '../../components/charts/BalanceLineChart';
+import { IncomeExpenseBarChart } from '../../components/charts/IncomeExpenseBarChart';
 
 export const Analytics: React.FC = () => {
     const { t } = useTranslation();
@@ -21,18 +29,22 @@ export const Analytics: React.FC = () => {
         transactions
             .filter((t) => t.type === 'expense')
             .reduce((acc, t) => {
-                acc[t.category] = (acc[t.category] || 0) + t.amount;
+                const currentAmount = acc[t.category] || 0;
+                acc[t.category] = currentAmount + t.amount;
                 return acc;
             }, {} as Record<string, number>)
     )
         .sort(([, a], [, b]) => b - a)
         .slice(0, 3)
-        .map(([categoryId, amount]) => ({
-            categoryId,
-            name: getCategoryName(categoryId, t),
-            amount,
-            color: getCategoryById(categoryId)?.color || '#6b7280',
-        }));
+        .map(([categoryId, amount]) => {
+            const category = getCategoryById(categoryId);
+            return {
+                categoryId,
+                name: getCategoryName(categoryId, t),
+                amount,
+                color: category?.color || '#6b7280',
+            };
+        });
 
     // Средний расход в день
     const totalExpense = transactions
@@ -57,7 +69,12 @@ export const Analytics: React.FC = () => {
             {/* Быстрая статистика */}
             <Grid container spacing={2} sx={{ mb: 4 }}>
                 <Grid item xs={12} md={6}>
-                    <Card sx={{ bgcolor: 'primary.main', color: 'white' }}>
+                    <Card
+                        sx={{
+                            bgcolor: 'primary.main',
+                            color: 'common.white',
+                        }}
+                    >
                         <CardContent>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                                 <TrendingDownIcon />
@@ -71,7 +88,12 @@ export const Analytics: React.FC = () => {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <Card sx={{ bgcolor: 'success.main', color: 'white' }}>
+                    <Card
+                        sx={{
+                            bgcolor: 'success.main',
+                            color: 'common.white',
+                        }}
+                    >
                         <CardContent>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                                 <TrendingUpIcon />
@@ -88,7 +110,7 @@ export const Analytics: React.FC = () => {
             {/* Графики */}
             <Grid container spacing={3} sx={{ mb: 4 }}>
                 <Grid item xs={12} lg={6}>
-                    <Paper sx={{ p: 3 }}>
+                    <Paper sx={{ p: 3 }} elevation={3}>
                         <Typography variant="h6" gutterBottom fontWeight="bold">
                             {t('expensesByCategory')}
                         </Typography>
@@ -97,7 +119,7 @@ export const Analytics: React.FC = () => {
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
-                    <Paper sx={{ p: 3 }}>
+                    <Paper sx={{ p: 3 }} elevation={3}>
                         <Typography variant="h6" gutterBottom fontWeight="bold">
                             {t('topCategories')}
                         </Typography>
@@ -114,15 +136,18 @@ export const Analytics: React.FC = () => {
                                             p: 2,
                                             bgcolor: 'background.default',
                                             borderRadius: 2,
-                                            borderLeft: 4,
-                                            borderColor: cat.color,
+                                            borderLeft: `4px solid ${cat.color}`,
                                         }}
                                     >
                                         <Box>
                                             <Typography variant="body1" fontWeight="bold">
                                                 #{index + 1} {cat.name}
                                             </Typography>
-                                            <Typography variant="h6" color={cat.color} fontWeight="bold">
+                                            <Typography
+                                                variant="h6"
+                                                sx={{ color: cat.color }}
+                                                fontWeight="bold"
+                                            >
                                                 {formatCurrency(cat.amount, currency)}
                                             </Typography>
                                         </Box>
@@ -138,7 +163,7 @@ export const Analytics: React.FC = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Paper sx={{ p: 3 }}>
+                    <Paper sx={{ p: 3 }} elevation={3}>
                         <Typography variant="h6" gutterBottom fontWeight="bold">
                             {t('balanceTrend')}
                         </Typography>
@@ -147,7 +172,7 @@ export const Analytics: React.FC = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Paper sx={{ p: 3 }}>
+                    <Paper sx={{ p: 3 }} elevation={3}>
                         <Typography variant="h6" gutterBottom fontWeight="bold">
                             {t('incomeVsExpense')}
                         </Typography>
