@@ -86,10 +86,13 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                 }}
                             >
                                 {category?.icon ? (
-                                    <category.icon sx={{ fontSize: 24 }} />
-                                ) : (
-                                    <MoreHorizIcon sx={{ fontSize: 24 }} />
-                                )}
+  (() => {
+    const Icon = category.icon as any;
+    return <Icon sx={{ fontSize: 24 }} />;
+  })()
+) : (
+  <MoreHorizIcon sx={{ fontSize: 24 }} />
+)}
                             </Box>
 
                             {/* Информация о транзакции */}
