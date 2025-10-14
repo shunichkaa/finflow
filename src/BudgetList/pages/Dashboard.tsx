@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { Container, Box, Typography, Button, Paper } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from "react-i18next";
-import { useFinanceStore } from './Budgets/store/useFinanceStore';
-import { TransactionType } from './Budgets/types';
-import { StatsCards } from './components/features/StatsCards';
-import { TransactionList } from './components/features/TransactionList';
-import { TransactionFilters } from './components/features/TransactionFilters';
-import { TransactionForm } from './components/features/TransactionForm';
-import { Modal } from './components/ui/Modal';
-import { useTransactionFilters } from './Budgets/hooks/useTransactionFilters';
+import { useFinanceStore } from '../../Budgets/store/useFinanceStore.ts';
+import { TransactionType } from '../../Budgets/types';
+import { StatsCards } from '../../components/features/StatsCards.tsx';
+import { TransactionList } from '../../components/features/TransactionList.tsx';
+import { TransactionFilters } from '../../components/features/TransactionFilters.tsx';
+import { TransactionForm } from '../../components/features/TransactionForm.tsx';
+import { Modal } from '../../components/ui/Modal.tsx';
+import { useTransactionFilters } from '../../Budgets/hooks/useTransactionFilters.ts';
 
 const Dashboard = () => {
     const { t } = useTranslation();

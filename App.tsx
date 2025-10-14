@@ -2,7 +2,7 @@ import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import Budgets from "./src/BudgetList/pages/Budgets";
 import {Layout} from "./src/components/Layout";
 import {Analytics} from "./src/BudgetList/pages/Analytics";
-import Dashboard from "./src/Dashboard";
+import Dashboard from "./src/BudgetList/pages/Dashboard.tsx";
 
 function App() {
     return (
