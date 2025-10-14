@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { Container, Box, Typography, Button, Paper, Grid } from '@mui/material';
+import React, {useState} from 'react';
+import {Box, Button, Container, Paper, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { useTranslation } from 'react-i18next';
-import { BudgetList } from '../components/features/BudgetList';
-import { BudgetForm } from '../components/features/BudgetForm';
-import { Modal } from '../components/ui/Modal';
-import { useFinanceStore } from '../Budgets/store/useFinanceStore';
-import { calculateBudgetSpent, getBudgetStatus } from '../Budgets/utils/budgetCalculations';
+import {useTranslation} from 'react-i18next';
+import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
+import {calculateBudgetSpent, getBudgetStatus} from '../../Budgets/utils/budgetCalculations';
+import {BudgetList} from '../../components/features/BudgetList';
+import {BudgetForm} from '../../components/features/BudgetForm';
+import {Modal} from '../../components/ui/Modal';
 
-export const Budgets: React.FC = () => {
-    const { t } = useTranslation();
+const Budgets: React.FC = () => {
+    const {t} = useTranslation();
     const [isModalOpen, setIsModalOpen] = useState(false);
+
     const budgets = useFinanceStore((state) => state.budgets);
     const transactions = useFinanceStore((state) => state.transactions);
 
-    // Статистика
     const totalBudgets = budgets.length;
     const exceededBudgets = budgets.filter((b) => {
         const spent = calculateBudgetSpent(b, transactions);
@@ -23,9 +23,9 @@ export const Budgets: React.FC = () => {
     }).length;
 
     return (
-        <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Container maxWidth="lg" sx={{py: 4}}>
             {/* Header */}
-            <Box sx={{ mb: 4 }}>
+            <Box sx={{mb: 4}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold">
                     🎯 {t('budgets')}
                 </Typography>
@@ -35,10 +35,10 @@ export const Budgets: React.FC = () => {
 
                 <Button
                     variant="contained"
-                    startIcon={<AddIcon />}
+                    startIcon={<AddIcon/>}
                     onClick={() => setIsModalOpen(true)}
                     size="large"
-                    sx={{ mt: 2 }}
+                    sx={{mt: 2}}
                 >
                     {t('createBudget')}
                 </Button>
@@ -46,37 +46,32 @@ export const Budgets: React.FC = () => {
 
             {/* Quick Stats */}
             {budgets.length > 0 && (
-                <Grid container spacing={2} sx={{ mb: 4 }}>
-                    <Grid item xs={12} sm={6}>
-                        <Paper sx={{ p: 3, bgcolor: 'primary.main', color: 'white' }}>
+                <Box sx={{display: 'flex', gap: 2, mb: 4, flexDirection: {xs: 'column', sm: 'row'}}}>
+                    <Box sx={{flex: 1}}>
+                        <Paper sx={{p: 3, bgcolor: 'primary.main', color: 'white'}}>
                             <Typography variant="h6">{t('totalBudgets')}</Typography>
-                            <Typography variant="h3" fontWeight="bold">
-                                {totalBudgets}
-                            </Typography>
+                            <Typography variant="h3" fontWeight="bold">{totalBudgets}</Typography>
                         </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Paper sx={{ p: 3, bgcolor: exceededBudgets > 0 ? 'error.main' : 'success.main', color: 'white' }}>
+                    </Box>
+                    <Box sx={{flex: 1}}>
+                        <Paper
+                            sx={{p: 3, bgcolor: exceededBudgets > 0 ? 'error.main' : 'success.main', color: 'white'}}>
                             <Typography variant="h6">{t('exceededBudgets')}</Typography>
-                            <Typography variant="h3" fontWeight="bold">
-                                {exceededBudgets}
-                            </Typography>
+                            <Typography variant="h3" fontWeight="bold">{exceededBudgets}</Typography>
                         </Paper>
-                    </Grid>
-                </Grid>
+                    </Box>
+                </Box>
             )}
 
             {/* Budget List */}
-            <BudgetList />
+            <BudgetList/>
 
             {/* Modal */}
-            <Modal
-                open={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                title={t('createBudget')}
-            >
-                <BudgetForm onSuccess={() => setIsModalOpen(false)} />
+            <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} title={t('createBudget')}>
+                <BudgetForm onSuccess={() => setIsModalOpen(false)}/>
             </Modal>
         </Container>
     );
 };
+
+export default Budgets;

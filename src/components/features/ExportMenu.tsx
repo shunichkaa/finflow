@@ -16,12 +16,16 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { useTranslation } from 'react-i18next';
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
 import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
-import {exportToCSV, exportToJSON, importFromJSON} from "../../Budgets/utils/exportData.ts";
+import { exportToCSV, exportToJSON, importFromJSON } from "../../Budgets/utils/exportData";
 
 export const ExportMenu: React.FC = () => {
     const { t } = useTranslation();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' as 'success' | 'error' });
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: '',
+        severity: 'success' as 'success' | 'error',
+    });
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const transactions = useFinanceStore((state) => state.transactions);
@@ -40,7 +44,7 @@ export const ExportMenu: React.FC = () => {
         try {
             exportToCSV(transactions, currency);
             setSnackbar({ open: true, message: t('exportSuccess'), severity: 'success' });
-        } catch (error) {
+        } catch {
             setSnackbar({ open: true, message: t('exportError'), severity: 'error' });
         }
         handleClose();
@@ -50,7 +54,7 @@ export const ExportMenu: React.FC = () => {
         try {
             exportToJSON(transactions, budgets);
             setSnackbar({ open: true, message: t('exportSuccess'), severity: 'success' });
-        } catch (error) {
+        } catch {
             setSnackbar({ open: true, message: t('exportError'), severity: 'error' });
         }
         handleClose();
@@ -66,9 +70,9 @@ export const ExportMenu: React.FC = () => {
         if (!file) return;
 
         try {
-            const data = await importFromJSON(file);
+            await importFromJSON(file);
             setSnackbar({ open: true, message: t('importSuccess'), severity: 'success' });
-        } catch (error) {
+        } catch {
             setSnackbar({ open: true, message: t('importError'), severity: 'error' });
         }
     };

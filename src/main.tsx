@@ -1,15 +1,13 @@
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CssBaseline from '@mui/material/CssBaseline';
-import Dashboard from './Dashboard.tsx';
-import {ThemeContextProvider} from './Budgets/theme/ThemeProvider';
-import './i18n/config';
-import {useInitial} from "./dev";
+import App from "../App.tsx";
 
-const initial = useInitial(); 
+const root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement
+);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <ThemeContextProvider>
-        <CssBaseline />
-        <Dashboard initial={initial} />
-    </ThemeContextProvider>
+root.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
 );

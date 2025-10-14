@@ -7,7 +7,8 @@ import {
     CartesianGrid,
     Tooltip,
     ResponsiveContainer,
-    Legend
+    Legend,
+    TooltipProps,
 } from 'recharts';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +17,18 @@ import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
 import { formatCurrency } from '../../Budgets/utils/formatters';
 import { format, eachDayOfInterval, startOfMonth, endOfMonth } from 'date-fns';
 
+interface ChartPoint {
+    date: string;
+    balance: number;
+}
+
+// Кастомный интерфейс для Tooltip с payload
+interface CustomTooltipProps extends TooltipProps<number, string> {
+    payload?: Array<{
+        payload: ChartPoint;
+    }>;
+}
+
 export const BalanceLineChart: React.FC = () => {
     const { t } = useTranslation();
     const transactions = useFinanceStore((state) => state.transactions);
@@ -23,30 +36,19 @@ export const BalanceLineChart: React.FC = () => {
 
     if (transactions.length === 0) {
         return (
-            <Box sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: 300,
-                color: 'text.secondary'
-            }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, color: 'text.secondary' }}>
                 <Typography>{t('noData')}</Typography>
             </Box>
         );
     }
 
-    // Определяем диапазон дат (текущий месяц)
     const now = new Date();
     const monthStart = startOfMonth(now);
     const monthEnd = endOfMonth(now);
     const allDays = eachDayOfInterval({ start: monthStart, end: monthEnd });
 
-    // Сортируем транзакции по дате
-    const sortedTransactions = [...transactions].sort(
-        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
+    const sortedTransactions = [...transactions].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-    // Вычисляем баланс для каждого дня
     let runningBalance = 0;
     const dailyBalances = new Map<string, number>();
 
@@ -57,39 +59,24 @@ export const BalanceLineChart: React.FC = () => {
         dailyBalances.set(dateStr, runningBalance);
     });
 
-    // Формируем данные для графика
-    const chartData = allDays.map((day) => {
+    const chartData: ChartPoint[] = allDays.map((day) => {
         const dayStr = format(day, 'yyyy-MM-dd');
         const balance = dailyBalances.get(dayStr);
-
-        if (balance !== undefined) {
-            runningBalance = balance;
-        }
-
-        return {
-            date: format(day, 'dd MMM'),
-            balance: runningBalance,
-        };
+        if (balance !== undefined) runningBalance = balance;
+        return { date: format(day, 'dd MMM'), balance: runningBalance };
     });
 
-    const CustomTooltip = ({ active, payload }: any) => {
-        if (active && payload && payload.length) {
+    const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
+        if (active && payload && payload.length > 0) {
+            const data = payload[0].payload;
+
             return (
-                <Box
-                    sx={{
-                        bgcolor: 'background.paper',
-                        p: 1.5,
-                        border: 1,
-                        borderColor: 'divider',
-                        borderRadius: 1,
-                        boxShadow: 2,
-                    }}
-                >
+                <Box sx={{ bgcolor: 'background.paper', p: 1.5, border: 1, borderColor: 'divider', borderRadius: 1, boxShadow: 2 }}>
                     <Typography variant="body2" fontWeight="bold">
-                        {payload[0].payload.date}
+                        {data.date}
                     </Typography>
                     <Typography variant="body2" color="primary">
-                        {formatCurrency(payload[0].value, currency)}
+                        {formatCurrency(data.balance, currency)}
                     </Typography>
                 </Box>
             );
@@ -101,27 +88,11 @@ export const BalanceLineChart: React.FC = () => {
         <ResponsiveContainer width="100%" height={300}>
             <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                <XAxis
-                    dataKey="date"
-                    tick={{ fontSize: 12 }}
-                    stroke="currentColor"
-                />
-                <YAxis
-                    tick={{ fontSize: 12 }}
-                    tickFormatter={(value) => `${value}€`}
-                    stroke="currentColor"
-                />
+                <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="currentColor" />
+                <YAxis tick={{ fontSize: 12 }} tickFormatter={(value) => formatCurrency(value, currency)} stroke="currentColor" />
                 <Tooltip content={<CustomTooltip />} />
                 <Legend />
-                <Line
-                    type="monotone"
-                    dataKey="balance"
-                    stroke="#7c3aed"
-                    strokeWidth={3}
-                    dot={{ fill: '#7c3aed', r: 4 }}
-                    activeDot={{ r: 6 }}
-                    name={t('balance')}
-                />
+                <Line type="monotone" dataKey="balance" stroke="#7c3aed" strokeWidth={3} dot={{ fill: '#7c3aed', r: 4 }} activeDot={{ r: 6 }} name={t('balance')} />
             </LineChart>
         </ResponsiveContainer>
     );

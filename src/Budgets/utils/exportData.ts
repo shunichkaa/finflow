@@ -1,6 +1,6 @@
-import { Budget, Transaction } from '../types';
-import { getCategoryById } from './categories';
-import { formatCurrency, formatDate } from './formatters';
+import {Budget, Transaction} from '../types';
+import {getCategoryById} from './categories';
+import {formatCurrency, formatDate} from './formatters';
 
 // Экспорт в CSV
 export const exportToCSV = (
@@ -15,7 +15,7 @@ export const exportToCSV = (
             formatDate(t.date),
             category?.name || 'Неизвестно',
             t.type === 'income' ? 'Доход' : 'Расход',
-            formatCurrency(t.amount, currency),
+            formatCurrency(t.amount, currency as any), // Исправление здесь
             t.description || '',
         ];
     });
@@ -25,7 +25,7 @@ export const exportToCSV = (
         ...rows.map((row) => row.map((cell) => `"${cell}"`).join(',')),
     ].join('\n');
 
-    const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const blob = new Blob(['\uFEFF' + csvContent], {type: 'text/csv;charset=utf-8;'});
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = `finflow_transactions_${new Date().toISOString().split('T')[0]}.csv`;
