@@ -59,8 +59,7 @@ const Budgets: React.FC = () => {
                     <Box sx={{flex: 1}}>
                         <Paper
                             sx={{ p: 3, bgcolor: exceededBudgets > 0 ? 'error.main' : 'success.main', color: 'white', minHeight: 120, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                            <Typography variant="h6">{t('exceededBudgets')}</Typography>
-                            <Typography variant="h3" fontWeight="bold">{exceededBudgets}</Typography>
+                            <Typography variant="h6" fontWeight="bold">{t('exceededBudgets')}: {exceededBudgets}</Typography>
                         </Paper>
                     </Box>
                 </Box>
