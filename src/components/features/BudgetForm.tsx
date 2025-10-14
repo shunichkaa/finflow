@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
+import type { Budget } from '../../Budgets/types';
 import { EXPENSE_CATEGORIES, getCategoryIcon, getCategoryName } from '../../Budgets/utils/categories';
 import { BudgetPeriod } from '../../Budgets/types';
 
@@ -23,11 +24,13 @@ interface BudgetFormData {
 
 interface BudgetFormProps {
     onSuccess?: () => void;
+    initialBudget?: Budget;
 }
 
-export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess }) => {
+export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess, initialBudget }) => {
     const { t } = useTranslation();
     const addBudget = useFinanceStore((state) => state.addBudget);
+    const updateBudget = useFinanceStore((state) => state.updateBudget);
     const budgets = useFinanceStore((state) => state.budgets);
 
     const {
@@ -38,25 +41,32 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess }) => {
         watch,
     } = useForm<BudgetFormData>({
         defaultValues: {
-            category: '',
-            limit: '',
-            period: 'monthly',
+            category: initialBudget?.category || '',
+            limit: initialBudget ? String(initialBudget.limit) : '',
+            period: initialBudget?.period || 'monthly',
         },
     });
 
     const selectedPeriod = watch('period');
 
     // Категории без бюджетов
-    const availableCategories = EXPENSE_CATEGORIES.filter(
-        (cat) => !budgets.some((b) => b.category === cat.id)
-    );
+    const availableCategories = initialBudget
+        ? EXPENSE_CATEGORIES
+        : EXPENSE_CATEGORIES.filter((cat) => !budgets.some((b) => b.category === cat.id));
 
     const onSubmit = (data: BudgetFormData) => {
-        addBudget({
-            category: data.category,
-            limit: parseFloat(data.limit),
-            period: data.period,
-        });
+        if (initialBudget) {
+            updateBudget(initialBudget.id, {
+                limit: parseFloat(data.limit),
+                period: data.period,
+            });
+        } else {
+            addBudget({
+                category: data.category,
+                limit: parseFloat(data.limit),
+                period: data.period,
+            });
+        }
 
         reset();
         onSuccess?.();
@@ -111,6 +121,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess }) => {
                             helperText={errors.category?.message}
                             fullWidth
                             required
+                            disabled={!!initialBudget}
                         >
                             {availableCategories.map((cat) => (
                                 <MenuItem key={cat.id} value={cat.id}>

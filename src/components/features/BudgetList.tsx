@@ -24,7 +24,11 @@ import {
     getDaysLeftInPeriod,
 } from '../../Budgets/utils/budgetCalculations';
 
-export const BudgetList: React.FC = () => {
+interface BudgetListProps {
+    onEdit?: (id: string) => void;
+}
+
+export const BudgetList: React.FC<BudgetListProps> = ({ onEdit }) => {
     const { t } = useTranslation();
     const budgets = useFinanceStore((state) => state.budgets);
     const transactions = useFinanceStore((state) => state.transactions);
@@ -47,8 +51,8 @@ export const BudgetList: React.FC = () => {
                 const daysLeft = getDaysLeftInPeriod(budget.period);
 
                 return (
-                    <Card key={budget.id} elevation={2}>
-                        <CardContent>
+                    <Card key={budget.id} elevation={2} sx={{ minHeight: 160, display: 'flex', flexDirection: 'column' }}>
+                        <CardContent sx={{ flexGrow: 1 }}>
                             {/* Header */}
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -167,6 +171,17 @@ export const BudgetList: React.FC = () => {
                                 </Typography>
                             </Box>
                         </CardContent>
+                        {onEdit && (
+                            <Box sx={{ px: 2, pb: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                                <Chip
+                                    label={t('edit')}
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => onEdit(budget.id)}
+                                    size="small"
+                                />
+                            </Box>
+                        )}
                     </Card>
                 );
             })}

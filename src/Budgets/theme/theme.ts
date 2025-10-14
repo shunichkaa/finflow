@@ -5,16 +5,16 @@ const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
         primary: {
-            main: '#8EC5FF',
-            light: '#D5E9FF',
-            dark: '#4F94F3',
-            contrastText: '#ffffff',
+            main: '#86B6F6',
+            light: '#DCEBFF',
+            dark: '#3D7FD9',
+            contrastText: '#0B1220',
         },
         secondary: {
-            main: '#A8D6FF',
-            light: '#E3F1FF',
-            dark: '#73ACF1',
-            contrastText: '#0D1B2A',
+            main: '#9EC9FF',
+            light: '#E6F2FF',
+            dark: '#5AA0EA',
+            contrastText: '#0B1220',
         },
         error: {
             main: '#f87171',
@@ -28,14 +28,14 @@ const lightThemeOptions: ThemeOptions = {
             main: '#fbbf24',
         },
         background: {
-            default: '#F6FAFF',
+            default: '#F9FBFF',
             paper: '#FFFFFF',
         },
         text: {
             primary: '#0D1B2A',
             secondary: '#51637E',
         },
-        divider: 'rgba(79,148,243,0.18)'
+        divider: 'rgba(134,182,246,0.2)'
     },
     typography: {
         fontFamily: [
@@ -102,15 +102,15 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#6FAEF9',
-            light: '#A8D6FF',
-            dark: '#4F94F3',
+            main: '#78A9F2',
+            light: '#BFD9FF',
+            dark: '#3A7DD6',
             contrastText: '#0B1220',
         },
         secondary: {
-            main: '#8EC5FF',
+            main: '#94C4FF',
             light: '#CFE7FF',
-            dark: '#3D7FD9',
+            dark: '#3978D0',
             contrastText: '#0B1220',
         },
         error: {
@@ -125,14 +125,14 @@ const darkThemeOptions: ThemeOptions = {
             main: '#fcd34d',
         },
         background: {
-            default: '#0D1626',
-            paper: '#121C2E',
+            default: '#0E1525',
+            paper: '#121A2E',
         },
         text: {
             primary: '#E6EEF9',
             secondary: '#A7B8D8',
         },
-        divider: 'rgba(159,197,255,0.2)'
+        divider: 'rgba(148,196,255,0.22)'
     },
     typography: {
         fontFamily: [

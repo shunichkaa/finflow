@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
     Box,
     Button,
@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { TransactionType } from '../../Budgets/types';
+import { TransactionType, Transaction } from '../../Budgets/types';
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
 import { getCategoriesByType, getCategoryIcon, getCategoryName } from '../../Budgets/utils/categories.tsx';
 import {DatePickerField} from "../ui/DatePickerField.tsx";
@@ -25,12 +25,14 @@ interface TransactionFormData {
 
 interface TransactionFormProps {
     onSuccess?: () => void;
+    initialTransaction?: Transaction;
 }
 
-export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) => {
+export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, initialTransaction }) => {
     const { t } = useTranslation();
-    const [type, setType] = useState<TransactionType>('expense');
+    const [type, setType] = useState<TransactionType>(initialTransaction?.type || 'expense');
     const addTransaction = useFinanceStore((state) => state.addTransaction);
+    const updateTransaction = useFinanceStore((state) => state.updateTransaction);
 
     const {
         control,
@@ -39,23 +41,33 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
         reset,
     } = useForm<TransactionFormData>({
         defaultValues: {
-            amount: '',
-            category: '',
-            description: '',
-            date: new Date().toISOString().split('T')[0],
+            amount: initialTransaction ? String(initialTransaction.amount) : '',
+            category: initialTransaction?.category || '',
+            description: initialTransaction?.description || '',
+            date: initialTransaction ? new Date(initialTransaction.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
         },
     });
 
-    const categories = getCategoriesByType(type);
+    const categories = useMemo(() => getCategoriesByType(type), [type]);
 
     const onSubmit = (data: TransactionFormData) => {
-        addTransaction({
-            amount: parseFloat(data.amount),
-            type,
-            category: data.category,
-            description: data.description,
-            date: new Date(data.date),
-        });
+        if (initialTransaction) {
+            updateTransaction(initialTransaction.id, {
+                amount: parseFloat(data.amount),
+                type,
+                category: data.category,
+                description: data.description,
+                date: new Date(data.date),
+            });
+        } else {
+            addTransaction({
+                amount: parseFloat(data.amount),
+                type,
+                category: data.category,
+                description: data.description,
+                date: new Date(data.date),
+            });
+        }
         reset();
         onSuccess?.();
     };
@@ -166,7 +178,7 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
                     color={type === 'income' ? 'success' : 'error'}
                     fullWidth
                 >
-                    {t('addTransaction')}
+                    {initialTransaction ? t('save') : t('addTransaction')}
                 </Button>
             </Stack>
         </Box>

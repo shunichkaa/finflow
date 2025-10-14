@@ -9,6 +9,8 @@ import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
 import { getCategoryById, getCategoryIcon, getCategoryName } from '../../Budgets/utils/categories.tsx';
 import { formatCurrency, formatDate } from '../../Budgets/utils/formatters';
 import { Transaction } from '../../Budgets/types';
+import { Modal } from '../ui/Modal';
+import { TransactionForm } from './TransactionForm';
 
 interface TransactionListProps {
     transactions?: Transaction[];
@@ -20,6 +22,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
     const storeTransactions = useFinanceStore((state) => state.transactions);
     const deleteTransaction = useFinanceStore((state) => state.deleteTransaction);
     const { currency } = useSettingsStore();
+    const [editingTxId, setEditingTxId] = React.useState<string | null>(null);
+    const [isEditOpen, setIsEditOpen] = React.useState(false);
 
     const transactions = propTransactions || storeTransactions;
 
@@ -83,6 +87,27 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                             ? category?.color
                                             : '#4a5568',
                                     flexShrink: 0,
+                                }}
+                                onClick={() => { setEditingTxId(transaction.id); setIsEditOpen(true); }}
+                                role="button"
+                                aria-label={t('edit')}
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: 48,
+                                    height: 48,
+                                    borderRadius: 2,
+                                    bgcolor:
+                                        theme.palette.mode === 'dark'
+                                            ? category?.color + '40'
+                                            : category?.color,
+                                    color:
+                                        theme.palette.mode === 'dark'
+                                            ? category?.color
+                                            : '#4a5568',
+                                    flexShrink: 0,
+                                    cursor: 'pointer'
                                 }}
                             >
                                 {category?.icon ? getCategoryIcon(category.icon, 24) : (
@@ -150,6 +175,19 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                     </React.Fragment>
                 );
             })}
+            {/* Edit transaction modal */}
+            <Modal
+                open={isEditOpen}
+                onClose={() => { setIsEditOpen(false); setEditingTxId(null); }}
+                title={t('save')}
+            >
+                {editingTxId && (
+                    <TransactionForm
+                        initialTransaction={sortedTransactions.find(tx => tx.id === editingTxId)}
+                        onSuccess={() => { setIsEditOpen(false); setEditingTxId(null); }}
+                    />
+                )}
+            </Modal>
         </List>
     );
 };
