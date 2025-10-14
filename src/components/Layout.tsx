@@ -19,6 +19,7 @@ export const Layout: React.FC<LayoutProps> = ({children}) => {
     const navItems = [
         {path: '/dashboard', label: t('dashboard')},
         {path: '/analytics', label: t('analytics')},
+        { path: '/budgets', label: t('budgets') },
     ];
 
     return (
