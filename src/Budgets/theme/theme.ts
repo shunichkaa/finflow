@@ -5,14 +5,16 @@ const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
         primary: {
-            main: '#6A92C8',
-            light: '#92bcfa',
-            dark: '#0E2D6C',
+            main: '#4F94F3',
+            light: '#A8D0FF',
+            dark: '#0E4CB3',
+            contrastText: '#ffffff',
         },
         secondary: {
-            main: '#10b981',
-            light: '#6ee7b7',
-            dark: '#059669',
+            main: '#7FB7FF',
+            light: '#CDE6FF',
+            dark: '#2E73D8',
+            contrastText: '#0D1B2A',
         },
         error: {
             main: '#f87171',
@@ -26,17 +28,23 @@ const lightThemeOptions: ThemeOptions = {
             main: '#fbbf24',
         },
         background: {
-            default: '#faf5ff',
-            paper: '#ffffff',
+            default: '#F6FAFF',
+            paper: '#FFFFFF',
         },
+        text: {
+            primary: '#0D1B2A',
+            secondary: '#51637E',
+        },
+        divider: 'rgba(79,148,243,0.18)'
     },
     typography: {
         fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
+            'Nunito',
+            'Inter',
+            'system-ui',
+            'Segoe UI',
             'Roboto',
-            '"Helvetica Neue"',
+            'Helvetica Neue',
             'Arial',
             'sans-serif',
         ].join(','),
@@ -46,9 +54,12 @@ const lightThemeOptions: ThemeOptions = {
         h2: {
             fontWeight: 600,
         },
+        button: {
+            fontWeight: 600,
+        }
     },
     shape: {
-        borderRadius: 10,
+        borderRadius: 14,
     },
     components: {
         MuiButton: {
@@ -56,15 +67,16 @@ const lightThemeOptions: ThemeOptions = {
                 root: {
                     textTransform: 'none',
                     fontWeight: 600,
-                    padding: '10px 20px',
+                    padding: '10px 18px',
+                    borderRadius: 999,
                 },
             },
         },
         MuiCard: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 1px 2px rgb(0 0 0 / 0.06)',
-                    border: '1px solid rgba(0,0,0,0.06)'
+                    boxShadow: '0 8px 24px rgba(33, 150, 243, 0.05)',
+                    border: '1px solid rgba(79, 148, 243, 0.12)'
                 },
             },
         },
@@ -72,14 +84,14 @@ const lightThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     boxShadow: 'none',
-                    borderBottom: '1px solid rgba(0,0,0,0.06)'
+                    borderBottom: '1px solid rgba(79,148,243,0.15)'
                 }
             }
         },
         MuiPaper: {
             styleOverrides: {
                 elevation1: {
-                    boxShadow: '0 1px 2px rgb(0 0 0 / 0.06)'
+                    boxShadow: '0 8px 24px rgba(33, 150, 243, 0.05)'
                 }
             }
         }
@@ -90,14 +102,16 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#92bcfa',
-            light: '#c2d1ec',
-            dark: '#6a92c8',
+            main: '#7FB7FF',
+            light: '#A8D0FF',
+            dark: '#4F94F3',
+            contrastText: '#0B1220',
         },
         secondary: {
-            main: '#6ee7b7',
-            light: '#a7f3d0',
-            dark: '#34d399',
+            main: '#9CC9FF',
+            light: '#CDE6FF',
+            dark: '#4F94F3',
+            contrastText: '#0B1220',
         },
         error: {
             main: '#fca5a5',
@@ -111,17 +125,23 @@ const darkThemeOptions: ThemeOptions = {
             main: '#fcd34d',
         },
         background: {
-            default: '#1e1b2e',
-            paper: '#2d2a3e',
+            default: '#0D1626',
+            paper: '#121C2E',
         },
+        text: {
+            primary: '#E6EEF9',
+            secondary: '#A7B8D8',
+        },
+        divider: 'rgba(159,197,255,0.2)'
     },
     typography: {
         fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
+            'Nunito',
+            'Inter',
+            'system-ui',
+            'Segoe UI',
             'Roboto',
-            '"Helvetica Neue"',
+            'Helvetica Neue',
             'Arial',
             'sans-serif',
         ].join(','),
@@ -131,9 +151,12 @@ const darkThemeOptions: ThemeOptions = {
         h2: {
             fontWeight: 600,
         },
+        button: {
+            fontWeight: 600,
+        }
     },
     shape: {
-        borderRadius: 10,
+        borderRadius: 14,
     },
     components: {
         MuiButton: {
@@ -141,15 +164,16 @@ const darkThemeOptions: ThemeOptions = {
                 root: {
                     textTransform: 'none',
                     fontWeight: 600,
-                    padding: '10px 20px',
+                    padding: '10px 18px',
+                    borderRadius: 999,
                 },
             },
         },
         MuiCard: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 1px 2px rgb(0 0 0 / 0.3)',
-                    border: '1px solid rgba(255,255,255,0.08)'
+                    boxShadow: '0 12px 32px rgba(79,148,243,0.12)',
+                    border: '1px solid rgba(79,148,243,0.18)'
                 },
             },
         },
@@ -157,14 +181,14 @@ const darkThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     boxShadow: 'none',
-                    borderBottom: '1px solid rgba(255,255,255,0.08)'
+                    borderBottom: '1px solid rgba(79,148,243,0.25)'
                 }
             }
         },
         MuiPaper: {
             styleOverrides: {
                 elevation1: {
-                    boxShadow: '0 1px 2px rgb(0 0 0 / 0.3)'
+                    boxShadow: '0 12px 32px rgba(79,148,243,0.12)'
                 }
             }
         }

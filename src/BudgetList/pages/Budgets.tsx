@@ -23,7 +23,7 @@ const Budgets: React.FC = () => {
     }).length;
 
     return (
-        <Container maxWidth="lg" sx={{py: 4}}>
+        <Container maxWidth="md" sx={{ py: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {/* Header */}
             <Box sx={{mb: 4}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold">
@@ -64,11 +64,15 @@ const Budgets: React.FC = () => {
             )}
 
             {/* Budget List */}
-            <BudgetList/>
+            <Box sx={{ width: '100%', maxWidth: 720 }}>
+                <BudgetList/>
+            </Box>
 
             {/* Modal */}
             <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} title={t('createBudget')}>
-                <BudgetForm onSuccess={() => setIsModalOpen(false)}/>
+                <Box sx={{ width: { xs: '100%', sm: 520 } }}>
+                    <BudgetForm onSuccess={() => setIsModalOpen(false)}/>
+                </Box>
             </Modal>
         </Container>
     );

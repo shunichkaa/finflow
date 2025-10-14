@@ -12,12 +12,12 @@ import LanguageIcon from '@mui/icons-material/Language';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CheckIcon from '@mui/icons-material/Check';
 import { useTranslation } from 'react-i18next';
-import { useSettingsStore, Currency } from '../../Budgets/store/useSettingsStore';
+import { useSettingsStore, Currency, Language } from '../../Budgets/store/useSettingsStore';
 
 export const SettingsMenu: React.FC = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const { i18n } = useTranslation();
-    const { currency, setCurrency } = useSettingsStore();
+    const { currency, setCurrency, language, setLanguage } = useSettingsStore();
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -63,14 +63,15 @@ export const SettingsMenu: React.FC = () => {
                         key={lang.code}
                         onClick={() => {
                             i18n.changeLanguage(lang.code);
+                            setLanguage(lang.code as Language);
                             handleClose();
                         }}
-                        selected={i18n.language === lang.code}
+                        selected={language === lang.code}
                     >
                         <ListItemText inset>
                             {lang.flag} {lang.label}
                         </ListItemText>
-                        {i18n.language === lang.code && (
+                        {language === lang.code && (
                             <CheckIcon fontSize="small" color="primary" />
                         )}
                     </MenuItem>

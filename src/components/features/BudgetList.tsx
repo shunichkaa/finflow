@@ -32,16 +32,7 @@ export const BudgetList: React.FC = () => {
     const { currency } = useSettingsStore();
 
     if (budgets.length === 0) {
-        return (
-            <Box sx={{ textAlign: 'center', py: 8 }}>
-                <Typography variant="h6" color="text.secondary" gutterBottom>
-                    📊 {t('noBudgets')}
-                </Typography>
-                <Typography variant="body2" color="text.disabled">
-                    {t('createFirstBudget')}
-                </Typography>
-            </Box>
-        );
+        return null;
     }
 
     return (

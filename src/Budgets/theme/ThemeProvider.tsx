@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
 import { darkTheme, lightTheme } from './theme';
 import { ThemeContext, ThemeMode } from './ThemeContext';
 
@@ -19,7 +20,10 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
     return (
         <ThemeContext.Provider value={{ mode, toggleTheme }}>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                {children}
+            </ThemeProvider>
         </ThemeContext.Provider>
     );
 };

@@ -52,6 +52,8 @@ const Dashboard = () => {
                 </Button>
             </Box>
 
+            <Container maxWidth="lg" sx={{ px: 2, pb: 4 }}>
+
             {/* Stats Cards */}
             <StatsCards onFilterClick={handleStatsCardClick} />
 
@@ -75,6 +77,7 @@ const Dashboard = () => {
                 </Typography>
                 <TransactionList transactions={filteredTransactions} />
             </Paper>
+            </Container>
 
             {/* Add Transaction Modal */}
             <Modal
