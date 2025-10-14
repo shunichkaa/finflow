@@ -71,23 +71,6 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                         >
                             {/* Иконка категории */}
                             <Box
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    width: 48,
-                                    height: 48,
-                                    borderRadius: 2,
-                                    bgcolor:
-                                        theme.palette.mode === 'dark'
-                                            ? category?.color + '40'
-                                            : category?.color,
-                                    color:
-                                        theme.palette.mode === 'dark'
-                                            ? category?.color
-                                            : '#4a5568',
-                                    flexShrink: 0,
-                                }}
                                 onClick={() => { setEditingTxId(transaction.id); setIsEditOpen(true); }}
                                 role="button"
                                 aria-label={t('edit')}

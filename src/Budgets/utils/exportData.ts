@@ -1,11 +1,12 @@
 import {Budget, Transaction} from '../types';
 import {getCategoryById} from './categories';
 import {formatCurrency, formatDate} from './formatters';
+import type { Currency } from '../store/useSettingsStore';
 
 // Экспорт в CSV
 export const exportToCSV = (
     transactions: Transaction[],
-    currency: string
+    currency: Currency
 ): void => {
     const headers = ['Дата', 'Категория', 'Тип', 'Сумма', 'Описание'];
 

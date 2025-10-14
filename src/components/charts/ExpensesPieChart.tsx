@@ -115,7 +115,7 @@ export const ExpensesPieChart: React.FC = () => {
                     outerRadius={100}
                     fill="#8884d8"
                     dataKey="value"
-                    label={({ percent }: { percent?: number }) => `${(((percent ?? 0)) * 100).toFixed(0)}%`}
+                    label
                 >
                     {chartData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
