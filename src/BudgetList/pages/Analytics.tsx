@@ -10,7 +10,7 @@ export const Analytics: React.FC = () => {
             {/* Заголовок */}
             <Box sx={{ mb: 3 }}>
                 <Typography variant="h4" fontWeight="500" gutterBottom>
-                    📊 {t('analytics')}
+                {t('analytics')}
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
                     {t('analyticsDescription')}
