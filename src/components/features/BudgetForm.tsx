@@ -1,0 +1,163 @@
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import {
+    Box,
+    Button,
+    TextField,
+    MenuItem,
+    Stack,
+    Typography,
+    ToggleButtonGroup,
+    ToggleButton,
+} from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
+import { EXPENSE_CATEGORIES, getCategoryIcon, getCategoryName } from '../../Budgets/utils/categories';
+import { BudgetPeriod } from '../../Budgets/types';
+
+interface BudgetFormData {
+    category: string;
+    limit: string;
+    period: BudgetPeriod;
+}
+
+interface BudgetFormProps {
+    onSuccess?: () => void;
+}
+
+export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess }) => {
+    const { t } = useTranslation();
+    const addBudget = useFinanceStore((state) => state.addBudget);
+    const budgets = useFinanceStore((state) => state.budgets);
+
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+        reset,
+        watch,
+    } = useForm<BudgetFormData>({
+        defaultValues: {
+            category: '',
+            limit: '',
+            period: 'monthly',
+        },
+    });
+
+    const selectedPeriod = watch('period');
+
+    // Категории без бюджетов
+    const availableCategories = EXPENSE_CATEGORIES.filter(
+        (cat) => !budgets.some((b) => b.category === cat.id)
+    );
+
+    const onSubmit = (data: BudgetFormData) => {
+        addBudget({
+            category: data.category,
+            limit: parseFloat(data.limit),
+            period: data.period,
+        });
+
+        reset();
+        onSuccess?.();
+    };
+
+    if (availableCategories.length === 0) {
+        return (
+            <Box sx={{ textAlign: 'center', py: 4 }}>
+                <Typography color="text.secondary">
+                    {t('allCategoriesHaveBudgets')}
+                </Typography>
+            </Box>
+        );
+    }
+
+    return (
+        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+            <Stack spacing={3}>
+                {/* Period Toggle */}
+                <Box>
+                    <Typography variant="subtitle2" gutterBottom>
+                        {t('period')}
+                    </Typography>
+                    <Controller
+                        name="period"
+                        control={control}
+                        render={({ field }) => (
+                            <ToggleButtonGroup
+                                {...field}
+                                exclusive
+                                fullWidth
+                                color="primary"
+                            >
+                                <ToggleButton value="weekly">{t('weekly')}</ToggleButton>
+                                <ToggleButton value="monthly">{t('monthly')}</ToggleButton>
+                            </ToggleButtonGroup>
+                        )}
+                    />
+                </Box>
+
+                {/* Category */}
+                <Controller
+                    name="category"
+                    control={control}
+                    rules={{ required: t('categoryRequired') }}
+                    render={({ field }) => (
+                        <TextField
+                            {...field}
+                            select
+                            label={t('category')}
+                            error={!!errors.category}
+                            helperText={errors.category?.message}
+                            fullWidth
+                            required
+                        >
+                            {availableCategories.map((cat) => (
+                                <MenuItem key={cat.id} value={cat.id}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                        {getCategoryIcon(cat.icon, 20)}
+                                        <span>{getCategoryName(cat.id, t)}</span>
+                                    </Box>
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    )}
+                />
+
+                {/* Limit */}
+                <Controller
+                    name="limit"
+                    control={control}
+                    rules={{
+                        required: t('limitRequired'),
+                        validate: (value) => parseFloat(value) > 0 || t('limitMustBePositive'),
+                    }}
+                    render={({ field }) => (
+                        <TextField
+                            {...field}
+                            label={t('limit')}
+                            type="number"
+                            inputProps={{ step: '0.01', min: '0' }}
+                            error={!!errors.limit}
+                            helperText={errors.limit?.message}
+                            fullWidth
+                            required
+                        />
+                    )}
+                />
+
+                {/* Info */}
+                <Box sx={{ bgcolor: 'info.main', color: 'white', p: 2, borderRadius: 2 }}>
+                    <Typography variant="body2">
+                        💡 {selectedPeriod === 'monthly' ? t('monthlyBudgetInfo') : t('weeklyBudgetInfo')}
+                    </Typography>
+                </Box>
+
+                {/* Submit */}
+                <Button type="submit" variant="contained" size="large" fullWidth>
+                    {t('createBudget')}
+                </Button>
+            </Stack>
+        </Box>
+    );
+};
