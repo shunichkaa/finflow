@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from "../App.tsx";
+import './i18n/config';
+import { ThemeContextProvider } from './Budgets/theme/ThemeProvider';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -8,6 +10,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <React.StrictMode>
-        <App />
+        <ThemeContextProvider>
+            <App />
+        </ThemeContextProvider>
     </React.StrictMode>
 );

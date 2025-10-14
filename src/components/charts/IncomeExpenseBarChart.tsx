@@ -64,7 +64,11 @@ export const IncomeExpenseBarChart: React.FC = () => {
         );
     }
 
-    const CustomTooltip = ({ active, payload }: any) => {
+    interface TooltipPayloadItem {
+        value: number;
+        payload: { month: string };
+    }
+    const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: TooltipPayloadItem[] }) => {
         if (active && payload && payload.length) {
             return (
                 <Box

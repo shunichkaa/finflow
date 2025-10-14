@@ -5,7 +5,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {useTranslation} from 'react-i18next';
 import {SettingsMenu} from './features/SettingsMenu';
-import {useThemeMode} from '../Budgets/theme/ThemeProvider';
+import {useThemeMode} from '../Budgets/theme/ThemeContext';
 import {ExportMenu} from "./features/ExportMenu.tsx";
 
 interface LayoutProps {

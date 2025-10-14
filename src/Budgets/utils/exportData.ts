@@ -15,7 +15,7 @@ export const exportToCSV = (
             formatDate(t.date),
             category?.name || 'Неизвестно',
             t.type === 'income' ? 'Доход' : 'Расход',
-            formatCurrency(t.amount, currency as any), // Исправление здесь
+            formatCurrency(t.amount, currency),
             t.description || '',
         ];
     });

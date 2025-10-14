@@ -48,7 +48,7 @@ const lightThemeOptions: ThemeOptions = {
         },
     },
     shape: {
-        borderRadius: 16,
+        borderRadius: 10,
     },
     components: {
         MuiButton: {
@@ -56,17 +56,33 @@ const lightThemeOptions: ThemeOptions = {
                 root: {
                     textTransform: 'none',
                     fontWeight: 600,
-                    padding: '10px 24px',
+                    padding: '10px 20px',
                 },
             },
         },
         MuiCard: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+                    boxShadow: '0 1px 2px rgb(0 0 0 / 0.06)',
+                    border: '1px solid rgba(0,0,0,0.06)'
                 },
             },
         },
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    boxShadow: 'none',
+                    borderBottom: '1px solid rgba(0,0,0,0.06)'
+                }
+            }
+        },
+        MuiPaper: {
+            styleOverrides: {
+                elevation1: {
+                    boxShadow: '0 1px 2px rgb(0 0 0 / 0.06)'
+                }
+            }
+        }
     },
 };
 
@@ -117,7 +133,7 @@ const darkThemeOptions: ThemeOptions = {
         },
     },
     shape: {
-        borderRadius: 16,
+        borderRadius: 10,
     },
     components: {
         MuiButton: {
@@ -125,17 +141,33 @@ const darkThemeOptions: ThemeOptions = {
                 root: {
                     textTransform: 'none',
                     fontWeight: 600,
-                    padding: '10px 24px',
+                    padding: '10px 20px',
                 },
             },
         },
         MuiCard: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3)',
+                    boxShadow: '0 1px 2px rgb(0 0 0 / 0.3)',
+                    border: '1px solid rgba(255,255,255,0.08)'
                 },
             },
         },
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    boxShadow: 'none',
+                    borderBottom: '1px solid rgba(255,255,255,0.08)'
+                }
+            }
+        },
+        MuiPaper: {
+            styleOverrides: {
+                elevation1: {
+                    boxShadow: '0 1px 2px rgb(0 0 0 / 0.3)'
+                }
+            }
+        }
     },
 };
 

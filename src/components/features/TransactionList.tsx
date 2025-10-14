@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
 import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
 import { getCategoryById } from '../../Budgets/utils/categories.tsx';
+import { getCategoryIcon } from '../../Budgets/utils/categories.tsx';
 import { formatCurrency, formatDate } from '../../Budgets/utils/formatters';
 import { Transaction } from '../../Budgets/types';
 
@@ -85,14 +86,9 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                     flexShrink: 0,
                                 }}
                             >
-                                {category?.icon ? (
-  (() => {
-    const Icon = category.icon as any;
-    return <Icon sx={{ fontSize: 24 }} />;
-  })()
-) : (
-  <MoreHorizIcon sx={{ fontSize: 24 }} />
-)}
+                                {category?.icon ? getCategoryIcon(category.icon, 24) : (
+                                    <MoreHorizIcon sx={{ fontSize: 24 }} />
+                                )}
                             </Box>
 
                             {/* Информация о транзакции */}
