@@ -25,7 +25,7 @@ export const Layout: React.FC<LayoutProps> = ({children}) => {
 
     return (
         <Box sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
-            <AppBar position="static" elevation={1} color="default">
+            <AppBar position="static" elevation={1} color="primary" enableColorOnDark>
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{flexGrow: 0, mr: 4}}>
                         💰 FinFlow

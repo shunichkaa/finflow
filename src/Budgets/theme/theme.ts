@@ -5,15 +5,15 @@ const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
         primary: {
-            main: '#4F94F3',
-            light: '#A8D0FF',
-            dark: '#0E4CB3',
+            main: '#8EC5FF',
+            light: '#D5E9FF',
+            dark: '#4F94F3',
             contrastText: '#ffffff',
         },
         secondary: {
-            main: '#7FB7FF',
-            light: '#CDE6FF',
-            dark: '#2E73D8',
+            main: '#A8D6FF',
+            light: '#E3F1FF',
+            dark: '#73ACF1',
             contrastText: '#0D1B2A',
         },
         error: {
@@ -102,15 +102,15 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#7FB7FF',
-            light: '#A8D0FF',
+            main: '#6FAEF9',
+            light: '#A8D6FF',
             dark: '#4F94F3',
             contrastText: '#0B1220',
         },
         secondary: {
-            main: '#9CC9FF',
-            light: '#CDE6FF',
-            dark: '#4F94F3',
+            main: '#8EC5FF',
+            light: '#CFE7FF',
+            dark: '#3D7FD9',
             contrastText: '#0B1220',
         },
         error: {
