@@ -49,16 +49,15 @@ const Budgets: React.FC = () => {
 
             {/* Quick Stats */}
             {budgets.length > 0 && (
-                <Box sx={{display: 'flex', gap: 2, mb: 4, flexDirection: {xs: 'column', sm: 'row'}}}>
-                    <Box sx={{flex: 1}}>
-                        <Paper sx={{ p: 3, bgcolor: 'primary.main', color: 'white', minHeight: 120, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                            <Typography variant="h6">{t('totalBudgets')}</Typography>
-                            <Typography variant="h3" fontWeight="bold">{totalBudgets}</Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 4 }}>
+                    <Box>
+                        <Paper sx={{ p: 3, bgcolor: 'primary.main', color: 'white', minHeight: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+                            <Typography variant="h6" fontWeight="bold">{t('totalBudgets')}: {totalBudgets}</Typography>
                         </Paper>
                     </Box>
-                    <Box sx={{flex: 1}}>
+                    <Box>
                         <Paper
-                            sx={{ p: 3, bgcolor: exceededBudgets > 0 ? 'error.main' : 'success.main', color: 'white', minHeight: 120, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                            sx={{ p: 3, bgcolor: exceededBudgets > 0 ? 'error.main' : 'success.main', color: 'white', minHeight: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
                             <Typography variant="h6" fontWeight="bold">{t('exceededBudgets')}: {exceededBudgets}</Typography>
                         </Paper>
                     </Box>
