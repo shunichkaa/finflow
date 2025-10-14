@@ -27,7 +27,7 @@ const Budgets: React.FC = () => {
             {/* Header */}
             <Box sx={{mb: 4}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold">
-                    🎯 {t('budgets')}
+                    {t('budgets')}
                 </Typography>
                 <Typography variant="body1" color="text.secondary" gutterBottom>
                     {t('budgetsDescription')}
