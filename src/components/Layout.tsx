@@ -6,6 +6,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {useTranslation} from 'react-i18next';
 import {SettingsMenu} from './features/SettingsMenu';
 import {useThemeMode} from '../Budgets/theme/ThemeProvider';
+import {ExportMenu} from "./features/ExportMenu.tsx";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -50,6 +51,7 @@ export const Layout: React.FC<LayoutProps> = ({children}) => {
                     <IconButton onClick={toggleTheme} color="inherit">
                         {mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
                     </IconButton>
+                    <ExportMenu />
                     <SettingsMenu/>
                 </Toolbar>
             </AppBar>
