@@ -35,7 +35,6 @@ const resources = {
             totalBudgets: 'Всего бюджетов',
             exceededBudgets: 'Превышено бюджетов',
             chartsComingSoon: 'Графики появятся здесь',
-            continueWork: 'Продолжайте работу по Дню 3',
 
             // Форма
             amount: 'Сумма',
@@ -152,7 +151,7 @@ const resources = {
             income: 'Revenus',
             expense: 'Dépenses',
             transactions: 'Transactions',
-            noTransactions: 'Aucune transaction',
+            // noTransactions already defined above
             noData: 'Aucune donnée',
 
             dashboard: 'Tableau de bord',
@@ -164,7 +163,6 @@ const resources = {
             totalBudgets: 'Budgets totaux',
             exceededBudgets: 'Budgets dépassés',
             chartsComingSoon: 'Les graphiques apparaîtront ici',
-            continueWork: 'Continuez avec le Jour 3',
             amount: 'Montant',
             category: 'Catégorie',
             description: 'Description',
@@ -211,7 +209,7 @@ const resources = {
             income: 'Einkommen',
             expense: 'Ausgaben',
             transactions: 'Transaktionen',
-            noTransactions: 'Noch keine Transaktionen',
+            // noTransactions already defined above
             noData: 'Keine Daten',
 
             dashboard: 'Dashboard',
@@ -382,6 +380,9 @@ i18n
         fallbackLng: 'en',
         interpolation: {
             escapeValue: false,
+        },
+        detection: {
+            order: ['localStorage', 'navigator', 'htmlTag'],
         },
     });
 

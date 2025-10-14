@@ -31,9 +31,6 @@ export const Analytics: React.FC = () => {
                 <Typography variant="h6" color="text.secondary" gutterBottom>
                     {t('chartsComingSoon')}
                 </Typography>
-                <Typography variant="body2" color="text.disabled">
-                    {t('continueWork')}
-                </Typography>
             </Paper>
         </Container>
     );
