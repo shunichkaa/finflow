@@ -6,9 +6,12 @@ import {useSettingsStore} from '../../Budgets/store/useSettingsStore';
 import {formatCurrency} from '../../Budgets/utils/formatters';
 import type {Transaction} from '../../Budgets/types';
 
-interface IncomeExpenseTrendChartProps {
+type Period = 'week' | 'month' | 'year';
+
+export interface IncomeExpenseTrendChartProps {
     transactions: Transaction[];
-    period: 'week' | 'month' | 'year';
+    period: Period;
+    noDataMessage?: string;
 }
 
 export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = ({

@@ -4,8 +4,9 @@ import {useTranslation} from 'react-i18next';
 import {useSettingsStore} from "../../Budgets/store/useSettingsStore.ts";
 import {useFinanceStore} from "../../Budgets/store/useFinanceStore.ts";
 import {formatCurrency} from "../../Budgets/utils/formatters.ts";
-import {ExpensesPieChart} from "../../components/charts/ExpensesPieChart.tsx";
 import {IncomeExpenseTrendChart} from "../../components/features/IncomeExpenseTrendChart.tsx";
+import {ExpensesPieChart} from "../../components/features/ExpensesPieChart.tsx";
+
 
 type Period = 'week' | 'month' | 'year';
 

@@ -1,27 +1,46 @@
-import React, {useMemo} from 'react';
-import {Cell, Legend, Pie, PieChart, PieLabelRenderProps, ResponsiveContainer, Tooltip} from 'recharts';
-import {Box, Typography} from '@mui/material';
-import {useTranslation} from 'react-i18next';
-import {useSettingsStore} from '../../Budgets/store/useSettingsStore';
-import {formatCurrency} from '../../Budgets/utils/formatters';
-import {getCategoryName} from '../../Budgets/utils/categories';
-import type {Transaction} from '../../Budgets/types';
+import React, { useMemo } from 'react';
+import {
+    Cell,
+    Legend,
+    Pie,
+    PieChart,
+    PieLabelRenderProps,
+    ResponsiveContainer,
+    Tooltip,
+} from 'recharts';
+import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
+import { formatCurrency } from '../../Budgets/utils/formatters';
+import { getCategoryName } from '../../Budgets/utils/categories';
+import type { Transaction } from '../../Budgets/types';
 
-interface ExpensesPieChartProps {
+export interface ExpensesPieChartProps {
     transactions: Transaction[];
+    noDataMessage?: string;
 }
 
 const COLORS = [
-    '#FFB3BA', '#BAE1FF', '#BAFFC9', '#FFF3BA', '#D7BAFF', '#FFD8BA', '#E2F0CB', '#F0F0F0',
+    '#FFB3BA',
+    '#BAE1FF',
+    '#BAFFC9',
+    '#FFF3BA',
+    '#D7BAFF',
+    '#FFD8BA',
+    '#E2F0CB',
+    '#F0F0F0',
 ];
 
-export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({transactions}) => {
-    const {t} = useTranslation();
-    const {currency} = useSettingsStore();
+export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
+                                                                      transactions,
+                                                                      noDataMessage,
+                                                                  }) => {
+    const { t } = useTranslation();
+    const { currency } = useSettingsStore();
 
     const chartData = useMemo(() => {
         const expensesByCategory = transactions
-            .filter(t => t.type === 'expense')
+            .filter((t) => t.type === 'expense')
             .reduce((acc, t) => {
                 const currentAmount = acc[t.category] || 0;
                 acc[t.category] = currentAmount + t.amount;
@@ -39,8 +58,17 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({transactions}
 
     if (chartData.length === 0) {
         return (
-            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300}}>
-                <Typography color="text.secondary">{t('noExpenseData')}</Typography>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    minHeight: 300,
+                }}
+            >
+                <Typography color="text.secondary">
+                    {noDataMessage || t('noExpenseData')}
+                </Typography>
             </Box>
         );
     }
@@ -58,7 +86,9 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({transactions}
         if ((percent ?? 0) < 0.05) return null;
 
         const RADIAN = Math.PI / 180;
-        const radius = Number(innerRadius) + (Number(outerRadius) - Number(innerRadius)) * 0.5;
+        const radius =
+            Number(innerRadius) +
+            (Number(outerRadius) - Number(innerRadius)) * 0.5;
         const x = Number(cx) + radius * Math.cos(-Number(midAngle) * RADIAN);
         const y = Number(cy) + radius * Math.sin(-Number(midAngle) * RADIAN);
 
@@ -92,7 +122,10 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({transactions}
                         dataKey="value"
                     >
                         {chartData.map((_, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}/>
+                            <Cell
+                                key={`cell-${index}`}
+                                fill={COLORS[index % COLORS.length]}
+                            />
                         ))}
                     </Pie>
                     <Tooltip
@@ -110,8 +143,14 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({transactions}
                             const payloadValue = entry.payload?.value;
                             if (typeof payloadValue !== 'number') return value;
 
-                            const percentage = ((payloadValue / totalExpenses) * 100).toFixed(1);
-                            return `${value}: ${formatCurrency(payloadValue, currency)} (${percentage}%)`;
+                            const percentage = (
+                                (payloadValue / totalExpenses) *
+                                100
+                            ).toFixed(1);
+                            return `${value}: ${formatCurrency(
+                                payloadValue,
+                                currency
+                            )} (${percentage}%)`;
                         }}
                     />
                 </PieChart>
