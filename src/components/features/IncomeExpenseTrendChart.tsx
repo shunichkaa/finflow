@@ -30,7 +30,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 const dateStr = date.toISOString().split('T')[0];
 
                 const dayTransactions = transactions.filter(
-                    t => t.date.split('T')[0] === dateStr
+                    t => t.date.toISOString().split('T')[0] === dateStr
                 );
 
                 data.push({
