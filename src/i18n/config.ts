@@ -38,6 +38,17 @@ const resources = {
             editBudget: 'Редактировать бюджет',
             edit: 'Редактировать',
 
+            // Периоды
+            week: 'Неделя',
+            month: 'Месяц',
+            year: 'Год',
+
+            // Статистика
+            savingsRate: 'Процент экономии',
+            expenseDistribution: 'Распределение расходов',
+            incomeVsExpenses: 'Доходы vs Расходы',
+            noTransactionData: 'Нет данных о транзакциях',
+
             // Форма
             amount: 'Сумма',
             category: 'Категория',
@@ -79,6 +90,7 @@ const resources = {
             'settings.language': 'Язык',
             'settings.currency': 'Валюта',
             'settings.theme': 'Тема',
+
             // Бюджет форма/страницы
             period: 'Период',
             weekly: 'Еженедельно',
@@ -127,7 +139,16 @@ const resources = {
             chartsComingSoon: 'Charts will appear here',
             editBudget: 'Edit Budget',
             edit: 'Edit',
-            continueWork: 'Continue with Day 3',
+
+            week: 'Week',
+            month: 'Month',
+            year: 'Year',
+
+            savingsRate: 'Savings Rate',
+            expenseDistribution: 'Expense Distribution',
+            incomeVsExpenses: 'Income vs Expenses',
+            noTransactionData: 'No transaction data',
+
             amount: 'Amount',
             category: 'Category',
             description: 'Description',
@@ -192,7 +213,6 @@ const resources = {
             income: 'Revenus',
             expense: 'Dépenses',
             transactions: 'Transactions',
-            // noTransactions already defined above
             noData: 'Aucune donnée',
 
             dashboard: 'Tableau de bord',
@@ -206,6 +226,16 @@ const resources = {
             chartsComingSoon: 'Les graphiques apparaîtront ici',
             editBudget: 'Modifier le budget',
             edit: 'Modifier',
+
+            week: 'Semaine',
+            month: 'Mois',
+            year: 'Année',
+
+            savingsRate: 'Taux d\'épargne',
+            expenseDistribution: 'Répartition des dépenses',
+            incomeVsExpenses: 'Revenus vs Dépenses',
+            noTransactionData: 'Aucune donnée de transaction',
+
             amount: 'Montant',
             category: 'Catégorie',
             description: 'Description',
@@ -221,8 +251,8 @@ const resources = {
             addFirst: 'Ajoutez votre première transaction',
             confirmDelete: 'Supprimer la transaction?',
             period: 'Période',
-            weekly: 'Еженедельно',
-            monthly: 'Ежемесячно',
+            weekly: 'Hebdomadaire',
+            monthly: 'Mensuel',
             limit: 'Limite',
             limitRequired: 'Entrez la limite',
             limitMustBePositive: 'La limite doit être positive',
@@ -235,7 +265,7 @@ const resources = {
             daysLeft: 'jours restants',
             spent: 'Dépensé',
             remaining: 'Restant',
-            exceeded: 'Превышено',
+            exceeded: 'Dépassé',
             limitLabel: 'Limite',
             used: 'utilisé',
             'category.food': 'Alimentation',
@@ -270,7 +300,6 @@ const resources = {
             income: 'Einkommen',
             expense: 'Ausgaben',
             transactions: 'Transaktionen',
-            // noTransactions already defined above
             noData: 'Keine Daten',
 
             dashboard: 'Dashboard',
@@ -284,7 +313,16 @@ const resources = {
             chartsComingSoon: 'Diagramme erscheinen hier',
             editBudget: 'Budget bearbeiten',
             edit: 'Bearbeiten',
-            continueWork: 'Weiter mit Tag 3',
+
+            week: 'Woche',
+            month: 'Monat',
+            year: 'Jahr',
+
+            savingsRate: 'Sparrate',
+            expenseDistribution: 'Ausgabenverteilung',
+            incomeVsExpenses: 'Einkommen vs Ausgaben',
+            noTransactionData: 'Keine Transaktionsdaten',
+
             amount: 'Betrag',
             category: 'Kategorie',
             description: 'Beschreibung',
@@ -362,7 +400,16 @@ const resources = {
             chartsComingSoon: 'Los gráficos aparecerán aquí',
             editBudget: 'Editar presupuesto',
             edit: 'Editar',
-            continueWork: 'Continúa con el Día 3',
+
+            week: 'Semana',
+            month: 'Mes',
+            year: 'Año',
+
+            savingsRate: 'Tasa de ahorro',
+            expenseDistribution: 'Distribución de gastos',
+            incomeVsExpenses: 'Ingresos vs Gastos',
+            noTransactionData: 'Sin datos de transacciones',
+
             amount: 'Cantidad',
             category: 'Categoría',
             description: 'Descripción',
@@ -440,7 +487,16 @@ const resources = {
             chartsComingSoon: 'Grafikoni će se pojaviti ovdje',
             editBudget: 'Uredi budžet',
             edit: 'Uredi',
-            continueWork: 'Nastavite sa Danom 3',
+
+            week: 'Nedjelja',
+            month: 'Mjesec',
+            year: 'Godina',
+
+            savingsRate: 'Stopa štednje',
+            expenseDistribution: 'Distribucija rashoda',
+            incomeVsExpenses: 'Prihodi vs Rashodi',
+            noTransactionData: 'Nema podataka o transakcijama',
+
             amount: 'Iznos',
             category: 'Kategorija',
             description: 'Opis',
@@ -455,6 +511,24 @@ const resources = {
             noTransactions: 'Nema transakcija',
             addFirst: 'Dodajte prvu transakciju',
             confirmDelete: 'Obrisati transakciju?',
+            period: 'Period',
+            weekly: 'Nedeljno',
+            monthly: 'Mjesečno',
+            limit: 'Limit',
+            limitRequired: 'Unesite limit',
+            limitMustBePositive: 'Limit mora biti pozitivan',
+            monthlyBudgetInfo: 'Mjesečni budžet se resetuje svakog mjeseca.',
+            weeklyBudgetInfo: 'Nedeljni budžet se resetuje svake nedelje.',
+            allCategoriesHaveBudgets: 'Sve kategorije imaju budžete',
+            confirmDeleteBudget: 'Obrisati budžet?',
+            budgetExceeded: 'Prekoračenje budžeta',
+            budgetAlmostExceeded: 'Budžet skoro iscrpljen',
+            daysLeft: 'dana preostalo',
+            spent: 'Potrošeno',
+            remaining: 'Preostalo',
+            exceeded: 'Prekoračeno',
+            limitLabel: 'Limit',
+            used: 'iskorišteno',
             'category.food': 'Hrana i namirnice',
             'category.transport': 'Prevoz',
             'category.housing': 'Stanovanje',
