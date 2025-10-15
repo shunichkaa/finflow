@@ -26,7 +26,7 @@ const Budgets: React.FC = () => {
     const editingBudget = useMemo(() => budgets.find(b => b.id === editingBudgetId) || null, [budgets, editingBudgetId]);
 
     return (
-        <Container maxWidth="md" sx={{ py: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Container maxWidth="md" sx={{py: 4, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             {/* Header */}
             <Box sx={{mb: 4}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold">
@@ -49,30 +49,66 @@ const Budgets: React.FC = () => {
 
             {/* Quick Stats */}
             {budgets.length > 0 && (
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 4 }}>
-                    <Box>
-                        <Paper sx={{ p: 3, bgcolor: 'primary.main', color: 'white', minHeight: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-                            <Typography variant="h6" fontWeight="bold">{t('totalBudgets')}: {totalBudgets}</Typography>
-                        </Paper>
-                    </Box>
-                    <Box>
-                        <Paper
-                            sx={{ p: 3, bgcolor: exceededBudgets > 0 ? 'error.main' : 'success.main', color: 'white', minHeight: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-                            <Typography variant="h6" fontWeight="bold">{t('exceededBudgets')}: {exceededBudgets}</Typography>
-                        </Paper>
-                    </Box>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: 2,
+                    mb: 4,
+                    width: '100%',
+                    maxWidth: 720
+                }}>
+                    <Paper sx={{
+                        flex: 1,
+                        p: 3,
+                        bgcolor: 'primary.main',
+                        color: 'white',
+                        minHeight: 120,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        textAlign: 'center'
+                    }}>
+                        <Typography variant="h6" fontWeight="bold">
+                            {t('totalBudgets')}: {totalBudgets}
+                        </Typography>
+                    </Paper>
+
+                    <Paper sx={{
+                        flex: 1,
+                        p: 3,
+                        bgcolor: exceededBudgets > 0 ? 'error.main' : '#3D7FD9',
+                        color: 'white',
+                        minHeight: 120,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        textAlign: 'center'
+                    }}>
+                        <Typography variant="h6" fontWeight="bold">
+                            {t('exceededBudgets')}: {exceededBudgets}
+                        </Typography>
+                    </Paper>
                 </Box>
             )}
 
             {/* Budget List */}
-            <Box sx={{ width: '100%', maxWidth: 720 }}>
-                <BudgetList onEdit={(id) => { setEditingBudgetId(id); setIsModalOpen(true); }}/>
+            <Box sx={{width: '100%', maxWidth: 720}}>
+                <BudgetList onEdit={(id) => {
+                    setEditingBudgetId(id);
+                    setIsModalOpen(true);
+                }}/>
             </Box>
 
             {/* Modal */}
-            <Modal open={isModalOpen} onClose={() => { setIsModalOpen(false); setEditingBudgetId(null); }} title={editingBudget ? t('editBudget') : t('createBudget')}>
-                <Box sx={{ width: { xs: '100%', sm: 520 } }}>
-                    <BudgetForm initialBudget={editingBudget ?? undefined} onSuccess={() => { setIsModalOpen(false); setEditingBudgetId(null); }}/>
+            <Modal open={isModalOpen} onClose={() => {
+                setIsModalOpen(false);
+                setEditingBudgetId(null);
+            }} title={editingBudget ? t('editBudget') : t('createBudget')}>
+                <Box sx={{width: {xs: '100%', sm: 520}}}>
+                    <BudgetForm initialBudget={editingBudget ?? undefined} onSuccess={() => {
+                        setIsModalOpen(false);
+                        setEditingBudgetId(null);
+                    }}/>
                 </Box>
             </Modal>
         </Container>

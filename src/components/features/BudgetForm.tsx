@@ -1,20 +1,11 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import {
-    Box,
-    Button,
-    TextField,
-    MenuItem,
-    Stack,
-    Typography,
-    ToggleButtonGroup,
-    ToggleButton,
-} from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
-import type { Budget } from '../../Budgets/types';
-import { EXPENSE_CATEGORIES, getCategoryIcon, getCategoryName } from '../../Budgets/utils/categories';
-import { BudgetPeriod } from '../../Budgets/types';
+import {Controller, useForm} from 'react-hook-form';
+import {Box, Button, MenuItem, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography,} from '@mui/material';
+import {useTranslation} from 'react-i18next';
+import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
+import type {Budget} from '../../Budgets/types';
+import {BudgetPeriod} from '../../Budgets/types';
+import {EXPENSE_CATEGORIES, getCategoryIcon, getCategoryName} from '../../Budgets/utils/categories';
 
 interface BudgetFormData {
     category: string;
@@ -27,8 +18,8 @@ interface BudgetFormProps {
     initialBudget?: Budget;
 }
 
-export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess, initialBudget }) => {
-    const { t } = useTranslation();
+export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}) => {
+    const {t} = useTranslation();
     const addBudget = useFinanceStore((state) => state.addBudget);
     const updateBudget = useFinanceStore((state) => state.updateBudget);
     const budgets = useFinanceStore((state) => state.budgets);
@@ -36,7 +27,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess, initialBudget
     const {
         control,
         handleSubmit,
-        formState: { errors },
+        formState: {errors},
         reset,
         watch,
     } = useForm<BudgetFormData>({
@@ -74,7 +65,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess, initialBudget
 
     if (availableCategories.length === 0) {
         return (
-            <Box sx={{ textAlign: 'center', py: 4 }}>
+            <Box sx={{textAlign: 'center', py: 4}}>
                 <Typography color="text.secondary">
                     {t('allCategoriesHaveBudgets')}
                 </Typography>
@@ -93,7 +84,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess, initialBudget
                     <Controller
                         name="period"
                         control={control}
-                        render={({ field }) => (
+                        render={({field}) => (
                             <ToggleButtonGroup
                                 {...field}
                                 exclusive
@@ -111,8 +102,8 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess, initialBudget
                 <Controller
                     name="category"
                     control={control}
-                    rules={{ required: t('categoryRequired') }}
-                    render={({ field }) => (
+                    rules={{required: t('categoryRequired')}}
+                    render={({field}) => (
                         <TextField
                             {...field}
                             select
@@ -125,7 +116,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess, initialBudget
                         >
                             {availableCategories.map((cat) => (
                                 <MenuItem key={cat.id} value={cat.id}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
                                         {getCategoryIcon(cat.icon, 20)}
                                         <span>{getCategoryName(cat.id, t)}</span>
                                     </Box>
@@ -143,12 +134,12 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess, initialBudget
                         required: t('limitRequired'),
                         validate: (value) => parseFloat(value) > 0 || t('limitMustBePositive'),
                     }}
-                    render={({ field }) => (
+                    render={({field}) => (
                         <TextField
                             {...field}
                             label={t('limit')}
                             type="number"
-                            inputProps={{ step: '0.01', min: '0' }}
+                            inputProps={{step: '0.01', min: '0'}}
                             error={!!errors.limit}
                             helperText={errors.limit?.message}
                             fullWidth
@@ -158,7 +149,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({ onSuccess, initialBudget
                 />
 
                 {/* Info */}
-                <Box sx={{ bgcolor: 'info.main', color: 'white', p: 2, borderRadius: 2 }}>
+                <Box sx={{bgcolor: 'info.main', color: 'white', p: 2, borderRadius: 2}}>
                     <Typography variant="body2">
                         💡 {selectedPeriod === 'monthly' ? t('monthlyBudgetInfo') : t('weeklyBudgetInfo')}
                     </Typography>
