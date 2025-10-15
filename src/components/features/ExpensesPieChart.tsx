@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from 'recharts';
+import {Cell, Legend, Pie, PieChart, PieLabelRenderProps, ResponsiveContainer, Tooltip} from 'recharts';
 import {Box, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next';
 import {useSettingsStore} from '../../Budgets/store/useSettingsStore';
@@ -12,14 +12,7 @@ interface ExpensesPieChartProps {
 }
 
 const COLORS = [
-    '#FF6384',
-    '#36A2EB',
-    '#FFCE56',
-    '#4BC0C0',
-    '#9966FF',
-    '#FF9F40',
-    '#FF6384',
-    '#C9CBCF',
+    '#FFB3BA', '#BAE1FF', '#BAFFC9', '#FFF3BA', '#D7BAFF', '#FFD8BA', '#E2F0CB', '#F0F0F0',
 ];
 
 export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({transactions}) => {
@@ -30,7 +23,8 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({transactions}
         const expensesByCategory = transactions
             .filter(t => t.type === 'expense')
             .reduce((acc, t) => {
-                acc[t.category] = (acc[t.category] || 0) + t.amount;
+                const currentAmount = acc[t.category] || 0;
+                acc[t.category] = currentAmount + t.amount;
                 return acc;
             }, {} as Record<string, number>);
 
@@ -53,25 +47,32 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({transactions}
 
     const totalExpenses = chartData.reduce((sum, item) => sum + item.value, 0);
 
-    const renderCustomLabel = ({cx, cy, midAngle, innerRadius, outerRadius, percent}: any) => {
-        if (percent < 0.05) return null; // Не показываем метки для маленьких сегментов
+    const renderCustomLabel = ({
+                                   cx,
+                                   cy,
+                                   midAngle,
+                                   innerRadius,
+                                   outerRadius,
+                                   percent,
+                               }: PieLabelRenderProps) => {
+        if ((percent ?? 0) < 0.05) return null;
 
         const RADIAN = Math.PI / 180;
-        const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+        const radius = Number(innerRadius) + (Number(outerRadius) - Number(innerRadius)) * 0.5;
+        const x = Number(cx) + radius * Math.cos(-Number(midAngle) * RADIAN);
+        const y = Number(cy) + radius * Math.sin(-Number(midAngle) * RADIAN);
 
         return (
             <text
                 x={x}
                 y={y}
                 fill="white"
-                textAnchor={x > cx ? 'start' : 'end'}
+                textAnchor={x > Number(cx) ? 'start' : 'end'}
                 dominantBaseline="central"
-                fontSize="12"
+                fontSize={12}
                 fontWeight="bold"
             >
-                {`${(percent * 100).toFixed(0)}%`}
+                {`${(Number(percent) * 100).toFixed(0)}%`}
             </text>
         );
     };
@@ -90,7 +91,7 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({transactions}
                         fill="#8884d8"
                         dataKey="value"
                     >
-                        {chartData.map((entry, index) => (
+                        {chartData.map((_, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}/>
                         ))}
                     </Pie>
@@ -105,9 +106,12 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({transactions}
                     <Legend
                         verticalAlign="bottom"
                         height={36}
-                        formatter={(value, entry: any) => {
-                            const percentage = ((entry.payload.value / totalExpenses) * 100).toFixed(1);
-                            return `${value}: ${formatCurrency(entry.payload.value, currency)} (${percentage}%)`;
+                        formatter={(value, entry) => {
+                            const payloadValue = entry.payload?.value;
+                            if (typeof payloadValue !== 'number') return value;
+
+                            const percentage = ((payloadValue / totalExpenses) * 100).toFixed(1);
+                            return `${value}: ${formatCurrency(payloadValue, currency)} (${percentage}%)`;
                         }}
                     />
                 </PieChart>
