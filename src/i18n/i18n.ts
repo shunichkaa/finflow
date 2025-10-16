@@ -12,7 +12,7 @@ const resources = {
 
             // Действия
             addTransaction: 'Добавить транзакцию',
-            newTransaction: 'Новая транзакция',
+            newTransaction: 'Новая транзакцию',
             save: 'Сохранить',
             cancel: 'Отмена',
             delete: 'Удалить',
@@ -110,6 +110,13 @@ const resources = {
             exceeded: 'Превышено',
             limitLabel: 'Лимит',
             used: 'использовано',
+
+            // Экспорт
+            export: 'Экспорт',
+            exportCSV: 'Экспорт CSV',
+            exportExcel: 'Экспорт Excel',
+            exportPDF: 'Экспорт PDF',
+            topExpenses: 'Топ-5 расходов',
         },
     },
     en: {
@@ -197,6 +204,13 @@ const resources = {
             'settings.language': 'Language',
             'settings.currency': 'Currency',
             'settings.theme': 'Theme',
+
+            // Export
+            export: 'Export',
+            exportCSV: 'Export CSV',
+            exportExcel: 'Export Excel',
+            exportPDF: 'Export PDF',
+            topExpenses: 'Top 5 Expenses',
         },
     },
     fr: {
@@ -284,6 +298,13 @@ const resources = {
             'settings.language': 'Langue',
             'settings.currency': 'Devise',
             'settings.theme': 'Thème',
+
+            // Export
+            export: 'Exporter',
+            exportCSV: 'Exporter CSV',
+            exportExcel: 'Exporter Excel',
+            exportPDF: 'Exporter PDF',
+            topExpenses: 'Top 5 des dépenses',
         },
     },
     de: {
@@ -371,6 +392,13 @@ const resources = {
             'settings.language': 'Sprache',
             'settings.currency': 'Währung',
             'settings.theme': 'Theme',
+
+            // Export
+            export: 'Exportieren',
+            exportCSV: 'CSV exportieren',
+            exportExcel: 'Excel exportieren',
+            exportPDF: 'PDF exportieren',
+            topExpenses: 'Top 5 Ausgaben',
         },
     },
     es: {
@@ -402,7 +430,7 @@ const resources = {
             edit: 'Editar',
 
             week: 'Semana',
-            month: 'Mes',
+            month: 'Mois',
             year: 'Año',
 
             savingsRate: 'Tasa de ahorro',
@@ -458,6 +486,13 @@ const resources = {
             'settings.language': 'Idioma',
             'settings.currency': 'Moneda',
             'settings.theme': 'Tema',
+
+            // Export
+            export: 'Exportar',
+            exportCSV: 'Exportar CSV',
+            exportExcel: 'Exportar Excel',
+            exportPDF: 'Exportar PDF',
+            topExpenses: 'Top 5 Gastos',
         },
     },
     me: {
@@ -545,6 +580,13 @@ const resources = {
             'settings.language': 'Jezik',
             'settings.currency': 'Valuta',
             'settings.theme': 'Tema',
+
+            // Export
+            export: 'Izvezi',
+            exportCSV: 'Izvezi CSV',
+            exportExcel: 'Izvezi Excel',
+            exportPDF: 'Izvezi PDF',
+            topExpenses: 'Top 5 Rashoda',
         },
     },
 };
