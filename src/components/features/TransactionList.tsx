@@ -35,7 +35,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
         return (
             <Box sx={{ textAlign: 'center', py: 8 }}>
                 <Typography variant="h6" color="text.secondary" gutterBottom>
-                    📝 {t('noTransactions')}
+                     {t('noTransactions')}
                 </Typography>
                 <Typography variant="body2" color="text.disabled">
                     {t('addFirst')}
