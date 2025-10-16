@@ -1,6 +1,6 @@
 import React from 'react';
 import {AppBar, Box, Button, IconButton, Toolbar, Typography} from '@mui/material';
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {useTranslation} from 'react-i18next';
@@ -15,6 +15,7 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({children}) => {
     const {t} = useTranslation();
     const location = useLocation();
+    const navigate = useNavigate(); // Добавлен хук для навигации
     const {mode, toggleTheme} = useThemeMode();
 
     const navItems = [
@@ -23,12 +24,29 @@ export const Layout: React.FC<LayoutProps> = ({children}) => {
         { path: '/budgets', label: t('budgets') },
     ];
 
+    // Обработчик клика по логотипу FinFlow
+    const handleLogoClick = () => {
+        navigate('/dashboard');
+    };
+
     return (
         <Box sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
             <AppBar position="static" elevation={1} color="primary" enableColorOnDark>
                 <Toolbar>
-                    <Typography variant="h6" component="div" sx={{flexGrow: 0, mr: 4}}>
-                        💰 FinFlow
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{
+                            flexGrow: 0,
+                            mr: 4,
+                            cursor: 'pointer',
+                            '&:hover': {
+                                opacity: 0.8
+                            }
+                        }}
+                        onClick={handleLogoClick}
+                    >
+                        💰 {t('appName')}
                     </Typography>
 
                     <Box sx={{flexGrow: 1, display: 'flex', gap: 2}}>
