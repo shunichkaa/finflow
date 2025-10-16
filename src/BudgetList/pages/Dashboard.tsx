@@ -53,7 +53,7 @@ const Dashboard = () => {
                     >
                         {t('addTransaction')}
                     </Button>
-                    <ExportData /> {/* ✅ добавлена кнопка экспорта */}
+                    <ExportData />
                 </Box>
             </Box>
 
