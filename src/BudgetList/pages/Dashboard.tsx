@@ -10,7 +10,7 @@ import { TransactionFilters } from '../../components/features/TransactionFilters
 import { TransactionForm } from '../../components/features/TransactionForm.tsx';
 import { Modal } from '../../components/ui/Modal.tsx';
 import { useTransactionFilters } from '../../Budgets/hooks/useTransactionFilters.ts';
-import { ExportData } from '../../components/features/ExportData.tsx'; // ✅ добавлен импорт
+import { ExportData } from '../../components/features/ExportData.tsx';
 
 const Dashboard = () => {
     const { t } = useTranslation();
