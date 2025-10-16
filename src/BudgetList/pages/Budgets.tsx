@@ -26,9 +26,9 @@ const Budgets: React.FC = () => {
     const editingBudget = useMemo(() => budgets.find(b => b.id === editingBudgetId) || null, [budgets, editingBudgetId]);
 
     return (
-        <Container maxWidth="md" sx={{py: 4, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            {/* Header */}
-            <Box sx={{mb: 4}}>
+        <Container maxWidth="md" sx={{py: 4}}>
+            {/* Header - выровнено влево */}
+            <Box sx={{mb: 4, textAlign: 'left'}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold">
                     {t('budgets')}
                 </Typography>
@@ -51,7 +51,7 @@ const Budgets: React.FC = () => {
             {budgets.length > 0 && (
                 <Box sx={{
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: {xs: 'column', sm: 'row'},
                     gap: 2,
                     mb: 4,
                     width: '100%',
@@ -92,7 +92,7 @@ const Budgets: React.FC = () => {
             )}
 
             {/* Budget List */}
-            <Box sx={{width: '100%', maxWidth: 720}}>
+            <Box sx={{width: '100%'}}>
                 <BudgetList onEdit={(id) => {
                     setEditingBudgetId(id);
                     setIsModalOpen(true);

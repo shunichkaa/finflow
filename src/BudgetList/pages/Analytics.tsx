@@ -51,18 +51,18 @@ const Analytics: React.FC = () => {
 
     return (
         <Container maxWidth="lg" sx={{py: 4}}>
-            {/* Header */}
-            <Box sx={{mb: 4, textAlign: 'center'}}>
-                <Typography variant="h4" gutterBottom fontWeight="bold">
+            {/* Header - выровнено влево */}
+            <Box sx={{mb: 4}}>
+                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{textAlign: 'left'}}>
                     {t('analytics')}
                 </Typography>
-                <Typography variant="body1" color="text.secondary">
+                <Typography variant="body1" color="text.secondary" sx={{textAlign: 'left'}}>
                     {t('analyticsDescription')}
                 </Typography>
             </Box>
 
             {/* Period Selector */}
-            <Box sx={{mb: 4, display: 'flex', justifyContent: 'center'}}>
+            <Box sx={{mb: 4, display: 'flex', justifyContent: 'flex-start'}}>
                 <ToggleButtonGroup
                     value={period}
                     exclusive
@@ -140,14 +140,14 @@ const Analytics: React.FC = () => {
             {/* Charts */}
             <Box sx={{display: 'grid', gridTemplateColumns: {xs: '1fr', lg: '1fr 1fr'}, gap: 3}}>
                 <Paper elevation={2} sx={{p: 3}}>
-                    <Typography variant="h6" gutterBottom fontWeight="bold" sx={{mb: 2}}>
+                    <Typography variant="h6" gutterBottom fontWeight="bold" sx={{mb: 2, textAlign: 'left'}}>
                         {t('expenseDistribution')}
                     </Typography>
                     <ExpensesPieChart transactions={filteredTransactions} noDataMessage={t('noTransactionData')}/>
                 </Paper>
 
                 <Paper elevation={2} sx={{p: 3}}>
-                    <Typography variant="h6" gutterBottom fontWeight="bold" sx={{mb: 2}}>
+                    <Typography variant="h6" gutterBottom fontWeight="bold" sx={{mb: 2, textAlign: 'left'}}>
                         {t('incomeVsExpenses')}
                     </Typography>
                     <IncomeExpenseTrendChart transactions={filteredTransactions} period={period}
@@ -157,7 +157,7 @@ const Analytics: React.FC = () => {
 
             {/* Top 5 Expenses */}
             <Paper elevation={2} sx={{p: 3, mt: 3}}>
-                <Typography variant="h6" gutterBottom fontWeight="bold" sx={{mb: 2}}>
+                <Typography variant="h6" gutterBottom fontWeight="bold" sx={{mb: 2, textAlign: 'left'}}>
                     {t('topExpenses')}
                 </Typography>
                 <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
