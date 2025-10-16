@@ -5,7 +5,8 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import {useTranslation} from 'react-i18next';
 import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
-import {exportToCSV, exportToExcel, exportToPDF} from '../../utils/exportUtils';
+import {exportToCSV, exportToExcel, exportToPDF} from "../../Budgets/utils/exportUtils.ts";
+
 
 export const ExportData: React.FC = () => {
     const {t} = useTranslation();
@@ -33,7 +34,7 @@ export const ExportData: React.FC = () => {
     };
 
     const handleExportPDF = () => {
-        exportToPDF(transactions, budgets, 'finflow-report');
+        exportToPDF(transactions, budgets); // Убрал третий параметр
         handleClose();
     };
 
