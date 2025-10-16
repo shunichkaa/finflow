@@ -10,6 +10,7 @@ import { TransactionFilters } from '../../components/features/TransactionFilters
 import { TransactionForm } from '../../components/features/TransactionForm.tsx';
 import { Modal } from '../../components/ui/Modal.tsx';
 import { useTransactionFilters } from '../../Budgets/hooks/useTransactionFilters.ts';
+import { ExportData } from '../../components/features/ExportData.tsx'; // ✅ добавлен импорт
 
 const Dashboard = () => {
     const { t } = useTranslation();
@@ -41,42 +42,45 @@ const Dashboard = () => {
                 <Typography variant="h6" color="text.secondary" gutterBottom>
                     {t('tagline')}
                 </Typography>
-                <Button
-                    variant="contained"
-                    startIcon={<AddIcon />}
-                    onClick={() => setIsModalOpen(true)}
-                    size="large"
-                    sx={{ mt: 2 }}
-                >
-                    {t('addTransaction')}
-                </Button>
+
+                {/* Кнопки добавления и экспорта */}
+                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 2 }}>
+                    <Button
+                        variant="contained"
+                        startIcon={<AddIcon />}
+                        onClick={() => setIsModalOpen(true)}
+                        size="large"
+                    >
+                        {t('addTransaction')}
+                    </Button>
+                    <ExportData /> {/* ✅ добавлена кнопка экспорта */}
+                </Box>
             </Box>
 
             <Container maxWidth="lg" sx={{ px: 2, pb: 4 }}>
+                {/* Stats Cards */}
+                <StatsCards onFilterClick={handleStatsCardClick} />
 
-            {/* Stats Cards */}
-            <StatsCards onFilterClick={handleStatsCardClick} />
+                {/* Filters */}
+                <TransactionFilters
+                    type={filters.type}
+                    category={filters.category}
+                    dateFrom={filters.dateFrom}
+                    dateTo={filters.dateTo}
+                    onTypeChange={setType}
+                    onCategoryChange={setCategory}
+                    onDateFromChange={setDateFrom}
+                    onDateToChange={setDateTo}
+                    onReset={reset}
+                />
 
-            {/* Filters */}
-            <TransactionFilters
-                type={filters.type}
-                category={filters.category}
-                dateFrom={filters.dateFrom}
-                dateTo={filters.dateTo}
-                onTypeChange={setType}
-                onCategoryChange={setCategory}
-                onDateFromChange={setDateFrom}
-                onDateToChange={setDateTo}
-                onReset={reset}
-            />
-
-            {/* Transaction List */}
-            <Paper sx={{ p: 2 }} id="transactions-list">
-                <Typography variant="h6" gutterBottom sx={{ px: 1 }}>
-                    {t('transactions')} ({filteredTransactions.length})
-                </Typography>
-                <TransactionList transactions={filteredTransactions} />
-            </Paper>
+                {/* Transaction List */}
+                <Paper sx={{ p: 2 }} id="transactions-list">
+                    <Typography variant="h6" gutterBottom sx={{ px: 1 }}>
+                        {t('transactions')} ({filteredTransactions.length})
+                    </Typography>
+                    <TransactionList transactions={filteredTransactions} />
+                </Paper>
             </Container>
 
             {/* Add Transaction Modal */}
@@ -90,4 +94,5 @@ const Dashboard = () => {
         </Container>
     );
 };
-export default Dashboard
+
+export default Dashboard;
