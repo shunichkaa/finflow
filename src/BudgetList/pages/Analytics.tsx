@@ -7,7 +7,6 @@ import {formatCurrency} from "../../Budgets/utils/formatters.ts";
 import {IncomeExpenseTrendChart} from "../../components/features/IncomeExpenseTrendChart.tsx";
 import {ExpensesPieChart} from "../../components/features/ExpensesPieChart.tsx";
 
-
 type Period = 'week' | 'month' | 'year';
 
 const Analytics: React.FC = () => {
@@ -155,6 +154,61 @@ const Analytics: React.FC = () => {
                                              noDataMessage={t('noTransactionData')}/>
                 </Paper>
             </Box>
+
+            {/* Top 5 Expenses */}
+            <Paper elevation={2} sx={{p: 3, mt: 3}}>
+                <Typography variant="h6" gutterBottom fontWeight="bold" sx={{mb: 2}}>
+                    {t('topExpenses')}
+                </Typography>
+                <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
+                    {filteredTransactions
+                        .filter(t => t.type === 'expense')
+                        .sort((a, b) => b.amount - a.amount)
+                        .slice(0, 5)
+                        .map((transaction, index) => (
+                            <Box
+                                key={transaction.id}
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    p: 2,
+                                    bgcolor: 'grey.50',
+                                    borderRadius: 2,
+                                    borderLeft: '4px solid',
+                                    borderLeftColor: 'error.main',
+                                }}
+                            >
+                                <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
+                                    <Typography variant="h6" color="text.secondary">
+                                        #{index + 1}
+                                    </Typography>
+                                    <Box>
+                                        <Typography variant="body1" fontWeight="bold">
+                                            {t(`category.${transaction.category}`)}
+                                        </Typography>
+                                        <Typography variant="caption" color="text.secondary">
+                                            {new Date(transaction.date).toLocaleDateString('ru-RU')}
+                                        </Typography>
+                                        {transaction.description && (
+                                            <Typography variant="body2" color="text.secondary">
+                                                {transaction.description}
+                                            </Typography>
+                                        )}
+                                    </Box>
+                                </Box>
+                                <Typography variant="h6" fontWeight="bold" color="error.main">
+                                    {formatCurrency(transaction.amount, currency)}
+                                </Typography>
+                            </Box>
+                        ))}
+                    {filteredTransactions.filter(t => t.type === 'expense').length === 0 && (
+                        <Typography color="text.secondary" textAlign="center">
+                            {t('noExpenseData')}
+                        </Typography>
+                    )}
+                </Box>
+            </Paper>
         </Container>
     );
 };
