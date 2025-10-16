@@ -12,7 +12,7 @@ const resources = {
 
             // Действия
             addTransaction: 'Добавить транзакцию',
-            newTransaction: 'Новая транзакцию',
+            newTransaction: 'Новая транзакция',
             save: 'Сохранить',
             cancel: 'Отмена',
             delete: 'Удалить',
@@ -117,6 +117,12 @@ const resources = {
             exportExcel: 'Экспорт Excel',
             exportPDF: 'Экспорт PDF',
             topExpenses: 'Топ-5 расходов',
+
+            // Финансовое здоровье
+            financialHealth: 'Финансовое здоровье',
+            excellent: 'Отлично! Продолжайте в том же духе',
+            good: 'Хорошо, есть куда расти',
+            needsImprovement: 'Требуется улучшение',
         },
     },
     en: {
@@ -211,6 +217,12 @@ const resources = {
             exportExcel: 'Export Excel',
             exportPDF: 'Export PDF',
             topExpenses: 'Top 5 Expenses',
+
+            // Financial Health
+            financialHealth: 'Financial Health',
+            excellent: 'Excellent! Keep up the good work',
+            good: 'Good, room for improvement',
+            needsImprovement: 'Needs improvement',
         },
     },
     fr: {
@@ -305,6 +317,12 @@ const resources = {
             exportExcel: 'Exporter Excel',
             exportPDF: 'Exporter PDF',
             topExpenses: 'Top 5 des dépenses',
+
+            // Santé financière
+            financialHealth: 'Santé financière',
+            excellent: 'Excellent ! Continuez comme ça',
+            good: 'Bien, possibilité d\'amélioration',
+            needsImprovement: 'Nécessite des améliorations',
         },
     },
     de: {
@@ -399,6 +417,12 @@ const resources = {
             exportExcel: 'Excel exportieren',
             exportPDF: 'PDF exportieren',
             topExpenses: 'Top 5 Ausgaben',
+
+            // Finanzielle Gesundheit
+            financialHealth: 'Finanzielle Gesundheit',
+            excellent: 'Ausgezeichnet! Weiter so',
+            good: 'Gut, Verbesserungspotenzial vorhanden',
+            needsImprovement: 'Verbesserungsbedarf',
         },
     },
     es: {
@@ -493,6 +517,12 @@ const resources = {
             exportExcel: 'Exportar Excel',
             exportPDF: 'Exportar PDF',
             topExpenses: 'Top 5 Gastos',
+
+            // Salud financiera
+            financialHealth: 'Salud financiera',
+            excellent: '¡Excelente! Sigue así',
+            good: 'Bien, hay margen de mejora',
+            needsImprovement: 'Necesita mejora',
         },
     },
     me: {
@@ -587,6 +617,12 @@ const resources = {
             exportExcel: 'Izvezi Excel',
             exportPDF: 'Izvezi PDF',
             topExpenses: 'Top 5 Rashoda',
+
+            // Finansijsko zdravlje
+            financialHealth: 'Finansijsko zdravlje',
+            excellent: 'Odlično! Nastavite tako',
+            good: 'Dobro, ima prostora za poboljšanje',
+            needsImprovement: 'Potrebno poboljšanje',
         },
     },
 };
