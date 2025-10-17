@@ -11,7 +11,7 @@ import {
     Divider,
     Alert
 } from '@mui/material';
-import { Google, Apple, Login, PersonAdd } from '@mui/icons-material';
+import { Google, Login, PersonAdd } from '@mui/icons-material';
 import {supabase} from '../../lib/supabaseClient';
 import {useNavigate} from "react-router-dom";
 import { useTranslation } from 'react-i18next';
@@ -47,26 +47,34 @@ export const Auth: React.FC = () => {
 
         setLoading(true);
 
-        let result;
-        if (mode === 'login') {
-            result = await supabase.auth.signInWithPassword({email, password});
-            if (result.error) setError(result.error.message);
-            else {
-                setSuccess(t('auth.loginSuccess', 'Вы успешно вошли!'));
-                setTimeout(() => {
-                    navigate('/dashboard');
-                }, 500);
+        try {
+            let result;
+            if (mode === 'login') {
+                result = await supabase.auth.signInWithPassword({email, password});
+                if (result.error) {
+                    setError(result.error.message);
+                } else {
+                    setSuccess(t('auth.loginSuccess', 'Вы успешно вошли!'));
+                    setTimeout(() => {
+                        navigate('/dashboard');
+                    }, 500);
+                }
+            } else {
+                result = await supabase.auth.signUp({email, password});
+                if (result.error) {
+                    setError(result.error.message);
+                } else {
+                    setSuccess(t('auth.signupSuccess', 'Регистрация успешна! Проверьте почту для подтверждения.'));
+                }
             }
-        } else {
-            result = await supabase.auth.signUp({email, password});
-            if (result.error) setError(result.error.message);
-            else setSuccess(t('auth.signupSuccess', 'Регистрация успешна! Проверьте почту для подтверждения.'));
+        } catch (error) {
+            setError(t('auth.unknownError', 'Произошла неизвестная ошибка'));
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
 
-    const handleOAuthLogin = async (provider: 'google' | 'apple') => {
+    const handleOAuthLogin = async (provider: 'google') => {
         try {
             setOauthLoading(provider);
             setError('');
@@ -74,15 +82,18 @@ export const Auth: React.FC = () => {
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: provider,
                 options: {
-                    redirectTo: `${window.location.origin}/dashboard`,
-                    queryParams: {
-                        access_type: 'offline',
-                        prompt: 'consent',
-                    }
+                    redirectTo: `${window.location.origin}/oauth-callback`,
                 }
             });
 
-            if (error) throw error;
+            if (error) {
+                if (error.message.includes('provider is not enabled')) {
+                    setError(t('auth.providerNotEnabled', 'Этот способ входа временно недоступен. Пожалуйста, используйте вход по email.'));
+                } else {
+                    setError(error.message);
+                }
+            }
+            // После успешного OAuth браузер автоматически перенаправит на /oauth-callback
         } catch (error: unknown) {
             const errorMessage = error instanceof Error
                 ? error.message
@@ -123,7 +134,7 @@ export const Auth: React.FC = () => {
                         {mode === 'login' ? t('auth.login', 'Вход в аккаунт') : t('auth.signup', 'Создание аккаунта')}
                     </Typography>
 
-                    {/* OAuth кнопки */}
+                    {/* OAuth кнопки - только Google */}
                     <Stack spacing={1}>
                         <Button
                             variant="outlined"
@@ -141,24 +152,6 @@ export const Auth: React.FC = () => {
                             }}
                         >
                             {oauthLoading === 'google' ? t('auth.loading', 'Загрузка...') : t('auth.continueWithGoogle', 'Продолжить с Google')}
-                        </Button>
-
-                        <Button
-                            variant="outlined"
-                            fullWidth
-                            startIcon={oauthLoading === 'apple' ? <CircularProgress size={20} /> : <Apple />}
-                            onClick={() => handleOAuthLogin('apple')}
-                            disabled={!!oauthLoading}
-                            sx={{
-                                py: 1.5,
-                                borderColor: 'grey.300',
-                                '&:hover': {
-                                    borderColor: 'grey.400',
-                                    backgroundColor: 'grey.50'
-                                }
-                            }}
-                        >
-                            {oauthLoading === 'apple' ? t('auth.loading', 'Загрузка...') : t('auth.continueWithApple', 'Продолжить с Apple')}
                         </Button>
                     </Stack>
 
