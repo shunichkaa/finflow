@@ -63,26 +63,25 @@ export const getCategoryName = (categoryId: string, t: (key: string) => string) 
 
 // Категории расходов
 export const EXPENSE_CATEGORIES: Category[] = [
-    {id: '1', name: 'Еда и продукты', type: 'expense', icon: 'restaurant', color: '#f9c1c1'},
-    {id: '2', name: 'Транспорт', type: 'expense', icon: 'car', color: '#a8d0ff'},
-    {id: '3', name: 'Жильё', type: 'expense', icon: 'home', color: '#c5b3ff'},
-    {id: '4', name: 'Развлечения', type: 'expense', icon: 'gaming', color: '#f4b6e3'},
-    {id: '5', name: 'Здоровье', type: 'expense', icon: 'hospital', color: '#a1e3c0'},
-    {id: '6', name: 'Образование', type: 'expense', icon: 'school', color: '#ffe4a1'},
-    {id: '7', name: 'Одежда', type: 'expense', icon: 'clothes', color: '#bfc8ff'},
-    {id: '8', name: 'Подписки', type: 'expense', icon: 'subscriptions', color: '#a0e3d2'},
-    {id: '9', name: 'Другое', type: 'expense', icon: 'more', color: '#d1d5db'},
+    {id: '1', name: 'Еда и продукты', type: 'expense', icon: 'restaurant', color: '#ff9aa2'},
+    {id: '2', name: 'Транспорт', type: 'expense', icon: 'car', color: '#76d9ff'},
+    {id: '3', name: 'Жильё', type: 'expense', icon: 'home', color: '#b18aff'},
+    {id: '4', name: 'Развлечения', type: 'expense', icon: 'gaming', color: '#ff8cc6'},
+    {id: '5', name: 'Здоровье', type: 'expense', icon: 'hospital', color: '#4ade80'},
+    {id: '6', name: 'Образование', type: 'expense', icon: 'school', color: '#ffd166'},
+    {id: '7', name: 'Одежда', type: 'expense', icon: 'clothes', color: '#8b9fff'},
+    {id: '8', name: 'Подписки', type: 'expense', icon: 'subscriptions', color: '#34d399'},
+    {id: '9', name: 'Другое', type: 'expense', icon: 'more', color: '#94a3b8'},
 ];
 
 // Категории доходов
 export const INCOME_CATEGORIES: Category[] = [
-    {id: '10', name: 'Зарплата', type: 'income', icon: 'work', color: '#b4f1a1'},
-    {id: '11', name: 'Фриланс', type: 'income', icon: 'laptop', color: '#a8d0ff'},
-    {id: '12', name: 'Инвестиции', type: 'income', icon: 'trending', color: '#c5b3ff'},
-    {id: '13', name: 'Подарки', type: 'income', icon: 'gift', color: '#f4b6e3'},
-    {id: '14', name: 'Другое', type: 'income', icon: 'wallet', color: '#a1e3c0'},
+    {id: '10', name: 'Зарплата', type: 'income', icon: 'work', color: '#86efac'},
+    {id: '11', name: 'Фриланс', type: 'income', icon: 'laptop', color: '#60a5fa'},
+    {id: '12', name: 'Инвестиции', type: 'income', icon: 'trending', color: '#a78bfa'},
+    {id: '13', name: 'Подарки', type: 'income', icon: 'gift', color: '#f472b6'},
+    {id: '14', name: 'Другое', type: 'income', icon: 'wallet', color: '#2dd4bf'},
 ];
-
 export const ALL_CATEGORIES = [...EXPENSE_CATEGORIES, ...INCOME_CATEGORIES];
 
 export const getCategoryById = (id: string) =>
