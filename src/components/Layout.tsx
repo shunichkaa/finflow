@@ -1,68 +1,101 @@
 import React from 'react';
-import {AppBar, Box, Button, IconButton, Toolbar, Typography} from '@mui/material';
-import {Link, useLocation, useNavigate, Outlet} from 'react-router-dom';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import {useTranslation} from 'react-i18next';
-import {SettingsMenu} from './features/SettingsMenu';
-import {useThemeMode} from '../Budgets/theme/ThemeContext';
-import {ExportMenu} from "./features/ExportMenu.tsx";
+import { AppBar, Box, Button, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
+import { Brightness4, Brightness7, Menu } from '@mui/icons-material';
+import { Link, useLocation, useNavigate, Outlet } from 'react-router-dom';
+import { useThemeMode } from '../Budgets/theme/ThemeContext';
+import { supabase } from '../lib/supabaseClient';
+
+const drawerWidth = 240;
 
 export const Layout: React.FC = () => {
-    const {t} = useTranslation();
-    const location = useLocation();
     const navigate = useNavigate();
-    const {mode, toggleTheme} = useThemeMode();
+    const location = useLocation();
+    const { mode, toggleTheme } = useThemeMode();
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    const navItems = [
-        {path: '/dashboard', label: t('dashboard')},
-        {path: '/analytics', label: t('analytics')},
-        {path: '/budgets', label: t('budgets')},
-    ];
-
-    const handleLogoClick = () => {
-        navigate('/dashboard');
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        navigate('/login');
     };
 
+    const navItems = [
+        { path: '/dashboard', label: 'Dashboard' },
+        { path: '/analytics', label: 'Analytics' },
+        { path: '/budgets', label: 'Budgets' },
+    ];
+
+    const drawer = (
+        <div>
+            <Toolbar>
+                <Typography variant="h6">💰 FinFlow</Typography>
+            </Toolbar>
+            <Divider />
+            <List>
+                {navItems.map((item) => (
+                    <ListItem key={item.path} disablePadding>
+                        <ListItemButton
+                            component={Link}
+                            to={item.path}
+                            selected={location.pathname === item.path}
+                        >
+                            <ListItemText primary={item.label} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <Button onClick={handleLogout} fullWidth color="secondary" sx={{ mt: 2 }}>
+                Logout
+            </Button>
+        </div>
+    );
+
     return (
-        <Box sx={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
-            <AppBar position="static" elevation={1} color="primary" enableColorOnDark>
+        <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
                 <Toolbar>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{flexGrow: 0, mr: 4, cursor: 'pointer', '&:hover': {opacity: 0.8}}}
-                        onClick={handleLogoClick}
+                    <IconButton
+                        color="inherit"
+                        edge="start"
+                        onClick={() => setMobileOpen(!mobileOpen)}
+                        sx={{ mr: 2, display: { sm: 'none' } }}
                     >
-                        💰 {t('appName')}
-                    </Typography>
-
-                    <Box sx={{flexGrow: 1, display: 'flex', gap: 2}}>
-                        {navItems.map((item) => (
-                            <Button
-                                key={item.path}
-                                component={Link}
-                                to={item.path}
-                                color="inherit"
-                                sx={{
-                                    borderBottom: location.pathname === item.path ? 2 : 0,
-                                    borderRadius: 0,
-                                }}
-                            >
-                                {item.label}
-                            </Button>
-                        ))}
-                    </Box>
-
-                    <IconButton onClick={toggleTheme} color="inherit">
-                        {mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
+                        <Menu />
                     </IconButton>
-                    <ExportMenu />
-                    <SettingsMenu/>
+                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+                        💰 FinFlow
+                    </Typography>
+                    <IconButton onClick={toggleTheme} color="inherit">
+                        {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+                    </IconButton>
                 </Toolbar>
             </AppBar>
 
-            <Box component="main" sx={{flexGrow: 1}}>
+            <Drawer
+                variant="temporary"
+                open={mobileOpen}
+                onClose={() => setMobileOpen(false)}
+                sx={{
+                    display: { xs: 'block', sm: 'none' },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                }}
+            >
+                {drawer}
+            </Drawer>
+
+            <Drawer
+                variant="permanent"
+                sx={{
+                    display: { xs: 'none', sm: 'block' },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                }}
+                open
+            >
+                {drawer}
+            </Drawer>
+
+            <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
                 <Outlet />
             </Box>
         </Box>
