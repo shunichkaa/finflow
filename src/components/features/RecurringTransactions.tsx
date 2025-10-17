@@ -19,50 +19,56 @@ import {useRecurringStore} from "../../Budgets/store/useRecurringStore";
 import {useFinanceStore} from "../../Budgets/store/useFinanceStore";
 import {formatCurrency} from "../../Budgets/utils/formatters";
 import {RecurringTransactionForm} from "./RecurringTransactionForm";
-
-// Тип для повторяющейся транзакции
-interface RecurringTransaction {
-    id: string;
-    amount: number;
-    category: string;
-    description?: string;
-    type: 'income' | 'expense';
-    frequency: 'daily' | 'weekly' | 'monthly' | 'yearly';
-    nextDue?: Date;
-    endDate?: Date;
-    lastCreated?: Date;
-    isActive: boolean;
-}
+import {RecurringTransaction} from "../../Budgets/types/recurring";
 
 export const RecurringTransactions: React.FC = () => {
     const {t} = useTranslation();
     const {currency} = useSettingsStore();
 
-    const recurring = useRecurringStore(state => state.recurring) as RecurringTransaction[];
+    const recurring = useRecurringStore(state => state.recurring);
     const toggleRecurring = useRecurringStore(state => state.toggleRecurring);
     const deleteRecurring = useRecurringStore(state => state.deleteRecurring);
-    const getDueRecurring = useRecurringStore(state => state.getDueRecurring) as () => RecurringTransaction[];
+    const getDueRecurring = useRecurringStore(state => state.getDueRecurring);
     const updateRecurring = useRecurringStore(state => state.updateRecurring);
     const addTransaction = useFinanceStore(state => state.addTransaction);
 
     const [formOpen, setFormOpen] = useState(false);
     const dueRecurring = getDueRecurring();
 
+    // Функции форматирования должны быть внутри компонента чтобы иметь доступ к t()
+    const formatNextDue = (dateString?: string) => {
+        if (!dateString) return '-';
+
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffDays = Math.ceil((date.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+
+        if (diffDays < 0) return t('overdue');
+        if (diffDays === 0) return t('today');
+        if (diffDays === 1) return t('tomorrow');
+        return `${diffDays} ${t('daysLeft')}`;
+    };
+
+    const formatEndDate = (dateString?: string) => {
+        if (!dateString) return '';
+        return new Date(dateString).toLocaleDateString();
+    };
+
     const handleCreateDueTransactions = () => {
         const now = new Date();
 
         dueRecurring.forEach(rec => {
-            // Добавляем транзакцию (конвертируем дату в ISO)
+            // Добавляем транзакцию
             addTransaction({
                 amount: rec.amount,
                 category: rec.category,
                 description: rec.description ? `${rec.description} (автоматически)` : '(автоматически)',
-                date: now.toISOString(),
+                date: now,
                 type: rec.type,
             });
 
             // Обновляем lastCreated в сторе повторяющихся транзакций
-            updateRecurring(rec.id, {lastCreated: now});
+            updateRecurring(rec.id, {lastCreated: now.toISOString()}); // Конвертируем в ISO string
         });
     };
 
@@ -75,19 +81,6 @@ export const RecurringTransactions: React.FC = () => {
         };
         return labels[freq] || freq;
     };
-
-    const formatNextDue = (date?: Date) => {
-        if (!date) return '-';
-        const now = new Date();
-        const diffDays = Math.ceil((date.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-
-        if (diffDays < 0) return t('overdue');
-        if (diffDays === 0) return t('today');
-        if (diffDays === 1) return t('tomorrow');
-        return `${diffDays} ${t('daysLeft')}`;
-    };
-
-    const formatEndDate = (date?: Date) => date?.toLocaleDateString() || '';
 
     return (
         <Container maxWidth="lg" sx={{py: 4}}>

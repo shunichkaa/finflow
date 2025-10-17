@@ -8,12 +8,14 @@ interface RecurringStore {
     updateRecurring: (id: string, recurring: Partial<RecurringTransaction>) => void;
     deleteRecurring: (id: string) => void;
     toggleRecurring: (id: string) => void;
-    getNextDueDate: (recurring: RecurringTransaction) => Date;
+    getNextDueDate: (recurring: RecurringTransaction) => string;
     getDueRecurring: () => RecurringTransaction[];
 }
 
-const calculateNextDue = (recurring: RecurringTransaction): Date => {
-    const lastDate = recurring.lastCreated ? new Date(recurring.lastCreated) : new Date(recurring.startDate);
+const calculateNextDue = (recurring: RecurringTransaction): string => {
+    const lastDate = recurring.lastCreated
+        ? new Date(recurring.lastCreated)
+        : new Date(recurring.startDate);
     const nextDate = new Date(lastDate);
 
     switch (recurring.frequency) {
@@ -40,7 +42,7 @@ const calculateNextDue = (recurring: RecurringTransaction): Date => {
             break;
     }
 
-    return nextDate;
+    return nextDate.toISOString();
 };
 
 export const useRecurringStore = create<RecurringStore>()(
@@ -50,13 +52,18 @@ export const useRecurringStore = create<RecurringStore>()(
 
             addRecurring: (recurringData) => {
                 const id = `recurring_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+                const nextDue = calculateNextDue({
+                    ...recurringData,
+                    id,
+                    isActive: true,
+                });
+
                 const newRecurring: RecurringTransaction = {
                     ...recurringData,
                     id,
                     isActive: true,
+                    nextDue,
                 };
-                const nextDue = calculateNextDue(newRecurring);
-                newRecurring.nextDue = nextDue.toISOString();
 
                 set((state) => ({
                     recurring: [...state.recurring, newRecurring],
@@ -95,7 +102,9 @@ export const useRecurringStore = create<RecurringStore>()(
                     if (!r.isActive) return false;
                     if (r.endDate && new Date(r.endDate) < now) return false;
 
-                    const nextDue = r.nextDue ? new Date(r.nextDue) : calculateNextDue(r);
+                    const nextDue = r.nextDue
+                        ? new Date(r.nextDue)
+                        : new Date(calculateNextDue(r));
                     return nextDue <= now;
                 });
             },
