@@ -123,17 +123,30 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     ];
 
     const drawer = (
-        <Box sx={{display: 'flex', flexDirection: 'column', height: '100%', background: 'linear-gradient(180deg, #F8FBFF 0%, #E8F4FD 100%)'}}>
+        <Box sx={{
+            display: 'flex', 
+            flexDirection: 'column', 
+            height: '100%', 
+            background: mode === 'dark' 
+                ? 'linear-gradient(180deg, #1A2332 0%, #243447 100%)'
+                : 'linear-gradient(180deg, #F8FBFF 0%, #E8F4FD 100%)'
+        }}>
             {/* AppBar для сайдбара */}
-            <AppBar position="static" elevation={0} sx={{background: 'linear-gradient(135deg, #B8D4F0 0%, #C7E0F4 100%)'}}>
+            <AppBar position="static" elevation={0} sx={{
+                background: mode === 'dark' 
+                    ? 'linear-gradient(135deg, #1A2332 0%, #243447 100%)'
+                    : 'linear-gradient(135deg, #B8D4F0 0%, #C7E0F4 100%)'
+            }}>
                 <Toolbar>
                     <IconButton
                         onClick={handleDrawerToggle}
                         sx={{
                             display: {sm: 'none'},
-                            color: '#2C3E50',
+                            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                             '&:hover': {
-                                backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                                backgroundColor: mode === 'dark' 
+                                    ? 'rgba(232, 244, 253, 0.1)' 
+                                    : 'rgba(44, 62, 80, 0.1)',
                             }
                         }}
                     >
@@ -142,7 +155,11 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 </Toolbar>
             </AppBar>
 
-            <Divider sx={{borderColor: 'rgba(184, 212, 240, 0.3)'}}/>
+            <Divider sx={{
+                borderColor: mode === 'dark' 
+                    ? 'rgba(123, 167, 209, 0.3)' 
+                    : 'rgba(184, 212, 240, 0.3)'
+            }}/>
 
             {/* Навигация */}
             <List sx={{flexGrow: 1, px: 1}}>
@@ -155,16 +172,22 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             onClick={() => setMobileOpen(false)}
                             sx={{
                                 borderRadius: 2,
-                                color: '#2C3E50',
+                                color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                                 '&.Mui-selected': {
-                                    backgroundColor: 'rgba(184, 212, 240, 0.3)',
-                                    color: '#2C3E50',
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(123, 167, 209, 0.3)' 
+                                        : 'rgba(184, 212, 240, 0.3)',
+                                    color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                                     '&:hover': {
-                                        backgroundColor: 'rgba(184, 212, 240, 0.4)',
+                                        backgroundColor: mode === 'dark' 
+                                            ? 'rgba(123, 167, 209, 0.4)' 
+                                            : 'rgba(184, 212, 240, 0.4)',
                                     }
                                 },
                                 '&:hover': {
-                                    backgroundColor: 'rgba(184, 212, 240, 0.2)',
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(123, 167, 209, 0.2)' 
+                                        : 'rgba(184, 212, 240, 0.2)',
                                 }
                             }}
                         >
@@ -179,7 +202,11 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 ))}
             </List>
 
-            <Divider sx={{borderColor: 'rgba(184, 212, 240, 0.3)'}}/>
+            <Divider sx={{
+                borderColor: mode === 'dark' 
+                    ? 'rgba(123, 167, 209, 0.3)' 
+                    : 'rgba(184, 212, 240, 0.3)'
+            }}/>
 
             {/* Кнопки смены языка и валюты */}
             <Box sx={{p: 2}}>
@@ -190,11 +217,17 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     variant="outlined"
                     sx={{
                         mb: 1,
-                        borderColor: 'rgba(184, 212, 240, 0.5)',
-                        color: '#2C3E50',
+                        borderColor: mode === 'dark' 
+                            ? 'rgba(123, 167, 209, 0.5)' 
+                            : 'rgba(184, 212, 240, 0.5)',
+                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                         '&:hover': {
-                            borderColor: 'rgba(184, 212, 240, 0.8)',
-                            backgroundColor: 'rgba(184, 212, 240, 0.1)',
+                            borderColor: mode === 'dark' 
+                                ? 'rgba(123, 167, 209, 0.8)' 
+                                : 'rgba(184, 212, 240, 0.8)',
+                            backgroundColor: mode === 'dark' 
+                                ? 'rgba(123, 167, 209, 0.1)' 
+                                : 'rgba(184, 212, 240, 0.1)',
                         }
                     }}
                 >
@@ -207,11 +240,17 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     variant="outlined"
                     sx={{
                         mb: 2,
-                        borderColor: 'rgba(184, 212, 240, 0.5)',
-                        color: '#2C3E50',
+                        borderColor: mode === 'dark' 
+                            ? 'rgba(123, 167, 209, 0.5)' 
+                            : 'rgba(184, 212, 240, 0.5)',
+                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                         '&:hover': {
-                            borderColor: 'rgba(184, 212, 240, 0.8)',
-                            backgroundColor: 'rgba(184, 212, 240, 0.1)',
+                            borderColor: mode === 'dark' 
+                                ? 'rgba(123, 167, 209, 0.8)' 
+                                : 'rgba(184, 212, 240, 0.8)',
+                            backgroundColor: mode === 'dark' 
+                                ? 'rgba(123, 167, 209, 0.1)' 
+                                : 'rgba(184, 212, 240, 0.1)',
                         }
                     }}
                 >
@@ -223,11 +262,15 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     fullWidth
                     variant="contained"
                     sx={{
-                        background: 'linear-gradient(135deg, #F5B7B1 0%, #E8A59B 100%)',
-                        color: '#2C3E50',
+                        background: mode === 'dark' 
+                            ? 'linear-gradient(135deg, #E8A59B 0%, #D18B7F 100%)'
+                            : 'linear-gradient(135deg, #F5B7B1 0%, #E8A59B 100%)',
+                        color: mode === 'dark' ? '#FFFFFF' : '#2C3E50',
                         fontWeight: 'bold',
                         '&:hover': {
-                            background: 'linear-gradient(135deg, #E8A59B 0%, #D18B7F 100%)',
+                            background: mode === 'dark' 
+                                ? 'linear-gradient(135deg, #D18B7F 0%, #C17A6B 100%)'
+                                : 'linear-gradient(135deg, #E8A59B 0%, #D18B7F 100%)',
                         }
                     }}
                 >
@@ -295,10 +338,16 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     zIndex: (theme) => theme.zIndex.drawer + 1,
                     width: {sm: sidebarOpen ? `calc(100% - ${drawerWidth}px)` : '100%'},
                     ml: {sm: sidebarOpen ? `${drawerWidth}px` : 0},
-                    background: 'linear-gradient(135deg, #B8D4F0 0%, #C7E0F4 100%)',
-                    color: '#2C3E50',
-                    boxShadow: '0 4px 20px rgba(184, 212, 240, 0.3)',
-                    borderBottom: '1px solid rgba(184, 212, 240, 0.2)',
+                    background: mode === 'dark' 
+                        ? 'linear-gradient(135deg, #1A2332 0%, #243447 100%)'
+                        : 'linear-gradient(135deg, #B8D4F0 0%, #C7E0F4 100%)',
+                    color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                    boxShadow: mode === 'dark' 
+                        ? '0 4px 20px rgba(26, 35, 50, 0.3)'
+                        : '0 4px 20px rgba(184, 212, 240, 0.3)',
+                    borderBottom: mode === 'dark' 
+                        ? '1px solid rgba(123, 167, 209, 0.2)'
+                        : '1px solid rgba(184, 212, 240, 0.2)',
                     transition: (theme) => theme.transitions.create(['width', 'margin'], {
                         easing: theme.transitions.easing.sharp,
                         duration: theme.transitions.duration.leavingScreen,
@@ -315,9 +364,11 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             sx={{
                                 mr: 2,
                                 display: {sm: 'none'},
-                                color: '#2C3E50',
+                                color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                                 '&:hover': {
-                                    backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(232, 244, 253, 0.1)' 
+                                        : 'rgba(44, 62, 80, 0.1)',
                                 }
                             }}
                         >
@@ -329,9 +380,11 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             sx={{
                                 display: {xs: 'none', sm: 'block'},
-                                color: '#2C3E50',
+                                color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                                 '&:hover': {
-                                    backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(232, 244, 253, 0.1)' 
+                                        : 'rgba(44, 62, 80, 0.1)',
                                 }
                             }}
                         >
@@ -347,7 +400,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             flexGrow: 1,
                             ml: 2,
                             cursor: 'pointer',
-                            color: '#2C3E50',
+                            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                             fontWeight: 'bold',
                             '&:hover': {
                                 opacity: 0.8,
@@ -362,9 +415,11 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     <IconButton 
                         onClick={toggleTheme} 
                         sx={{
-                            color: '#2C3E50',
+                            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                             '&:hover': {
-                                backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                                backgroundColor: mode === 'dark' 
+                                    ? 'rgba(232, 244, 253, 0.1)' 
+                                    : 'rgba(44, 62, 80, 0.1)',
                             }
                         }}
                     >
