@@ -1,6 +1,6 @@
 import React from 'react';
 import {AppBar, Box, Button, IconButton, Toolbar, Typography} from '@mui/material';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import {Link, useLocation, useNavigate, Outlet} from 'react-router-dom';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import {useTranslation} from 'react-i18next';
@@ -8,23 +8,18 @@ import {SettingsMenu} from './features/SettingsMenu';
 import {useThemeMode} from '../Budgets/theme/ThemeContext';
 import {ExportMenu} from "./features/ExportMenu.tsx";
 
-interface LayoutProps {
-    children: React.ReactNode;
-}
-
-export const Layout: React.FC<LayoutProps> = ({children}) => {
+export const Layout: React.FC = () => {
     const {t} = useTranslation();
     const location = useLocation();
-    const navigate = useNavigate(); // Добавлен хук для навигации
+    const navigate = useNavigate();
     const {mode, toggleTheme} = useThemeMode();
 
     const navItems = [
         {path: '/dashboard', label: t('dashboard')},
         {path: '/analytics', label: t('analytics')},
-        { path: '/budgets', label: t('budgets') },
+        {path: '/budgets', label: t('budgets')},
     ];
 
-    // Обработчик клика по логотипу FinFlow
     const handleLogoClick = () => {
         navigate('/dashboard');
     };
@@ -36,14 +31,7 @@ export const Layout: React.FC<LayoutProps> = ({children}) => {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{
-                            flexGrow: 0,
-                            mr: 4,
-                            cursor: 'pointer',
-                            '&:hover': {
-                                opacity: 0.8
-                            }
-                        }}
+                        sx={{flexGrow: 0, mr: 4, cursor: 'pointer', '&:hover': {opacity: 0.8}}}
                         onClick={handleLogoClick}
                     >
                         💰 {t('appName')}
@@ -75,7 +63,7 @@ export const Layout: React.FC<LayoutProps> = ({children}) => {
             </AppBar>
 
             <Box component="main" sx={{flexGrow: 1}}>
-                {children}
+                <Outlet />
             </Box>
         </Box>
     );
