@@ -111,28 +111,46 @@ export const Auth: React.FC = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                bgcolor: 'background.default',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 p: 2,
+                position: 'relative',
+                '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+                    zIndex: 0,
+                }
             }}
         >
             <Fade in>
                 <Paper
-                    elevation={6}
+                    elevation={12}
                     sx={{
                         p: 4,
                         width: 400,
                         display: 'flex',
                         flexDirection: 'column',
                         gap: 3,
-                        borderRadius: 3,
+                        borderRadius: 4,
+                        background: 'rgba(255, 255, 255, 0.95)',
+                        backdropFilter: 'blur(20px)',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        position: 'relative',
+                        zIndex: 1,
                     }}
                 >
-                    <Typography variant="h4" textAlign="center" fontWeight={700}>
-                        💰 {t('appName', 'FinFlow')}
-                    </Typography>
-                    <Typography variant="subtitle1" textAlign="center" color="text.secondary">
-                        {mode === 'login' ? t('auth.login', 'Вход в аккаунт') : t('auth.signup', 'Создание аккаунта')}
-                    </Typography>
+                    <Box sx={{textAlign: 'center', mb: 2}}>
+                        <Typography variant="h4" fontWeight={700} sx={{color: '#1e293b', mb: 1}}>
+                            💰 {t('appName', 'FinFlow')}
+                        </Typography>
+                        <Typography variant="subtitle1" sx={{color: '#64748b'}}>
+                            {mode === 'login' ? t('auth.login', 'Вход в аккаунт') : t('auth.signup', 'Создание аккаунта')}
+                        </Typography>
+                    </Box>
 
                     {/* OAuth кнопки - только Google */}
                     <Stack spacing={1}>
@@ -144,10 +162,16 @@ export const Auth: React.FC = () => {
                             disabled={!!oauthLoading}
                             sx={{
                                 py: 1.5,
-                                borderColor: 'grey.300',
+                                borderRadius: 2,
+                                borderColor: '#e2e8f0',
+                                color: '#374151',
+                                fontWeight: 'bold',
+                                textTransform: 'none',
                                 '&:hover': {
-                                    borderColor: 'grey.400',
-                                    backgroundColor: 'grey.50'
+                                    borderColor: '#cbd5e1',
+                                    backgroundColor: '#f8fafc',
+                                    transform: 'translateY(-1px)',
+                                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
                                 }
                             }}
                         >
@@ -155,8 +179,8 @@ export const Auth: React.FC = () => {
                         </Button>
                     </Stack>
 
-                    <Divider>
-                        <Typography variant="body2" color="text.secondary">
+                    <Divider sx={{my: 2}}>
+                        <Typography variant="body2" sx={{color: '#64748b', px: 2}}>
                             {t('auth.or', 'или')}
                         </Typography>
                     </Divider>
@@ -171,6 +195,17 @@ export const Auth: React.FC = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             fullWidth
                             required
+                            sx={{
+                                '& .MuiOutlinedInput-root': {
+                                    borderRadius: 2,
+                                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: '#667eea',
+                                    },
+                                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: '#667eea',
+                                    },
+                                }
+                            }}
                         />
                         <TextField
                             label={t('auth.password', 'Пароль')}
@@ -179,15 +214,26 @@ export const Auth: React.FC = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             fullWidth
                             required
+                            sx={{
+                                '& .MuiOutlinedInput-root': {
+                                    borderRadius: 2,
+                                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: '#667eea',
+                                    },
+                                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: '#667eea',
+                                    },
+                                }
+                            }}
                         />
 
                         {error && (
-                            <Alert severity="error" sx={{ width: '100%' }}>
+                            <Alert severity="error" sx={{ width: '100%', borderRadius: 2 }}>
                                 {error}
                             </Alert>
                         )}
                         {success && (
-                            <Alert severity="success" sx={{ width: '100%' }}>
+                            <Alert severity="success" sx={{ width: '100%', borderRadius: 2 }}>
                                 {success}
                             </Alert>
                         )}
@@ -195,9 +241,23 @@ export const Auth: React.FC = () => {
                         <Button
                             type="submit"
                             variant="contained"
-                            color="primary"
                             fullWidth
-                            sx={{py: 1.5}}
+                            sx={{
+                                py: 1.5,
+                                borderRadius: 2,
+                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                fontWeight: 'bold',
+                                textTransform: 'none',
+                                '&:hover': {
+                                    background: 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)',
+                                    transform: 'translateY(-1px)',
+                                    boxShadow: '0 6px 20px rgba(102, 126, 234, 0.4)',
+                                },
+                                '&:disabled': {
+                                    background: '#e2e8f0',
+                                    color: '#94a3b8',
+                                }
+                            }}
                             disabled={loading || !!oauthLoading}
                             startIcon={mode === 'login' ? <Login /> : <PersonAdd />}
                         >
@@ -207,7 +267,7 @@ export const Auth: React.FC = () => {
                     </Box>
 
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={1}>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" sx={{color: '#64748b'}}>
                             {mode === 'login' ? t('auth.noAccount', 'Нет аккаунта?') : t('auth.hasAccount', 'Уже есть аккаунт?')}
                         </Typography>
                         <Button
@@ -217,7 +277,14 @@ export const Auth: React.FC = () => {
                                 setError('');
                                 setSuccess('');
                             }}
-                            sx={{textTransform: 'none'}}
+                            sx={{
+                                textTransform: 'none',
+                                color: '#667eea',
+                                fontWeight: 'bold',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                                }
+                            }}
                             disabled={loading || !!oauthLoading}
                         >
                             {mode === 'login' ? t('auth.signup', 'Регистрация') : t('auth.login', 'Вход')}

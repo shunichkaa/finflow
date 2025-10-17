@@ -5,37 +5,46 @@ const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
         primary: {
-            main: '#86B6F6',
-            light: '#DCEBFF',
-            dark: '#3D7FD9',
-            contrastText: '#0B1220',
+            main: '#B8D4F0', // Молочно-голубой
+            light: '#E8F4FD', // Очень светлый голубой
+            dark: '#7BA7D1', // Темно-голубой
+            contrastText: '#2C3E50',
         },
         secondary: {
-            main: '#9EC9FF',
-            light: '#E6F2FF',
-            dark: '#5AA0EA',
-            contrastText: '#0B1220',
+            main: '#C7E0F4', // Пастельный голубой
+            light: '#F0F8FF', // Очень светлый
+            dark: '#8BB8E8', // Средний голубой
+            contrastText: '#2C3E50',
         },
         error: {
-            main: '#f87171',
-            light: '#fca5a5',
-            dark: '#dc2626',
+            main: '#F5B7B1', // Пастельный розовый
+            light: '#FADBD8',
+            dark: '#E8A59B',
         },
         success: {
-            main: '#34d399',
+            main: '#A9DFBF', // Пастельный зеленый
+            light: '#D5F4E6',
+            dark: '#7DCEA0',
         },
         warning: {
-            main: '#fbbf24',
+            main: '#F9E79F', // Пастельный желтый
+            light: '#FCF3CF',
+            dark: '#F4D03F',
+        },
+        info: {
+            main: '#AED6F1', // Пастельный синий
+            light: '#D6EAF8',
+            dark: '#85C1E9',
         },
         background: {
-            default: '#F9FBFF',
+            default: '#F8FBFF', // Очень светлый молочно-голубой
             paper: '#FFFFFF',
         },
         text: {
-            primary: '#0D1B2A',
-            secondary: '#51637E',
+            primary: '#2C3E50', // Темно-серый
+            secondary: '#5D6D7E', // Средне-серый
         },
-        divider: 'rgba(134,182,246,0.2)'
+        divider: 'rgba(184,212,240,0.3)'
     },
     typography: {
         fontFamily: [
@@ -75,8 +84,9 @@ const lightThemeOptions: ThemeOptions = {
         MuiCard: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 8px 24px rgba(33, 150, 243, 0.05)',
-                    border: '1px solid rgba(79, 148, 243, 0.12)'
+                    boxShadow: '0 8px 24px rgba(184, 212, 240, 0.15)',
+                    border: '1px solid rgba(184, 212, 240, 0.2)',
+                    borderRadius: 16,
                 },
             },
         },
@@ -102,37 +112,46 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#78A9F2',
-            light: '#BFD9FF',
-            dark: '#3A7DD6',
-            contrastText: '#0B1220',
+            main: '#7BA7D1', // Темно-голубой для темной темы
+            light: '#B8D4F0',
+            dark: '#5A8BC4',
+            contrastText: '#FFFFFF',
         },
         secondary: {
-            main: '#94C4FF',
-            light: '#CFE7FF',
-            dark: '#3978D0',
-            contrastText: '#0B1220',
+            main: '#8BB8E8', // Средний голубой
+            light: '#C7E0F4',
+            dark: '#6B9BD6',
+            contrastText: '#FFFFFF',
         },
         error: {
-            main: '#fca5a5',
-            light: '#fecaca',
-            dark: '#f87171',
+            main: '#E8A59B', // Пастельный розовый для темной темы
+            light: '#F5B7B1',
+            dark: '#D18B7F',
         },
         success: {
-            main: '#6ee7b7',
+            main: '#7DCEA0', // Пастельный зеленый для темной темы
+            light: '#A9DFBF',
+            dark: '#5BBF7A',
         },
         warning: {
-            main: '#fcd34d',
+            main: '#F4D03F', // Пастельный желтый для темной темы
+            light: '#F9E79F',
+            dark: '#D4AC0D',
+        },
+        info: {
+            main: '#85C1E9', // Пастельный синий для темной темы
+            light: '#AED6F1',
+            dark: '#5DADE2',
         },
         background: {
-            default: '#0E1525',
-            paper: '#121A2E',
+            default: '#1A2332', // Темно-синий фон
+            paper: '#243447', // Светлее для карточек
         },
         text: {
-            primary: '#E6EEF9',
-            secondary: '#A7B8D8',
+            primary: '#E8F4FD', // Светлый текст
+            secondary: '#B8D4F0', // Средний светлый
         },
-        divider: 'rgba(148,196,255,0.22)'
+        divider: 'rgba(123,167,209,0.3)'
     },
     typography: {
         fontFamily: [

@@ -123,15 +123,18 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     ];
 
     const drawer = (
-        <Box sx={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+        <Box sx={{display: 'flex', flexDirection: 'column', height: '100%', background: 'linear-gradient(180deg, #F8FBFF 0%, #E8F4FD 100%)'}}>
             {/* AppBar для сайдбара */}
-            <AppBar position="static" elevation={1}>
+            <AppBar position="static" elevation={0} sx={{background: 'linear-gradient(135deg, #B8D4F0 0%, #C7E0F4 100%)'}}>
                 <Toolbar>
                     <IconButton
                         onClick={handleDrawerToggle}
                         sx={{
                             display: {sm: 'none'},
-                            color: 'inherit'
+                            color: '#2C3E50',
+                            '&:hover': {
+                                backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                            }
                         }}
                     >
                         <Close/>
@@ -139,25 +142,44 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 </Toolbar>
             </AppBar>
 
-            <Divider/>
+            <Divider sx={{borderColor: 'rgba(184, 212, 240, 0.3)'}}/>
 
             {/* Навигация */}
-            <List sx={{flexGrow: 1}}>
+            <List sx={{flexGrow: 1, px: 1}}>
                 {navItems.map((item) => (
-                    <ListItem key={item.path} disablePadding>
+                    <ListItem key={item.path} disablePadding sx={{mb: 0.5}}>
                         <ListItemButton
                             component={Link}
                             to={item.path}
                             selected={location.pathname === item.path}
                             onClick={() => setMobileOpen(false)}
+                            sx={{
+                                borderRadius: 2,
+                                color: '#2C3E50',
+                                '&.Mui-selected': {
+                                    backgroundColor: 'rgba(184, 212, 240, 0.3)',
+                                    color: '#2C3E50',
+                                    '&:hover': {
+                                        backgroundColor: 'rgba(184, 212, 240, 0.4)',
+                                    }
+                                },
+                                '&:hover': {
+                                    backgroundColor: 'rgba(184, 212, 240, 0.2)',
+                                }
+                            }}
                         >
-                            <ListItemText primary={item.label}/>
+                            <ListItemText 
+                                primary={item.label}
+                                primaryTypographyProps={{
+                                    fontWeight: location.pathname === item.path ? 'bold' : 'normal'
+                                }}
+                            />
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
 
-            <Divider/>
+            <Divider sx={{borderColor: 'rgba(184, 212, 240, 0.3)'}}/>
 
             {/* Кнопки смены языка и валюты */}
             <Box sx={{p: 2}}>
@@ -166,7 +188,15 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     onClick={handleLanguageClick}
                     fullWidth
                     variant="outlined"
-                    sx={{mb: 1}}
+                    sx={{
+                        mb: 1,
+                        borderColor: 'rgba(184, 212, 240, 0.5)',
+                        color: '#2C3E50',
+                        '&:hover': {
+                            borderColor: 'rgba(184, 212, 240, 0.8)',
+                            backgroundColor: 'rgba(184, 212, 240, 0.1)',
+                        }
+                    }}
                 >
                     {t('settings.language')}
                 </Button>
@@ -175,7 +205,15 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     onClick={handleCurrencyClick}
                     fullWidth
                     variant="outlined"
-                    sx={{mb: 2}}
+                    sx={{
+                        mb: 2,
+                        borderColor: 'rgba(184, 212, 240, 0.5)',
+                        color: '#2C3E50',
+                        '&:hover': {
+                            borderColor: 'rgba(184, 212, 240, 0.8)',
+                            backgroundColor: 'rgba(184, 212, 240, 0.1)',
+                        }
+                    }}
                 >
                     {t('settings.currency')}
                 </Button>
@@ -184,7 +222,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     onClick={handleLogout}
                     fullWidth
                     variant="contained"
-                    color="secondary"
+                    sx={{
+                        background: 'linear-gradient(135deg, #F5B7B1 0%, #E8A59B 100%)',
+                        color: '#2C3E50',
+                        fontWeight: 'bold',
+                        '&:hover': {
+                            background: 'linear-gradient(135deg, #E8A59B 0%, #D18B7F 100%)',
+                        }
+                    }}
                 >
                     {t('logout', 'Logout')}
                 </Button>
@@ -250,6 +295,10 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     zIndex: (theme) => theme.zIndex.drawer + 1,
                     width: {sm: sidebarOpen ? `calc(100% - ${drawerWidth}px)` : '100%'},
                     ml: {sm: sidebarOpen ? `${drawerWidth}px` : 0},
+                    background: 'linear-gradient(135deg, #B8D4F0 0%, #C7E0F4 100%)',
+                    color: '#2C3E50',
+                    boxShadow: '0 4px 20px rgba(184, 212, 240, 0.3)',
+                    borderBottom: '1px solid rgba(184, 212, 240, 0.2)',
                     transition: (theme) => theme.transitions.create(['width', 'margin'], {
                         easing: theme.transitions.easing.sharp,
                         duration: theme.transitions.duration.leavingScreen,
@@ -265,7 +314,11 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             onClick={handleDrawerToggle}
                             sx={{
                                 mr: 2,
-                                display: {sm: 'none'}
+                                display: {sm: 'none'},
+                                color: '#2C3E50',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                                }
                             }}
                         >
                             <MenuIcon/>
@@ -276,6 +329,10 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             sx={{
                                 display: {xs: 'none', sm: 'block'},
+                                color: '#2C3E50',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                                }
                             }}
                         >
                             {sidebarOpen ? <ChevronLeft/> : <MenuIcon/>}
@@ -290,15 +347,27 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             flexGrow: 1,
                             ml: 2,
                             cursor: 'pointer',
+                            color: '#2C3E50',
+                            fontWeight: 'bold',
                             '&:hover': {
-                                opacity: 0.8
+                                opacity: 0.8,
+                                transform: 'scale(1.02)',
+                                transition: 'all 0.2s ease'
                             }
                         }}
                     >
                         💰 {t('appName')}
                     </Typography>
 
-                    <IconButton onClick={toggleTheme} color="inherit">
+                    <IconButton 
+                        onClick={toggleTheme} 
+                        sx={{
+                            color: '#2C3E50',
+                            '&:hover': {
+                                backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                            }
+                        }}
+                    >
                         {mode === 'dark' ? <Brightness7/> : <Brightness4/>}
                     </IconButton>
                 </Toolbar>

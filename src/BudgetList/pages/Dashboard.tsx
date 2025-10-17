@@ -36,10 +36,10 @@ const Dashboard = () => {
         <Container maxWidth="lg" sx={{ py: 4 }}>
             {/* Header */}
             <Box sx={{ textAlign: 'center', mb: 4 }}>
-                <Typography variant="h3" gutterBottom color="primary" fontWeight="bold">
+                <Typography variant="h3" gutterBottom fontWeight="bold" sx={{color: '#2C3E50'}}>
                     💰 {t('appName')}
                 </Typography>
-                <Typography variant="h6" color="text.secondary" gutterBottom>
+                <Typography variant="h6" gutterBottom sx={{color: '#5D6D7E'}}>
                     {t('tagline')}
                 </Typography>
 
@@ -50,6 +50,16 @@ const Dashboard = () => {
                         startIcon={<AddIcon />}
                         onClick={() => setIsModalOpen(true)}
                         size="large"
+                        sx={{
+                            background: 'linear-gradient(135deg, #B8D4F0 0%, #7BA7D1 100%)',
+                            color: '#2C3E50',
+                            fontWeight: 'bold',
+                            '&:hover': {
+                                background: 'linear-gradient(135deg, #A8C4E0 0%, #6B97C1 100%)',
+                                transform: 'translateY(-2px)',
+                                boxShadow: '0 6px 20px rgba(123, 167, 209, 0.4)',
+                            }
+                        }}
                     >
                         {t('addTransaction')}
                     </Button>

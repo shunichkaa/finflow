@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Box, CircularProgress, Typography, Alert, Button } from '@mui/material';
-import {supabase} from "../../lib/supabaseClient.ts";
+import {supabase} from "../../lib/supabaseClient";
 
 
 export const OAuthCallback = () => {
