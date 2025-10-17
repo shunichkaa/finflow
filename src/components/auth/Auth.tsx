@@ -1,15 +1,28 @@
 import React, {useState} from 'react';
-import {Box, Button, CircularProgress, Fade, Paper, Stack, TextField, Typography,} from '@mui/material';
+import {
+    Box,
+    Button,
+    CircularProgress,
+    Fade,
+    Paper,
+    Stack,
+    TextField,
+    Typography,
+    Divider,
+    Alert
+} from '@mui/material';
+import { Google, Apple, Login, PersonAdd } from '@mui/icons-material';
 import {supabase} from '../../lib/supabaseClient';
-import LoginIcon from '@mui/icons-material/Login';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {useNavigate} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 export const Auth: React.FC = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [oauthLoading, setOauthLoading] = useState<string | null>(null);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [mode, setMode] = useState<'login' | 'signup'>('login');
@@ -20,15 +33,15 @@ export const Auth: React.FC = () => {
         setSuccess('');
 
         if (!email || !password) {
-            setError('Пожалуйста, заполните все поля');
+            setError(t('auth.fillAllFields', 'Пожалуйста, заполните все поля'));
             return;
         }
         if (!email.includes('@')) {
-            setError('Введите корректный email');
+            setError(t('auth.validEmail', 'Введите корректный email'));
             return;
         }
         if (password.length < 6) {
-            setError('Пароль должен быть минимум 6 символов');
+            setError(t('auth.passwordLength', 'Пароль должен быть минимум 6 символов'));
             return;
         }
 
@@ -39,8 +52,7 @@ export const Auth: React.FC = () => {
             result = await supabase.auth.signInWithPassword({email, password});
             if (result.error) setError(result.error.message);
             else {
-                setSuccess('Вы успешно вошли!');
-                // редирект на dashboard через 500ms, чтобы пользователь успел увидеть сообщение
+                setSuccess(t('auth.loginSuccess', 'Вы успешно вошли!'));
                 setTimeout(() => {
                     navigate('/dashboard');
                 }, 500);
@@ -48,10 +60,37 @@ export const Auth: React.FC = () => {
         } else {
             result = await supabase.auth.signUp({email, password});
             if (result.error) setError(result.error.message);
-            else setSuccess('Регистрация успешна! Проверьте почту для подтверждения.');
+            else setSuccess(t('auth.signupSuccess', 'Регистрация успешна! Проверьте почту для подтверждения.'));
         }
 
         setLoading(false);
+    };
+
+    const handleOAuthLogin = async (provider: 'google' | 'apple') => {
+        try {
+            setOauthLoading(provider);
+            setError('');
+
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: provider,
+                options: {
+                    redirectTo: `${window.location.origin}/dashboard`,
+                    queryParams: {
+                        access_type: 'offline',
+                        prompt: 'consent',
+                    }
+                }
+            });
+
+            if (error) throw error;
+        } catch (error: unknown) {
+            const errorMessage = error instanceof Error
+                ? error.message
+                : t('auth.oauthError', 'Ошибка при входе через социальную сеть');
+            setError(errorMessage);
+        } finally {
+            setOauthLoading(null);
+        }
     };
 
     return (
@@ -70,7 +109,7 @@ export const Auth: React.FC = () => {
                     elevation={6}
                     sx={{
                         p: 4,
-                        width: 380,
+                        width: 400,
                         display: 'flex',
                         flexDirection: 'column',
                         gap: 3,
@@ -78,16 +117,62 @@ export const Auth: React.FC = () => {
                     }}
                 >
                     <Typography variant="h4" textAlign="center" fontWeight={700}>
-                        💰 FinFlow
+                        💰 {t('appName', 'FinFlow')}
                     </Typography>
                     <Typography variant="subtitle1" textAlign="center" color="text.secondary">
-                        {mode === 'login' ? 'Вход в аккаунт' : 'Создание аккаунта'}
+                        {mode === 'login' ? t('auth.login', 'Вход в аккаунт') : t('auth.signup', 'Создание аккаунта')}
                     </Typography>
 
+                    {/* OAuth кнопки */}
+                    <Stack spacing={1}>
+                        <Button
+                            variant="outlined"
+                            fullWidth
+                            startIcon={oauthLoading === 'google' ? <CircularProgress size={20} /> : <Google />}
+                            onClick={() => handleOAuthLogin('google')}
+                            disabled={!!oauthLoading}
+                            sx={{
+                                py: 1.5,
+                                borderColor: 'grey.300',
+                                '&:hover': {
+                                    borderColor: 'grey.400',
+                                    backgroundColor: 'grey.50'
+                                }
+                            }}
+                        >
+                            {oauthLoading === 'google' ? t('auth.loading', 'Загрузка...') : t('auth.continueWithGoogle', 'Продолжить с Google')}
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            fullWidth
+                            startIcon={oauthLoading === 'apple' ? <CircularProgress size={20} /> : <Apple />}
+                            onClick={() => handleOAuthLogin('apple')}
+                            disabled={!!oauthLoading}
+                            sx={{
+                                py: 1.5,
+                                borderColor: 'grey.300',
+                                '&:hover': {
+                                    borderColor: 'grey.400',
+                                    backgroundColor: 'grey.50'
+                                }
+                            }}
+                        >
+                            {oauthLoading === 'apple' ? t('auth.loading', 'Загрузка...') : t('auth.continueWithApple', 'Продолжить с Apple')}
+                        </Button>
+                    </Stack>
+
+                    <Divider>
+                        <Typography variant="body2" color="text.secondary">
+                            {t('auth.or', 'или')}
+                        </Typography>
+                    </Divider>
+
+                    {/* Форма email/пароль */}
                     <Box component="form" onSubmit={handleSubmit}
                          sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
                         <TextField
-                            label="Email"
+                            label={t('auth.email', 'Email')}
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -95,7 +180,7 @@ export const Auth: React.FC = () => {
                             required
                         />
                         <TextField
-                            label="Пароль"
+                            label={t('auth.password', 'Пароль')}
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -104,14 +189,14 @@ export const Auth: React.FC = () => {
                         />
 
                         {error && (
-                            <Typography color="error" variant="body2" textAlign="center">
+                            <Alert severity="error" sx={{ width: '100%' }}>
                                 {error}
-                            </Typography>
+                            </Alert>
                         )}
                         {success && (
-                            <Typography color="success.main" variant="body2" textAlign="center">
+                            <Alert severity="success" sx={{ width: '100%' }}>
                                 {success}
-                            </Typography>
+                            </Alert>
                         )}
 
                         <Button
@@ -120,17 +205,17 @@ export const Auth: React.FC = () => {
                             color="primary"
                             fullWidth
                             sx={{py: 1.5}}
-                            disabled={loading}
-                            startIcon={mode === 'login' ? <LoginIcon/> : <PersonAddIcon/>}
+                            disabled={loading || !!oauthLoading}
+                            startIcon={mode === 'login' ? <Login /> : <PersonAdd />}
                         >
-                            {loading ? <CircularProgress size={24}
-                                                         color="inherit"/> : mode === 'login' ? 'Войти' : 'Зарегистрироваться'}
+                            {loading ? <CircularProgress size={24} color="inherit"/> :
+                                mode === 'login' ? t('auth.loginButton', 'Войти') : t('auth.signupButton', 'Зарегистрироваться')}
                         </Button>
                     </Box>
 
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={1}>
                         <Typography variant="body2" color="text.secondary">
-                            {mode === 'login' ? 'Нет аккаунта?' : 'Уже есть аккаунт?'}
+                            {mode === 'login' ? t('auth.noAccount', 'Нет аккаунта?') : t('auth.hasAccount', 'Уже есть аккаунт?')}
                         </Typography>
                         <Button
                             variant="text"
@@ -140,8 +225,9 @@ export const Auth: React.FC = () => {
                                 setSuccess('');
                             }}
                             sx={{textTransform: 'none'}}
+                            disabled={loading || !!oauthLoading}
                         >
-                            {mode === 'login' ? 'Регистрация' : 'Вход'}
+                            {mode === 'login' ? t('auth.signup', 'Регистрация') : t('auth.login', 'Вход')}
                         </Button>
                     </Stack>
                 </Paper>
