@@ -17,6 +17,7 @@
     "@mui/material": "^7.3.4",
     "@mui/x-date-pickers": "^8.14.0",
     "@supabase/supabase-js": "^2.75.0",
+    "currency-symbol-map": "^5.1.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.18",
     "fdir": "^6.5.0",

@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
-    AppBar, Box, Button, CssBaseline, Divider, Drawer,
-    IconButton, List, ListItem, ListItemButton, ListItemText,
-    Toolbar, Typography, Menu, MenuItem
+    AppBar,
+    Box,
+    Button,
+    CssBaseline,
+    Divider,
+    Drawer,
+    IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+    Menu,
+    MenuItem,
+    Toolbar,
+    Typography
 } from '@mui/material';
-import { Brightness4, Brightness7, Menu as MenuIcon, Close, ChevronLeft, Language, CurrencyExchange } from '@mui/icons-material';
-import { Link, useLocation, useNavigate, Outlet } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useThemeMode } from '../Budgets/theme/ThemeContext';
-import { supabase } from '../lib/supabaseClient';
+import {
+    Brightness4,
+    Brightness7,
+    ChevronLeft,
+    Close,
+    CurrencyExchange,
+    Language,
+    Menu as MenuIcon
+} from '@mui/icons-material';
+import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
+import {useThemeMode} from '../Budgets/theme/ThemeContext';
+import {supabase} from '../lib/supabaseClient';
+import getSymbolFromCurrency from 'currency-symbol-map';
 
 const drawerWidth = 240;
 
@@ -17,11 +38,11 @@ interface LayoutProps {
     defaultSidebarOpen?: boolean;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, defaultSidebarOpen = true }) => {
+export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = true}) => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { mode, toggleTheme } = useThemeMode();
-    const { t, i18n } = useTranslation();
+    const {mode, toggleTheme} = useThemeMode();
+    const {t, i18n} = useTranslation();
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(defaultSidebarOpen);
@@ -63,47 +84,65 @@ export const Layout: React.FC<LayoutProps> = ({ children, defaultSidebarOpen = t
     };
 
     const languages = [
-        { code: 'ru', name: 'Русский', nativeName: 'Русский' },
-        { code: 'en', name: 'English', nativeName: 'English' },
-        { code: 'fr', name: 'French', nativeName: 'Français' },
-        { code: 'de', name: 'German', nativeName: 'Deutsch' },
-        { code: 'es', name: 'Spanish', nativeName: 'Español' },
-        { code: 'me', name: 'Montenegrin', nativeName: 'Crnogorski' },
+        {code: 'ru', name: 'Русский', nativeName: 'Русский'},
+        {code: 'en', name: 'English', nativeName: 'English'},
+        {code: 'fr', name: 'French', nativeName: 'Français'},
+        {code: 'de', name: 'German', nativeName: 'Deutsch'},
+        {code: 'es', name: 'Spanish', nativeName: 'Español'},
+        {code: 'me', name: 'Montenegrin', nativeName: 'Crnogorski'},
     ];
 
+    // Самые популярные валюты мира (USD и EUR наверху)
     const currencies = [
-        { code: 'RUB', symbol: '₽', name: 'Russian Ruble' },
-        { code: 'USD', symbol: '$', name: 'US Dollar' },
-        { code: 'EUR', symbol: '€', name: 'Euro' },
+        {code: 'USD', name: 'US Dollar'},
+        {code: 'EUR', name: 'Euro'},
+        {code: 'GBP', name: 'British Pound'},
+        {code: 'JPY', name: 'Japanese Yen'},
+        {code: 'CAD', name: 'Canadian Dollar'},
+        {code: 'AUD', name: 'Australian Dollar'},
+        {code: 'CHF', name: 'Swiss Franc'},
+        {code: 'CNY', name: 'Chinese Yuan'},
+        {code: 'RUB', name: 'Russian Ruble'},
+        {code: 'UAH', name: 'Ukrainian Hryvnia'},
+        {code: 'PLN', name: 'Polish Zloty'},
+        {code: 'TRY', name: 'Turkish Lira'},
+        {code: 'AED', name: 'UAE Dirham'},
+        {code: 'SAR', name: 'Saudi Riyal'},
+        {code: 'KRW', name: 'South Korean Won'},
+        {code: 'SGD', name: 'Singapore Dollar'},
+        {code: 'NZD', name: 'New Zealand Dollar'},
+        {code: 'MXN', name: 'Mexican Peso'},
+        {code: 'BRL', name: 'Brazilian Real'},
+        {code: 'INR', name: 'Indian Rupee'},
     ];
 
     const navItems = [
-        { path: '/dashboard', label: t('dashboard') },
-        { path: '/analytics', label: t('analytics') },
-        { path: '/budgets', label: t('budgets') },
+        {path: '/dashboard', label: t('dashboard')},
+        {path: '/analytics', label: t('analytics')},
+        {path: '/budgets', label: t('budgets')},
     ];
 
     const drawer = (
-        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <Box sx={{display: 'flex', flexDirection: 'column', height: '100%'}}>
             {/* AppBar для сайдбара */}
             <AppBar position="static" elevation={1}>
                 <Toolbar>
                     <IconButton
                         onClick={handleDrawerToggle}
                         sx={{
-                            display: { sm: 'none' },
+                            display: {sm: 'none'},
                             color: 'inherit'
                         }}
                     >
-                        <Close />
+                        <Close/>
                     </IconButton>
                 </Toolbar>
             </AppBar>
 
-            <Divider />
+            <Divider/>
 
             {/* Навигация */}
-            <List sx={{ flexGrow: 1 }}>
+            <List sx={{flexGrow: 1}}>
                 {navItems.map((item) => (
                     <ListItem key={item.path} disablePadding>
                         <ListItemButton
@@ -112,31 +151,31 @@ export const Layout: React.FC<LayoutProps> = ({ children, defaultSidebarOpen = t
                             selected={location.pathname === item.path}
                             onClick={() => setMobileOpen(false)}
                         >
-                            <ListItemText primary={item.label} />
+                            <ListItemText primary={item.label}/>
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
 
-            <Divider />
+            <Divider/>
 
             {/* Кнопки смены языка и валюты */}
-            <Box sx={{ p: 2 }}>
+            <Box sx={{p: 2}}>
                 <Button
-                    startIcon={<Language />}
+                    startIcon={<Language/>}
                     onClick={handleLanguageClick}
                     fullWidth
                     variant="outlined"
-                    sx={{ mb: 1 }}
+                    sx={{mb: 1}}
                 >
                     {t('settings.language')}
                 </Button>
                 <Button
-                    startIcon={<CurrencyExchange />}
+                    startIcon={<CurrencyExchange/>}
                     onClick={handleCurrencyClick}
                     fullWidth
                     variant="outlined"
-                    sx={{ mb: 2 }}
+                    sx={{mb: 2}}
                 >
                     {t('settings.currency')}
                 </Button>
@@ -156,6 +195,11 @@ export const Layout: React.FC<LayoutProps> = ({ children, defaultSidebarOpen = t
                 anchorEl={languageAnchor}
                 open={Boolean(languageAnchor)}
                 onClose={handleLanguageClose}
+                PaperProps={{
+                    style: {
+                        maxHeight: 300,
+                    },
+                }}
             >
                 {languages.map((language) => (
                     <MenuItem
@@ -173,30 +217,39 @@ export const Layout: React.FC<LayoutProps> = ({ children, defaultSidebarOpen = t
                 anchorEl={currencyAnchor}
                 open={Boolean(currencyAnchor)}
                 onClose={handleCurrencyClose}
+                PaperProps={{
+                    style: {
+                        maxHeight: 400,
+                    },
+                }}
             >
-                {currencies.map((currency) => (
-                    <MenuItem
-                        key={currency.code}
-                        onClick={handleCurrencyClose}
-                    >
-                        {currency.code} {currency.symbol}
-                    </MenuItem>
-                ))}
+                {currencies.map((currency) => {
+                    const symbol = getSymbolFromCurrency(currency.code);
+                    const displaySymbol = symbol && symbol !== currency.code ? symbol : '';
+                    return (
+                        <MenuItem
+                            key={currency.code}
+                            onClick={handleCurrencyClose}
+                        >
+                            {displaySymbol} {currency.code} - {currency.name}
+                        </MenuItem>
+                    );
+                })}
             </Menu>
         </Box>
     );
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
+        <Box sx={{display: 'flex'}}>
+            <CssBaseline/>
 
             {/* Основной AppBar */}
             <AppBar
                 position="fixed"
                 sx={{
                     zIndex: (theme) => theme.zIndex.drawer + 1,
-                    width: { sm: sidebarOpen ? `calc(100% - ${drawerWidth}px)` : '100%' },
-                    ml: { sm: sidebarOpen ? `${drawerWidth}px` : 0 },
+                    width: {sm: sidebarOpen ? `calc(100% - ${drawerWidth}px)` : '100%'},
+                    ml: {sm: sidebarOpen ? `${drawerWidth}px` : 0},
                     transition: (theme) => theme.transitions.create(['width', 'margin'], {
                         easing: theme.transitions.easing.sharp,
                         duration: theme.transitions.duration.leavingScreen,
@@ -205,27 +258,27 @@ export const Layout: React.FC<LayoutProps> = ({ children, defaultSidebarOpen = t
             >
                 <Toolbar>
                     {/* Бургер-меню для мобильных и кнопка скрытия для десктопа */}
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box sx={{display: 'flex', alignItems: 'center'}}>
                         <IconButton
                             color="inherit"
                             edge="start"
                             onClick={handleDrawerToggle}
                             sx={{
                                 mr: 2,
-                                display: { sm: 'none' }
+                                display: {sm: 'none'}
                             }}
                         >
-                            <MenuIcon />
+                            <MenuIcon/>
                         </IconButton>
 
                         <IconButton
                             color="inherit"
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             sx={{
-                                display: { xs: 'none', sm: 'block' },
+                                display: {xs: 'none', sm: 'block'},
                             }}
                         >
-                            {sidebarOpen ? <ChevronLeft /> : <MenuIcon />}
+                            {sidebarOpen ? <ChevronLeft/> : <MenuIcon/>}
                         </IconButton>
                     </Box>
 
@@ -246,7 +299,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, defaultSidebarOpen = t
                     </Typography>
 
                     <IconButton onClick={toggleTheme} color="inherit">
-                        {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+                        {mode === 'dark' ? <Brightness7/> : <Brightness4/>}
                     </IconButton>
                 </Toolbar>
             </AppBar>
@@ -260,7 +313,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, defaultSidebarOpen = t
                     keepMounted: true,
                 }}
                 sx={{
-                    display: { xs: 'block', sm: 'none' },
+                    display: {xs: 'block', sm: 'none'},
                     '& .MuiDrawer-paper': {
                         boxSizing: 'border-box',
                         width: drawerWidth
@@ -275,7 +328,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, defaultSidebarOpen = t
                 <Drawer
                     variant="permanent"
                     sx={{
-                        display: { xs: 'none', sm: 'block' },
+                        display: {xs: 'none', sm: 'block'},
                         '& .MuiDrawer-paper': {
                             boxSizing: 'border-box',
                             width: drawerWidth,
@@ -296,14 +349,14 @@ export const Layout: React.FC<LayoutProps> = ({ children, defaultSidebarOpen = t
                     p: 3,
                     width: '100%',
                     mt: 8,
-                    ml: { sm: sidebarOpen ? `${drawerWidth}px` : 0 },
+                    ml: {sm: sidebarOpen ? `${drawerWidth}px` : 0},
                     transition: (theme) => theme.transitions.create('margin', {
                         easing: theme.transitions.easing.sharp,
                         duration: theme.transitions.duration.leavingScreen,
                     }),
                 }}
             >
-                {children ?? <Outlet />}
+                {children ?? <Outlet/>}
             </Box>
         </Box>
     );
