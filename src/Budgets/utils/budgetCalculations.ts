@@ -45,14 +45,20 @@ export const getBudgetStatus = (
 
 export const getBudgetStatusColor = (status: string) => {
     const colors = {
-        safe: '#22c55e',
-        warning: '#f59e0b',
-        danger: '#ef4444',
-        exceeded: '#dc2626',
-    };
-    return colors[status as keyof typeof colors] || colors.safe;
-};
+        safe: '#34d399',
+        warning: '#fdba74',
+        danger: '#fca5a5',
+        exceeded: '#f87171'
+    } as const;
 
+    const colorKeys = Object.keys(colors) as Array<keyof typeof colors>;
+
+    if (colorKeys.includes(status as keyof typeof colors)) {
+        return colors[status as keyof typeof colors];
+    }
+
+    return colors.safe;
+};
 export const getDaysLeftInPeriod = (period: 'monthly' | 'weekly'): number => {
     const now = new Date();
     const periodEnd = period === 'weekly'
