@@ -1,17 +1,18 @@
-import {useState} from 'react';
-import {supabase} from '../../lib/supabaseClient.ts';
+import React, { useState } from 'react';
+import { Box, Button, TextField, Typography, Paper, CircularProgress } from '@mui/material';
+import { supabase } from '../../lib/supabaseClient';
 
-export const Auth = () => {
+export const Auth: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError('');
-        const {error} = await supabase.auth.signInWithPassword({email, password});
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) setError(error.message);
         setLoading(false);
     };
@@ -19,42 +20,72 @@ export const Auth = () => {
     const handleSignup = async () => {
         setLoading(true);
         setError('');
-        const {error} = await supabase.auth.signUp({email, password});
+        const { error } = await supabase.auth.signUp({ email, password });
         if (error) setError(error.message);
         setLoading(false);
     };
 
     return (
-        <form onSubmit={handleLogin} className="flex flex-col gap-3 w-64 mx-auto mt-10">
-            <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                className="border p-2 rounded"
-            />
-            <input
-                type="password"
-                placeholder="Пароль"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                className="border p-2 rounded"
-            />
-            <button
-                type="submit"
-                disabled={loading}
-                className="bg-blue-500 text-white rounded p-2"
+        <Box
+            sx={{
+                height: '100vh',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                bgcolor: 'background.default',
+                p: 2,
+            }}
+        >
+            <Paper
+                elevation={3}
+                sx={{ p: 4, width: 360, display: 'flex', flexDirection: 'column', gap: 2 }}
             >
-                {loading ? 'Вход...' : 'Войти'}
-            </button>
-            <button
-                type="button"
-                onClick={handleSignup}
-                className="text-sm text-gray-600 underline"
-            >
-                Зарегистрироваться
-            </button>
-            {error && <p className="text-red-500 text-sm">{error}</p>}
-        </form>
+                <Typography variant="h5" textAlign="center">
+                    💰 FinFlow
+                </Typography>
+
+                <TextField
+                    label="Email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    fullWidth
+                />
+                <TextField
+                    label="Пароль"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    fullWidth
+                />
+
+                {error && (
+                    <Typography color="error" variant="body2" textAlign="center">
+                        {error}
+                    </Typography>
+                )}
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleLogin}
+                    disabled={loading}
+                    fullWidth
+                    sx={{ py: 1.5 }}
+                >
+                    {loading ? <CircularProgress size={24} color="inherit" /> : 'Войти'}
+                </Button>
+
+                <Button
+                    variant="text"
+                    color="secondary"
+                    onClick={handleSignup}
+                    disabled={loading}
+                    fullWidth
+                >
+                    Зарегистрироваться
+                </Button>
+            </Paper>
+        </Box>
     );
 };
