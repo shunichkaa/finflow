@@ -608,6 +608,9 @@ export default function Profile() {
                             },
                             '& .MuiInputLabel-root': {
                                 color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                '&.Mui-focused': {
+                                    color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                },
                             },
                         }}
                     />
@@ -634,6 +637,9 @@ export default function Profile() {
                             },
                             '& .MuiInputLabel-root': {
                                 color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                '&.Mui-focused': {
+                                    color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                },
                             },
                         }}
                     />
@@ -678,6 +684,9 @@ export default function Profile() {
                             },
                             '& .MuiInputLabel-root': {
                                 color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                '&.Mui-focused': {
+                                    color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                },
                             },
                         }}
                     />
@@ -704,6 +713,9 @@ export default function Profile() {
                             },
                             '& .MuiInputLabel-root': {
                                 color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                '&.Mui-focused': {
+                                    color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                },
                             },
                         }}
                     />
@@ -730,6 +742,9 @@ export default function Profile() {
                             },
                             '& .MuiInputLabel-root': {
                                 color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                '&.Mui-focused': {
+                                    color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                },
                             },
                         }}
                     />
