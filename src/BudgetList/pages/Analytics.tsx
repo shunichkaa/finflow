@@ -22,17 +22,14 @@ const Analytics: React.FC = () => {
 
         switch (period) {
             case 'week':
-                // Последние 7 дней включая сегодня
                 startDate.setDate(now.getDate() - 6);
                 startDate.setHours(0, 0, 0, 0);
                 break;
             case 'month':
-                // Последние 30 дней
                 startDate.setDate(now.getDate() - 29);
                 startDate.setHours(0, 0, 0, 0);
                 break;
             case 'year':
-                // Последние 365 дней
                 startDate.setDate(now.getDate() - 364);
                 startDate.setHours(0, 0, 0, 0);
                 break;
@@ -44,7 +41,6 @@ const Analytics: React.FC = () => {
             return txDate >= startDate;
         });
 
-        // Если нет данных для выбранного периода, показываем все транзакции
         if (filtered.length === 0 && transactions.length > 0) {
             return transactions;
         }
@@ -69,7 +65,6 @@ const Analytics: React.FC = () => {
 
     return (
         <Container maxWidth="lg" sx={{py: 4}}>
-            {/* Header - выровнено влево */}
             <Box sx={{mb: 4}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold" sx={{textAlign: 'left', color: '#2C3E50'}}>
                     {t('analytics')}
@@ -79,7 +74,6 @@ const Analytics: React.FC = () => {
                 </Typography>
             </Box>
 
-            {/* Сообщение если нет данных для выбранного периода */}
             {filteredTransactions.length === 0 && transactions.length > 0 && (
                 <Box sx={{mb: 3, p: 2, borderRadius: 2, backgroundColor: 'rgba(184, 212, 240, 0.1)', border: '1px solid rgba(184, 212, 240, 0.3)'}}>
                     <Typography variant="body2" sx={{color: '#5D6D7E', textAlign: 'center'}}>
@@ -364,7 +358,7 @@ const Analytics: React.FC = () => {
                                                 width: 40,
                                                 height: 40,
                                                 borderRadius: '50%',
-                                                bgcolor: index === 0 ? '#F4D03F' : index === 1 ? '#AED6F1' : index === 2 ? '#A9DFBF' : '#E8F4FD',
+                                                bgcolor: index === 0 ? '#f2da6b' : index === 1 ? '#AED6F1' : index === 2 ? '#A9DFBF' : '#E8F4FD',
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
@@ -390,7 +384,7 @@ const Analytics: React.FC = () => {
                                             )}
                                         </Box>
                                     </Box>
-                                    <Typography variant="h6" fontWeight="bold" sx={{color: '#E8A59B'}}>
+                                    <Typography variant="h6" fontWeight="bold" sx={{color: '#bd5147'}}>
                                         {formatCurrency(transaction.amount, currency)}
                                     </Typography>
                                 </Box>

@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import {Box, Button, Container, Paper, Typography} from '@mui/material';
+import {Box, Button, Container, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {useTranslation} from 'react-i18next';
 import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
@@ -27,7 +27,6 @@ const Budgets: React.FC = () => {
 
     return (
         <Container maxWidth="md" sx={{py: 4}}>
-            {/* Header - выровнено влево */}
             <Box sx={{mb: 4, textAlign: 'left'}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold">
                     {t('budgets')}
@@ -57,37 +56,6 @@ const Budgets: React.FC = () => {
                     width: '100%',
                     maxWidth: 720
                 }}>
-                    <Paper sx={{
-                        flex: 1,
-                        p: 3,
-                        bgcolor: 'primary.main',
-                        color: 'white',
-                        minHeight: 120,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        textAlign: 'center'
-                    }}>
-                        <Typography variant="h6" fontWeight="bold">
-                            {t('totalBudgets')}: {totalBudgets}
-                        </Typography>
-                    </Paper>
-
-                    <Paper sx={{
-                        flex: 1,
-                        p: 3,
-                        bgcolor: exceededBudgets > 0 ? 'error.main' : '#3D7FD9',
-                        color: 'white',
-                        minHeight: 120,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        textAlign: 'center'
-                    }}>
-                        <Typography variant="h6" fontWeight="bold">
-                            {t('exceededBudgets')}: {exceededBudgets}
-                        </Typography>
-                    </Paper>
                 </Box>
             )}
 
