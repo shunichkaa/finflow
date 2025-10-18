@@ -5,16 +5,16 @@ const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
         primary: {
-            main: '#0ea5e9', // Яркий голубой для акцентов
-            light: '#7dd3fc', // Светлый голубой
-            dark: '#0284c7', // Темный голубой
-            contrastText: '#ffffff',
+            main: '#93c5fd', // Пастельный голубой
+            light: '#dbeafe', // Светлый голубо-молочный
+            dark: '#60a5fa', // Темный пастельный голубой
+            contrastText: '#1e40af',
         },
         secondary: {
-            main: '#64748b', // Нейтральный серо-голубой
-            light: '#94a3b8',
-            dark: '#475569',
-            contrastText: '#ffffff',
+            main: '#bfdbfe', // Пастельный голубо-молочный
+            light: '#dbeafe',
+            dark: '#93c5fd',
+            contrastText: '#1e40af',
         },
         error: {
             main: '#ef4444', // Четкий красный
@@ -147,16 +147,16 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#0ea5e9', // Яркий голубой для акцентов
-            light: '#7dd3fc',
-            dark: '#0284c7',
-            contrastText: '#ffffff',
+            main: '#1e3a8a', // Мягкий темно-синий для темной темы
+            light: '#1e40af',
+            dark: '#1e3a8a',
+            contrastText: '#dbeafe',
         },
         secondary: {
-            main: '#94a3b8', // Светлый серо-голубой
-            light: '#cbd5e1',
-            dark: '#64748b',
-            contrastText: '#ffffff',
+            main: '#1e40af', // Мягкий синий как вторичный
+            light: '#3b82f6',
+            dark: '#1e3a8a',
+            contrastText: '#dbeafe',
         },
         error: {
             main: '#ef4444', // Четкий красный

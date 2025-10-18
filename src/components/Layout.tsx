@@ -138,8 +138,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             {/* AppBar для сайдбара */}
             <AppBar position="static" elevation={0} sx={{
                 backgroundColor: mode === 'dark' 
-                    ? '#2D4A5A'
-                    : '#B8D4F0'
+                    ? '#1e3a8a'
+                    : '#93c5fd'
             }}>
                 <Toolbar>
                     <IconButton
@@ -414,8 +414,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     width: {sm: sidebarOpen ? `calc(100% - ${drawerWidth}px)` : '100%'},
                     ml: {sm: sidebarOpen ? `${drawerWidth}px` : 0},
                     backgroundColor: mode === 'dark' 
-                        ? '#2D4A5A'
-                        : '#B8D4F0',
+                        ? '#1e3a8a'
+                        : '#93c5fd',
                     color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                     boxShadow: mode === 'dark' 
                         ? '0 4px 20px rgba(26, 35, 50, 0.3)'
