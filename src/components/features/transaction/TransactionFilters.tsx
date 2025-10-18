@@ -73,6 +73,9 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                             },
                             '& .MuiInputLabel-root': {
                                 color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                                '&.Mui-focused': {
+                                    color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                                },
                             }
                         }}
                     >
@@ -96,6 +99,9 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                             },
                             '& .MuiInputLabel-root': {
                                 color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                                '&.Mui-focused': {
+                                    color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                                },
                             }
                         }}
                     >

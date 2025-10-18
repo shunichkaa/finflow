@@ -377,6 +377,18 @@ const darkThemeOptions: ThemeOptions = {
                 },
             },
         },
+        MuiFormControl: {
+            styleOverrides: {
+                root: {
+                    '& .MuiInputLabel-root': {
+                        color: '#F5F5DC',
+                        '&.Mui-focused': {
+                            color: '#F5F5DC',
+                        },
+                    },
+                },
+            },
+        },
         MuiMenu: {
             styleOverrides: {
                 paper: {
