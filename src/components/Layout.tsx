@@ -158,14 +158,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     </IconButton>
                     
                     {/* Кнопка скрытия для десктопа и название приложения */}
-                    <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, ml: 1 }}>
                         <IconButton
                             color="inherit"
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             sx={{
                                 display: {xs: 'none', sm: 'block'},
                                 color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
-                                mr: 1,
+                                mr: 2,
                                 transition: (theme) => theme.transitions.create(['background-color', 'transform'], {
                                     easing: theme.transitions.easing.easeInOut,
                                     duration: theme.transitions.duration.standard,
@@ -197,7 +197,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     }
                                 }}
                             >
-                                {t('appName')}
+                                💰 {t('appName')}
                             </Typography>
                             <Typography
                                 variant="caption"
@@ -436,7 +436,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             >
                 <Toolbar>
                     {/* Бургер-меню для мобильных */}
-                    <Box sx={{display: 'flex', alignItems: 'center'}}>
+                    <Box sx={{display: 'flex', alignItems: 'center', ml: 1}}>
                         <IconButton
                             color="inherit"
                             edge="start"
@@ -464,6 +464,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     sx={{
                                         display: {xs: 'none', sm: 'block'},
                                         color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                                        mr: 2,
                                         '&:hover': {
                                             backgroundColor: mode === 'dark' 
                                                 ? 'rgba(232, 244, 253, 0.1)' 
@@ -490,7 +491,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                             }
                                         }}
                                     >
-                                        {t('appName')}
+                                        💰 {t('appName')}
                                     </Typography>
                                     <Typography
                                         variant="caption"
