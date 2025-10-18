@@ -2,6 +2,7 @@ import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import Budgets from "./src/BudgetList/pages/Budgets";
 import Dashboard from "./src/BudgetList/pages/Dashboard";
 import Analytics from "./src/BudgetList/pages/Analytics";
+import Profile from "./src/BudgetList/pages/Profile";
 import {Auth} from "./src/components/auth/Auth";
 import {ProtectedRoute} from "./src/components/auth/ProtectedRoute";
 import {Layout} from "./src/components/Layout";
@@ -47,6 +48,16 @@ function App() {
                                 <ProtectedRoute>
                                     <ErrorBoundary>
                                         <Budgets/>
+                                    </ErrorBoundary>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="profile"
+                            element={
+                                <ProtectedRoute>
+                                    <ErrorBoundary>
+                                        <Profile/>
                                     </ErrorBoundary>
                                 </ProtectedRoute>
                             }
