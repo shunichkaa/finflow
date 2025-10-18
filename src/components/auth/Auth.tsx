@@ -1,4 +1,4 @@
-import React, {useState, lazy, Suspense} from 'react';
+import React, {useState} from 'react';
 import {
     Box,
     Button,
@@ -16,10 +16,6 @@ import {supabase} from '../../lib/supabaseClient';
 import {useNavigate} from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
-// Lazy load AuthDebug only in development
-const AuthDebug = lazy(() => 
-    import('./AuthDebug').then(module => ({ default: module.AuthDebug }))
-);
 
 export const Auth: React.FC = () => {
     const navigate = useNavigate();
@@ -198,12 +194,22 @@ export const Auth: React.FC = () => {
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     borderRadius: 2,
+                                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
                                     '&:hover .MuiOutlinedInput-notchedOutline': {
                                         borderColor: 'rgba(101, 70, 51, 0.6)',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                                         borderColor: 'rgba(101, 70, 51, 0.8)',
                                     },
+                                },
+                                '& .MuiInputLabel-root': {
+                                    color: 'rgba(101, 70, 51, 0.7)',
+                                    '&.Mui-focused': {
+                                        color: 'rgba(101, 70, 51, 0.8)',
+                                    },
+                                },
+                                '& .MuiOutlinedInput-input': {
+                                    color: '#654633',
                                 }
                             }}
                         />
@@ -217,12 +223,22 @@ export const Auth: React.FC = () => {
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     borderRadius: 2,
+                                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
                                     '&:hover .MuiOutlinedInput-notchedOutline': {
                                         borderColor: 'rgba(101, 70, 51, 0.6)',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                                         borderColor: 'rgba(101, 70, 51, 0.8)',
                                     },
+                                },
+                                '& .MuiInputLabel-root': {
+                                    color: 'rgba(101, 70, 51, 0.7)',
+                                    '&.Mui-focused': {
+                                        color: 'rgba(101, 70, 51, 0.8)',
+                                    },
+                                },
+                                '& .MuiOutlinedInput-input': {
+                                    color: '#654633',
                                 }
                             }}
                         />
@@ -295,12 +311,6 @@ export const Auth: React.FC = () => {
                 </Paper>
             </Fade>
             
-            {/* Debug component - remove in production */}
-            {process.env.NODE_ENV === 'development' && (
-                <Suspense fallback={<div>Loading debug...</div>}>
-                    <AuthDebug />
-                </Suspense>
-            )}
         </Box>
     );
 };

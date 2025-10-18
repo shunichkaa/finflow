@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm install --legacy-peer-deps && vite build",
+    "build": "npm install --legacy-peer-deps && vite build && cp public/_headers dist/_headers",
     "lint": "eslint .",
     "preview": "vite preview",
-    "vercel-build": "npm install --legacy-peer-deps && vite build"
+    "vercel-build": "npm install --legacy-peer-deps && vite build && cp public/_headers dist/_headers"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
