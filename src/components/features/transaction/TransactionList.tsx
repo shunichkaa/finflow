@@ -4,13 +4,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
-import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
-import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
-import { getCategoryById, getCategoryIcon, getCategoryName } from '../../Budgets/utils/categories.tsx';
-import { formatCurrency, formatDate } from '../../Budgets/utils/formatters';
-import { Transaction } from '../../Budgets/types';
-import { Modal } from '../ui/Modal';
-import { TransactionForm } from './TransactionForm';
+import { useFinanceStore } from '../../../Budgets/store/useFinanceStore.ts';
+import { useSettingsStore } from '../../../Budgets/store/useSettingsStore.ts';
+import { getCategoryById, getCategoryIcon, getCategoryName } from '../../../Budgets/utils/categories.tsx';
+import { formatCurrency, formatDate } from '../../../Budgets/utils/formatters.ts';
+import { Transaction } from '../../../Budgets/types';
+import { Modal } from '../../ui/Modal.tsx';
+import { TransactionForm } from './TransactionForm.tsx';
 
 interface TransactionListProps {
     transactions?: Transaction[];

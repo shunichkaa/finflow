@@ -11,10 +11,10 @@ import {
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { TransactionType, Transaction } from '../../Budgets/types';
-import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
-import { getCategoriesByType, getCategoryIcon, getCategoryName } from '../../Budgets/utils/categories.tsx';
-import {DatePickerField} from "../ui/DatePickerField.tsx";
+import { TransactionType, Transaction } from '../../../Budgets/types';
+import { useFinanceStore } from '../../../Budgets/store/useFinanceStore.ts';
+import { getCategoriesByType, getCategoryIcon, getCategoryName } from '../../../Budgets/utils/categories.tsx';
+import {DatePickerField} from "../../ui/DatePickerField.tsx";
 
 interface TransactionFormData {
     amount: string;

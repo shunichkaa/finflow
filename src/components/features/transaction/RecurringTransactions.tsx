@@ -14,12 +14,12 @@ import {
 } from '@mui/material';
 import {Add, Delete, Edit, Repeat, Schedule, Warning} from '@mui/icons-material';
 import {useTranslation} from 'react-i18next';
-import {useSettingsStore} from "../../Budgets/store/useSettingsStore";
-import {useRecurringStore} from "../../Budgets/store/useRecurringStore";
-import {useFinanceStore} from "../../Budgets/store/useFinanceStore";
-import {formatCurrency} from "../../Budgets/utils/formatters";
-import {RecurringTransactionForm} from "./RecurringTransactionForm";
-import {RecurringTransaction} from "../../Budgets/types/recurring";
+import {useSettingsStore} from "../../../Budgets/store/useSettingsStore.ts";
+import {useRecurringStore} from "../../../Budgets/store/useRecurringStore.ts";
+import {useFinanceStore} from "../../../Budgets/store/useFinanceStore.ts";
+import {formatCurrency} from "../../../Budgets/utils/formatters.ts";
+import {RecurringTransactionForm} from "./RecurringTransactionForm.tsx";
+import {RecurringTransaction} from "../../../Budgets/types/recurring.ts";
 
 export const RecurringTransactions: React.FC = () => {
     const {t} = useTranslation();

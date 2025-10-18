@@ -3,17 +3,17 @@ import {Alert, Box, Card, CardContent, Chip, IconButton, LinearProgress, Typogra
 import DeleteIcon from '@mui/icons-material/Delete';
 import WarningIcon from '@mui/icons-material/Warning';
 import {useTranslation} from 'react-i18next';
-import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
-import {useSettingsStore} from '../../Budgets/store/useSettingsStore';
-import {getCategoryById, getCategoryIcon, getCategoryName} from '../../Budgets/utils/categories';
-import {formatCurrency} from '../../Budgets/utils/formatters';
+import {useFinanceStore} from '../../../Budgets/store/useFinanceStore.ts';
+import {useSettingsStore} from '../../../Budgets/store/useSettingsStore.ts';
+import {getCategoryById, getCategoryIcon, getCategoryName} from '../../../Budgets/utils/categories.tsx';
+import {formatCurrency} from '../../../Budgets/utils/formatters.ts';
 import {
     calculateBudgetSpent,
     getBudgetPercentage,
     getBudgetStatus,
     getBudgetStatusColor,
     getDaysLeftInPeriod,
-} from '../../Budgets/utils/budgetCalculations';
+} from '../../../Budgets/utils/budgetCalculations.ts';
 
 interface BudgetListProps {
     onEdit?: (id: string) => void;

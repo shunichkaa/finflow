@@ -2,9 +2,9 @@ import React, {useMemo} from 'react';
 import {CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,} from 'recharts';
 import {Box, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next';
-import {useSettingsStore} from '../../Budgets/store/useSettingsStore';
-import {formatCurrency} from '../../Budgets/utils/formatters';
-import type {Transaction} from '../../Budgets/types';
+import {useSettingsStore} from '../../../Budgets/store/useSettingsStore.ts';
+import {formatCurrency} from '../../../Budgets/utils/formatters.ts';
+import type {Transaction} from '../../../Budgets/types';
 
 type Period = 'week' | 'month' | 'year';
 

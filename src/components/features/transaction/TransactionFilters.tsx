@@ -10,9 +10,9 @@ import {
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useTranslation } from 'react-i18next';
-import { TransactionType } from '../../Budgets/types';
-import { ALL_CATEGORIES, getCategoryIcon, getCategoryName } from '../../Budgets/utils/categories';
-import { DatePickerField } from '../ui/DatePickerField';
+import { TransactionType } from '../../../Budgets/types';
+import { ALL_CATEGORIES, getCategoryIcon, getCategoryName } from '../../../Budgets/utils/categories.tsx';
+import { DatePickerField } from '../../ui/DatePickerField.tsx';
 
 interface TransactionFiltersProps {
     type: TransactionType | 'all';

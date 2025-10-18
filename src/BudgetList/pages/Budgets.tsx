@@ -4,8 +4,8 @@ import AddIcon from '@mui/icons-material/Add';
 import {useTranslation} from 'react-i18next';
 import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
 import {calculateBudgetSpent, getBudgetStatus} from '../../Budgets/utils/budgetCalculations';
-import {BudgetList} from '../../components/features/BudgetList';
-import {BudgetForm} from '../../components/features/BudgetForm';
+import {BudgetList} from '../../components/features/budget/BudgetList.tsx';
+import {BudgetForm} from '../../components/features/budget/BudgetForm.tsx';
 import {Modal} from '../../components/ui/Modal';
 
 const Budgets: React.FC = () => {

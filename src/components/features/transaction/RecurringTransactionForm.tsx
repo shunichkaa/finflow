@@ -18,8 +18,8 @@ import {
 } from '@mui/material';
 import {useTranslation} from 'react-i18next';
 import {Repeat, TrendingUp, TrendingDown} from '@mui/icons-material';
-import {useRecurringStore} from "../../Budgets/store/useRecurringStore";
-import {RecurringFrequency} from "../../Budgets/types/recurring";
+import {useRecurringStore} from "../../../Budgets/store/useRecurringStore.ts";
+import {RecurringFrequency} from "../../../Budgets/types/recurring.ts";
 
 interface RecurringTransactionFormProps {
     open: boolean;

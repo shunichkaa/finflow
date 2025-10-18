@@ -10,10 +10,10 @@ import {
 } from 'recharts';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
-import { formatCurrency } from '../../Budgets/utils/formatters';
-import { getCategoryName } from '../../Budgets/utils/categories';
-import type { Transaction } from '../../Budgets/types';
+import { useSettingsStore } from '../../../Budgets/store/useSettingsStore.ts';
+import { formatCurrency } from '../../../Budgets/utils/formatters.ts';
+import { getCategoryName } from '../../../Budgets/utils/categories.tsx';
+import type { Transaction } from '../../../Budgets/types';
 
 export interface ExpensesPieChartProps {
     transactions: Transaction[];

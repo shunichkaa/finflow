@@ -2,10 +2,10 @@ import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {Box, Button, MenuItem, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography,} from '@mui/material';
 import {useTranslation} from 'react-i18next';
-import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
-import type {Budget} from '../../Budgets/types';
-import {BudgetPeriod} from '../../Budgets/types';
-import {EXPENSE_CATEGORIES, getCategoryIcon, getCategoryName} from '../../Budgets/utils/categories';
+import {useFinanceStore} from '../../../Budgets/store/useFinanceStore.ts';
+import type {Budget} from '../../../Budgets/types';
+import {BudgetPeriod} from '../../../Budgets/types';
+import {EXPENSE_CATEGORIES, getCategoryIcon, getCategoryName} from '../../../Budgets/utils/categories.tsx';
 
 interface BudgetFormData {
     category: string;

@@ -4,8 +4,8 @@ import {useTranslation} from 'react-i18next';
 import {useSettingsStore} from "../../Budgets/store/useSettingsStore";
 import {useFinanceStore} from "../../Budgets/store/useFinanceStore";
 import {formatCurrency} from "../../Budgets/utils/formatters";
-import {IncomeExpenseTrendChart} from "../../components/features/IncomeExpenseTrendChart";
-import {ExpensesPieChart} from "../../components/features/ExpensesPieChart";
+import {IncomeExpenseTrendChart} from "../../components/features/analytics/IncomeExpenseTrendChart.tsx";
+import {ExpensesPieChart} from "../../components/features/analytics/ExpensesPieChart.tsx";
 import {getCategoryName} from "../../Budgets/utils/categories";
 
 type Period = 'week' | 'month' | 'year';

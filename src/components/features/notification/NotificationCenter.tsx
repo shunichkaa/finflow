@@ -15,7 +15,7 @@ import {
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import {formatDistanceToNow} from 'date-fns';
 import {ru} from 'date-fns/locale';
-import {useNotificationStore} from "../../Budgets/store/useNotificationStore.ts";
+import {useNotificationStore} from "../../../Budgets/store/useNotificationStore.ts";
 
 export const NotificationCenter: React.FC = () => {
     const {notifications, markAsRead, markAllAsRead, unreadCount} = useNotificationStore();
