@@ -12,3 +12,4 @@ tsconfig.app.json
 tsconfig.node.json
 vite.config.ts
 eslint.config.js
+README.md
