@@ -126,7 +126,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
         <Box sx={{
             display: 'flex', 
             flexDirection: 'column', 
-            height: '100%', 
+            height: '100vh', 
             backgroundColor: mode === 'dark' 
                 ? '#1A2332'
                 : '#f8fafc',
@@ -215,66 +215,61 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 </Toolbar>
             </AppBar>
 
-            <Divider sx={{
-                borderColor: mode === 'dark' 
-                    ? 'rgba(123, 167, 209, 0.3)' 
-                    : 'rgba(184, 212, 240, 0.3)'
-            }}/>
-
             {/* Навигация */}
-            <List sx={{flexGrow: 1, px: 1}}>
-                {navItems.map((item) => (
-                    <ListItem key={item.path} disablePadding sx={{mb: 0.5}}>
-                        <ListItemButton
-                            component={Link}
-                            to={item.path}
-                            selected={location.pathname === item.path}
-                            onClick={() => setMobileOpen(false)}
-                            sx={{
-                                borderRadius: 2,
-                                color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
-                                transition: (theme) => theme.transitions.create(['background-color', 'transform'], {
-                                    easing: theme.transitions.easing.easeInOut,
-                                    duration: theme.transitions.duration.standard,
-                                }),
-                                '&.Mui-selected': {
-                                    backgroundColor: mode === 'dark' 
-                                        ? 'rgba(123, 167, 209, 0.3)' 
-                                        : 'rgba(184, 212, 240, 0.3)',
+            <Box sx={{ flexGrow: 1, overflow: 'auto' }}>
+                <List sx={{ px: 1 }}>
+                    {navItems.map((item) => (
+                        <ListItem key={item.path} disablePadding sx={{mb: 0.5}}>
+                            <ListItemButton
+                                component={Link}
+                                to={item.path}
+                                selected={location.pathname === item.path}
+                                onClick={() => setMobileOpen(false)}
+                                sx={{
+                                    borderRadius: 2,
                                     color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                                    transition: (theme) => theme.transitions.create(['background-color', 'transform'], {
+                                        easing: theme.transitions.easing.easeInOut,
+                                        duration: theme.transitions.duration.standard,
+                                    }),
+                                    '&.Mui-selected': {
+                                        backgroundColor: mode === 'dark' 
+                                            ? 'rgba(123, 167, 209, 0.3)' 
+                                            : 'rgba(184, 212, 240, 0.3)',
+                                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                                        '&:hover': {
+                                            backgroundColor: mode === 'dark' 
+                                                ? 'rgba(123, 167, 209, 0.4)' 
+                                                : 'rgba(184, 212, 240, 0.4)',
+                                        }
+                                    },
                                     '&:hover': {
                                         backgroundColor: mode === 'dark' 
-                                            ? 'rgba(123, 167, 209, 0.4)' 
-                                            : 'rgba(184, 212, 240, 0.4)',
+                                            ? 'rgba(123, 167, 209, 0.2)' 
+                                            : 'rgba(184, 212, 240, 0.2)',
+                                        transform: 'translateX(6px)',
                                     }
-                                },
-                                '&:hover': {
-                                    backgroundColor: mode === 'dark' 
-                                        ? 'rgba(123, 167, 209, 0.2)' 
-                                        : 'rgba(184, 212, 240, 0.2)',
-                                    transform: 'translateX(6px)',
-                                }
-                            }}
-                        >
-                            <ListItemText 
-                                primary={item.label}
-                                primaryTypographyProps={{
-                                    fontWeight: location.pathname === item.path ? 'bold' : 'normal'
                                 }}
-                            />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
+                            >
+                                <ListItemText 
+                                    primary={item.label}
+                                    primaryTypographyProps={{
+                                        fontWeight: location.pathname === item.path ? 'bold' : 'normal'
+                                    }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Box>
 
+            {/* Кнопки смены языка и валюты - в самом низу */}
             <Divider sx={{
                 borderColor: mode === 'dark' 
                     ? 'rgba(123, 167, 209, 0.3)' 
                     : 'rgba(184, 212, 240, 0.3)'
             }}/>
-
-            {/* Кнопки смены языка и валюты */}
-            <Box sx={{p: 2}}>
+            <Box sx={{ p: 2 }}>
                 <Button
                     startIcon={<Language/>}
                     onClick={handleLanguageClick}
