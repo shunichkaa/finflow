@@ -48,7 +48,7 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
         <Card sx={{ 
             borderRadius: 3, 
             boxShadow: 2,
-            backgroundColor: mode === 'dark' ? '#475569' : '#f1f5f9',
+            backgroundColor: mode === 'dark' ? '#475569' : '#e2e8f0',
             color: mode === 'dark' ? '#f1f5f9' : '#475569'
         }}>
             <CardContent>

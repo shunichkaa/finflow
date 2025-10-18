@@ -76,7 +76,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                     sx={{
                         background: mode === 'dark' 
                             ? '#475569'
-                            : '#f1f5f9',
+                            : '#e2e8f0',
                         color: mode === 'dark' ? '#f1f5f9' : '#475569',
                         position: 'relative',
                         overflow: 'hidden',

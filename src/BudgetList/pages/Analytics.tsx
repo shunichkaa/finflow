@@ -126,12 +126,12 @@ const Analytics: React.FC = () => {
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
                                     ? '#475569'
-                                    : '#e8f4fd',
+                                    : '#e2e8f0',
                                 color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                 '&:hover': {
                                     bgcolor: mode === 'dark' 
                                         ? '#64748b'
-                                        : '#c7d2fe',
+                                        : '#cbd5e1',
                                 }
                             }
                         }}
@@ -150,12 +150,12 @@ const Analytics: React.FC = () => {
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
                                     ? '#475569'
-                                    : '#e8f4fd',
+                                    : '#e2e8f0',
                                 color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                 '&:hover': {
                                     bgcolor: mode === 'dark' 
                                         ? '#64748b'
-                                        : '#c7d2fe',
+                                        : '#cbd5e1',
                                 }
                             }
                         }}
@@ -174,12 +174,12 @@ const Analytics: React.FC = () => {
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
                                     ? '#475569'
-                                    : '#e8f4fd',
+                                    : '#e2e8f0',
                                 color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                 '&:hover': {
                                     bgcolor: mode === 'dark' 
                                         ? '#64748b'
-                                        : '#c7d2fe',
+                                        : '#cbd5e1',
                                 }
                             }
                         }}
@@ -204,7 +204,7 @@ const Analytics: React.FC = () => {
                         borderRadius: 3,
                         background: mode === 'dark' 
                             ? '#475569'
-                            : '#f1f5f9',
+                            : '#e2e8f0',
                         color: mode === 'dark' ? '#f1f5f9' : '#475569',
                         transition: 'all 0.3s ease',
                         '&:hover': {
@@ -231,7 +231,7 @@ const Analytics: React.FC = () => {
                         borderRadius: 3,
                         background: mode === 'dark' 
                             ? '#475569'
-                            : '#f1f5f9',
+                            : '#e2e8f0',
                         color: mode === 'dark' ? '#f1f5f9' : '#475569',
                         transition: 'all 0.3s ease',
                         '&:hover': {

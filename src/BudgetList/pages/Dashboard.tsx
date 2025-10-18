@@ -83,7 +83,7 @@ const Dashboard = () => {
                 {/* Transaction List */}
                 <Paper sx={{ 
                     p: 2, 
-                    backgroundColor: mode === 'dark' ? '#475569' : '#f1f5f9',
+                    backgroundColor: mode === 'dark' ? '#475569' : '#e2e8f0',
                     color: mode === 'dark' ? '#f1f5f9' : '#475569'
                 }} id="transactions-list">
                     <Typography variant="h6" gutterBottom sx={{ 
