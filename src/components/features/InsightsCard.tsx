@@ -48,11 +48,11 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
         <Card sx={{ 
             borderRadius: 3, 
             boxShadow: 2,
-            backgroundColor: mode === 'dark' ? '#1A2332' : '#ffffff',
-            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50'
+            backgroundColor: mode === 'dark' ? '#475569' : '#f1f5f9',
+            color: mode === 'dark' ? '#f1f5f9' : '#475569'
         }}>
             <CardContent>
-                <Typography variant="h6" gutterBottom sx={{ color: mode === 'dark' ? '#E8F4FD' : '#2C3E50' }}>
+                <Typography variant="h6" gutterBottom sx={{ color: mode === 'dark' ? '#f1f5f9' : '#475569' }}>
                     {t('insights.title', 'AI-инсайты')}
                 </Typography>
 
@@ -63,7 +63,7 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
                             mb: 2,
                             p: 1.5,
                             borderRadius: 2,
-                            backgroundColor: mode === 'dark' ? 'rgba(232, 244, 253, 0.05)' : 'rgba(0,0,0,0.03)'
+                            backgroundColor: mode === 'dark' ? 'rgba(241, 245, 249, 0.1)' : 'rgba(71, 85, 105, 0.05)'
                         }}
                     >
                         <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -83,11 +83,11 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
                             )}
                         </Box>
 
-                        <Typography variant="subtitle1" fontWeight={600} mt={1} sx={{ color: mode === 'dark' ? '#E8F4FD' : '#2C3E50' }}>
+                        <Typography variant="subtitle1" fontWeight={600} mt={1} sx={{ color: mode === 'dark' ? '#f1f5f9' : '#475569' }}>
                             {insight.title}
                         </Typography>
 
-                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(232, 244, 253, 0.8)' : 'rgba(44, 62, 80, 0.7)' }}>
+                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(241, 245, 249, 0.8)' : 'rgba(71, 85, 105, 0.7)' }}>
                             {insight.description}
                         </Typography>
                     </Box>

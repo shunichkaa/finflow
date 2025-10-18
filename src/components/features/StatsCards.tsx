@@ -75,13 +75,9 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                     key={stat.title}
                     sx={{
                         background: mode === 'dark' 
-                            ? (stat.title === t('income') 
-                                ? 'linear-gradient(135deg, #2D5A3D 0%, #1B3A2A 100%)'
-                                : stat.title === t('expense')
-                                ? 'linear-gradient(135deg, #5A2D2D 0%, #3A1B1B 100%)'
-                                : 'linear-gradient(135deg, #2D4A5A 0%, #1B2F3A 100%)')
-                            : stat.bgGradient,
-                        color: mode === 'dark' ? '#E8F4FD' : 'white',
+                            ? '#475569'
+                            : '#f1f5f9',
+                        color: mode === 'dark' ? '#f1f5f9' : '#475569',
                         position: 'relative',
                         overflow: 'hidden',
                         cursor: onFilterClick ? 'pointer' : 'default',

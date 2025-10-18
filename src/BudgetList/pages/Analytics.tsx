@@ -122,16 +122,16 @@ const Analytics: React.FC = () => {
                             py: 1.5,
                             fontWeight: 'bold',
                             textTransform: 'none',
-                            color: mode === 'dark' ? '#dbeafe' : '#1e40af',
+                            color: mode === 'dark' ? '#f1f5f9' : '#475569',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
-                                    ? 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)'
-                                    : 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
-                                color: mode === 'dark' ? '#dbeafe' : '#1e40af',
+                                    ? '#475569'
+                                    : '#e8f4fd',
+                                color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                 '&:hover': {
                                     bgcolor: mode === 'dark' 
-                                        ? 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)'
-                                        : 'linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%)',
+                                        ? '#64748b'
+                                        : '#c7d2fe',
                                 }
                             }
                         }}
@@ -146,16 +146,16 @@ const Analytics: React.FC = () => {
                             py: 1.5,
                             fontWeight: 'bold',
                             textTransform: 'none',
-                            color: mode === 'dark' ? '#dbeafe' : '#1e40af',
+                            color: mode === 'dark' ? '#f1f5f9' : '#475569',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
-                                    ? 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)'
-                                    : 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
-                                color: mode === 'dark' ? '#dbeafe' : '#1e40af',
+                                    ? '#475569'
+                                    : '#e8f4fd',
+                                color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                 '&:hover': {
                                     bgcolor: mode === 'dark' 
-                                        ? 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)'
-                                        : 'linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%)',
+                                        ? '#64748b'
+                                        : '#c7d2fe',
                                 }
                             }
                         }}
@@ -170,16 +170,16 @@ const Analytics: React.FC = () => {
                             py: 1.5,
                             fontWeight: 'bold',
                             textTransform: 'none',
-                            color: mode === 'dark' ? '#dbeafe' : '#1e40af',
+                            color: mode === 'dark' ? '#f1f5f9' : '#475569',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
-                                    ? 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)'
-                                    : 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
-                                color: mode === 'dark' ? '#dbeafe' : '#1e40af',
+                                    ? '#475569'
+                                    : '#e8f4fd',
+                                color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                 '&:hover': {
                                     bgcolor: mode === 'dark' 
-                                        ? 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)'
-                                        : 'linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%)',
+                                        ? '#64748b'
+                                        : '#c7d2fe',
                                 }
                             }
                         }}
@@ -203,9 +203,9 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)'
-                            : 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
-                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                            ? '#475569'
+                            : '#f1f5f9',
+                        color: mode === 'dark' ? '#f1f5f9' : '#475569',
                         transition: 'all 0.3s ease',
                         '&:hover': {
                             transform: 'translateY(-4px)',
@@ -230,9 +230,9 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%)'
-                            : 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
-                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                            ? '#475569'
+                            : '#f1f5f9',
+                        color: mode === 'dark' ? '#f1f5f9' : '#475569',
                         transition: 'all 0.3s ease',
                         '&:hover': {
                             transform: 'translateY(-4px)',
@@ -263,7 +263,7 @@ const Analytics: React.FC = () => {
                             : (mode === 'dark' 
                                 ? 'linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%)'
                                 : 'linear-gradient(135deg, #3b82f6 0%, #1e40af 100%)'),
-                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                        color: mode === 'dark' ? '#f1f5f9' : '#475569',
                         transition: 'all 0.3s ease',
                         '&:hover': {
                             transform: 'translateY(-4px)',
@@ -298,7 +298,7 @@ const Analytics: React.FC = () => {
                             : (mode === 'dark' 
                                 ? 'linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%)'
                                 : 'linear-gradient(135deg, #3b82f6 0%, #1e40af 100%)'),
-                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                        color: mode === 'dark' ? '#f1f5f9' : '#475569',
                         transition: 'all 0.3s ease',
                         '&:hover': {
                             transform: 'translateY(-4px)',
@@ -459,7 +459,7 @@ const Analytics: React.FC = () => {
                                                 justifyContent: 'center',
                                                 fontWeight: 'bold',
                                                 fontSize: '1.1rem',
-                                                color: mode === 'dark' ? '#dbeafe' : '#1e40af',
+                                                color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                                 border: mode === 'dark' 
                                                     ? '2px solid rgba(123, 167, 209, 0.5)'
                                                     : '2px solid rgba(184, 212, 240, 0.5)',

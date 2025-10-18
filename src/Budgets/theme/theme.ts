@@ -5,16 +5,16 @@ const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
         primary: {
-            main: '#93c5fd', // Пастельный голубой
-            light: '#dbeafe', // Светлый голубо-молочный
-            dark: '#60a5fa', // Темный пастельный голубой
-            contrastText: '#1e40af',
+            main: '#e8f4fd', // Очень светлый сине-серый/почти белый (из палитры неба)
+            light: '#f0f9ff', // Почти белый с голубым оттенком
+            dark: '#c7d2fe', // Светлый приглушенный сине-серый
+            contrastText: '#475569', // Средне-темный приглушенный сине-серый
         },
         secondary: {
-            main: '#bfdbfe', // Пастельный голубо-молочный
-            light: '#dbeafe',
-            dark: '#93c5fd',
-            contrastText: '#1e40af',
+            main: '#f1f5f9', // Очень светлый бежевый/почти белый (из палитры неба)
+            light: '#f8fafc',
+            dark: '#e2e8f0',
+            contrastText: '#475569', // Средне-темный приглушенный сине-серый
         },
         error: {
             main: '#ef4444', // Четкий красный
@@ -147,16 +147,16 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#1e3a8a', // Мягкий темно-синий для темной темы
-            light: '#1e40af',
-            dark: '#1e3a8a',
-            contrastText: '#dbeafe',
+            main: '#334155', // Средне-темный приглушенный сине-серый (из палитры неба)
+            light: '#475569',
+            dark: '#1e293b',
+            contrastText: '#f1f5f9', // Очень светлый бежевый/почти белый
         },
         secondary: {
-            main: '#1e40af', // Мягкий синий как вторичный
-            light: '#3b82f6',
-            dark: '#1e3a8a',
-            contrastText: '#dbeafe',
+            main: '#475569', // Средний приглушенный сине-серый (из палитры неба)
+            light: '#64748b',
+            dark: '#334155',
+            contrastText: '#f1f5f9', // Очень светлый бежевый/почти белый
         },
         error: {
             main: '#ef4444', // Четкий красный

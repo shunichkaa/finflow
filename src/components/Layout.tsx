@@ -138,15 +138,15 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             {/* AppBar для сайдбара */}
             <AppBar position="static" elevation={0} sx={{
                 backgroundColor: mode === 'dark' 
-                    ? '#1e3a8a'
-                    : '#93c5fd'
+                    ? '#334155'
+                    : '#e8f4fd'
             }}>
                 <Toolbar>
                     <IconButton
                         onClick={handleDrawerToggle}
                         sx={{
                             display: {sm: 'none'},
-                            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                            color: mode === 'dark' ? '#f1f5f9' : '#475569',
                             '&:hover': {
                                 backgroundColor: mode === 'dark' 
                                     ? 'rgba(232, 244, 253, 0.1)' 
@@ -164,7 +164,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             sx={{
                                 display: {xs: 'none', sm: 'block'},
-                                color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                                color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                 mr: 2,
                                 transition: (theme) => theme.transitions.create(['background-color', 'transform'], {
                                     easing: theme.transitions.easing.easeInOut,
@@ -188,7 +188,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 onClick={handleLogoClick}
                                 sx={{
                                     cursor: 'pointer',
-                                    color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                                    color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                     fontWeight: 'bold',
                                     '&:hover': {
                                         opacity: 0.8,
@@ -227,7 +227,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 onClick={() => setMobileOpen(false)}
                                 sx={{
                                     borderRadius: 2,
-                                    color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                                    color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                     transition: (theme) => theme.transitions.create(['background-color', 'transform'], {
                                         easing: theme.transitions.easing.easeInOut,
                                         duration: theme.transitions.duration.standard,
@@ -236,7 +236,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                         backgroundColor: mode === 'dark' 
                                             ? 'rgba(123, 167, 209, 0.3)' 
                                             : 'rgba(184, 212, 240, 0.3)',
-                                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                                        color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                         '&:hover': {
                                             backgroundColor: mode === 'dark' 
                                                 ? 'rgba(123, 167, 209, 0.4)' 
@@ -280,7 +280,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         borderColor: mode === 'dark' 
                             ? 'rgba(123, 167, 209, 0.5)' 
                             : 'rgba(184, 212, 240, 0.5)',
-                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                        color: mode === 'dark' ? '#f1f5f9' : '#475569',
                         transition: (theme) => theme.transitions.create(['border-color', 'background-color', 'transform'], {
                             easing: theme.transitions.easing.easeInOut,
                             duration: theme.transitions.duration.standard,
@@ -308,7 +308,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         borderColor: mode === 'dark' 
                             ? 'rgba(123, 167, 209, 0.5)' 
                             : 'rgba(184, 212, 240, 0.5)',
-                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                        color: mode === 'dark' ? '#f1f5f9' : '#475569',
                         transition: (theme) => theme.transitions.create(['border-color', 'background-color', 'transform'], {
                             easing: theme.transitions.easing.easeInOut,
                             duration: theme.transitions.duration.standard,
@@ -414,9 +414,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     width: {sm: sidebarOpen ? `calc(100% - ${drawerWidth}px)` : '100%'},
                     ml: {sm: sidebarOpen ? `${drawerWidth}px` : 0},
                     backgroundColor: mode === 'dark' 
-                        ? '#1e3a8a'
-                        : '#93c5fd',
-                    color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                        ? '#334155'
+                        : '#e8f4fd',
+                    color: mode === 'dark' ? '#f1f5f9' : '#475569',
                     boxShadow: mode === 'dark' 
                         ? '0 4px 20px rgba(26, 35, 50, 0.3)'
                         : '0 4px 20px rgba(184, 212, 240, 0.3)',
@@ -439,7 +439,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             sx={{
                                 mr: 2,
                                 display: {sm: 'none'},
-                                color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                                color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                 '&:hover': {
                                     backgroundColor: mode === 'dark' 
                                         ? 'rgba(232, 244, 253, 0.1)' 
@@ -458,7 +458,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     onClick={() => setSidebarOpen(!sidebarOpen)}
                                     sx={{
                                         display: {xs: 'none', sm: 'block'},
-                                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                                        color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                         mr: 2,
                                         '&:hover': {
                                             backgroundColor: mode === 'dark' 
@@ -477,7 +477,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                         onClick={handleLogoClick}
                                         sx={{
                                             cursor: 'pointer',
-                                            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                                            color: mode === 'dark' ? '#f1f5f9' : '#475569',
                                             fontWeight: 'bold',
                                             '&:hover': {
                                                 opacity: 0.8,
@@ -509,7 +509,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     <IconButton 
                         onClick={toggleTheme} 
                         sx={{
-                            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
+                            color: mode === 'dark' ? '#f1f5f9' : '#475569',
                             '&:hover': {
                                 backgroundColor: mode === 'dark' 
                                     ? 'rgba(232, 244, 253, 0.1)' 
