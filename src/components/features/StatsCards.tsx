@@ -75,9 +75,9 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                     key={stat.title}
                     sx={{
                         background: mode === 'dark' 
-                            ? '#475569'
-                            : '#e2e8f0',
-                        color: mode === 'dark' ? '#f1f5f9' : '#475569',
+                            ? 'rgba(101, 70, 51, 0.5)'
+                            : 'rgba(234, 234, 244, 0.5)',
+                        color: mode === 'dark' ? '#FCF9F9' : '#654633',
                         position: 'relative',
                         overflow: 'hidden',
                         cursor: onFilterClick ? 'pointer' : 'default',

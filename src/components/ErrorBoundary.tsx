@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 import { Box, Typography, Button, Container, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useThemeMode } from '../Budgets/theme/ThemeContext';
 
 interface ErrorBoundaryState {
     hasError: boolean;
@@ -21,6 +22,7 @@ interface ErrorFallbackProps {
 
 const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetError }) => {
     const navigate = useNavigate();
+    const {mode} = useThemeMode();
 
     const handleGoHome = () => {
         if (resetError) {
@@ -41,7 +43,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                     p: 4,
                     textAlign: 'center',
                     borderRadius: 3,
-                    backgroundColor: '#f8fafc',
+                    backgroundColor: 'rgba(252, 249, 249, 0.1)',
                     border: '1px solid rgba(148, 163, 184, 0.1)',
                 }}
             >
@@ -50,7 +52,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                     sx={{
                         fontSize: '4rem',
                         mb: 2,
-                        color: '#ef4444',
+                        color: 'rgba(255, 185, 141, 0.8)',
                     }}
                 >
                     ⚠️
@@ -70,8 +72,8 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                         sx={{
                             mt: 3,
                             p: 2,
-                            backgroundColor: '#fef2f2',
-                            border: '1px solid #fecaca',
+                            backgroundColor: 'rgba(254, 222, 233, 0.1)',
+                            border: '1px solid rgba(255, 185, 141, 0.3)',
                             borderRadius: 2,
                             textAlign: 'left',
                         }}
@@ -85,7 +87,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                             sx={{
                                 fontFamily: 'monospace',
                                 fontSize: '0.75rem',
-                                color: '#dc2626',
+                                color: 'rgba(101, 70, 51, 0.8)',
                                 whiteSpace: 'pre-wrap',
                                 wordBreak: 'break-word',
                             }}
@@ -99,7 +101,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                                 sx={{
                                     fontFamily: 'monospace',
                                     fontSize: '0.75rem',
-                                    color: '#dc2626',
+                                    color: 'rgba(101, 70, 51, 0.8)',
                                     whiteSpace: 'pre-wrap',
                                     wordBreak: 'break-word',
                                     mt: 1,
@@ -117,10 +119,20 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                         variant="contained"
                         onClick={handleGoHome}
                         sx={{
-                            backgroundColor: '#0ea5e9',
+                        background: mode === 'dark' 
+                            ? 'rgba(101, 70, 51, 0.5)'
+                            : 'rgba(234, 234, 244, 0.5)',
+                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                            fontWeight: 'bold',
                             '&:hover': {
-                                backgroundColor: '#0284c7',
-                            },
+                                background: mode === 'dark' 
+                                    ? 'rgba(101, 70, 51, 0.7)'
+                                    : 'rgba(234, 234, 244, 0.7)',
+                                transform: 'translateY(-2px)',
+                                boxShadow: mode === 'dark' 
+                                    ? '0 6px 20px rgba(101, 70, 51, 0.4)'
+                                    : '0 6px 20px rgba(234, 234, 244, 0.4)',
+                            }
                         }}
                     >
                         Вернуться на главную
@@ -129,11 +141,11 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                         variant="outlined"
                         onClick={handleReload}
                         sx={{
-                            borderColor: '#64748b',
-                            color: '#64748b',
+                            borderColor: 'rgba(101, 70, 51, 0.3)',
+                            color: 'rgba(101, 70, 51, 0.7)',
                             '&:hover': {
-                                borderColor: '#475569',
-                                backgroundColor: 'rgba(100, 116, 139, 0.04)',
+                                borderColor: 'rgba(101, 70, 51, 0.5)',
+                                backgroundColor: 'rgba(101, 70, 51, 0.04)',
                             },
                         }}
                     >

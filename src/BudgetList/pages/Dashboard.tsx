@@ -47,13 +47,19 @@ const Dashboard = () => {
                         onClick={() => setIsModalOpen(true)}
                         size="large"
                         sx={{
-                            background: 'linear-gradient(135deg, #B8D4F0 0%, #7BA7D1 100%)',
-                            color: '#2C3E50',
+                        background: mode === 'dark' 
+                            ? 'rgba(101, 70, 51, 0.5)'
+                            : 'rgba(234, 234, 244, 0.5)',
+                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
                             fontWeight: 'bold',
                             '&:hover': {
-                                background: 'linear-gradient(135deg, #A8C4E0 0%, #6B97C1 100%)',
+                                background: mode === 'dark' 
+                                    ? 'rgba(101, 70, 51, 0.7)'
+                                    : 'rgba(234, 234, 244, 0.7)',
                                 transform: 'translateY(-2px)',
-                                boxShadow: '0 6px 20px rgba(123, 167, 209, 0.4)',
+                                boxShadow: mode === 'dark' 
+                                    ? '0 6px 20px rgba(101, 70, 51, 0.4)'
+                                    : '0 6px 20px rgba(234, 234, 244, 0.4)',
                             }
                         }}
                     >
@@ -83,12 +89,12 @@ const Dashboard = () => {
                 {/* Transaction List */}
                 <Paper sx={{ 
                     p: 2, 
-                    backgroundColor: mode === 'dark' ? '#475569' : '#e2e8f0',
-                    color: mode === 'dark' ? '#f1f5f9' : '#475569'
+                    backgroundColor: mode === 'dark' ? 'rgba(101, 70, 51, 0.5)' : 'rgba(234, 234, 244, 0.5)',
+                    color: mode === 'dark' ? '#FCF9F9' : '#654633'
                 }} id="transactions-list">
                     <Typography variant="h6" gutterBottom sx={{ 
                         px: 1,
-                        color: mode === 'dark' ? '#f1f5f9' : '#475569'
+                        color: mode === 'dark' ? '#FCF9F9' : '#654633'
                     }}>
                         {t('transactions')} ({filteredTransactions.length})
                     </Typography>

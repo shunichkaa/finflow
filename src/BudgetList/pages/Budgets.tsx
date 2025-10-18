@@ -3,24 +3,17 @@ import {Box, Button, Container, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {useTranslation} from 'react-i18next';
 import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
-import {calculateBudgetSpent, getBudgetStatus} from '../../Budgets/utils/budgetCalculations';
 import {BudgetList} from '../../components/features/budget/BudgetList.tsx';
 import {BudgetForm} from '../../components/features/budget/BudgetForm.tsx';
 import {Modal} from '../../components/ui/Modal';
+import {useThemeMode} from '../../Budgets/theme/ThemeContext';
 
 const Budgets: React.FC = () => {
     const {t} = useTranslation();
+    const {mode} = useThemeMode();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const budgets = useFinanceStore((state) => state.budgets);
-    const transactions = useFinanceStore((state) => state.transactions);
-
-    const totalBudgets = budgets.length;
-    const exceededBudgets = budgets.filter((b) => {
-        const spent = calculateBudgetSpent(b, transactions);
-        const status = getBudgetStatus((spent / b.limit) * 100);
-        return status === 'exceeded';
-    }).length;
 
     const [editingBudgetId, setEditingBudgetId] = useState<string | null>(null);
     const editingBudget = useMemo(() => budgets.find(b => b.id === editingBudgetId) || null, [budgets, editingBudgetId]);
@@ -28,10 +21,10 @@ const Budgets: React.FC = () => {
     return (
         <Container maxWidth="md" sx={{py: 4}}>
             <Box sx={{mb: 4, textAlign: 'left'}}>
-                <Typography variant="h4" gutterBottom fontWeight="bold">
+                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FCF9F9' : '#654633' }}>
                     {t('budgets')}
                 </Typography>
-                <Typography variant="body1" color="text.secondary" gutterBottom>
+                <Typography variant="body1" gutterBottom sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.7)' : 'rgba(101, 70, 51, 0.7)' }}>
                     {t('budgetsDescription')}
                 </Typography>
 
@@ -40,54 +33,28 @@ const Budgets: React.FC = () => {
                     startIcon={<AddIcon/>}
                     onClick={() => setIsModalOpen(true)}
                     size="large"
-                    sx={{mt: 2}}
+                    sx={{
+                        mt: 2,
+                     background: mode === 'dark'
+                         ? 'rgba(101, 70, 51, 0.5)'
+                         : 'rgba(234, 234, 244, 0.5)',
+                        color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                        fontWeight: 'bold',
+                        '&:hover': {
+                            background: mode === 'dark' 
+                                ? 'rgba(101, 70, 51, 0.7)'
+                                : 'rgba(234, 234, 244, 0.7)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: mode === 'dark' 
+                                ? '0 6px 20px rgba(101, 70, 51, 0.4)'
+                                : '0 6px 20px rgba(234, 234, 244, 0.4)',
+                        }
+                    }}
                 >
                     {t('createBudget')}
                 </Button>
             </Box>
 
-            {/* Quick Stats */}
-            {budgets.length > 0 && (
-                <Box sx={{
-                    display: 'flex',
-                    flexDirection: {xs: 'column', sm: 'row'},
-                    gap: 2,
-                    mb: 4,
-                    width: '100%',
-                    maxWidth: 720
-                }}>
-                    <Box sx={{
-                        flex: 1,
-                        p: 2,
-                        borderRadius: 2,
-                        bgcolor: 'rgba(14, 165, 233, 0.1)',
-                        border: '1px solid rgba(14, 165, 233, 0.2)',
-                        color: 'primary.main'
-                    }}>
-                        <Typography variant="h6" fontWeight="bold">
-                            {totalBudgets}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {t('totalBudgets')}
-                        </Typography>
-                    </Box>
-                    <Box sx={{
-                        flex: 1,
-                        p: 2,
-                        borderRadius: 2,
-                        bgcolor: exceededBudgets > 0 ? 'rgba(239, 68, 68, 0.1)' : 'rgba(16, 185, 129, 0.1)',
-                        border: exceededBudgets > 0 ? '1px solid rgba(239, 68, 68, 0.2)' : '1px solid rgba(16, 185, 129, 0.2)',
-                        color: exceededBudgets > 0 ? 'error.main' : 'success.main'
-                    }}>
-                        <Typography variant="h6" fontWeight="bold">
-                            {exceededBudgets}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {t('exceededBudgets')}
-                        </Typography>
-                    </Box>
-                </Box>
-            )}
 
             {/* Budget List */}
             <Box sx={{width: '100%'}}>

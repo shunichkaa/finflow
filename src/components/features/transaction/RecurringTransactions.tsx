@@ -94,7 +94,27 @@ export const RecurringTransactions: React.FC = () => {
                         {t('recurringDescription')}
                     </Typography>
                 </Box>
-                <Button variant="contained" startIcon={<Add/>} onClick={() => setFormOpen(true)}>
+                <Button 
+                    variant="contained" 
+                    startIcon={<Add/>} 
+                    onClick={() => setFormOpen(true)}
+                    sx={{
+                 background: mode === 'dark'
+                     ? 'rgba(101, 70, 51, 0.5)'
+                     : 'rgba(234, 234, 244, 0.5)',
+                        color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                        fontWeight: 'bold',
+                        '&:hover': {
+                     background: mode === 'dark'
+                         ? 'rgba(101, 70, 51, 0.7)'
+                         : 'rgba(234, 234, 244, 0.7)',
+                            transform: 'translateY(-2px)',
+                     boxShadow: mode === 'dark'
+                         ? '0 6px 20px rgba(101, 70, 51, 0.4)'
+                         : '0 6px 20px rgba(234, 234, 244, 0.4)',
+                        }
+                    }}
+                >
                     {t('addRecurring')}
                 </Button>
             </Box>
@@ -128,7 +148,27 @@ export const RecurringTransactions: React.FC = () => {
                         <Typography variant="body2" color="text.secondary" sx={{mb: 3}}>
                             {t('addFirstRecurring')}
                         </Typography>
-                        <Button variant="contained" startIcon={<Add/>} onClick={() => setFormOpen(true)}>
+                        <Button 
+                            variant="contained" 
+                            startIcon={<Add/>} 
+                            onClick={() => setFormOpen(true)}
+                            sx={{
+                 background: mode === 'dark'
+                     ? 'rgba(101, 70, 51, 0.5)'
+                     : 'rgba(234, 234, 244, 0.5)',
+                                color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                fontWeight: 'bold',
+                                '&:hover': {
+                     background: mode === 'dark'
+                         ? 'rgba(101, 70, 51, 0.7)'
+                         : 'rgba(234, 234, 244, 0.7)',
+                                    transform: 'translateY(-2px)',
+                     boxShadow: mode === 'dark'
+                         ? '0 6px 20px rgba(101, 70, 51, 0.4)'
+                         : '0 6px 20px rgba(234, 234, 244, 0.4)',
+                                }
+                            }}
+                        >
                             {t('addRecurring')}
                         </Button>
                     </CardContent>

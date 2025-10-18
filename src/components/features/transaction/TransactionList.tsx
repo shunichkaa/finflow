@@ -4,6 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
+import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 import { useFinanceStore } from '../../../Budgets/store/useFinanceStore.ts';
 import { useSettingsStore } from '../../../Budgets/store/useSettingsStore.ts';
 import { getCategoryById, getCategoryIcon, getCategoryName } from '../../../Budgets/utils/categories.tsx';
@@ -19,6 +20,7 @@ interface TransactionListProps {
 export const TransactionList: React.FC<TransactionListProps> = ({ transactions: propTransactions }) => {
     const { t } = useTranslation();
     const theme = useTheme();
+    const { mode } = useThemeMode();
     const storeTransactions = useFinanceStore((state) => state.transactions);
     const deleteTransaction = useFinanceStore((state) => state.deleteTransaction);
     const { currency } = useSettingsStore();
@@ -34,10 +36,10 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
     if (transactions.length === 0) {
         return (
             <Box sx={{ textAlign: 'center', py: 8 }}>
-                <Typography variant="h6" color="text.secondary" gutterBottom>
+                <Typography variant="h6" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.7)' : 'rgba(101, 70, 51, 0.7)', mb: 2 }}>
                      {t('noTransactions')}
                 </Typography>
-                <Typography variant="body2" color="text.disabled">
+                <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.5)' : 'rgba(101, 70, 51, 0.5)' }}>
                     {t('addFirst')}
                 </Typography>
             </Box>
@@ -106,24 +108,30 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                     </Typography>
                                     <Chip
                                         label={t(transaction.type)}
-                                        color={transaction.type === 'income' ? 'success' : 'error'}
+                                        sx={{
+                                            backgroundColor: transaction.type === 'income' 
+                                                ? (mode === 'dark' ? 'rgba(254, 222, 233, 0.3)' : 'rgba(254, 222, 233, 0.5)')
+                                                : (mode === 'dark' ? 'rgba(255, 185, 141, 0.3)' : 'rgba(255, 185, 141, 0.5)'),
+                                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                            fontWeight: 'bold'
+                                        }}
                                         size="small"
                                     />
                                 </Box>
                                 {transaction.description && (
                                     <Typography
                                         variant="body2"
-                                        color="text.secondary"
                                         sx={{
                                             overflow: 'hidden',
                                             textOverflow: 'ellipsis',
                                             whiteSpace: 'nowrap',
+                                            color: mode === 'dark' ? 'rgba(252, 249, 249, 0.7)' : 'rgba(101, 70, 51, 0.7)'
                                         }}
                                     >
                                         {transaction.description}
                                     </Typography>
                                 )}
-                                <Typography variant="caption" color="text.disabled">
+                                <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.5)' : 'rgba(101, 70, 51, 0.5)' }}>
                                     {formatDate(transaction.date)}
                                 </Typography>
                             </Box>
@@ -140,8 +148,12 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                 <Typography
                                     variant="h6"
                                     fontWeight="bold"
-                                    color={transaction.type === 'income' ? 'success.main' : 'error.main'}
-                                    sx={{ whiteSpace: 'nowrap' }}
+                                    sx={{ 
+                                        whiteSpace: 'nowrap',
+                                        color: transaction.type === 'income' 
+                                            ? (mode === 'dark' ? '#FCF9F9' : '#654633') // Спокойный белый для темной темы, яркий коричневый для светлой
+                                            : (mode === 'dark' ? '#FCF9F9' : '#654633') // Тот же цвет для расходов, но с минусом
+                                    }}
                                 >
                                     {transaction.type === 'income' ? '+' : '-'}
                                     {formatCurrency(transaction.amount, currency)}

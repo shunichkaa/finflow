@@ -1,9 +1,11 @@
 import React from 'react';
 import { Box, Typography, Button, Container, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useThemeMode } from '../Budgets/theme/ThemeContext';
 
 const NotFound: React.FC = () => {
     const navigate = useNavigate();
+    const {mode} = useThemeMode();
 
     const handleGoHome = () => {
         navigate('/dashboard');
@@ -50,13 +52,22 @@ const NotFound: React.FC = () => {
                     onClick={handleGoHome}
                     size="large"
                     sx={{
-                        backgroundColor: '#0ea5e9',
+                        background: mode === 'dark' 
+                            ? 'rgba(101, 70, 51, 0.5)'
+                            : 'rgba(234, 234, 244, 0.5)',
+                        color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                        fontWeight: 'bold',
                         px: 4,
                         py: 1.5,
                         borderRadius: 2,
                         '&:hover': {
-                            backgroundColor: '#0284c7',
-                            boxShadow: '0 4px 12px rgba(14, 165, 233, 0.15)',
+                            background: mode === 'dark' 
+                                ? 'rgba(101, 70, 51, 0.7)'
+                                : 'rgba(234, 234, 244, 0.7)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: mode === 'dark' 
+                                ? '0 6px 20px rgba(101, 70, 51, 0.4)'
+                                : '0 6px 20px rgba(234, 234, 244, 0.4)',
                         },
                     }}
                 >
