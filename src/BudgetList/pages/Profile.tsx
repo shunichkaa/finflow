@@ -480,31 +480,24 @@ export default function Profile() {
                     >
                         Изменить пароль
                     </Button>
+
+                    <Button
+                        variant="outlined"
+                        color="error"
+                        startIcon={<Delete />}
+                        onClick={handleDeleteAccount}
+                        sx={{ 
+                            borderColor: '#ff6b6b',
+                            color: '#ff6b6b',
+                            '&:hover': {
+                                borderColor: '#ff5252',
+                                backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                            }
+                        }}
+                    >
+                        Удалить аккаунт
+                    </Button>
                 </Box>
-            </Paper>
-
-            {/* Опасная зона */}
-            <Paper sx={{ p: 3, borderRadius: 3, border: '2px solid #ff6b6b' }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: '#ff6b6b' }}>
-                    Опасная зона
-                </Typography>
-
-                <Button
-                    variant="outlined"
-                    color="error"
-                    startIcon={<Delete />}
-                    onClick={handleDeleteAccount}
-                    sx={{ 
-                        borderColor: '#ff6b6b',
-                        color: '#ff6b6b',
-                        '&:hover': {
-                            borderColor: '#ff5252',
-                            backgroundColor: 'rgba(255, 107, 107, 0.1)',
-                        }
-                    }}
-                >
-                    Удалить аккаунт
-                </Button>
             </Paper>
 
             {/* Кнопка сохранения */}

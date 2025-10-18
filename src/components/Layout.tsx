@@ -214,13 +214,41 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 </List>
             </Box>
 
-            {/* Кнопка выхода - в самом низу */}
+            {/* Кнопки внизу */}
             <Divider sx={{
                 borderColor: mode === 'dark' 
                     ? 'rgba(123, 167, 209, 0.3)' 
                     : 'rgba(184, 212, 240, 0.3)'
             }}/>
-            <Box sx={{ p: 2 }}>
+            <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <Button
+                    onClick={handleProfileClick}
+                    fullWidth
+                    variant="outlined"
+                    startIcon={<Person />}
+                    sx={{
+                        borderColor: mode === 'dark' 
+                            ? 'rgba(123, 167, 209, 0.3)'
+                            : 'rgba(184, 212, 240, 0.3)',
+                        color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                        fontWeight: 'bold',
+                        transition: (theme) => theme.transitions.create(['background', 'transform'], {
+                            easing: theme.transitions.easing.easeInOut,
+                            duration: theme.transitions.duration.standard,
+                        }),
+                        '&:hover': {
+                            background: mode === 'dark' 
+                                ? 'rgba(123, 167, 209, 0.1)'
+                                : 'rgba(184, 212, 240, 0.1)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: mode === 'dark' 
+                                ? '0 4px 15px rgba(123, 167, 209, 0.3)'
+                                : '0 4px 15px rgba(184, 212, 240, 0.3)',
+                        }
+                    }}
+                >
+                    Личный кабинет
+                </Button>
                 <Button
                     onClick={handleLogout}
                     fullWidth
