@@ -8,6 +8,7 @@ import { useFinanceStore } from "../../Budgets/store/useFinanceStore";
 import { useSettingsStore } from "../../Budgets/store/useSettingsStore";
 import { formatCurrency } from "../../Budgets/utils/formatters";
 import { TransactionType } from '../../Budgets/types';
+import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 interface Stat {
     title: string;
@@ -24,6 +25,7 @@ interface StatsCardsProps {
 
 export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
     const { t } = useTranslation();
+    const { mode } = useThemeMode();
     const transactions = useFinanceStore((state) => state.transactions);
     const { currency } = useSettingsStore();
 
@@ -72,8 +74,14 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                 <Card
                     key={stat.title}
                     sx={{
-                        background: stat.bgGradient,
-                        color: 'white',
+                        background: mode === 'dark' 
+                            ? (stat.title === t('income') 
+                                ? 'linear-gradient(135deg, #2D5A3D 0%, #1B3A2A 100%)'
+                                : stat.title === t('expense')
+                                ? 'linear-gradient(135deg, #5A2D2D 0%, #3A1B1B 100%)'
+                                : 'linear-gradient(135deg, #2D4A5A 0%, #1B2F3A 100%)')
+                            : stat.bgGradient,
+                        color: mode === 'dark' ? '#E8F4FD' : 'white',
                         position: 'relative',
                         overflow: 'hidden',
                         cursor: onFilterClick ? 'pointer' : 'default',
@@ -86,10 +94,10 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                     onClick={() => onFilterClick && stat.filterType && onFilterClick(stat.filterType)}
                 >
                     <CardContent>
-                        <Box sx={{ position: 'absolute', right: 16, top: 16, opacity: 0.3 }}>
+                        <Box sx={{ position: 'absolute', right: 16, top: 16, opacity: mode === 'dark' ? 0.2 : 0.3 }}>
                             {stat.icon}
                         </Box>
-                        <Typography variant="body2" sx={{ opacity: 0.9, mb: 1 }}>
+                        <Typography variant="body2" sx={{ opacity: mode === 'dark' ? 0.8 : 0.9, mb: 1 }}>
                             {stat.title}
                         </Typography>
                         <Typography variant="h4" fontWeight="bold">

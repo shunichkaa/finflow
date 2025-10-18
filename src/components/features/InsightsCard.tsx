@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Typography, Box, Chip, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 
 export interface Insight {
     id: string;
@@ -26,6 +27,7 @@ const typeColor: Record<Insight['type'], 'error' | 'info' | 'success' | 'default
 
 export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
     const { t } = useTranslation();
+    const { mode } = useThemeMode();
 
     if (insights.length === 0) {
         return (
@@ -43,9 +45,14 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
     }
 
     return (
-        <Card sx={{ borderRadius: 3, boxShadow: 2 }}>
+        <Card sx={{ 
+            borderRadius: 3, 
+            boxShadow: 2,
+            backgroundColor: mode === 'dark' ? '#1A2332' : '#ffffff',
+            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50'
+        }}>
             <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <Typography variant="h6" gutterBottom sx={{ color: mode === 'dark' ? '#E8F4FD' : '#2C3E50' }}>
                     {t('insights.title', 'AI-инсайты')}
                 </Typography>
 
@@ -56,7 +63,7 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
                             mb: 2,
                             p: 1.5,
                             borderRadius: 2,
-                            backgroundColor: 'rgba(0,0,0,0.03)'
+                            backgroundColor: mode === 'dark' ? 'rgba(232, 244, 253, 0.05)' : 'rgba(0,0,0,0.03)'
                         }}
                     >
                         <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -76,11 +83,11 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
                             )}
                         </Box>
 
-                        <Typography variant="subtitle1" fontWeight={600} mt={1}>
+                        <Typography variant="subtitle1" fontWeight={600} mt={1} sx={{ color: mode === 'dark' ? '#E8F4FD' : '#2C3E50' }}>
                             {insight.title}
                         </Typography>
 
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(232, 244, 253, 0.8)' : 'rgba(44, 62, 80, 0.7)' }}>
                             {insight.description}
                         </Typography>
                     </Box>

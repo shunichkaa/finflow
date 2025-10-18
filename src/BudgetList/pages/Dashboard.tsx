@@ -11,9 +11,11 @@ import { TransactionForm } from '../../components/features/transaction/Transacti
 import { Modal } from '../../components/ui/Modal.tsx';
 import { useTransactionFilters } from '../../Budgets/hooks/useTransactionFilters.ts';
 import { ExportData } from '../../components/features/ExportData.tsx';
+import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 const Dashboard = () => {
     const { t } = useTranslation();
+    const { mode } = useThemeMode();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const transactions = useFinanceStore((state) => state.transactions);
 
@@ -79,8 +81,15 @@ const Dashboard = () => {
                 />
 
                 {/* Transaction List */}
-                <Paper sx={{ p: 2 }} id="transactions-list">
-                    <Typography variant="h6" gutterBottom sx={{ px: 1 }}>
+                <Paper sx={{ 
+                    p: 2, 
+                    backgroundColor: mode === 'dark' ? '#1A2332' : '#ffffff',
+                    color: mode === 'dark' ? '#E8F4FD' : '#2C3E50'
+                }} id="transactions-list">
+                    <Typography variant="h6" gutterBottom sx={{ 
+                        px: 1,
+                        color: mode === 'dark' ? '#E8F4FD' : '#2C3E50'
+                    }}>
                         {t('transactions')} ({filteredTransactions.length})
                     </Typography>
                     <TransactionList transactions={filteredTransactions} />
