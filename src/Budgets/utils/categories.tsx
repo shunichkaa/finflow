@@ -1,3 +1,4 @@
+import React from 'react';
 import {Category} from '../types';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
