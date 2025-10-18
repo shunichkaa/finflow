@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {Box, Card, CardContent, LinearProgress, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';

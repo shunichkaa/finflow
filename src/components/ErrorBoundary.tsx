@@ -1,4 +1,5 @@
-import React, { Component, ReactNode } from 'react';
+import React from 'react';
+import { Component, ReactNode } from 'react';
 import { Box, Typography, Button, Container, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useThemeMode } from '../Budgets/theme/ThemeContext';

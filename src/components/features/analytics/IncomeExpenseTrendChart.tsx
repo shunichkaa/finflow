@@ -1,4 +1,5 @@
-import React, {useMemo} from 'react';
+import React from 'react';
+import {useMemo} from 'react';
 import {CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,} from 'recharts';
 import {Box, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next';
