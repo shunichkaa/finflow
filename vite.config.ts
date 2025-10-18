@@ -5,9 +5,20 @@ export default defineConfig({
     plugins: [react()],
     build: {
         outDir: 'dist',
-        sourcemap: false
+        sourcemap: false,
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['react', 'react-dom'],
+                    mui: ['@mui/material', '@mui/icons-material'],
+                    router: ['react-router-dom'],
+                    supabase: ['@supabase/supabase-js']
+                }
+            }
+        }
     },
     server: {
         port: 5173
-    }
+    },
+    base: '/'
 })
