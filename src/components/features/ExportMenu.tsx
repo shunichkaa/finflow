@@ -17,10 +17,12 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { useTranslation } from 'react-i18next';
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore';
 import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
+import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 import { exportToCSV, exportToJSON, importFromJSON } from "../../Budgets/utils/exportData";
 
 export const ExportMenu: React.FC = () => {
     const { t } = useTranslation();
+    const { mode } = useThemeMode();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [snackbar, setSnackbar] = useState({
         open: false,
@@ -90,6 +92,13 @@ export const ExportMenu: React.FC = () => {
                 onClose={handleClose}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                PaperProps={{
+                    sx: {
+                        bgcolor: mode === 'dark' ? '#1a1a1a' : '#ffffff',
+                        backdropFilter: 'blur(10px)',
+                        border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.1)',
+                    }
+                }}
             >
                 <MenuItem onClick={handleExportCSV}>
                     <ListItemIcon>
