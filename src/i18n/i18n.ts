@@ -17,7 +17,6 @@ const resources = {
             cancel: 'Отмена',
             delete: 'Удалить',
             reset: 'Сбросить',
-            logout: 'Выйти',
 
             // Финансы
             balance: 'Баланс',
@@ -49,15 +48,6 @@ const resources = {
             expenseDistribution: 'Распределение расходов',
             incomeVsExpenses: 'Доходы vs Расходы',
             noTransactionData: 'Нет данных о транзакциях',
-            avgDailyExpense: 'Средний расход в день',
-            transactionCount: 'Количество транзакций',
-            totalTransactionsInPeriod: 'Всего транзакций за период',
-            averageTransaction: 'Средняя транзакция',
-            perTransaction: 'за транзакцию',
-            perDay: 'в день',
-            topSpendingCategory: 'Топ категория расходов',
-            positiveBalance: 'Положительный баланс',
-            negativeBalance: 'Отрицательный баланс',
 
             // Форма
             amount: 'Сумма',
@@ -121,32 +111,18 @@ const resources = {
             limitLabel: 'Лимит',
             used: 'использовано',
 
-            // Повторяющиеся транзакции
-            recurringTransactions: 'Повторяющиеся транзакции',
-            recurringTransaction: 'Повторяющаяся транзакция',
-            recurringDescription: 'Автоматические платежи и поступления',
-            addRecurring: 'Добавить повторяющуюся',
-            noRecurringTransactions: 'Нет повторяющихся транзакций',
-            addFirstRecurring: 'Создайте автоматический платеж или поступление',
-            frequency: 'Частота',
-            daily: 'Ежедневно',
-            startDate: 'Дата начала',
-            endDate: 'Дата окончания',
-            endDateOptional: 'Необязательно - оставьте пустым для бессрочного',
-            dayOfMonth: 'День месяца',
-            recurringHint: 'Транзакции будут создаваться автоматически',
-            dueTransactions: 'Предстоящие платежи',
-            dueTransactionsHint: 'Эти транзакции готовы к созданию',
-            createAll: 'Создать все',
-            nextPayment: 'Следующий платеж',
-            overdue: 'Просрочено',
-            today: 'Сегодня',
-            tomorrow: 'Завтра',
-            due: 'К оплате',
-            inactive: 'Неактивно',
-            until: 'До',
-            confirmDeleteRecurring: 'Удалить повторяющуюся транзакцию?',
+            // Экспорт
+            export: 'Экспорт',
+            exportCSV: 'Экспорт CSV',
+            exportExcel: 'Экспорт Excel',
+            exportPDF: 'Экспорт PDF',
             topExpenses: 'Топ-5 расходов',
+
+            // Финансовое здоровье
+            financialHealth: 'Финансовое здоровье',
+            excellent: 'Отлично! Продолжайте в том же духе',
+            good: 'Хорошо, есть куда расти',
+            needsImprovement: 'Требуется улучшение',
         },
     },
     en: {
@@ -159,7 +135,6 @@ const resources = {
             cancel: 'Cancel',
             delete: 'Delete',
             reset: 'Reset',
-            logout: 'Logout',
             balance: 'Balance',
             income: 'Income',
             expense: 'Expenses',
@@ -186,15 +161,6 @@ const resources = {
             expenseDistribution: 'Expense Distribution',
             incomeVsExpenses: 'Income vs Expenses',
             noTransactionData: 'No transaction data',
-            avgDailyExpense: 'Average Daily Expense',
-            transactionCount: 'Transaction Count',
-            totalTransactionsInPeriod: 'Total transactions in period',
-            averageTransaction: 'Average Transaction',
-            perTransaction: 'per transaction',
-            perDay: 'per day',
-            topSpendingCategory: 'Top Spending Category',
-            positiveBalance: 'Positive balance',
-            negativeBalance: 'Negative balance',
 
             amount: 'Amount',
             category: 'Category',
@@ -244,7 +210,19 @@ const resources = {
             'settings.language': 'Language',
             'settings.currency': 'Currency',
             'settings.theme': 'Theme',
+
+            // Export
+            export: 'Export',
+            exportCSV: 'Export CSV',
+            exportExcel: 'Export Excel',
+            exportPDF: 'Export PDF',
             topExpenses: 'Top 5 Expenses',
+
+            // Financial Health
+            financialHealth: 'Financial Health',
+            excellent: 'Excellent! Keep up the good work',
+            good: 'Good, room for improvement',
+            needsImprovement: 'Needs improvement',
         },
     },
     fr: {
@@ -257,7 +235,6 @@ const resources = {
             cancel: 'Annuler',
             delete: 'Supprimer',
             reset: 'Réinitialiser',
-            logout: 'Déconnexion',
             balance: 'Solde',
             income: 'Revenus',
             expense: 'Dépenses',
@@ -333,7 +310,19 @@ const resources = {
             'settings.language': 'Langue',
             'settings.currency': 'Devise',
             'settings.theme': 'Thème',
+
+            // Export
+            export: 'Exporter',
+            exportCSV: 'Exporter CSV',
+            exportExcel: 'Exporter Excel',
+            exportPDF: 'Exporter PDF',
             topExpenses: 'Top 5 des dépenses',
+
+            // Santé financière
+            financialHealth: 'Santé financière',
+            excellent: 'Excellent ! Continuez comme ça',
+            good: 'Bien, possibilité d\'amélioration',
+            needsImprovement: 'Nécessite des améliorations',
         },
     },
     de: {
@@ -346,7 +335,6 @@ const resources = {
             cancel: 'Abbrechen',
             delete: 'Löschen',
             reset: 'Zurücksetzen',
-            logout: 'Abmelden',
             balance: 'Saldo',
             income: 'Einkommen',
             expense: 'Ausgaben',
@@ -422,7 +410,19 @@ const resources = {
             'settings.language': 'Sprache',
             'settings.currency': 'Währung',
             'settings.theme': 'Theme',
+
+            // Export
+            export: 'Exportieren',
+            exportCSV: 'CSV exportieren',
+            exportExcel: 'Excel exportieren',
+            exportPDF: 'PDF exportieren',
             topExpenses: 'Top 5 Ausgaben',
+
+            // Finanzielle Gesundheit
+            financialHealth: 'Finanzielle Gesundheit',
+            excellent: 'Ausgezeichnet! Weiter so',
+            good: 'Gut, Verbesserungspotenzial vorhanden',
+            needsImprovement: 'Verbesserungsbedarf',
         },
     },
     es: {
@@ -435,7 +435,6 @@ const resources = {
             cancel: 'Cancelar',
             delete: 'Eliminar',
             reset: 'Restablecer',
-            logout: 'Cerrar sesión',
             balance: 'Balance',
             income: 'Ingresos',
             expense: 'Gastos',
@@ -455,7 +454,7 @@ const resources = {
             edit: 'Editar',
 
             week: 'Semana',
-            month: 'Mes',
+            month: 'Mois',
             year: 'Año',
 
             savingsRate: 'Tasa de ahorro',
@@ -511,7 +510,19 @@ const resources = {
             'settings.language': 'Idioma',
             'settings.currency': 'Moneda',
             'settings.theme': 'Tema',
+
+            // Export
+            export: 'Exportar',
+            exportCSV: 'Exportar CSV',
+            exportExcel: 'Exportar Excel',
+            exportPDF: 'Exportar PDF',
             topExpenses: 'Top 5 Gastos',
+
+            // Salud financiera
+            financialHealth: 'Salud financiera',
+            excellent: '¡Excelente! Sigue así',
+            good: 'Bien, hay margen de mejora',
+            needsImprovement: 'Necesita mejora',
         },
     },
     me: {
@@ -524,7 +535,6 @@ const resources = {
             cancel: 'Otkaži',
             delete: 'Obriši',
             reset: 'Resetuj',
-            logout: 'Odjavi se',
             balance: 'Balans',
             income: 'Prihodi',
             expense: 'Rashodi',
@@ -600,7 +610,19 @@ const resources = {
             'settings.language': 'Jezik',
             'settings.currency': 'Valuta',
             'settings.theme': 'Tema',
+
+            // Export
+            export: 'Izvezi',
+            exportCSV: 'Izvezi CSV',
+            exportExcel: 'Izvezi Excel',
+            exportPDF: 'Izvezi PDF',
             topExpenses: 'Top 5 Rashoda',
+
+            // Finansijsko zdravlje
+            financialHealth: 'Finansijsko zdravlje',
+            excellent: 'Odlično! Nastavite tako',
+            good: 'Dobro, ima prostora za poboljšanje',
+            needsImprovement: 'Potrebno poboljšanje',
         },
     },
 };

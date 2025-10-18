@@ -29,9 +29,9 @@ const lightThemeOptions: ThemeOptions = {
             contrastText: '#ffffff',
         },
         warning: {
-            main: '#f59e0b', // Четкий оранжевый
-            light: '#fbbf24',
-            dark: '#d97706',
+            main: '#ECB660', // средний золотисто-желтый из палитры
+            light: '#EED387', // светлый золотистый
+            dark: '#AB9443', // темный коричнево-оранжевый
             contrastText: '#ffffff',
         },
         info: {
@@ -171,9 +171,9 @@ const darkThemeOptions: ThemeOptions = {
             contrastText: '#ffffff',
         },
         warning: {
-            main: '#f59e0b', // Четкий оранжевый
-            light: '#fbbf24',
-            dark: '#d97706',
+            main: '#ECB660', // средний золотисто-желтый из палитры
+            light: '#EED387', // светлый золотистый
+            dark: '#AB9443', // темный коричнево-оранжевый
             contrastText: '#ffffff',
         },
         info: {

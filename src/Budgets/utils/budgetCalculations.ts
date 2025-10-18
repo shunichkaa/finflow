@@ -47,7 +47,7 @@ export const getBudgetStatus = (
 export const getBudgetStatusColor = (status: string) => {
     const colors = {
         safe: '#10b981',
-        warning: '#f59e0b',
+        warning: '#ECB660',
         danger: '#ef4444',
         exceeded: '#dc2626'
     } as const;

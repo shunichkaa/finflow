@@ -36,12 +36,6 @@ const Dashboard = () => {
         <Container maxWidth="lg" sx={{ py: 4 }}>
             {/* Header */}
             <Box sx={{ textAlign: 'center', mb: 4 }}>
-                <Typography variant="h3" gutterBottom fontWeight="bold" sx={{color: '#2C3E50'}}>
-                    💰 {t('appName')}
-                </Typography>
-                <Typography variant="h6" gutterBottom sx={{color: '#5D6D7E'}}>
-                    {t('tagline')}
-                </Typography>
 
                 {/* Кнопки добавления и экспорта */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 2 }}>
