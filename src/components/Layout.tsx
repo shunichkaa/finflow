@@ -20,7 +20,8 @@ import {
     Brightness7,
     ChevronLeft,
     Close,
-    Menu as MenuIcon
+    Menu as MenuIcon,
+    Person
 } from '@mui/icons-material';
 import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
@@ -57,6 +58,10 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     const handleLogout = async () => {
         await supabase.auth.signOut();
         navigate('/login');
+    };
+
+    const handleProfileClick = () => {
+        navigate('/profile');
     };
 
 

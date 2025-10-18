@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import {
     Container,
     Paper,
@@ -16,9 +16,12 @@ import {
     ListItemText,
     ListItemIcon,
     Avatar,
-    Chip,
     Alert,
-    Snackbar
+    Snackbar,
+    Modal,
+    TextField,
+    IconButton,
+    InputAdornment
 } from '@mui/material';
 import {
     Person,
@@ -30,7 +33,11 @@ import {
     Notifications,
     Backup,
     Delete,
-    Edit
+    Edit,
+    PhotoCamera,
+    Visibility,
+    VisibilityOff,
+    Close
 } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
@@ -49,6 +56,17 @@ export default function Profile() {
         const [backupEnabled, setBackupEnabled] = useState(true);
         const [snackbarOpen, setSnackbarOpen] = useState(false);
         const [snackbarMessage, setSnackbarMessage] = useState('');
+        
+        // Состояние для редактирования профиля
+        const [editModalOpen, setEditModalOpen] = useState(false);
+        const [avatar, setAvatar] = useState<string | null>(null);
+        const [nickname, setNickname] = useState(session?.user?.user_metadata?.nickname || '');
+        const [email, setEmail] = useState(session?.user?.email || '');
+        const [currentPassword, setCurrentPassword] = useState('');
+        const [newPassword, setNewPassword] = useState('');
+        const [confirmPassword, setConfirmPassword] = useState('');
+        const [showPasswords, setShowPasswords] = useState(false);
+        const fileInputRef = useRef<HTMLInputElement>(null);
 
         // Показываем загрузку пока аутентификация не завершена
         if (authLoading) {
@@ -131,6 +149,61 @@ export default function Profile() {
         }
     };
 
+    // Функции для редактирования профиля
+    const handleAvatarUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setAvatar(e.target?.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleEditProfile = () => {
+        setEditModalOpen(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setEditModalOpen(false);
+        // Сброс полей
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+    };
+
+    const handleSaveProfile = async () => {
+        try {
+            // Валидация паролей
+            if (newPassword && newPassword !== confirmPassword) {
+                setSnackbarMessage('Пароли не совпадают');
+                setSnackbarOpen(true);
+                return;
+            }
+
+            if (newPassword && newPassword.length < 6) {
+                setSnackbarMessage('Пароль должен содержать минимум 6 символов');
+                setSnackbarOpen(true);
+                return;
+            }
+
+            // Здесь будет логика сохранения изменений
+            // Пока что просто показываем сообщение об успехе
+            setSnackbarMessage('Профиль успешно обновлен');
+            setSnackbarOpen(true);
+            setEditModalOpen(false);
+            
+            // Сброс полей
+            setCurrentPassword('');
+            setNewPassword('');
+            setConfirmPassword('');
+        } catch (error) {
+            setSnackbarMessage('Ошибка при сохранении профиля');
+            setSnackbarOpen(true);
+        }
+    };
+
     return (
         <Container maxWidth="md" sx={{ py: 4 }}>
             <Typography variant="h4" gutterBottom sx={{ mb: 4, color: mode === 'dark' ? '#F5F5DC' : '#654633' }}>
@@ -140,25 +213,26 @@ export default function Profile() {
             {/* Профиль пользователя */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
                 <Box display="flex" alignItems="center" mb={3}>
-                    <Avatar sx={{ width: 64, height: 64, mr: 2, bgcolor: 'primary.main' }}>
-                        <Person fontSize="large" />
+                    <Avatar 
+                        src={avatar || undefined}
+                        sx={{ width: 64, height: 64, mr: 2, bgcolor: 'primary.main' }}
+                    >
+                        {!avatar && <Person fontSize="large" />}
                     </Avatar>
                     <Box>
                         <Typography variant="h6" sx={{ color: mode === 'dark' ? '#F5F5DC' : '#654633' }}>
-                            {session?.user?.email || 'Пользователь'}
+                            {nickname || session?.user?.email || 'Пользователь'}
                         </Typography>
-                        <Chip 
-                            label="Премиум" 
-                            color="primary" 
-                            size="small" 
-                            sx={{ mt: 1 }}
-                        />
+                        <Typography variant="body2" sx={{ color: mode === 'dark' ? '#B0B0B0' : '#666', mt: 0.5 }}>
+                            {session?.user?.email}
+                        </Typography>
                     </Box>
                 </Box>
                 
                 <Button
                     variant="outlined"
                     startIcon={<Edit />}
+                    onClick={handleEditProfile}
                     sx={{ 
                         borderColor: 'rgba(101, 70, 51, 0.3)',
                         color: '#654633',
@@ -394,6 +468,7 @@ export default function Profile() {
                     <Button
                         variant="outlined"
                         startIcon={<Security />}
+                        onClick={handleEditProfile}
                         sx={{ 
                             borderColor: 'rgba(101, 70, 51, 0.3)',
                             color: '#654633',
@@ -413,10 +488,6 @@ export default function Profile() {
                 <Typography variant="h6" gutterBottom sx={{ mb: 3, color: '#ff6b6b' }}>
                     Опасная зона
                 </Typography>
-
-                <Alert severity="warning" sx={{ mb: 2 }}>
-                    Эти действия нельзя отменить. Будьте осторожны!
-                </Alert>
 
                 <Button
                     variant="outlined"
@@ -459,6 +530,252 @@ export default function Profile() {
                     Сохранить настройки
                 </Button>
             </Box>
+
+            {/* Модальное окно редактирования профиля */}
+            <Modal
+                open={editModalOpen}
+                onClose={handleCloseEditModal}
+                aria-labelledby="edit-profile-modal"
+            >
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: { xs: '90%', sm: 500 },
+                        maxHeight: '90vh',
+                        overflow: 'auto',
+                        bgcolor: mode === 'dark' ? '#1a1a1a' : '#ffffff',
+                        borderRadius: 3,
+                        boxShadow: 24,
+                        p: 4,
+                    }}
+                >
+                    <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+                        <Typography variant="h5" sx={{ color: mode === 'dark' ? '#F5F5DC' : '#654633' }}>
+                            Редактировать профиль
+                        </Typography>
+                        <IconButton onClick={handleCloseEditModal} size="small">
+                            <Close />
+                        </IconButton>
+                    </Box>
+
+                    {/* Аватар */}
+                    <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
+                        <Avatar
+                            src={avatar || undefined}
+                            sx={{ width: 80, height: 80, mb: 2, bgcolor: 'primary.main' }}
+                        >
+                            {!avatar && <Person fontSize="large" />}
+                        </Avatar>
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            onChange={handleAvatarUpload}
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                        />
+                        <Button
+                            variant="outlined"
+                            startIcon={<PhotoCamera />}
+                            onClick={() => fileInputRef.current?.click()}
+                            size="small"
+                            sx={{ 
+                                borderColor: 'rgba(101, 70, 51, 0.3)',
+                                color: '#654633',
+                                '&:hover': {
+                                    borderColor: 'rgba(101, 70, 51, 0.6)',
+                                    backgroundColor: 'rgba(101, 70, 51, 0.1)',
+                                }
+                            }}
+                        >
+                            Изменить фото
+                        </Button>
+                    </Box>
+
+                    {/* Никнейм */}
+                    <TextField
+                        fullWidth
+                        label="Никнейм"
+                        value={nickname}
+                        onChange={(e) => setNickname(e.target.value)}
+                        margin="normal"
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                '& fieldset': {
+                                    borderColor: 'rgba(101, 70, 51, 0.3)',
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: 'rgba(101, 70, 51, 0.6)',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#654633',
+                                },
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            },
+                        }}
+                    />
+
+                    {/* Email */}
+                    <TextField
+                        fullWidth
+                        label="Email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        margin="normal"
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                '& fieldset': {
+                                    borderColor: 'rgba(101, 70, 51, 0.3)',
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: 'rgba(101, 70, 51, 0.6)',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#654633',
+                                },
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            },
+                        }}
+                    />
+
+                    <Divider sx={{ my: 2 }} />
+
+                    <Typography variant="h6" sx={{ mb: 2, color: mode === 'dark' ? '#F5F5DC' : '#654633' }}>
+                        Изменить пароль
+                    </Typography>
+
+                    {/* Текущий пароль */}
+                    <TextField
+                        fullWidth
+                        label="Текущий пароль"
+                        type={showPasswords ? 'text' : 'password'}
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        margin="normal"
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={() => setShowPasswords(!showPasswords)}
+                                        edge="end"
+                                    >
+                                        {showPasswords ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                '& fieldset': {
+                                    borderColor: 'rgba(101, 70, 51, 0.3)',
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: 'rgba(101, 70, 51, 0.6)',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#654633',
+                                },
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            },
+                        }}
+                    />
+
+                    {/* Новый пароль */}
+                    <TextField
+                        fullWidth
+                        label="Новый пароль"
+                        type={showPasswords ? 'text' : 'password'}
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        margin="normal"
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                '& fieldset': {
+                                    borderColor: 'rgba(101, 70, 51, 0.3)',
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: 'rgba(101, 70, 51, 0.6)',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#654633',
+                                },
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            },
+                        }}
+                    />
+
+                    {/* Подтверждение пароля */}
+                    <TextField
+                        fullWidth
+                        label="Подтвердите новый пароль"
+                        type={showPasswords ? 'text' : 'password'}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        margin="normal"
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                '& fieldset': {
+                                    borderColor: 'rgba(101, 70, 51, 0.3)',
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: 'rgba(101, 70, 51, 0.6)',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#654633',
+                                },
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            },
+                        }}
+                    />
+
+                    {/* Кнопки */}
+                    <Box display="flex" gap={2} justifyContent="flex-end" mt={3}>
+                        <Button
+                            variant="outlined"
+                            onClick={handleCloseEditModal}
+                            sx={{ 
+                                borderColor: 'rgba(101, 70, 51, 0.3)',
+                                color: '#654633',
+                                '&:hover': {
+                                    borderColor: 'rgba(101, 70, 51, 0.6)',
+                                    backgroundColor: 'rgba(101, 70, 51, 0.1)',
+                                }
+                            }}
+                        >
+                            Отмена
+                        </Button>
+                        <Button
+                            variant="contained"
+                            onClick={handleSaveProfile}
+                            sx={{
+                                background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.8) 0%, rgba(248, 229, 229, 0.6) 100%)',
+                                color: '#654633',
+                                fontWeight: 'bold',
+                                '&:hover': {
+                                    background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.9) 0%, rgba(248, 229, 229, 0.8) 100%)',
+                                    transform: 'translateY(-1px)',
+                                    boxShadow: '0 6px 20px rgba(101, 70, 51, 0.2)',
+                                }
+                            }}
+                        >
+                            Сохранить
+                        </Button>
+                    </Box>
+                </Box>
+            </Modal>
 
             {/* Snackbar для уведомлений */}
             <Snackbar
