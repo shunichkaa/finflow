@@ -25,6 +25,11 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
         const now = new Date();
         const data: { date: string; income: number; expense: number }[] = [];
 
+        // Защита от некорректных данных
+        if (!transactions || !Array.isArray(transactions)) {
+            return data;
+        }
+
         if (period === 'week') {
             // Последние 7 дней
             for (let i = 6; i >= 0; i--) {
@@ -33,7 +38,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 const dateStr = date.toISOString().split('T')[0];
 
                 const dayTransactions = transactions.filter(
-                    t => t.date.toISOString().split('T')[0] === dateStr
+                    t => t && t.date && new Date(t.date).toISOString().split('T')[0] === dateStr
                 );
 
                 data.push({
@@ -55,6 +60,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 weekEnd.setDate(now.getDate() - (i * 7));
 
                 const weekTransactions = transactions.filter(t => {
+                    if (!t || !t.date) return false;
                     const tDate = new Date(t.date);
                     return tDate >= weekStart && tDate <= weekEnd;
                 });
@@ -76,6 +82,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 monthDate.setMonth(now.getMonth() - i);
 
                 const monthTransactions = transactions.filter(t => {
+                    if (!t || !t.date) return false;
                     const tDate = new Date(t.date);
                     return (
                         tDate.getMonth() === monthDate.getMonth() &&
