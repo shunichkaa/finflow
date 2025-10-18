@@ -51,7 +51,7 @@ export const useRecurringStore = create<RecurringStore>()(
             recurring: [],
 
             addRecurring: (recurringData) => {
-                const id = `recurring_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+                const id = `recurring_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
                 const nextDue = calculateNextDue({
                     ...recurringData,
                     id,

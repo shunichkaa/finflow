@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { v4 as uuid } from 'uuid';
 import type { Transaction, Budget, CreateTransactionInput, CreateBudgetInput } from '../types';
 
 // ============================================
@@ -44,7 +45,7 @@ export const useFinanceStore = create<FinanceStore>()(
                         ...state.transactions,
                         {
                             ...transaction,
-                            id: crypto.randomUUID(),
+                            id: uuid(),
                             createdAt: new Date(),
                         },
                     ],
@@ -70,7 +71,7 @@ export const useFinanceStore = create<FinanceStore>()(
                         ...state.budgets,
                         {
                             ...budget,
-                            id: crypto.randomUUID(),
+                            id: uuid(),
                         },
                     ],
                 })),

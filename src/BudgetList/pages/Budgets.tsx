@@ -56,6 +56,34 @@ const Budgets: React.FC = () => {
                     width: '100%',
                     maxWidth: 720
                 }}>
+                    <Box sx={{
+                        flex: 1,
+                        p: 2,
+                        borderRadius: 2,
+                        bgcolor: 'primary.light',
+                        color: 'primary.contrastText'
+                    }}>
+                        <Typography variant="h6" fontWeight="bold">
+                            {totalBudgets}
+                        </Typography>
+                        <Typography variant="body2">
+                            {t('totalBudgets')}
+                        </Typography>
+                    </Box>
+                    <Box sx={{
+                        flex: 1,
+                        p: 2,
+                        borderRadius: 2,
+                        bgcolor: exceededBudgets > 0 ? 'error.light' : 'success.light',
+                        color: exceededBudgets > 0 ? 'error.contrastText' : 'success.contrastText'
+                    }}>
+                        <Typography variant="h6" fontWeight="bold">
+                            {exceededBudgets}
+                        </Typography>
+                        <Typography variant="body2">
+                            {t('exceededBudgets')}
+                        </Typography>
+                    </Box>
                 </Box>
             )}
 

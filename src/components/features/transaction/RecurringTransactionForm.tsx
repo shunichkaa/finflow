@@ -55,7 +55,13 @@ export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> =
     const categories = type === 'income' ? incomeCategories : expenseCategories;
 
     const handleSubmit = () => {
-        if (!amount || !category) return;
+        if (!amount || !category || parseFloat(amount) <= 0) return;
+        
+        // Валидация дня месяца
+        const day = parseInt(dayOfMonth);
+        if ((frequency === 'monthly' || frequency === 'yearly') && (day < 1 || day > 31)) {
+            return;
+        }
 
         const recurringData = {
             amount: parseFloat(amount),

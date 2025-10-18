@@ -1,4 +1,4 @@
-import {uuid} from "@supabase/supabase-js/dist/main/lib/helpers";
+import {v4 as uuid} from 'uuid';
 
 
 export interface Insight {
@@ -14,6 +14,7 @@ export interface Insight {
 
 // Вычисляем среднее и стандартное отклонение
 function mean(values: number[]): number {
+    if (values.length === 0) return 0;
     return values.reduce((a, b) => a + b, 0) / values.length;
 }
 
