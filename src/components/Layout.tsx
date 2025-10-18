@@ -2,6 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import {
     AppBar,
+    Avatar,
     Box,
     Button,
     CssBaseline,
@@ -26,6 +27,7 @@ import {
 import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useThemeMode} from '../Budgets/theme/ThemeContext';
+import {useSettingsStore} from '../Budgets/store/useSettingsStore';
 import {supabase} from '../lib/supabaseClient';
 
 const drawerWidth = 280;
@@ -40,6 +42,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     const location = useLocation();
     const {mode, toggleTheme} = useThemeMode();
     const {t} = useTranslation();
+    const {avatar, nickname} = useSettingsStore();
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(defaultSidebarOpen);
@@ -224,7 +227,19 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     onClick={handleProfileClick}
                     fullWidth
                     variant="outlined"
-                    startIcon={<Person />}
+                    startIcon={
+                        <Avatar
+                            src={avatar || undefined}
+                            sx={{ 
+                                width: 24, 
+                                height: 24, 
+                                bgcolor: 'primary.main',
+                                fontSize: '0.875rem'
+                            }}
+                        >
+                            {!avatar && <Person sx={{ fontSize: '1rem' }} />}
+                        </Avatar>
+                    }
                     sx={{
                         borderColor: mode === 'dark' 
                             ? 'rgba(123, 167, 209, 0.3)'
@@ -246,7 +261,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         }
                     }}
                 >
-                    Личный кабинет
+                    {nickname || 'Личный кабинет'}
                 </Button>
                 <Button
                     onClick={handleLogout}

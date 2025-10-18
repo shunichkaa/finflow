@@ -49,7 +49,7 @@ export default function Profile() {
     try {
         const { i18n } = useTranslation();
         const { mode, toggleTheme } = useThemeMode();
-        const { currency, setCurrency } = useSettingsStore();
+        const { currency, setCurrency, avatar, setAvatar, nickname, setNickname } = useSettingsStore();
         const { session, loading: authLoading } = useAuth();
         const [iCloudSync, setICloudSync] = useState(false);
         const [notifications, setNotifications] = useState(true);
@@ -59,8 +59,6 @@ export default function Profile() {
         
         // Состояние для редактирования профиля
         const [editModalOpen, setEditModalOpen] = useState(false);
-        const [avatar, setAvatar] = useState<string | null>(null);
-        const [nickname, setNickname] = useState(session?.user?.user_metadata?.nickname || '');
         const [email, setEmail] = useState(session?.user?.email || '');
         const [currentPassword, setCurrentPassword] = useState('');
         const [newPassword, setNewPassword] = useState('');
@@ -187,6 +185,9 @@ export default function Profile() {
                 setSnackbarOpen(true);
                 return;
             }
+
+            // Сохраняем никнейм в глобальное состояние
+            setNickname(nickname);
 
             // Здесь будет логика сохранения изменений
             // Пока что просто показываем сообщение об успехе
