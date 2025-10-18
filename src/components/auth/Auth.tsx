@@ -112,7 +112,7 @@ export const Auth: React.FC = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.8) 0%, rgba(248, 229, 229, 0.6) 50%, rgba(255, 185, 141, 0.4) 100%)',
                 p: 2,
                 position: 'relative',
                 '&::before': {
@@ -122,7 +122,7 @@ export const Auth: React.FC = () => {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+                    background: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23654633" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
                     zIndex: 0,
                 }
             }}
@@ -245,17 +245,18 @@ export const Auth: React.FC = () => {
                             sx={{
                                 py: 1.5,
                                 borderRadius: 2,
-                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.8) 0%, rgba(248, 229, 229, 0.6) 100%)',
+                                color: '#654633',
                                 fontWeight: 'bold',
                                 textTransform: 'none',
                                 '&:hover': {
-                                    background: 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)',
+                                    background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.9) 0%, rgba(248, 229, 229, 0.8) 100%)',
                                     transform: 'translateY(-1px)',
-                                    boxShadow: '0 6px 20px rgba(102, 126, 234, 0.4)',
+                                    boxShadow: '0 6px 20px rgba(101, 70, 51, 0.2)',
                                 },
                                 '&:disabled': {
-                                    background: '#e2e8f0',
-                                    color: '#94a3b8',
+                                    background: 'rgba(101, 70, 51, 0.2)',
+                                    color: 'rgba(101, 70, 51, 0.5)',
                                 }
                             }}
                             disabled={loading || !!oauthLoading}
