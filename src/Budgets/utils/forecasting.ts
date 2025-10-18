@@ -1,14 +1,3 @@
-// Простое скользящее среднее
-export function simpleMovingAverage(data: number[], period: number): number[] {
-    if (period <= 0 || period > data.length) return [];
-    const result: number[] = [];
-    for (let i = period - 1; i < data.length; i++) {
-        const window = data.slice(i - period + 1, i + 1);
-        const avg = window.reduce((a, b) => a + b, 0) / period;
-        result.push(avg);
-    }
-    return result;
-}
 
 // Экспоненциальное сглаживание
 export function exponentialSmoothing(data: number[], alpha: number): number[] {

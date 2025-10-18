@@ -23,19 +23,3 @@ export const formatDate = (date: Date) => {
         year: 'numeric',
     }).format(new Date(date));
 };
-
-export const formatMonth = (date: Date) => {
-    const language = useSettingsStore.getState().language || 'ru';
-    return new Intl.DateTimeFormat(language, {
-        month: 'long',
-        year: 'numeric',
-    }).format(new Date(date));
-};
-
-export const formatShortDate = (date: Date) => {
-    const language = useSettingsStore.getState().language || 'ru';
-    return new Intl.DateTimeFormat(language, {
-        day: '2-digit',
-        month: '2-digit',
-    }).format(new Date(date));
-};

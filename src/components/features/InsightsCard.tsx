@@ -1,18 +1,28 @@
 import React from 'react';
 import { Card, CardContent, Typography, Box, Chip, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import {Insight} from "../../Budgets/utils/insights.ts";
+
+export interface Insight {
+    id: string;
+    type: 'warning' | 'info' | 'success' | 'tip';
+    title: string;
+    description: string;
+    action?: {
+        label: string;
+        onClick: () => void;
+    };
+}
 
 interface InsightsCardProps {
     insights: Insight[];
 }
 
-const typeColor = {
+const typeColor: Record<Insight['type'], 'error' | 'info' | 'success' | 'default'> = {
     warning: 'error',
     info: 'info',
     success: 'success',
     tip: 'default'
-} as const;
+};
 
 export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
     const { t } = useTranslation();

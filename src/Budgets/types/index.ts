@@ -56,7 +56,6 @@ export interface Category {
 // ============================================
 
 export type CreateTransactionInput = Omit<Transaction, 'id' | 'createdAt'>;
-export type UpdateTransactionInput = Partial<Omit<Transaction, 'id' | 'createdAt'>>;
 export type CreateBudgetInput = Omit<Budget, 'id'>;
 
 // ============================================
@@ -72,43 +71,3 @@ export interface TransactionFilters {
 }
 
 export type SortOption = 'date-desc' | 'date-asc' | 'amount-desc' | 'amount-asc';
-
-// ============================================
-// СТАТИСТИКА
-// ============================================
-
-export interface DashboardStats {
-    totalIncome: number;
-    totalExpense: number;
-    balance: number;
-    transactionsCount: number;
-}
-
-export interface CategoryStats {
-    categoryId: string;
-    categoryName: string;
-    totalAmount: number;
-    transactionsCount: number;
-    percentage: number;
-}
-
-// ============================================
-// ДАННЫЕ ДЛЯ ГРАФИКОВ
-// ============================================
-
-export interface BalanceChartData {
-    date: string;
-    balance: number;
-}
-
-export interface IncomeExpenseChartData {
-    period: string;
-    income: number;
-    expense: number;
-}
-
-export interface PieChartData {
-    name: string;
-    value: number;
-    color: string;
-}
