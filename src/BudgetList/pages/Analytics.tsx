@@ -65,17 +65,32 @@ const Analytics: React.FC = () => {
     return (
         <Container maxWidth="lg" sx={{py: 4}}>
             <Box sx={{mb: 4}}>
-                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{textAlign: 'left', color: '#2C3E50'}}>
+                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{
+                    textAlign: 'left', 
+                    color: mode === 'dark' ? '#E8F4FD' : '#2C3E50'
+                }}>
                     {t('analytics')}
                 </Typography>
-                <Typography variant="body1" sx={{textAlign: 'left', color: '#5D6D7E'}}>
+                <Typography variant="body1" sx={{
+                    textAlign: 'left', 
+                    color: mode === 'dark' ? 'rgba(232, 244, 253, 0.8)' : '#5D6D7E'
+                }}>
                     {t('analyticsDescription')}
                 </Typography>
             </Box>
 
             {filteredTransactions.length === 0 && transactions.length > 0 && (
-                <Box sx={{mb: 3, p: 2, borderRadius: 2, backgroundColor: 'rgba(184, 212, 240, 0.1)', border: '1px solid rgba(184, 212, 240, 0.3)'}}>
-                    <Typography variant="body2" sx={{color: '#5D6D7E', textAlign: 'center'}}>
+                <Box sx={{
+                    mb: 3, 
+                    p: 2, 
+                    borderRadius: 2, 
+                    backgroundColor: mode === 'dark' ? 'rgba(123, 167, 209, 0.1)' : 'rgba(184, 212, 240, 0.1)', 
+                    border: mode === 'dark' ? '1px solid rgba(123, 167, 209, 0.3)' : '1px solid rgba(184, 212, 240, 0.3)'
+                }}>
+                    <Typography variant="body2" sx={{
+                        color: mode === 'dark' ? 'rgba(232, 244, 253, 0.8)' : '#5D6D7E', 
+                        textAlign: 'center'
+                    }}>
                         📅 {t('noDataForPeriod', 'Нет данных для выбранного периода. Показаны все доступные транзакции.')}
                     </Typography>
                 </Box>
@@ -88,11 +103,15 @@ const Analytics: React.FC = () => {
                     exclusive
                     onChange={(_, value) => value && setPeriod(value)}
                     sx={{
-                        bgcolor: 'rgba(255, 255, 255, 0.8)',
+                        bgcolor: mode === 'dark' ? 'rgba(26, 35, 50, 0.8)' : 'rgba(255, 255, 255, 0.8)',
                         borderRadius: 3,
                         p: 0.5,
-                        boxShadow: '0 4px 12px rgba(184, 212, 240, 0.2)',
-                        border: '1px solid rgba(184, 212, 240, 0.3)',
+                        boxShadow: mode === 'dark' 
+                            ? '0 4px 12px rgba(123, 167, 209, 0.2)'
+                            : '0 4px 12px rgba(184, 212, 240, 0.2)',
+                        border: mode === 'dark' 
+                            ? '1px solid rgba(123, 167, 209, 0.3)'
+                            : '1px solid rgba(184, 212, 240, 0.3)',
                     }}
                 >
                     <ToggleButton 
@@ -103,11 +122,16 @@ const Analytics: React.FC = () => {
                             py: 1.5,
                             fontWeight: 'bold',
                             textTransform: 'none',
+                            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                             '&.Mui-selected': {
-                                bgcolor: 'linear-gradient(135deg, #B8D4F0 0%, #7BA7D1 100%)',
-                                color: '#2C3E50',
+                                bgcolor: mode === 'dark' 
+                                    ? 'linear-gradient(135deg, #2D4A5A 0%, #1B2F3A 100%)'
+                                    : 'linear-gradient(135deg, #B8D4F0 0%, #7BA7D1 100%)',
+                                color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                                 '&:hover': {
-                                    bgcolor: 'linear-gradient(135deg, #A8C4E0 0%, #6B97C1 100%)',
+                                    bgcolor: mode === 'dark' 
+                                        ? 'linear-gradient(135deg, #3D5A6A 0%, #2B3F4A 100%)'
+                                        : 'linear-gradient(135deg, #A8C4E0 0%, #6B97C1 100%)',
                                 }
                             }
                         }}
@@ -122,11 +146,16 @@ const Analytics: React.FC = () => {
                             py: 1.5,
                             fontWeight: 'bold',
                             textTransform: 'none',
+                            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                             '&.Mui-selected': {
-                                bgcolor: 'linear-gradient(135deg, #B8D4F0 0%, #7BA7D1 100%)',
-                                color: '#2C3E50',
+                                bgcolor: mode === 'dark' 
+                                    ? 'linear-gradient(135deg, #2D4A5A 0%, #1B2F3A 100%)'
+                                    : 'linear-gradient(135deg, #B8D4F0 0%, #7BA7D1 100%)',
+                                color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                                 '&:hover': {
-                                    bgcolor: 'linear-gradient(135deg, #A8C4E0 0%, #6B97C1 100%)',
+                                    bgcolor: mode === 'dark' 
+                                        ? 'linear-gradient(135deg, #3D5A6A 0%, #2B3F4A 100%)'
+                                        : 'linear-gradient(135deg, #A8C4E0 0%, #6B97C1 100%)',
                                 }
                             }
                         }}
@@ -141,11 +170,16 @@ const Analytics: React.FC = () => {
                             py: 1.5,
                             fontWeight: 'bold',
                             textTransform: 'none',
+                            color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                             '&.Mui-selected': {
-                                bgcolor: 'linear-gradient(135deg, #B8D4F0 0%, #7BA7D1 100%)',
-                                color: '#2C3E50',
+                                bgcolor: mode === 'dark' 
+                                    ? 'linear-gradient(135deg, #2D4A5A 0%, #1B2F3A 100%)'
+                                    : 'linear-gradient(135deg, #B8D4F0 0%, #7BA7D1 100%)',
+                                color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                                 '&:hover': {
-                                    bgcolor: 'linear-gradient(135deg, #A8C4E0 0%, #6B97C1 100%)',
+                                    bgcolor: mode === 'dark' 
+                                        ? 'linear-gradient(135deg, #3D5A6A 0%, #2B3F4A 100%)'
+                                        : 'linear-gradient(135deg, #A8C4E0 0%, #6B97C1 100%)',
                                 }
                             }
                         }}
@@ -227,8 +261,8 @@ const Analytics: React.FC = () => {
                                 ? 'linear-gradient(135deg, #2D4A5A 0%, #1B2F3A 100%)'
                                 : 'linear-gradient(135deg, #AED6F1 0%, #85C1E9 100%)')
                             : (mode === 'dark' 
-                                ? 'linear-gradient(135deg, #5A4A2D 0%, #3A2F1B 100%)'
-                                : 'linear-gradient(135deg, #F9E79F 0%, #F4D03F 100%)'),
+                                ? 'linear-gradient(135deg, #4A2D5A 0%, #2F1B3A 100%)'
+                                : 'linear-gradient(135deg, #DDA0DD 0%, #BA55D3 100%)'),
                         color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                         transition: 'all 0.3s ease',
                         '&:hover': {
@@ -238,8 +272,8 @@ const Analytics: React.FC = () => {
                                     ? '0 12px 30px rgba(45, 74, 90, 0.4)'
                                     : '0 12px 30px rgba(133, 193, 233, 0.3)')
                                 : (mode === 'dark' 
-                                    ? '0 12px 30px rgba(90, 74, 45, 0.4)'
-                                    : '0 12px 30px rgba(244, 208, 63, 0.3)'),
+                                    ? '0 12px 30px rgba(74, 45, 90, 0.4)'
+                                    : '0 12px 30px rgba(186, 85, 211, 0.3)'),
                         }
                     }}
                 >
