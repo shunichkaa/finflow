@@ -63,7 +63,7 @@ const Analytics: React.FC = () => {
     }, [filteredTransactions]);
 
     return (
-        <Container maxWidth="lg" sx={{py: 4}}>
+        <Container maxWidth="lg" sx={{py: {xs: 2, sm: 4}, px: {xs: 1, sm: 2}}}>
             <Box sx={{mb: 4}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold" sx={{
                     textAlign: 'left', 
@@ -193,8 +193,8 @@ const Analytics: React.FC = () => {
             <Box
                 sx={{
                     display: 'grid',
-                    gridTemplateColumns: {xs: '1fr', sm: '1fr 1fr', md: 'repeat(4, 1fr)'},
-                    gap: {xs: 2, sm: 3},
+                    gridTemplateColumns: {xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)'},
+                    gap: {xs: 1.5, sm: 2, md: 3},
                     mb: 4
                 }}
             >
@@ -308,11 +308,11 @@ const Analytics: React.FC = () => {
             </Box>
 
             {/* Charts */}
-            <Box sx={{display: 'grid', gridTemplateColumns: {xs: '1fr', lg: '1fr 1fr'}, gap: {xs: 2, sm: 3}}}>
+            <Box sx={{display: 'grid', gridTemplateColumns: {xs: '1fr', lg: '1fr 1fr'}, gap: {xs: 1.5, sm: 2, md: 3}}}>
                 <Paper 
                     elevation={3} 
                     sx={{
-                        p: 3,
+                        p: {xs: 2, sm: 3},
                         borderRadius: 3,
                         background: mode === 'dark' 
                             ? 'linear-gradient(135deg, rgba(101, 70, 51, 0.3) 0%, rgba(101, 70, 51, 0.5) 100%)'
@@ -342,7 +342,7 @@ const Analytics: React.FC = () => {
                 <Paper 
                     elevation={3} 
                     sx={{
-                        p: 3,
+                        p: {xs: 2, sm: 3},
                         borderRadius: 3,
                         background: mode === 'dark' 
                             ? 'linear-gradient(135deg, rgba(101, 70, 51, 0.3) 0%, rgba(101, 70, 51, 0.5) 100%)'

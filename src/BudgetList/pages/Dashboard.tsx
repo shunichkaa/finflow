@@ -69,7 +69,7 @@ const Dashboard = () => {
                 </Box>
             </Box>
 
-            <Container maxWidth="lg" sx={{ px: 2, pb: 4 }}>
+            <Container maxWidth="lg" sx={{ px: {xs: 1, sm: 2}, pb: 4 }}>
                 {/* Stats Cards */}
                 <StatsCards onFilterClick={handleStatsCardClick} />
 

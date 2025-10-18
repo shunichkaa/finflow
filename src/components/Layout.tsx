@@ -31,7 +31,7 @@ import {useThemeMode} from '../Budgets/theme/ThemeContext';
 import {supabase} from '../lib/supabaseClient';
 import getSymbolFromCurrency from 'currency-symbol-map';
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 interface LayoutProps {
     children?: React.ReactNode;
@@ -561,7 +561,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     display: {xs: 'block', sm: 'none'},
                     '& .MuiDrawer-paper': {
                         boxSizing: 'border-box',
-                        width: drawerWidth,
+                        width: {xs: '100vw', sm: drawerWidth},
+                        maxWidth: drawerWidth,
                         transition: (theme) => theme.transitions.create('transform', {
                             easing: theme.transitions.easing.easeInOut,
                             duration: theme.transitions.duration.complex,
@@ -606,9 +607,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    p: 3,
+                    p: {xs: 2, sm: 3},
                     width: '100%',
-                    mt: 8,
+                    mt: {xs: 7, sm: 8},
                     ml: {sm: sidebarOpen ? `${drawerWidth}px` : 0},
                     transition: (theme) => theme.transitions.create('margin', {
                         easing: theme.transitions.easing.easeInOut,

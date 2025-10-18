@@ -19,7 +19,7 @@ const Budgets: React.FC = () => {
     const editingBudget = useMemo(() => budgets.find(b => b.id === editingBudgetId) || null, [budgets, editingBudgetId]);
 
     return (
-        <Container maxWidth="md" sx={{py: 4}}>
+        <Container maxWidth="md" sx={{py: {xs: 2, sm: 4}, px: {xs: 1, sm: 2}}}>
             <Box sx={{mb: 4, textAlign: 'left'}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FCF9F9' : '#654633' }}>
                     {t('budgets')}

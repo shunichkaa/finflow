@@ -69,7 +69,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
     ];
 
     return (
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: 2, mb: 3 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: {xs: 1.5, sm: 2}, mb: 3 }}>
             {stats.map((stat) => (
                 <Card
                     key={stat.title}
