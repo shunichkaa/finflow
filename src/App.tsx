@@ -1,4 +1,3 @@
-import React from 'react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
@@ -8,6 +7,7 @@ import { Auth } from './components/auth/Auth';
 import Dashboard from './BudgetList/pages/Dashboard';
 import Analytics from './BudgetList/pages/Analytics';
 import Budgets from './BudgetList/pages/Budgets';
+import Profile from './BudgetList/pages/Profile';
 import NotFound from './pages/NotFound';
 import ServerError from './pages/ServerError';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -28,6 +28,7 @@ function App() {
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/analytics" element={<Analytics />} />
                   <Route path="/budgets" element={<Budgets />} />
+                  <Route path="/profile" element={<Profile />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Layout>
