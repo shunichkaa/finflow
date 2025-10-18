@@ -199,10 +199,10 @@ export const Auth: React.FC = () => {
                                 '& .MuiOutlinedInput-root': {
                                     borderRadius: 2,
                                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: '#667eea',
+                                        borderColor: 'rgba(101, 70, 51, 0.6)',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: '#667eea',
+                                        borderColor: 'rgba(101, 70, 51, 0.8)',
                                     },
                                 }
                             }}
@@ -218,10 +218,10 @@ export const Auth: React.FC = () => {
                                 '& .MuiOutlinedInput-root': {
                                     borderRadius: 2,
                                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: '#667eea',
+                                        borderColor: 'rgba(101, 70, 51, 0.6)',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: '#667eea',
+                                        borderColor: 'rgba(101, 70, 51, 0.8)',
                                     },
                                 }
                             }}
@@ -280,10 +280,11 @@ export const Auth: React.FC = () => {
                             }}
                             sx={{
                                 textTransform: 'none',
-                                color: '#667eea',
+                                color: 'rgba(101, 70, 51, 0.8)',
                                 fontWeight: 'bold',
                                 '&:hover': {
-                                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                                    backgroundColor: 'rgba(101, 70, 51, 0.1)',
+                                    color: '#654633',
                                 }
                             }}
                             disabled={loading || !!oauthLoading}
