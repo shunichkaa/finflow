@@ -12,8 +12,6 @@ import {
     ListItem,
     ListItemButton,
     ListItemText,
-    Menu,
-    MenuItem,
     Toolbar,
     Typography
 } from '@mui/material';
@@ -22,15 +20,12 @@ import {
     Brightness7,
     ChevronLeft,
     Close,
-    CurrencyExchange,
-    Language,
     Menu as MenuIcon
 } from '@mui/icons-material';
 import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useThemeMode} from '../Budgets/theme/ThemeContext';
 import {supabase} from '../lib/supabaseClient';
-import getSymbolFromCurrency from 'currency-symbol-map';
 
 const drawerWidth = 280;
 
@@ -43,12 +38,13 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     const navigate = useNavigate();
     const location = useLocation();
     const {mode, toggleTheme} = useThemeMode();
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(defaultSidebarOpen);
-    const [languageAnchor, setLanguageAnchor] = useState<null | HTMLElement>(null);
-    const [currencyAnchor, setCurrencyAnchor] = useState<null | HTMLElement>(null);
+    
+    // Скрываем боковую панель на странице логина
+    const isLoginPage = location.pathname === '/login';
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -63,65 +59,13 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
         navigate('/login');
     };
 
-    const handleLanguageClick = (event: React.MouseEvent<HTMLElement>) => {
-        setLanguageAnchor(event.currentTarget);
-    };
 
-    const handleCurrencyClick = (event: React.MouseEvent<HTMLElement>) => {
-        setCurrencyAnchor(event.currentTarget);
-    };
-
-    const handleLanguageClose = () => {
-        setLanguageAnchor(null);
-    };
-
-    const handleCurrencyClose = () => {
-        setCurrencyAnchor(null);
-    };
-
-    const changeLanguage = (lng: string) => {
-        i18n.changeLanguage(lng);
-        handleLanguageClose();
-    };
-
-    const languages = [
-        {code: 'ru', name: 'Русский', nativeName: 'Русский'},
-        {code: 'en', name: 'English', nativeName: 'English'},
-        {code: 'fr', name: 'French', nativeName: 'Français'},
-        {code: 'de', name: 'German', nativeName: 'Deutsch'},
-        {code: 'es', name: 'Spanish', nativeName: 'Español'},
-        {code: 'me', name: 'Montenegrin', nativeName: 'Crnogorski'},
-    ];
-
-    // Самые популярные валюты мира (USD и EUR наверху)
-    const currencies = [
-        {code: 'USD', name: 'US Dollar'},
-        {code: 'EUR', name: 'Euro'},
-        {code: 'GBP', name: 'British Pound'},
-        {code: 'JPY', name: 'Japanese Yen'},
-        {code: 'CAD', name: 'Canadian Dollar'},
-        {code: 'AUD', name: 'Australian Dollar'},
-        {code: 'CHF', name: 'Swiss Franc'},
-        {code: 'CNY', name: 'Chinese Yuan'},
-        {code: 'RUB', name: 'Russian Ruble'},
-        {code: 'UAH', name: 'Ukrainian Hryvnia'},
-        {code: 'PLN', name: 'Polish Zloty'},
-        {code: 'TRY', name: 'Turkish Lira'},
-        {code: 'AED', name: 'UAE Dirham'},
-        {code: 'SAR', name: 'Saudi Riyal'},
-        {code: 'KRW', name: 'South Korean Won'},
-        {code: 'SGD', name: 'Singapore Dollar'},
-        {code: 'NZD', name: 'New Zealand Dollar'},
-        {code: 'MXN', name: 'Mexican Peso'},
-        {code: 'BRL', name: 'Brazilian Real'},
-        {code: 'INR', name: 'Indian Rupee'},
-    ];
 
     const navItems = [
         {path: '/dashboard', label: t('dashboard')},
         {path: '/analytics', label: t('analytics')},
         {path: '/budgets', label: t('budgets')},
-        {path: '/profile', label: '👤 Личный кабинет'},
+        {path: '/profile', label: 'Личный кабинет'},
     ];
 
     const drawer = (
@@ -199,7 +143,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     }
                                 }}
                             >
-                                💰 {t('appName')}
+                                {t('appName')}
                             </Typography>
                             <Typography
                                 variant="caption"
@@ -265,70 +209,13 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 </List>
             </Box>
 
-            {/* Кнопки смены языка и валюты - в самом низу */}
+            {/* Кнопка выхода - в самом низу */}
             <Divider sx={{
                 borderColor: mode === 'dark' 
                     ? 'rgba(123, 167, 209, 0.3)' 
                     : 'rgba(184, 212, 240, 0.3)'
             }}/>
             <Box sx={{ p: 2 }}>
-                <Button
-                    startIcon={<Language/>}
-                    onClick={handleLanguageClick}
-                    fullWidth
-                    variant="outlined"
-                    sx={{
-                        mb: 1,
-                        borderColor: mode === 'dark' 
-                            ? 'rgba(123, 167, 209, 0.5)' 
-                            : 'rgba(184, 212, 240, 0.5)',
-                        color: mode === 'dark' ? '#F5F5DC' : '#654633',
-                        transition: (theme) => theme.transitions.create(['border-color', 'background-color', 'transform'], {
-                            easing: theme.transitions.easing.easeInOut,
-                            duration: theme.transitions.duration.standard,
-                        }),
-                        '&:hover': {
-                            borderColor: mode === 'dark' 
-                                ? 'rgba(123, 167, 209, 0.8)' 
-                                : 'rgba(184, 212, 240, 0.8)',
-                            backgroundColor: mode === 'dark' 
-                                ? 'rgba(123, 167, 209, 0.1)' 
-                                : 'rgba(184, 212, 240, 0.1)',
-                            transform: 'translateY(-3px)',
-                        }
-                    }}
-                >
-                    {t('settings.language')}
-                </Button>
-                <Button
-                    startIcon={<CurrencyExchange/>}
-                    onClick={handleCurrencyClick}
-                    fullWidth
-                    variant="outlined"
-                    sx={{
-                        mb: 2,
-                        borderColor: mode === 'dark' 
-                            ? 'rgba(123, 167, 209, 0.5)' 
-                            : 'rgba(184, 212, 240, 0.5)',
-                        color: mode === 'dark' ? '#F5F5DC' : '#654633',
-                        transition: (theme) => theme.transitions.create(['border-color', 'background-color', 'transform'], {
-                            easing: theme.transitions.easing.easeInOut,
-                            duration: theme.transitions.duration.standard,
-                        }),
-                        '&:hover': {
-                            borderColor: mode === 'dark' 
-                                ? 'rgba(123, 167, 209, 0.8)' 
-                                : 'rgba(184, 212, 240, 0.8)',
-                            backgroundColor: mode === 'dark' 
-                                ? 'rgba(123, 167, 209, 0.1)' 
-                                : 'rgba(184, 212, 240, 0.1)',
-                            transform: 'translateY(-3px)',
-                        }
-                    }}
-                >
-                    {t('settings.currency')}
-                </Button>
-
                 <Button
                     onClick={handleLogout}
                     fullWidth
@@ -358,76 +245,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 </Button>
             </Box>
 
-            {/* Меню выбора языка */}
-            <Menu
-                anchorEl={languageAnchor}
-                open={Boolean(languageAnchor)}
-                onClose={handleLanguageClose}
-                PaperProps={{
-                    style: {
-                        maxHeight: 300,
-                        backgroundColor: mode === 'dark' ? 'rgba(60, 55, 50, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-                        border: mode === 'dark' ? '1px solid rgba(80, 75, 70, 0.3)' : '1px solid rgba(0, 0, 0, 0.1)',
-                        backdropFilter: 'blur(10px)',
-                    },
-                }}
-            >
-                {languages.map((language) => (
-                    <MenuItem
-                        key={language.code}
-                        onClick={() => changeLanguage(language.code)}
-                        selected={i18n.language === language.code}
-                        sx={{
-                            color: mode === 'dark' ? '#E8F4F8' : '#654633',
-                            '&:hover': {
-                                backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(0, 0, 0, 0.04)',
-                            },
-                            '&.Mui-selected': {
-                                backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.5)' : 'rgba(0, 0, 0, 0.08)',
-                            }
-                        }}
-                    >
-                        {language.nativeName}
-                    </MenuItem>
-                ))}
-            </Menu>
-
-            {/* Меню выбора валюты */}
-            <Menu
-                anchorEl={currencyAnchor}
-                open={Boolean(currencyAnchor)}
-                onClose={handleCurrencyClose}
-                PaperProps={{
-                    style: {
-                        maxHeight: 400,
-                        backgroundColor: mode === 'dark' ? 'rgba(60, 55, 50, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-                        border: mode === 'dark' ? '1px solid rgba(80, 75, 70, 0.3)' : '1px solid rgba(0, 0, 0, 0.1)',
-                        backdropFilter: 'blur(10px)',
-                    },
-                }}
-            >
-                {currencies.map((currency) => {
-                    const symbol = getSymbolFromCurrency(currency.code);
-                    const displaySymbol = symbol && symbol !== currency.code ? symbol : '';
-                    return (
-                        <MenuItem
-                            key={currency.code}
-                            onClick={handleCurrencyClose}
-                            sx={{
-                                color: mode === 'dark' ? '#E8F4F8' : '#654633',
-                                '&:hover': {
-                                    backgroundColor: mode === 'dark' ? 'rgba(60, 70, 80, 0.3)' : 'rgba(0, 0, 0, 0.04)',
-                                },
-                                '&.Mui-selected': {
-                                    backgroundColor: mode === 'dark' ? 'rgba(60, 70, 80, 0.5)' : 'rgba(0, 0, 0, 0.08)',
-                                }
-                            }}
-                        >
-                            {displaySymbol} {currency.code} - {currency.name}
-                        </MenuItem>
-                    );
-                })}
-            </Menu>
         </Box>
     );
 
@@ -440,8 +257,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 position="fixed"
                 sx={{
                     zIndex: (theme) => theme.zIndex.drawer + 1,
-                    width: {sm: sidebarOpen ? `calc(100% - ${drawerWidth}px)` : '100%'},
-                    ml: {sm: sidebarOpen ? `${drawerWidth}px` : 0},
+                    width: {sm: (sidebarOpen && !isLoginPage) ? `calc(100% - ${drawerWidth}px)` : '100%'},
+                    ml: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
                     backgroundColor: mode === 'dark' 
                         ? 'rgba(60, 55, 50, 0.8)'
                         : 'rgba(234, 234, 244, 0.5)',
@@ -515,7 +332,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                             }
                                         }}
                                     >
-                                        💰 {t('appName')}
+                                        {t('appName')}
                                     </Typography>
                                     <Typography
                                         variant="caption"
@@ -576,23 +393,24 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             </Drawer>
 
             {/* Desktop Sidebar */}
-            <Drawer
-                variant="permanent"
-                sx={{
-                    display: {xs: 'none', sm: 'block'},
-                    '& .MuiDrawer-paper': {
-                        boxSizing: 'border-box',
-                        width: sidebarOpen ? drawerWidth : 0,
-                        border: 'none',
-                        overflow: 'hidden',
-                        transition: (theme) => theme.transitions.create('width', {
-                            easing: theme.transitions.easing.easeInOut,
-                            duration: theme.transitions.duration.complex,
-                        }),
-                    },
-                }}
-                open={sidebarOpen}
-            >
+            {!isLoginPage && (
+                <Drawer
+                    variant="permanent"
+                    sx={{
+                        display: {xs: 'none', sm: 'block'},
+                        '& .MuiDrawer-paper': {
+                            boxSizing: 'border-box',
+                            width: sidebarOpen ? drawerWidth : 0,
+                            border: 'none',
+                            overflow: 'hidden',
+                            transition: (theme) => theme.transitions.create('width', {
+                                easing: theme.transitions.easing.easeInOut,
+                                duration: theme.transitions.duration.complex,
+                            }),
+                        },
+                    }}
+                    open={sidebarOpen}
+                >
                 <Box sx={{
                     opacity: sidebarOpen ? 1 : 0,
                     transition: (theme) => theme.transitions.create('opacity', {
@@ -603,6 +421,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     {drawer}
                 </Box>
             </Drawer>
+            )}
 
             {/* Main Content */}
             <Box
@@ -612,7 +431,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     p: {xs: 2, sm: 3},
                     width: '100%',
                     mt: {xs: 7, sm: 8},
-                    ml: {sm: sidebarOpen ? `${drawerWidth}px` : 0},
+                    ml: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
                     transition: (theme) => theme.transitions.create('margin', {
                         easing: theme.transitions.easing.easeInOut,
                         duration: theme.transitions.duration.complex,

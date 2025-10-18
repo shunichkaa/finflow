@@ -9,7 +9,6 @@ import {
     Select,
     MenuItem,
     FormControl,
-    InputLabel,
     Button,
     Divider,
     List,
@@ -35,37 +34,85 @@ import {
 } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
-import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
+import { useSettingsStore, Currency } from '../../Budgets/store/useSettingsStore';
 import { useAuth } from '../../Budgets/hooks/useAuth';
+import getSymbolFromCurrency from 'currency-symbol-map';
 
 export default function Profile() {
-    const { t } = useTranslation();
-    const { mode, toggleTheme } = useThemeMode();
-    const { currency, setCurrency } = useSettingsStore();
-    const { session } = useAuth();
-    const [language, setLanguage] = useState('ru');
-    const [iCloudSync, setICloudSync] = useState(false);
-    const [notifications, setNotifications] = useState(true);
-    const [backupEnabled, setBackupEnabled] = useState(true);
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarMessage, setSnackbarMessage] = useState('');
+    try {
+        const { i18n } = useTranslation();
+        const { mode, toggleTheme } = useThemeMode();
+        const { currency, setCurrency } = useSettingsStore();
+        const { session, loading: authLoading } = useAuth();
+        const [iCloudSync, setICloudSync] = useState(false);
+        const [notifications, setNotifications] = useState(true);
+        const [backupEnabled, setBackupEnabled] = useState(true);
+        const [snackbarOpen, setSnackbarOpen] = useState(false);
+        const [snackbarMessage, setSnackbarMessage] = useState('');
+
+        // Показываем загрузку пока аутентификация не завершена
+        if (authLoading) {
+            return (
+                <Container maxWidth="md" sx={{ py: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+                    <Typography variant="h6" sx={{ color: '#654633' }}>
+                        Загрузка...
+                    </Typography>
+                </Container>
+            );
+        }
 
     const currencies = [
-        { code: 'RUB', symbol: '₽', name: 'Российский рубль' },
-        { code: 'USD', symbol: '$', name: 'Доллар США' },
-        { code: 'EUR', symbol: '€', name: 'Евро' },
-        { code: 'GBP', symbol: '£', name: 'Фунт стерлингов' },
-        { code: 'CNY', symbol: '¥', name: 'Китайский юань' },
+        { code: 'RUB', name: 'Russian Ruble' },
+        { code: 'USD', name: 'US Dollar' },
+        { code: 'EUR', name: 'Euro' },
+        { code: 'GBP', name: 'British Pound' },
+        { code: 'JPY', name: 'Japanese Yen' },
+        { code: 'CAD', name: 'Canadian Dollar' },
+        { code: 'AUD', name: 'Australian Dollar' },
+        { code: 'CHF', name: 'Swiss Franc' },
+        { code: 'CNY', name: 'Chinese Yuan' },
+        { code: 'SEK', name: 'Swedish Krona' },
+        { code: 'NOK', name: 'Norwegian Krone' },
+        { code: 'DKK', name: 'Danish Krone' },
+        { code: 'PLN', name: 'Polish Zloty' },
+        { code: 'CZK', name: 'Czech Koruna' },
+        { code: 'HUF', name: 'Hungarian Forint' },
+        { code: 'BGN', name: 'Bulgarian Lev' },
+        { code: 'RON', name: 'Romanian Leu' },
+        { code: 'HRK', name: 'Croatian Kuna' },
+        { code: 'TRY', name: 'Turkish Lira' },
+        { code: 'UAH', name: 'Ukrainian Hryvnia' },
+        { code: 'KZT', name: 'Kazakhstani Tenge' },
+        { code: 'BYN', name: 'Belarusian Ruble' },
+        { code: 'MXN', name: 'Mexican Peso' },
+        { code: 'BRL', name: 'Brazilian Real' },
+        { code: 'INR', name: 'Indian Rupee' },
     ];
 
     const languages = [
-        { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-        { code: 'en', name: 'English', flag: '🇺🇸' },
-        { code: 'fr', name: 'Français', flag: '🇫🇷' },
-        { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-        { code: 'es', name: 'Español', flag: '🇪🇸' },
-        { code: 'me', name: 'Crnogorski', flag: '🇲🇪' },
+        { code: 'ru', nativeName: 'Русский' },
+        { code: 'en', nativeName: 'English' },
+        { code: 'fr', nativeName: 'Français' },
+        { code: 'de', nativeName: 'Deutsch' },
+        { code: 'es', nativeName: 'Español' },
+        { code: 'me', nativeName: 'Crnogorski' },
     ];
+
+    const changeLanguage = (languageCode: string) => {
+        if (i18n && i18n.changeLanguage) {
+            i18n.changeLanguage(languageCode);
+            setSnackbarMessage('Язык изменен');
+            setSnackbarOpen(true);
+        }
+    };
+
+    const handleCurrencyChange = (currencyCode: string) => {
+        if (setCurrency) {
+            setCurrency(currencyCode as Currency);
+            setSnackbarMessage('Валюта изменена');
+            setSnackbarOpen(true);
+        }
+    };
 
     const handleSave = () => {
         setSnackbarMessage('Настройки сохранены');
@@ -87,7 +134,7 @@ export default function Profile() {
     return (
         <Container maxWidth="md" sx={{ py: 4 }}>
             <Typography variant="h4" gutterBottom sx={{ mb: 4, color: mode === 'dark' ? '#F5F5DC' : '#654633' }}>
-                👤 Личный кабинет
+                Личный кабинет
             </Typography>
 
             {/* Профиль пользователя */}
@@ -128,7 +175,7 @@ export default function Profile() {
             {/* Настройки */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#F5F5DC' : '#654633' }}>
-                    ⚙️ Настройки
+                    Настройки
                 </Typography>
 
                 <List>
@@ -145,7 +192,7 @@ export default function Profile() {
                             control={
                                 <Switch
                                     checked={mode === 'dark'}
-                                    onChange={toggleTheme}
+                                    onChange={toggleTheme || (() => {})}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
                                             color: '#654633',
@@ -173,8 +220,8 @@ export default function Profile() {
                         />
                         <FormControl size="small" sx={{ minWidth: 120 }}>
                             <Select
-                                value={language}
-                                onChange={(e) => setLanguage(e.target.value)}
+                                value={i18n?.language || 'ru'}
+                                onChange={(e) => changeLanguage(e.target.value)}
                                 sx={{
                                     '& .MuiSelect-select': {
                                         color: mode === 'dark' ? '#F5F5DC' : '#654633',
@@ -183,7 +230,7 @@ export default function Profile() {
                             >
                                 {languages.map((lang) => (
                                     <MenuItem key={lang.code} value={lang.code}>
-                                        {lang.flag} {lang.name}
+                                        {lang.nativeName}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -203,19 +250,23 @@ export default function Profile() {
                         />
                         <FormControl size="small" sx={{ minWidth: 120 }}>
                             <Select
-                                value={currency}
-                                onChange={(e) => setCurrency(e.target.value)}
+                                value={currency || 'EUR'}
+                                onChange={(e) => handleCurrencyChange(e.target.value)}
                                 sx={{
                                     '& .MuiSelect-select': {
                                         color: mode === 'dark' ? '#F5F5DC' : '#654633',
                                     },
                                 }}
                             >
-                                {currencies.map((curr) => (
-                                    <MenuItem key={curr.code} value={curr.code}>
-                                        {curr.symbol} {curr.code}
-                                    </MenuItem>
-                                ))}
+                                {currencies.map((curr) => {
+                                    const symbol = getSymbolFromCurrency(curr.code);
+                                    const displaySymbol = symbol && symbol !== curr.code ? symbol : '';
+                                    return (
+                                        <MenuItem key={curr.code} value={curr.code}>
+                                            {displaySymbol} {curr.code} - {curr.name}
+                                        </MenuItem>
+                                    );
+                                })}
                             </Select>
                         </FormControl>
                     </ListItem>
@@ -255,7 +306,7 @@ export default function Profile() {
             {/* Синхронизация */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#F5F5DC' : '#654633' }}>
-                    ☁️ Синхронизация
+                    Синхронизация
                 </Typography>
 
                 <List>
@@ -320,7 +371,7 @@ export default function Profile() {
             {/* Управление данными */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#F5F5DC' : '#654633' }}>
-                    💾 Управление данными
+                    Управление данными
                 </Typography>
 
                 <Box display="flex" gap={2} flexWrap="wrap">
@@ -360,7 +411,7 @@ export default function Profile() {
             {/* Опасная зона */}
             <Paper sx={{ p: 3, borderRadius: 3, border: '2px solid #ff6b6b' }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 3, color: '#ff6b6b' }}>
-                    ⚠️ Опасная зона
+                    Опасная зона
                 </Typography>
 
                 <Alert severity="warning" sx={{ mb: 2 }}>
@@ -418,4 +469,14 @@ export default function Profile() {
             />
         </Container>
     );
+    } catch (error) {
+        console.error('Error in Profile component:', error);
+        return (
+            <Container maxWidth="md" sx={{ py: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+                <Typography variant="h6" sx={{ color: '#ff6b6b' }}>
+                    Произошла ошибка при загрузке страницы
+                </Typography>
+            </Container>
+        );
+    }
 }

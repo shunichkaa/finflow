@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export type Language = 'ru' | 'en' | 'me'; // ru - русский, en - английский, me - черногорский
-export type Currency = 'EUR' | 'USD' | 'RUB';
+export type Language = 'ru' | 'en' | 'fr' | 'de' | 'es' | 'me'; // ru - русский, en - английский, fr - французский, de - немецкий, es - испанский, me - черногорский
+export type Currency = 'EUR' | 'USD' | 'RUB' | 'GBP' | 'JPY' | 'CAD' | 'AUD' | 'CHF' | 'CNY' | 'SEK' | 'NOK' | 'DKK' | 'PLN' | 'CZK' | 'HUF' | 'BGN' | 'RON' | 'HRK' | 'TRY' | 'UAH' | 'KZT' | 'BYN' | 'MXN' | 'BRL' | 'INR';
 
 interface SettingsStore {
     language: Language;
