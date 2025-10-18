@@ -41,10 +41,7 @@ const Analytics: React.FC = () => {
             return txDate >= startDate;
         });
 
-        if (filtered.length === 0 && transactions.length > 0) {
-            return transactions;
-        }
-
+        // Возвращаем отфильтрованные транзакции, даже если их нет
         return filtered;
     }, [transactions, period]);
 
@@ -160,8 +157,8 @@ const Analytics: React.FC = () => {
             <Box
                 sx={{
                     display: 'grid',
-                    gridTemplateColumns: {xs: '1fr 1fr', md: 'repeat(4, 1fr)'},
-                    gap: 3,
+                    gridTemplateColumns: {xs: '1fr', sm: '1fr 1fr', md: 'repeat(4, 1fr)'},
+                    gap: {xs: 2, sm: 3},
                     mb: 4
                 }}
             >
@@ -267,7 +264,7 @@ const Analytics: React.FC = () => {
             </Box>
 
             {/* Charts */}
-            <Box sx={{display: 'grid', gridTemplateColumns: {xs: '1fr', lg: '1fr 1fr'}, gap: 3}}>
+            <Box sx={{display: 'grid', gridTemplateColumns: {xs: '1fr', lg: '1fr 1fr'}, gap: {xs: 2, sm: 3}}}>
                 <Paper 
                     elevation={3} 
                     sx={{

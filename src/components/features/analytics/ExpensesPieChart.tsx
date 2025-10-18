@@ -21,14 +21,14 @@ export interface ExpensesPieChartProps {
 }
 
 const COLORS = [
-    '#FFB3BA',
-    '#BAE1FF',
-    '#BAFFC9',
-    '#FFF3BA',
-    '#D7BAFF',
-    '#FFD8BA',
-    '#E2F0CB',
-    '#F0F0F0',
+    '#fca5a5',
+    '#7dd3fc',
+    '#6ee7b7',
+    '#fbbf24',
+    '#a5b4fc',
+    '#f9a8d4',
+    '#67e8f9',
+    '#94a3b8',
 ];
 
 export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
@@ -132,8 +132,9 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                         formatter={(value: number) => formatCurrency(value, currency)}
                         contentStyle={{
                             backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                            border: '1px solid #ccc',
+                            border: '1px solid rgba(148, 163, 184, 0.2)',
                             borderRadius: '8px',
+                            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                         }}
                     />
                     <Legend

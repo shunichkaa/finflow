@@ -109,11 +109,12 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
     return (
         <Box>
             <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3"/>
+                <LineChart data={chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.2)"/>
                     <XAxis
                         dataKey="date"
                         tick={{fontSize: 12}}
+                        interval="preserveStartEnd"
                     />
                     <YAxis
                         tick={{fontSize: 12}}
@@ -123,8 +124,9 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         formatter={(value: number) => formatCurrency(value, currency)}
                         contentStyle={{
                             backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                            border: '1px solid #ccc',
+                            border: '1px solid rgba(148, 163, 184, 0.2)',
                             borderRadius: '8px',
+                            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                         }}
                     />
                     <Legend/>
@@ -132,7 +134,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         type="monotone"
                         dataKey="income"
                         name={t('income')}
-                        stroke="#4caf50"
+                        stroke="#10b981"
                         strokeWidth={2}
                         dot={{r: 4}}
                         activeDot={{r: 6}}
@@ -141,7 +143,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         type="monotone"
                         dataKey="expense"
                         name={t('expense')}
-                        stroke="#f44336"
+                        stroke="#ef4444"
                         strokeWidth={2}
                         dot={{r: 4}}
                         activeDot={{r: 6}}
