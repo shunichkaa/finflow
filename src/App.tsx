@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import { Layout } from './components/Layout';
@@ -7,8 +6,8 @@ import { Auth } from './components/auth/Auth';
 import Dashboard from './BudgetList/pages/Dashboard';
 import Analytics from './BudgetList/pages/Analytics';
 import Budgets from './BudgetList/pages/Budgets';
-import { NotFound } from './pages/NotFound';
-import { ServerError } from './pages/ServerError';
+import NotFound from './pages/NotFound';
+import ServerError from './pages/ServerError';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 function App() {

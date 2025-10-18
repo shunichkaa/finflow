@@ -17,6 +17,7 @@ import {useTranslation} from 'react-i18next';
 import {useSettingsStore} from "../../../Budgets/store/useSettingsStore.ts";
 import {useRecurringStore} from "../../../Budgets/store/useRecurringStore.ts";
 import {useFinanceStore} from "../../../Budgets/store/useFinanceStore.ts";
+import {useThemeMode} from "../../../Budgets/theme/ThemeContext";
 import {formatCurrency} from "../../../Budgets/utils/formatters.ts";
 import {RecurringTransactionForm} from "./RecurringTransactionForm.tsx";
 import {RecurringTransaction} from "../../../Budgets/types/recurring.ts";
@@ -24,6 +25,7 @@ import {RecurringTransaction} from "../../../Budgets/types/recurring.ts";
 export const RecurringTransactions: React.FC = () => {
     const {t} = useTranslation();
     const {currency} = useSettingsStore();
+    const {mode} = useThemeMode();
 
     const recurring = useRecurringStore(state => state.recurring);
     const toggleRecurring = useRecurringStore(state => state.toggleRecurring);
