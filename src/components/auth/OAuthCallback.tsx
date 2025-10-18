@@ -12,6 +12,19 @@ export const OAuthCallback = () => {
             try {
                 console.log('OAuth callback started');
 
+                // Проверяем URL параметры на наличие ошибок
+                const urlParams = new URLSearchParams(window.location.search);
+                const hashParams = new URLSearchParams(window.location.hash.substring(1));
+                
+                const errorParam = urlParams.get('error') || hashParams.get('error');
+                const errorDescription = urlParams.get('error_description') || hashParams.get('error_description');
+
+                if (errorParam) {
+                    console.error('OAuth error from URL:', errorParam, errorDescription);
+                    setError(errorDescription || errorParam || 'Ошибка при входе через социальную сеть');
+                    return;
+                }
+
                 // Ждем обработки OAuth Supabase
                 const {data: {session}, error: sessionError} = await supabase.auth.getSession();
 
@@ -28,23 +41,15 @@ export const OAuthCallback = () => {
                     console.log('OAuth success, redirecting to dashboard');
                     navigate('/dashboard', {replace: true});
                 } else {
-                    // Проверяем hash параметры
-                    const hashParams = new URLSearchParams(window.location.hash.substring(1));
-                    const errorDescription = hashParams.get('error_description');
-
-                    if (errorDescription) {
-                        setError(errorDescription);
-                    } else {
-                        // Даем дополнительное время для обработки
-                        setTimeout(async () => {
-                            const {data: {session: retrySession}} = await supabase.auth.getSession();
-                            if (retrySession) {
-                                navigate('/dashboard', {replace: true});
-                            } else {
-                                setError('Не удалось войти. Попробуйте еще раз.');
-                            }
-                        }, 2000);
-                    }
+                    // Даем дополнительное время для обработки
+                    setTimeout(async () => {
+                        const {data: {session: retrySession}} = await supabase.auth.getSession();
+                        if (retrySession) {
+                            navigate('/dashboard', {replace: true});
+                        } else {
+                            setError('Не удалось войти. Попробуйте еще раз.');
+                        }
+                    }, 2000);
                 }
             } catch (error) {
                 console.error('OAuth callback error:', error);

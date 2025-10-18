@@ -15,6 +15,7 @@ import { Google, Login, PersonAdd } from '@mui/icons-material';
 import {supabase} from '../../lib/supabaseClient';
 import {useNavigate} from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import {AuthDebug} from './AuthDebug';
 
 export const Auth: React.FC = () => {
     const navigate = useNavigate();
@@ -287,6 +288,9 @@ export const Auth: React.FC = () => {
                     </Stack>
                 </Paper>
             </Fade>
+            
+            {/* Debug component - remove in production */}
+            {process.env.NODE_ENV === 'development' && <AuthDebug />}
         </Box>
     );
 };

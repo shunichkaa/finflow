@@ -7,10 +7,31 @@ interface Props {
 }
 
 export const ProtectedRoute = ({ children }: Props) => {
-    const { session, loading } =    useAuth();
+    const { session, loading, error } = useAuth();
 
-    if (loading) return <p>Загрузка...</p>;
-    if (!session) return <Navigate to="/login" replace />;
+    if (loading) {
+        return (
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                fontSize: '18px',
+                color: '#64748b'
+            }}>
+                Загрузка...
+            </div>
+        );
+    }
+
+    if (error) {
+        console.error('Auth error in ProtectedRoute:', error);
+        return <Navigate to="/login" replace />;
+    }
+    
+    if (!session) {
+        return <Navigate to="/login" replace />;
+    }
 
     return <>{children}</>;
 };
