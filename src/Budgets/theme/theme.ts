@@ -5,46 +5,50 @@ const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
         primary: {
-            main: '#B8D4F0', // Молочно-голубой
-            light: '#E8F4FD', // Очень светлый голубой
-            dark: '#7BA7D1', // Темно-голубой
-            contrastText: '#2C3E50',
+            main: '#0ea5e9', // Яркий голубой для акцентов
+            light: '#7dd3fc', // Светлый голубой
+            dark: '#0284c7', // Темный голубой
+            contrastText: '#ffffff',
         },
         secondary: {
-            main: '#C7E0F4', // Пастельный голубой
-            light: '#F0F8FF', // Очень светлый
-            dark: '#8BB8E8', // Средний голубой
-            contrastText: '#2C3E50',
+            main: '#64748b', // Нейтральный серо-голубой
+            light: '#94a3b8',
+            dark: '#475569',
+            contrastText: '#ffffff',
         },
         error: {
-            main: '#F5B7B1', // Пастельный розовый
-            light: '#FADBD8',
-            dark: '#E8A59B',
+            main: '#ef4444', // Четкий красный
+            light: '#fca5a5',
+            dark: '#dc2626',
+            contrastText: '#ffffff',
         },
         success: {
-            main: '#A9DFBF', // Пастельный зеленый
-            light: '#D5F4E6',
-            dark: '#7DCEA0',
+            main: '#10b981', // Четкий зеленый
+            light: '#6ee7b7',
+            dark: '#059669',
+            contrastText: '#ffffff',
         },
         warning: {
-            main: '#F9E79F', // Пастельный желтый
-            light: '#FCF3CF',
-            dark: '#F4D03F',
+            main: '#f59e0b', // Четкий оранжевый
+            light: '#fbbf24',
+            dark: '#d97706',
+            contrastText: '#ffffff',
         },
         info: {
-            main: '#AED6F1', // Пастельный синий
-            light: '#D6EAF8',
-            dark: '#85C1E9',
+            main: '#3b82f6', // Четкий синий
+            light: '#93c5fd',
+            dark: '#2563eb',
+            contrastText: '#ffffff',
         },
         background: {
-            default: '#F8FBFF', // Очень светлый молочно-голубой
-            paper: '#FFFFFF',
+            default: '#f8fafc', // Очень светлый серо-голубой
+            paper: '#ffffff',
         },
         text: {
-            primary: '#2C3E50', // Темно-серый
-            secondary: '#5D6D7E', // Средне-серый
+            primary: '#1e293b', // Темно-серый для отличной читаемости
+            secondary: '#64748b', // Средне-серый
         },
-        divider: 'rgba(184,212,240,0.3)'
+        divider: 'rgba(148, 163, 184, 0.2)'
     },
     typography: {
         fontFamily: [
@@ -77,16 +81,21 @@ const lightThemeOptions: ThemeOptions = {
                     textTransform: 'none',
                     fontWeight: 600,
                     padding: '10px 18px',
-                    borderRadius: 999,
+                    borderRadius: 12,
+                    boxShadow: 'none',
+                    '&:hover': {
+                        boxShadow: '0 4px 12px rgba(14, 165, 233, 0.15)',
+                    },
                 },
             },
         },
         MuiCard: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 8px 24px rgba(184, 212, 240, 0.15)',
-                    border: '1px solid rgba(184, 212, 240, 0.2)',
+                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
+                    border: '1px solid rgba(148, 163, 184, 0.1)',
                     borderRadius: 16,
+                    backgroundColor: '#ffffff',
                 },
             },
         },
@@ -94,17 +103,43 @@ const lightThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     boxShadow: 'none',
-                    borderBottom: '1px solid rgba(79,148,243,0.15)'
+                    borderBottom: '1px solid rgba(148, 163, 184, 0.1)',
+                    backgroundColor: '#ffffff',
                 }
             }
         },
         MuiPaper: {
             styleOverrides: {
                 elevation1: {
-                    boxShadow: '0 8px 24px rgba(33, 150, 243, 0.05)'
+                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)'
                 }
             }
-        }
+        },
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+                    '& .MuiOutlinedInput-root': {
+                        borderRadius: 12,
+                        backgroundColor: '#ffffff',
+                        '&:hover .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#0ea5e9',
+                        },
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#0ea5e9',
+                            borderWidth: 2,
+                        },
+                    },
+                },
+            },
+        },
+        MuiChip: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 8,
+                    fontWeight: 500,
+                },
+            },
+        },
     },
 };
 
@@ -112,46 +147,50 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#7BA7D1', // Темно-голубой для темной темы
-            light: '#B8D4F0',
-            dark: '#5A8BC4',
-            contrastText: '#FFFFFF',
+            main: '#0ea5e9', // Яркий голубой для акцентов
+            light: '#7dd3fc',
+            dark: '#0284c7',
+            contrastText: '#ffffff',
         },
         secondary: {
-            main: '#8BB8E8', // Средний голубой
-            light: '#C7E0F4',
-            dark: '#6B9BD6',
-            contrastText: '#FFFFFF',
+            main: '#94a3b8', // Светлый серо-голубой
+            light: '#cbd5e1',
+            dark: '#64748b',
+            contrastText: '#ffffff',
         },
         error: {
-            main: '#E8A59B', // Пастельный розовый для темной темы
-            light: '#F5B7B1',
-            dark: '#D18B7F',
+            main: '#ef4444', // Четкий красный
+            light: '#fca5a5',
+            dark: '#dc2626',
+            contrastText: '#ffffff',
         },
         success: {
-            main: '#7DCEA0', // Пастельный зеленый для темной темы
-            light: '#A9DFBF',
-            dark: '#5BBF7A',
+            main: '#10b981', // Четкий зеленый
+            light: '#6ee7b7',
+            dark: '#059669',
+            contrastText: '#ffffff',
         },
         warning: {
-            main: '#F4D03F', // Пастельный желтый для темной темы
-            light: '#F9E79F',
-            dark: '#D4AC0D',
+            main: '#f59e0b', // Четкий оранжевый
+            light: '#fbbf24',
+            dark: '#d97706',
+            contrastText: '#ffffff',
         },
         info: {
-            main: '#85C1E9', // Пастельный синий для темной темы
-            light: '#AED6F1',
-            dark: '#5DADE2',
+            main: '#3b82f6', // Четкий синий
+            light: '#93c5fd',
+            dark: '#2563eb',
+            contrastText: '#ffffff',
         },
         background: {
-            default: '#1A2332', // Темно-синий фон
-            paper: '#243447', // Светлее для карточек
+            default: '#0f172a', // Очень темный сине-серый
+            paper: '#1e293b', // Светлее для карточек
         },
         text: {
-            primary: '#E8F4FD', // Светлый текст
-            secondary: '#B8D4F0', // Средний светлый
+            primary: '#f8fafc', // Очень светлый текст
+            secondary: '#cbd5e1', // Средний светлый
         },
-        divider: 'rgba(123,167,209,0.3)'
+        divider: 'rgba(148, 163, 184, 0.2)'
     },
     typography: {
         fontFamily: [
@@ -184,15 +223,21 @@ const darkThemeOptions: ThemeOptions = {
                     textTransform: 'none',
                     fontWeight: 600,
                     padding: '10px 18px',
-                    borderRadius: 999,
+                    borderRadius: 12,
+                    boxShadow: 'none',
+                    '&:hover': {
+                        boxShadow: '0 4px 12px rgba(14, 165, 233, 0.25)',
+                    },
                 },
             },
         },
         MuiCard: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 12px 32px rgba(79,148,243,0.12)',
-                    border: '1px solid rgba(79,148,243,0.18)'
+                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)',
+                    border: '1px solid rgba(148, 163, 184, 0.1)',
+                    borderRadius: 16,
+                    backgroundColor: '#1e293b',
                 },
             },
         },
@@ -200,17 +245,43 @@ const darkThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     boxShadow: 'none',
-                    borderBottom: '1px solid rgba(79,148,243,0.25)'
+                    borderBottom: '1px solid rgba(148, 163, 184, 0.1)',
+                    backgroundColor: '#1e293b',
                 }
             }
         },
         MuiPaper: {
             styleOverrides: {
                 elevation1: {
-                    boxShadow: '0 12px 32px rgba(79,148,243,0.12)'
+                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)'
                 }
             }
-        }
+        },
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+                    '& .MuiOutlinedInput-root': {
+                        borderRadius: 12,
+                        backgroundColor: '#1e293b',
+                        '&:hover .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#0ea5e9',
+                        },
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#0ea5e9',
+                            borderWidth: 2,
+                        },
+                    },
+                },
+            },
+        },
+        MuiChip: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 8,
+                    fontWeight: 500,
+                },
+            },
+        },
     },
 };
 

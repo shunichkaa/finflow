@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import {useSwipeGesture} from "../../Budgets/hooks/useSwipeGesture.ts";
+import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+import { useSwipeGesture } from "../../Budgets/hooks/useSwipeGesture.ts";
 
 
 interface NavItem {
@@ -20,7 +21,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                                                                       activeItem,
                                                                       onItemClick
                                                                   }) => {
-    const router = useRouter();
+    const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -78,123 +79,112 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
     const handleNavClick = (item: NavItem) => {
         onItemClick?.(item.id);
-        router.push(item.path);
+        navigate(item.path);
     };
 
     return (
-        <div className={`mobile-navigation ${isVisible ? 'visible' : 'hidden'}`}>
-            <style jsx>{`
-                .mobile-navigation {
-                    position: fixed;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    background: white;
-                    border-top: 1px solid #e0e0e0;
-                    padding: 8px 0;
-                    transition: transform 0.3s ease;
-                    z-index: 1000;
-                    backdrop-filter: blur(10px);
-                    background: rgba(255, 255, 255, 0.95);
-                }
-
-                .mobile-navigation.hidden {
-                    transform: translateY(100%);
-                }
-
-                .nav-content {
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    max-width: 500px;
-                    margin: 0 auto;
-                }
-
-                .nav-item {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    padding: 8px 12px;
-                    border: none;
-                    background: none;
-                    cursor: pointer;
-                    position: relative;
-                    min-width: 60px;
-                    border-radius: 12px;
-                    transition: all 0.2s ease;
-                }
-
-                .nav-item:active {
-                    background: rgba(25, 118, 210, 0.1);
-                    transform: scale(0.95);
-                }
-
-                .nav-item.active {
-                    color: #1976d2;
-                }
-
-                .nav-icon {
-                    font-size: 20px;
-                    margin-bottom: 4px;
-                    min-height: 24px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-
-                .nav-label {
-                    font-size: 12px;
-                    font-weight: 500;
-                }
-
-                .badge {
-                    position: absolute;
-                    top: 4px;
-                    right: 8px;
-                    background: #f44336;
-                    color: white;
-                    border-radius: 10px;
-                    min-width: 18px;
-                    height: 18px;
-                    font-size: 10px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 0 4px;
-                }
-
-                @media (max-width: 480px) {
-                    .nav-label {
-                        font-size: 10px;
-                    }
-
-                    .nav-item {
-                        padding: 8px 8px;
-                        min-width: 50px;
-                    }
-                }
-            `}</style>
-
-            <div className="nav-content">
+        <Box
+            sx={{
+                position: 'fixed',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                zIndex: 1000,
+                transform: isVisible ? 'translateY(0)' : 'translateY(100%)',
+                transition: 'transform 0.3s ease',
+                display: { xs: 'block', md: 'none' },
+                backdropFilter: 'blur(10px)',
+                backgroundColor: 'rgba(248, 250, 252, 0.95)',
+                borderTop: '1px solid rgba(148, 163, 184, 0.2)',
+                padding: '8px 0',
+            }}
+        >
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    alignItems: 'center',
+                    maxWidth: 500,
+                    margin: '0 auto',
+                }}
+            >
                 {navItems.map((item) => (
-                    <button
+                    <Box
                         key={item.id}
-                        className={`nav-item ${activeItem === item.id ? 'active' : ''}`}
+                        component="button"
                         onClick={() => handleNavClick(item)}
                         aria-label={item.label}
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            padding: '8px 12px',
+                            border: 'none',
+                            background: 'none',
+                            cursor: 'pointer',
+                            position: 'relative',
+                            minWidth: 60,
+                            borderRadius: '12px',
+                            transition: 'all 0.2s ease',
+                            color: activeItem === item.id ? '#0ea5e9' : '#64748b',
+                            '&:active': {
+                                backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                                transform: 'scale(0.95)',
+                            },
+                            '&:hover': {
+                                backgroundColor: 'rgba(14, 165, 233, 0.05)',
+                            },
+                        }}
                     >
-                        <div className="nav-icon">
+                        <Box
+                            sx={{
+                                fontSize: '20px',
+                                marginBottom: '4px',
+                                minHeight: 24,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                position: 'relative',
+                            }}
+                        >
                             {item.icon}
-                            {item.badge && <span className="badge">{item.badge}</span>}
-                        </div>
-                        <span className="nav-label">{item.label}</span>
-                    </button>
+                            {item.badge && (
+                                <Box
+                                    sx={{
+                                        position: 'absolute',
+                                        top: -4,
+                                        right: -8,
+                                        backgroundColor: '#ef4444',
+                                        color: 'white',
+                                        borderRadius: '10px',
+                                        minWidth: 18,
+                                        height: 18,
+                                        fontSize: '10px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: '0 4px',
+                                    }}
+                                >
+                                    {item.badge}
+                                </Box>
+                            )}
+                        </Box>
+                        <Box
+                            sx={{
+                                fontSize: { xs: '10px', sm: '12px' },
+                                fontWeight: 500,
+                            }}
+                        >
+                            {item.label}
+                        </Box>
+                    </Box>
                 ))}
-            </div>
+            </Box>
 
             {/* Safe area для iPhone */}
-            <div style={{ height: 'env(safe-area-inset-bottom)' }} />
-        </div>
+            <Box sx={{ height: 'env(safe-area-inset-bottom)' }} />
+        </Box>
     );
 };
 
@@ -210,55 +200,68 @@ export const SwipeableTransactionItem: React.FC<{
         threshold: 60
     });
 
+    const getTransformX = () => {
+        if (swipeState.direction === 'left') {
+            return -Math.min(swipeState.distance * 0.3, 80);
+        } else if (swipeState.direction === 'right') {
+            return Math.min(swipeState.distance * 0.3, 80);
+        }
+        return 0;
+    };
+
     return (
-        <div className="swipeable-item" {...swipeProps}>
-            <style jsx>{`
-                .swipeable-item {
-                    position: relative;
-                    transition: transform 0.2s ease;
-                    transform: translateX(${swipeState.direction === 'left' ? -Math.min(swipeState.distance * 0.3, 80) :
-                            swipeState.direction === 'right' ? Math.min(swipeState.distance * 0.3, 80) : 0}px);
-                }
-
-                .swipeable-item:active {
-                    background: #f5f5f5;
-                }
-
-                .swipe-background {
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    width: 80px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                    font-weight: bold;
-                    transition: opacity 0.2s ease;
-                }
-
-                .delete-background {
-                    right: 0;
-                    background: #f44336;
-                    opacity: ${swipeState.direction === 'left' ? 0.9 : 0};
-                }
-
-                .edit-background {
-                    left: 0;
-                    background: #1976d2;
-                    opacity: ${swipeState.direction === 'right' ? 0.9 : 0};
-                }
-            `}</style>
-
-            <div className="swipe-background delete-background">
+        <Box
+            {...swipeProps}
+            sx={{
+                position: 'relative',
+                transition: 'transform 0.2s ease',
+                transform: `translateX(${getTransformX()}px)`,
+                '&:active': {
+                    backgroundColor: '#f8fafc',
+                },
+            }}
+        >
+            <Box
+                sx={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    right: 0,
+                    width: 80,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    transition: 'opacity 0.2s ease',
+                    backgroundColor: '#ef4444',
+                    opacity: swipeState.direction === 'left' ? 0.9 : 0,
+                }}
+            >
                 Удалить
-            </div>
+            </Box>
 
-            <div className="swipe-background edit-background">
+            <Box
+                sx={{
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    width: 80,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontWeight: 'bold',
+                    transition: 'opacity 0.2s ease',
+                    backgroundColor: '#0ea5e9',
+                    opacity: swipeState.direction === 'right' ? 0.9 : 0,
+                }}
+            >
                 Редактировать
-            </div>
+            </Box>
 
             {children}
-        </div>
+        </Box>
     );
 };

@@ -60,13 +60,14 @@ const Budgets: React.FC = () => {
                         flex: 1,
                         p: 2,
                         borderRadius: 2,
-                        bgcolor: 'primary.light',
-                        color: 'primary.contrastText'
+                        bgcolor: 'rgba(14, 165, 233, 0.1)',
+                        border: '1px solid rgba(14, 165, 233, 0.2)',
+                        color: 'primary.main'
                     }}>
                         <Typography variant="h6" fontWeight="bold">
                             {totalBudgets}
                         </Typography>
-                        <Typography variant="body2">
+                        <Typography variant="body2" color="text.secondary">
                             {t('totalBudgets')}
                         </Typography>
                     </Box>
@@ -74,13 +75,14 @@ const Budgets: React.FC = () => {
                         flex: 1,
                         p: 2,
                         borderRadius: 2,
-                        bgcolor: exceededBudgets > 0 ? 'error.light' : 'success.light',
-                        color: exceededBudgets > 0 ? 'error.contrastText' : 'success.contrastText'
+                        bgcolor: exceededBudgets > 0 ? 'rgba(239, 68, 68, 0.1)' : 'rgba(16, 185, 129, 0.1)',
+                        border: exceededBudgets > 0 ? '1px solid rgba(239, 68, 68, 0.2)' : '1px solid rgba(16, 185, 129, 0.2)',
+                        color: exceededBudgets > 0 ? 'error.main' : 'success.main'
                     }}>
                         <Typography variant="h6" fontWeight="bold">
                             {exceededBudgets}
                         </Typography>
-                        <Typography variant="body2">
+                        <Typography variant="body2" color="text.secondary">
                             {t('exceededBudgets')}
                         </Typography>
                     </Box>
