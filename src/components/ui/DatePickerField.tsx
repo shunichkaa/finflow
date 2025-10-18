@@ -9,6 +9,7 @@ import 'dayjs/locale/fr';
 import 'dayjs/locale/de';
 import 'dayjs/locale/es';
 import { useTranslation } from 'react-i18next';
+import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 interface DatePickerFieldProps {
     label: string;
@@ -18,6 +19,7 @@ interface DatePickerFieldProps {
 
 export const DatePickerField: React.FC<DatePickerFieldProps> = ({ label, value, onChange }) => {
     const { i18n } = useTranslation();
+    const { mode } = useThemeMode();
 
     // Маппинг языков
     const localeMap: Record<string, string> = {
@@ -46,7 +48,16 @@ export const DatePickerField: React.FC<DatePickerFieldProps> = ({ label, value, 
                 slotProps={{
                     textField: {
                         size: 'small',
-                        fullWidth: true,
+                        sx: {
+                            minWidth: 130,
+                            '& .MuiOutlinedInput-root': {
+                                backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
+                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                            }
+                        }
                     },
                 }}
             />

@@ -103,14 +103,14 @@ const Analytics: React.FC = () => {
                     exclusive
                     onChange={(_, value) => value && setPeriod(value)}
                     sx={{
-                        bgcolor: mode === 'dark' ? 'rgba(26, 35, 50, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+                        bgcolor: mode === 'dark' ? 'rgba(60, 55, 50, 0.6)' : 'rgba(255, 255, 255, 0.8)',
                         borderRadius: 3,
                         p: 0.5,
                         boxShadow: mode === 'dark' 
-                            ? '0 4px 12px rgba(123, 167, 209, 0.2)'
+                            ? '0 4px 12px rgba(80, 75, 70, 0.3)'
                             : '0 4px 12px rgba(184, 212, 240, 0.2)',
                         border: mode === 'dark' 
-                            ? '1px solid rgba(123, 167, 209, 0.3)'
+                            ? '1px solid rgba(80, 75, 70, 0.4)'
                             : '1px solid rgba(184, 212, 240, 0.3)',
                     }}
                 >
@@ -122,15 +122,15 @@ const Analytics: React.FC = () => {
                             py: 1.5,
                             fontWeight: 'bold',
                             textTransform: 'none',
-                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
-                                    ? 'rgba(101, 70, 51, 0.5)'
+                                    ? 'rgba(80, 75, 70, 0.6)'
                                     : 'rgba(234, 234, 244, 0.5)',
-                                color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
                                 '&:hover': {
                                     bgcolor: mode === 'dark' 
-                                        ? 'rgba(255, 185, 141, 0.3)'
+                                        ? 'rgba(100, 95, 90, 0.4)'
                                         : 'rgba(255, 185, 141, 0.3)',
                                 }
                             }
@@ -146,15 +146,15 @@ const Analytics: React.FC = () => {
                             py: 1.5,
                             fontWeight: 'bold',
                             textTransform: 'none',
-                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
-                                    ? 'rgba(101, 70, 51, 0.5)'
+                                    ? 'rgba(80, 75, 70, 0.6)'
                                     : 'rgba(234, 234, 244, 0.5)',
-                                color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
                                 '&:hover': {
                                     bgcolor: mode === 'dark' 
-                                        ? 'rgba(255, 185, 141, 0.3)'
+                                        ? 'rgba(100, 95, 90, 0.4)'
                                         : 'rgba(255, 185, 141, 0.3)',
                                 }
                             }
@@ -170,15 +170,15 @@ const Analytics: React.FC = () => {
                             py: 1.5,
                             fontWeight: 'bold',
                             textTransform: 'none',
-                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
-                                    ? 'rgba(101, 70, 51, 0.5)'
+                                    ? 'rgba(80, 75, 70, 0.6)'
                                     : 'rgba(234, 234, 244, 0.5)',
-                                color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
                                 '&:hover': {
                                     bgcolor: mode === 'dark' 
-                                        ? 'rgba(255, 185, 141, 0.3)'
+                                        ? 'rgba(100, 95, 90, 0.4)'
                                         : 'rgba(255, 185, 141, 0.3)',
                                 }
                             }
@@ -443,7 +443,7 @@ const Analytics: React.FC = () => {
                                                 justifyContent: 'center',
                                                 fontWeight: 'bold',
                                                 fontSize: '1.1rem',
-                                                color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
                                                 border: mode === 'dark' 
                                                     ? '2px solid rgba(101, 70, 51, 0.3)'
                                                     : '2px solid rgba(101, 70, 51, 0.3)',
