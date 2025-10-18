@@ -49,6 +49,7 @@ const resources = {
             expenseDistribution: 'Распределение расходов',
             incomeVsExpenses: 'Доходы vs Расходы',
             noTransactionData: 'Нет данных о транзакциях',
+            noExpenseData: 'Нет данных о расходах',
             avgDailyExpense: 'Средний расход в день',
             transactionCount: 'Количество транзакций',
             totalTransactionsInPeriod: 'Всего транзакций за период',
@@ -186,6 +187,7 @@ const resources = {
             expenseDistribution: 'Expense Distribution',
             incomeVsExpenses: 'Income vs Expenses',
             noTransactionData: 'No transaction data',
+            noExpenseData: 'No expense data',
             avgDailyExpense: 'Average Daily Expense',
             transactionCount: 'Transaction Count',
             totalTransactionsInPeriod: 'Total transactions in period',
@@ -284,6 +286,7 @@ const resources = {
             expenseDistribution: 'Répartition des dépenses',
             incomeVsExpenses: 'Revenus vs Dépenses',
             noTransactionData: 'Aucune donnée de transaction',
+            noExpenseData: 'Aucune donnée de dépense',
 
             amount: 'Montant',
             category: 'Catégorie',
@@ -373,6 +376,7 @@ const resources = {
             expenseDistribution: 'Ausgabenverteilung',
             incomeVsExpenses: 'Einkommen vs Ausgaben',
             noTransactionData: 'Keine Transaktionsdaten',
+            noExpenseData: 'Keine Ausgabendaten',
 
             amount: 'Betrag',
             category: 'Kategorie',
@@ -462,6 +466,7 @@ const resources = {
             expenseDistribution: 'Distribución de gastos',
             incomeVsExpenses: 'Ingresos vs Gastos',
             noTransactionData: 'Sin datos de transacciones',
+            noExpenseData: 'Sin datos de gastos',
 
             amount: 'Cantidad',
             category: 'Categoría',
@@ -551,6 +556,7 @@ const resources = {
             expenseDistribution: 'Distribucija rashoda',
             incomeVsExpenses: 'Prihodi vs Rashodi',
             noTransactionData: 'Nema podataka o transakcijama',
+            noExpenseData: 'Nema podataka o rashodima',
 
             amount: 'Iznos',
             category: 'Kategorija',

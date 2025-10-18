@@ -132,6 +132,59 @@ const lightThemeOptions: ThemeOptions = {
                 },
             },
         },
+        MuiSelect: {
+            styleOverrides: {
+                root: {
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'rgba(101, 70, 51, 0.3)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'rgba(101, 70, 51, 0.6)',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'rgba(101, 70, 51, 0.8)',
+                    },
+                },
+            },
+        },
+        MuiMenu: {
+            styleOverrides: {
+                paper: {
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    borderRadius: 12,
+                    boxShadow: '0 8px 32px rgba(101, 70, 51, 0.1)',
+                },
+            },
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    color: '#654633',
+                    '&:hover': {
+                        backgroundColor: 'rgba(101, 70, 51, 0.1)',
+                    },
+                    '&.Mui-selected': {
+                        backgroundColor: 'rgba(101, 70, 51, 0.2)',
+                        '&:hover': {
+                            backgroundColor: 'rgba(101, 70, 51, 0.3)',
+                        },
+                    },
+                },
+            },
+        },
+        MuiPopover: {
+            styleOverrides: {
+                paper: {
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    borderRadius: 12,
+                    boxShadow: '0 8px 32px rgba(101, 70, 51, 0.1)',
+                },
+            },
+        },
         MuiChip: {
             styleOverrides: {
                 root: {
@@ -271,6 +324,59 @@ const darkThemeOptions: ThemeOptions = {
                             borderWidth: 2,
                         },
                     },
+                },
+            },
+        },
+        MuiSelect: {
+            styleOverrides: {
+                root: {
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'rgba(245, 245, 220, 0.3)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'rgba(245, 245, 220, 0.6)',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'rgba(245, 245, 220, 0.8)',
+                    },
+                },
+            },
+        },
+        MuiMenu: {
+            styleOverrides: {
+                paper: {
+                    backgroundColor: 'rgba(30, 41, 59, 0.95)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(245, 245, 220, 0.2)',
+                    borderRadius: 12,
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                },
+            },
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    color: '#F5F5DC',
+                    '&:hover': {
+                        backgroundColor: 'rgba(245, 245, 220, 0.1)',
+                    },
+                    '&.Mui-selected': {
+                        backgroundColor: 'rgba(245, 245, 220, 0.2)',
+                        '&:hover': {
+                            backgroundColor: 'rgba(245, 245, 220, 0.3)',
+                        },
+                    },
+                },
+            },
+        },
+        MuiPopover: {
+            styleOverrides: {
+                paper: {
+                    backgroundColor: 'rgba(30, 41, 59, 0.95)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(245, 245, 220, 0.2)',
+                    borderRadius: 12,
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
                 },
             },
         },
