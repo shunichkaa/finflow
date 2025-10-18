@@ -136,7 +136,7 @@ const Analytics: React.FC = () => {
                             }
                         }}
                     >
-                        📅 {t('week')}
+{t('week')}
                     </ToggleButton>
                     <ToggleButton 
                         value="month"
@@ -160,7 +160,7 @@ const Analytics: React.FC = () => {
                             }
                         }}
                     >
-                        📆 {t('month')}
+{t('month')}
                     </ToggleButton>
                     <ToggleButton 
                         value="year"
@@ -184,7 +184,7 @@ const Analytics: React.FC = () => {
                             }
                         }}
                     >
-                        🗓️ {t('year')}
+{t('year')}
                     </ToggleButton>
                 </ToggleButtonGroup>
             </Box>
@@ -395,7 +395,7 @@ const Analytics: React.FC = () => {
                     mt: 3,
                     borderRadius: 3,
                     background: mode === 'dark' 
-                        ? 'linear-gradient(135deg, #2D4A5A 0%, #1B2F3A 100%)'
+                        ? 'linear-gradient(135deg, #3D6A7A 0%, #2B4F5A 100%)'
                         : 'linear-gradient(135deg, #B8D4F0 0%, #C7E0F4 100%)',
                     color: mode === 'dark' ? '#E8F4FD' : '#2C3E50',
                     position: 'relative',
