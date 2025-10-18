@@ -87,13 +87,9 @@ export const Auth: React.FC = () => {
             });
 
             if (error) {
-                if (error.message.includes('provider is not enabled')) {
-                    setError(t('auth.providerNotEnabled', 'Этот способ входа временно недоступен. Пожалуйста, используйте вход по email.'));
-                } else {
-                    setError(error.message);
-                }
+                console.error('OAuth error:', error);
+                setError(error.message);
             }
-            // После успешного OAuth браузер автоматически перенаправит на /oauth-callback
         } catch (error: unknown) {
             const errorMessage = error instanceof Error
                 ? error.message
@@ -152,7 +148,6 @@ export const Auth: React.FC = () => {
                         </Typography>
                     </Box>
 
-                    {/* OAuth кнопки - только Google */}
                     <Stack spacing={1}>
                         <Button
                             variant="outlined"
