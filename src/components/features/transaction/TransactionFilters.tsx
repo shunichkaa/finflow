@@ -7,6 +7,7 @@ import {
     Stack,
     Button,
     Paper,
+    Typography,
 } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -46,17 +47,26 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
         <Paper sx={{ 
             p: 2, 
             mb: 2,
-            backgroundColor: mode === 'dark' ? 'rgba(60, 55, 50, 0.4)' : 'rgba(234, 234, 244, 0.2)',
-            border: mode === 'dark' ? '1px solid rgba(80, 75, 70, 0.3)' : '1px solid rgba(234, 234, 244, 0.3)',
+            backgroundColor: mode === 'dark' ? 'rgba(60, 55, 50, 0.6)' : 'rgba(234, 234, 244, 0.4)',
+            border: mode === 'dark' ? '1px solid rgba(80, 75, 70, 0.4)' : '1px solid rgba(234, 234, 244, 0.4)',
             borderRadius: 2
         }}>
             <Stack spacing={1.5}>
                 {/* Компактная строка с фильтрами */}
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems="center">
-                    <FilterListIcon sx={{ 
-                        color: mode === 'dark' ? '#F5F5DC' : '#654633',
-                        fontSize: 20
-                    }} />
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ xs: 'stretch', sm: 'center' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: { xs: 1, sm: 0 } }}>
+                        <FilterListIcon sx={{ 
+                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            fontSize: 20
+                        }} />
+                        <Typography variant="body2" sx={{ 
+                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                            fontWeight: 500,
+                            display: { xs: 'block', sm: 'none' }
+                        }}>
+                            {t('filters')}
+                        </Typography>
+                    </Box>
                     
                     {/* Тип транзакции */}
                     <TextField
@@ -66,7 +76,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         value={type}
                         onChange={(e) => onTypeChange(e.target.value as TransactionType | 'all')}
                         sx={{
-                            minWidth: 120,
+                            minWidth: { xs: '100%', sm: 120 },
                             '& .MuiOutlinedInput-root': {
                                 backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
                                 color: mode === 'dark' ? '#F5F5DC' : '#654633',
@@ -92,7 +102,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         value={category}
                         onChange={(e) => onCategoryChange(e.target.value)}
                         sx={{
-                            minWidth: 140,
+                            minWidth: { xs: '100%', sm: 140 },
                             '& .MuiOutlinedInput-root': {
                                 backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
                                 color: mode === 'dark' ? '#F5F5DC' : '#654633',
@@ -117,17 +127,19 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     </TextField>
 
                     {/* Даты */}
-                    <DatePickerField
-                        label={t('from')}
-                        value={dateFrom}
-                        onChange={onDateFromChange}
-                    />
+                    <Box sx={{ display: 'flex', gap: 1, width: { xs: '100%', sm: 'auto' } }}>
+                        <DatePickerField
+                            label={t('from')}
+                            value={dateFrom}
+                            onChange={onDateFromChange}
+                        />
 
-                    <DatePickerField
-                        label={t('to')}
-                        value={dateTo}
-                        onChange={onDateToChange}
-                    />
+                        <DatePickerField
+                            label={t('to')}
+                            value={dateTo}
+                            onChange={onDateToChange}
+                        />
+                    </Box>
 
                     {/* Кнопка сброса */}
                     <Button
@@ -136,7 +148,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         startIcon={<ClearIcon />}
                         onClick={onReset}
                         sx={{
-                            minWidth: 'auto',
+                            minWidth: { xs: '100%', sm: 'auto' },
                             px: 2,
                             borderColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.5)' : 'rgba(255, 185, 141, 0.5)',
                             color: mode === 'dark' ? '#F5F5DC' : '#654633',

@@ -54,22 +54,29 @@ export const Auth: React.FC = () => {
             if (mode === 'login') {
                 result = await supabase.auth.signInWithPassword({email, password});
                 if (result.error) {
+                    console.error('Login error:', result.error);
                     setError(result.error.message);
-                } else {
+                } else if (result.data.user) {
                     setSuccess(t('auth.loginSuccess', 'Вы успешно вошли!'));
                     setTimeout(() => {
                         navigate('/dashboard');
                     }, 500);
+                } else {
+                    setError(t('auth.loginFailed', 'Не удалось войти. Проверьте данные.'));
                 }
             } else {
                 result = await supabase.auth.signUp({email, password});
                 if (result.error) {
+                    console.error('Signup error:', result.error);
                     setError(result.error.message);
-                } else {
+                } else if (result.data.user) {
                     setSuccess(t('auth.signupSuccess', 'Регистрация успешна! Проверьте почту для подтверждения.'));
+                } else {
+                    setError(t('auth.signupFailed', 'Не удалось зарегистрироваться.'));
                 }
             }
         } catch (error) {
+            console.error('Auth error:', error);
             setError(t('auth.unknownError', 'Произошла неизвестная ошибка'));
         } finally {
             setLoading(false);
@@ -85,19 +92,25 @@ export const Auth: React.FC = () => {
                 provider: provider,
                 options: {
                     redirectTo: `${window.location.origin}/oauth-callback`,
+                    queryParams: {
+                        access_type: 'offline',
+                        prompt: 'consent',
+                    }
                 }
             });
 
             if (error) {
                 console.error('OAuth error:', error);
                 setError(error.message);
+                setOauthLoading(null);
             }
+            // Не устанавливаем setOauthLoading(null) здесь, так как происходит редирект
         } catch (error: unknown) {
+            console.error('OAuth catch error:', error);
             const errorMessage = error instanceof Error
                 ? error.message
                 : t('auth.oauthError', 'Ошибка при входе через социальную сеть');
             setError(errorMessage);
-        } finally {
             setOauthLoading(null);
         }
     };

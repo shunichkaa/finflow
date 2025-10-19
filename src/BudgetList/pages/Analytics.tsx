@@ -204,8 +204,8 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'rgba(101, 70, 51, 0.5)'
-                            : 'rgba(234, 234, 244, 0.5)',
+                            ? 'rgba(101, 70, 51, 0.8)'
+                            : 'rgba(234, 234, 244, 0.8)',
                         color: mode === 'dark' ? '#FCF9F9' : '#654633',
                         transition: 'all 0.3s ease',
                         '&:hover': {
@@ -231,8 +231,8 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'rgba(255, 185, 141, 0.5)'
-                            : 'rgba(255, 185, 141, 0.5)',
+                            ? 'rgba(255, 185, 141, 0.8)'
+                            : 'rgba(255, 185, 141, 0.8)',
                         color: mode === 'dark' ? '#FCF9F9' : '#654633',
                         transition: 'all 0.3s ease',
                         '&:hover': {
@@ -258,8 +258,8 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'rgba(254, 222, 233, 0.5)'
-                            : 'rgba(254, 222, 233, 0.5)',
+                            ? 'rgba(254, 222, 233, 0.8)'
+                            : 'rgba(254, 222, 233, 0.8)',
                         color: mode === 'dark' ? '#FCF9F9' : '#654633',
                         transition: 'all 0.3s ease',
                         '&:hover': {
@@ -285,8 +285,8 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'rgba(248, 229, 229, 0.5)'
-                            : 'rgba(248, 229, 229, 0.5)',
+                            ? 'rgba(248, 229, 229, 0.8)'
+                            : 'rgba(248, 229, 229, 0.8)',
                         color: mode === 'dark' ? '#FCF9F9' : '#654633',
                         transition: 'all 0.3s ease',
                         '&:hover': {
@@ -309,20 +309,22 @@ const Analytics: React.FC = () => {
             </Box>
 
             {/* Charts */}
-            <Box sx={{display: 'grid', gridTemplateColumns: {xs: '1fr', lg: '1fr 1fr'}, gap: {xs: 1.5, sm: 2, md: 3}, alignItems: 'start'}}>
+            <Box sx={{display: 'grid', gridTemplateColumns: {xs: '1fr', lg: '1fr 1fr'}, gap: {xs: 1.5, sm: 2, md: 3}, alignItems: 'stretch'}}>
                 <Paper 
                     elevation={3} 
                     sx={{
                         p: {xs: 2, sm: 3},
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, rgba(101, 70, 51, 0.3) 0%, rgba(101, 70, 51, 0.5) 100%)'
-                            : 'linear-gradient(135deg, rgba(234, 234, 244, 0.3) 0%, rgba(234, 234, 244, 0.5) 100%)',
+                            ? 'linear-gradient(135deg, rgba(101, 70, 51, 0.6) 0%, rgba(101, 70, 51, 0.8) 100%)'
+                            : 'linear-gradient(135deg, rgba(234, 234, 244, 0.6) 0%, rgba(234, 234, 244, 0.8) 100%)',
                         border: mode === 'dark' 
-                        ? '1px solid rgba(101, 70, 51, 0.2)'
-                        : '1px solid rgba(234, 234, 244, 0.2)',
+                        ? '1px solid rgba(101, 70, 51, 0.3)'
+                        : '1px solid rgba(234, 234, 244, 0.3)',
                         transition: 'all 0.3s ease',
-                        minHeight: 'fit-content',
+                        minHeight: '500px',
+                        display: 'flex',
+                        flexDirection: 'column',
                         '&:hover': {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark' 
@@ -338,7 +340,9 @@ const Analytics: React.FC = () => {
                     }}>
                         📊 {t('expenseDistribution')}
                     </Typography>
-                    <ExpensesPieChart transactions={filteredTransactions} noDataMessage={t('noTransactionData')}/>
+                    <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+                        <ExpensesPieChart transactions={filteredTransactions} noDataMessage={t('noTransactionData')}/>
+                    </Box>
                 </Paper>
 
                 <Paper 
@@ -347,12 +351,15 @@ const Analytics: React.FC = () => {
                         p: {xs: 2, sm: 3},
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, rgba(101, 70, 51, 0.3) 0%, rgba(101, 70, 51, 0.5) 100%)'
-                            : 'linear-gradient(135deg, rgba(234, 234, 244, 0.3) 0%, rgba(234, 234, 244, 0.5) 100%)',
+                            ? 'linear-gradient(135deg, rgba(101, 70, 51, 0.6) 0%, rgba(101, 70, 51, 0.8) 100%)'
+                            : 'linear-gradient(135deg, rgba(234, 234, 244, 0.6) 0%, rgba(234, 234, 244, 0.8) 100%)',
                         border: mode === 'dark' 
-                        ? '1px solid rgba(101, 70, 51, 0.2)'
-                        : '1px solid rgba(234, 234, 244, 0.2)',
+                        ? '1px solid rgba(101, 70, 51, 0.3)'
+                        : '1px solid rgba(234, 234, 244, 0.3)',
                         transition: 'all 0.3s ease',
+                        minHeight: '500px',
+                        display: 'flex',
+                        flexDirection: 'column',
                         '&:hover': {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark' 
@@ -368,8 +375,10 @@ const Analytics: React.FC = () => {
                     }}>
                         📈 {t('incomeVsExpenses')}
                     </Typography>
-                    <IncomeExpenseTrendChart transactions={filteredTransactions} period={period}
-                                             noDataMessage={t('noTransactionData')}/>
+                    <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+                        <IncomeExpenseTrendChart transactions={filteredTransactions} period={period}
+                                                 noDataMessage={t('noTransactionData')}/>
+                    </Box>
                 </Paper>
             </Box>
 
@@ -381,8 +390,8 @@ const Analytics: React.FC = () => {
                     mt: 3,
                     borderRadius: 3,
                     background: mode === 'dark' 
-                        ? 'rgba(101, 70, 51, 0.5)'
-                        : 'rgba(234, 234, 244, 0.5)',
+                        ? 'rgba(101, 70, 51, 0.8)'
+                        : 'rgba(234, 234, 244, 0.8)',
                     color: mode === 'dark' ? '#FCF9F9' : '#654633',
                     position: 'relative',
                     overflow: 'hidden',

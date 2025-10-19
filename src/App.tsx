@@ -4,6 +4,7 @@ import { CssBaseline } from '@mui/material';
 import { Layout } from './components/Layout';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { Auth } from './components/auth/Auth';
+import { OAuthCallback } from './components/auth/OAuthCallback';
 import Dashboard from './BudgetList/pages/Dashboard';
 import Analytics from './BudgetList/pages/Analytics';
 import Budgets from './BudgetList/pages/Budgets';
@@ -23,6 +24,7 @@ function App() {
               <Auth />
             </Layout>
           } />
+          <Route path="/oauth-callback" element={<OAuthCallback />} />
           <Route path="/error" element={<ServerError />} />
           <Route path="/" element={
             <ProtectedRoute>

@@ -28,8 +28,11 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
 
         // Защита от некорректных данных
         if (!transactions || !Array.isArray(transactions)) {
+            console.log('No transactions data:', transactions);
             return data;
         }
+
+        console.log('Processing transactions:', transactions.length, 'for period:', period);
 
         if (period === 'week') {
             // Последние 7 дней
@@ -103,10 +106,11 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
             }
         }
 
+        console.log('Generated chart data:', data);
         return data;
     }, [transactions, period, t]);
 
-    if (chartData.every(d => d.income === 0 && d.expense === 0)) {
+    if (chartData.length === 0 || chartData.every(d => d.income === 0 && d.expense === 0)) {
         return (
             <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300}}>
                 <Typography color="text.secondary">{t('noTransactionData')}</Typography>
@@ -117,16 +121,20 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
     return (
         <Box>
             <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.2)"/>
+                <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.3)"/>
                     <XAxis
                         dataKey="date"
-                        tick={{fontSize: 12}}
+                        tick={{fontSize: 12, fill: '#64748b'}}
                         interval="preserveStartEnd"
+                        axisLine={{stroke: '#e2e8f0'}}
+                        tickLine={{stroke: '#e2e8f0'}}
                     />
                     <YAxis
-                        tick={{fontSize: 12}}
-                        tickFormatter={(value) => `${value}`}
+                        tick={{fontSize: 12, fill: '#64748b'}}
+                        tickFormatter={(value) => formatCurrency(value, currency)}
+                        axisLine={{stroke: '#e2e8f0'}}
+                        tickLine={{stroke: '#e2e8f0'}}
                     />
                     <Tooltip
                         formatter={(value: number) => formatCurrency(value, currency)}
@@ -137,24 +145,30 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                         }}
                     />
-                    <Legend/>
+                    <Legend 
+                        wrapperStyle={{ 
+                            paddingTop: '20px',
+                            fontSize: '14px',
+                            color: '#64748b'
+                        }}
+                    />
                     <Line
                         type="monotone"
                         dataKey="income"
                         name={t('income')}
-                        stroke="#10b981"
-                        strokeWidth={2}
-                        dot={{r: 4}}
-                        activeDot={{r: 6}}
+                        stroke="#4ECDC4"
+                        strokeWidth={3}
+                        dot={{r: 5, fill: '#4ECDC4', stroke: '#fff', strokeWidth: 2}}
+                        activeDot={{r: 7, fill: '#4ECDC4', stroke: '#fff', strokeWidth: 2}}
                     />
                     <Line
                         type="monotone"
                         dataKey="expense"
                         name={t('expense')}
-                        stroke="#ef4444"
-                        strokeWidth={2}
-                        dot={{r: 4}}
-                        activeDot={{r: 6}}
+                        stroke="#FF6B6B"
+                        strokeWidth={3}
+                        dot={{r: 5, fill: '#FF6B6B', stroke: '#fff', strokeWidth: 2}}
+                        activeDot={{r: 7, fill: '#FF6B6B', stroke: '#fff', strokeWidth: 2}}
                     />
                 </LineChart>
             </ResponsiveContainer>

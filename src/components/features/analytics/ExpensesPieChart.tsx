@@ -22,14 +22,16 @@ export interface ExpensesPieChartProps {
 }
 
 const COLORS = [
-    '#fca5a5',
-    '#7dd3fc',
-    '#6ee7b7',
-    '#fbbf24',
-    '#a5b4fc',
-    '#f9a8d4',
-    '#67e8f9',
-    '#94a3b8',
+    '#FF6B6B', // Красный
+    '#4ECDC4', // Бирюзовый
+    '#45B7D1', // Голубой
+    '#96CEB4', // Зеленый
+    '#FFEAA7', // Желтый
+    '#DDA0DD', // Фиолетовый
+    '#98D8C8', // Мятный
+    '#F7DC6F', // Золотой
+    '#BB8FCE', // Лавандовый
+    '#85C1E9', // Светло-голубой
 ];
 
 export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
@@ -84,47 +86,55 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                                    outerRadius,
                                    percent,
                                }: PieLabelRenderProps) => {
-        if ((percent ?? 0) < 0.05) return null;
+        if ((percent ?? 0) < 0.08) return null; // Показываем проценты только для сегментов больше 8%
 
         const RADIAN = Math.PI / 180;
-        const radius =
-            Number(innerRadius) +
-            (Number(outerRadius) - Number(innerRadius)) * 0.5;
+        const radius = Number(innerRadius) + (Number(outerRadius) - Number(innerRadius)) * 0.5;
         const x = Number(cx) + radius * Math.cos(-Number(midAngle) * RADIAN);
         const y = Number(cy) + radius * Math.sin(-Number(midAngle) * RADIAN);
+
+        const percentage = Math.round(Number(percent) * 100);
 
         return (
             <text
                 x={x}
                 y={y}
                 fill="white"
-                textAnchor={x > Number(cx) ? 'start' : 'end'}
+                textAnchor="middle"
                 dominantBaseline="central"
-                fontSize={12}
-                fontWeight="bold"
+                fontSize="12"
+                fontWeight="600"
+                style={{ 
+                    fontFamily: 'system-ui, -apple-system, sans-serif',
+                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
+                    filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))'
+                }}
             >
-                {`${(Number(percent) * 100).toFixed(0)}%`}
+                {percentage}%
             </text>
         );
     };
 
-    // Динамически определяем высоту в зависимости от количества категорий
-    const legendHeight = Math.max(36, chartData.length * 20 + 20);
-    const chartHeight = 300 + legendHeight;
-
     return (
-        <Box>
-            <ResponsiveContainer width="100%" height={chartHeight}>
+        <Box sx={{ width: '100%', height: 400 }}>
+            <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                     <Pie
                         data={chartData}
                         cx="50%"
-                        cy="40%"
+                        cy="45%"
                         labelLine={false}
                         label={renderCustomLabel}
-                        outerRadius={80}
+                        outerRadius={110}
+                        innerRadius={40}
                         fill="#8884d8"
                         dataKey="value"
+                        stroke="#ffffff"
+                        strokeWidth={3}
+                        animationBegin={0}
+                        animationDuration={1000}
+                        animationEasing="ease-out"
+                        paddingAngle={2}
                     >
                         {chartData.map((_, index) => (
                             <Cell
@@ -134,33 +144,44 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                         ))}
                     </Pie>
                     <Tooltip
-                        formatter={(value: number) => formatCurrency(value, currency)}
+                        formatter={(value: number) => [formatCurrency(value, currency), 'Сумма']}
+                        labelFormatter={(label) => `Категория: ${label}`}
                         contentStyle={{
-                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                            border: '1px solid rgba(148, 163, 184, 0.2)',
-                            borderRadius: '8px',
-                            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                            backgroundColor: 'rgba(255, 255, 255, 0.98)',
+                            border: '1px solid rgba(0, 0, 0, 0.1)',
+                            borderRadius: '12px',
+                            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
+                            fontSize: '14px',
+                            color: '#2D3748',
                         }}
                     />
                     <Legend
                         verticalAlign="bottom"
-                        height={legendHeight}
+                        height={80}
                         wrapperStyle={{
                             paddingTop: '20px',
                             paddingBottom: '10px',
+                            fontSize: '12px',
+                            color: '#2D3748',
+                            fontFamily: 'system-ui, -apple-system, sans-serif',
                         }}
+                        iconType="rect"
+                        iconSize={12}
                         formatter={(value, entry) => {
                             const payloadValue = entry.payload?.value;
                             if (typeof payloadValue !== 'number') return value;
 
-                            const percentage = (
-                                (payloadValue / totalExpenses) *
-                                100
-                            ).toFixed(1);
-                            return `${value}: ${formatCurrency(
-                                payloadValue,
-                                currency
-                            )} (${percentage}%)`;
+                            const percentage = ((payloadValue / totalExpenses) * 100).toFixed(1);
+                            return (
+                                <span style={{ 
+                                    color: '#2D3748', 
+                                    fontWeight: '500',
+                                    fontSize: '12px',
+                                    lineHeight: '1.4'
+                                }}>
+                                    {value}: {formatCurrency(payloadValue, currency)} ({percentage}%)
+                                </span>
+                            );
                         }}
                     />
                 </PieChart>

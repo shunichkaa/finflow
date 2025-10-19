@@ -66,6 +66,13 @@ export const getDaysLeftInPeriod = (period: 'monthly' | 'weekly'): number => {
         ? endOfWeek(now, { weekStartsOn: 1 })
         : endOfMonth(now);
 
-    const diff = periodEnd.getTime() - now.getTime();
-    return Math.ceil(diff / (1000 * 60 * 60 * 24));
+    // Устанавливаем время на конец дня для более точного расчета
+    const endOfToday = new Date(now);
+    endOfToday.setHours(23, 59, 59, 999);
+    
+    const diff = periodEnd.getTime() - endOfToday.getTime();
+    const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    
+    // Возвращаем максимум 0, чтобы не показывать отрицательные значения
+    return Math.max(0, daysLeft);
 };

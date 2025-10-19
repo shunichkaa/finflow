@@ -40,6 +40,20 @@ export interface Budget {
 }
 
 /**
+ * Цель/копилка - накопление на определенную цель
+ */
+export interface Goal {
+    id: string;
+    name: string;
+    targetAmount: number;
+    currentAmount: number;
+    description?: string;
+    targetDate?: Date;
+    createdAt: Date;
+    isCompleted: boolean;
+}
+
+/**
  * Категория - группировка транзакций
  */
 export interface Category {
@@ -57,6 +71,7 @@ export interface Category {
 
 export type CreateTransactionInput = Omit<Transaction, 'id' | 'createdAt'>;
 export type CreateBudgetInput = Omit<Budget, 'id'>;
+export type CreateGoalInput = Omit<Goal, 'id' | 'createdAt' | 'isCompleted'>;
 
 // ============================================
 // ФИЛЬТРЫ

@@ -3,6 +3,7 @@ import React from 'react';
 import { Box, Chip, Divider, IconButton, List, ListItem, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
@@ -27,6 +28,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
     const { currency } = useSettingsStore();
     const [editingTxId, setEditingTxId] = React.useState<string | null>(null);
     const [isEditOpen, setIsEditOpen] = React.useState(false);
+    const [isAddOpen, setIsAddOpen] = React.useState(false);
 
     const transactions = propTransactions || storeTransactions;
 
@@ -68,104 +70,237 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                 display: 'flex',
                                 alignItems: 'center',
                                 py: 2,
-                                px: 2,
-                                gap: 2,
+                                px: { xs: 1, sm: 2 },
+                                gap: { xs: 1, sm: 2 },
+                                flexDirection: { xs: 'column', sm: 'row' },
+                                alignItems: { xs: 'stretch', sm: 'center' },
                             }}
                         >
-                            {/* Иконка категории */}
-                            <Box
-                                onClick={() => { setEditingTxId(transaction.id); setIsEditOpen(true); }}
-                                role="button"
-                                aria-label={t('edit')}
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    width: 48,
-                                    height: 48,
-                                    borderRadius: 2,
-                                    bgcolor:
-                                        theme.palette.mode === 'dark'
-                                            ? category?.color + '40'
-                                            : category?.color,
-                                    color:
-                                        theme.palette.mode === 'dark'
-                                            ? category?.color
-                                            : '#4a5568',
-                                    flexShrink: 0,
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                {category?.icon ? getCategoryIcon(category.icon, 24) : (
-                                    <MoreHorizIcon sx={{ fontSize: 24 }} />
-                                )}
-                            </Box>
-
-                            {/* Информация о транзакции */}
-                            <Box sx={{ flexGrow: 1, minWidth: 0 }}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
-                                    <Typography variant="body1" fontWeight={600} noWrap>
-                                        {categoryName}
-                                    </Typography>
-                                    <Chip
-                                        label={t(transaction.type)}
+                            {/* Мобильная версия - вертикальная компоновка */}
+                            <Box sx={{ 
+                                display: { xs: 'flex', sm: 'none' }, 
+                                width: '100%', 
+                                flexDirection: 'column', 
+                                gap: 1 
+                            }}>
+                                {/* Верхняя строка: иконка, название, сумма */}
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <Box
+                                        onClick={() => { setEditingTxId(transaction.id); setIsEditOpen(true); }}
+                                        role="button"
+                                        aria-label={t('edit')}
                                         sx={{
-                                            backgroundColor: transaction.type === 'income' 
-                                                ? (mode === 'dark' ? 'rgba(254, 222, 233, 0.3)' : 'rgba(254, 222, 233, 0.5)')
-                                                : (mode === 'dark' ? 'rgba(255, 185, 141, 0.3)' : 'rgba(255, 185, 141, 0.5)'),
-                                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
-                                            fontWeight: 'bold'
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            width: 40,
+                                            height: 40,
+                                            borderRadius: 2,
+                                            bgcolor:
+                                                theme.palette.mode === 'dark'
+                                                    ? category?.color + '40'
+                                                    : category?.color,
+                                            color:
+                                                theme.palette.mode === 'dark'
+                                                    ? category?.color
+                                                    : '#4a5568',
+                                            flexShrink: 0,
+                                            cursor: 'pointer'
                                         }}
-                                        size="small"
-                                    />
+                                    >
+                                        {category?.icon ? getCategoryIcon(category.icon, 20) : (
+                                            <MoreHorizIcon sx={{ fontSize: 20 }} />
+                                        )}
+                                    </Box>
+                                    
+                                    <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+                                        <Typography variant="body1" fontWeight={600} noWrap>
+                                            {categoryName}
+                                        </Typography>
+                                    </Box>
+                                    
+                                    <Typography
+                                        variant="h6"
+                                        fontWeight="bold"
+                                        sx={{ 
+                                            whiteSpace: 'nowrap',
+                                            color: transaction.type === 'income' 
+                                                ? (mode === 'dark' ? '#FCF9F9' : '#654633')
+                                                : (mode === 'dark' ? '#FCF9F9' : '#654633')
+                                        }}
+                                    >
+                                        {transaction.type === 'income' ? '+' : '-'}
+                                        {formatCurrency(transaction.amount, currency)}
+                                    </Typography>
                                 </Box>
+                                
+                                {/* Нижняя строка: тип, дата, кнопки */}
+                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                        <Chip
+                                            label={t(transaction.type)}
+                                            sx={{
+                                                backgroundColor: transaction.type === 'income' 
+                                                    ? (mode === 'dark' ? 'rgba(254, 222, 233, 0.3)' : 'rgba(254, 222, 233, 0.5)')
+                                                    : (mode === 'dark' ? 'rgba(255, 185, 141, 0.3)' : 'rgba(255, 185, 141, 0.5)'),
+                                                color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                                fontWeight: 'bold'
+                                            }}
+                                            size="small"
+                                        />
+                                        <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.5)' : 'rgba(101, 70, 51, 0.5)' }}>
+                                            {formatDate(transaction.date)}
+                                        </Typography>
+                                    </Box>
+                                    
+                                    <IconButton
+                                        size="small"
+                                        color="error"
+                                        onClick={() => handleDelete(transaction.id)}
+                                    >
+                                        <DeleteIcon fontSize="small" />
+                                    </IconButton>
+                                </Box>
+                                
+                                {/* Описание (если есть) */}
                                 {transaction.description && (
                                     <Typography
                                         variant="body2"
                                         sx={{
-                                            overflow: 'hidden',
-                                            textOverflow: 'ellipsis',
-                                            whiteSpace: 'nowrap',
-                                            color: mode === 'dark' ? 'rgba(252, 249, 249, 0.7)' : 'rgba(101, 70, 51, 0.7)'
+                                            color: mode === 'dark' ? 'rgba(252, 249, 249, 0.7)' : 'rgba(101, 70, 51, 0.7)',
+                                            fontSize: '0.875rem'
                                         }}
                                     >
                                         {transaction.description}
                                     </Typography>
                                 )}
-                                <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.5)' : 'rgba(101, 70, 51, 0.5)' }}>
-                                    {formatDate(transaction.date)}
-                                </Typography>
                             </Box>
 
-                            {/* Сумма и кнопка удаления */}
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 1,
-                                    flexShrink: 0,
-                                }}
-                            >
-                                <Typography
-                                    variant="h6"
-                                    fontWeight="bold"
-                                    sx={{ 
-                                        whiteSpace: 'nowrap',
-                                        color: transaction.type === 'income' 
-                                            ? (mode === 'dark' ? '#FCF9F9' : '#654633') // Спокойный белый для темной темы, яркий коричневый для светлой
-                                            : (mode === 'dark' ? '#FCF9F9' : '#654633') // Тот же цвет для расходов, но с минусом
+                            {/* Десктопная версия - горизонтальная компоновка */}
+                            <Box sx={{ 
+                                display: { xs: 'none', sm: 'flex' }, 
+                                width: '100%', 
+                                alignItems: 'center', 
+                                gap: 2 
+                            }}>
+                                {/* Иконка категории */}
+                                <Box
+                                    onClick={() => { setEditingTxId(transaction.id); setIsEditOpen(true); }}
+                                    role="button"
+                                    aria-label={t('edit')}
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        width: 48,
+                                        height: 48,
+                                        borderRadius: 2,
+                                        bgcolor:
+                                            theme.palette.mode === 'dark'
+                                                ? category?.color + '40'
+                                                : category?.color,
+                                        color:
+                                            theme.palette.mode === 'dark'
+                                                ? category?.color
+                                                : '#4a5568',
+                                        flexShrink: 0,
+                                        cursor: 'pointer'
                                     }}
                                 >
-                                    {transaction.type === 'income' ? '+' : '-'}
-                                    {formatCurrency(transaction.amount, currency)}
-                                </Typography>
-                                <IconButton
-                                    size="small"
-                                    color="error"
-                                    onClick={() => handleDelete(transaction.id)}
+                                    {category?.icon ? getCategoryIcon(category.icon, 24) : (
+                                        <MoreHorizIcon sx={{ fontSize: 24 }} />
+                                    )}
+                                </Box>
+
+                                {/* Информация о транзакции */}
+                                <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+                                        <Typography variant="body1" fontWeight={600} noWrap>
+                                            {categoryName}
+                                        </Typography>
+                                        <Chip
+                                            label={t(transaction.type)}
+                                            sx={{
+                                                backgroundColor: transaction.type === 'income' 
+                                                    ? (mode === 'dark' ? 'rgba(254, 222, 233, 0.3)' : 'rgba(254, 222, 233, 0.5)')
+                                                    : (mode === 'dark' ? 'rgba(255, 185, 141, 0.3)' : 'rgba(255, 185, 141, 0.5)'),
+                                                color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                                fontWeight: 'bold'
+                                            }}
+                                            size="small"
+                                        />
+                                    </Box>
+                                    {transaction.description && (
+                                        <Typography
+                                            variant="body2"
+                                            sx={{
+                                                overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                                whiteSpace: 'nowrap',
+                                                color: mode === 'dark' ? 'rgba(252, 249, 249, 0.7)' : 'rgba(101, 70, 51, 0.7)'
+                                            }}
+                                        >
+                                            {transaction.description}
+                                        </Typography>
+                                    )}
+                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.5)' : 'rgba(101, 70, 51, 0.5)' }}>
+                                        {formatDate(transaction.date)}
+                                    </Typography>
+                                </Box>
+
+                                {/* Сумма и кнопки */}
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 1,
+                                        flexShrink: 0,
+                                    }}
                                 >
-                                    <DeleteIcon fontSize="small" />
-                                </IconButton>
+                                    <Typography
+                                        variant="h6"
+                                        fontWeight="bold"
+                                        sx={{ 
+                                            whiteSpace: 'nowrap',
+                                            color: transaction.type === 'income' 
+                                                ? (mode === 'dark' ? '#FCF9F9' : '#654633')
+                                                : (mode === 'dark' ? '#FCF9F9' : '#654633')
+                                        }}
+                                    >
+                                        {transaction.type === 'income' ? '+' : '-'}
+                                        {formatCurrency(transaction.amount, currency)}
+                                    </Typography>
+                                    
+                                    {/* Кнопка добавления транзакции */}
+                                    <IconButton
+                                        size="small"
+                                        onClick={() => setIsAddOpen(true)}
+                                        sx={{
+                                            width: 32,
+                                            height: 32,
+                                            backgroundColor: mode === 'dark' 
+                                                ? 'rgba(101, 70, 51, 0.3)' 
+                                                : 'rgba(234, 234, 244, 0.3)',
+                                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                            '&:hover': {
+                                                backgroundColor: mode === 'dark' 
+                                                    ? 'rgba(101, 70, 51, 0.5)' 
+                                                    : 'rgba(234, 234, 244, 0.5)',
+                                                transform: 'scale(1.1)',
+                                            }
+                                        }}
+                                    >
+                                        <AddIcon fontSize="small" />
+                                    </IconButton>
+                                    
+                                    <IconButton
+                                        size="small"
+                                        color="error"
+                                        onClick={() => handleDelete(transaction.id)}
+                                    >
+                                        <DeleteIcon fontSize="small" />
+                                    </IconButton>
+                                </Box>
                             </Box>
                         </ListItem>
                     </React.Fragment>
@@ -183,6 +318,17 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                         onSuccess={() => { setIsEditOpen(false); setEditingTxId(null); }}
                     />
                 )}
+            </Modal>
+            
+            {/* Add transaction modal */}
+            <Modal
+                open={isAddOpen}
+                onClose={() => setIsAddOpen(false)}
+                title={t('newTransaction')}
+            >
+                <TransactionForm
+                    onSuccess={() => setIsAddOpen(false)}
+                />
             </Modal>
         </List>
     );
