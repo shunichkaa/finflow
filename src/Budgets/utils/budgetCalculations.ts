@@ -73,6 +73,6 @@ export const getDaysLeftInPeriod = (period: 'monthly' | 'weekly'): number => {
     const diff = periodEnd.getTime() - endOfToday.getTime();
     const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
     
-    // Возвращаем максимум 1, чтобы показать "последний день" когда остается 0 дней
-    return Math.max(1, daysLeft);
+    // Возвращаем 0, если период уже закончился, иначе количество дней
+    return Math.max(0, daysLeft);
 };

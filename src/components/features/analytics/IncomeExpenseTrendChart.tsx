@@ -59,26 +59,25 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 });
             }
         } else if (period === 'month') {
-            // Последние 4 недели
-            for (let i = 3; i >= 0; i--) {
-                const weekStart = new Date(now);
-                weekStart.setDate(now.getDate() - (i * 7 + 6));
-                const weekEnd = new Date(now);
-                weekEnd.setDate(now.getDate() - (i * 7));
+            // Последние 30 дней (как в Analytics.tsx)
+            for (let i = 29; i >= 0; i--) {
+                const date = new Date(now);
+                date.setDate(now.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
 
-                const weekTransactions = transactions.filter(t => {
+                const dayTransactions = transactions.filter(t => {
                     if (!t || !t.date) return false;
                     const tDate = new Date(t.date);
-                    tDate.setHours(0, 0, 0, 0);
-                    return tDate >= weekStart && tDate <= weekEnd;
+                    const tDateStr = tDate.toISOString().split('T')[0];
+                    return tDateStr === dateStr;
                 });
 
                 data.push({
-                    date: `${t('week')} ${4 - i}`,
-                    income: weekTransactions
+                    date: date.toLocaleDateString('ru-RU', {day: '2-digit', month: '2-digit'}),
+                    income: dayTransactions
                         .filter(t => t.type === 'income')
                         .reduce((sum, t) => sum + t.amount, 0),
-                    expense: weekTransactions
+                    expense: dayTransactions
                         .filter(t => t.type === 'expense')
                         .reduce((sum, t) => sum + t.amount, 0),
                 });
