@@ -10,4 +10,11 @@ if (!supabaseUrl || !supabaseKey) {
 console.log('Supabase URL:', supabaseUrl);
 console.log('Supabase Key (first 20 chars):', supabaseKey?.substring(0, 20) + '...');
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = createClient(supabaseUrl, supabaseKey, {
+    auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true,
+        flowType: 'pkce'
+    }
+});

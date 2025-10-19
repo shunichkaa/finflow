@@ -22,17 +22,18 @@ export interface ExpensesPieChartProps {
     noDataMessage?: string;
 }
 
-const COLORS = [
-    '#6366F1', // Индиго
-    '#8B5CF6', // Фиолетовый
-    '#A78BFA', // Светло-фиолетовый
-    '#4ECDC4', // Бирюзовый
-    '#96CEB4', // Зеленый
-    '#DDA0DD', // Лавандовый
-    '#98D8C8', // Мятный
-    '#85C1E9', // Светло-голубой
-    '#BB8FCE', // Светло-лавандовый
-    '#C4C0F8', // Очень светло-фиолетовый
+// Liquid Glass цветовая палитра с градиентами и прозрачностью
+const LIQUID_GLASS_COLORS = [
+    'url(#liquidGlass1)', // Индиго с градиентом
+    'url(#liquidGlass2)', // Фиолетовый с градиентом
+    'url(#liquidGlass3)', // Светло-фиолетовый с градиентом
+    'url(#liquidGlass4)', // Бирюзовый с градиентом
+    'url(#liquidGlass5)', // Зеленый с градиентом
+    'url(#liquidGlass6)', // Лавандовый с градиентом
+    'url(#liquidGlass7)', // Мятный с градиентом
+    'url(#liquidGlass8)', // Светло-голубой с градиентом
+    'url(#liquidGlass9)', // Светло-лавандовый с градиентом
+    'url(#liquidGlass10)', // Очень светло-фиолетовый с градиентом
 ];
 
 export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
@@ -124,20 +125,25 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
             width: '100%', 
             height: 400,
             position: 'relative',
-            backdropFilter: 'blur(40px) saturate(180%)',
-            backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.3)' : 'rgba(255, 255, 255, 0.2)',
-            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
-            borderRadius: 3,
+            backdropFilter: 'blur(60px) saturate(200%)',
+            background: mode === 'dark' 
+                ? 'linear-gradient(135deg, rgba(15, 15, 35, 0.4) 0%, rgba(26, 0, 77, 0.3) 50%, rgba(15, 15, 35, 0.4) 100%)'
+                : 'linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(240, 240, 255, 0.2) 50%, rgba(255, 255, 255, 0.3) 100%)',
+            border: mode === 'dark' 
+                ? '1px solid rgba(255, 255, 255, 0.15)' 
+                : '1px solid rgba(255, 255, 255, 0.25)',
+            borderRadius: 4,
             boxShadow: mode === 'dark' 
-                ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                ? '0 12px 48px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(99, 102, 241, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1)'
+                : '0 12px 48px rgba(36, 49, 104, 0.15), 0 4px 16px rgba(99, 102, 241, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.05)',
             overflow: 'hidden',
-            transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
             '&:hover': {
-                transform: 'translateY(-4px) scale(1.01)',
+                transform: 'translateY(-8px) scale(1.02)',
+                backdropFilter: 'blur(80px) saturate(250%)',
                 boxShadow: mode === 'dark' 
-                    ? '0 16px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-                    : '0 16px 48px rgba(36, 49, 104, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                    ? '0 24px 72px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.2)'
+                    : '0 24px 72px rgba(36, 49, 104, 0.25), 0 8px 24px rgba(99, 102, 241, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 0 rgba(0, 0, 0, 0.1)',
             },
             '&::before': {
                 content: '""',
@@ -145,8 +151,8 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                 top: 0,
                 left: 0,
                 right: 0,
-                height: '1px',
-                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                height: '2px',
+                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
                 zIndex: 1,
             },
             '&::after': {
@@ -156,8 +162,10 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%)',
-                borderRadius: 3,
+                background: mode === 'dark'
+                    ? 'radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%)'
+                    : 'radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.04) 0%, transparent 50%)',
+                borderRadius: 4,
                 zIndex: -1,
             }
         }}>
