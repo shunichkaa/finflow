@@ -27,7 +27,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
         const data: { date: string; income: number; expense: number }[] = [];
 
         // Защита от некорректных данных
-        if (!transactions || !Array.isArray(transactions)) {
+        if (!transactions || !Array.isArray(transactions) || transactions.length === 0) {
             console.log('No transactions data:', transactions);
             return data;
         }
@@ -41,9 +41,12 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 date.setDate(now.getDate() - i);
                 const dateStr = date.toISOString().split('T')[0];
 
-                const dayTransactions = transactions.filter(
-                    t => t && t.date && new Date(t.date).toISOString().split('T')[0] === dateStr
-                );
+                const dayTransactions = transactions.filter(t => {
+                    if (!t || !t.date) return false;
+                    const tDate = new Date(t.date);
+                    const tDateStr = tDate.toISOString().split('T')[0];
+                    return tDateStr === dateStr;
+                });
 
                 data.push({
                     date: date.toLocaleDateString('ru-RU', {day: '2-digit', month: '2-digit'}),
@@ -66,6 +69,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 const weekTransactions = transactions.filter(t => {
                     if (!t || !t.date) return false;
                     const tDate = new Date(t.date);
+                    tDate.setHours(0, 0, 0, 0);
                     return tDate >= weekStart && tDate <= weekEnd;
                 });
 
@@ -110,7 +114,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
         return data;
     }, [transactions, period, t]);
 
-    if (chartData.length === 0 || chartData.every(d => d.income === 0 && d.expense === 0)) {
+    if (chartData.length === 0) {
         return (
             <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300}}>
                 <Typography color="text.secondary">{t('noTransactionData')}</Typography>

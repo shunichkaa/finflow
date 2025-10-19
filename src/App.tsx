@@ -8,6 +8,7 @@ import { OAuthCallback } from './components/auth/OAuthCallback';
 import Dashboard from './BudgetList/pages/Dashboard';
 import Analytics from './BudgetList/pages/Analytics';
 import Budgets from './BudgetList/pages/Budgets';
+import Goals from './BudgetList/pages/Goals';
 import Profile from './BudgetList/pages/Profile';
 import NotFound from './pages/NotFound';
 import ServerError from './pages/ServerError';
@@ -51,6 +52,13 @@ function App() {
             <ProtectedRoute>
               <Layout>
                 <Budgets />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/goals" element={
+            <ProtectedRoute>
+              <Layout>
+                <Goals />
               </Layout>
             </ProtectedRoute>
           } />

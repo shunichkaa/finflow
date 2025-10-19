@@ -3,7 +3,6 @@ import React from 'react';
 import { Box, Chip, Divider, IconButton, List, ListItem, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
@@ -271,27 +270,6 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         {formatCurrency(transaction.amount, currency)}
                                     </Typography>
                                     
-                                    {/* Кнопка добавления транзакции */}
-                                    <IconButton
-                                        size="small"
-                                        onClick={() => setIsAddOpen(true)}
-                                        sx={{
-                                            width: 32,
-                                            height: 32,
-                                            backgroundColor: mode === 'dark' 
-                                                ? 'rgba(101, 70, 51, 0.3)' 
-                                                : 'rgba(234, 234, 244, 0.3)',
-                                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
-                                            '&:hover': {
-                                                backgroundColor: mode === 'dark' 
-                                                    ? 'rgba(101, 70, 51, 0.5)' 
-                                                    : 'rgba(234, 234, 244, 0.5)',
-                                                transform: 'scale(1.1)',
-                                            }
-                                        }}
-                                    >
-                                        <AddIcon fontSize="small" />
-                                    </IconButton>
                                     
                                     <IconButton
                                         size="small"

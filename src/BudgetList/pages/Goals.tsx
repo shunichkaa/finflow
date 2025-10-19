@@ -1,49 +1,56 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Box, Typography, Button, Paper } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from "react-i18next";
-import { useFinanceStore } from '../../Budgets/store/useFinanceStore.ts';
-import { TransactionType } from '../../Budgets/types';
-import { StatsCards } from '../../components/features/StatsCards.tsx';
-import { TransactionList } from '../../components/features/transaction/TransactionList.tsx';
-import { TransactionFilters } from '../../components/features/transaction/TransactionFilters.tsx';
-import { TransactionForm } from '../../components/features/transaction/TransactionForm.tsx';
-import { Modal } from '../../components/ui/Modal.tsx';
-import { useTransactionFilters } from '../../Budgets/hooks/useTransactionFilters.ts';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
+import { Goal } from '../../Budgets/types';
+import { GoalsList } from '../../components/features/goals/GoalsList';
+import { GoalForm } from '../../components/features/goals/GoalForm';
+import { Modal } from '../../components/ui/Modal';
 
-const Dashboard = () => {
+const Goals: React.FC = () => {
     const { t } = useTranslation();
     const { mode } = useThemeMode();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const transactions = useFinanceStore((state) => state.transactions);
+    const [editingGoal, setEditingGoal] = useState<Goal | null>(null);
 
-    const {
-        filters,
-        setType,
-        setCategory,
-        setDateFrom,
-        setDateTo,
-        reset,
-        filteredTransactions,
-    } = useTransactionFilters(transactions);
+    const handleAddGoal = () => {
+        setEditingGoal(null);
+        setIsModalOpen(true);
+    };
 
-    const handleStatsCardClick = (type: TransactionType | 'all') => {
-        setType(type);
-        document.getElementById('transactions-list')?.scrollIntoView({ behavior: 'smooth' });
+    const handleEditGoal = (goal: Goal) => {
+        setEditingGoal(goal);
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setEditingGoal(null);
     };
 
     return (
         <Container maxWidth="lg" sx={{ py: 4 }}>
             {/* Header */}
             <Box sx={{ textAlign: 'center', mb: 4 }}>
+                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{
+                    color: mode === 'dark' ? '#FCF9F9' : '#654633'
+                }}>
+                    🎯 {t('goals', 'Цели')}
+                </Typography>
+                <Typography variant="body1" sx={{
+                    color: mode === 'dark' ? 'rgba(252, 249, 249, 0.8)' : 'rgba(101, 70, 51, 0.7)',
+                    mb: 3
+                }}>
+                    {t('goalsDescription', 'Ставьте финансовые цели и отслеживайте прогресс их достижения')}
+                </Typography>
 
                 {/* Кнопка добавления */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3, mb: 2 }}>
                     <Button
                         variant="contained"
                         startIcon={<AddIcon />}
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={handleAddGoal}
                         size="large"
                         sx={{
                             backgroundColor: mode === 'dark' 
@@ -80,34 +87,18 @@ const Dashboard = () => {
                             }
                         }}
                     >
-                        {t('addTransaction')}
+                        {t('createGoal', 'Создать цель')}
                     </Button>
                 </Box>
             </Box>
 
             <Container maxWidth="lg" sx={{ px: {xs: 1, sm: 2}, pb: 4 }}>
-                {/* Stats Cards */}
-                <StatsCards onFilterClick={handleStatsCardClick} />
-
-                {/* Filters */}
-                <TransactionFilters
-                    type={filters.type}
-                    category={filters.category}
-                    dateFrom={filters.dateFrom}
-                    dateTo={filters.dateTo}
-                    onTypeChange={setType}
-                    onCategoryChange={setCategory}
-                    onDateFromChange={setDateFrom}
-                    onDateToChange={setDateTo}
-                    onReset={reset}
-                />
-
-                {/* Transaction List */}
+                {/* Goals List */}
                 <Paper sx={{ 
                     p: 2, 
                     backgroundColor: mode === 'dark' ? 'rgba(101, 70, 51, 0.8)' : 'rgba(234, 234, 244, 0.8)',
                     color: mode === 'dark' ? '#FCF9F9' : '#654633'
-                }} id="transactions-list">
+                }}>
                     <Box sx={{ 
                         display: 'flex', 
                         justifyContent: 'space-between', 
@@ -119,13 +110,13 @@ const Dashboard = () => {
                             color: mode === 'dark' ? '#FCF9F9' : '#654633',
                             fontWeight: 'bold'
                         }}>
-                            {t('transactions')} ({filteredTransactions.length})
+                            {t('myGoals', 'Мои цели')}
                         </Typography>
                         <Button
                             variant="outlined"
                             size="small"
                             startIcon={<AddIcon />}
-                            onClick={() => setIsModalOpen(true)}
+                            onClick={handleAddGoal}
                             sx={{
                                 borderColor: mode === 'dark' 
                                     ? 'rgba(100, 200, 150, 0.5)' 
@@ -155,23 +146,26 @@ const Dashboard = () => {
                                 }
                             }}
                         >
-                            {t('addTransaction')}
+                            {t('createGoal', 'Создать цель')}
                         </Button>
                     </Box>
-                    <TransactionList transactions={filteredTransactions} />
+                    <GoalsList onEditGoal={handleEditGoal} onAddGoal={handleAddGoal} />
                 </Paper>
             </Container>
 
-            {/* Add Transaction Modal */}
+            {/* Add/Edit Goal Modal */}
             <Modal
                 open={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                title={t('newTransaction')}
+                onClose={handleCloseModal}
+                title={editingGoal ? t('editGoal', 'Редактировать цель') : t('createGoal', 'Создать цель')}
             >
-                <TransactionForm onSuccess={() => setIsModalOpen(false)} />
+                <GoalForm
+                    initialGoal={editingGoal || undefined}
+                    onSuccess={handleCloseModal}
+                />
             </Modal>
         </Container>
     );
 };
 
-export default Dashboard;
+export default Goals;

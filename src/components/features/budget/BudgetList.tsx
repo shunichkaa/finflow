@@ -147,8 +147,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                                     }}
                                                 />
                                                 <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(101, 70, 51, 0.8)' }}>
-                                                    {daysLeft === 0 ? t('lastDay') : 
-                                                     daysLeft === 1 ? t('dayLeft') : 
+                                                    {daysLeft === 1 ? t('lastDay') : 
                                                      `${daysLeft} ${t('daysLeft')}`}
                                                 </Typography>
                                             </Box>
