@@ -64,7 +64,7 @@ const Analytics: React.FC = () => {
     }, [filteredTransactions]);
 
     return (
-        <Container maxWidth="lg" sx={{py: {xs: 2, sm: 4}, px: {xs: 1, sm: 2}}}>
+        <Container maxWidth="xl" sx={{py: {xs: 1, sm: 2}, px: {xs: 1, sm: 2, md: 3}}}>
             <Box sx={{mb: 4}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold" sx={{
                     textAlign: 'left', 

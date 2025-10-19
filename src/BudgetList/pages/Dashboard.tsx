@@ -13,6 +13,7 @@ import { useTransactionFilters } from '../../Budgets/hooks/useTransactionFilters
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 const Dashboard = () => {
+    console.log('Dashboard component loaded - version 2.0');
     const { t } = useTranslation();
     const { mode } = useThemeMode();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +35,7 @@ const Dashboard = () => {
     };
 
     return (
-        <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Container maxWidth="xl" sx={{ py: 2, px: { xs: 1, sm: 2, md: 3 } }}>
             {/* Header with add button */}
             <Box sx={{ 
                 display: 'flex', 
@@ -100,7 +101,7 @@ const Dashboard = () => {
             </Box>
 
 
-            <Container maxWidth="lg" sx={{ px: {xs: 1, sm: 2}, pb: 4 }}>
+            <Container maxWidth="xl" sx={{ px: {xs: 0, sm: 1}, pb: 2 }}>
                 {/* Stats Cards */}
                 <StatsCards onFilterClick={handleStatsCardClick} />
 
@@ -119,7 +120,7 @@ const Dashboard = () => {
 
                 {/* Transaction List */}
                 <Paper sx={{ 
-                    p: 2, 
+                    p: { xs: 1.5, sm: 2 }, 
                     backgroundColor: mode === 'dark' ? 'rgba(101, 70, 51, 0.8)' : 'rgba(234, 234, 244, 0.8)',
                     color: mode === 'dark' ? '#FCF9F9' : '#654633'
                 }} id="transactions-list">
@@ -164,42 +165,6 @@ const Dashboard = () => {
                         >
                             <AddIcon sx={{ fontSize: 18 }} />
                         </Box>
-                        <Button
-                            variant="outlined"
-                            size="small"
-                            startIcon={<AddIcon />}
-                            onClick={() => setIsModalOpen(true)}
-                            sx={{
-                                borderColor: mode === 'dark' 
-                                    ? 'rgba(100, 200, 150, 0.5)' 
-                                    : 'rgba(254, 222, 233, 0.5)',
-                                color: mode === 'dark' 
-                                    ? 'rgba(100, 200, 150, 0.8)' 
-                                    : 'rgba(254, 222, 233, 0.8)',
-                                fontWeight: '500',
-                                textTransform: 'none',
-                                borderRadius: 2,
-                                px: 2,
-                                py: 0.5,
-                                '&:hover': {
-                                    borderColor: mode === 'dark' 
-                                        ? 'rgba(100, 200, 150, 0.8)' 
-                                        : 'rgba(254, 222, 233, 0.8)',
-                                    backgroundColor: mode === 'dark' 
-                                        ? 'rgba(100, 200, 150, 0.1)' 
-                                        : 'rgba(254, 222, 233, 0.1)',
-                                    transform: 'translateY(-1px)',
-                                },
-                                '& .MuiButton-startIcon': {
-                                    marginRight: 0.5,
-                                    '& svg': {
-                                        fontSize: '16px'
-                                    }
-                                }
-                            }}
-                        >
-                            {t('addTransaction')}
-                        </Button>
                     </Box>
                     <TransactionList transactions={filteredTransactions} />
                 </Paper>

@@ -8,7 +8,7 @@ const Goals: React.FC = () => {
     const { mode } = useThemeMode();
 
     return (
-        <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Container maxWidth="xl" sx={{ py: {xs: 1, sm: 2}, px: {xs: 1, sm: 2, md: 3} }}>
             <Box sx={{ textAlign: 'center', mb: 4 }}>
                 <Typography variant="h4" gutterBottom fontWeight="bold" sx={{
                     color: mode === 'dark' ? '#FCF9F9' : '#654633'
