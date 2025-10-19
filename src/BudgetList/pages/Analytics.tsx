@@ -20,6 +20,7 @@ const Analytics: React.FC = () => {
     const {currency} = useSettingsStore();
 
     const filteredTransactions = useMemo(() => {
+        console.log('Analytics: Total transactions:', transactions.length);
         const now = new Date();
         const startDate = new Date();
 
@@ -44,6 +45,9 @@ const Analytics: React.FC = () => {
             return txDate >= startDate;
         });
 
+        console.log('Analytics: Filtered transactions for period', period, ':', filtered.length);
+        console.log('Analytics: Sample filtered transactions:', filtered.slice(0, 3));
+        
         // Возвращаем отфильтрованные транзакции, даже если их нет
         return filtered;
     }, [transactions, period]);

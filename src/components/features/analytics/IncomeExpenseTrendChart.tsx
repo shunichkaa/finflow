@@ -123,13 +123,15 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
     }, [transactions, period, t]);
 
     if (chartData.length === 0) {
-        console.log('No chart data available');
+        console.log('No chart data available - showing no data message');
         return (
             <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300}}>
                 <Typography color="text.secondary">{t('noTransactionData')}</Typography>
             </Box>
         );
     }
+
+    console.log('Rendering chart with data:', chartData.length, 'points');
 
     return (
         <Box>

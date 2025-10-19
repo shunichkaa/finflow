@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 const Goals: React.FC = () => {
+    console.log('Goals component is loading...');
     const { t } = useTranslation();
     const { mode } = useThemeMode();
 

@@ -86,7 +86,7 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                                    outerRadius,
                                    percent,
                                }: PieLabelRenderProps) => {
-        if ((percent ?? 0) < 0.08) return null; // Показываем проценты только для сегментов больше 8%
+        if ((percent ?? 0) < 0.03) return null; // Показываем проценты только для сегментов больше 3%
 
         const RADIAN = Math.PI / 180;
         const radius = Number(innerRadius) + (Number(outerRadius) - Number(innerRadius)) * 0.5;
@@ -102,12 +102,14 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                 fill="white"
                 textAnchor="middle"
                 dominantBaseline="central"
-                fontSize="12"
-                fontWeight="600"
+                fontSize="11"
+                fontWeight="700"
                 style={{ 
                     fontFamily: 'system-ui, -apple-system, sans-serif',
-                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
-                    filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3))'
+                    textShadow: '0 1px 4px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 0, 0, 0.5)',
+                    filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))',
+                    stroke: 'rgba(0, 0, 0, 0.3)',
+                    strokeWidth: '0.5px'
                 }}
             >
                 {percentage}%
