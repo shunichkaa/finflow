@@ -1,5 +1,4 @@
-import React from 'react';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {
     AppBar,
     Avatar,
@@ -16,14 +15,7 @@ import {
     Toolbar,
     Typography
 } from '@mui/material';
-import {
-    Brightness4,
-    Brightness7,
-    ChevronLeft,
-    Close,
-    Menu as MenuIcon,
-    Person
-} from '@mui/icons-material';
+import {Brightness4, Brightness7, ChevronLeft, Close, Menu as MenuIcon, Person} from '@mui/icons-material';
 import {Link, Outlet, useLocation, useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useThemeMode} from '../Budgets/theme/ThemeContext';
@@ -75,7 +67,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
         {path: '/analytics', label: t('analytics')},
         {path: '/budgets', label: t('budgets')},
         {path: '/goals', label: t('savings', 'Копилка')},
-        {path: '/profile', label: t('profile', 'Профиль')},
     ];
 
     const drawer = (
@@ -244,7 +235,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     }
                                 }}
                             >
-                                <ListItemText 
+                                <ListItemText
                                     primary={item.label}
                                     primaryTypographyProps={{
                                         fontWeight: location.pathname === item.path ? 'bold' : 'normal'
