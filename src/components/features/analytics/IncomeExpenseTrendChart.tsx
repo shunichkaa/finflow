@@ -110,10 +110,13 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
         }
 
         console.log('Generated chart data:', data);
+        console.log('Chart data length:', data.length);
+        console.log('Has data with values:', data.some(d => d.income > 0 || d.expense > 0));
         return data;
     }, [transactions, period, t]);
 
     if (chartData.length === 0) {
+        console.log('No chart data available');
         return (
             <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300}}>
                 <Typography color="text.secondary">{t('noTransactionData')}</Typography>

@@ -8,7 +8,10 @@ import { GoalsList } from '../../components/features/goals/GoalsList';
 import { GoalForm } from '../../components/features/goals/GoalForm';
 import { Modal } from '../../components/ui/Modal';
 
+console.log('Goals component loaded');
+
 const Goals: React.FC = () => {
+    console.log('Goals component rendering');
     const { t } = useTranslation();
     const { mode } = useThemeMode();
     const [isModalOpen, setIsModalOpen] = useState(false);

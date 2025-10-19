@@ -104,6 +104,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                     const statusColor = getBudgetStatusColor(status);
                     const remaining = budget.limit - spent;
                     const daysLeft = getDaysLeftInPeriod(budget.period);
+                    console.log('Budget:', budget.category, 'Period:', budget.period, 'Days left:', daysLeft);
 
                     return (
                         <Card key={budget.id} elevation={2}
@@ -147,9 +148,12 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                                     }}
                                                 />
                                                 <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(101, 70, 51, 0.8)' }}>
-                                                    {daysLeft === 0 ? t('lastDay') : 
-                                                     daysLeft === 1 ? t('dayLeft') : 
-                                                     `${daysLeft} ${t('daysLeft')}`}
+                                                    {(() => {
+                                                        console.log('Displaying days left for', budget.category, ':', daysLeft);
+                                                        if (daysLeft === 0) return t('lastDay');
+                                                        if (daysLeft === 1) return t('dayLeft');
+                                                        return `${daysLeft} ${t('daysLeft')}`;
+                                                    })()}
                                                 </Typography>
                                             </Box>
                                         </Box>
