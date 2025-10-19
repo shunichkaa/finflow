@@ -129,6 +129,10 @@ const resources = {
             // Цели
             goals: 'Цели',
             goalsDescription: 'Ставьте финансовые цели и отслеживайте прогресс их достижения',
+            
+            // Копилка
+            savings: 'Копилка',
+            savingsDescription: 'Создавайте копилки для накопления на важные цели',
             myGoals: 'Мои цели',
             createGoal: 'Создать цель',
             editGoal: 'Редактировать цель',
@@ -253,6 +257,10 @@ const resources = {
             // Goals
             goals: 'Goals',
             goalsDescription: 'Set financial goals and track your progress',
+            
+            // Savings
+            savings: 'Savings',
+            savingsDescription: 'Create savings jars for important goals',
             myGoals: 'My Goals',
             createGoal: 'Create Goal',
             editGoal: 'Edit Goal',

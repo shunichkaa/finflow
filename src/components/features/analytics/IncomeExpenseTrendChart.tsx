@@ -21,6 +21,12 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                                                                                 }) => {
     const {t} = useTranslation();
     const {currency} = useSettingsStore();
+    
+    console.log('IncomeExpenseTrendChart props:', { 
+        transactionsCount: transactions?.length, 
+        period, 
+        transactions: transactions?.slice(0, 3) 
+    });
 
     const chartData = useMemo(() => {
         const now = new Date();
@@ -112,6 +118,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
         console.log('Generated chart data:', data);
         console.log('Chart data length:', data.length);
         console.log('Has data with values:', data.some(d => d.income > 0 || d.expense > 0));
+        console.log('Sample data points:', data.slice(0, 3));
         return data;
     }, [transactions, period, t]);
 

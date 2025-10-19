@@ -35,55 +35,70 @@ const Dashboard = () => {
 
     return (
         <Container maxWidth="lg" sx={{ py: 4 }}>
-            {/* Header */}
-            <Box sx={{ textAlign: 'center', mb: 4 }}>
-
-                {/* Кнопка добавления */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3, mb: 2 }}>
-                    <Button
-                        variant="contained"
-                        startIcon={<AddIcon />}
-                        onClick={() => setIsModalOpen(true)}
-                        size="large"
-                        sx={{
-                            backgroundColor: mode === 'dark' 
-                                ? 'rgba(100, 200, 150, 0.8)'
-                                : 'rgba(254, 222, 233, 0.8)',
-                            color: mode === 'dark' ? '#1A3A2A' : '#654633',
-                            fontWeight: '600',
-                            fontSize: '16px',
-                            px: 4,
-                            py: 1.5,
-                            borderRadius: 3,
-                            textTransform: 'none',
-                            boxShadow: mode === 'dark' 
-                                ? '0 8px 25px rgba(100, 200, 150, 0.3)'
-                                : '0 8px 25px rgba(254, 222, 233, 0.4)',
-                            border: 'none',
-                            '&:hover': {
-                                backgroundColor: mode === 'dark' 
-                                    ? 'rgba(100, 200, 150, 0.9)'
-                                    : 'rgba(254, 222, 233, 0.9)',
-                                transform: 'translateY(-3px)',
-                                boxShadow: mode === 'dark' 
-                                    ? '0 12px 35px rgba(100, 200, 150, 0.4)'
-                                    : '0 12px 35px rgba(254, 222, 233, 0.5)',
-                            },
-                            '&:active': {
-                                transform: 'translateY(-1px)',
-                            },
-                            '& .MuiButton-startIcon': {
-                                marginRight: 1,
-                                '& svg': {
-                                    fontSize: '20px'
-                                }
-                            }
-                        }}
-                    >
-                        {t('addTransaction')}
-                    </Button>
+            {/* Header with add button */}
+            <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                mb: 4,
+                flexDirection: { xs: 'column', sm: 'row' },
+                gap: { xs: 2, sm: 0 }
+            }}>
+                {/* Title */}
+                <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+                    <Typography variant="h4" gutterBottom fontWeight="bold" sx={{
+                        color: mode === 'dark' ? '#FCF9F9' : '#654633'
+                    }}>
+                        {t('dashboard')}
+                    </Typography>
                 </Box>
+                
+                {/* Add Button */}
+                <Button
+                    variant="contained"
+                    startIcon={<AddIcon />}
+                    onClick={() => setIsModalOpen(true)}
+                    size="large"
+                    sx={{
+                        backgroundColor: mode === 'dark' 
+                            ? 'rgba(100, 200, 150, 0.8)'
+                            : 'rgba(254, 222, 233, 0.8)',
+                        color: mode === 'dark' ? '#1A3A2A' : '#654633',
+                        fontWeight: '600',
+                        fontSize: '16px',
+                        px: 4,
+                        py: 1.5,
+                        borderRadius: 3,
+                        textTransform: 'none',
+                        boxShadow: mode === 'dark' 
+                            ? '0 8px 25px rgba(100, 200, 150, 0.3)'
+                            : '0 8px 25px rgba(254, 222, 233, 0.4)',
+                        border: 'none',
+                        minWidth: { xs: '100%', sm: 200 },
+                        '&:hover': {
+                            backgroundColor: mode === 'dark' 
+                                ? 'rgba(100, 200, 150, 0.9)'
+                                : 'rgba(254, 222, 233, 0.9)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: mode === 'dark' 
+                                ? '0 12px 35px rgba(100, 200, 150, 0.4)'
+                                : '0 12px 35px rgba(254, 222, 233, 0.5)',
+                        },
+                        '&:active': {
+                            transform: 'translateY(-1px)',
+                        },
+                        '& .MuiButton-startIcon': {
+                            marginRight: 1,
+                            '& svg': {
+                                fontSize: '20px'
+                            }
+                        }
+                    }}
+                >
+                    {t('addTransaction')}
+                </Button>
             </Box>
+
 
             <Container maxWidth="lg" sx={{ px: {xs: 1, sm: 2}, pb: 4 }}>
                 {/* Stats Cards */}
@@ -121,6 +136,34 @@ const Dashboard = () => {
                         }}>
                             {t('transactions')} ({filteredTransactions.length})
                         </Typography>
+                        
+                        <Box
+                            onClick={() => setIsModalOpen(true)}
+                            role="button"
+                            aria-label={t('addTransaction')}
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: 32,
+                                height: 32,
+                                borderRadius: '50%',
+                                backgroundColor: mode === 'dark' 
+                                    ? 'rgba(100, 200, 150, 0.8)'
+                                    : 'rgba(254, 222, 233, 0.8)',
+                                color: mode === 'dark' ? '#1A3A2A' : '#654633',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                '&:hover': {
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(100, 200, 150, 0.9)'
+                                        : 'rgba(254, 222, 233, 0.9)',
+                                    transform: 'scale(1.1)',
+                                }
+                            }}
+                        >
+                            <AddIcon sx={{ fontSize: 18 }} />
+                        </Box>
                         <Button
                             variant="outlined"
                             size="small"
