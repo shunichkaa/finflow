@@ -7,6 +7,7 @@ import {useFinanceStore} from '../../../Budgets/store/useFinanceStore.ts';
 import type {Budget} from '../../../Budgets/types';
 import {BudgetPeriod} from '../../../Budgets/types';
 import {EXPENSE_CATEGORIES, getCategoryIcon, getCategoryName} from '../../../Budgets/utils/categories.tsx';
+import {useThemeMode} from '../../../Budgets/theme/ThemeContext';
 
 interface BudgetFormData {
     category: string;
@@ -21,6 +22,7 @@ interface BudgetFormProps {
 
 export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}) => {
     const {t} = useTranslation();
+    const {mode} = useThemeMode();
     const addBudget = useFinanceStore((state) => state.addBudget);
     const updateBudget = useFinanceStore((state) => state.updateBudget);
     const budgets = useFinanceStore((state) => state.budgets);
@@ -90,7 +92,31 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                                 {...field}
                                 exclusive
                                 fullWidth
-                                color="primary"
+                                sx={{
+                                    '& .MuiToggleButton-root': {
+                                        color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                        borderColor: mode === 'dark' 
+                                            ? 'rgba(100, 200, 150, 0.3)' 
+                                            : 'rgba(254, 222, 233, 0.3)',
+                                        backgroundColor: 'transparent',
+                                        '&:hover': {
+                                            backgroundColor: mode === 'dark' 
+                                                ? 'rgba(100, 200, 150, 0.1)' 
+                                                : 'rgba(254, 222, 233, 0.1)',
+                                        },
+                                        '&.Mui-selected': {
+                                            backgroundColor: mode === 'dark' 
+                                                ? 'rgba(100, 200, 150, 0.8)' 
+                                                : 'rgba(254, 222, 233, 0.8)',
+                                            color: mode === 'dark' ? '#1A3A2A' : '#654633',
+                                            '&:hover': {
+                                                backgroundColor: mode === 'dark' 
+                                                    ? 'rgba(100, 200, 150, 0.9)' 
+                                                    : 'rgba(254, 222, 233, 0.9)',
+                                            }
+                                        }
+                                    }
+                                }}
                             >
                                 <ToggleButton value="weekly">{t('weekly')}</ToggleButton>
                                 <ToggleButton value="monthly">{t('monthly')}</ToggleButton>
