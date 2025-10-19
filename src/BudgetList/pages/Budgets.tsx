@@ -20,7 +20,17 @@ const Budgets: React.FC = () => {
     const editingBudget = useMemo(() => budgets.find(b => b.id === editingBudgetId) || null, [budgets, editingBudgetId]);
 
     return (
-        <Container maxWidth="md" sx={{py: {xs: 2, sm: 4}, px: {xs: 1, sm: 2}}}>
+        <Container 
+            maxWidth="xl" 
+            sx={{
+                py: {xs: 0.5, sm: 1}, 
+                px: {xs: 0.5, sm: 1, md: 1.5},
+                transition: (theme) => theme.transitions.create(['padding', 'transform'], {
+                    easing: theme.transitions.easing.easeInOut,
+                    duration: theme.transitions.duration.complex,
+                }),
+            }}
+        >
             <Box sx={{mb: 4, textAlign: 'left'}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FCF9F9' : '#654633' }}>
                     {t('budgets')}

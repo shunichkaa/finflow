@@ -146,6 +146,13 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                 : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
             overflow: 'hidden',
+            transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            '&:hover': {
+                transform: 'translateY(-4px) scale(1.01)',
+                boxShadow: mode === 'dark' 
+                    ? '0 16px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                    : '0 16px 48px rgba(36, 49, 104, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+            },
             '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -169,7 +176,13 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
             }
         }}>
             <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                <LineChart 
+                    data={chartData} 
+                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                    animationBegin={0}
+                    animationDuration={1200}
+                    animationEasing="ease-out"
+                >
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.3)"/>
                     <XAxis
                         dataKey="date"
@@ -208,6 +221,10 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         strokeWidth={3}
                         dot={{r: 5, fill: '#96CEB4', stroke: '#fff', strokeWidth: 2}}
                         activeDot={{r: 7, fill: '#96CEB4', stroke: '#fff', strokeWidth: 2}}
+                        animationBegin={200}
+                        animationDuration={1000}
+                        animationEasing="ease-out"
+                        isAnimationActive={true}
                     />
                     <Line
                         type="monotone"
@@ -217,6 +234,10 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         strokeWidth={3}
                         dot={{r: 5, fill: '#8B5CF6', stroke: '#fff', strokeWidth: 2}}
                         activeDot={{r: 7, fill: '#8B5CF6', stroke: '#fff', strokeWidth: 2}}
+                        animationBegin={400}
+                        animationDuration={1000}
+                        animationEasing="ease-out"
+                        isAnimationActive={true}
                     />
                 </LineChart>
             </ResponsiveContainer>

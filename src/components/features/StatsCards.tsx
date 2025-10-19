@@ -47,8 +47,8 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
             icon: <AccountBalanceWalletIcon sx={{ fontSize: 40 }} />,
             color: balance >= 0 ? 'primary' : 'error',
             bgGradient: balance >= 0
-                ? 'linear-gradient(135deg, #BDE3FB 0%, #92BCFA 100%)'
-                : 'linear-gradient(135deg, #FDF0EC 0%, #AEE1F9 100%)',
+                ? 'linear-gradient(135deg, #96CEB4 0%, #4ECDC4 100%)'
+                : 'linear-gradient(135deg, #FF6B6B 0%, #8B5CF6 100%)',
             filterType: 'all',
         },
         {
@@ -56,7 +56,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
             value: totalIncome,
             icon: <TrendingUpIcon sx={{ fontSize: 40 }} />,
             color: 'success',
-            bgGradient: 'linear-gradient(135deg, #C2D1EC 0%, #6A92C8 100%)',
+            bgGradient: 'linear-gradient(135deg, #96CEB4 0%, #4ECDC4 100%)',
             filterType: 'income',
         },
         {
@@ -64,7 +64,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
             value: totalExpense,
             icon: <TrendingDownIcon sx={{ fontSize: 40 }} />,
             color: 'error',
-            bgGradient: 'linear-gradient(135deg, #9DB2DC 0%, #0E2D6C 100%)',
+            bgGradient: 'linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%)',
             filterType: 'expense',
         },
     ];

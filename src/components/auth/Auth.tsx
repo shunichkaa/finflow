@@ -16,18 +16,20 @@ import { Google, Login, PersonAdd } from '@mui/icons-material';
 import {supabase} from '../../lib/supabaseClient';
 import {useNavigate} from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 
 export const Auth: React.FC = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const { mode } = useThemeMode();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [oauthLoading, setOauthLoading] = useState<string | null>(null);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const [mode, setMode] = useState<'login' | 'signup'>('login');
+    const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -51,7 +53,7 @@ export const Auth: React.FC = () => {
 
         try {
             let result;
-            if (mode === 'login') {
+            if (authMode === 'login') {
                 result = await supabase.auth.signInWithPassword({email, password});
                 if (result.error) {
                     console.error('Login error:', result.error);
@@ -122,7 +124,9 @@ export const Auth: React.FC = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.8) 0%, rgba(248, 229, 229, 0.6) 50%, rgba(255, 185, 141, 0.4) 100%)',
+                background: mode === 'dark' 
+                    ? 'linear-gradient(135deg, #0F0F23 0%, #1E1B4B 50%, #312E81 100%)'
+                    : 'linear-gradient(135deg, #F8FFA1 0%, #F6D5EE 50%, #A8A3F6 100%)',
                 p: 2,
                 position: 'relative',
                 '&::before': {
@@ -132,14 +136,16 @@ export const Auth: React.FC = () => {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23654633" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+                    background: mode === 'dark' 
+                        ? 'radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.2) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%)'
+                        : 'radial-gradient(circle at 20% 80%, rgba(168, 163, 246, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(246, 213, 238, 0.3) 0%, transparent 50%)',
                     zIndex: 0,
                 }
             }}
         >
             <Fade in>
                 <Paper
-                    elevation={12}
+                    elevation={0}
                     sx={{
                         p: 4,
                         width: 400,
@@ -147,19 +153,31 @@ export const Auth: React.FC = () => {
                         flexDirection: 'column',
                         gap: 3,
                         borderRadius: 4,
-                        background: 'rgba(255, 255, 255, 0.95)',
-                        backdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        backdropFilter: 'blur(40px) saturate(180%)',
+                        backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.3)' : 'rgba(255, 255, 255, 0.2)',
+                        border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
+                        boxShadow: mode === 'dark' 
+                            ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                            : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
                         position: 'relative',
-                        zIndex: 1,
+                        overflow: 'hidden',
+                        '&::before': {
+                            content: '""',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            height: '1px',
+                            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                        },
                     }}
                 >
                     <Box sx={{textAlign: 'center', mb: 2}}>
-                        <Typography variant="h4" fontWeight={700} sx={{color: '#1e293b', mb: 1}}>
+                        <Typography variant="h4" fontWeight={700} sx={{color: mode === 'dark' ? '#FFFFFF' : '#243168', mb: 1}}>
                             💰 {t('appName', 'FinFlow')}
                         </Typography>
-                        <Typography variant="subtitle1" sx={{color: '#64748b'}}>
-                            {mode === 'login' ? t('auth.login', 'Вход в аккаунт') : t('auth.signup', 'Создание аккаунта')}
+                        <Typography variant="subtitle1" sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.7)'}}>
+                            {authMode === 'login' ? t('auth.login', 'Вход в аккаунт') : t('auth.signup', 'Создание аккаунта')}
                         </Typography>
                     </Box>
 
@@ -290,21 +308,21 @@ export const Auth: React.FC = () => {
                                 }
                             }}
                             disabled={loading || !!oauthLoading}
-                            startIcon={mode === 'login' ? <Login /> : <PersonAdd />}
+                            startIcon={authMode === 'login' ? <Login /> : <PersonAdd />}
                         >
                             {loading ? <CircularProgress size={24} color="inherit"/> :
-                                mode === 'login' ? t('auth.loginButton', 'Войти') : t('auth.signupButton', 'Зарегистрироваться')}
+                                authMode === 'login' ? t('auth.loginButton', 'Войти') : t('auth.signupButton', 'Зарегистрироваться')}
                         </Button>
                     </Box>
 
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={1}>
                         <Typography variant="body2" sx={{color: '#64748b'}}>
-                            {mode === 'login' ? t('auth.noAccount', 'Нет аккаунта?') : t('auth.hasAccount', 'Уже есть аккаунт?')}
+                            {authMode === 'login' ? t('auth.noAccount', 'Нет аккаунта?') : t('auth.hasAccount', 'Уже есть аккаунт?')}
                         </Typography>
                         <Button
                             variant="text"
                             onClick={() => {
-                                setMode(mode === 'login' ? 'signup' : 'login');
+                                setAuthMode(authMode === 'login' ? 'signup' : 'login');
                                 setError('');
                                 setSuccess('');
                             }}
@@ -319,7 +337,7 @@ export const Auth: React.FC = () => {
                             }}
                             disabled={loading || !!oauthLoading}
                         >
-                            {mode === 'login' ? t('auth.signup', 'Регистрация') : t('auth.login', 'Вход')}
+                            {authMode === 'login' ? t('auth.signup', 'Регистрация') : t('auth.login', 'Вход')}
                         </Button>
                     </Stack>
                 </Paper>

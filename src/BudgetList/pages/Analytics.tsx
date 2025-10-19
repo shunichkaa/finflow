@@ -68,7 +68,17 @@ const Analytics: React.FC = () => {
     }, [filteredTransactions]);
 
     return (
-        <Container maxWidth="xl" sx={{py: {xs: 1, sm: 2}, px: {xs: 1, sm: 2, md: 3}}}>
+        <Container 
+            maxWidth="xl" 
+            sx={{
+                py: {xs: 0.5, sm: 1}, 
+                px: {xs: 0.5, sm: 1, md: 1.5},
+                transition: (theme) => theme.transitions.create(['padding', 'transform'], {
+                    easing: theme.transitions.easing.easeInOut,
+                    duration: theme.transitions.duration.complex,
+                }),
+            }}
+        >
             <Box sx={{mb: 4}}>
                 <Typography variant="h4" gutterBottom fontWeight="bold" sx={{
                     textAlign: 'left', 

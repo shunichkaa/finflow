@@ -196,13 +196,52 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
 
                                 {/* Warning for exceeded */}
                                 {status === 'exceeded' && (
-                                    <Alert severity="error" icon={<WarningIcon/>} sx={{mb: 2}}>
+                                    <Alert 
+                                        severity="error" 
+                                        icon={<WarningIcon/>} 
+                                        sx={{
+                                            mb: 2,
+                                            backgroundColor: mode === 'dark' 
+                                                ? 'rgba(255, 107, 107, 0.15)' 
+                                                : 'rgba(255, 107, 107, 0.1)',
+                                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                            border: mode === 'dark' 
+                                                ? '1px solid rgba(255, 107, 107, 0.3)' 
+                                                : '1px solid rgba(255, 107, 107, 0.2)',
+                                            '& .MuiAlert-icon': {
+                                                color: mode === 'dark' ? '#FF6B6B' : '#E55555',
+                                            },
+                                            '& .MuiAlert-message': {
+                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                                fontWeight: 500,
+                                            }
+                                        }}
+                                    >
                                         {t('budgetExceeded')} {formatCurrency(spent - budget.limit, currency)}
                                     </Alert>
                                 )}
 
                                 {status === 'danger' && (
-                                    <Alert severity="warning" sx={{mb: 2}}>
+                                    <Alert 
+                                        severity="warning" 
+                                        sx={{
+                                            mb: 2,
+                                            backgroundColor: mode === 'dark' 
+                                                ? 'rgba(255, 193, 7, 0.15)' 
+                                                : 'rgba(255, 193, 7, 0.1)',
+                                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                            border: mode === 'dark' 
+                                                ? '1px solid rgba(255, 193, 7, 0.3)' 
+                                                : '1px solid rgba(255, 193, 7, 0.2)',
+                                            '& .MuiAlert-icon': {
+                                                color: mode === 'dark' ? '#FFC107' : '#F57C00',
+                                            },
+                                            '& .MuiAlert-message': {
+                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                                fontWeight: 500,
+                                            }
+                                        }}
+                                    >
                                         {t('budgetAlmostExceeded')}
                                     </Alert>
                                 )}

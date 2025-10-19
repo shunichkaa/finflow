@@ -132,6 +132,13 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                 ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                 : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
             overflow: 'hidden',
+            transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            '&:hover': {
+                transform: 'translateY(-4px) scale(1.01)',
+                boxShadow: mode === 'dark' 
+                    ? '0 16px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                    : '0 16px 48px rgba(36, 49, 104, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+            },
             '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -169,8 +176,9 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                         stroke="rgba(255, 255, 255, 0.2)"
                         strokeWidth={2}
                         animationBegin={0}
-                        animationDuration={1000}
+                        animationDuration={1500}
                         animationEasing="ease-out"
+                        isAnimationActive={true}
                         paddingAngle={1}
                     >
                         {chartData.map((_, index) => (
