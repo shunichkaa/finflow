@@ -176,7 +176,17 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                 />
 
                 {/* Info */}
-                <Box sx={{bgcolor: 'info.main', color: 'white', p: 2, borderRadius: 2}}>
+                <Box sx={{
+                    backgroundColor: mode === 'dark' 
+                        ? 'rgba(100, 200, 150, 0.1)' 
+                        : 'rgba(254, 222, 233, 0.1)',
+                    border: `1px solid ${mode === 'dark' 
+                        ? 'rgba(100, 200, 150, 0.3)' 
+                        : 'rgba(254, 222, 233, 0.3)'}`,
+                    color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                    p: 2, 
+                    borderRadius: 2
+                }}>
                     <Typography variant="body2">
                         💡 {selectedPeriod === 'monthly' ? t('monthlyBudgetInfo') : t('weeklyBudgetInfo')}
                     </Typography>
