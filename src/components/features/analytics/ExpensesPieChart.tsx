@@ -108,17 +108,21 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
         );
     };
 
+    // Динамически определяем высоту в зависимости от количества категорий
+    const legendHeight = Math.max(36, chartData.length * 20 + 20);
+    const chartHeight = 300 + legendHeight;
+
     return (
         <Box>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={chartHeight}>
                 <PieChart>
                     <Pie
                         data={chartData}
                         cx="50%"
-                        cy="50%"
+                        cy="40%"
                         labelLine={false}
                         label={renderCustomLabel}
-                        outerRadius={100}
+                        outerRadius={80}
                         fill="#8884d8"
                         dataKey="value"
                     >
@@ -140,7 +144,11 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                     />
                     <Legend
                         verticalAlign="bottom"
-                        height={36}
+                        height={legendHeight}
+                        wrapperStyle={{
+                            paddingTop: '20px',
+                            paddingBottom: '10px',
+                        }}
                         formatter={(value, entry) => {
                             const payloadValue = entry.payload?.value;
                             if (typeof payloadValue !== 'number') return value;

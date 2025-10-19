@@ -309,7 +309,7 @@ const Analytics: React.FC = () => {
             </Box>
 
             {/* Charts */}
-            <Box sx={{display: 'grid', gridTemplateColumns: {xs: '1fr', lg: '1fr 1fr'}, gap: {xs: 1.5, sm: 2, md: 3}}}>
+            <Box sx={{display: 'grid', gridTemplateColumns: {xs: '1fr', lg: '1fr 1fr'}, gap: {xs: 1.5, sm: 2, md: 3}, alignItems: 'start'}}>
                 <Paper 
                     elevation={3} 
                     sx={{
@@ -322,6 +322,7 @@ const Analytics: React.FC = () => {
                         ? '1px solid rgba(101, 70, 51, 0.2)'
                         : '1px solid rgba(234, 234, 244, 0.2)',
                         transition: 'all 0.3s ease',
+                        minHeight: 'fit-content',
                         '&:hover': {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark' 
