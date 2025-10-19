@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useSettingsStore } from '../../../Budgets/store/useSettingsStore.ts';
 import { formatCurrency } from '../../../Budgets/utils/formatters.ts';
 import { getCategoryName } from '../../../Budgets/utils/categories.tsx';
+import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 import type { Transaction } from '../../../Budgets/types';
 
 export interface ExpensesPieChartProps {
@@ -40,6 +41,7 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                                                                   }) => {
     const { t } = useTranslation();
     const { currency } = useSettingsStore();
+    const { mode } = useThemeMode();
 
     const chartData = useMemo(() => {
         const expensesByCategory = transactions
@@ -122,15 +124,33 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
             width: '100%', 
             height: 400,
             position: 'relative',
+            backdropFilter: 'blur(40px) saturate(180%)',
+            backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.3)' : 'rgba(255, 255, 255, 0.2)',
+            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: 3,
+            boxShadow: mode === 'dark' 
+                ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+            overflow: 'hidden',
             '&::before': {
                 content: '""',
                 position: 'absolute',
                 top: 0,
                 left: 0,
                 right: 0,
+                height: '1px',
+                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                zIndex: 1,
+            },
+            '&::after': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
                 bottom: 0,
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
-                borderRadius: 4,
+                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%)',
+                borderRadius: 3,
                 zIndex: -1,
             }
         }}>

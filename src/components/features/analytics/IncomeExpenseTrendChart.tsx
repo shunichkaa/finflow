@@ -5,6 +5,7 @@ import {Box, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next';
 import {useSettingsStore} from '../../../Budgets/store/useSettingsStore.ts';
 import {formatCurrency} from '../../../Budgets/utils/formatters.ts';
+import {useThemeMode} from '../../../Budgets/theme/ThemeContext';
 import type {Transaction} from '../../../Budgets/types';
 
 type Period = 'week' | 'month' | 'year';
@@ -21,6 +22,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                                                                                 }) => {
     const {t} = useTranslation();
     const {currency} = useSettingsStore();
+    const {mode} = useThemeMode();
     
     console.log('IncomeExpenseTrendChart props:', { 
         transactionsCount: transactions?.length, 
@@ -134,7 +136,38 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
     console.log('Rendering chart with data:', chartData.length, 'points');
 
     return (
-        <Box>
+        <Box sx={{
+            position: 'relative',
+            backdropFilter: 'blur(40px) saturate(180%)',
+            backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.3)' : 'rgba(255, 255, 255, 0.2)',
+            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: 3,
+            boxShadow: mode === 'dark' 
+                ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+            overflow: 'hidden',
+            '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '1px',
+                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                zIndex: 1,
+            },
+            '&::after': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%)',
+                borderRadius: 3,
+                zIndex: -1,
+            }
+        }}>
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.3)"/>
@@ -171,19 +204,19 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         type="monotone"
                         dataKey="income"
                         name={t('income')}
-                        stroke="#4ECDC4"
+                        stroke="#96CEB4"
                         strokeWidth={3}
-                        dot={{r: 5, fill: '#4ECDC4', stroke: '#fff', strokeWidth: 2}}
-                        activeDot={{r: 7, fill: '#4ECDC4', stroke: '#fff', strokeWidth: 2}}
+                        dot={{r: 5, fill: '#96CEB4', stroke: '#fff', strokeWidth: 2}}
+                        activeDot={{r: 7, fill: '#96CEB4', stroke: '#fff', strokeWidth: 2}}
                     />
                     <Line
                         type="monotone"
                         dataKey="expense"
                         name={t('expense')}
-                        stroke="#FF6B6B"
+                        stroke="#8B5CF6"
                         strokeWidth={3}
-                        dot={{r: 5, fill: '#FF6B6B', stroke: '#fff', strokeWidth: 2}}
-                        activeDot={{r: 7, fill: '#FF6B6B', stroke: '#fff', strokeWidth: 2}}
+                        dot={{r: 5, fill: '#8B5CF6', stroke: '#fff', strokeWidth: 2}}
+                        activeDot={{r: 7, fill: '#8B5CF6', stroke: '#fff', strokeWidth: 2}}
                     />
                 </LineChart>
             </ResponsiveContainer>

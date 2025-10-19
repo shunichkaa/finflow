@@ -60,59 +60,8 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                 </Box>
 
                 <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#243168' }}>
-                    Что-то пошло не так
+                    Ой, что-то не так, уже исправляем...
                 </Typography>
-
-                <Typography variant="body1" sx={{ mb: 3, color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.7)' }}>
-                    Произошла неожиданная ошибка. Мы уже работаем над её исправлением.
-                </Typography>
-
-                {/* Детали ошибки в режиме разработки */}
-                {process.env.NODE_ENV === 'development' && error && (
-                    <Box
-                        sx={{
-                            mt: 3,
-                            p: 2,
-                            backgroundColor: 'rgba(254, 222, 233, 0.1)',
-                            border: '1px solid rgba(255, 185, 141, 0.3)',
-                            borderRadius: 2,
-                            textAlign: 'left',
-                        }}
-                    >
-                        <Typography variant="subtitle2" sx={{ color: mode === 'dark' ? '#FF6B6B' : '#E55555', gutterBottom: true }}>
-                            Детали ошибки:
-                        </Typography>
-                        <Typography
-                            variant="body2"
-                            component="pre"
-                            sx={{
-                                fontFamily: 'monospace',
-                                fontSize: '0.75rem',
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.8)',
-                                whiteSpace: 'pre-wrap',
-                                wordBreak: 'break-word',
-                            }}
-                        >
-                            {error.toString()}
-                        </Typography>
-                        {errorInfo && (
-                            <Typography
-                                variant="body2"
-                                component="pre"
-                                sx={{
-                                    fontFamily: 'monospace',
-                                    fontSize: '0.75rem',
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.8)',
-                                    whiteSpace: 'pre-wrap',
-                                    wordBreak: 'break-word',
-                                    mt: 1,
-                                }}
-                            >
-                                {errorInfo.componentStack}
-                            </Typography>
-                        )}
-                    </Box>
-                )}
 
                 {/* Кнопки действий */}
                 <Box sx={{ mt: 4, display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -121,18 +70,18 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                         onClick={handleGoHome}
                         sx={{
                         background: mode === 'dark' 
-                            ? 'rgba(101, 70, 51, 0.5)'
-                            : 'rgba(234, 234, 244, 0.5)',
-                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                            ? 'rgba(99, 102, 241, 0.8)'
+                            : 'rgba(168, 163, 246, 0.8)',
+                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
                             fontWeight: 'bold',
                             '&:hover': {
                                 background: mode === 'dark' 
-                                    ? 'rgba(101, 70, 51, 0.7)'
-                                    : 'rgba(234, 234, 244, 0.7)',
+                                    ? 'rgba(99, 102, 241, 1)'
+                                    : 'rgba(168, 163, 246, 1)',
                                 transform: 'translateY(-2px)',
                                 boxShadow: mode === 'dark' 
-                                    ? '0 6px 20px rgba(101, 70, 51, 0.4)'
-                                    : '0 6px 20px rgba(234, 234, 244, 0.4)',
+                                    ? '0 6px 20px rgba(99, 102, 241, 0.4)'
+                                    : '0 6px 20px rgba(168, 163, 246, 0.4)',
                             }
                         }}
                     >
@@ -142,11 +91,11 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                         variant="outlined"
                         onClick={handleReload}
                         sx={{
-                            borderColor: 'rgba(101, 70, 51, 0.3)',
-                            color: 'rgba(101, 70, 51, 0.7)',
+                            borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(36, 49, 104, 0.3)',
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
                             '&:hover': {
-                                borderColor: 'rgba(101, 70, 51, 0.5)',
-                                backgroundColor: 'rgba(101, 70, 51, 0.04)',
+                                borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(36, 49, 104, 0.5)',
+                                backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(36, 49, 104, 0.04)',
                             },
                         }}
                     >

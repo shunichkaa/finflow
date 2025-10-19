@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Chip, Divider, IconButton, List, ListItem, Typography } from '@mui/material';
+import { Box, Divider, IconButton, List, ListItem, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useTranslation } from 'react-i18next';
@@ -67,7 +67,6 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                         <ListItem
                             sx={{
                                 display: 'flex',
-                                alignItems: 'center',
                                 py: 2,
                                 px: { xs: 1, sm: 2 },
                                 gap: { xs: 1, sm: 2 },
@@ -136,17 +135,16 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                 {/* Нижняя строка: тип, дата, кнопки */}
                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        <Chip
-                                            label={t(transaction.type)}
-                                            sx={{
-                                                backgroundColor: transaction.type === 'income' 
-                                                    ? (mode === 'dark' ? 'rgba(254, 222, 233, 0.3)' : 'rgba(254, 222, 233, 0.5)')
-                                                    : (mode === 'dark' ? 'rgba(255, 185, 141, 0.3)' : 'rgba(255, 185, 141, 0.5)'),
-                                                color: mode === 'dark' ? '#FCF9F9' : '#654633',
-                                                fontWeight: 'bold'
+                                        <Typography 
+                                            variant="caption" 
+                                            sx={{ 
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)',
+                                                fontSize: '0.7rem',
+                                                fontWeight: 500
                                             }}
-                                            size="small"
-                                        />
+                                        >
+                                            {t(transaction.type)}
+                                        </Typography>
                                         <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.5)' : 'rgba(101, 70, 51, 0.5)' }}>
                                             {formatDate(transaction.date)}
                                         </Typography>
@@ -217,17 +215,16 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         <Typography variant="body1" fontWeight={600} noWrap>
                                             {categoryName}
                                         </Typography>
-                                        <Chip
-                                            label={t(transaction.type)}
-                                            sx={{
-                                                backgroundColor: transaction.type === 'income' 
-                                                    ? (mode === 'dark' ? 'rgba(254, 222, 233, 0.3)' : 'rgba(254, 222, 233, 0.5)')
-                                                    : (mode === 'dark' ? 'rgba(255, 185, 141, 0.3)' : 'rgba(255, 185, 141, 0.5)'),
-                                                color: mode === 'dark' ? '#FCF9F9' : '#654633',
-                                                fontWeight: 'bold'
+                                        <Typography 
+                                            variant="caption" 
+                                            sx={{ 
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)',
+                                                fontSize: '0.7rem',
+                                                fontWeight: 500
                                             }}
-                                            size="small"
-                                        />
+                                        >
+                                            {t(transaction.type)}
+                                        </Typography>
                                     </Box>
                                     {transaction.description && (
                                         <Typography
