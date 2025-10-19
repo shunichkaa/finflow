@@ -5,54 +5,57 @@ const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
         primary: {
-            main: 'rgba(234, 234, 244, 0.5)', // Нежный фиолетовый с прозрачностью
-            light: 'rgba(252, 249, 249, 0.3)', // Спокойный белый с прозрачностью
-            dark: 'rgba(101, 70, 51, 0.6)', // Яркий коричневый с прозрачностью
-            contrastText: '#654633', // Яркий коричневый для текста
+            main: '#A8A3F6', // LILAC - светлый фиолетовый
+            light: '#C4C0F8', // Светлый лиловый
+            dark: '#8B85E8', // Темный лиловый
+            contrastText: '#FFFFFF', // Белый для контраста
         },
         secondary: {
-            main: 'rgba(248, 229, 229, 0.5)', // Светлый бежевый с прозрачностью
-            light: 'rgba(254, 222, 233, 0.3)', // Светлый розовый с прозрачностью
-            dark: 'rgba(255, 185, 141, 0.6)', // Нежный оранжевый с прозрачностью
-            contrastText: '#654633', // Яркий коричневый для текста
+            main: '#F6D5EE', // PINK - нежный розовый
+            light: '#F8E5F2', // Светлый розовый
+            dark: '#F2C5E6', // Темный розовый
+            contrastText: '#243168', // NAVY для контраста
         },
         error: {
-            main: 'rgba(255, 185, 141, 0.8)', // Нежный оранжевый для ошибок
-            light: 'rgba(255, 185, 141, 0.6)',
-            dark: 'rgba(101, 70, 51, 0.8)',
-            contrastText: '#654633',
+            main: '#FF6B6B', // Красный из UI-кита
+            light: '#FF8E8E',
+            dark: '#E55555',
+            contrastText: '#FFFFFF',
         },
         success: {
-            main: 'rgba(254, 222, 233, 0.8)', // Светлый розовый для успеха
-            light: 'rgba(254, 222, 233, 0.6)',
-            dark: 'rgba(248, 229, 229, 0.8)',
-            contrastText: '#654633',
+            main: '#96CEB4', // Зеленый из UI-кита
+            light: '#B0D9C4',
+            dark: '#7CB89A',
+            contrastText: '#FFFFFF',
         },
         warning: {
-            main: 'rgba(255, 185, 141, 0.8)', // Нежный оранжевый для предупреждений
-            light: 'rgba(255, 185, 141, 0.6)',
-            dark: 'rgba(101, 70, 51, 0.8)',
-            contrastText: '#654633',
+            main: '#FFEAA7', // Желтый из UI-кита
+            light: '#FFF0C7',
+            dark: '#F5E087',
+            contrastText: '#243168',
         },
         info: {
-            main: 'rgba(234, 234, 244, 0.8)', // Нежный фиолетовый для информации
-            light: 'rgba(234, 234, 244, 0.6)',
-            dark: 'rgba(101, 70, 51, 0.8)',
-            contrastText: '#654633',
+            main: '#4ECDC4', // Бирюзовый из UI-кита
+            light: '#6ED5CE',
+            dark: '#3EB5AE',
+            contrastText: '#FFFFFF',
         },
         background: {
-            default: 'rgba(252, 249, 249, 0.3)', // Спокойный белый с большей прозрачностью
-            paper: 'rgba(248, 229, 229, 0.2)', // Светлый бежевый с большей прозрачностью
+            default: '#F5F5F5', // Светло-серый фон
+            paper: 'rgba(255, 255, 255, 0.25)', // Полупрозрачный белый для glassmorphism
         },
         text: {
-            primary: '#654633', // Яркий коричневый для основного текста
-            secondary: 'rgba(101, 70, 51, 0.7)', // Яркий коричневый с прозрачностью для вторичного текста
+            primary: '#243168', // NAVY для основного текста
+            secondary: 'rgba(36, 49, 104, 0.7)', // NAVY с прозрачностью
         },
-        divider: 'rgba(101, 70, 51, 0.2)' // Яркий коричневый с прозрачностью для разделителей
+        divider: 'rgba(36, 49, 104, 0.15)' // NAVY с прозрачностью
     },
     typography: {
         fontFamily: [
-            'Nunito',
+            'SF Pro Display',
+            'Proxima Nova',
+            'Montserrat',
+            'Poppins',
             'Inter',
             'system-ui',
             'Segoe UI',
@@ -63,16 +66,47 @@ const lightThemeOptions: ThemeOptions = {
         ].join(','),
         h1: {
             fontWeight: 700,
+            fontSize: '2.5rem',
+            letterSpacing: '-0.02em',
         },
         h2: {
             fontWeight: 600,
+            fontSize: '2rem',
+            letterSpacing: '-0.01em',
+        },
+        h3: {
+            fontWeight: 600,
+            fontSize: '1.5rem',
+            letterSpacing: '-0.01em',
+        },
+        h4: {
+            fontWeight: 600,
+            fontSize: '1.25rem',
+        },
+        h5: {
+            fontWeight: 600,
+            fontSize: '1.125rem',
+        },
+        h6: {
+            fontWeight: 600,
+            fontSize: '1rem',
+        },
+        body1: {
+            fontSize: '1rem',
+            lineHeight: 1.6,
+        },
+        body2: {
+            fontSize: '0.875rem',
+            lineHeight: 1.5,
         },
         button: {
             fontWeight: 600,
+            fontSize: '0.875rem',
+            letterSpacing: '0.02em',
         }
     },
     shape: {
-        borderRadius: 14,
+        borderRadius: 16,
     },
     components: {
         MuiButton: {
@@ -80,11 +114,33 @@ const lightThemeOptions: ThemeOptions = {
                 root: {
                     textTransform: 'none',
                     fontWeight: 600,
-                    padding: '10px 18px',
-                    borderRadius: 12,
-                    boxShadow: 'none',
+                    padding: '14px 28px',
+                    borderRadius: 20,
+                    backdropFilter: 'blur(20px) saturate(180%)',
+                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                    boxShadow: '0 8px 32px rgba(36, 49, 104, 0.25), 0 2px 8px rgba(36, 49, 104, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: '-100%',
+                        width: '100%',
+                        height: '100%',
+                        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                        transition: 'left 0.5s',
+                    },
                     '&:hover': {
-                        boxShadow: '0 4px 12px rgba(14, 165, 233, 0.15)',
+                        transform: 'translateY(-4px) scale(1.05)',
+                        boxShadow: '0 16px 48px rgba(36, 49, 104, 0.4), 0 4px 16px rgba(36, 49, 104, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                        '&::before': {
+                            left: '100%',
+                        },
+                    },
+                    '&:active': {
+                        transform: 'translateY(-2px) scale(1.02)',
                     },
                 },
             },
@@ -92,10 +148,28 @@ const lightThemeOptions: ThemeOptions = {
         MuiCard: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
-                    border: '1px solid rgba(148, 163, 184, 0.1)',
-                    borderRadius: 16,
-                    backgroundColor: '#ffffff',
+                    backdropFilter: 'blur(40px) saturate(180%)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                    borderRadius: 24,
+                    boxShadow: '0 8px 32px rgba(36, 49, 104, 0.37), 0 2px 8px rgba(36, 49, 104, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: '1px',
+                        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                    },
+                    '&:hover': {
+                        transform: 'translateY(-8px) scale(1.02)',
+                        boxShadow: '0 20px 60px rgba(36, 49, 104, 0.4), 0 8px 20px rgba(36, 49, 104, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                        backgroundColor: 'rgba(255, 255, 255, 0.35)',
+                    },
                 },
             },
         },
@@ -229,54 +303,57 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: 'rgba(60, 55, 50, 0.8)', // Темный коричнево-серый
-            light: 'rgba(80, 75, 70, 0.6)', // Средний коричнево-серый
-            dark: 'rgba(40, 35, 30, 0.9)', // Очень темный коричнево-серый
-            contrastText: '#F5F5DC', // Бежевый для текста
+            main: '#6366F1', // Мягкий индиго
+            light: '#818CF8', // Светлый индиго
+            dark: '#4F46E5', // Темный индиго
+            contrastText: '#FFFFFF', // Белый для контраста
         },
         secondary: {
-            main: 'rgba(80, 75, 70, 0.7)', // Средний коричнево-серый
-            light: 'rgba(100, 95, 90, 0.5)', // Светлый коричнево-серый
-            dark: 'rgba(60, 55, 50, 0.8)', // Темный коричнево-серый
-            contrastText: '#F5F5DC', // Бежевый для текста
+            main: '#8B5CF6', // Мягкий фиолетовый
+            light: '#A78BFA', // Светлый фиолетовый
+            dark: '#7C3AED', // Темный фиолетовый
+            contrastText: '#FFFFFF', // Белый для контраста
         },
         error: {
-            main: 'rgba(220, 100, 100, 0.8)', // Холодный красный для ошибок
-            light: 'rgba(220, 100, 100, 0.6)',
-            dark: 'rgba(180, 60, 60, 0.8)',
-            contrastText: '#E8F4F8',
+            main: '#FF6B6B', // Красный из UI-кита
+            light: '#FF8E8E',
+            dark: '#E55555',
+            contrastText: '#FFFFFF',
         },
         success: {
-            main: 'rgba(100, 200, 150, 0.8)', // Холодный зеленый для успеха
-            light: 'rgba(100, 200, 150, 0.6)',
-            dark: 'rgba(60, 160, 100, 0.8)',
-            contrastText: '#1A3A2A',
+            main: '#96CEB4', // Зеленый из UI-кита
+            light: '#B0D9C4',
+            dark: '#7CB89A',
+            contrastText: '#FFFFFF',
         },
         warning: {
-            main: 'rgba(200, 180, 100, 0.8)', // Холодный желтый для предупреждений
-            light: 'rgba(200, 180, 100, 0.6)',
-            dark: 'rgba(160, 140, 80, 0.8)',
-            contrastText: '#E8F4F8',
+            main: '#FFEAA7', // Желтый из UI-кита
+            light: '#FFF0C7',
+            dark: '#F5E087',
+            contrastText: '#1A004D',
         },
         info: {
-            main: 'rgba(100, 150, 200, 0.8)', // Холодный синий для информации
-            light: 'rgba(100, 150, 200, 0.6)',
-            dark: 'rgba(60, 100, 160, 0.8)',
-            contrastText: '#E8F4F8',
+            main: '#4ECDC4', // Бирюзовый из UI-кита
+            light: '#6ED5CE',
+            dark: '#3EB5AE',
+            contrastText: '#FFFFFF',
         },
         background: {
-            default: 'rgba(40, 35, 30, 0.98)', // Темный коричнево-серый фон
-            paper: 'rgba(60, 55, 50, 0.4)', // Темный коричнево-серый для карточек
+            default: '#0F0F23', // Мягкий темно-синий фон
+            paper: 'rgba(15, 15, 35, 0.85)', // Полупрозрачный темно-синий для glassmorphism
         },
         text: {
-            primary: '#F5F5DC', // Бежевый для основного текста
-            secondary: 'rgba(245, 245, 220, 0.8)', // Бежевый с прозрачностью для вторичного текста
+            primary: '#FFFFFF', // Белый для основного текста
+            secondary: 'rgba(255, 255, 255, 0.8)', // Белый с прозрачностью
         },
-        divider: 'rgba(139, 69, 19, 0.3)' // Темный шоколадный для разделителей
+        divider: 'rgba(255, 255, 255, 0.15)' // Белый с прозрачностью
     },
     typography: {
         fontFamily: [
-            'Nunito',
+            'SF Pro Display',
+            'Proxima Nova',
+            'Montserrat',
+            'Poppins',
             'Inter',
             'system-ui',
             'Segoe UI',
@@ -287,16 +364,47 @@ const darkThemeOptions: ThemeOptions = {
         ].join(','),
         h1: {
             fontWeight: 700,
+            fontSize: '2.5rem',
+            letterSpacing: '-0.02em',
         },
         h2: {
             fontWeight: 600,
+            fontSize: '2rem',
+            letterSpacing: '-0.01em',
+        },
+        h3: {
+            fontWeight: 600,
+            fontSize: '1.5rem',
+            letterSpacing: '-0.01em',
+        },
+        h4: {
+            fontWeight: 600,
+            fontSize: '1.25rem',
+        },
+        h5: {
+            fontWeight: 600,
+            fontSize: '1.125rem',
+        },
+        h6: {
+            fontWeight: 600,
+            fontSize: '1rem',
+        },
+        body1: {
+            fontSize: '1rem',
+            lineHeight: 1.6,
+        },
+        body2: {
+            fontSize: '0.875rem',
+            lineHeight: 1.5,
         },
         button: {
             fontWeight: 600,
+            fontSize: '0.875rem',
+            letterSpacing: '0.02em',
         }
     },
     shape: {
-        borderRadius: 14,
+        borderRadius: 16,
     },
     components: {
         MuiButton: {
@@ -304,11 +412,33 @@ const darkThemeOptions: ThemeOptions = {
                 root: {
                     textTransform: 'none',
                     fontWeight: 600,
-                    padding: '10px 18px',
-                    borderRadius: 12,
-                    boxShadow: 'none',
+                    padding: '14px 28px',
+                    borderRadius: 20,
+                    backdropFilter: 'blur(20px) saturate(180%)',
+                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: '-100%',
+                        width: '100%',
+                        height: '100%',
+                        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
+                        transition: 'left 0.5s',
+                    },
                     '&:hover': {
-                        boxShadow: '0 4px 12px rgba(14, 165, 233, 0.25)',
+                        transform: 'translateY(-4px) scale(1.05)',
+                        boxShadow: '0 16px 48px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                        '&::before': {
+                            left: '100%',
+                        },
+                    },
+                    '&:active': {
+                        transform: 'translateY(-2px) scale(1.02)',
                     },
                 },
             },
@@ -316,10 +446,28 @@ const darkThemeOptions: ThemeOptions = {
         MuiCard: {
             styleOverrides: {
                 root: {
-                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)',
-                    border: '1px solid rgba(148, 163, 184, 0.1)',
-                    borderRadius: 16,
-                    backgroundColor: '#1e293b',
+                    backdropFilter: 'blur(40px) saturate(180%)',
+                    backgroundColor: 'rgba(26, 0, 77, 0.25)',
+                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                    borderRadius: 24,
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: '1px',
+                        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                    },
+                    '&:hover': {
+                        transform: 'translateY(-8px) scale(1.02)',
+                        boxShadow: '0 20px 60px rgba(0, 0, 0, 0.7), 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                        backgroundColor: 'rgba(26, 0, 77, 0.35)',
+                    },
                 },
             },
         },

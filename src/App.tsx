@@ -56,11 +56,9 @@ function App() {
             </ProtectedRoute>
           } />
           <Route path="/goals" element={
-            <ProtectedRoute>
-              <Layout>
-                <Goals />
-              </Layout>
-            </ProtectedRoute>
+            <Layout>
+              <Goals />
+            </Layout>
           } />
           <Route path="/profile" element={
             <ProtectedRoute>

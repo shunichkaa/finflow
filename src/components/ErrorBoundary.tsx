@@ -44,8 +44,8 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                     p: 4,
                     textAlign: 'center',
                     borderRadius: 3,
-                    backgroundColor: 'rgba(252, 249, 249, 0.1)',
-                    border: '1px solid rgba(148, 163, 184, 0.1)',
+                    backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.8)' : 'rgba(255, 255, 255, 0.25)',
+                    border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(148, 163, 184, 0.1)',
                 }}
             >
                 {/* Иконка ошибки */}
@@ -59,11 +59,11 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                     ⚠️
                 </Box>
 
-                <Typography variant="h4" gutterBottom fontWeight="bold" color="text.primary">
+                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#243168' }}>
                     Что-то пошло не так
                 </Typography>
 
-                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                <Typography variant="body1" sx={{ mb: 3, color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.7)' }}>
                     Произошла неожиданная ошибка. Мы уже работаем над её исправлением.
                 </Typography>
 
@@ -79,7 +79,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                             textAlign: 'left',
                         }}
                     >
-                        <Typography variant="subtitle2" color="error" gutterBottom>
+                        <Typography variant="subtitle2" sx={{ color: mode === 'dark' ? '#FF6B6B' : '#E55555', gutterBottom: true }}>
                             Детали ошибки:
                         </Typography>
                         <Typography
@@ -88,7 +88,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                             sx={{
                                 fontFamily: 'monospace',
                                 fontSize: '0.75rem',
-                                color: 'rgba(101, 70, 51, 0.8)',
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.8)',
                                 whiteSpace: 'pre-wrap',
                                 wordBreak: 'break-word',
                             }}
@@ -102,7 +102,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                                 sx={{
                                     fontFamily: 'monospace',
                                     fontSize: '0.75rem',
-                                    color: 'rgba(101, 70, 51, 0.8)',
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.8)',
                                     whiteSpace: 'pre-wrap',
                                     wordBreak: 'break-word',
                                     mt: 1,

@@ -47,20 +47,35 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
         <Paper sx={{ 
             p: 2, 
             mb: 2,
-            backgroundColor: mode === 'dark' ? 'rgba(60, 55, 50, 0.6)' : 'rgba(234, 234, 244, 0.4)',
-            border: mode === 'dark' ? '1px solid rgba(80, 75, 70, 0.4)' : '1px solid rgba(234, 234, 244, 0.4)',
-            borderRadius: 2
+            backdropFilter: 'blur(40px) saturate(180%)',
+            backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.3)' : 'rgba(255, 255, 255, 0.2)',
+            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: 3,
+            boxShadow: mode === 'dark' 
+                ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+            position: 'relative',
+            overflow: 'hidden',
+            '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '1px',
+                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+            },
         }}>
             <Stack spacing={1.5}>
                 {/* Компактная строка с фильтрами */}
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ xs: 'stretch', sm: 'center' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: { xs: 1, sm: 0 } }}>
                         <FilterListIcon sx={{ 
-                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
                             fontSize: 20
                         }} />
                         <Typography variant="body2" sx={{ 
-                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.8)',
                             fontWeight: 500,
                             display: { xs: 'block', sm: 'none' }
                         }}>

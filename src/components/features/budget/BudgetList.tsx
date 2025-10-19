@@ -80,13 +80,13 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                         : (mode === 'dark' ? '1px solid rgba(254, 222, 233, 0.3)' : '1px solid rgba(254, 222, 233, 0.4)')
                 }}>
                     <CardContent>
-                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.9)' : 'rgba(101, 70, 51, 0.8)' }} gutterBottom>
+                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.7)' }} gutterBottom>
                             {t('exceededBudgets')}
                         </Typography>
                         <Typography
                             variant="h4"
                             fontWeight="bold"
-                            sx={{ color: mode === 'dark' ? '#FFFFFF' : '#654633' }}
+                            sx={{ color: mode === 'dark' ? '#FFFFFF' : '#243168' }}
                         >
                             {exceededBudgets}
                         </Typography>
@@ -95,7 +95,11 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
             </Box>
 
             {/* Список бюджетов */}
-            <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
+            <Box sx={{
+                display: 'grid', 
+                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, 
+                gap: 2
+            }}>
                 {budgets.map((budget) => {
                     const category = getCategoryById(budget.category);
                     const spent = calculateBudgetSpent(budget, transactions);
@@ -111,8 +115,24 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                   minHeight: 160, 
                                   display: 'flex', 
                                   flexDirection: 'column',
-                                  backgroundColor: mode === 'dark' ? 'rgba(101, 70, 51, 0.3)' : 'rgba(234, 234, 244, 0.3)',
-                                  border: mode === 'dark' ? '1px solid rgba(101, 70, 51, 0.3)' : '1px solid rgba(234, 234, 244, 0.3)'
+                                  backdropFilter: 'blur(40px) saturate(180%)',
+                                  backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.4)' : 'rgba(255, 255, 255, 0.2)',
+                                  border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
+                                  borderRadius: 3,
+                                  boxShadow: mode === 'dark' 
+                                      ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                                      : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                                  position: 'relative',
+                                  overflow: 'hidden',
+                                  '&::before': {
+                                      content: '""',
+                                      position: 'absolute',
+                                      top: 0,
+                                      left: 0,
+                                      right: 0,
+                                      height: '1px',
+                                      background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                                  },
                               }}>
                             <CardContent sx={{flexGrow: 1}}>
                                 {/* Header */}
@@ -207,32 +227,29 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                 {/* Stats */}
                                 <Box sx={{display: 'flex', justifyContent: 'space-between', mt: 2}}>
                                     <Box>
-                                        <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(101, 70, 51, 0.8)' }}>
+                                        <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.7)' }}>
                                             {t('spent')}
                                         </Typography>
-                                        <Typography variant="h6" fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#654633' }}>
+                                        <Typography variant="h6" fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#243168' }}>
                                             {formatCurrency(spent, currency)}
                                         </Typography>
                                     </Box>
 
                                     <Box sx={{textAlign: 'right'}}>
-                                        <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(101, 70, 51, 0.8)' }}>
-                                            {remaining >= 0 ? t('remaining') : t('exceeded')}
-                                        </Typography>
                                         <Typography
                                             variant="h6"
                                             fontWeight="bold"
-                                            sx={{ color: mode === 'dark' ? '#FFFFFF' : '#654633' }}
+                                            sx={{ color: mode === 'dark' ? '#FFFFFF' : '#243168' }}
                                         >
                                             {formatCurrency(Math.abs(remaining), currency)}
                                         </Typography>
                                     </Box>
 
                                     <Box sx={{textAlign: 'right'}}>
-                                        <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(101, 70, 51, 0.8)' }}>
+                                        <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.7)' }}>
                                             {t('limit')}
                                         </Typography>
-                                        <Typography variant="h6" fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#654633' }}>
+                                        <Typography variant="h6" fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#243168' }}>
                                             {formatCurrency(budget.limit, currency)}
                                         </Typography>
                                     </Box>

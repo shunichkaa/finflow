@@ -29,6 +29,7 @@ import {useTranslation} from 'react-i18next';
 import {useThemeMode} from '../Budgets/theme/ThemeContext';
 import {useSettingsStore} from '../Budgets/store/useSettingsStore';
 import {supabase} from '../lib/supabaseClient';
+import {GradientBackground} from './ui/GradientBackground';
 
 const drawerWidth = 280;
 
@@ -81,26 +82,43 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             display: 'flex', 
             flexDirection: 'column', 
             height: '100vh', 
+            backdropFilter: 'blur(40px) saturate(180%)',
             backgroundColor: mode === 'dark' 
-                ? 'rgba(60, 55, 50, 0.2)'
-                : 'rgba(248, 229, 229, 0.3)',
+                ? 'rgba(26, 0, 77, 0.25)'
+                : 'rgba(255, 255, 255, 0.25)',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
             transition: (theme) => theme.transitions.create('opacity', {
                 easing: theme.transitions.easing.easeInOut,
                 duration: theme.transitions.duration.complex,
             }),
+            position: 'relative',
+            overflow: 'hidden',
+            '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '1px',
+                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
+            },
         }}>
             {/* AppBar для сайдбара */}
             <AppBar position="static" elevation={0} sx={{
+                backdropFilter: 'blur(40px) saturate(180%)',
                 backgroundColor: mode === 'dark' 
-                    ? 'rgba(60, 55, 50, 0.8)'
-                    : 'rgba(234, 234, 244, 0.5)'
+                    ? 'rgba(26, 0, 77, 0.3)'
+                    : 'rgba(255, 255, 255, 0.3)',
+                border: '1px solid rgba(255, 255, 255, 0.18)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
             }}>
                 <Toolbar>
                     <IconButton
                         onClick={handleDrawerToggle}
                         sx={{
                             display: {sm: 'none'},
-                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
                             '&:hover': {
                                 backgroundColor: mode === 'dark' 
                                     ? 'rgba(232, 244, 253, 0.1)' 
@@ -118,7 +136,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             sx={{
                                 display: {xs: 'none', sm: 'block'},
-                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
                                 mr: 2,
                                 transition: (theme) => theme.transitions.create(['background-color', 'transform'], {
                                     easing: theme.transitions.easing.easeInOut,
@@ -142,7 +160,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 onClick={handleLogoClick}
                                 sx={{
                                     cursor: 'pointer',
-                                    color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#243168',
                                     fontWeight: 'bold',
                                     '&:hover': {
                                         opacity: 0.8,
@@ -171,7 +189,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
 
             {/* Навигация */}
             <Box sx={{ flexGrow: 1, overflow: 'auto' }}>
-                <List sx={{ px: 1 }}>
+                <List sx={{ px: 0.5, overflow: 'hidden' }}>
                     {navItems.map((item) => (
                         <ListItem key={item.path} disablePadding sx={{mb: 0.5}}>
                             <ListItemButton
@@ -180,28 +198,48 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 selected={location.pathname === item.path}
                                 onClick={() => setMobileOpen(false)}
                                 sx={{
-                                    borderRadius: 2,
-                                    color: mode === 'dark' ? '#F5F5DC' : '#654633',
-                                    transition: (theme) => theme.transitions.create(['background-color', 'transform'], {
+                                    borderRadius: 3,
+                                    color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                    backdropFilter: 'blur(10px)',
+                                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                                    transition: (theme) => theme.transitions.create(['background-color', 'transform', 'box-shadow'], {
                                         easing: theme.transitions.easing.easeInOut,
                                         duration: theme.transitions.duration.standard,
                                     }),
+                                    position: 'relative',
+                                    overflow: 'hidden',
+                                    '&::before': {
+                                        content: '""',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: '-100%',
+                                        width: '100%',
+                                        height: '100%',
+                                        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
+                                        transition: 'left 0.5s',
+                                    },
                                     '&.Mui-selected': {
                                         backgroundColor: mode === 'dark' 
-                                            ? 'rgba(80, 75, 70, 0.4)' 
-                                            : 'rgba(255, 185, 141, 0.3)',
-                                        color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                            ? 'rgba(99, 102, 241, 0.4)' 
+                                            : 'rgba(168, 163, 246, 0.3)',
+                                        color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                        boxShadow: '0 4px 16px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
                                         '&:hover': {
                                             backgroundColor: mode === 'dark' 
-                                                ? 'rgba(100, 95, 90, 0.5)' 
-                                                : 'rgba(255, 185, 141, 0.4)',
+                                                ? 'rgba(99, 102, 241, 0.5)' 
+                                                : 'rgba(168, 163, 246, 0.4)',
+                                            transform: 'scale(1.02)',
                                         }
                                     },
                                     '&:hover': {
                                         backgroundColor: mode === 'dark' 
-                                            ? 'rgba(80, 75, 70, 0.2)' 
-                                            : 'rgba(255, 185, 141, 0.2)',
-                                        transform: 'translateX(6px)',
+                                            ? 'rgba(99, 102, 241, 0.2)' 
+                                            : 'rgba(168, 163, 246, 0.2)',
+                                        transform: 'scale(1.01)',
+                                        boxShadow: '0 4px 16px rgba(99, 102, 241, 0.2)',
+                                        '&::before': {
+                                            left: '100%',
+                                        },
                                     }
                                 }}
                             >
@@ -220,8 +258,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             {/* Кнопки внизу */}
             <Divider sx={{
                 borderColor: mode === 'dark' 
-                    ? 'rgba(123, 167, 209, 0.3)' 
-                    : 'rgba(184, 212, 240, 0.3)'
+                    ? 'rgba(255, 255, 255, 0.2)' 
+                    : 'rgba(36, 49, 104, 0.2)'
             }}/>
             <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
                 <Button
@@ -243,9 +281,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     }
                     sx={{
                         borderColor: mode === 'dark' 
-                            ? 'rgba(123, 167, 209, 0.3)'
-                            : 'rgba(184, 212, 240, 0.3)',
-                        color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            ? 'rgba(255, 255, 255, 0.3)'
+                            : 'rgba(36, 49, 104, 0.3)',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#243168',
                         fontWeight: 'bold',
                         transition: (theme) => theme.transitions.create(['background', 'transform'], {
                             easing: theme.transitions.easing.easeInOut,
@@ -253,12 +291,12 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         }),
                         '&:hover': {
                             background: mode === 'dark' 
-                                ? 'rgba(123, 167, 209, 0.1)'
-                                : 'rgba(184, 212, 240, 0.1)',
+                                ? 'rgba(99, 102, 241, 0.1)'
+                                : 'rgba(168, 163, 246, 0.1)',
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark' 
-                                ? '0 4px 15px rgba(123, 167, 209, 0.3)'
-                                : '0 4px 15px rgba(184, 212, 240, 0.3)',
+                                ? '0 4px 15px rgba(99, 102, 241, 0.3)'
+                                : '0 4px 15px rgba(168, 163, 246, 0.3)',
                         }
                     }}
                 >
@@ -270,9 +308,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     variant="contained"
                     sx={{
                         background: mode === 'dark' 
-                            ? 'rgba(80, 75, 70, 0.6)'
-                            : 'rgba(255, 185, 141, 0.5)',
-                        color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            ? 'rgba(102, 51, 255, 0.8)'
+                            : 'rgba(168, 163, 246, 0.8)',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#243168',
                         fontWeight: 'bold',
                         transition: (theme) => theme.transitions.create(['background', 'transform'], {
                             easing: theme.transitions.easing.easeInOut,
@@ -280,12 +318,12 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         }),
                         '&:hover': {
                             background: mode === 'dark' 
-                                ? 'rgba(100, 95, 90, 0.8)'
-                                : 'rgba(255, 185, 141, 0.7)',
+                                ? 'rgba(102, 51, 255, 1)'
+                                : 'rgba(168, 163, 246, 1)',
                             transform: 'translateY(-3px)',
                             boxShadow: mode === 'dark' 
-                                ? '0 6px 20px rgba(100, 95, 90, 0.4)'
-                                : '0 6px 20px rgba(255, 185, 141, 0.4)',
+                                ? '0 6px 20px rgba(102, 51, 255, 0.4)'
+                                : '0 6px 20px rgba(168, 163, 246, 0.4)',
                         }
                     }}
                 >
@@ -297,8 +335,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     );
 
     return (
-        <Box sx={{display: 'flex'}}>
-            <CssBaseline/>
+        <GradientBackground>
+            <Box sx={{display: 'flex'}}>
+                <CssBaseline/>
 
             {/* Основной AppBar */}
             <AppBar
@@ -307,16 +346,13 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     zIndex: (theme) => theme.zIndex.drawer + 1,
                     width: {sm: (sidebarOpen && !isLoginPage) ? `calc(100% - ${drawerWidth}px)` : '100%'},
                     ml: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
+                    backdropFilter: 'blur(40px) saturate(180%)',
                     backgroundColor: mode === 'dark' 
-                        ? 'rgba(60, 55, 50, 0.8)'
-                        : 'rgba(234, 234, 244, 0.5)',
-                    color: mode === 'dark' ? '#F5F5DC' : '#654633',
-                    boxShadow: mode === 'dark' 
-                        ? '0 4px 20px rgba(26, 35, 50, 0.3)'
-                        : '0 4px 20px rgba(184, 212, 240, 0.3)',
-                    borderBottom: mode === 'dark' 
-                        ? '1px solid rgba(123, 167, 209, 0.2)'
-                        : '1px solid rgba(184, 212, 240, 0.2)',
+                        ? 'rgba(26, 0, 77, 0.3)'
+                        : 'rgba(255, 255, 255, 0.3)',
+                    color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                     transition: (theme) => theme.transitions.create(['width', 'margin'], {
                         easing: theme.transitions.easing.easeInOut,
                         duration: theme.transitions.duration.complex,
@@ -333,7 +369,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             sx={{
                                 mr: 2,
                                 display: {sm: 'none'},
-                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
                                 '&:hover': {
                                     backgroundColor: mode === 'dark' 
                                         ? 'rgba(232, 244, 253, 0.1)' 
@@ -352,7 +388,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     onClick={() => setSidebarOpen(!sidebarOpen)}
                                     sx={{
                                         display: {xs: 'none', sm: 'block'},
-                                        color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                        color: mode === 'dark' ? '#FFFFFF' : '#243168',
                                         mr: 2,
                                         '&:hover': {
                                             backgroundColor: mode === 'dark' 
@@ -371,7 +407,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                         onClick={handleLogoClick}
                                         sx={{
                                             cursor: 'pointer',
-                                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
                                             fontWeight: 'bold',
                                             '&:hover': {
                                                 opacity: 0.8,
@@ -385,7 +421,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     <Typography
                                         variant="caption"
                                         sx={{
-                                            color: mode === 'dark' ? 'rgba(232, 244, 253, 0.7)' : 'rgba(44, 62, 80, 0.7)',
+                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
                                             fontSize: '0.7rem',
                                             lineHeight: 1,
                                             mt: 0.5
@@ -403,7 +439,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     <IconButton 
                         onClick={toggleTheme} 
                         sx={{
-                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
                             '&:hover': {
                                 backgroundColor: mode === 'dark' 
                                     ? 'rgba(232, 244, 253, 0.1)' 
@@ -476,18 +512,25 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    p: {xs: 2, sm: 3},
+                    p: {xs: 1.5, sm: 2},
                     width: '100%',
                     mt: {xs: 7, sm: 8},
                     ml: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
-                    transition: (theme) => theme.transitions.create('margin', {
+                    transition: (theme) => theme.transitions.create(['margin', 'padding'], {
                         easing: theme.transitions.easing.easeInOut,
                         duration: theme.transitions.duration.complex,
                     }),
+                    '& > *': {
+                        transition: (theme) => theme.transitions.create(['transform', 'opacity'], {
+                            easing: theme.transitions.easing.easeInOut,
+                            duration: theme.transitions.duration.complex,
+                        }),
+                    },
                 }}
             >
                 {children ?? <Outlet/>}
             </Box>
         </Box>
+        </GradientBackground>
     );
 };

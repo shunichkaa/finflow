@@ -22,16 +22,16 @@ export interface ExpensesPieChartProps {
 }
 
 const COLORS = [
-    '#FF6B6B', // Красный
+    '#6366F1', // Индиго
+    '#8B5CF6', // Фиолетовый
+    '#A78BFA', // Светло-фиолетовый
     '#4ECDC4', // Бирюзовый
-    '#45B7D1', // Голубой
     '#96CEB4', // Зеленый
-    '#FFEAA7', // Желтый
-    '#DDA0DD', // Фиолетовый
+    '#DDA0DD', // Лавандовый
     '#98D8C8', // Мятный
-    '#F7DC6F', // Золотой
-    '#BB8FCE', // Лавандовый
     '#85C1E9', // Светло-голубой
+    '#BB8FCE', // Светло-лавандовый
+    '#C4C0F8', // Очень светло-фиолетовый
 ];
 
 export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
@@ -118,7 +118,22 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
     };
 
     return (
-        <Box sx={{ width: '100%', height: 400 }}>
+        <Box sx={{ 
+            width: '100%', 
+            height: 400,
+            position: 'relative',
+            '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
+                borderRadius: 4,
+                zIndex: -1,
+            }
+        }}>
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                     <Pie
@@ -131,12 +146,12 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                         innerRadius={40}
                         fill="#8884d8"
                         dataKey="value"
-                        stroke="#ffffff"
-                        strokeWidth={3}
+                        stroke="rgba(255, 255, 255, 0.2)"
+                        strokeWidth={2}
                         animationBegin={0}
                         animationDuration={1000}
                         animationEasing="ease-out"
-                        paddingAngle={2}
+                        paddingAngle={1}
                     >
                         {chartData.map((_, index) => (
                             <Cell

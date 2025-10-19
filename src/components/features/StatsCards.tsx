@@ -75,17 +75,33 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                 <Card
                     key={stat.title}
                     sx={{
+                        backdropFilter: 'blur(40px) saturate(180%)',
                         background: mode === 'dark' 
-                            ? 'rgba(101, 70, 51, 0.5)'
-                            : 'rgba(234, 234, 244, 0.5)',
-                        color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                            ? 'rgba(15, 15, 35, 0.4)'
+                            : 'rgba(255, 255, 255, 0.2)',
+                        border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
+                        color: mode === 'dark' ? '#FFFFFF' : '#243168',
                         position: 'relative',
                         overflow: 'hidden',
                         cursor: onFilterClick ? 'pointer' : 'default',
-                        transition: 'transform 0.2s, box-shadow 0.2s',
+                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                        '&::before': {
+                            content: '""',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            height: '1px',
+                            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                        },
                         '&:hover': onFilterClick ? {
-                            transform: 'translateY(-4px)',
-                            boxShadow: 6,
+                            transform: 'translateY(-8px) scale(1.02)',
+                            boxShadow: mode === 'dark' 
+                                ? '0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                                : '0 20px 60px rgba(36, 49, 104, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                            background: mode === 'dark' 
+                                ? 'rgba(15, 15, 35, 0.6)'
+                                : 'rgba(255, 255, 255, 0.3)',
                         } : {},
                     }}
                     onClick={() => onFilterClick && stat.filterType && onFilterClick(stat.filterType)}
