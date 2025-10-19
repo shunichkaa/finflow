@@ -60,7 +60,7 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
                 backdropFilter: `blur(${intensityValues.blur}) saturate(${intensityValues.saturation})`,
                 border: '1px solid rgba(255, 255, 255, 0.18)',
                 boxShadow: `${intensityValues.shadow} ${glowColor || defaultGlowColor}, 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)`,
-                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                 position: 'relative',
                 overflow: 'hidden',
                 ...(shimmer && {
@@ -72,7 +72,7 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
                         width: '100%',
                         height: '100%',
                         background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
-                        transition: 'left 0.5s',
+                        transition: 'left 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                     },
                 }),
                 '&::after': {
@@ -84,7 +84,7 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
                     bottom: 0,
                     background: `radial-gradient(circle at 50% 50%, ${glowColor || defaultGlowColor} 0%, transparent 70%)`,
                     opacity: 0,
-                    transition: 'opacity 0.4s ease',
+                    transition: 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                     pointerEvents: 'none',
                 },
                 '&:hover': {

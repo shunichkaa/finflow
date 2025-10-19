@@ -24,6 +24,7 @@ export interface FinanceStore {
 
     // ===== UTILITY =====
     clearAllData: () => void;
+    addTestData: () => void;
 }
 
 // ============================================
@@ -95,6 +96,70 @@ export const useFinanceStore = create<FinanceStore>()(
                     transactions: [],
                     budgets: [],
                 })),
+
+            addTestData: () =>
+                set((state) => {
+                    const testTransactions: Transaction[] = [
+                        {
+                            id: uuid(),
+                            type: 'income',
+                            amount: 50000,
+                            category: 'salary',
+                            description: 'Зарплата',
+                            date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 дней назад
+                            createdAt: new Date(),
+                        },
+                        {
+                            id: uuid(),
+                            type: 'income',
+                            amount: 15000,
+                            category: 'freelance',
+                            description: 'Фриланс проект',
+                            date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 дня назад
+                            createdAt: new Date(),
+                        },
+                        {
+                            id: uuid(),
+                            type: 'expense',
+                            amount: 25000,
+                            category: 'food',
+                            description: 'Продукты',
+                            date: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000), // 4 дня назад
+                            createdAt: new Date(),
+                        },
+                        {
+                            id: uuid(),
+                            type: 'expense',
+                            amount: 8000,
+                            category: 'transport',
+                            description: 'Транспорт',
+                            date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 дня назад
+                            createdAt: new Date(),
+                        },
+                        {
+                            id: uuid(),
+                            type: 'expense',
+                            amount: 12000,
+                            category: 'entertainment',
+                            description: 'Развлечения',
+                            date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 день назад
+                            createdAt: new Date(),
+                        },
+                        {
+                            id: uuid(),
+                            type: 'expense',
+                            amount: 5000,
+                            category: 'health',
+                            description: 'Медицина',
+                            date: new Date(), // сегодня
+                            createdAt: new Date(),
+                        },
+                    ];
+
+                    return {
+                        transactions: [...state.transactions, ...testTransactions],
+                    };
+                }),
         }),
         {
             name: 'finflow-storage',

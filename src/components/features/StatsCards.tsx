@@ -84,7 +84,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                         position: 'relative',
                         overflow: 'hidden',
                         cursor: onFilterClick ? 'pointer' : 'default',
-                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                        transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         '&::before': {
                             content: '""',
                             position: 'absolute',

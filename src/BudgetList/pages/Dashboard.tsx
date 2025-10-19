@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Container, Box, Typography, Paper } from '@mui/material';
+import { Container, Box, Typography, Paper, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import DataUsageIcon from '@mui/icons-material/DataUsage';
 import { useTranslation } from "react-i18next";
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore.ts';
 import { TransactionType } from '../../Budgets/types';
@@ -20,6 +21,7 @@ const Dashboard = () => {
     const { mode } = useThemeMode();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const transactions = useFinanceStore((state) => state.transactions);
+    const addTestData = useFinanceStore((state) => state.addTestData);
 
     const {
         filters,
@@ -66,33 +68,66 @@ const Dashboard = () => {
                     </Typography>
                 </Box>
                 
-                {/* Add Button */}
-                <GlassButton
-                    variant="contained"
-                    startIcon={<AddIcon />}
-                    onClick={() => setIsModalOpen(true)}
-                    size="large"
-                    intensity="high"
-                    glowColor={mode === 'dark' 
-                        ? 'rgba(99, 102, 241, 0.5)' 
-                        : 'rgba(168, 163, 246, 0.5)'}
-                    sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#243168',
-                        fontWeight: '600',
-                        fontSize: '16px',
-                        px: 4,
-                        py: 1.5,
-                        minWidth: { xs: '100%', sm: 200 },
-                        '& .MuiButton-startIcon': {
-                            marginRight: 1,
-                            '& svg': {
-                                fontSize: '20px'
+                {/* Buttons */}
+                <Box sx={{ 
+                    display: 'flex', 
+                    gap: 2, 
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    width: { xs: '100%', sm: 'auto' }
+                }}>
+                    <GlassButton
+                        variant="outlined"
+                        startIcon={<DataUsageIcon />}
+                        onClick={() => addTestData()}
+                        size="large"
+                        intensity="medium"
+                        glowColor={mode === 'dark' 
+                            ? 'rgba(139, 92, 246, 0.3)' 
+                            : 'rgba(139, 92, 246, 0.2)'}
+                        sx={{
+                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                            px: 3,
+                            py: 1.5,
+                            minWidth: { xs: '100%', sm: 160 },
+                            '& .MuiButton-startIcon': {
+                                marginRight: 1,
+                                '& svg': {
+                                    fontSize: '18px'
+                                }
                             }
-                        }
-                    }}
-                >
-                    {t('addTransaction')}
-                </GlassButton>
+                        }}
+                    >
+                        Тестовые данные
+                    </GlassButton>
+                    <GlassButton
+                        variant="contained"
+                        startIcon={<AddIcon />}
+                        onClick={() => setIsModalOpen(true)}
+                        size="large"
+                        intensity="high"
+                        glowColor={mode === 'dark' 
+                            ? 'rgba(99, 102, 241, 0.5)' 
+                            : 'rgba(168, 163, 246, 0.5)'}
+                        sx={{
+                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                            fontWeight: '600',
+                            fontSize: '16px',
+                            px: 4,
+                            py: 1.5,
+                            minWidth: { xs: '100%', sm: 200 },
+                            '& .MuiButton-startIcon': {
+                                marginRight: 1,
+                                '& svg': {
+                                    fontSize: '20px'
+                                }
+                            }
+                        }}
+                    >
+                        {t('addTransaction')}
+                    </GlassButton>
+                </Box>
             </Box>
 
 
