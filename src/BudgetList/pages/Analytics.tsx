@@ -333,7 +333,7 @@ const Analytics: React.FC = () => {
                             ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.6) 0%, rgba(99, 102, 241, 0.8) 100%)'
                             : 'linear-gradient(135deg, rgba(234, 234, 244, 0.6) 0%, rgba(234, 234, 244, 0.8) 100%)',
                         border: mode === 'dark' 
-                        ? '1px solid rgba(101, 70, 51, 0.3)'
+                        ? '1px solid rgba(99, 102, 241, 0.3)'
                         : '1px solid rgba(234, 234, 244, 0.3)',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         minHeight: '500px',
@@ -368,7 +368,7 @@ const Analytics: React.FC = () => {
                             ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.6) 0%, rgba(99, 102, 241, 0.8) 100%)'
                             : 'linear-gradient(135deg, rgba(234, 234, 244, 0.6) 0%, rgba(234, 234, 244, 0.8) 100%)',
                         border: mode === 'dark' 
-                        ? '1px solid rgba(101, 70, 51, 0.3)'
+                        ? '1px solid rgba(99, 102, 241, 0.3)'
                         : '1px solid rgba(234, 234, 244, 0.3)',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         minHeight: '500px',
@@ -404,13 +404,13 @@ const Analytics: React.FC = () => {
                     mt: 3,
                     borderRadius: 3,
                     background: mode === 'dark' 
-                        ? 'rgba(101, 70, 51, 0.8)'
+                        ? 'rgba(99, 102, 241, 0.8)'
                         : 'rgba(234, 234, 244, 0.8)',
                     color: mode === 'dark' ? '#FCF9F9' : '#4A5568',
                     position: 'relative',
                     overflow: 'hidden',
                     border: mode === 'dark' 
-                        ? '1px solid rgba(101, 70, 51, 0.3)'
+                        ? '1px solid rgba(99, 102, 241, 0.3)'
                         : '1px solid rgba(234, 234, 244, 0.3)',
                 }}
             >

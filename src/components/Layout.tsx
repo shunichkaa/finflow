@@ -75,6 +75,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
         {path: '/analytics', label: t('analytics')},
         {path: '/budgets', label: t('budgets')},
         {path: '/goals', label: t('savings', 'Копилка')},
+        {path: '/profile', label: t('profile', 'Профиль')},
     ];
 
     const drawer = (

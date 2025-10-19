@@ -46,19 +46,28 @@ const Budgets: React.FC = () => {
                     size="large"
                     sx={{
                         mt: 2,
-                     background: mode === 'dark'
-                         ? 'rgba(101, 70, 51, 0.5)'
-                         : 'rgba(234, 234, 244, 0.5)',
-                        color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                        backdropFilter: 'blur(20px) saturate(180%)',
+                        background: mode === 'dark'
+                            ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%)'
+                            : 'linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%)',
+                        border: mode === 'dark' 
+                            ? '1px solid rgba(255, 255, 255, 0.2)' 
+                            : '1px solid rgba(255, 255, 255, 0.3)',
+                        color: mode === 'dark' ? '#FFFFFF' : '#4A5568',
                         fontWeight: 'bold',
+                        borderRadius: 3,
+                        boxShadow: mode === 'dark' 
+                            ? '0 8px 32px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                            : '0 8px 32px rgba(99, 102, 241, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                        transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         '&:hover': {
                             background: mode === 'dark' 
-                                ? 'rgba(101, 70, 51, 0.7)'
-                                : 'rgba(234, 234, 244, 0.7)',
-                            transform: 'translateY(-2px)',
+                                ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.4) 0%, rgba(139, 92, 246, 0.3) 100%)'
+                                : 'linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%)',
+                            transform: 'translateY(-4px) scale(1.02)',
                             boxShadow: mode === 'dark' 
-                                ? '0 6px 20px rgba(101, 70, 51, 0.4)'
-                                : '0 6px 20px rgba(234, 234, 244, 0.4)',
+                                ? '0 16px 48px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                                : '0 16px 48px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
                         }
                     }}
                 >

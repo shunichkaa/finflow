@@ -221,9 +221,9 @@ export default function Profile() {
                         {!avatar && <Person fontSize="large" />}
                     </Avatar>
                     <Box>
-                        <Typography variant="h6" sx={{ color: mode === 'dark' ? '#F5F5DC' : '#654633' }}>
-                            {nickname || session?.user?.email || 'Пользователь'}
-                        </Typography>
+                    <Typography variant="h6" sx={{ color: mode === 'dark' ? '#F5F5DC' : '#4A5568' }}>
+                        {nickname || session?.user?.email || 'Пользователь'}
+                    </Typography>
                         <Typography variant="body2" sx={{ color: mode === 'dark' ? '#B0B0B0' : '#666', mt: 0.5 }}>
                             {session?.user?.email}
                         </Typography>
@@ -235,11 +235,11 @@ export default function Profile() {
                     startIcon={<Edit />}
                     onClick={handleEditProfile}
                     sx={{ 
-                        borderColor: 'rgba(101, 70, 51, 0.3)',
-                        color: '#654633',
+                        borderColor: mode === 'dark' ? 'rgba(99, 102, 241, 0.3)' : 'rgba(74, 85, 104, 0.3)',
+                        color: mode === 'dark' ? '#FFFFFF' : '#4A5568',
                         '&:hover': {
-                            borderColor: 'rgba(101, 70, 51, 0.6)',
-                            backgroundColor: 'rgba(101, 70, 51, 0.1)',
+                            borderColor: mode === 'dark' ? 'rgba(99, 102, 241, 0.6)' : 'rgba(74, 85, 104, 0.6)',
+                            backgroundColor: mode === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(74, 85, 104, 0.1)',
                         }
                     }}
                 >
@@ -249,7 +249,7 @@ export default function Profile() {
 
             {/* Настройки */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#F5F5DC' : '#654633' }}>
+                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#F5F5DC' : '#4A5568' }}>
                     Настройки
                 </Typography>
 
