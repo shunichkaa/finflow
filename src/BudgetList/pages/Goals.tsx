@@ -274,7 +274,7 @@ const Goals: React.FC = () => {
                                 <GlassCard 
                                     glowColor={iconData.color + '40'}
                                     sx={{ 
-                                        height: '100%',
+                                        aspectRatio: '1 / 1',
                                         display: 'flex',
                                         flexDirection: 'column',
                                         opacity: goal.isCompleted ? 0.7 : 1,
