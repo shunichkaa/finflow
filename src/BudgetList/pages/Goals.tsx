@@ -33,20 +33,6 @@ const Goals: React.FC = () => {
                     {t('savingsDescription', 'Создавайте копилки для накопления на важные цели')}
                 </Typography>
             </Box>
-            
-            <Box sx={{ textAlign: 'center', py: 8 }}>
-                <Typography variant="h6" sx={{ 
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)', 
-                    mb: 2 
-                }}>
-                    🏦 Страница копилки работает!
-                </Typography>
-                <Typography variant="body2" sx={{ 
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(36, 49, 104, 0.5)'
-                }}>
-                    Компонент загружен успешно
-                </Typography>
-            </Box>
         </Container>
     );
 };
