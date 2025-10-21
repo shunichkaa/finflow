@@ -196,7 +196,7 @@ const Goals: React.FC = () => {
                         mb: 1
                     }}
                 >
-                    🏦 {t('savings', 'Копилка')}
+                    {t('savings', 'Копилка')}
                 </Typography>
                 <Typography 
                     variant="body1" 
@@ -270,7 +270,7 @@ const Goals: React.FC = () => {
                         const IconComponent = iconData.icon;
 
                         return (
-                            <Grid item xs={12} sm={12} md={6} lg={4} key={goal.id}>
+                            <Grid item xs={12} sm={12} md={12} lg={6} key={goal.id}>
                                 <GlassCard 
                                     glowColor={iconData.color + '40'}
                                     sx={{ 
@@ -382,16 +382,6 @@ const Goals: React.FC = () => {
                                                     }
                                                 }}
                                             />
-                                            <Typography 
-                                                variant="caption" 
-                                                sx={{ 
-                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(36, 49, 104, 0.5)',
-                                                    mt: 0.5,
-                                                    display: 'block'
-                                                }}
-                                            >
-                                                {percentage.toFixed(1)}% выполнено
-                                            </Typography>
                                         </Box>
 
                                         {/* Информация */}
