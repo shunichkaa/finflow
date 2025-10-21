@@ -250,11 +250,11 @@ const Goals: React.FC = () => {
                         }}
                     >
                         У вас пока нет копилок
-                    </Typography>
+                </Typography>
                     <Typography 
                         variant="body2" 
                         sx={{ 
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(36, 49, 104, 0.5)'
+                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(36, 49, 104, 0.5)'
                         }}
                     >
                         Создайте свою первую копилку для достижения целей
@@ -270,31 +270,33 @@ const Goals: React.FC = () => {
                         const IconComponent = iconData.icon;
 
                         return (
-                            <Grid item xs={12} sm={12} md={12} lg={6} key={goal.id}>
+                            <Grid item xs={12} sm={12} md={6} lg={6} key={goal.id}>
                                 <GlassCard 
                                     glowColor={iconData.color + '40'}
                                     sx={{ 
-                                        aspectRatio: '1 / 1',
+                                        height: '100%',
+                                        minHeight: 500,
+                                        aspectRatio: { xs: 'auto', sm: '1 / 1' },
                                         display: 'flex',
                                         flexDirection: 'column',
                                         opacity: goal.isCompleted ? 0.7 : 1,
                                     }}
                                 >
-                                    <Box sx={{ p: 3 }}>
+                                    <Box sx={{ p: 4, display: 'flex', flexDirection: 'column', height: '100%' }}>
                                         {/* Верхняя часть с иконкой и действиями */}
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 4 }}>
                                             <Box 
                                                 sx={{ 
-                                                    width: 56, 
-                                                    height: 56, 
-                                                    borderRadius: 3,
+                                                    width: 72, 
+                                                    height: 72, 
+                                                    borderRadius: 4,
                                                     background: `linear-gradient(135deg, ${iconData.color}20 0%, ${iconData.color}40 100%)`,
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                     justifyContent: 'center',
                                                 }}
                                             >
-                                                <IconComponent sx={{ fontSize: 32, color: iconData.color }} />
+                                                <IconComponent sx={{ fontSize: 40, color: iconData.color }} />
                                             </Box>
                                             <Box sx={{ display: 'flex', gap: 0.5 }}>
                                                 <IconButton
@@ -328,21 +330,23 @@ const Goals: React.FC = () => {
 
                                         {/* Название и описание */}
                                         <Typography 
-                                            variant="h6" 
-                                            fontWeight="600"
+                                            variant="h5" 
+                                            fontWeight="700"
                                             sx={{ 
                                                 color: mode === 'dark' ? '#FFFFFF' : '#243168',
-                                                mb: 0.5
+                                                mb: 1,
+                                                fontSize: '1.5rem'
                                             }}
                                         >
                                             {goal.name}
                                         </Typography>
                                         {goal.description && (
                                             <Typography 
-                                                variant="body2" 
+                                                variant="body1" 
                                                 sx={{ 
-                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)',
-                                                    mb: 2
+                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                                                    mb: 3,
+                                                    fontSize: '1rem'
                                                 }}
                                             >
                                                 {goal.description}
@@ -350,19 +354,25 @@ const Goals: React.FC = () => {
                                         )}
 
                                         {/* Прогресс */}
-                                        <Box sx={{ mb: 2 }}>
-                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                        <Box sx={{ mb: 3 }}>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
                                                 <Typography 
-                                                    variant="body2" 
-                                                    fontWeight="600"
-                                                    sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.8)' }}
+                                                    variant="h6" 
+                                                    fontWeight="700"
+                                                    sx={{ 
+                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(36, 49, 104, 0.9)',
+                                                        fontSize: '1.1rem'
+                                                    }}
                                                 >
                                                     {formatCurrency(goal.currentAmount, currency)}
                                                 </Typography>
                                                 <Typography 
-                                                    variant="body2" 
+                                                    variant="h6" 
                                                     fontWeight="600"
-                                                    sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)' }}
+                                                    sx={{ 
+                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)',
+                                                        fontSize: '1.1rem'
+                                                    }}
                                                 >
                                                     {formatCurrency(goal.targetAmount, currency)}
                                                 </Typography>
@@ -371,8 +381,8 @@ const Goals: React.FC = () => {
                                                 variant="determinate"
                                                 value={Math.min(percentage, 100)}
                                                 sx={{
-                                                    height: 8,
-                                                    borderRadius: 4,
+                                                    height: 12,
+                                                    borderRadius: 6,
                                                     backgroundColor: mode === 'dark' 
                                                         ? 'rgba(255, 255, 255, 0.1)' 
                                                         : 'rgba(36, 49, 104, 0.1)',
@@ -385,11 +395,10 @@ const Goals: React.FC = () => {
                                         </Box>
 
                                         {/* Информация */}
-                                        <Stack spacing={1}>
+                                        <Stack spacing={2} sx={{ mt: 'auto' }}>
                                             {daysLeft !== null && (
                                                 <Chip
                                                     label={daysLeft > 0 ? `${daysLeft} ${daysLeft === 1 ? 'день' : daysLeft < 5 ? 'дня' : 'дней'} до цели` : 'Срок истёк'}
-                                                    size="small"
                                                     sx={{
                                                         backgroundColor: daysLeft > 0 
                                                             ? `${iconData.color}20`
@@ -398,37 +407,43 @@ const Goals: React.FC = () => {
                                                             ? iconData.color
                                                             : '#FF6B6B',
                                                         fontWeight: 600,
-                                                        fontSize: '0.75rem'
+                                                        fontSize: '0.9rem',
+                                                        height: 36,
+                                                        borderRadius: 2
                                                     }}
                                                 />
                                             )}
                                             {recommendedDaily && recommendedDaily > 0 && (
                                                 <Box 
                                                     sx={{ 
-                                                        p: 1.5, 
-                                                        borderRadius: 2,
+                                                        p: 2.5, 
+                                                        borderRadius: 3,
                                                         backgroundColor: mode === 'dark' 
                                                             ? 'rgba(255, 255, 255, 0.05)' 
                                                             : 'rgba(36, 49, 104, 0.05)',
                                                     }}
                                                 >
                                                     <Typography 
-                                                        variant="caption" 
+                                                        variant="body2" 
                                                         sx={{ 
-                                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)',
+                                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
                                                             display: 'block',
-                                                            mb: 0.5
+                                                            mb: 1,
+                                                            fontSize: '0.875rem'
                                                         }}
                                                     >
                                                         Рекомендуется откладывать:
                                                     </Typography>
                                                     <Typography 
-                                                        variant="body2" 
-                                                        fontWeight="600"
-                                                        sx={{ color: iconData.color }}
+                                                        variant="h6" 
+                                                        fontWeight="700"
+                                                        sx={{ 
+                                                            color: iconData.color,
+                                                            fontSize: '1.1rem'
+                                                        }}
                                                     >
                                                         {formatCurrency(recommendedDaily, currency)} / день
-                </Typography>
+                                                    </Typography>
                                                 </Box>
                                             )}
                                         </Stack>
