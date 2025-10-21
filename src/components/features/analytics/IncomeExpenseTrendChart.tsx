@@ -143,7 +143,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                     <XAxis
                         dataKey="date"
                         tick={{fontSize: 12, fill: mode === 'dark' ? '#FFFFFF' : '#64748b'}}
-                        interval="preserveStartEnd"
+                        interval={period === 'year' ? 1 : period === 'month' ? 4 : 0}
                         axisLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : '#e2e8f0'}}
                         tickLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : '#e2e8f0'}}
                     />
@@ -175,9 +175,9 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         dataKey="income"
                         name={t('income')}
                         stroke="#96CEB4"
-                        strokeWidth={3}
-                        dot={{r: 5, fill: '#96CEB4', stroke: '#fff', strokeWidth: 2}}
-                        activeDot={{r: 7, fill: '#96CEB4', stroke: '#fff', strokeWidth: 2}}
+                        strokeWidth={2.5}
+                        dot={{r: 3, fill: '#96CEB4', stroke: '#fff', strokeWidth: 1.5}}
+                        activeDot={{r: 6, fill: '#96CEB4', stroke: '#fff', strokeWidth: 2}}
                         animationBegin={200}
                         animationDuration={1000}
                         animationEasing="ease-out"
@@ -188,9 +188,9 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         dataKey="expense"
                         name={t('expense')}
                         stroke="#8B5CF6"
-                        strokeWidth={3}
-                        dot={{r: 5, fill: '#8B5CF6', stroke: '#fff', strokeWidth: 2}}
-                        activeDot={{r: 7, fill: '#8B5CF6', stroke: '#fff', strokeWidth: 2}}
+                        strokeWidth={2.5}
+                        dot={{r: 3, fill: '#8B5CF6', stroke: '#fff', strokeWidth: 1.5}}
+                        activeDot={{r: 6, fill: '#8B5CF6', stroke: '#fff', strokeWidth: 2}}
                         animationBegin={400}
                         animationDuration={1000}
                         animationEasing="ease-out"
