@@ -76,11 +76,24 @@ const Analytics: React.FC = () => {
             }}
         >
             <Box sx={{mb: 4}}>
-                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{
-                    textAlign: 'left', 
-                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB'
-                }}>
+                <Typography 
+                    variant="h4" 
+                    gutterBottom 
+                    fontWeight="700"
+                    sx={{ 
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                        mb: 1
+                    }}
+                >
                     {t('analytics')}
+                </Typography>
+                <Typography 
+                    variant="body1" 
+                    sx={{
+                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
+                    }}
+                >
+                    Анализ ваших финансов и трендов
                 </Typography>
                 <Typography variant="body1" sx={{
                     textAlign: 'left', 

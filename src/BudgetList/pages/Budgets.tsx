@@ -31,11 +31,25 @@ const Budgets: React.FC = () => {
                 }),
             }}
         >
-            <Box sx={{mb: 4, textAlign: 'left'}}>
-                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+            <Box sx={{mb: 4}}>
+                <Typography 
+                    variant="h4" 
+                    gutterBottom 
+                    fontWeight="700"
+                    sx={{
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                        mb: 1
+                    }}
+                >
                     {t('budgets')}
                 </Typography>
-                <Typography variant="body1" gutterBottom sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)' }}>
+                <Typography 
+                    variant="body1" 
+                    sx={{
+                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
+                        mb: 3
+                    }}
+                >
                     {t('budgetsDescription')}
                 </Typography>
 
@@ -43,31 +57,25 @@ const Budgets: React.FC = () => {
                     variant="contained"
                     startIcon={<AddIcon/>}
                     onClick={() => setIsModalOpen(true)}
-                    size="large"
                     sx={{
-                        mt: 2,
-                        backdropFilter: 'blur(20px) saturate(180%)',
-                        background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%)'
-                            : 'linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%)',
-                        border: mode === 'dark' 
-                            ? '1px solid rgba(255, 255, 255, 0.2)' 
-                            : '1px solid rgba(255, 255, 255, 0.3)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
-                        fontWeight: 'bold',
+                        background: mode === 'dark' 
+                            ? 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)'
+                            : 'linear-gradient(135deg, #A8A3F6 0%, #F6D5EE 100%)',
+                        color: '#FFFFFF',
+                        fontWeight: 600,
+                        px: 4,
+                        py: 1.5,
                         borderRadius: 3,
-                        boxShadow: mode === 'dark' 
-                            ? '0 8px 32px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                            : '0 8px 32px rgba(99, 102, 241, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
-                        transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                        textTransform: 'none',
+                        boxShadow: mode === 'dark'
+                            ? '0 8px 24px rgba(99, 102, 241, 0.4)'
+                            : '0 8px 24px rgba(168, 163, 246, 0.4)',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&:hover': {
-                            background: mode === 'dark' 
-                                ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.4) 0%, rgba(139, 92, 246, 0.3) 100%)'
-                                : 'linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(139, 92, 246, 0.2) 100%)',
-                            transform: 'translateY(-4px) scale(1.02)',
-                            boxShadow: mode === 'dark' 
-                                ? '0 16px 48px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-                                : '0 16px 48px rgba(99, 102, 241, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: mode === 'dark'
+                                ? '0 12px 32px rgba(99, 102, 241, 0.5)'
+                                : '0 12px 32px rgba(168, 163, 246, 0.5)',
                         }
                     }}
                 >
