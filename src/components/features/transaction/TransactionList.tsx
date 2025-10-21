@@ -49,9 +49,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
     }
 
     const handleDelete = (id: string) => {
-        if (window.confirm(t('confirmDelete'))) {
-            deleteTransaction(id);
-        }
+        deleteTransaction(id);
     };
 
     return (
