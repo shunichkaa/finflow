@@ -17,10 +17,10 @@ const Analytics: React.FC = () => {
     const {mode} = useThemeMode();
     const [period, setPeriod] = useState<Period>('month');
     const transactions = useFinanceStore(state => state.transactions);
+    const addTestData = useFinanceStore(state => state.addTestData);
     const {currency} = useSettingsStore();
 
     const filteredTransactions = useMemo(() => {
-        console.log('Analytics: Total transactions:', transactions.length);
         const now = new Date();
         const startDate = new Date();
 
@@ -44,11 +44,7 @@ const Analytics: React.FC = () => {
             txDate.setHours(0, 0, 0, 0);
             return txDate >= startDate;
         });
-
-        console.log('Analytics: Filtered transactions for period', period, ':', filtered.length);
-        console.log('Analytics: Sample filtered transactions:', filtered.slice(0, 3));
         
-        // Возвращаем отфильтрованные транзакции, даже если их нет
         return filtered;
     }, [transactions, period]);
 

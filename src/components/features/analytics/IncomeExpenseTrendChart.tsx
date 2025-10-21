@@ -23,12 +23,6 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
     const {t} = useTranslation();
     const {currency} = useSettingsStore();
     const {mode} = useThemeMode();
-    
-    console.log('IncomeExpenseTrendChart props:', { 
-        transactionsCount: transactions?.length, 
-        period, 
-        transactions: transactions?.slice(0, 3) 
-    });
 
     const chartData = useMemo(() => {
         const now = new Date();
@@ -36,11 +30,8 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
 
         // Защита от некорректных данных
         if (!transactions || !Array.isArray(transactions) || transactions.length === 0) {
-            console.log('No transactions data:', transactions);
             return data;
         }
-
-        console.log('Processing transactions:', transactions.length, 'for period:', period);
 
         if (period === 'week') {
             // Последние 7 дней
@@ -117,65 +108,27 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
             }
         }
 
-        console.log('Generated chart data:', data);
-        console.log('Chart data length:', data.length);
-        console.log('Has data with values:', data.some(d => d.income > 0 || d.expense > 0));
-        console.log('Sample data points:', data.slice(0, 3));
         return data;
-    }, [transactions, period, t]);
+    }, [transactions, period]);
 
-    if (chartData.length === 0) {
-        console.log('No chart data available - showing no data message');
+    const hasData = chartData.some(d => d.income > 0 || d.expense > 0);
+
+    if (chartData.length === 0 || !hasData) {
         return (
-            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300}}>
-                <Typography color="text.secondary">{t('noTransactionData')}</Typography>
+            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300, width: '100%'}}>
+                <Typography sx={{ 
+                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                    fontSize: '1rem'
+                }}>
+                    {t('noTransactionData', 'Нет данных для отображения')}
+                </Typography>
             </Box>
         );
     }
-
-    console.log('Rendering chart with data:', chartData.length, 'points');
-
+    
     return (
-        <Box sx={{
-            position: 'relative',
-            backdropFilter: 'blur(40px) saturate(180%)',
-            backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.3)' : 'rgba(255, 255, 255, 0.2)',
-            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
-            borderRadius: 3,
-            boxShadow: mode === 'dark' 
-                ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
-            overflow: 'hidden',
-            transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-            '&:hover': {
-                transform: 'translateY(-4px) scale(1.01)',
-                boxShadow: mode === 'dark' 
-                    ? '0 16px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-                    : '0 16px 48px rgba(36, 49, 104, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
-            },
-            '&::before': {
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: '1px',
-                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
-                zIndex: 1,
-            },
-            '&::after': {
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%)',
-                borderRadius: 3,
-                zIndex: -1,
-            }
-        }}>
-            <ResponsiveContainer width="100%" height={300}>
+        <Box sx={{ width: '100%', height: 350, p: 2 }}>
+            <ResponsiveContainer width="100%" height="100%">
                 <LineChart 
                     data={chartData} 
                     margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
@@ -183,34 +136,38 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                     animationDuration={1200}
                     animationEasing="ease-out"
                 >
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(148, 163, 184, 0.3)"/>
+                    <CartesianGrid 
+                        strokeDasharray="3 3" 
+                        stroke={mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(148, 163, 184, 0.3)'}
+                    />
                     <XAxis
                         dataKey="date"
-                        tick={{fontSize: 12, fill: '#64748b'}}
+                        tick={{fontSize: 12, fill: mode === 'dark' ? '#FFFFFF' : '#64748b'}}
                         interval="preserveStartEnd"
-                        axisLine={{stroke: '#e2e8f0'}}
-                        tickLine={{stroke: '#e2e8f0'}}
+                        axisLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : '#e2e8f0'}}
+                        tickLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : '#e2e8f0'}}
                     />
                     <YAxis
-                        tick={{fontSize: 12, fill: '#64748b'}}
+                        tick={{fontSize: 12, fill: mode === 'dark' ? '#FFFFFF' : '#64748b'}}
                         tickFormatter={(value) => formatCurrency(value, currency)}
-                        axisLine={{stroke: '#e2e8f0'}}
-                        tickLine={{stroke: '#e2e8f0'}}
+                        axisLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : '#e2e8f0'}}
+                        tickLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : '#e2e8f0'}}
                     />
                     <Tooltip
                         formatter={(value: number) => formatCurrency(value, currency)}
                         contentStyle={{
-                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                            border: '1px solid rgba(148, 163, 184, 0.2)',
+                            backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(148, 163, 184, 0.2)',
                             borderRadius: '8px',
                             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                            color: mode === 'dark' ? '#FFFFFF' : '#000000'
                         }}
                     />
                     <Legend 
                         wrapperStyle={{ 
                             paddingTop: '20px',
                             fontSize: '14px',
-                            color: '#64748b'
+                            color: mode === 'dark' ? '#FFFFFF' : '#64748b'
                         }}
                     />
                     <Line

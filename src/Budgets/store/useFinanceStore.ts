@@ -99,59 +99,78 @@ export const useFinanceStore = create<FinanceStore>()(
 
             addTestData: () =>
                 set((state) => {
+                    const now = new Date();
                     const testTransactions: Transaction[] = [
                         {
                             id: uuid(),
                             type: 'income',
                             amount: 50000,
-                            category: 'salary',
+                            category: '10', // Зарплата
                             description: 'Зарплата',
-                            date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 дней назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 5), // 5 дней назад
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'income',
                             amount: 15000,
-                            category: 'freelance',
+                            category: '11', // Фриланс
                             description: 'Фриланс проект',
-                            date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 дня назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 3), // 3 дня назад
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'expense',
                             amount: 25000,
-                            category: 'food',
+                            category: '1', // Еда и продукты
                             description: 'Продукты',
-                            date: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000), // 4 дня назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 4), // 4 дня назад
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'expense',
                             amount: 8000,
-                            category: 'transport',
+                            category: '2', // Транспорт
                             description: 'Транспорт',
-                            date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 дня назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2), // 2 дня назад
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'expense',
                             amount: 12000,
-                            category: 'entertainment',
+                            category: '4', // Развлечения
                             description: 'Развлечения',
-                            date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 день назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1), // 1 день назад
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'expense',
                             amount: 5000,
-                            category: 'health',
+                            category: '5', // Здоровье
                             description: 'Медицина',
-                            date: new Date(), // сегодня
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate()), // сегодня
+                            createdAt: new Date(),
+                        },
+                        {
+                            id: uuid(),
+                            type: 'income',
+                            amount: 20000,
+                            category: '12', // Инвестиции
+                            description: 'Дивиденды',
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7), // 7 дней назад
+                            createdAt: new Date(),
+                        },
+                        {
+                            id: uuid(),
+                            type: 'expense',
+                            amount: 15000,
+                            category: '3', // Жильё
+                            description: 'Коммунальные услуги',
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6), // 6 дней назад
                             createdAt: new Date(),
                         },
                     ];

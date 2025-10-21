@@ -15,7 +15,6 @@ import { useTransactionFilters } from '../../Budgets/hooks/useTransactionFilters
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 const Dashboard = () => {
-    console.log('Dashboard component loaded - version 2.0');
     const { t } = useTranslation();
     const { mode } = useThemeMode();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -117,7 +116,11 @@ const Dashboard = () => {
                 <GlassCard 
                     sx={{ 
                         p: { xs: 1.5, sm: 2 }, 
-                        color: mode === 'dark' ? '#FFFFFF' : '#243168'
+                        color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                        '&:hover': {
+                            transform: 'none',
+                            boxShadow: '0 8px 32px rgba(102, 51, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                        }
                     }} 
                     id="transactions-list"
                     intensity="medium"

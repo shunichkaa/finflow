@@ -15,6 +15,10 @@ import {
     Button,
     InputAdornment
 } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { ru } from 'date-fns/locale';
 import { useTranslation } from "react-i18next";
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 import { GlassCard } from '../../components/ui/GlassCard';
@@ -67,7 +71,7 @@ const Goals: React.FC = () => {
     const [goalName, setGoalName] = useState('');
     const [targetAmount, setTargetAmount] = useState('');
     const [currentAmount, setCurrentAmount] = useState('');
-    const [targetDate, setTargetDate] = useState('');
+    const [targetDate, setTargetDate] = useState<Date | null>(null);
     const [editingGoal, setEditingGoal] = useState<string | null>(null);
 
     const handleOpenDialog = () => {
@@ -76,7 +80,7 @@ const Goals: React.FC = () => {
         setGoalName('');
         setTargetAmount('');
         setCurrentAmount('');
-        setTargetDate('');
+        setTargetDate(null);
         setSelectedIcon('savings');
     };
 
@@ -88,7 +92,7 @@ const Goals: React.FC = () => {
         setGoalName(goal.name);
         setTargetAmount(goal.targetAmount.toString());
         setCurrentAmount(goal.currentAmount.toString());
-        setTargetDate(goal.targetDate ? new Date(goal.targetDate).toISOString().split('T')[0] : '');
+        setTargetDate(goal.targetDate ? new Date(goal.targetDate) : null);
         setSelectedIcon((goal as any).icon || 'savings');
         setOpenDialog(true);
     };
@@ -100,7 +104,7 @@ const Goals: React.FC = () => {
             name: goalName,
             targetAmount: parseFloat(targetAmount),
             currentAmount: parseFloat(currentAmount) || 0,
-            targetDate: targetDate ? new Date(targetDate) : undefined,
+            targetDate: targetDate || undefined,
             icon: selectedIcon,
         };
 
@@ -114,7 +118,7 @@ const Goals: React.FC = () => {
         setGoalName('');
         setTargetAmount('');
         setCurrentAmount('');
-        setTargetDate('');
+        setTargetDate(null);
         setSelectedIcon('savings');
     };
 
@@ -530,14 +534,68 @@ const Goals: React.FC = () => {
                         />
 
                         {/* Дата цели */}
-                        <TextField
-                            label="Дата завершения"
-                            type="date"
-                            value={targetDate}
-                            onChange={(e) => setTargetDate(e.target.value)}
-                            fullWidth
-                            InputLabelProps={{ shrink: true }}
-                        />
+                        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ru}>
+                            <DatePicker
+                                label="Дата завершения"
+                                value={targetDate}
+                                onChange={(newValue) => setTargetDate(newValue)}
+                                slotProps={{
+                                    textField: {
+                                        fullWidth: true,
+                                        sx: {
+                                            '& .MuiOutlinedInput-root': {
+                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                            },
+                                            '& .MuiInputLabel-root': {
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                                            },
+                                            '& .MuiSvgIcon-root': {
+                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                            }
+                                        }
+                                    },
+                                    popper: {
+                                        sx: {
+                                            '& .MuiPaper-root': {
+                                                backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.98)' : 'rgba(255, 255, 255, 0.98)',
+                                                backdropFilter: 'blur(20px)',
+                                                border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(36, 49, 104, 0.2)',
+                                                borderRadius: 3,
+                                                boxShadow: mode === 'dark'
+                                                    ? '0 12px 40px rgba(0, 0, 0, 0.5)'
+                                                    : '0 12px 40px rgba(36, 49, 104, 0.2)',
+                                            },
+                                            '& .MuiPickersDay-root': {
+                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                                '&.Mui-selected': {
+                                                    backgroundColor: mode === 'dark' ? '#6366F1' : '#A8A3F6',
+                                                    '&:hover': {
+                                                        backgroundColor: mode === 'dark' ? '#4F46E5' : '#8B85E8',
+                                                    }
+                                                },
+                                                '&:hover': {
+                                                    backgroundColor: mode === 'dark' 
+                                                        ? 'rgba(99, 102, 241, 0.2)' 
+                                                        : 'rgba(168, 163, 246, 0.2)',
+                                                }
+                                            },
+                                            '& .MuiPickersCalendarHeader-root': {
+                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                            },
+                                            '& .MuiDayCalendar-weekDayLabel': {
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                                            },
+                                            '& .MuiPickersYear-yearButton': {
+                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                                '&.Mui-selected': {
+                                                    backgroundColor: mode === 'dark' ? '#6366F1' : '#A8A3F6',
+                                                }
+                                            }
+                                        }
+                                    }
+                                }}
+                            />
+                        </LocalizationProvider>
 
                         {/* Кнопки */}
                         <Stack direction="row" spacing={2}>
