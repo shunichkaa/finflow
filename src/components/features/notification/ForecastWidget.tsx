@@ -45,7 +45,20 @@ export const ForecastWidget: React.FC<ForecastWidgetProps> = ({
                     <LinearProgress
                         variant="determinate"
                         value={Math.min((dailyAverage * 30) / balance * 100, 100)}
-                        sx={{mt: 1, height: 8, borderRadius: 2}}
+                        sx={{
+                            mt: 1, 
+                            height: 12, 
+                            borderRadius: 6,
+                            backgroundColor: mode === 'dark' 
+                                ? 'rgba(255, 255, 255, 0.1)' 
+                                : 'rgba(6, 0, 171, 0.1)',
+                            '& .MuiLinearProgress-bar': {
+                                borderRadius: 4,
+                                background: mode === 'dark'
+                                    ? 'linear-gradient(90deg, #0033FF 0%, #0033FFCC 100%)'
+                                    : 'linear-gradient(90deg, #977DFF 0%, #977DFFCC 100%)',
+                            },
+                        }}
                     />
                 </Box>
 

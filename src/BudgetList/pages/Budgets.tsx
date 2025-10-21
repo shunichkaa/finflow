@@ -32,10 +32,10 @@ const Budgets: React.FC = () => {
             }}
         >
             <Box sx={{mb: 4, textAlign: 'left'}}>
-                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FCF9F9' : '#654633' }}>
+                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
                     {t('budgets')}
                 </Typography>
-                <Typography variant="body1" gutterBottom sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.7)' : 'rgba(101, 70, 51, 0.7)' }}>
+                <Typography variant="body1" gutterBottom sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)' }}>
                     {t('budgetsDescription')}
                 </Typography>
 
@@ -53,7 +53,7 @@ const Budgets: React.FC = () => {
                         border: mode === 'dark' 
                             ? '1px solid rgba(255, 255, 255, 0.2)' 
                             : '1px solid rgba(255, 255, 255, 0.3)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#4A5568',
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         fontWeight: 'bold',
                         borderRadius: 3,
                         boxShadow: mode === 'dark' 

@@ -29,7 +29,7 @@ const NotFound: React.FC = () => {
                         : '2px solid rgba(255, 255, 255, 0.3)',
                     boxShadow: mode === 'dark' 
                         ? '0 20px 60px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(99, 102, 241, 0.15), inset 0 2px 0 rgba(255, 255, 255, 0.1)'
-                        : '0 20px 60px rgba(36, 49, 104, 0.2), 0 8px 24px rgba(99, 102, 241, 0.1), inset 0 2px 0 rgba(255, 255, 255, 0.3)',
+                        : '0 20px 60px rgba(6, 0, 171, 0.2), 0 8px 24px rgba(99, 102, 241, 0.1), inset 0 2px 0 rgba(255, 255, 255, 0.3)',
                     position: 'relative',
                     overflow: 'hidden',
                     transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
@@ -87,7 +87,7 @@ const NotFound: React.FC = () => {
                     gutterBottom 
                     fontWeight="bold" 
                     sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#4A5568',
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         fontSize: '6rem',
                         textShadow: mode === 'dark' ? '0 4px 8px rgba(0, 0, 0, 0.5)' : '0 2px 4px rgba(0, 0, 0, 0.1)',
                         mb: 2,
@@ -101,7 +101,7 @@ const NotFound: React.FC = () => {
                     gutterBottom 
                     fontWeight="600" 
                     sx={{
-                        color: mode === 'dark' ? '#F5F5DC' : '#4A5568',
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         mb: 2,
                     }}
                 >
@@ -130,7 +130,7 @@ const NotFound: React.FC = () => {
                         ? 'rgba(99, 102, 241, 0.4)' 
                         : 'rgba(99, 102, 241, 0.2)'}
                     sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#4A5568',
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         fontWeight: 'bold',
                         px: 4,
                         py: 2,

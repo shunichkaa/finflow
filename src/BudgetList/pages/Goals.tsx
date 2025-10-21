@@ -192,7 +192,7 @@ const Goals: React.FC = () => {
                     gutterBottom 
                     fontWeight="700"
                     sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         mb: 1
                     }}
                 >
@@ -201,7 +201,7 @@ const Goals: React.FC = () => {
                 <Typography 
                     variant="body1" 
                     sx={{
-                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.6)',
+                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
                     }}
                 >
                     Создавайте копилки для накопления на важные цели
@@ -245,7 +245,7 @@ const Goals: React.FC = () => {
                     <Typography 
                         variant="h6" 
                         sx={{ 
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)', 
+                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', 
                             mb: 1
                         }}
                     >
@@ -254,7 +254,7 @@ const Goals: React.FC = () => {
                     <Typography 
                         variant="body2" 
                         sx={{ 
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(36, 49, 104, 0.5)'
+                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 0, 171, 0.5)'
                         }}
                     >
                         Создайте свою первую копилку для достижения целей
@@ -303,7 +303,7 @@ const Goals: React.FC = () => {
                                                     size="small"
                                                     onClick={() => handleEditGoal(goal.id)}
                                                     sx={{
-                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)',
+                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
                                                         '&:hover': {
                                                             color: iconData.color,
                                                             backgroundColor: `${iconData.color}20`,
@@ -316,7 +316,7 @@ const Goals: React.FC = () => {
                                                     size="small"
                                                     onClick={() => handleDeleteGoal(goal.id)}
                                                     sx={{
-                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)',
+                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
                                                         '&:hover': {
                                                             color: '#FF6B6B',
                                                             backgroundColor: 'rgba(255, 107, 107, 0.1)',
@@ -333,7 +333,7 @@ const Goals: React.FC = () => {
                                             variant="h5" 
                                             fontWeight="700"
                                             sx={{ 
-                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                                                 mb: 1,
                                                 fontSize: '1.5rem'
                                             }}
@@ -344,7 +344,7 @@ const Goals: React.FC = () => {
                                             <Typography 
                                                 variant="body1" 
                                                 sx={{ 
-                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                                     mb: 3,
                                                     fontSize: '1rem'
                                                 }}
@@ -360,7 +360,7 @@ const Goals: React.FC = () => {
                                                     variant="h6" 
                                                     fontWeight="700"
                                                     sx={{ 
-                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(36, 49, 104, 0.9)',
+                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(6, 0, 171, 0.9)',
                                                         fontSize: '1.1rem'
                                                     }}
                                                 >
@@ -370,7 +370,7 @@ const Goals: React.FC = () => {
                                                     variant="h6" 
                                                     fontWeight="600"
                                                     sx={{ 
-                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)',
+                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
                                                         fontSize: '1.1rem'
                                                     }}
                                                 >
@@ -385,7 +385,7 @@ const Goals: React.FC = () => {
                                                     borderRadius: 6,
                                                     backgroundColor: mode === 'dark' 
                                                         ? 'rgba(255, 255, 255, 0.1)' 
-                                                        : 'rgba(36, 49, 104, 0.1)',
+                                                        : 'rgba(6, 0, 171, 0.1)',
                                                     '& .MuiLinearProgress-bar': {
                                                         borderRadius: 4,
                                                         background: `linear-gradient(90deg, ${iconData.color} 0%, ${iconData.color}CC 100%)`,
@@ -420,13 +420,13 @@ const Goals: React.FC = () => {
                                                         borderRadius: 3,
                                                         backgroundColor: mode === 'dark' 
                                                             ? 'rgba(255, 255, 255, 0.05)' 
-                                                            : 'rgba(36, 49, 104, 0.05)',
+                                                            : 'rgba(6, 0, 171, 0.05)',
                                                     }}
                                                 >
                                                     <Typography 
                                                         variant="body2" 
                                                         sx={{ 
-                                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                                             display: 'block',
                                                             mb: 1,
                                                             fontSize: '0.875rem'
@@ -472,7 +472,7 @@ const Goals: React.FC = () => {
                 }}
             >
                 <DialogTitle sx={{ 
-                    color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                     fontWeight: 600,
                     pb: 1
                 }}>
@@ -485,16 +485,17 @@ const Goals: React.FC = () => {
                             <Typography 
                                 variant="body2" 
                                 sx={{ 
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                     mb: 1.5,
                                     fontWeight: 500
                                 }}
                             >
                                 Выберите иконку:
                 </Typography>
-                            <Grid container spacing={1.5}>
+                            <Grid container spacing={2}>
                                 {GOAL_ICONS.map((iconData) => {
                                     const IconComp = iconData.icon;
+                                    const isSelected = selectedIcon === iconData.id;
                                     return (
                                         <Grid item xs={3} sm={2} key={iconData.id}>
                                             <Box
@@ -502,27 +503,64 @@ const Goals: React.FC = () => {
                                                 sx={{
                                                     width: '100%',
                                                     aspectRatio: '1',
-                                                    borderRadius: 2,
+                                                    borderRadius: 3,
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                     justifyContent: 'center',
                                                     cursor: 'pointer',
-                                                    background: selectedIcon === iconData.id
-                                                        ? `linear-gradient(135deg, ${iconData.color}40 0%, ${iconData.color}60 100%)`
+                                                    position: 'relative',
+                                                    background: isSelected
+                                                        ? `linear-gradient(135deg, ${iconData.color}50 0%, ${iconData.color}70 100%)`
                                                         : mode === 'dark'
                                                             ? 'rgba(255, 255, 255, 0.05)'
-                                                            : 'rgba(36, 49, 104, 0.05)',
-                                                    border: selectedIcon === iconData.id
-                                                        ? `2px solid ${iconData.color}`
-                                                        : '2px solid transparent',
-                                                    transition: 'all 0.2s',
+                                                            : 'rgba(6, 0, 171, 0.05)',
+                                                    border: isSelected
+                                                        ? `3px solid ${iconData.color}`
+                                                        : mode === 'dark'
+                                                            ? '2px solid rgba(255, 255, 255, 0.1)'
+                                                            : '2px solid rgba(6, 0, 171, 0.1)',
+                                                    boxShadow: isSelected
+                                                        ? `0 8px 24px ${iconData.color}40, 0 0 0 4px ${iconData.color}20`
+                                                        : 'none',
+                                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                                    transform: isSelected ? 'scale(1.05)' : 'scale(1)',
+                                                    '&::before': isSelected ? {
+                                                        content: '""',
+                                                        position: 'absolute',
+                                                        inset: -8,
+                                                        borderRadius: 3,
+                                                        background: `radial-gradient(circle at center, ${iconData.color}30 0%, transparent 70%)`,
+                                                        animation: 'pulse 2s ease-in-out infinite',
+                                                        zIndex: -1,
+                                                    } : {},
                                                     '&:hover': {
-                                                        transform: 'scale(1.1)',
-                                                        background: `linear-gradient(135deg, ${iconData.color}30 0%, ${iconData.color}50 100%)`,
+                                                        transform: 'scale(1.15) translateY(-4px)',
+                                                        background: `linear-gradient(135deg, ${iconData.color}40 0%, ${iconData.color}60 100%)`,
+                                                        boxShadow: `0 12px 32px ${iconData.color}50, 0 0 0 3px ${iconData.color}30`,
+                                                        border: `2px solid ${iconData.color}`,
+                                                    },
+                                                    '@keyframes pulse': {
+                                                        '0%, 100%': {
+                                                            opacity: 0.6,
+                                                            transform: 'scale(1)',
+                                                        },
+                                                        '50%': {
+                                                            opacity: 1,
+                                                            transform: 'scale(1.1)',
+                                                        },
                                                     }
                                                 }}
                                             >
-                                                <IconComp sx={{ fontSize: 28, color: iconData.color }} />
+                                                <IconComp 
+                                                    sx={{ 
+                                                        fontSize: 32, 
+                                                        color: iconData.color,
+                                                        filter: isSelected 
+                                                            ? `drop-shadow(0 4px 8px ${iconData.color}60)`
+                                                            : 'none',
+                                                        transition: 'all 0.3s',
+                                                    }} 
+                                                />
                                             </Box>
                                         </Grid>
                                     );
@@ -577,13 +615,13 @@ const Goals: React.FC = () => {
                                         fullWidth: true,
                                         sx: {
                                             '& .MuiOutlinedInput-root': {
-                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                                             },
                                             '& .MuiInputLabel-root': {
-                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                             },
                                             '& .MuiSvgIcon-root': {
-                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                                             }
                                         }
                                     },
@@ -592,14 +630,14 @@ const Goals: React.FC = () => {
                                             '& .MuiPaper-root': {
                                                 backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.98)' : 'rgba(255, 255, 255, 0.98)',
                                                 backdropFilter: 'blur(20px)',
-                                                border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(36, 49, 104, 0.2)',
+                                                border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(6, 0, 171, 0.2)',
                                                 borderRadius: 3,
                                                 boxShadow: mode === 'dark'
                                                     ? '0 12px 40px rgba(0, 0, 0, 0.5)'
-                                                    : '0 12px 40px rgba(36, 49, 104, 0.2)',
+                                                    : '0 12px 40px rgba(6, 0, 171, 0.2)',
                                             },
                                             '& .MuiPickersDay-root': {
-                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                                                 '&.Mui-selected': {
                                                     backgroundColor: mode === 'dark' ? '#6366F1' : '#A8A3F6',
                                                     '&:hover': {
@@ -613,13 +651,13 @@ const Goals: React.FC = () => {
                                                 }
                                             },
                                             '& .MuiPickersCalendarHeader-root': {
-                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                                             },
                                             '& .MuiDayCalendar-weekDayLabel': {
-                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                             },
                                             '& .MuiPickersYear-yearButton': {
-                                                color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                                                 '&.Mui-selected': {
                                                     backgroundColor: mode === 'dark' ? '#6366F1' : '#A8A3F6',
                                                 }
@@ -636,7 +674,7 @@ const Goals: React.FC = () => {
                                 onClick={() => setOpenDialog(false)}
                                 fullWidth
                                 sx={{
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                 }}
                             >
                                 Отмена

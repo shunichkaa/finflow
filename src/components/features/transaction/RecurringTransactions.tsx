@@ -103,17 +103,17 @@ export const RecurringTransactions: React.FC = () => {
                     onClick={() => setFormOpen(true)}
                     sx={{
                  background: mode === 'dark'
-                     ? 'rgba(101, 70, 51, 0.5)'
+                     ? 'rgba(6, 0, 171, 0.5)'
                      : 'rgba(234, 234, 244, 0.5)',
-                        color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                        color: mode === 'dark' ? '#FCF9F9' : '#0600AB',
                         fontWeight: 'bold',
                         '&:hover': {
                      background: mode === 'dark'
-                         ? 'rgba(101, 70, 51, 0.7)'
+                         ? 'rgba(6, 0, 171, 0.7)'
                          : 'rgba(234, 234, 244, 0.7)',
                             transform: 'translateY(-2px)',
                      boxShadow: mode === 'dark'
-                         ? '0 6px 20px rgba(101, 70, 51, 0.4)'
+                         ? '0 6px 20px rgba(6, 0, 171, 0.4)'
                          : '0 6px 20px rgba(234, 234, 244, 0.4)',
                         }
                     }}
@@ -157,17 +157,17 @@ export const RecurringTransactions: React.FC = () => {
                             onClick={() => setFormOpen(true)}
                             sx={{
                  background: mode === 'dark'
-                     ? 'rgba(101, 70, 51, 0.5)'
+                     ? 'rgba(6, 0, 171, 0.5)'
                      : 'rgba(234, 234, 244, 0.5)',
-                                color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                color: mode === 'dark' ? '#FCF9F9' : '#0600AB',
                                 fontWeight: 'bold',
                                 '&:hover': {
                      background: mode === 'dark'
-                         ? 'rgba(101, 70, 51, 0.7)'
+                         ? 'rgba(6, 0, 171, 0.7)'
                          : 'rgba(234, 234, 244, 0.7)',
                                     transform: 'translateY(-2px)',
                      boxShadow: mode === 'dark'
-                         ? '0 6px 20px rgba(101, 70, 51, 0.4)'
+                         ? '0 6px 20px rgba(6, 0, 171, 0.4)'
                          : '0 6px 20px rgba(234, 234, 244, 0.4)',
                                 }
                             }}

@@ -64,12 +64,15 @@ export const FinancialHealthScore: React.FC<FinancialHealthScoreProps> = ({
                     variant="determinate"
                     value={healthScore}
                     sx={{
-                        height: 10,
-                        borderRadius: 5,
+                        height: 12,
+                        borderRadius: 6,
                         mb: 2,
-                        bgcolor: 'grey.200',
+                        backgroundColor: mode === 'dark' 
+                            ? 'rgba(255, 255, 255, 0.1)' 
+                            : 'rgba(6, 0, 171, 0.1)',
                         '& .MuiLinearProgress-bar': {
-                            bgcolor: getScoreColor(healthScore),
+                            borderRadius: 4,
+                            background: `linear-gradient(90deg, ${getScoreColor(healthScore)} 0%, ${getScoreColor(healthScore)}CC 100%)`,
                         },
                     }}
                 />

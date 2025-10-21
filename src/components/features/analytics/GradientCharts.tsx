@@ -131,7 +131,7 @@ export const GradientCharts: React.FC = () => {
             <Typography
                 variant="h5"
                 sx={{
-                    color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                     fontWeight: 600,
                     mb: 3,
                     textAlign: 'center',

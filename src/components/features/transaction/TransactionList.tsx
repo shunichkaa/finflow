@@ -38,10 +38,10 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
     if (transactions.length === 0) {
         return (
             <Box sx={{ textAlign: 'center', py: 8 }}>
-                <Typography variant="h6" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.7)' : 'rgba(101, 70, 51, 0.7)', mb: 2 }}>
+                <Typography variant="h6" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', mb: 2 }}>
                      {t('noTransactions')}
                 </Typography>
-                <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.5)' : 'rgba(101, 70, 51, 0.5)' }}>
+                <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 0, 171, 0.5)' }}>
                     {t('addFirst')}
                 </Typography>
             </Box>
@@ -121,8 +121,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         sx={{ 
                                             whiteSpace: 'nowrap',
                                             color: transaction.type === 'income' 
-                                                ? (mode === 'dark' ? '#FCF9F9' : '#654633')
-                                                : (mode === 'dark' ? '#FCF9F9' : '#654633')
+                                                ? (mode === 'dark' ? '#FFFFFF' : '#0600AB')
+                                                : (mode === 'dark' ? '#FFFFFF' : '#0600AB')
                                         }}
                                     >
                                         {transaction.type === 'income' ? '+' : '-'}
@@ -136,14 +136,14 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         <Typography 
                                             variant="caption" 
                                             sx={{ 
-                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)',
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
                                                 fontSize: '0.7rem',
                                                 fontWeight: 500
                                             }}
                                         >
                                             {t(transaction.type)}
                                         </Typography>
-                                        <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.5)' : 'rgba(101, 70, 51, 0.5)' }}>
+                                        <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 0, 171, 0.5)' }}>
                                             {formatDate(transaction.date)}
                                         </Typography>
                                     </Box>
@@ -162,7 +162,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                     <Typography
                                         variant="body2"
                                         sx={{
-                                            color: mode === 'dark' ? 'rgba(252, 249, 249, 0.7)' : 'rgba(101, 70, 51, 0.7)',
+                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                             fontSize: '0.875rem'
                                         }}
                                     >
@@ -216,7 +216,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         <Typography 
                                             variant="caption" 
                                             sx={{ 
-                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(36, 49, 104, 0.6)',
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
                                                 fontSize: '0.7rem',
                                                 fontWeight: 500
                                             }}
@@ -231,13 +231,13 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                                 overflow: 'hidden',
                                                 textOverflow: 'ellipsis',
                                                 whiteSpace: 'nowrap',
-                                                color: mode === 'dark' ? 'rgba(252, 249, 249, 0.7)' : 'rgba(101, 70, 51, 0.7)'
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)'
                                             }}
                                         >
                                             {transaction.description}
                                         </Typography>
                                     )}
-                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(252, 249, 249, 0.5)' : 'rgba(101, 70, 51, 0.5)' }}>
+                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 0, 171, 0.5)' }}>
                                         {formatDate(transaction.date)}
                                     </Typography>
                                 </Box>
@@ -257,8 +257,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         sx={{ 
                                             whiteSpace: 'nowrap',
                                             color: transaction.type === 'income' 
-                                                ? (mode === 'dark' ? '#FCF9F9' : '#654633')
-                                                : (mode === 'dark' ? '#FCF9F9' : '#654633')
+                                                ? (mode === 'dark' ? '#FFFFFF' : '#0600AB')
+                                                : (mode === 'dark' ? '#FFFFFF' : '#0600AB')
                                         }}
                                     >
                                         {transaction.type === 'income' ? '+' : '-'}

@@ -86,7 +86,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
         <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
             <Stack spacing={3}>
                 <Typography variant="h6" sx={{ 
-                    color: mode === 'dark' ? '#FFFFFF' : '#654633',
+                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                     fontWeight: 'bold',
                     textAlign: 'center'
                 }}>
@@ -103,10 +103,10 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         },
                         '& .MuiInputLabel-root': {
-                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
                         },
                     }}
                 />
@@ -121,10 +121,10 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         },
                         '& .MuiInputLabel-root': {
-                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
                         },
                     }}
                 />
@@ -140,7 +140,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     InputProps={{
                         endAdornment: (
                             <Typography variant="body2" sx={{ 
-                                color: mode === 'dark' ? 'rgba(245, 245, 220, 0.6)' : 'rgba(101, 70, 51, 0.6)' 
+                                color: mode === 'dark' ? 'rgba(245, 245, 220, 0.6)' : 'rgba(6, 0, 171, 0.6)' 
                             }}>
                                 {currency}
                             </Typography>
@@ -149,10 +149,10 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         },
                         '& .MuiInputLabel-root': {
-                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
                         },
                     }}
                 />
@@ -168,7 +168,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     InputProps={{
                         endAdornment: (
                             <Typography variant="body2" sx={{ 
-                                color: mode === 'dark' ? 'rgba(245, 245, 220, 0.6)' : 'rgba(101, 70, 51, 0.6)' 
+                                color: mode === 'dark' ? 'rgba(245, 245, 220, 0.6)' : 'rgba(6, 0, 171, 0.6)' 
                             }}>
                                 {currency}
                             </Typography>
@@ -177,10 +177,10 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         },
                         '& .MuiInputLabel-root': {
-                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
                         },
                     }}
                 />
@@ -195,10 +195,10 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         },
                         '& .MuiInputLabel-root': {
-                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
                         },
                     }}
                 />
@@ -211,9 +211,9 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         py: 1.5,
                         background: mode === 'dark' 
-                            ? 'rgba(101, 70, 51, 0.8)'
+                            ? 'rgba(6, 0, 171, 0.8)'
                             : 'rgba(234, 234, 244, 0.8)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#654633',
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         fontWeight: 'bold',
                         '&:hover': {
                             background: mode === 'dark' 
@@ -221,7 +221,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                                 : 'rgba(234, 234, 244, 1)',
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark' 
-                                ? '0 6px 20px rgba(101, 70, 51, 0.4)'
+                                ? '0 6px 20px rgba(6, 0, 171, 0.4)'
                                 : '0 6px 20px rgba(234, 234, 244, 0.4)',
                         }
                     }}

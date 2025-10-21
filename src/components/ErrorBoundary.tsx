@@ -59,7 +59,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                     ⚠️
                 </Box>
 
-                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#243168' }}>
+                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
                     Ой, что-то не так, уже исправляем...
                 </Typography>
 
@@ -72,7 +72,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                         background: mode === 'dark' 
                             ? 'rgba(99, 102, 241, 0.8)'
                             : 'rgba(168, 163, 246, 0.8)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                             fontWeight: 'bold',
                             '&:hover': {
                                 background: mode === 'dark' 
@@ -91,11 +91,11 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                         variant="outlined"
                         onClick={handleReload}
                         sx={{
-                            borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(36, 49, 104, 0.3)',
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                            borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(6, 0, 171, 0.3)',
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                             '&:hover': {
-                                borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(36, 49, 104, 0.5)',
-                                backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(36, 49, 104, 0.04)',
+                                borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 0, 171, 0.5)',
+                                backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(6, 0, 171, 0.04)',
                             },
                         }}
                     >

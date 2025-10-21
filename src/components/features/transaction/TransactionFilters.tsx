@@ -53,7 +53,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
             borderRadius: 3,
             boxShadow: mode === 'dark' 
                 ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                : '0 8px 32px rgba(6, 0, 171, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
             position: 'relative',
             overflow: 'hidden',
             '&::before': {
@@ -71,11 +71,11 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ xs: 'stretch', sm: 'center' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: { xs: 1, sm: 0 } }}>
                         <FilterListIcon sx={{ 
-                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                             fontSize: 20
                         }} />
                         <Typography variant="body2" sx={{ 
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.8)',
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(6, 0, 171, 0.8)',
                             fontWeight: 500,
                             display: { xs: 'block', sm: 'none' }
                         }}>
@@ -94,7 +94,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                             minWidth: { xs: '100%', sm: 120 },
                             '& .MuiOutlinedInput-root': {
                                 backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                             },
                             '& .MuiInputLabel-root': {
                                 color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
@@ -120,7 +120,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                             minWidth: { xs: '100%', sm: 140 },
                             '& .MuiOutlinedInput-root': {
                                 backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                             },
                             '& .MuiInputLabel-root': {
                                 color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
@@ -166,7 +166,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                             minWidth: { xs: '100%', sm: 'auto' },
                             px: 2,
                             borderColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.5)' : 'rgba(255, 185, 141, 0.5)',
-                            color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                             '&:hover': {
                                 borderColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.7)' : 'rgba(255, 185, 141, 0.7)',
                                 backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.2)' : 'rgba(255, 185, 141, 0.1)',

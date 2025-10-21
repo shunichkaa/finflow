@@ -51,7 +51,7 @@ export const ExportData: React.FC = () => {
                  background: mode === 'dark'
                      ? 'rgba(255, 185, 141, 0.8)'
                      : 'rgba(255, 185, 141, 0.8)',
-                    color: mode === 'dark' ? '#654633' : '#654633',
+                    color: mode === 'dark' ? '#0600AB' : '#0600AB',
                     fontWeight: 'bold',
                     border: mode === 'dark' 
                         ? '2px solid rgba(255, 185, 141, 0.6)'

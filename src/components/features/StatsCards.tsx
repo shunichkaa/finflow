@@ -80,7 +80,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                             ? 'rgba(15, 15, 35, 0.4)'
                             : 'rgba(255, 255, 255, 0.2)',
                         border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         position: 'relative',
                         overflow: 'hidden',
                         cursor: onFilterClick ? 'pointer' : 'default',
@@ -98,7 +98,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                             transform: 'translateY(-8px) scale(1.02)',
                             boxShadow: mode === 'dark' 
                                 ? '0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-                                : '0 20px 60px rgba(36, 49, 104, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                                : '0 20px 60px rgba(6, 0, 171, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
                             background: mode === 'dark' 
                                 ? 'rgba(15, 15, 35, 0.6)'
                                 : 'rgba(255, 255, 255, 0.3)',

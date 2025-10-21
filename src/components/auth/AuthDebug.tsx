@@ -43,7 +43,7 @@ export const AuthDebug: React.FC = () => {
                 zIndex: 10
             }}
         >
-            <Typography variant="h6" gutterBottom sx={{ color: '#654633' }}>
+            <Typography variant="h6" gutterBottom sx={{ color: '#0600AB' }}>
                 🔍 Auth Debug Information
             </Typography>
             
@@ -75,7 +75,7 @@ export const AuthDebug: React.FC = () => {
                     onClick={handleTestConnection}
                     sx={{
                         borderColor: 'rgba(101, 70, 51, 0.3)',
-                        color: '#654633',
+                        color: '#0600AB',
                         '&:hover': {
                             borderColor: 'rgba(101, 70, 51, 0.6)',
                             backgroundColor: 'rgba(101, 70, 51, 0.1)',
@@ -91,7 +91,7 @@ export const AuthDebug: React.FC = () => {
                         onClick={handleSignOut}
                         sx={{
                             borderColor: 'rgba(255, 185, 141, 0.6)',
-                            color: '#654633',
+                            color: '#0600AB',
                             '&:hover': {
                                 borderColor: 'rgba(255, 185, 141, 0.8)',
                                 backgroundColor: 'rgba(255, 185, 141, 0.1)',

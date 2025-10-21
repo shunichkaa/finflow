@@ -42,21 +42,21 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children }) 
                 display: 'flex', 
                 justifyContent: 'space-between', 
                 alignItems: 'center',
-                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                 bgcolor: mode === 'dark' ? '#1a1a1a' : '#ffffff',
             }}>
                 {title}
                 <IconButton
                     onClick={onClose}
                     size="small"
-                    sx={{ color: mode === 'dark' ? '#F5F5DC' : '#654633' }}
+                    sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}
                 >
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
             <DialogContent sx={{ 
                 bgcolor: mode === 'dark' ? '#1a1a1a' : '#ffffff',
-                color: mode === 'dark' ? '#F5F5DC' : '#654633',
+                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
             }}>
                 {children}
             </DialogContent>

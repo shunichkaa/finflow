@@ -158,7 +158,7 @@ export const Auth: React.FC = () => {
                         border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
                         boxShadow: mode === 'dark' 
                             ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                            : '0 8px 32px rgba(36, 49, 104, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                            : '0 8px 32px rgba(6, 0, 171, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
                         position: 'relative',
                         overflow: 'hidden',
                         '&::before': {
@@ -173,10 +173,10 @@ export const Auth: React.FC = () => {
                     }}
                 >
                     <Box sx={{textAlign: 'center', mb: 2}}>
-                        <Typography variant="h4" fontWeight={700} sx={{color: mode === 'dark' ? '#FFFFFF' : '#243168', mb: 1}}>
+                        <Typography variant="h4" fontWeight={700} sx={{color: mode === 'dark' ? '#FFFFFF' : '#0600AB', mb: 1}}>
                             💰 {t('appName', 'FinFlow')}
                         </Typography>
-                        <Typography variant="subtitle1" sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(36, 49, 104, 0.7)'}}>
+                        <Typography variant="subtitle1" sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(6, 0, 171, 0.7)'}}>
                             {authMode === 'login' ? t('auth.login', 'Вход в аккаунт') : t('auth.signup', 'Создание аккаунта')}
                         </Typography>
                     </Box>
@@ -228,20 +228,20 @@ export const Auth: React.FC = () => {
                                     borderRadius: 2,
                                     backgroundColor: 'rgba(255, 255, 255, 0.9)',
                                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: 'rgba(101, 70, 51, 0.6)',
+                                        borderColor: 'rgba(6, 0, 171, 0.6)',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: 'rgba(101, 70, 51, 0.8)',
+                                        borderColor: 'rgba(6, 0, 171, 0.8)',
                                     },
                                 },
                                 '& .MuiInputLabel-root': {
-                                    color: 'rgba(101, 70, 51, 0.7)',
+                                    color: 'rgba(6, 0, 171, 0.7)',
                                     '&.Mui-focused': {
-                                        color: 'rgba(101, 70, 51, 0.8)',
+                                        color: 'rgba(6, 0, 171, 0.8)',
                                     },
                                 },
                                 '& .MuiOutlinedInput-input': {
-                                    color: '#654633',
+                                    color: '#0600AB',
                                 }
                             }}
                         />
@@ -257,20 +257,20 @@ export const Auth: React.FC = () => {
                                     borderRadius: 2,
                                     backgroundColor: 'rgba(255, 255, 255, 0.9)',
                                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: 'rgba(101, 70, 51, 0.6)',
+                                        borderColor: 'rgba(6, 0, 171, 0.6)',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: 'rgba(101, 70, 51, 0.8)',
+                                        borderColor: 'rgba(6, 0, 171, 0.8)',
                                     },
                                 },
                                 '& .MuiInputLabel-root': {
-                                    color: 'rgba(101, 70, 51, 0.7)',
+                                    color: 'rgba(6, 0, 171, 0.7)',
                                     '&.Mui-focused': {
-                                        color: 'rgba(101, 70, 51, 0.8)',
+                                        color: 'rgba(6, 0, 171, 0.8)',
                                     },
                                 },
                                 '& .MuiOutlinedInput-input': {
-                                    color: '#654633',
+                                    color: '#0600AB',
                                 }
                             }}
                         />
@@ -294,17 +294,17 @@ export const Auth: React.FC = () => {
                                 py: 1.5,
                                 borderRadius: 2,
                                 background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.8) 0%, rgba(248, 229, 229, 0.6) 100%)',
-                                color: '#654633',
+                                color: '#0600AB',
                                 fontWeight: 'bold',
                                 textTransform: 'none',
                                 '&:hover': {
                                     background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.9) 0%, rgba(248, 229, 229, 0.8) 100%)',
                                     transform: 'translateY(-1px)',
-                                    boxShadow: '0 6px 20px rgba(101, 70, 51, 0.2)',
+                                    boxShadow: '0 6px 20px rgba(6, 0, 171, 0.2)',
                                 },
                                 '&:disabled': {
-                                    background: 'rgba(101, 70, 51, 0.2)',
-                                    color: 'rgba(101, 70, 51, 0.5)',
+                                    background: 'rgba(6, 0, 171, 0.2)',
+                                    color: 'rgba(6, 0, 171, 0.5)',
                                 }
                             }}
                             disabled={loading || !!oauthLoading}
@@ -328,11 +328,11 @@ export const Auth: React.FC = () => {
                             }}
                             sx={{
                                 textTransform: 'none',
-                                color: 'rgba(101, 70, 51, 0.8)',
+                                color: 'rgba(6, 0, 171, 0.8)',
                                 fontWeight: 'bold',
                                 '&:hover': {
-                                    backgroundColor: 'rgba(101, 70, 51, 0.1)',
-                                    color: '#654633',
+                                    backgroundColor: 'rgba(6, 0, 171, 0.1)',
+                                    color: '#0600AB',
                                 }
                             }}
                             disabled={loading || !!oauthLoading}

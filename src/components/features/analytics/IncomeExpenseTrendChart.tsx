@@ -117,7 +117,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
         return (
             <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300, width: '100%'}}>
                 <Typography sx={{ 
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(36, 49, 104, 0.7)',
+                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                     fontSize: '1rem'
                 }}>
                     {t('noTransactionData', 'Нет данных для отображения')}
@@ -175,9 +175,9 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         dataKey="income"
                         name={t('income')}
                         stroke="#96CEB4"
-                        strokeWidth={2.5}
-                        dot={{r: 3, fill: '#96CEB4', stroke: '#fff', strokeWidth: 1.5}}
-                        activeDot={{r: 6, fill: '#96CEB4', stroke: '#fff', strokeWidth: 2}}
+                        strokeWidth={3}
+                        dot={{r: 4, fill: '#96CEB4', stroke: '#fff', strokeWidth: 2}}
+                        activeDot={{r: 7, fill: '#96CEB4', stroke: '#fff', strokeWidth: 2.5}}
                         animationBegin={200}
                         animationDuration={1000}
                         animationEasing="ease-out"
@@ -187,10 +187,10 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         type="monotone"
                         dataKey="expense"
                         name={t('expense')}
-                        stroke="#8B5CF6"
-                        strokeWidth={2.5}
-                        dot={{r: 3, fill: '#8B5CF6', stroke: '#fff', strokeWidth: 1.5}}
-                        activeDot={{r: 6, fill: '#8B5CF6', stroke: '#fff', strokeWidth: 2}}
+                        stroke={mode === 'dark' ? '#977DFF' : '#FFCCF2'}
+                        strokeWidth={3}
+                        dot={{r: 4, fill: mode === 'dark' ? '#977DFF' : '#FFCCF2', stroke: '#fff', strokeWidth: 2}}
+                        activeDot={{r: 7, fill: mode === 'dark' ? '#977DFF' : '#FFCCF2', stroke: '#fff', strokeWidth: 2.5}}
                         animationBegin={400}
                         animationDuration={1000}
                         animationEasing="ease-out"

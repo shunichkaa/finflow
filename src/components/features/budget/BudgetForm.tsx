@@ -94,7 +94,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                                 fullWidth
                                 sx={{
                                     '& .MuiToggleButton-root': {
-                                        color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                                        color: mode === 'dark' ? '#FCF9F9' : '#0600AB',
                                         borderColor: mode === 'dark' 
                                             ? 'rgba(100, 200, 150, 0.3)' 
                                             : 'rgba(254, 222, 233, 0.3)',
@@ -108,7 +108,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                                             backgroundColor: mode === 'dark' 
                                                 ? 'rgba(100, 200, 150, 0.8)' 
                                                 : 'rgba(254, 222, 233, 0.8)',
-                                            color: mode === 'dark' ? '#1A3A2A' : '#654633',
+                                            color: mode === 'dark' ? '#1A3A2A' : '#0600AB',
                                             '&:hover': {
                                                 backgroundColor: mode === 'dark' 
                                                     ? 'rgba(100, 200, 150, 0.9)' 
@@ -183,7 +183,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                     border: `1px solid ${mode === 'dark' 
                         ? 'rgba(100, 200, 150, 0.3)' 
                         : 'rgba(254, 222, 233, 0.3)'}`,
-                    color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                    color: mode === 'dark' ? '#FCF9F9' : '#0600AB',
                     p: 2, 
                     borderRadius: 2
                 }}>

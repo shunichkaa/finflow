@@ -59,7 +59,7 @@ const Dashboard = () => {
                 {/* Title */}
                 <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
                     <Typography variant="h4" gutterBottom fontWeight="bold" sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#243168'
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB'
                     }}>
                         {t('dashboard')}
                     </Typography>
@@ -76,7 +76,7 @@ const Dashboard = () => {
                         ? 'rgba(99, 102, 241, 0.5)' 
                         : 'rgba(168, 163, 246, 0.5)'}
                     sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         fontWeight: '600',
                         fontSize: '16px',
                         px: 4,
@@ -116,7 +116,7 @@ const Dashboard = () => {
                 <GlassCard 
                     sx={{ 
                         p: { xs: 1.5, sm: 2 }, 
-                        color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                         '&:hover': {
                             transform: 'none',
                             boxShadow: '0 8px 32px rgba(102, 51, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
@@ -136,7 +136,7 @@ const Dashboard = () => {
                         px: 1
                     }}>
                         <Typography variant="h6" sx={{ 
-                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                             fontWeight: 'bold'
                         }}>
                             {t('transactions')} ({filteredTransactions.length})
@@ -156,7 +156,7 @@ const Dashboard = () => {
                                 backgroundColor: mode === 'dark' 
                                     ? 'rgba(100, 200, 150, 0.8)'
                                     : 'rgba(254, 222, 233, 0.8)',
-                                color: mode === 'dark' ? '#1A3A2A' : '#654633',
+                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                                 cursor: 'pointer',
                                 transition: 'all 0.2s ease',
                                 '&:hover': {

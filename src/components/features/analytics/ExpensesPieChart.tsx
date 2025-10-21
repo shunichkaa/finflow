@@ -137,86 +137,86 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                     <defs>
-                        {/* Ultra Glass градиенты с максимальной прозрачностью и сложными переходами */}
+                        {/* Ultra Glass градиенты с новой палитрой */}
                         <linearGradient id="liquidGlass1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(99, 102, 241, 0.3)" />
-                            <stop offset="20%" stopColor="rgba(99, 102, 241, 0.5)" />
-                            <stop offset="40%" stopColor="rgba(99, 102, 241, 0.4)" />
-                            <stop offset="60%" stopColor="rgba(99, 102, 241, 0.6)" />
-                            <stop offset="80%" stopColor="rgba(99, 102, 241, 0.3)" />
-                            <stop offset="100%" stopColor="rgba(99, 102, 241, 0.2)" />
+                            <stop offset="0%" stopColor="rgba(0, 51, 255, 0.4)" />
+                            <stop offset="20%" stopColor="rgba(0, 51, 255, 0.6)" />
+                            <stop offset="40%" stopColor="rgba(0, 51, 255, 0.5)" />
+                            <stop offset="60%" stopColor="rgba(0, 51, 255, 0.7)" />
+                            <stop offset="80%" stopColor="rgba(0, 51, 255, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(0, 51, 255, 0.3)" />
                         </linearGradient>
                         <linearGradient id="liquidGlass2" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(139, 92, 246, 0.3)" />
-                            <stop offset="20%" stopColor="rgba(139, 92, 246, 0.5)" />
-                            <stop offset="40%" stopColor="rgba(139, 92, 246, 0.4)" />
-                            <stop offset="60%" stopColor="rgba(139, 92, 246, 0.6)" />
-                            <stop offset="80%" stopColor="rgba(139, 92, 246, 0.3)" />
-                            <stop offset="100%" stopColor="rgba(139, 92, 246, 0.2)" />
+                            <stop offset="0%" stopColor="rgba(151, 125, 255, 0.4)" />
+                            <stop offset="20%" stopColor="rgba(151, 125, 255, 0.6)" />
+                            <stop offset="40%" stopColor="rgba(151, 125, 255, 0.5)" />
+                            <stop offset="60%" stopColor="rgba(151, 125, 255, 0.7)" />
+                            <stop offset="80%" stopColor="rgba(151, 125, 255, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(151, 125, 255, 0.3)" />
                         </linearGradient>
                         <linearGradient id="liquidGlass3" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(167, 139, 250, 0.3)" />
-                            <stop offset="20%" stopColor="rgba(167, 139, 250, 0.5)" />
-                            <stop offset="40%" stopColor="rgba(167, 139, 250, 0.4)" />
-                            <stop offset="60%" stopColor="rgba(167, 139, 250, 0.6)" />
-                            <stop offset="80%" stopColor="rgba(167, 139, 250, 0.3)" />
-                            <stop offset="100%" stopColor="rgba(167, 139, 250, 0.2)" />
+                            <stop offset="0%" stopColor="rgba(255, 204, 242, 0.4)" />
+                            <stop offset="20%" stopColor="rgba(255, 204, 242, 0.6)" />
+                            <stop offset="40%" stopColor="rgba(255, 204, 242, 0.5)" />
+                            <stop offset="60%" stopColor="rgba(255, 204, 242, 0.7)" />
+                            <stop offset="80%" stopColor="rgba(255, 204, 242, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(255, 204, 242, 0.3)" />
                         </linearGradient>
                         <linearGradient id="liquidGlass4" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(78, 205, 196, 0.3)" />
-                            <stop offset="20%" stopColor="rgba(78, 205, 196, 0.5)" />
-                            <stop offset="40%" stopColor="rgba(78, 205, 196, 0.4)" />
-                            <stop offset="60%" stopColor="rgba(78, 205, 196, 0.6)" />
-                            <stop offset="80%" stopColor="rgba(78, 205, 196, 0.3)" />
-                            <stop offset="100%" stopColor="rgba(78, 205, 196, 0.2)" />
+                            <stop offset="0%" stopColor="rgba(242, 230, 238, 0.4)" />
+                            <stop offset="20%" stopColor="rgba(242, 230, 238, 0.6)" />
+                            <stop offset="40%" stopColor="rgba(242, 230, 238, 0.5)" />
+                            <stop offset="60%" stopColor="rgba(242, 230, 238, 0.7)" />
+                            <stop offset="80%" stopColor="rgba(242, 230, 238, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(242, 230, 238, 0.3)" />
                         </linearGradient>
                         <linearGradient id="liquidGlass5" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(150, 206, 180, 0.3)" />
-                            <stop offset="20%" stopColor="rgba(150, 206, 180, 0.5)" />
-                            <stop offset="40%" stopColor="rgba(150, 206, 180, 0.4)" />
-                            <stop offset="60%" stopColor="rgba(150, 206, 180, 0.6)" />
-                            <stop offset="80%" stopColor="rgba(150, 206, 180, 0.3)" />
-                            <stop offset="100%" stopColor="rgba(150, 206, 180, 0.2)" />
+                            <stop offset="0%" stopColor="rgba(6, 0, 171, 0.4)" />
+                            <stop offset="20%" stopColor="rgba(6, 0, 171, 0.6)" />
+                            <stop offset="40%" stopColor="rgba(6, 0, 171, 0.5)" />
+                            <stop offset="60%" stopColor="rgba(6, 0, 171, 0.7)" />
+                            <stop offset="80%" stopColor="rgba(6, 0, 171, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(6, 0, 171, 0.3)" />
                         </linearGradient>
                         <linearGradient id="liquidGlass6" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(221, 160, 221, 0.3)" />
-                            <stop offset="20%" stopColor="rgba(221, 160, 221, 0.5)" />
-                            <stop offset="40%" stopColor="rgba(221, 160, 221, 0.4)" />
-                            <stop offset="60%" stopColor="rgba(221, 160, 221, 0.6)" />
-                            <stop offset="80%" stopColor="rgba(221, 160, 221, 0.3)" />
-                            <stop offset="100%" stopColor="rgba(221, 160, 221, 0.2)" />
+                            <stop offset="0%" stopColor="rgba(96, 0, 175, 0.4)" />
+                            <stop offset="20%" stopColor="rgba(96, 0, 175, 0.6)" />
+                            <stop offset="40%" stopColor="rgba(96, 0, 175, 0.5)" />
+                            <stop offset="60%" stopColor="rgba(96, 0, 175, 0.7)" />
+                            <stop offset="80%" stopColor="rgba(96, 0, 175, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(96, 0, 175, 0.3)" />
                         </linearGradient>
                         <linearGradient id="liquidGlass7" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(152, 216, 200, 0.3)" />
-                            <stop offset="20%" stopColor="rgba(152, 216, 200, 0.5)" />
-                            <stop offset="40%" stopColor="rgba(152, 216, 200, 0.4)" />
-                            <stop offset="60%" stopColor="rgba(152, 216, 200, 0.6)" />
-                            <stop offset="80%" stopColor="rgba(152, 216, 200, 0.3)" />
-                            <stop offset="100%" stopColor="rgba(152, 216, 200, 0.2)" />
+                            <stop offset="0%" stopColor="rgba(77, 111, 255, 0.4)" />
+                            <stop offset="20%" stopColor="rgba(77, 111, 255, 0.6)" />
+                            <stop offset="40%" stopColor="rgba(77, 111, 255, 0.5)" />
+                            <stop offset="60%" stopColor="rgba(77, 111, 255, 0.7)" />
+                            <stop offset="80%" stopColor="rgba(77, 111, 255, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(77, 111, 255, 0.3)" />
                         </linearGradient>
                         <linearGradient id="liquidGlass8" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(133, 193, 233, 0.3)" />
-                            <stop offset="20%" stopColor="rgba(133, 193, 233, 0.5)" />
-                            <stop offset="40%" stopColor="rgba(133, 193, 233, 0.4)" />
-                            <stop offset="60%" stopColor="rgba(133, 193, 233, 0.6)" />
-                            <stop offset="80%" stopColor="rgba(133, 193, 233, 0.3)" />
-                            <stop offset="100%" stopColor="rgba(133, 193, 233, 0.2)" />
+                            <stop offset="0%" stopColor="rgba(184, 166, 255, 0.4)" />
+                            <stop offset="20%" stopColor="rgba(184, 166, 255, 0.6)" />
+                            <stop offset="40%" stopColor="rgba(184, 166, 255, 0.5)" />
+                            <stop offset="60%" stopColor="rgba(184, 166, 255, 0.7)" />
+                            <stop offset="80%" stopColor="rgba(184, 166, 255, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(184, 166, 255, 0.3)" />
                         </linearGradient>
                         <linearGradient id="liquidGlass9" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(187, 143, 206, 0.3)" />
-                            <stop offset="20%" stopColor="rgba(187, 143, 206, 0.5)" />
-                            <stop offset="40%" stopColor="rgba(187, 143, 206, 0.4)" />
-                            <stop offset="60%" stopColor="rgba(187, 143, 206, 0.6)" />
-                            <stop offset="80%" stopColor="rgba(187, 143, 206, 0.3)" />
-                            <stop offset="100%" stopColor="rgba(187, 143, 206, 0.2)" />
+                            <stop offset="0%" stopColor="rgba(255, 179, 237, 0.4)" />
+                            <stop offset="20%" stopColor="rgba(255, 179, 237, 0.6)" />
+                            <stop offset="40%" stopColor="rgba(255, 179, 237, 0.5)" />
+                            <stop offset="60%" stopColor="rgba(255, 179, 237, 0.7)" />
+                            <stop offset="80%" stopColor="rgba(255, 179, 237, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(255, 179, 237, 0.3)" />
                         </linearGradient>
                         <linearGradient id="liquidGlass10" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(196, 192, 248, 0.3)" />
-                            <stop offset="20%" stopColor="rgba(196, 192, 248, 0.5)" />
-                            <stop offset="40%" stopColor="rgba(196, 192, 248, 0.4)" />
-                            <stop offset="60%" stopColor="rgba(196, 192, 248, 0.6)" />
-                            <stop offset="80%" stopColor="rgba(196, 192, 248, 0.3)" />
-                            <stop offset="100%" stopColor="rgba(196, 192, 248, 0.2)" />
+                            <stop offset="0%" stopColor="rgba(255, 221, 246, 0.4)" />
+                            <stop offset="20%" stopColor="rgba(255, 221, 246, 0.6)" />
+                            <stop offset="40%" stopColor="rgba(255, 221, 246, 0.5)" />
+                            <stop offset="60%" stopColor="rgba(255, 221, 246, 0.7)" />
+                            <stop offset="80%" stopColor="rgba(255, 221, 246, 0.4)" />
+                            <stop offset="100%" stopColor="rgba(255, 221, 246, 0.3)" />
                         </linearGradient>
                         
                         {/* Сложные радиальные градиенты для максимального glass эффекта */}

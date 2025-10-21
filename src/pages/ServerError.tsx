@@ -61,7 +61,7 @@ const ServerError: React.FC = () => {
                         background: mode === 'dark' 
                             ? 'rgba(101, 70, 51, 0.5)'
                             : 'rgba(234, 234, 244, 0.5)',
-                            color: mode === 'dark' ? '#FCF9F9' : '#654633',
+                            color: mode === 'dark' ? '#FCF9F9' : '#0600AB',
                             fontWeight: 'bold',
                             px: 4,
                             py: 1.5,
