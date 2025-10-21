@@ -120,15 +120,28 @@ const lightThemeOptions: ThemeOptions = {
         },
     },
     shape: {
-        borderRadius: 16,
+        borderRadius: 8,
     },
     components: {
         MuiCssBaseline: {
             styleOverrides: {
+                '*': {
+                    margin: 0,
+                    padding: 0,
+                },
+                'html, body, #root': {
+                    margin: 0,
+                    padding: 0,
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'auto',
+                },
                 body: {
                     background: 'linear-gradient(135deg, #F2E6EE 0%, #FFCCF2 50%, #977DFF 100%)',
                     backgroundAttachment: 'fixed',
                     minHeight: '100vh',
+                    margin: 0,
+                    padding: 0,
                 },
             },
         },
@@ -520,16 +533,52 @@ const darkThemeOptions: ThemeOptions = {
         },
     },
     shape: {
-        borderRadius: 16,
+        borderRadius: 8,
     },
     components: {
         MuiCssBaseline: {
             styleOverrides: {
-                body: {
-                    background: 'linear-gradient(135deg, #00003D 0%, #0600AB 50%, #0033FF 100%)',
-                    backgroundAttachment: 'fixed',
-                    minHeight: '100vh',
+                '*': {
+                    margin: 0,
+                    padding: 0,
+                    scrollBehavior: 'smooth',
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
                 },
+                'html': {
+                    scrollBehavior: 'smooth',
+                },
+                'html, body, #root': {
+                    margin: 0,
+                    padding: 0,
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'auto',
+                    scrollBehavior: 'smooth',
+                },
+                '::-webkit-scrollbar': {
+                    width: '10px',
+                    height: '10px',
+                },
+                '::-webkit-scrollbar-track': {
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    borderRadius: '10px',
+                },
+                '::-webkit-scrollbar-thumb': {
+                    background: 'rgba(151, 125, 255, 0.4)',
+                    borderRadius: '10px',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                        background: 'rgba(151, 125, 255, 0.6)',
+                    },
+                },
+                    body: {
+                        background: 'linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #3d3d5c 100%)',
+                        backgroundAttachment: 'fixed',
+                        minHeight: '100vh',
+                        margin: 0,
+                        padding: 0,
+                    },
             },
         },
         MuiButton: {

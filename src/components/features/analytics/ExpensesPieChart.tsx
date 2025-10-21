@@ -128,9 +128,9 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: mode === 'dark'
-                ? 'radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 100%)'
-                : 'radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.03) 50%, transparent 100%)',
+                background: mode === 'dark'
+                    ? 'radial-gradient(circle at 50% 50%, rgba(74, 74, 106, 0.08) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 100%)'
+                    : 'radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.03) 50%, transparent 100%)',
             borderRadius: 4,
             overflow: 'hidden'
         }}>

@@ -113,20 +113,20 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                     return (
                         <Card key={budget.id} elevation={2}
                               sx={{
-                                  minHeight: 500, 
-                                  aspectRatio: { xs: 'auto', sm: '1 / 1' },
+                                  minHeight: 320, 
                                   display: 'flex', 
                                   flexDirection: 'column',
                                   backdropFilter: 'blur(40px) saturate(180%)',
                                   backgroundColor: mode === 'dark' ? 'rgba(28, 28, 30, 0.85)' : 'rgba(252, 248, 245, 0.7)',
                                   border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(252, 248, 245, 0.9)',
-                                  borderRadius: 6,
+                                  borderRadius: 2,
                                   boxShadow: mode === 'dark' 
                                       ? '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
                                       : '0 8px 32px rgba(31, 38, 135, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
                                   position: 'relative',
                                   overflow: 'hidden',
-                                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                  transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                                  willChange: 'transform, box-shadow',
                                   '&:hover': {
                                       transform: 'translateY(-2px)',
                                       boxShadow: mode === 'dark'
@@ -134,21 +134,21 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                           : '0 16px 48px rgba(31, 38, 135, 0.2), 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
                                   },
                               }}>
-                            <Box sx={{ p: 4, display: 'flex', flexDirection: 'column', height: '100%' }}>
+                            <Box sx={{ p: 3, display: 'flex', flexDirection: 'column', height: '100%' }}>
                                 {/* Верхняя часть с иконкой и действиями */}
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 4 }}>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2.5 }}>
                                     <Box 
                                         sx={{ 
-                                            width: 72, 
-                                            height: 72, 
-                                            borderRadius: 4,
+                                            width: 56, 
+                                            height: 56, 
+                                            borderRadius: 3,
                                             background: `linear-gradient(135deg, ${categoryColor}20 0%, ${categoryColor}40 100%)`,
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',
                                         }}
                                     >
-                                        {getCategoryIcon(category?.icon || 'more', 40)}
+                                        {getCategoryIcon(category?.icon || 'more', 32)}
                                     </Box>
                                     <Box sx={{ display: 'flex', gap: 0.5 }}>
                                         <IconButton
@@ -173,31 +173,32 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
 
                                 {/* Название */}
                                 <Typography 
-                                    variant="h5" 
+                                    variant="h6" 
                                     fontWeight="700"
                                     sx={{ 
                                         color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
-                                        mb: 1,
-                                        fontSize: '1.5rem'
+                                        mb: 0.5,
+                                        fontSize: '1.1rem'
                                     }}
                                 >
                                     {getCategoryName(budget.category, t)}
                                 </Typography>
 
                                 {/* Период и дни */}
-                                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mb: 3 }}>
+                                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mb: 2 }}>
                                     <Chip
                                         label={t(budget.period === 'monthly' ? 'monthly' : 'weekly')}
+                                        size="small"
                                         sx={{
                                             backgroundColor: `${categoryColor}20`,
                                             color: categoryColor,
                                             fontWeight: 600,
-                                            fontSize: '0.9rem',
-                                            height: 36,
+                                            fontSize: '0.75rem',
+                                            height: 28,
                                             borderRadius: 2
                                         }}
                                     />
-                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', fontSize: '0.875rem' }}>
+                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', fontSize: '0.75rem' }}>
                                         {(() => {
                                             if (daysLeft === 0) {
                                                 return t('lastDay');
@@ -265,24 +266,24 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                 )}
 
                                 {/* Прогресс */}
-                                <Box sx={{ mb: 3 }}>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
+                                <Box sx={{ mb: 2 }}>
+                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                                         <Typography 
-                                            variant="h6" 
+                                            variant="body1" 
                                             fontWeight="700"
                                             sx={{ 
                                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(6, 0, 171, 0.9)',
-                                                fontSize: '1.1rem'
+                                                fontSize: '0.95rem'
                                             }}
                                         >
                                             {formatCurrency(spent, currency)}
                                         </Typography>
                                         <Typography 
-                                            variant="h6" 
+                                            variant="body1" 
                                             fontWeight="600"
                                             sx={{ 
                                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
-                                                fontSize: '1.1rem'
+                                                fontSize: '0.95rem'
                                             }}
                                         >
                                             {formatCurrency(budget.limit, currency)}
@@ -292,8 +293,8 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                         variant="determinate"
                                         value={Math.min(percentage, 100)}
                                         sx={{
-                                            height: 12,
-                                            borderRadius: 6,
+                                            height: 8,
+                                            borderRadius: 4,
                                             backgroundColor: mode === 'dark' 
                                                 ? 'rgba(255, 255, 255, 0.1)' 
                                                 : 'rgba(6, 0, 171, 0.1)',
@@ -310,30 +311,30 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                     {remaining > 0 && (
                                         <Box 
                                             sx={{ 
-                                                p: 2.5, 
-                                                borderRadius: 3,
+                                                p: 2, 
+                                                borderRadius: 2,
                                                 backgroundColor: mode === 'dark' 
                                                     ? 'rgba(255, 255, 255, 0.05)' 
                                                     : 'rgba(6, 0, 171, 0.05)',
                                             }}
                                         >
                                             <Typography 
-                                                variant="body2" 
+                                                variant="caption" 
                                                 sx={{ 
                                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                                     display: 'block',
-                                                    mb: 1,
-                                                    fontSize: '0.875rem'
+                                                    mb: 0.5,
+                                                    fontSize: '0.75rem'
                                                 }}
                                             >
                                                 {t('remaining')}:
                                             </Typography>
                                             <Typography 
-                                                variant="h6" 
+                                                variant="body1" 
                                                 fontWeight="700"
                                                 sx={{ 
                                                     color: categoryColor,
-                                                    fontSize: '1.1rem'
+                                                    fontSize: '0.95rem'
                                                 }}
                                             >
                                                 {formatCurrency(remaining, currency)}

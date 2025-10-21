@@ -71,40 +71,72 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             display: 'flex', 
             flexDirection: 'column', 
             height: '100vh', 
-            backdropFilter: 'blur(40px) saturate(180%)',
+            backdropFilter: 'blur(80px) saturate(220%)',
+            WebkitBackdropFilter: 'blur(80px) saturate(220%)',
             backgroundColor: mode === 'dark' 
-                ? 'rgba(28, 28, 30, 0.9)'
-                : 'rgba(252, 248, 245, 0.85)',
+                ? 'rgba(28, 28, 30, 0.75)'
+                : 'rgba(255, 255, 255, 0.45)',
             borderRight: mode === 'dark' 
-                ? '1px solid rgba(255, 255, 255, 0.08)' 
-                : '1px solid rgba(0, 0, 0, 0.05)',
+                ? '1.5px solid rgba(255, 255, 255, 0.18)' 
+                : '1.5px solid rgba(255, 255, 255, 0.6)',
             boxShadow: mode === 'dark'
-                ? '4px 0 24px rgba(0, 0, 0, 0.3)'
-                : '4px 0 24px rgba(0, 0, 0, 0.08)',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                ? `8px 0 32px rgba(0, 0, 0, 0.5),
+                   inset 1px 0 0 rgba(255, 255, 255, 0.15),
+                   0 0 60px rgba(151, 125, 255, 0.1)`
+                : `8px 0 32px rgba(151, 125, 255, 0.12),
+                   inset 1px 0 0 rgba(255, 255, 255, 0.8),
+                   0 0 60px rgba(151, 125, 255, 0.08)`,
+            transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
             position: 'relative',
             overflow: 'hidden',
+            willChange: 'width, margin-left',
+            '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: '1px',
+                height: '100%',
+                background: mode === 'dark'
+                    ? 'linear-gradient(180deg, transparent, rgba(151, 125, 255, 0.5), transparent)'
+                    : 'linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.9), transparent)',
+            }
         }}>
             {/* Sidebar Header */}
             <AppBar position="static" elevation={0} sx={{
-                backdropFilter: 'blur(40px) saturate(180%)',
+                backdropFilter: 'blur(60px) saturate(200%)',
+                WebkitBackdropFilter: 'blur(60px) saturate(200%)',
                 backgroundColor: 'transparent',
-                borderBottom: mode === 'dark' 
-                    ? '1px solid rgba(255, 255, 255, 0.08)' 
-                    : '1px solid rgba(0, 0, 0, 0.05)',
+                borderBottom: 'none',
                 boxShadow: 'none',
+                background: mode === 'dark'
+                    ? 'linear-gradient(180deg, rgba(28, 28, 30, 0.95) 0%, rgba(28, 28, 30, 0.85) 100%)'
+                    : 'linear-gradient(180deg, rgba(252, 248, 245, 0.95) 0%, rgba(252, 248, 245, 0.85) 100%)',
+                position: 'relative',
+                '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: '1px',
+                    background: mode === 'dark'
+                        ? 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.3), transparent)'
+                        : 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.2), transparent)',
+                }
             }}>
                 <Toolbar sx={{ minHeight: { xs: 64, sm: 70 } }}>
                     <IconButton
                         onClick={handleDrawerToggle}
                         sx={{
                             display: {sm: 'none'},
-                            color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
+                            color: mode === 'dark' ? '#977DFF' : '#977DFF',
                             transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
                                 background: mode === 'dark' 
-                                    ? 'rgba(10, 132, 255, 0.15)' 
-                                    : 'rgba(0, 122, 255, 0.08)',
+                                    ? 'rgba(151, 125, 255, 0.15)' 
+                                    : 'rgba(151, 125, 255, 0.1)',
+                                color: mode === 'dark' ? '#B8A6FF' : '#7B5EE6',
                                 transform: 'scale(1.1)',
                             },
                             '&:active': {
@@ -121,13 +153,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             sx={{
                                 display: {xs: 'none', sm: 'block'},
-                                color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
+                                color: mode === 'dark' ? '#977DFF' : '#977DFF',
                                 mr: 2,
                                 transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                                 '&:hover': {
                                     background: mode === 'dark' 
-                                        ? 'rgba(10, 132, 255, 0.15)' 
-                                        : 'rgba(0, 122, 255, 0.08)',
+                                        ? 'rgba(151, 125, 255, 0.15)' 
+                                        : 'rgba(151, 125, 255, 0.1)',
+                                    color: mode === 'dark' ? '#B8A6FF' : '#7B5EE6',
                                     transform: 'scale(1.1)',
                                 },
                                 '&:active': {
@@ -332,21 +365,29 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             <AppBar
                 position="fixed"
                 sx={{
-                    zIndex: (theme) => theme.zIndex.drawer + 1,
+                    zIndex: (theme) => theme.zIndex.drawer - 1,
                     width: {sm: (sidebarOpen && !isLoginPage) ? `calc(100% - ${drawerWidth}px)` : '100%'},
                     ml: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
-                    backdropFilter: 'blur(40px) saturate(180%)',
-                    backgroundColor: mode === 'dark' 
-                        ? 'rgba(28, 28, 30, 0.9)'
-                        : 'rgba(252, 248, 245, 0.85)',
+                    backdropFilter: 'blur(80px) saturate(220%)',
+                    WebkitBackdropFilter: 'blur(80px) saturate(220%)',
+                    backgroundColor: 'transparent',
                     color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
-                    borderBottom: mode === 'dark' 
-                        ? '1px solid rgba(255, 255, 255, 0.08)' 
-                        : '1px solid rgba(0, 0, 0, 0.05)',
-                    boxShadow: mode === 'dark'
-                        ? '0 2px 16px rgba(0, 0, 0, 0.3)'
-                        : '0 2px 16px rgba(0, 0, 0, 0.06)',
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    borderBottom: 'none',
+                    boxShadow: 'none',
+                    transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    willChange: 'width, margin-left, box-shadow',
+                    '&::after': {
+                        content: '""',
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: '1px',
+                        background: mode === 'dark'
+                            ? 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.2), transparent)'
+                            : 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.15), transparent)',
+                        opacity: 0.6,
+                    }
                 }}
             >
                 <Toolbar sx={{ minHeight: { xs: 64, sm: 70 } }}>
@@ -359,12 +400,13 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             sx={{
                                 mr: 2,
                                 display: {sm: 'none'},
-                                color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
+                                color: mode === 'dark' ? '#977DFF' : '#977DFF',
                                 transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                                 '&:hover': {
                                     background: mode === 'dark' 
-                                        ? 'rgba(10, 132, 255, 0.15)' 
-                                        : 'rgba(0, 122, 255, 0.08)',
+                                        ? 'rgba(151, 125, 255, 0.15)' 
+                                        : 'rgba(151, 125, 255, 0.1)',
+                                    color: mode === 'dark' ? '#B8A6FF' : '#7B5EE6',
                                     transform: 'scale(1.1)',
                                 },
                                 '&:active': {
@@ -382,13 +424,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     onClick={() => setSidebarOpen(!sidebarOpen)}
                                     sx={{
                                         display: {xs: 'none', sm: 'block'},
-                                        color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
+                                        color: mode === 'dark' ? '#977DFF' : '#977DFF',
                                         mr: 2,
                                         transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                                         '&:hover': {
                                             background: mode === 'dark' 
-                                                ? 'rgba(10, 132, 255, 0.15)' 
-                                                : 'rgba(0, 122, 255, 0.08)',
+                                                ? 'rgba(151, 125, 255, 0.15)' 
+                                                : 'rgba(151, 125, 255, 0.1)',
+                                            color: mode === 'dark' ? '#B8A6FF' : '#7B5EE6',
                                             transform: 'scale(1.1)',
                                         },
                                         '&:active': {
@@ -454,8 +497,18 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         boxSizing: 'border-box',
                         width: {xs: '100vw', sm: drawerWidth},
                         maxWidth: drawerWidth,
-                        transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        transition: 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        willChange: 'transform',
+                        boxShadow: mode === 'dark'
+                            ? '8px 0 40px rgba(0, 0, 0, 0.6)'
+                            : '8px 0 40px rgba(151, 125, 255, 0.15)',
                     },
+                    '& .MuiBackdrop-root': {
+                        backdropFilter: 'blur(10px)',
+                        backgroundColor: mode === 'dark'
+                            ? 'rgba(0, 0, 0, 0.5)'
+                            : 'rgba(151, 125, 255, 0.1)',
+                    }
                 }}
             >
                 {drawer}
@@ -472,14 +525,19 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             width: sidebarOpen ? drawerWidth : 0,
                             border: 'none',
                             overflow: 'hidden',
-                            transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            transition: 'width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                            willChange: 'width',
+                            boxShadow: mode === 'dark'
+                                ? '8px 0 40px rgba(0, 0, 0, 0.6)'
+                                : '8px 0 40px rgba(151, 125, 255, 0.15)',
                         },
                     }}
                     open={sidebarOpen}
                 >
                 <Box sx={{
                     opacity: sidebarOpen ? 1 : 0,
-                    transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transition: 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                    willChange: 'opacity',
                 }}>
                     {drawer}
                 </Box>

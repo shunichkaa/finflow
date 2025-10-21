@@ -128,16 +128,16 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
     
     return (
         <Box sx={{ 
-            width: '100%', 
-            height: 350, 
-            p: 2,
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: mode === 'dark'
-                ? 'radial-gradient(circle at 50% 50%, rgba(0, 51, 255, 0.1) 0%, rgba(151, 125, 255, 0.05) 50%, transparent 100%)'
-                : 'radial-gradient(circle at 50% 50%, rgba(151, 125, 255, 0.05) 0%, rgba(255, 204, 242, 0.03) 50%, transparent 100%)',
+                width: '100%', 
+                height: 350, 
+                p: 2,
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: mode === 'dark'
+                    ? 'radial-gradient(circle at 50% 50%, rgba(74, 74, 106, 0.08) 0%, rgba(151, 125, 255, 0.05) 50%, transparent 100%)'
+                    : 'radial-gradient(circle at 50% 50%, rgba(151, 125, 255, 0.05) 0%, rgba(255, 204, 242, 0.03) 50%, transparent 100%)',
             borderRadius: 4,
             overflow: 'hidden'
         }}>
@@ -156,20 +156,20 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                             <stop offset="50%" stopColor="#4ECDC4" stopOpacity={0.6}/>
                             <stop offset="100%" stopColor="#96CEB4" stopOpacity={0.4}/>
                         </linearGradient>
-                        <linearGradient id="expenseGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor={mode === 'dark' ? '#977DFF' : '#8B5CF6'} stopOpacity={0.8}/>
-                            <stop offset="50%" stopColor={mode === 'dark' ? '#0033FF' : '#6366F1'} stopOpacity={0.6}/>
-                            <stop offset="100%" stopColor={mode === 'dark' ? '#977DFF' : '#8B5CF6'} stopOpacity={0.4}/>
-                        </linearGradient>
+                            <linearGradient id="expenseGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor={mode === 'dark' ? '#B8A6FF' : '#8B5CF6'} stopOpacity={0.8}/>
+                                <stop offset="50%" stopColor={mode === 'dark' ? '#8B5CF6' : '#6366F1'} stopOpacity={0.6}/>
+                                <stop offset="100%" stopColor={mode === 'dark' ? '#B8A6FF' : '#8B5CF6'} stopOpacity={0.4}/>
+                            </linearGradient>
                         {/* Area gradients for glass effect */}
                         <linearGradient id="incomeArea" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stopColor="#96CEB4" stopOpacity={0.3}/>
                             <stop offset="100%" stopColor="#96CEB4" stopOpacity={0.05}/>
                         </linearGradient>
-                        <linearGradient id="expenseArea" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor={mode === 'dark' ? '#977DFF' : '#8B5CF6'} stopOpacity={0.3}/>
-                            <stop offset="100%" stopColor={mode === 'dark' ? '#977DFF' : '#8B5CF6'} stopOpacity={0.05}/>
-                        </linearGradient>
+                            <linearGradient id="expenseArea" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor={mode === 'dark' ? '#B8A6FF' : '#8B5CF6'} stopOpacity={0.3}/>
+                                <stop offset="100%" stopColor={mode === 'dark' ? '#B8A6FF' : '#8B5CF6'} stopOpacity={0.05}/>
+                            </linearGradient>
                         {/* Glass glow filter */}
                         <filter id="glassGlow" x="-50%" y="-50%" width="200%" height="200%">
                             <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
