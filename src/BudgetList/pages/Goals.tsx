@@ -74,6 +74,32 @@ const Goals: React.FC = () => {
     const [targetDate, setTargetDate] = useState<Date | null>(null);
     const [editingGoal, setEditingGoal] = useState<string | null>(null);
 
+    const formatNumberWithSpaces = (value: string): string => {
+        // Удаляем все пробелы и нечисловые символы кроме точки
+        const numericValue = value.replace(/[^\d.]/g, '');
+        // Разделяем на целую и дробную часть
+        const parts = numericValue.split('.');
+        // Форматируем целую часть с пробелами
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        // Возвращаем с дробной частью если есть
+        return parts.join('.');
+    };
+
+    const parseFormattedNumber = (value: string): number => {
+        // Удаляем все пробелы и парсим число
+        return parseFloat(value.replace(/\s/g, '')) || 0;
+    };
+
+    const handleTargetAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const formatted = formatNumberWithSpaces(e.target.value);
+        setTargetAmount(formatted);
+    };
+
+    const handleCurrentAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const formatted = formatNumberWithSpaces(e.target.value);
+        setCurrentAmount(formatted);
+    };
+
     const handleOpenDialog = () => {
         setOpenDialog(true);
         setEditingGoal(null);
@@ -90,8 +116,8 @@ const Goals: React.FC = () => {
 
         setEditingGoal(goalId);
         setGoalName(goal.name);
-        setTargetAmount(goal.targetAmount.toString());
-        setCurrentAmount(goal.currentAmount.toString());
+        setTargetAmount(formatNumberWithSpaces(goal.targetAmount.toString()));
+        setCurrentAmount(formatNumberWithSpaces(goal.currentAmount.toString()));
         setTargetDate(goal.targetDate ? new Date(goal.targetDate) : null);
         setSelectedIcon((goal as any).icon || 'savings');
         setOpenDialog(true);
@@ -102,8 +128,8 @@ const Goals: React.FC = () => {
 
         const goalData = {
             name: goalName,
-            targetAmount: parseFloat(targetAmount),
-            currentAmount: parseFloat(currentAmount) || 0,
+            targetAmount: parseFormattedNumber(targetAmount),
+            currentAmount: parseFormattedNumber(currentAmount),
             targetDate: targetDate || undefined,
             icon: selectedIcon,
         };
@@ -244,7 +270,7 @@ const Goals: React.FC = () => {
                         const IconComponent = iconData.icon;
 
                         return (
-                            <Grid item xs={12} sm={6} md={4} key={goal.id}>
+                            <Grid item xs={12} sm={12} md={6} lg={4} key={goal.id}>
                                 <GlassCard 
                                     glowColor={iconData.color + '40'}
                                     sx={{ 
@@ -511,11 +537,12 @@ const Goals: React.FC = () => {
                         {/* Целевая сумма */}
                         <TextField
                             label="Целевая сумма"
-                            type="number"
+                            type="text"
                             value={targetAmount}
-                            onChange={(e) => setTargetAmount(e.target.value)}
+                            onChange={handleTargetAmountChange}
                             fullWidth
                             required
+                            placeholder="1 000 000"
                             InputProps={{
                                 endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
                             }}
@@ -524,10 +551,11 @@ const Goals: React.FC = () => {
                         {/* Текущая сумма */}
                         <TextField
                             label="Текущая сумма"
-                            type="number"
+                            type="text"
                             value={currentAmount}
-                            onChange={(e) => setCurrentAmount(e.target.value)}
+                            onChange={handleCurrentAmountChange}
                             fullWidth
+                            placeholder="500 000"
                             InputProps={{
                                 endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
                             }}
