@@ -58,30 +58,40 @@ const Dashboard = () => {
             }}>
                 {/* Title */}
                 <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-                    <Typography variant="h4" gutterBottom fontWeight="bold" sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB'
+                    <Typography variant="h4" gutterBottom sx={{
+                        color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
+                        fontWeight: 700,
+                        letterSpacing: '-0.02em'
                     }}>
                         {t('dashboard')}
                     </Typography>
                 </Box>
                 
-                {/* Button */}
-                <GlassButton
+                {/* Add Transaction Button - Gradient Style */}
+                <Button
                     variant="contained"
                     startIcon={<AddIcon />}
                     onClick={() => setIsModalOpen(true)}
                     size="large"
-                    intensity="high"
-                    glowColor={mode === 'dark' 
-                        ? 'rgba(99, 102, 241, 0.5)' 
-                        : 'rgba(168, 163, 246, 0.5)'}
                     sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
-                        fontWeight: '600',
+                        background: 'linear-gradient(135deg, #977DFF 0%, #0033FF 100%)',
+                        color: '#FFFFFF',
+                        fontWeight: '500',
                         fontSize: '16px',
                         px: 4,
                         py: 1.5,
+                        borderRadius: 4,
                         minWidth: { xs: '100%', sm: 200 },
+                        boxShadow: '0 4px 12px rgba(151, 125, 255, 0.3)',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        '&:hover': {
+                            background: 'linear-gradient(135deg, #7B5EE6 0%, #0028CC 100%)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 8px 20px rgba(151, 125, 255, 0.4)',
+                        },
+                        '&:active': {
+                            transform: 'scale(0.98)',
+                        },
                         '& .MuiButton-startIcon': {
                             marginRight: 1,
                             '& svg': {
@@ -91,7 +101,7 @@ const Dashboard = () => {
                     }}
                 >
                     {t('addTransaction')}
-                </GlassButton>
+                </Button>
             </Box>
 
 
@@ -112,32 +122,28 @@ const Dashboard = () => {
                     onReset={reset}
                 />
 
-                {/* Transaction List */}
+                {/* Transaction List - iOS Card */}
                 <GlassCard 
                     sx={{ 
-                        p: { xs: 1.5, sm: 2 }, 
-                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                        p: { xs: 2, sm: 3 }, 
+                        color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
                         '&:hover': {
-                            transform: 'none',
-                            boxShadow: '0 8px 32px rgba(102, 51, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                            transform: 'translateY(-2px)',
                         }
                     }} 
                     id="transactions-list"
                     intensity="medium"
-                    glowColor={mode === 'dark' 
-                        ? 'rgba(102, 51, 255, 0.3)' 
-                        : 'rgba(168, 163, 246, 0.3)'}
                 >
                     <Box sx={{ 
                         display: 'flex', 
                         justifyContent: 'space-between', 
                         alignItems: 'center', 
-                        mb: 2,
-                        px: 1
+                        mb: 3,
                     }}>
                         <Typography variant="h6" sx={{ 
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
-                            fontWeight: 'bold'
+                            color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
+                            fontWeight: 600,
+                            letterSpacing: '-0.01em'
                         }}>
                             {t('transactions')} ({filteredTransactions.length})
                         </Typography>
@@ -150,24 +156,25 @@ const Dashboard = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                width: 32,
-                                height: 32,
+                                width: 36,
+                                height: 36,
                                 borderRadius: '50%',
-                                backgroundColor: mode === 'dark' 
-                                    ? 'rgba(100, 200, 150, 0.8)'
-                                    : 'rgba(254, 222, 233, 0.8)',
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                background: 'linear-gradient(135deg, #977DFF 0%, #0033FF 100%)',
+                                color: '#FFFFFF',
                                 cursor: 'pointer',
-                                transition: 'all 0.2s ease',
+                                boxShadow: '0 4px 12px rgba(151, 125, 255, 0.3)',
+                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                 '&:hover': {
-                                    backgroundColor: mode === 'dark' 
-                                        ? 'rgba(100, 200, 150, 0.9)'
-                                        : 'rgba(254, 222, 233, 0.9)',
+                                    background: 'linear-gradient(135deg, #7B5EE6 0%, #0028CC 100%)',
                                     transform: 'scale(1.1)',
+                                    boxShadow: '0 6px 16px rgba(151, 125, 255, 0.4)',
+                                },
+                                '&:active': {
+                                    transform: 'scale(0.95)',
                                 }
                             }}
                         >
-                            <AddIcon sx={{ fontSize: 18 }} />
+                            <AddIcon sx={{ fontSize: 20 }} />
                         </Box>
                     </Box>
                     <TransactionList transactions={filteredTransactions} />

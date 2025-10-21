@@ -23,44 +23,51 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
             case 'low':
                 return {
                     blur: '10px',
-                    saturation: '120%',
-                    shadow: '0 4px 16px',
-                    hoverShadow: '0 8px 24px',
+                    saturation: '150%',
+                    shadow: '0 4px 12px',
+                    hoverShadow: '0 8px 20px',
                 };
             case 'high':
                 return {
                     blur: '30px',
                     saturation: '200%',
-                    shadow: '0 8px 32px',
-                    hoverShadow: '0 16px 48px',
+                    shadow: '0 8px 24px',
+                    hoverShadow: '0 16px 40px',
                 };
             default: // medium
                 return {
                     blur: '20px',
                     saturation: '180%',
-                    shadow: '0 6px 24px',
-                    hoverShadow: '0 12px 36px',
+                    shadow: '0 6px 16px',
+                    hoverShadow: '0 12px 32px',
                 };
         }
     };
 
     const intensityValues = getIntensityValues();
     const defaultGlowColor = mode === 'dark' 
-        ? 'rgba(102, 51, 255, 0.4)' 
-        : 'rgba(168, 163, 246, 0.4)';
+        ? 'rgba(10, 132, 255, 0.3)' 
+        : 'rgba(0, 122, 255, 0.15)';
 
     return (
         <Button
             {...props}
             sx={{
                 textTransform: 'none',
-                fontWeight: 600,
-                padding: '14px 28px',
-                borderRadius: 3,
+                fontWeight: 500,
+                padding: '12px 24px',
+                borderRadius: 4,
                 backdropFilter: `blur(${intensityValues.blur}) saturate(${intensityValues.saturation})`,
-                border: '1px solid rgba(255, 255, 255, 0.18)',
-                boxShadow: `${intensityValues.shadow} ${glowColor || defaultGlowColor}, 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)`,
-                transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                backgroundColor: mode === 'dark' 
+                    ? 'rgba(28, 28, 30, 0.8)'
+                    : 'rgba(252, 248, 245, 0.7)',
+                border: mode === 'dark'
+                    ? '1px solid rgba(255, 255, 255, 0.1)'
+                    : '1px solid rgba(252, 248, 245, 0.9)',
+                boxShadow: mode === 'dark'
+                    ? `${intensityValues.shadow} rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)`
+                    : `${intensityValues.shadow} rgba(31, 38, 135, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)`,
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 position: 'relative',
                 overflow: 'hidden',
                 ...(shimmer && {
@@ -72,35 +79,25 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
                         width: '100%',
                         height: '100%',
                         background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
-                        transition: 'left 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                        transition: 'left 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                     },
                 }),
-                '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: `radial-gradient(circle at 50% 50%, ${glowColor || defaultGlowColor} 0%, transparent 70%)`,
-                    opacity: 0,
-                    transition: 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                    pointerEvents: 'none',
-                },
                 '&:hover': {
-                    transform: 'translateY(-4px) scale(1.05)',
-                    boxShadow: `${intensityValues.hoverShadow} ${glowColor || defaultGlowColor}, 0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)`,
+                    transform: 'translateY(-2px)',
+                    boxShadow: mode === 'dark'
+                        ? `${intensityValues.hoverShadow} rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15)`
+                        : `${intensityValues.hoverShadow} rgba(31, 38, 135, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)`,
+                    backgroundColor: mode === 'dark' 
+                        ? 'rgba(28, 28, 30, 0.9)'
+                        : 'rgba(252, 248, 245, 0.85)',
                     ...(shimmer && {
                         '&::before': {
                             left: '100%',
                         },
                     }),
-                    '&::after': {
-                        opacity: 0.1,
-                    },
                 },
                 '&:active': {
-                    transform: 'translateY(-2px) scale(1.02)',
+                    transform: 'scale(0.98)',
                 },
                 ...sx,
             }}

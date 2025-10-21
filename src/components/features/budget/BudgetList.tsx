@@ -98,7 +98,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
             <Box sx={{
                 display: 'grid', 
                 gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, 
-                gap: 2
+                gap: 3
             }}>
                 {budgets.map((budget) => {
                     const category = getCategoryById(budget.category);
@@ -108,90 +108,106 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                     const statusColor = getBudgetStatusColor(status);
                     const remaining = budget.limit - spent;
                     const daysLeft = getDaysLeftInPeriod(budget.period);
+                    const categoryColor = category?.color || '#96CEB4';
 
                     return (
                         <Card key={budget.id} elevation={2}
                               sx={{
-                                  minHeight: 160, 
+                                  minHeight: 500, 
+                                  aspectRatio: { xs: 'auto', sm: '1 / 1' },
                                   display: 'flex', 
                                   flexDirection: 'column',
                                   backdropFilter: 'blur(40px) saturate(180%)',
-                                  backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.4)' : 'rgba(255, 255, 255, 0.2)',
-                                  border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
-                                  borderRadius: 3,
+                                  backgroundColor: mode === 'dark' ? 'rgba(28, 28, 30, 0.85)' : 'rgba(252, 248, 245, 0.7)',
+                                  border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(252, 248, 245, 0.9)',
+                                  borderRadius: 6,
                                   boxShadow: mode === 'dark' 
-                                      ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                                      : '0 8px 32px rgba(6, 0, 171, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                                      ? '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+                                      : '0 8px 32px rgba(31, 38, 135, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
                                   position: 'relative',
                                   overflow: 'hidden',
-                                  '&::before': {
-                                      content: '""',
-                                      position: 'absolute',
-                                      top: 0,
-                                      left: 0,
-                                      right: 0,
-                                      height: '1px',
-                                      background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                  '&:hover': {
+                                      transform: 'translateY(-2px)',
+                                      boxShadow: mode === 'dark'
+                                          ? '0 16px 48px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+                                          : '0 16px 48px rgba(31, 38, 135, 0.2), 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
                                   },
                               }}>
-                            <CardContent sx={{flexGrow: 1}}>
-                                {/* Header */}
-                                <Box sx={{display: 'flex', justifyContent: 'space-between', mb: 2}}>
-                                    <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
-                                        <Box
-                                            sx={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                width: 48,
-                                                height: 48,
-                                                borderRadius: 2,
-                                                bgcolor: category?.color,
-                                                color: '#fff',
-                                            }}
-                                        >
-                                            {getCategoryIcon(category?.icon || 'more', 24)}
-                                        </Box>
-                                        <Box>
-                                            <Typography variant="h6" fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
-                                                {getCategoryName(budget.category, t)}
-                                            </Typography>
-                                            <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
-                                                <Chip
-                                                    label={t(budget.period === 'monthly' ? 'monthly' : 'weekly')}
-                                                    size="small"
-                                                    variant="outlined"
-                                                    sx={{
-                                                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
-                                                        borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(151, 125, 255, 0.3)'
-                                                    }}
-                                                />
-                                                <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(6, 0, 171, 0.8)' }}>
-                                                    {(() => {
-                                                        if (daysLeft === 0) {
-                                                            return t('lastDay');
-                                                        }
-                                                        if (daysLeft === 1) {
-                                                            return t('dayLeft');
-                                                        }
-                                                        return `${daysLeft} ${t('daysLeft')}`;
-                                                    })()}
-                                                </Typography>
-                                            </Box>
-                                        </Box>
-                                    </Box>
-
-                                    <IconButton
-                                        size="small"
-                                        color="error"
-                                        onClick={() => {
-                                            if (window.confirm(t('confirmDeleteBudget'))) {
-                                                deleteBudget(budget.id);
-                                            }
+                            <Box sx={{ p: 4, display: 'flex', flexDirection: 'column', height: '100%' }}>
+                                {/* Верхняя часть с иконкой и действиями */}
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 4 }}>
+                                    <Box 
+                                        sx={{ 
+                                            width: 72, 
+                                            height: 72, 
+                                            borderRadius: 4,
+                                            background: `linear-gradient(135deg, ${categoryColor}20 0%, ${categoryColor}40 100%)`,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
                                         }}
                                     >
-                                        <DeleteIcon/>
-                                    </IconButton>
+                                        {getCategoryIcon(category?.icon || 'more', 40)}
+                                    </Box>
+                                    <Box sx={{ display: 'flex', gap: 0.5 }}>
+                                        <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                                if (window.confirm(t('confirmDeleteBudget'))) {
+                                                    deleteBudget(budget.id);
+                                                }
+                                            }}
+                                            sx={{
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
+                                                '&:hover': {
+                                                    color: '#FF6B6B',
+                                                    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                                                }
+                                            }}
+                                        >
+                                            <DeleteIcon fontSize="small" />
+                                        </IconButton>
+                                    </Box>
+                                </Box>
+
+                                {/* Название */}
+                                <Typography 
+                                    variant="h5" 
+                                    fontWeight="700"
+                                    sx={{ 
+                                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                        mb: 1,
+                                        fontSize: '1.5rem'
+                                    }}
+                                >
+                                    {getCategoryName(budget.category, t)}
+                                </Typography>
+
+                                {/* Период и дни */}
+                                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mb: 3 }}>
+                                    <Chip
+                                        label={t(budget.period === 'monthly' ? 'monthly' : 'weekly')}
+                                        sx={{
+                                            backgroundColor: `${categoryColor}20`,
+                                            color: categoryColor,
+                                            fontWeight: 600,
+                                            fontSize: '0.9rem',
+                                            height: 36,
+                                            borderRadius: 2
+                                        }}
+                                    />
+                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', fontSize: '0.875rem' }}>
+                                        {(() => {
+                                            if (daysLeft === 0) {
+                                                return t('lastDay');
+                                            }
+                                            if (daysLeft === 1) {
+                                                return t('dayLeft');
+                                            }
+                                            return `${daysLeft} ${t('daysLeft')}`;
+                                        })()}
+                                    </Typography>
                                 </Box>
 
                                 {/* Warning for exceeded */}
@@ -208,8 +224,9 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             border: mode === 'dark' 
                                                 ? '1px solid rgba(255, 107, 107, 0.3)' 
                                                 : '1px solid rgba(255, 107, 107, 0.2)',
+                                            borderRadius: 3,
                                             '& .MuiAlert-icon': {
-                                                color: mode === 'dark' ? '#FF6B6B' : '#E55555',
+                                                color: '#FF6B6B',
                                             },
                                             '& .MuiAlert-message': {
                                                 color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
@@ -227,14 +244,15 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                         sx={{
                                             mb: 2,
                                             backgroundColor: mode === 'dark' 
-                                                ? 'rgba(255, 193, 7, 0.15)' 
-                                                : 'rgba(255, 193, 7, 0.1)',
+                                                ? 'rgba(255, 179, 71, 0.15)' 
+                                                : 'rgba(255, 179, 71, 0.1)',
                                             color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                                             border: mode === 'dark' 
-                                                ? '1px solid rgba(255, 193, 7, 0.3)' 
-                                                : '1px solid rgba(255, 193, 7, 0.2)',
+                                                ? '1px solid rgba(255, 179, 71, 0.3)' 
+                                                : '1px solid rgba(255, 179, 71, 0.2)',
+                                            borderRadius: 3,
                                             '& .MuiAlert-icon': {
-                                                color: mode === 'dark' ? '#FFC107' : '#F57C00',
+                                                color: '#FFB347',
                                             },
                                             '& .MuiAlert-message': {
                                                 color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
@@ -246,8 +264,30 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                     </Alert>
                                 )}
 
-                                {/* Progress Bar */}
-                                <Box sx={{mb: 1}}>
+                                {/* Прогресс */}
+                                <Box sx={{ mb: 3 }}>
+                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
+                                        <Typography 
+                                            variant="h6" 
+                                            fontWeight="700"
+                                            sx={{ 
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(6, 0, 171, 0.9)',
+                                                fontSize: '1.1rem'
+                                            }}
+                                        >
+                                            {formatCurrency(spent, currency)}
+                                        </Typography>
+                                        <Typography 
+                                            variant="h6" 
+                                            fontWeight="600"
+                                            sx={{ 
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
+                                                fontSize: '1.1rem'
+                                            }}
+                                        >
+                                            {formatCurrency(budget.limit, currency)}
+                                        </Typography>
+                                    </Box>
                                     <LinearProgress
                                         variant="determinate"
                                         value={Math.min(percentage, 100)}
@@ -259,61 +299,49 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                                 : 'rgba(6, 0, 171, 0.1)',
                                             '& .MuiLinearProgress-bar': {
                                                 borderRadius: 4,
-                                                background: `linear-gradient(90deg, ${statusColor} 0%, ${statusColor}CC 100%)`,
-                                            },
+                                                background: `linear-gradient(90deg, ${categoryColor} 0%, ${categoryColor}CC 100%)`,
+                                            }
                                         }}
                                     />
                                 </Box>
 
-                                {/* Stats */}
-                                <Box sx={{display: 'flex', justifyContent: 'space-between', mt: 2}}>
-                                    <Box>
-                                        <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(6, 0, 171, 0.7)' }}>
-                                            {t('spent')}
-                                        </Typography>
-                                        <Typography variant="h6" fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
-                                            {formatCurrency(spent, currency)}
-                                        </Typography>
-                                    </Box>
-
-                                    <Box sx={{textAlign: 'right'}}>
-                                        <Typography
-                                            variant="h6"
-                                            fontWeight="bold"
-                                            sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}
+                                {/* Информация */}
+                                <Box sx={{ mt: 'auto' }}>
+                                    {remaining > 0 && (
+                                        <Box 
+                                            sx={{ 
+                                                p: 2.5, 
+                                                borderRadius: 3,
+                                                backgroundColor: mode === 'dark' 
+                                                    ? 'rgba(255, 255, 255, 0.05)' 
+                                                    : 'rgba(6, 0, 171, 0.05)',
+                                            }}
                                         >
-                                            {formatCurrency(Math.abs(remaining), currency)}
-                                        </Typography>
-                                    </Box>
-
-                                    <Box sx={{textAlign: 'right'}}>
-                                        <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(6, 0, 171, 0.7)' }}>
-                                            {t('limit')}
-                                        </Typography>
-                                        <Typography variant="h6" fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
-                                            {formatCurrency(budget.limit, currency)}
-                                        </Typography>
-                                    </Box>
+                                            <Typography 
+                                                variant="body2" 
+                                                sx={{ 
+                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
+                                                    display: 'block',
+                                                    mb: 1,
+                                                    fontSize: '0.875rem'
+                                                }}
+                                            >
+                                                {t('remaining')}:
+                                            </Typography>
+                                            <Typography 
+                                                variant="h6" 
+                                                fontWeight="700"
+                                                sx={{ 
+                                                    color: categoryColor,
+                                                    fontSize: '1.1rem'
+                                                }}
+                                            >
+                                                {formatCurrency(remaining, currency)}
+                                            </Typography>
+                                        </Box>
+                                    )}
                                 </Box>
-
-                                {/* Percentage */}
-                                <Box sx={{mt: 2, textAlign: 'center'}}>
-                                    <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(6, 0, 171, 0.8)' }}>
-                                        {percentage.toFixed(1)}% {t('used')}
-                                    </Typography>
-                                </Box>
-                            </CardContent>
-                            {onEdit && (
-                                <Box sx={{px: 2, pb: 2, display: 'flex', justifyContent: 'flex-end'}}>
-                                    <Chip
-                                        label={t('edit')}
-                                        variant="outlined"
-                                        color="primary"
-                                        onClick={() => onEdit(budget.id)}
-                                        size="small"
-                                    />
-                                </Box>
-                            )}
+                            </Box>
                         </Card>
                     );
                 })}

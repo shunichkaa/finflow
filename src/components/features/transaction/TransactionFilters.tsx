@@ -45,17 +45,18 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
 
     return (
         <Paper sx={{ 
-            p: 2, 
+            p: 2.5, 
             mb: 2,
             backdropFilter: 'blur(40px) saturate(180%)',
-            backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.3)' : 'rgba(255, 255, 255, 0.2)',
-            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
-            borderRadius: 3,
+            backgroundColor: mode === 'dark' ? 'rgba(28, 28, 30, 0.85)' : 'rgba(252, 248, 245, 0.7)',
+            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(252, 248, 245, 0.9)',
+            borderRadius: 6,
             boxShadow: mode === 'dark' 
-                ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                : '0 8px 32px rgba(6, 0, 171, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                ? '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+                : '0 8px 32px rgba(31, 38, 135, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
             position: 'relative',
             overflow: 'hidden',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -93,13 +94,14 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         sx={{
                             minWidth: { xs: '100%', sm: 120 },
                             '& .MuiOutlinedInput-root': {
-                                backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
+                                backgroundColor: mode === 'dark' ? 'rgba(58, 58, 60, 0.6)' : 'rgba(252, 248, 245, 0.6)',
                                 color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                borderRadius: 3,
                             },
                             '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                 '&.Mui-focused': {
-                                    color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                                    color: mode === 'dark' ? '#977DFF' : '#977DFF',
                                 },
                             }
                         }}
@@ -119,13 +121,14 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         sx={{
                             minWidth: { xs: '100%', sm: 140 },
                             '& .MuiOutlinedInput-root': {
-                                backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
+                                backgroundColor: mode === 'dark' ? 'rgba(58, 58, 60, 0.6)' : 'rgba(252, 248, 245, 0.6)',
                                 color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                borderRadius: 3,
                             },
                             '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                 '&.Mui-focused': {
-                                    color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                                    color: mode === 'dark' ? '#977DFF' : '#977DFF',
                                 },
                             }
                         }}
@@ -165,11 +168,19 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         sx={{
                             minWidth: { xs: '100%', sm: 'auto' },
                             px: 2,
-                            borderColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.5)' : 'rgba(255, 185, 141, 0.5)',
+                            borderRadius: 3,
+                            borderColor: mode === 'dark' ? 'rgba(151, 125, 255, 0.3)' : 'rgba(151, 125, 255, 0.3)',
                             color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            backdropFilter: 'blur(20px)',
+                            background: mode === 'dark' ? 'rgba(58, 58, 60, 0.4)' : 'rgba(151, 125, 255, 0.05)',
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
-                                borderColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.7)' : 'rgba(255, 185, 141, 0.7)',
-                                backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.2)' : 'rgba(255, 185, 141, 0.1)',
+                                borderColor: '#977DFF',
+                                backgroundColor: mode === 'dark' ? 'rgba(151, 125, 255, 0.15)' : 'rgba(151, 125, 255, 0.1)',
+                                transform: 'translateY(-2px)',
+                                boxShadow: mode === 'dark' 
+                                    ? '0 6px 20px rgba(151, 125, 255, 0.3)'
+                                    : '0 6px 20px rgba(151, 125, 255, 0.15)',
                             }
                         }}
                     >

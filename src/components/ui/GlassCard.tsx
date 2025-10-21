@@ -22,7 +22,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
             case 'low':
                 return {
                     blur: '20px',
-                    saturation: '120%',
+                    saturation: '150%',
                     shadow: '0 4px 16px',
                     hoverShadow: '0 8px 24px',
                 };
@@ -31,7 +31,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                     blur: '60px',
                     saturation: '200%',
                     shadow: '0 12px 48px',
-                    hoverShadow: '0 24px 72px',
+                    hoverShadow: '0 20px 60px',
                 };
             default: // medium
                 return {
@@ -45,53 +45,32 @@ export const GlassCard: React.FC<GlassCardProps> = ({
 
     const intensityValues = getIntensityValues();
     const defaultGlowColor = mode === 'dark' 
-        ? 'rgba(102, 51, 255, 0.3)' 
-        : 'rgba(168, 163, 246, 0.3)';
+        ? 'rgba(10, 132, 255, 0.15)' 
+        : 'rgba(0, 122, 255, 0.1)';
 
     return (
         <Card
             {...props}
             sx={{
+                borderRadius: 6,
                 backdropFilter: `blur(${intensityValues.blur}) saturate(${intensityValues.saturation})`,
                 backgroundColor: mode === 'dark' 
-                    ? 'rgba(26, 0, 77, 0.25)'
-                    : 'rgba(255, 255, 255, 0.25)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
-                borderRadius: 4,
-                boxShadow: `${intensityValues.shadow} ${glowColor || defaultGlowColor}, 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)`,
-                transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    ? 'rgba(28, 28, 30, 0.85)'
+                    : 'rgba(252, 248, 245, 0.7)',
+                border: mode === 'dark'
+                    ? '1px solid rgba(255, 255, 255, 0.1)'
+                    : '1px solid rgba(252, 248, 245, 0.9)',
+                boxShadow: mode === 'dark'
+                    ? `${intensityValues.shadow} rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)`
+                    : `${intensityValues.shadow} rgba(31, 38, 135, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)`,
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 position: 'relative',
                 overflow: 'hidden',
-                '&::before': {
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '1px',
-                    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
-                },
-                '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: `radial-gradient(circle at 50% 0%, ${glowColor || defaultGlowColor} 0%, transparent 70%)`,
-                    opacity: 0,
-                    transition: 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                    pointerEvents: 'none',
-                },
                 '&:hover': {
-                    transform: 'translateY(-8px) scale(1.02)',
-                    boxShadow: `${intensityValues.hoverShadow} ${glowColor || defaultGlowColor}, 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)`,
-                    backgroundColor: mode === 'dark' 
-                        ? 'rgba(26, 0, 77, 0.35)'
-                        : 'rgba(255, 255, 255, 0.35)',
-                    '&::after': {
-                        opacity: 0.1,
-                    },
+                    transform: 'translateY(-2px)',
+                    boxShadow: mode === 'dark'
+                        ? `${intensityValues.hoverShadow} rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)`
+                        : `${intensityValues.hoverShadow} rgba(31, 38, 135, 0.2), 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.7)`,
                 },
                 ...sx,
             }}
