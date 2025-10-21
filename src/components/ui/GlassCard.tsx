@@ -109,11 +109,9 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                        0 4px 12px rgba(31, 38, 135, 0.08), 
                        inset 0 1px 0 rgba(255, 255, 255, 0.8),
                        inset 0 -1px 0 rgba(255, 255, 255, 0.4)`,
-                transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 position: 'relative',
                 overflow: 'hidden',
-                animation: animated ? `${float} 8s cubic-bezier(0.4, 0.0, 0.2, 1) infinite` : 'none',
-                willChange: 'transform, box-shadow',
                 '&::before': {
                     content: '""',
                     position: 'absolute',
@@ -124,9 +122,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                     background: mode === 'dark'
                         ? 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent)'
                         : 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
-                    animation: animated ? `${shimmer} 10s cubic-bezier(0.4, 0.0, 0.2, 1) infinite` : 'none',
                     pointerEvents: 'none',
-                    willChange: 'transform',
                 },
                 '&::after': {
                     content: '""',
@@ -139,8 +135,6 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                         ? 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.5), transparent)'
                         : 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent)',
                     opacity: 0.6,
-                    animation: `${glow} 4s cubic-bezier(0.4, 0.0, 0.2, 1) infinite`,
-                    willChange: 'opacity',
                 },
                 '&:hover': {
                     transform: `translateY(-4px) scale(${intensityValues.scale})`,

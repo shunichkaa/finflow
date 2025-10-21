@@ -55,7 +55,6 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({ children
                     ? 'linear-gradient(-45deg, #1a1a2e, #2d2d44, #3d3d5c, #4a4a6a, #2d2d44)'
                     : 'linear-gradient(-45deg, #F2E6EE, #FFCCF2, #977DFF, #FFCCF2, #F2E6EE)',
                 backgroundSize: '400% 400%',
-                animation: `${gradientAnimation} 20s cubic-bezier(0.4, 0.0, 0.2, 1) infinite`,
                 '&::before': {
                     content: '""',
                     position: 'fixed',
@@ -72,8 +71,6 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({ children
                            radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 50%)`,
                     pointerEvents: 'none',
                     zIndex: 0,
-                    animation: `${pulse} 10s cubic-bezier(0.4, 0.0, 0.2, 1) infinite`,
-                    willChange: 'opacity, transform',
                 },
                 '&::after': {
                     content: '""',
@@ -88,9 +85,7 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({ children
                         : 'radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 60%)',
                     pointerEvents: 'none',
                     zIndex: 0,
-                    filter: 'blur(100px)',
-                    animation: `${float} 25s cubic-bezier(0.4, 0.0, 0.2, 1) infinite`,
-                    willChange: 'transform',
+                    filter: 'blur(60px)',
                 },
             }}
         >

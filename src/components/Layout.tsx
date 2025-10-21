@@ -86,10 +86,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 : `8px 0 32px rgba(151, 125, 255, 0.12),
                    inset 1px 0 0 rgba(255, 255, 255, 0.8),
                    0 0 60px rgba(151, 125, 255, 0.08)`,
-            transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             position: 'relative',
             overflow: 'hidden',
-            willChange: 'width, margin-left',
             '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -335,15 +334,21 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     sx={{
                         borderRadius: 3,
                         py: 1.5,
-                        background: 'linear-gradient(135deg, #977DFF 0%, #0033FF 100%)',
+                        background: mode === 'dark' 
+                            ? 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)'
+                            : 'linear-gradient(135deg, #A8A3F6 0%, #F6D5EE 100%)',
                         color: '#FFFFFF',
-                        fontWeight: 500,
-                        boxShadow: '0 4px 12px rgba(151, 125, 255, 0.3)',
+                        fontWeight: 600,
+                        textTransform: 'none',
+                        boxShadow: mode === 'dark'
+                            ? '0 8px 24px rgba(99, 102, 241, 0.4)'
+                            : '0 8px 24px rgba(168, 163, 246, 0.4)',
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&:hover': {
-                            background: 'linear-gradient(135deg, #7B5EE6 0%, #0028CC 100%)',
                             transform: 'translateY(-2px)',
-                            boxShadow: '0 8px 20px rgba(151, 125, 255, 0.4)',
+                            boxShadow: mode === 'dark'
+                                ? '0 12px 32px rgba(99, 102, 241, 0.5)'
+                                : '0 12px 32px rgba(168, 163, 246, 0.5)',
                         },
                         '&:active': {
                             transform: 'scale(0.98)',
@@ -374,8 +379,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
                     borderBottom: 'none',
                     boxShadow: 'none',
-                    transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                    willChange: 'width, margin-left, box-shadow',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     '&::after': {
                         content: '""',
                         position: 'absolute',
@@ -498,7 +502,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         width: {xs: '100vw', sm: drawerWidth},
                         maxWidth: drawerWidth,
                         transition: 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                        willChange: 'transform',
                         boxShadow: mode === 'dark'
                             ? '8px 0 40px rgba(0, 0, 0, 0.6)'
                             : '8px 0 40px rgba(151, 125, 255, 0.15)',
@@ -526,7 +529,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             border: 'none',
                             overflow: 'hidden',
                             transition: 'width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                            willChange: 'width',
                             boxShadow: mode === 'dark'
                                 ? '8px 0 40px rgba(0, 0, 0, 0.6)'
                                 : '8px 0 40px rgba(151, 125, 255, 0.15)',
@@ -537,7 +539,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 <Box sx={{
                     opacity: sidebarOpen ? 1 : 0,
                     transition: 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-                    willChange: 'opacity',
                 }}>
                     {drawer}
                 </Box>

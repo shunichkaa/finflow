@@ -36,9 +36,9 @@ const lightThemeOptions: ThemeOptions = {
             contrastText: '#FFFFFF',
         },
         info: {
-            main: '#0033FF', // Ярко-синий из градиента
-            light: '#4D6FFF',
-            dark: '#0028CC',
+            main: '#8B5CF6', // Мягкий фиолетовый
+            light: '#A78BFA',
+            dark: '#7C3AED',
             contrastText: '#FFFFFF',
         },
         background: {
@@ -168,7 +168,7 @@ const lightThemeOptions: ThemeOptions = {
                     },
                 },
                 contained: {
-                    background: 'linear-gradient(135deg, #977DFF 0%, #0033FF 100%)',
+                    background: 'linear-gradient(135deg, #977DFF 0%, #8B5CF6 100%)',
                     color: '#FFFFFF',
                     border: 'none',
                     boxShadow: '0 8px 32px rgba(151, 125, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1)',
@@ -352,7 +352,7 @@ const lightThemeOptions: ThemeOptions = {
                 },
                 bar: {
                     borderRadius: 8,
-                    background: 'linear-gradient(90deg, #977DFF 0%, #0033FF 100%)',
+                    background: 'linear-gradient(90deg, #977DFF 0%, #8B5CF6 100%)',
                 },
             },
         },
@@ -419,9 +419,9 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#0033FF', // Ярко-синий из градиента
-            light: '#4D6FFF',
-            dark: '#0028CC',
+            main: '#8B5CF6', // Мягкий фиолетовый
+            light: '#A78BFA',
+            dark: '#7C3AED',
             contrastText: '#FFFFFF',
         },
         secondary: {
@@ -541,12 +541,8 @@ const darkThemeOptions: ThemeOptions = {
                 '*': {
                     margin: 0,
                     padding: 0,
-                    scrollBehavior: 'smooth',
                     WebkitFontSmoothing: 'antialiased',
                     MozOsxFontSmoothing: 'grayscale',
-                },
-                'html': {
-                    scrollBehavior: 'smooth',
                 },
                 'html, body, #root': {
                     margin: 0,
@@ -554,7 +550,6 @@ const darkThemeOptions: ThemeOptions = {
                     width: '100%',
                     height: '100%',
                     overflow: 'auto',
-                    scrollBehavior: 'smooth',
                 },
                 '::-webkit-scrollbar': {
                     width: '10px',
@@ -604,7 +599,7 @@ const darkThemeOptions: ThemeOptions = {
                     },
                 },
                 contained: {
-                    background: 'linear-gradient(135deg, #0033FF 0%, #977DFF 100%)',
+                    background: 'linear-gradient(135deg, #8B5CF6 0%, #977DFF 100%)',
                     color: '#FFFFFF',
                     border: 'none',
                     boxShadow: '0 8px 32px rgba(0, 51, 255, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3)',
@@ -771,7 +766,7 @@ const darkThemeOptions: ThemeOptions = {
                 },
                 bar: {
                     borderRadius: 8,
-                    background: 'linear-gradient(90deg, #0033FF 0%, #977DFF 100%)',
+                    background: 'linear-gradient(90deg, #8B5CF6 0%, #977DFF 100%)',
                 },
             },
         },

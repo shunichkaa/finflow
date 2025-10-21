@@ -107,19 +107,19 @@ export const GradientCharts: React.FC = () => {
             glowColor: 'rgba(151, 125, 255, 0.3)',
         },
         {
-            gradient: 'linear-gradient(135deg, #FFCCF2 0%, #0033FF 50%, #0600AF 100%)',
+            gradient: 'linear-gradient(135deg, #FFCCF2 0%, #8B5CF6 50%, #7C3AED 100%)',
             title: 'Расходы',
             subtitle: 'По категориям',
             glowColor: 'rgba(0, 51, 255, 0.3)',
         },
         {
-            gradient: 'linear-gradient(135deg, #977DFF 0%, #0033FF 50%, #0600AF 100%)',
+            gradient: 'linear-gradient(135deg, #977DFF 0%, #8B5CF6 50%, #7C3AED 100%)',
             title: 'Бюджет',
             subtitle: 'Остаток средств',
             glowColor: 'rgba(151, 125, 255, 0.3)',
         },
         {
-            gradient: 'linear-gradient(135deg, #0033FF 0%, #0600AB 50%, #00003D 100%)',
+            gradient: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #2d2d44 100%)',
             title: 'Сбережения',
             subtitle: 'Накопления',
             glowColor: 'rgba(0, 51, 255, 0.4)',

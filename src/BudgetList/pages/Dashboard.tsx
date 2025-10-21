@@ -58,45 +58,51 @@ const Dashboard = () => {
             }}>
                 {/* Title */}
                 <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-                    <Typography variant="h4" gutterBottom sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
-                        fontWeight: 700,
-                        letterSpacing: '-0.02em'
-                    }}>
+                    <Typography 
+                        variant="h4" 
+                        gutterBottom 
+                        fontWeight="700"
+                        sx={{
+                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            mb: 1
+                        }}
+                    >
                         {t('dashboard')}
+                    </Typography>
+                    <Typography 
+                        variant="body1" 
+                        sx={{
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
+                        }}
+                    >
+                        Управляйте своими финансами
                     </Typography>
                 </Box>
                 
-                {/* Add Transaction Button - Gradient Style */}
+                {/* Add Transaction Button - Goals Style */}
                 <Button
                     variant="contained"
                     startIcon={<AddIcon />}
                     onClick={() => setIsModalOpen(true)}
-                    size="large"
                     sx={{
-                        background: 'linear-gradient(135deg, #977DFF 0%, #0033FF 100%)',
+                        background: mode === 'dark' 
+                            ? 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)'
+                            : 'linear-gradient(135deg, #A8A3F6 0%, #F6D5EE 100%)',
                         color: '#FFFFFF',
-                        fontWeight: '500',
-                        fontSize: '16px',
+                        fontWeight: 600,
                         px: 4,
                         py: 1.5,
-                        borderRadius: 4,
-                        minWidth: { xs: '100%', sm: 200 },
-                        boxShadow: '0 4px 12px rgba(151, 125, 255, 0.3)',
+                        borderRadius: 3,
+                        textTransform: 'none',
+                        boxShadow: mode === 'dark'
+                            ? '0 8px 24px rgba(99, 102, 241, 0.4)'
+                            : '0 8px 24px rgba(168, 163, 246, 0.4)',
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&:hover': {
-                            background: 'linear-gradient(135deg, #7B5EE6 0%, #0028CC 100%)',
                             transform: 'translateY(-2px)',
-                            boxShadow: '0 8px 20px rgba(151, 125, 255, 0.4)',
-                        },
-                        '&:active': {
-                            transform: 'scale(0.98)',
-                        },
-                        '& .MuiButton-startIcon': {
-                            marginRight: 1,
-                            '& svg': {
-                                fontSize: '20px'
-                            }
+                            boxShadow: mode === 'dark'
+                                ? '0 12px 32px rgba(99, 102, 241, 0.5)'
+                                : '0 12px 32px rgba(168, 163, 246, 0.5)',
                         }
                     }}
                 >
@@ -159,7 +165,7 @@ const Dashboard = () => {
                                 width: 36,
                                 height: 36,
                                 borderRadius: '50%',
-                                background: 'linear-gradient(135deg, #977DFF 0%, #0033FF 100%)',
+                                background: 'linear-gradient(135deg, #977DFF 0%, #8B5CF6 100%)',
                                 color: '#FFFFFF',
                                 cursor: 'pointer',
                                 boxShadow: '0 4px 12px rgba(151, 125, 255, 0.3)',

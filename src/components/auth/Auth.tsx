@@ -428,8 +428,8 @@ export const Auth: React.FC = () => {
                                 py: 1.8,
                                 borderRadius: 3,
                                 background: mode === 'dark'
-                                    ? 'linear-gradient(135deg, #0033FF 0%, #977DFF 100%)'
-                                    : 'linear-gradient(135deg, #977DFF 0%, #0033FF 100%)',
+                                    ? 'linear-gradient(135deg, #8B5CF6 0%, #977DFF 100%)'
+                                    : 'linear-gradient(135deg, #977DFF 0%, #8B5CF6 100%)',
                                 color: '#FFFFFF',
                                 fontWeight: 600,
                                 fontSize: '1rem',

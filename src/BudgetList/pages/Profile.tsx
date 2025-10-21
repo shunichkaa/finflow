@@ -270,7 +270,7 @@ export default function Profile() {
                                     onChange={toggleTheme || (() => {})}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#0033FF' : '#977DFF',
+                                            color: mode === 'dark' ? '#8B5CF6' : '#977DFF',
                                         },
                                         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
                                             backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
@@ -364,7 +364,7 @@ export default function Profile() {
                                     onChange={(e) => setNotifications(e.target.checked)}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#0033FF' : '#977DFF',
+                                            color: mode === 'dark' ? '#8B5CF6' : '#977DFF',
                                         },
                                         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
                                             backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
@@ -400,7 +400,7 @@ export default function Profile() {
                                     onChange={(e) => setICloudSync(e.target.checked)}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#0033FF' : '#977DFF',
+                                            color: mode === 'dark' ? '#8B5CF6' : '#977DFF',
                                         },
                                         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
                                             backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
@@ -429,7 +429,7 @@ export default function Profile() {
                                     onChange={(e) => setBackupEnabled(e.target.checked)}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#0033FF' : '#977DFF',
+                                            color: mode === 'dark' ? '#8B5CF6' : '#977DFF',
                                         },
                                         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
                                             backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
