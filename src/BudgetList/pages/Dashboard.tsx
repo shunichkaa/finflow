@@ -66,66 +66,33 @@ const Dashboard = () => {
                     </Typography>
                 </Box>
                 
-                {/* Buttons */}
-                <Box sx={{ 
-                    display: 'flex', 
-                    gap: 2, 
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    width: { xs: '100%', sm: 'auto' }
-                }}>
-                    <GlassButton
-                        variant="outlined"
-                        startIcon={<DataUsageIcon />}
-                        onClick={() => addTestData()}
-                        size="large"
-                        intensity="medium"
-                        glowColor={mode === 'dark' 
-                            ? 'rgba(139, 92, 246, 0.3)' 
-                            : 'rgba(139, 92, 246, 0.2)'}
-                        sx={{
-                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
-                            fontWeight: '600',
-                            fontSize: '14px',
-                            px: 3,
-                            py: 1.5,
-                            minWidth: { xs: '100%', sm: 160 },
-                            '& .MuiButton-startIcon': {
-                                marginRight: 1,
-                                '& svg': {
-                                    fontSize: '18px'
-                                }
+                {/* Button */}
+                <GlassButton
+                    variant="contained"
+                    startIcon={<AddIcon />}
+                    onClick={() => setIsModalOpen(true)}
+                    size="large"
+                    intensity="high"
+                    glowColor={mode === 'dark' 
+                        ? 'rgba(99, 102, 241, 0.5)' 
+                        : 'rgba(168, 163, 246, 0.5)'}
+                    sx={{
+                        color: mode === 'dark' ? '#FFFFFF' : '#243168',
+                        fontWeight: '600',
+                        fontSize: '16px',
+                        px: 4,
+                        py: 1.5,
+                        minWidth: { xs: '100%', sm: 200 },
+                        '& .MuiButton-startIcon': {
+                            marginRight: 1,
+                            '& svg': {
+                                fontSize: '20px'
                             }
-                        }}
-                    >
-                        Тестовые данные
-                    </GlassButton>
-                    <GlassButton
-                        variant="contained"
-                        startIcon={<AddIcon />}
-                        onClick={() => setIsModalOpen(true)}
-                        size="large"
-                        intensity="high"
-                        glowColor={mode === 'dark' 
-                            ? 'rgba(99, 102, 241, 0.5)' 
-                            : 'rgba(168, 163, 246, 0.5)'}
-                        sx={{
-                            color: mode === 'dark' ? '#FFFFFF' : '#243168',
-                            fontWeight: '600',
-                            fontSize: '16px',
-                            px: 4,
-                            py: 1.5,
-                            minWidth: { xs: '100%', sm: 200 },
-                            '& .MuiButton-startIcon': {
-                                marginRight: 1,
-                                '& svg': {
-                                    fontSize: '20px'
-                                }
-                            }
-                        }}
-                    >
-                        {t('addTransaction')}
-                    </GlassButton>
-                </Box>
+                        }
+                    }}
+                >
+                    {t('addTransaction')}
+                </GlassButton>
             </Box>
 
 
