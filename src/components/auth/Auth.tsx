@@ -124,43 +124,67 @@ export const Auth: React.FC = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                background: mode === 'dark' 
-                    ? 'linear-gradient(135deg, #0F0F23 0%, #1E1B4B 50%, #312E81 100%)'
-                    : 'linear-gradient(135deg, #F8FFA1 0%, #F6D5EE 50%, #A8A3F6 100%)',
+                    background: mode === 'dark' 
+                        ? 'linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #3d3d5c 100%)'
+                        : 'linear-gradient(135deg, #F2E6EE 0%, #FFCCF2 50%, #977DFF 100%)',
+                backgroundAttachment: 'fixed',
                 p: 2,
                 position: 'relative',
                 '&::before': {
                     content: '""',
-                    position: 'absolute',
+                    position: 'fixed',
                     top: 0,
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: mode === 'dark' 
-                        ? 'radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.2) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%)'
-                        : 'radial-gradient(circle at 20% 80%, rgba(168, 163, 246, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(246, 213, 238, 0.3) 0%, transparent 50%)',
+                        background: mode === 'dark'
+                            ? 'radial-gradient(circle at 20% 80%, rgba(74, 74, 106, 0.2) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(151, 125, 255, 0.15) 0%, transparent 60%)'
+                            : 'radial-gradient(circle at 20% 80%, rgba(151, 125, 255, 0.15) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(255, 204, 242, 0.12) 0%, transparent 60%)',
+                    pointerEvents: 'none',
                     zIndex: 0,
-                }
+                },
+                '&::after': {
+                    content: '""',
+                    position: 'fixed',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '80%',
+                    height: '80%',
+                    background: mode === 'dark'
+                        ? 'radial-gradient(circle, rgba(0, 51, 255, 0.05) 0%, transparent 70%)'
+                        : 'radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%)',
+                    pointerEvents: 'none',
+                    zIndex: 0,
+                    filter: 'blur(60px)',
+                },
             }}
         >
             <Fade in>
                 <Paper
                     elevation={0}
                     sx={{
-                        p: 4,
-                        width: 400,
+                        p: 5,
+                        width: 450,
+                        maxWidth: '95vw',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: 3,
-                        borderRadius: 4,
+                        borderRadius: 6,
                         backdropFilter: 'blur(40px) saturate(180%)',
-                        backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.3)' : 'rgba(255, 255, 255, 0.2)',
-                        border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
+                        backgroundColor: mode === 'dark' 
+                            ? 'rgba(28, 28, 30, 0.85)' 
+                            : 'rgba(252, 248, 245, 0.7)',
+                        border: mode === 'dark' 
+                            ? '1px solid rgba(255, 255, 255, 0.1)' 
+                            : '1px solid rgba(252, 248, 245, 0.9)',
                         boxShadow: mode === 'dark' 
-                            ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                            : '0 8px 32px rgba(6, 0, 171, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+                            ? '0 20px 60px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+                            : '0 20px 60px rgba(31, 38, 135, 0.2), 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
                         position: 'relative',
                         overflow: 'hidden',
+                        zIndex: 1,
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&::before': {
                             content: '""',
                             position: 'absolute',
@@ -189,17 +213,40 @@ export const Auth: React.FC = () => {
                             onClick={() => handleOAuthLogin('google')}
                             disabled={!!oauthLoading}
                             sx={{
-                                py: 1.5,
-                                borderRadius: 2,
-                                borderColor: '#e2e8f0',
-                                color: '#374151',
-                                fontWeight: 'bold',
+                                py: 1.8,
+                                borderRadius: 3,
+                                borderColor: mode === 'dark' 
+                                    ? 'rgba(255, 255, 255, 0.2)' 
+                                    : 'rgba(151, 125, 255, 0.3)',
+                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                fontWeight: 600,
                                 textTransform: 'none',
+                                fontSize: '1rem',
+                                backdropFilter: 'blur(20px)',
+                                background: mode === 'dark' 
+                                    ? 'rgba(58, 58, 60, 0.4)' 
+                                    : 'rgba(252, 248, 245, 0.6)',
+                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                 '&:hover': {
-                                    borderColor: '#cbd5e1',
-                                    backgroundColor: '#f8fafc',
-                                    transform: 'translateY(-1px)',
-                                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                                    borderColor: mode === 'dark' ? '#977DFF' : '#977DFF',
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(151, 125, 255, 0.15)' 
+                                        : 'rgba(151, 125, 255, 0.1)',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: mode === 'dark' 
+                                        ? '0 8px 24px rgba(151, 125, 255, 0.3)'
+                                        : '0 8px 24px rgba(151, 125, 255, 0.2)',
+                                },
+                                '&:active': {
+                                    transform: 'scale(0.98)',
+                                },
+                                '&:disabled': {
+                                    borderColor: mode === 'dark' 
+                                        ? 'rgba(255, 255, 255, 0.1)' 
+                                        : 'rgba(151, 125, 255, 0.15)',
+                                    color: mode === 'dark' 
+                                        ? 'rgba(255, 255, 255, 0.3)' 
+                                        : 'rgba(6, 0, 171, 0.3)',
                                 }
                             }}
                         >
@@ -207,8 +254,19 @@ export const Auth: React.FC = () => {
                         </Button>
                     </Stack>
 
-                    <Divider sx={{my: 2}}>
-                        <Typography variant="body2" sx={{color: '#64748b', px: 2}}>
+                    <Divider sx={{
+                        my: 2,
+                        borderColor: mode === 'dark' 
+                            ? 'rgba(255, 255, 255, 0.1)' 
+                            : 'rgba(151, 125, 255, 0.2)'
+                    }}>
+                        <Typography variant="body2" sx={{
+                            color: mode === 'dark' 
+                                ? 'rgba(255, 255, 255, 0.6)' 
+                                : 'rgba(6, 0, 171, 0.6)', 
+                            px: 2,
+                            fontWeight: 500
+                        }}>
                             {t('auth.or', 'или')}
                         </Typography>
                     </Divider>
@@ -225,23 +283,44 @@ export const Auth: React.FC = () => {
                             required
                             sx={{
                                 '& .MuiOutlinedInput-root': {
-                                    borderRadius: 2,
-                                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: 'rgba(6, 0, 171, 0.6)',
+                                    borderRadius: 3,
+                                    backdropFilter: 'blur(20px)',
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(58, 58, 60, 0.6)' 
+                                        : 'rgba(252, 248, 245, 0.6)',
+                                    border: mode === 'dark' 
+                                        ? '1px solid rgba(255, 255, 255, 0.08)' 
+                                        : '1px solid rgba(0, 0, 0, 0.08)',
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    '&:hover': {
+                                        backgroundColor: mode === 'dark' 
+                                            ? 'rgba(58, 58, 60, 0.75)' 
+                                            : 'rgba(252, 248, 245, 0.75)',
+                                        border: mode === 'dark' 
+                                            ? '1px solid rgba(151, 125, 255, 0.2)' 
+                                            : '1px solid rgba(151, 125, 255, 0.2)',
                                     },
-                                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: 'rgba(6, 0, 171, 0.8)',
+                                    '&.Mui-focused': {
+                                        backgroundColor: mode === 'dark' 
+                                            ? 'rgba(58, 58, 60, 0.85)' 
+                                            : 'rgba(252, 248, 245, 0.85)',
+                                        border: '1px solid #977DFF',
+                                        boxShadow: '0 4px 16px rgba(151, 125, 255, 0.15)',
+                                    },
+                                    '& fieldset': {
+                                        border: 'none',
                                     },
                                 },
                                 '& .MuiInputLabel-root': {
-                                    color: 'rgba(6, 0, 171, 0.7)',
+                                    color: mode === 'dark' 
+                                        ? 'rgba(255, 255, 255, 0.7)' 
+                                        : 'rgba(6, 0, 171, 0.7)',
                                     '&.Mui-focused': {
-                                        color: 'rgba(6, 0, 171, 0.8)',
+                                        color: '#977DFF',
                                     },
                                 },
                                 '& .MuiOutlinedInput-input': {
-                                    color: '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                                 }
                             }}
                         />
@@ -254,34 +333,89 @@ export const Auth: React.FC = () => {
                             required
                             sx={{
                                 '& .MuiOutlinedInput-root': {
-                                    borderRadius: 2,
-                                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: 'rgba(6, 0, 171, 0.6)',
+                                    borderRadius: 3,
+                                    backdropFilter: 'blur(20px)',
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(58, 58, 60, 0.6)' 
+                                        : 'rgba(252, 248, 245, 0.6)',
+                                    border: mode === 'dark' 
+                                        ? '1px solid rgba(255, 255, 255, 0.08)' 
+                                        : '1px solid rgba(0, 0, 0, 0.08)',
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    '&:hover': {
+                                        backgroundColor: mode === 'dark' 
+                                            ? 'rgba(58, 58, 60, 0.75)' 
+                                            : 'rgba(252, 248, 245, 0.75)',
+                                        border: mode === 'dark' 
+                                            ? '1px solid rgba(151, 125, 255, 0.2)' 
+                                            : '1px solid rgba(151, 125, 255, 0.2)',
                                     },
-                                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                        borderColor: 'rgba(6, 0, 171, 0.8)',
+                                    '&.Mui-focused': {
+                                        backgroundColor: mode === 'dark' 
+                                            ? 'rgba(58, 58, 60, 0.85)' 
+                                            : 'rgba(252, 248, 245, 0.85)',
+                                        border: '1px solid #977DFF',
+                                        boxShadow: '0 4px 16px rgba(151, 125, 255, 0.15)',
+                                    },
+                                    '& fieldset': {
+                                        border: 'none',
                                     },
                                 },
                                 '& .MuiInputLabel-root': {
-                                    color: 'rgba(6, 0, 171, 0.7)',
+                                    color: mode === 'dark' 
+                                        ? 'rgba(255, 255, 255, 0.7)' 
+                                        : 'rgba(6, 0, 171, 0.7)',
                                     '&.Mui-focused': {
-                                        color: 'rgba(6, 0, 171, 0.8)',
+                                        color: '#977DFF',
                                     },
                                 },
                                 '& .MuiOutlinedInput-input': {
-                                    color: '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
                                 }
                             }}
                         />
 
                         {error && (
-                            <Alert severity="error" sx={{ width: '100%', borderRadius: 2 }}>
+                            <Alert 
+                                severity="error" 
+                                sx={{ 
+                                    width: '100%', 
+                                    borderRadius: 3,
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(255, 107, 107, 0.15)' 
+                                        : 'rgba(255, 107, 107, 0.1)',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    border: mode === 'dark' 
+                                        ? '1px solid rgba(255, 107, 107, 0.3)' 
+                                        : '1px solid rgba(255, 107, 107, 0.2)',
+                                    backdropFilter: 'blur(20px)',
+                                    '& .MuiAlert-icon': {
+                                        color: '#FF6B6B',
+                                    }
+                                }}
+                            >
                                 {error}
                             </Alert>
                         )}
                         {success && (
-                            <Alert severity="success" sx={{ width: '100%', borderRadius: 2 }}>
+                            <Alert 
+                                severity="success" 
+                                sx={{ 
+                                    width: '100%', 
+                                    borderRadius: 3,
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(150, 206, 180, 0.15)' 
+                                        : 'rgba(150, 206, 180, 0.1)',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    border: mode === 'dark' 
+                                        ? '1px solid rgba(150, 206, 180, 0.3)' 
+                                        : '1px solid rgba(150, 206, 180, 0.2)',
+                                    backdropFilter: 'blur(20px)',
+                                    '& .MuiAlert-icon': {
+                                        color: '#96CEB4',
+                                    }
+                                }}
+                            >
                                 {success}
                             </Alert>
                         )}
@@ -291,20 +425,39 @@ export const Auth: React.FC = () => {
                             variant="contained"
                             fullWidth
                             sx={{
-                                py: 1.5,
-                                borderRadius: 2,
-                                background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.8) 0%, rgba(248, 229, 229, 0.6) 100%)',
-                                color: '#0600AB',
-                                fontWeight: 'bold',
+                                py: 1.8,
+                                borderRadius: 3,
+                                background: mode === 'dark'
+                                    ? 'linear-gradient(135deg, #0033FF 0%, #977DFF 100%)'
+                                    : 'linear-gradient(135deg, #977DFF 0%, #0033FF 100%)',
+                                color: '#FFFFFF',
+                                fontWeight: 600,
+                                fontSize: '1rem',
                                 textTransform: 'none',
+                                boxShadow: mode === 'dark'
+                                    ? '0 8px 24px rgba(0, 51, 255, 0.4)'
+                                    : '0 8px 24px rgba(151, 125, 255, 0.3)',
+                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                 '&:hover': {
-                                    background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.9) 0%, rgba(248, 229, 229, 0.8) 100%)',
-                                    transform: 'translateY(-1px)',
-                                    boxShadow: '0 6px 20px rgba(6, 0, 171, 0.2)',
+                                    background: mode === 'dark'
+                                        ? 'linear-gradient(135deg, #0028CC 0%, #7B5EE6 100%)'
+                                        : 'linear-gradient(135deg, #7B5EE6 0%, #0028CC 100%)',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: mode === 'dark'
+                                        ? '0 12px 32px rgba(0, 51, 255, 0.5)'
+                                        : '0 12px 32px rgba(151, 125, 255, 0.4)',
+                                },
+                                '&:active': {
+                                    transform: 'scale(0.98)',
                                 },
                                 '&:disabled': {
-                                    background: 'rgba(6, 0, 171, 0.2)',
-                                    color: 'rgba(6, 0, 171, 0.5)',
+                                    background: mode === 'dark'
+                                        ? 'rgba(151, 125, 255, 0.2)'
+                                        : 'rgba(151, 125, 255, 0.3)',
+                                    color: mode === 'dark'
+                                        ? 'rgba(255, 255, 255, 0.3)'
+                                        : 'rgba(255, 255, 255, 0.6)',
+                                    boxShadow: 'none',
                                 }
                             }}
                             disabled={loading || !!oauthLoading}
@@ -316,7 +469,12 @@ export const Auth: React.FC = () => {
                     </Box>
 
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={1}>
-                        <Typography variant="body2" sx={{color: '#64748b'}}>
+                        <Typography variant="body2" sx={{
+                            color: mode === 'dark' 
+                                ? 'rgba(255, 255, 255, 0.6)' 
+                                : 'rgba(6, 0, 171, 0.6)',
+                            fontWeight: 500
+                        }}>
                             {authMode === 'login' ? t('auth.noAccount', 'Нет аккаунта?') : t('auth.hasAccount', 'Уже есть аккаунт?')}
                         </Typography>
                         <Button
@@ -328,11 +486,15 @@ export const Auth: React.FC = () => {
                             }}
                             sx={{
                                 textTransform: 'none',
-                                color: 'rgba(6, 0, 171, 0.8)',
-                                fontWeight: 'bold',
+                                color: mode === 'dark' ? '#977DFF' : '#977DFF',
+                                fontWeight: 600,
+                                borderRadius: 2,
+                                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                                 '&:hover': {
-                                    backgroundColor: 'rgba(6, 0, 171, 0.1)',
-                                    color: '#0600AB',
+                                    backgroundColor: mode === 'dark'
+                                        ? 'rgba(151, 125, 255, 0.15)'
+                                        : 'rgba(151, 125, 255, 0.1)',
+                                    color: mode === 'dark' ? '#B8A6FF' : '#7B5EE6',
                                 }
                             }}
                             disabled={loading || !!oauthLoading}
