@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Box, Typography, Paper, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import DataUsageIcon from '@mui/icons-material/DataUsage';
 import { useTranslation } from "react-i18next";
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore.ts';
 import { TransactionType } from '../../Budgets/types';
@@ -21,7 +20,6 @@ const Dashboard = () => {
     const { mode } = useThemeMode();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const transactions = useFinanceStore((state) => state.transactions);
-    const addTestData = useFinanceStore((state) => state.addTestData);
 
     const {
         filters,
