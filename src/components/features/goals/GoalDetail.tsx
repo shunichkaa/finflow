@@ -112,7 +112,6 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose }) =
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                borderBottom: `1px solid ${mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6'}`,
                 pb: 2,
             }}>
                 <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
