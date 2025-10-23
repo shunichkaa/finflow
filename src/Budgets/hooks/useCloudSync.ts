@@ -20,7 +20,14 @@ export const useCloudSync = (enabled: boolean) => {
         error: null
     });
     
-    const isInitialLoad = useRef(true);
+    // Используем localStorage для надёжного отслеживания первой загрузки
+    const getInitialLoadKey = (userId: string) => `cloud-sync-initial-load-${userId}`;
+    const hasInitialLoaded = (userId: string) => {
+        return localStorage.getItem(getInitialLoadKey(userId)) === 'true';
+    };
+    const markInitialLoaded = (userId: string) => {
+        localStorage.setItem(getInitialLoadKey(userId), 'true');
+    };
 
     const { session } = useAuth();
     const transactions = useFinanceStore(state => state.transactions);
@@ -182,17 +189,18 @@ export const useCloudSync = (enabled: boolean) => {
         }
     };
 
-    // Начальная загрузка данных при включении синхронизации
+    // Начальная загрузка данных при включении синхронизации (только один раз для каждого пользователя)
     useEffect(() => {
-        if (enabled && session?.user?.id && isInitialLoad.current) {
-            syncFromCloud();
-            isInitialLoad.current = false;
+        if (enabled && session?.user?.id && !hasInitialLoaded(session.user.id)) {
+            syncFromCloud().then(() => {
+                markInitialLoaded(session.user.id);
+            });
         }
     }, [enabled, session?.user?.id]);
 
     // Автосохранение каждые 30 секунд
     useEffect(() => {
-        if (enabled && session?.user?.id && !isInitialLoad.current) {
+        if (enabled && session?.user?.id && hasInitialLoaded(session.user.id)) {
             const interval = setInterval(() => {
                 syncToCloud();
             }, 30000);
@@ -203,7 +211,7 @@ export const useCloudSync = (enabled: boolean) => {
 
     // Синхронизация при изменении данных (debounced)
     useEffect(() => {
-        if (enabled && session?.user?.id && !isInitialLoad.current) {
+        if (enabled && session?.user?.id && hasInitialLoaded(session.user.id)) {
             const timeoutId = setTimeout(() => {
                 syncToCloud();
             }, 2000); // Debounce 2 секунды
