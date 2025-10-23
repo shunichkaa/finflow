@@ -15,8 +15,8 @@ import ServerError from "./src/pages/ServerError";
 
 function App() {
     return (
-        <ErrorBoundary>
-            <BrowserRouter>
+        <BrowserRouter>
+            <ErrorBoundary>
                 <Routes>
                     <Route path="/login" element={<Auth/>}/>
                     <Route path="/oauth-callback" element={<OAuthCallback/>}/>
@@ -78,8 +78,8 @@ function App() {
 
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>
-            </BrowserRouter>
-        </ErrorBoundary>
+            </ErrorBoundary>
+        </BrowserRouter>
     );
 }
 
