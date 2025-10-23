@@ -859,10 +859,24 @@ export default function Profile() {
     } catch (error) {
         console.error('Error in Profile component:', error);
         return (
-            <Container maxWidth="md" sx={{ py: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
-                <Typography variant="h6" sx={{ color: '#FFB3BA' }}>
+            <Container maxWidth="md" sx={{ py: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+                <Box sx={{ 
+                    textAlign: 'center',
+                    p: 4,
+                    borderRadius: 3,
+                    backgroundColor: 'rgba(255, 59, 59, 0.1)',
+                    border: '2px solid #FF3B3B'
+                }}>
+                    <Typography variant="h3" sx={{ color: '#FF3B3B', mb: 2, fontWeight: 700 }}>
+                        ⚠️
+                    </Typography>
+                    <Typography variant="h5" sx={{ color: '#FF3B3B', fontWeight: 600 }}>
                     Произошла ошибка при загрузке страницы
                 </Typography>
+                    <Typography variant="body1" sx={{ color: '#FF3B3B', mt: 2, opacity: 0.8 }}>
+                        Попробуйте перезагрузить страницу
+                    </Typography>
+                </Box>
             </Container>
         );
     }
