@@ -234,40 +234,40 @@ export default function Profile() {
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
                 <Box display="flex" alignItems="center" justifyContent="space-between">
                     <Box display="flex" alignItems="center">
-                        <Avatar 
-                            src={avatar || undefined}
-                            sx={{ width: 64, height: 64, mr: 2, bgcolor: 'primary.main' }}
-                        >
-                            {!avatar && <Person fontSize="large" />}
-                        </Avatar>
-                        <Box>
+                    <Avatar 
+                        src={avatar || undefined}
+                        sx={{ width: 64, height: 64, mr: 2, bgcolor: 'primary.main' }}
+                    >
+                        {!avatar && <Person fontSize="large" />}
+                    </Avatar>
+                    <Box>
                             <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                                {nickname || session?.user?.email || 'Пользователь'}
-                            </Typography>
-                            <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', mt: 0.5 }}>
-                                {session?.user?.email}
-                            </Typography>
-                        </Box>
+                        {nickname || session?.user?.email || 'Пользователь'}
+                    </Typography>
+                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', mt: 0.5 }}>
+                            {session?.user?.email}
+                        </Typography>
                     </Box>
-                    
-                    <Button
-                        variant="outlined"
-                        startIcon={<Edit />}
-                        onClick={handleEditProfile}
-                        sx={{ 
+                </Box>
+                
+                <Button
+                    variant="outlined"
+                    startIcon={<Edit />}
+                    onClick={handleEditProfile}
+                    sx={{ 
                             borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             borderRadius: 2,
                             px: 2,
                             py: 1,
-                            '&:hover': {
+                        '&:hover': {
                                 borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
                                 backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
-                            }
-                        }}
-                    >
+                        }
+                    }}
+                >
                         Редактировать
-                    </Button>
+                </Button>
                 </Box>
             </Paper>
 
@@ -585,68 +585,134 @@ export default function Profile() {
                                     }
                                 }}
                             />
-                            <Select
-                                value={notificationTime}
-                                onChange={(e) => setNotificationTime(e.target.value)}
-                                size="small"
-                                MenuProps={{
-                                    PaperProps: {
-                                        style: {
-                                            maxHeight: 300,
+                            <Box sx={{ position: 'relative', display: 'flex', gap: 1, alignItems: 'center' }}>
+                                {/* Скрытый селектор */}
+                                <Select
+                                    value={notificationTime}
+                                    onChange={(e) => setNotificationTime(e.target.value)}
+                                    size="small"
+                                    MenuProps={{
+                                        PaperProps: {
+                                            style: {
+                                                maxHeight: 300,
+                                            },
                                         },
-                                    },
-                                }}
-                                sx={{
-                                    width: '100px',
-                                    backgroundColor: mode === 'dark' 
-                                        ? 'rgba(108, 111, 249, 0.15)' 
-                                        : 'rgba(108, 111, 249, 0.08)',
-                                    borderRadius: '12px',
-                                    '& .MuiSelect-select': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                        fontSize: '1.1rem',
-                                        fontWeight: 600,
-                                        fontFamily: 'Nunito, system-ui, sans-serif',
-                                        textAlign: 'center',
-                                        padding: '10px 14px',
-                                    },
-                                    '& fieldset': {
-                                        borderColor: mode === 'dark' 
-                                            ? 'rgba(108, 111, 249, 0.3)' 
-                                            : 'rgba(108, 111, 249, 0.2)',
-                                        borderWidth: '2px',
-                                    },
-                                    '&:hover': {
+                                    }}
+                                    sx={{
+                                        position: 'absolute',
+                                        opacity: 0,
+                                        pointerEvents: 'none',
+                                        width: '100px',
+                                    }}
+                                >
+                                    {Array.from({ length: 24 }, (_, hour) => 
+                                        ['00', '15', '30', '45'].map((minute) => (
+                                            <MenuItem 
+                                                key={`${hour}:${minute}`}
+                                                value={`${String(hour).padStart(2, '0')}:${minute}`}
+                                                sx={{
+                                                    justifyContent: 'center',
+                                                    fontWeight: 600,
+                                                    fontSize: '1.05rem',
+                                                }}
+                                            >
+                                                {`${String(hour).padStart(2, '0')}:${minute}`}
+                                            </MenuItem>
+                                        ))
+                                    ).flat()}
+                                </Select>
+
+                                {/* Визуальное отображение часов */}
+                                <Box
+                                    onClick={(e) => {
+                                        const select = e.currentTarget.parentElement?.querySelector('.MuiSelect-select');
+                                        if (select) {
+                                            (select as HTMLElement).click();
+                                        }
+                                    }}
+                                    sx={{
+                                        width: '60px',
                                         backgroundColor: mode === 'dark' 
-                                            ? 'rgba(108, 111, 249, 0.2)' 
-                                            : 'rgba(108, 111, 249, 0.12)',
-                                        transform: 'translateY(-1px)',
-                                        '& fieldset': {
+                                            ? 'rgba(108, 111, 249, 0.15)' 
+                                            : 'rgba(108, 111, 249, 0.08)',
+                                        borderRadius: '12px',
+                                        border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
+                                        padding: '10px 8px',
+                                        textAlign: 'center',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease',
+                                        '&:hover': {
+                                            backgroundColor: mode === 'dark' 
+                                                ? 'rgba(108, 111, 249, 0.2)' 
+                                                : 'rgba(108, 111, 249, 0.12)',
+                                            transform: 'translateY(-1px)',
                                             borderColor: '#6C6FF9',
                                         },
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#6C6FF9',
-                                        borderWidth: '2px',
-                                    },
-                                }}
-                            >
-                                {Array.from({ length: 24 }, (_, hour) => 
-                                    ['00', '15', '30', '45'].map((minute) => (
-                                        <MenuItem 
-                                            key={`${hour}:${minute}`}
-                                            value={`${String(hour).padStart(2, '0')}:${minute}`}
-                                            sx={{
-                                                justifyContent: 'center',
-                                                fontWeight: 600,
-                                                fontSize: '1.05rem',
-                                            }}
-                                        >
-                                            {`${String(hour).padStart(2, '0')}:${minute}`}
-                                        </MenuItem>
-                                    ))
-                                ).flat()}
-                            </Select>
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                            fontSize: '1.1rem',
+                                            fontWeight: 600,
+                                            fontFamily: 'Nunito, system-ui, sans-serif',
+                                        }}
+                                    >
+                                        {notificationTime.split(':')[0]}
+                                    </Typography>
+                                </Box>
+
+                                {/* Разделитель */}
+                                <Typography 
+                                    variant="h6" 
+                                    sx={{ 
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    :
+                                </Typography>
+
+                                {/* Визуальное отображение минут */}
+                                <Box
+                                    onClick={(e) => {
+                                        const select = e.currentTarget.parentElement?.querySelector('.MuiSelect-select');
+                                        if (select) {
+                                            (select as HTMLElement).click();
+                                        }
+                                    }}
+                                    sx={{
+                                        width: '60px',
+                                        backgroundColor: mode === 'dark' 
+                                            ? 'rgba(108, 111, 249, 0.15)' 
+                                            : 'rgba(108, 111, 249, 0.08)',
+                                        borderRadius: '12px',
+                                        border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
+                                        padding: '10px 8px',
+                                        textAlign: 'center',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease',
+                                        '&:hover': {
+                                            backgroundColor: mode === 'dark' 
+                                                ? 'rgba(108, 111, 249, 0.2)' 
+                                                : 'rgba(108, 111, 249, 0.12)',
+                                            transform: 'translateY(-1px)',
+                                            borderColor: '#6C6FF9',
+                                        },
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                            fontSize: '1.1rem',
+                                            fontWeight: 600,
+                                            fontFamily: 'Nunito, system-ui, sans-serif',
+                                        }}
+                                    >
+                                        {notificationTime.split(':')[1]}
+                                    </Typography>
+                                </Box>
+                            </Box>
                         </ListItem>
                     )}
                 </List>
