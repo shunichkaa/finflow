@@ -45,7 +45,6 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children }) 
                 alignItems: 'center',
                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                 bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
-                borderBottom: `1px solid ${mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6'}`,
                 flexShrink: 0,
             }}>
                 {title}

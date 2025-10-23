@@ -55,8 +55,8 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                 <Card elevation={2} sx={{
                     flex: 1, 
                     minWidth: 0,
-                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(234, 234, 244, 0.4)',
-                    border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(234, 234, 244, 0.4)'
+                    backgroundColor: mode === 'dark' ? 'rgba(168, 163, 246, 0.15)' : 'rgba(168, 163, 246, 0.3)',
+                    border: mode === 'dark' ? '1px solid rgba(168, 163, 246, 0.3)' : '1px solid rgba(168, 163, 246, 0.4)'
                 }}>
                     <CardContent sx={{ 
                         display: 'flex', 
