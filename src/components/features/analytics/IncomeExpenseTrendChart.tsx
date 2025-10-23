@@ -135,7 +135,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 alignItems: 'center',
                 justifyContent: 'center',
                 background: mode === 'dark'
-                    ? 'radial-gradient(circle at 50% 50%, rgba(74, 74, 106, 0.08) 0%, rgba(108, 111, 249, 0.05) 50%, transparent 100%)'
+                    ? 'rgba(255, 255, 255, 0.02)'
                     : 'radial-gradient(circle at 50% 50%, rgba(108, 111, 249, 0.05) 0%, rgba(255, 204, 242, 0.03) 50%, transparent 100%)',
             borderRadius: 4,
             overflow: 'hidden'
@@ -228,7 +228,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         type="monotone"
                         dataKey="income"
                         name={t('income')}
-                        stroke="#6C6FF9"
+                        stroke="#B5EAD7"
                         strokeWidth={3}
                         dot={false}
                         activeDot={false}
@@ -241,7 +241,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         type="monotone"
                         dataKey="expense"
                         name={t('expense')}
-                        stroke="#6C6FF9"
+                        stroke="#FFB3BA"
                         strokeWidth={3}
                         dot={false}
                         activeDot={false}
