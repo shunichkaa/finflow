@@ -105,7 +105,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                        0 4px 12px rgba(0, 0, 0, 0.3), 
                        inset 0 1px 0 rgba(255, 255, 255, 0.15),
                        inset 0 -1px 0 rgba(255, 255, 255, 0.05)`
-                    : `${intensityValues.shadow} rgba(151, 125, 255, 0.12), 
+                    : `${intensityValues.shadow} rgba(108, 111, 249, 0.12), 
                        0 4px 12px rgba(31, 38, 135, 0.08), 
                        inset 0 1px 0 rgba(255, 255, 255, 0.8),
                        inset 0 -1px 0 rgba(255, 255, 255, 0.4)`,
@@ -132,26 +132,26 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                     right: 0,
                     height: '2px',
                     background: mode === 'dark'
-                        ? 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.5), transparent)'
+                        ? 'linear-gradient(90deg, transparent, rgba(108, 111, 249, 0.5), transparent)'
                         : 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent)',
                     opacity: 0.6,
                 },
                 '&:hover': {
                     transform: `translateY(-4px) scale(${intensityValues.scale})`,
                     boxShadow: mode === 'dark'
-                        ? `${intensityValues.hoverShadow} rgba(151, 125, 255, 0.3), 
+                        ? `${intensityValues.hoverShadow} rgba(108, 111, 249, 0.3), 
                            0 12px 28px rgba(0, 0, 0, 0.4), 
                            inset 0 1px 0 rgba(255, 255, 255, 0.2),
                            inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-                           0 0 40px rgba(151, 125, 255, 0.2)`
-                        : `${intensityValues.hoverShadow} rgba(151, 125, 255, 0.25), 
+                           0 0 40px rgba(108, 111, 249, 0.2)`
+                        : `${intensityValues.hoverShadow} rgba(108, 111, 249, 0.25), 
                            0 12px 28px rgba(31, 38, 135, 0.15), 
                            inset 0 1px 0 rgba(255, 255, 255, 1),
                            inset 0 -1px 0 rgba(255, 255, 255, 0.6),
-                           0 0 40px rgba(151, 125, 255, 0.15)`,
+                           0 0 40px rgba(108, 111, 249, 0.15)`,
                     border: mode === 'dark'
-                        ? '1.5px solid rgba(151, 125, 255, 0.3)'
-                        : '1.5px solid rgba(151, 125, 255, 0.4)',
+                        ? '1.5px solid rgba(108, 111, 249, 0.3)'
+                        : '1.5px solid rgba(108, 111, 249, 0.4)',
                 },
                 ...sx,
             }}
@@ -165,8 +165,8 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                 width: '80%',
                 height: '80%',
                 background: mode === 'dark'
-                    ? 'radial-gradient(circle, rgba(151, 125, 255, 0.08) 0%, transparent 70%)'
-                    : 'radial-gradient(circle, rgba(151, 125, 255, 0.05) 0%, transparent 70%)',
+                    ? 'radial-gradient(circle, rgba(108, 111, 249, 0.08) 0%, transparent 70%)'
+                    : 'radial-gradient(circle, rgba(108, 111, 249, 0.05) 0%, transparent 70%)',
                 opacity: 0,
                 transition: 'opacity 0.5s ease',
                 pointerEvents: 'none',

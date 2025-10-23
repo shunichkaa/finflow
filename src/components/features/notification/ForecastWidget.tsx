@@ -55,8 +55,8 @@ export const ForecastWidget: React.FC<ForecastWidgetProps> = ({
                             '& .MuiLinearProgress-bar': {
                                 borderRadius: 4,
                                 background: mode === 'dark'
-                                    ? 'linear-gradient(90deg, #8B5CF6 0%, #8B5CF6CC 100%)'
-                                    : 'linear-gradient(90deg, #977DFF 0%, #977DFFCC 100%)',
+                                    ? 'linear-gradient(90deg, #6C6FF9 0%, #6C6FF9CC 100%)'
+                                    : 'linear-gradient(90deg, #6C6FF9 0%, #6C6FF9CC 100%)',
                             },
                         }}
                     />

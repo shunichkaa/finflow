@@ -14,7 +14,7 @@ export const Input: React.FC<InputProps> = ({
     return (
         <div className="w-full flex flex-col">
             {label && (
-                <label className="block text-sm md:text-base text-[#8F9BB3] mb-2 ml-2 font-medium">
+                <label className="block text-sm md:text-base text-[#272B3E] mb-2 ml-2 font-medium">
                     {label}
                 </label>
             )}
@@ -26,7 +26,7 @@ export const Input: React.FC<InputProps> = ({
                     px-4 md:px-5 py-3 md:py-4
                     text-sm md:text-base
                     text-[#272B3E]
-                    placeholder:text-[#8F9BB3]
+                    placeholder:text-[#272B3E]
                     border-none
                     outline-none
                     transition-all duration-300

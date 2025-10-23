@@ -126,7 +126,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                             minWidth: 60,
                             borderRadius: '12px',
                             transition: 'all 0.2s ease',
-                            color: activeItem === item.id ? '#0ea5e9' : '#64748b',
+                            color: activeItem === item.id ? '#6C6FF9' : '#272B3E',
                             '&:active': {
                                 backgroundColor: 'rgba(14, 165, 233, 0.1)',
                                 transform: 'scale(0.95)',
@@ -154,7 +154,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                                         position: 'absolute',
                                         top: -4,
                                         right: -8,
-                                        backgroundColor: '#ef4444',
+                                        backgroundColor: '#FFB3BA',
                                         color: 'white',
                                         borderRadius: '10px',
                                         minWidth: 18,
@@ -217,7 +217,7 @@ export const SwipeableTransactionItem: React.FC<{
                 transition: 'transform 0.2s ease',
                 transform: `translateX(${getTransformX()}px)`,
                 '&:active': {
-                    backgroundColor: '#f8fafc',
+                    backgroundColor: '#F5F6FA',
                 },
             }}
         >
@@ -234,7 +234,7 @@ export const SwipeableTransactionItem: React.FC<{
                     color: 'white',
                     fontWeight: 'bold',
                     transition: 'opacity 0.2s ease',
-                    backgroundColor: '#ef4444',
+                    backgroundColor: '#FFB3BA',
                     opacity: swipeState.direction === 'left' ? 0.9 : 0,
                 }}
             >
@@ -254,7 +254,7 @@ export const SwipeableTransactionItem: React.FC<{
                     color: 'white',
                     fontWeight: 'bold',
                     transition: 'opacity 0.2s ease',
-                    backgroundColor: '#0ea5e9',
+                    backgroundColor: '#6C6FF9',
                     opacity: swipeState.direction === 'right' ? 0.9 : 0,
                 }}
             >

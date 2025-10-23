@@ -92,25 +92,25 @@ export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
                     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
                     margin: 40px; 
                     line-height: 1.6;
-                    color: #5a5a5a;
+                    color: #272B3E;
                 }
                 h1 { 
-                    color: #89CFF0; 
+                    color: #6C6FF9; 
                     text-align: center;
                     margin-bottom: 10px;
                 }
                 h2 { 
-                    color: #8A9A5B; 
+                    color: #B5EAD7; 
                     margin-top: 30px;
-                    border-bottom: 2px solid #E6E6FA;
+                    border-bottom: 2px solid #EFF0F6;
                     padding-bottom: 8px;
                 }
                 .summary { 
-                    background: #F8F8FF; 
+                    background: #FFFFFF; 
                     padding: 25px; 
                     border-radius: 12px; 
                     margin: 25px 0; 
-                    border-left: 4px solid #89CFF0;
+                    border-left: 4px solid #6C6FF9;
                 }
                 .summary-item { 
                     display: flex; 
@@ -127,53 +127,53 @@ export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
                     overflow: hidden;
                 }
                 th, td { 
-                    border: 1px solid #E6E6FA; 
+                    border: 1px solid #EFF0F6; 
                     padding: 14px; 
                     text-align: left; 
                 }
                 th { 
                     background-color: #B5EAD7; 
-                    color: #5a5a5a; 
+                    color: #272B3E; 
                     font-weight: 600;
                 }
                 tr:nth-child(even) { 
-                    background-color: #F8F8FF; 
+                    background-color: #FFFFFF; 
                 }
                 tr:hover {
-                    background-color: #F0F8FF;
+                    background-color: #FFFFFF;
                 }
                 .income { 
-                    color: #77DD77; 
+                    color: #B5EAD7; 
                     font-weight: 600; 
                 }
                 .expense { 
-                    color: #FFB6C1; 
+                    color: #FFE5F1; 
                     font-weight: 600; 
                 }
                 .footer { 
                     margin-top: 50px; 
                     text-align: center; 
-                    color: #A9A9A9; 
+                    color: #272B3E; 
                     font-style: italic;
                     padding: 20px;
-                    border-top: 1px solid #E6E6FA;
+                    border-top: 1px solid #EFF0F6;
                 }
                 .report-date {
                     text-align: center;
-                    color: #A9A9A9;
+                    color: #272B3E;
                     margin-bottom: 30px;
                 }
                 .balance-positive {
-                    color: #77DD77;
+                    color: #B5EAD7;
                     font-weight: 600;
                 }
                 .balance-negative {
-                    color: #FFB6C1;
+                    color: #FFE5F1;
                     font-weight: 600;
                 }
                 @media print {
                     body { margin: 20px; }
-                    .summary { background: #F8F8FF !important; }
+                    .summary { background: #FFFFFF !important; }
                     table { box-shadow: none; }
                 }
             </style>

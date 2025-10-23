@@ -36,7 +36,7 @@ export const Button: React.FC<ButtonProps> = ({
         `.trim().replace(/\s+/g, ' '),
         secondary: `
             bg-[#F5F6FA]
-            text-[#8F9BB3]
+            text-[#272B3E]
             rounded-[20px] md:rounded-[24px]
             shadow-[-8px_-8px_16px_rgba(255,255,255,0.8),8px_8px_16px_rgba(174,174,192,0.3)]
             hover:shadow-[-10px_-10px_20px_rgba(255,255,255,0.9),10px_10px_20px_rgba(174,174,192,0.4)]

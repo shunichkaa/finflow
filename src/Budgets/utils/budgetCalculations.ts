@@ -46,10 +46,10 @@ export const getBudgetStatus = (
 
 export const getBudgetStatusColor = (status: string) => {
     const colors = {
-        safe: '#10b981',
-        warning: '#ECB660',
-        danger: '#ef4444',
-        exceeded: '#dc2626'
+        safe: '#B5EAD7',
+        warning: '#FFD7BA',
+        danger: '#FFB3BA',
+        exceeded: '#FFB3BA'
     } as const;
 
     const colorKeys = Object.keys(colors) as Array<keyof typeof colors>;

@@ -18,8 +18,8 @@ export const Text: React.FC<TextProps> = ({
         h2: 'text-xl md:text-2xl lg:text-3xl font-semibold text-[#272B3E] leading-tight',
         h3: 'text-lg md:text-xl lg:text-2xl font-semibold text-[#272B3E] leading-snug',
         body: 'text-sm md:text-base lg:text-lg text-[#272B3E] leading-relaxed',
-        small: 'text-xs md:text-sm text-[#8F9BB3] leading-relaxed',
-        caption: 'text-xs text-[#8F9BB3] leading-normal'
+        small: 'text-xs md:text-sm text-[#272B3E] leading-relaxed',
+        caption: 'text-xs text-[#272B3E] leading-normal'
     };
 
     const Component = as || (variant.startsWith('h') ? variant as 'h1' | 'h2' | 'h3' : 'p');

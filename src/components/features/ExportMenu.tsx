@@ -93,7 +93,7 @@ export const ExportMenu: React.FC = () => {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 PaperProps={{
                     sx: {
-                        bgcolor: mode === 'dark' ? '#1a1a1a' : '#ffffff',
+                        bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                         backdropFilter: 'blur(10px)',
                         border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.1)',
                     }

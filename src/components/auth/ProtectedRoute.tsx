@@ -17,7 +17,7 @@ export const ProtectedRoute = ({ children }: Props) => {
                 alignItems: 'center',
                 height: '100vh',
                 fontSize: '18px',
-                color: '#64748b'
+                color: '#272B3E'
             }}>
                 Загрузка...
             </div>
