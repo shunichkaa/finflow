@@ -6,9 +6,7 @@ import {
     Button,
     Box,
     Typography,
-    IconButton,
 } from '@mui/material';
-import KeyboardIcon from '@mui/icons-material/Keyboard';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 interface IOSTimePickerProps {
@@ -25,31 +23,31 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
     
     const hoursRef = useRef<HTMLDivElement>(null);
     const minutesRef = useRef<HTMLDivElement>(null);
+    const isInitializing = useRef(false);
 
     useEffect(() => {
-        if (value) {
+        if (open && value) {
             const [h, m] = value.split(':');
             setHours(h.padStart(2, '0'));
             setMinutes(m.padStart(2, '0'));
-        }
-    }, [value]);
-
-    useEffect(() => {
-        if (open && hoursRef.current && minutesRef.current) {
-            // Скролл к выбранному значению
-            const hourIndex = parseInt(hours);
-            const minuteIndex = parseInt(minutes);
             
+            isInitializing.current = true;
+            
+            // Скролл к выбранному значению
             setTimeout(() => {
                 if (hoursRef.current) {
-                    hoursRef.current.scrollTop = hourIndex * 44;
+                    hoursRef.current.scrollTop = parseInt(h) * 44;
                 }
                 if (minutesRef.current) {
-                    minutesRef.current.scrollTop = minuteIndex * 44;
+                    minutesRef.current.scrollTop = parseInt(m) * 44;
                 }
+                
+                setTimeout(() => {
+                    isInitializing.current = false;
+                }, 200);
             }, 100);
         }
-    }, [open, hours, minutes]);
+    }, [open, value]);
 
     const handleApply = () => {
         onChange(`${hours}:${minutes}`);
@@ -57,7 +55,7 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
     };
 
     const handleScroll = (ref: React.RefObject<HTMLDivElement>, setter: (val: string) => void) => {
-        if (!ref.current) return;
+        if (!ref.current || isInitializing.current) return;
         
         const scrollTop = ref.current.scrollTop;
         const itemHeight = 44;
@@ -102,20 +100,6 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
             }}
         >
             <Box sx={{ p: 2, pt: 3 }}>
-                <Typography 
-                    variant="subtitle2" 
-                    sx={{ 
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.5px',
-                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(0, 0, 0, 0.6)',
-                        fontSize: '11px',
-                        fontWeight: 600,
-                        mb: 2,
-                    }}
-                >
-                    iOS Timepicker
-                </Typography>
-
                 <Box sx={{ 
                     display: 'flex', 
                     gap: 1,
@@ -159,10 +143,14 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
                             <Box
                                 key={hour}
                                 onClick={() => {
+                                    isInitializing.current = true;
                                     setHours(String(hour).padStart(2, '0'));
                                     if (hoursRef.current) {
                                         hoursRef.current.scrollTop = hour * 44;
                                     }
+                                    setTimeout(() => {
+                                        isInitializing.current = false;
+                                    }, 200);
                                 }}
                                 sx={{
                                     ...itemStyle(hour === parseInt(hours)),
@@ -208,10 +196,14 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
                             <Box
                                 key={minute}
                                 onClick={() => {
+                                    isInitializing.current = true;
                                     setMinutes(String(minute).padStart(2, '0'));
                                     if (minutesRef.current) {
                                         minutesRef.current.scrollTop = minute * 44;
                                     }
+                                    setTimeout(() => {
+                                        isInitializing.current = false;
+                                    }, 200);
                                 }}
                                 sx={{
                                     ...itemStyle(minute === parseInt(minutes)),
@@ -229,33 +221,8 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
             <DialogActions sx={{ 
                 padding: '16px 24px',
                 borderTop: `1px solid ${borderColor}`,
-                gap: 2,
+                justifyContent: 'center',
             }}>
-                <IconButton
-                    sx={{
-                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.5)',
-                    }}
-                >
-                    <KeyboardIcon />
-                </IconButton>
-
-                <Box sx={{ flex: 1 }} />
-
-                <Button
-                    onClick={onClose}
-                    sx={{
-                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
-                        textTransform: 'none',
-                        fontSize: '16px',
-                        fontWeight: 500,
-                        '&:hover': {
-                            backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
-                        }
-                    }}
-                >
-                    Cancel
-                </Button>
-
                 <Button
                     onClick={handleApply}
                     variant="contained"
@@ -265,7 +232,7 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
                         fontSize: '16px',
                         fontWeight: 500,
                         borderRadius: '10px',
-                        paddingX: '24px',
+                        paddingX: '32px',
                         boxShadow: 'none',
                         '&:hover': {
                             backgroundColor: '#5B5EE8',
@@ -273,7 +240,7 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
                         }
                     }}
                 >
-                    Apply
+                    ОК
                 </Button>
             </DialogActions>
         </Dialog>
