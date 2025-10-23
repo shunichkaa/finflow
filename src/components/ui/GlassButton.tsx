@@ -1,47 +1,18 @@
 import React from 'react';
-import { Button, ButtonProps, Box, keyframes } from '@mui/material';
+import { Button, ButtonProps, Box } from '@mui/material';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 interface GlassButtonProps extends ButtonProps {
     glowColor?: string;
-    intensity?: 'low' | 'medium' | 'high' | 'premium';
+    intensity?: 'low' | 'medium' | 'high';
     shimmer?: boolean;
 }
-
-const shimmer = keyframes`
-    0% {
-        transform: translateX(-100%) rotate(45deg);
-    }
-    100% {
-        transform: translateX(300%) rotate(45deg);
-    }
-`;
-
-const pulse = keyframes`
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(151, 125, 255, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 40px rgba(151, 125, 255, 0.6);
-    }
-`;
-
-const ripple = keyframes`
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(4);
-        opacity: 0;
-    }
-`;
 
 export const GlassButton: React.FC<GlassButtonProps> = ({ 
     children, 
     glowColor, 
-    intensity = 'premium',
-    shimmer: showShimmer = true,
+    intensity = 'medium',
+    shimmer = true,
     sx,
     ...props 
 }) => {
@@ -51,155 +22,86 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
         switch (intensity) {
             case 'low':
                 return {
-                    blur: '20px',
+                    blur: '10px',
                     saturation: '150%',
                     shadow: '0 4px 12px',
-                    hoverShadow: '0 8px 24px',
+                    hoverShadow: '0 8px 20px',
                 };
             case 'high':
                 return {
-                    blur: '60px',
+                    blur: '30px',
                     saturation: '200%',
-                    shadow: '0 12px 32px',
-                    hoverShadow: '0 20px 48px',
-                };
-            case 'premium':
-                return {
-                    blur: '80px',
-                    saturation: '220%',
-                    shadow: '0 16px 48px',
-                    hoverShadow: '0 24px 64px',
+                    shadow: '0 8px 24px',
+                    hoverShadow: '0 16px 40px',
                 };
             default: // medium
                 return {
-                    blur: '40px',
+                    blur: '20px',
                     saturation: '180%',
-                    shadow: '0 8px 24px',
-                    hoverShadow: '0 16px 40px',
+                    shadow: '0 6px 16px',
+                    hoverShadow: '0 12px 32px',
                 };
         }
     };
 
     const intensityValues = getIntensityValues();
+    const defaultGlowColor = mode === 'dark' 
+        ? 'rgba(10, 132, 255, 0.3)' 
+        : 'rgba(0, 122, 255, 0.15)';
 
     return (
         <Button
             {...props}
             sx={{
                 textTransform: 'none',
-                fontWeight: 600,
-                padding: '14px 28px',
-                fontSize: '1rem',
-                borderRadius: 2,
+                fontWeight: 500,
+                padding: '12px 24px',
+                borderRadius: 4,
                 backdropFilter: `blur(${intensityValues.blur}) saturate(${intensityValues.saturation})`,
-                WebkitBackdropFilter: `blur(${intensityValues.blur}) saturate(${intensityValues.saturation})`,
                 backgroundColor: mode === 'dark' 
-                    ? 'rgba(28, 28, 30, 0.6)'
-                    : 'rgba(255, 255, 255, 0.3)',
+                    ? 'rgba(28, 28, 30, 0.8)'
+                    : 'rgba(252, 248, 245, 0.7)',
                 border: mode === 'dark'
-                    ? '1.5px solid rgba(255, 255, 255, 0.2)'
-                    : '1.5px solid rgba(255, 255, 255, 0.6)',
+                    ? '1px solid rgba(255, 255, 255, 0.1)'
+                    : '1px solid rgba(252, 248, 245, 0.9)',
                 boxShadow: mode === 'dark'
-                    ? `${intensityValues.shadow} rgba(151, 125, 255, 0.3), 
-                       0 4px 12px rgba(0, 0, 0, 0.3), 
-                       inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                       inset 0 -1px 0 rgba(255, 255, 255, 0.1)`
-                    : `${intensityValues.shadow} rgba(151, 125, 255, 0.2), 
-                       0 4px 12px rgba(31, 38, 135, 0.1), 
-                       inset 0 1px 0 rgba(255, 255, 255, 0.9),
-                       inset 0 -1px 0 rgba(255, 255, 255, 0.5)`,
+                    ? `${intensityValues.shadow} rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)`
+                    : `${intensityValues.shadow} rgba(31, 38, 135, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)`,
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 position: 'relative',
                 overflow: 'hidden',
-                '&::before': showShimmer ? {
-                    content: '""',
-                    position: 'absolute',
-                    top: '-50%',
-                    left: '-50%',
-                    width: '200%',
-                    height: '200%',
-                    background: mode === 'dark'
-                        ? 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)'
-                        : 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent)',
-                    pointerEvents: 'none',
-                } : {},
-                '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    background: mode === 'dark'
-                        ? 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.8), transparent)'
-                        : 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 1), transparent)',
-                    opacity: 0.8,
-                },
-                '&:hover': {
-                    transform: 'translateY(-3px) scale(1.02)',
-                    boxShadow: mode === 'dark'
-                        ? `${intensityValues.hoverShadow} rgba(151, 125, 255, 0.5), 
-                           0 8px 20px rgba(0, 0, 0, 0.4), 
-                           inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                           inset 0 -1px 0 rgba(255, 255, 255, 0.15),
-                           0 0 60px rgba(151, 125, 255, 0.3)`
-                        : `${intensityValues.hoverShadow} rgba(151, 125, 255, 0.35), 
-                           0 8px 20px rgba(31, 38, 135, 0.2), 
-                           inset 0 1px 0 rgba(255, 255, 255, 1),
-                           inset 0 -1px 0 rgba(255, 255, 255, 0.7),
-                           0 0 60px rgba(151, 125, 255, 0.2)`,
-                    backgroundColor: mode === 'dark' 
-                        ? 'rgba(28, 28, 30, 0.75)'
-                        : 'rgba(255, 255, 255, 0.5)',
-                    border: mode === 'dark'
-                        ? '1.5px solid rgba(151, 125, 255, 0.4)'
-                        : '1.5px solid rgba(151, 125, 255, 0.5)',
-                },
-                '&:active': {
-                    transform: 'scale(0.97)',
-                    '&::after': {
+                ...(shimmer && {
+                    '&::before': {
                         content: '""',
                         position: 'absolute',
-                        top: '50%',
-                        left: '50%',
+                        top: 0,
+                        left: '-100%',
                         width: '100%',
                         height: '100%',
-                        borderRadius: '50%',
-                        background: mode === 'dark'
-                            ? 'rgba(151, 125, 255, 0.3)'
-                            : 'rgba(151, 125, 255, 0.2)',
-                        animation: `${ripple} 0.6s ease-out`,
-                        pointerEvents: 'none',
+                        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                        transition: 'left 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                     },
+                }),
+                '&:hover': {
+                    transform: 'translateY(-2px)',
+                    boxShadow: mode === 'dark'
+                        ? `${intensityValues.hoverShadow} rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15)`
+                        : `${intensityValues.hoverShadow} rgba(31, 38, 135, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)`,
+                    backgroundColor: mode === 'dark' 
+                        ? 'rgba(28, 28, 30, 0.9)'
+                        : 'rgba(252, 248, 245, 0.85)',
+                    ...(shimmer && {
+                        '&::before': {
+                            left: '100%',
+                        },
+                    }),
                 },
-                '&:disabled': {
-                    opacity: 0.5,
-                    cursor: 'not-allowed',
-                    transform: 'none',
+                '&:active': {
+                    transform: 'scale(0.98)',
                 },
                 ...sx,
             }}
         >
-            {/* Ambient glow */}
-            <Box sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '100%',
-                height: '100%',
-                background: mode === 'dark'
-                    ? 'radial-gradient(circle, rgba(151, 125, 255, 0.2) 0%, transparent 70%)'
-                    : 'radial-gradient(circle, rgba(151, 125, 255, 0.1) 0%, transparent 70%)',
-                opacity: 0,
-                transition: 'opacity 0.3s ease',
-                pointerEvents: 'none',
-                zIndex: 0,
-                '.MuiButton-root:hover &': {
-                    opacity: 1,
-                }
-            }} />
-            
             <Box sx={{ position: 'relative', zIndex: 1 }}>
                 {children}
             </Box>
