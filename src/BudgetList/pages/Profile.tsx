@@ -43,6 +43,7 @@ import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 import { useSettingsStore, Currency } from '../../Budgets/store/useSettingsStore';
 import { useAuth } from '../../Budgets/hooks/useAuth';
+import { useCloudSync } from '../../Budgets/hooks/useCloudSync';
 import getSymbolFromCurrency from 'currency-symbol-map';
 
 export default function Profile() {
@@ -56,6 +57,9 @@ export default function Profile() {
         const [backupEnabled, setBackupEnabled] = useState(true);
         const [snackbarOpen, setSnackbarOpen] = useState(false);
         const [snackbarMessage, setSnackbarMessage] = useState('');
+        
+        // Cloud sync
+        const { status: syncStatus, syncNow } = useCloudSync(iCloudSync);
         
         // Состояние для редактирования профиля
         const [editModalOpen, setEditModalOpen] = useState(false);
@@ -387,29 +391,72 @@ export default function Profile() {
                 <List>
                     <ListItem>
                         <ListItemIcon>
-                            <CloudSync />
+                            <CloudSync sx={{ 
+                                color: syncStatus.isSyncing ? '#6C6FF9' : undefined,
+                                animation: syncStatus.isSyncing ? 'spin 1s linear infinite' : 'none',
+                                '@keyframes spin': {
+                                    '0%': { transform: 'rotate(0deg)' },
+                                    '100%': { transform: 'rotate(360deg)' }
+                                }
+                            }} />
                         </ListItemIcon>
                         <ListItemText 
-                            primary="iCloud синхронизация" 
-                            secondary="Синхронизировать данные с iCloud"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={iCloudSync}
-                                    onChange={(e) => setICloudSync(e.target.checked)}
-                                    sx={{
-                                        '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                                        },
-                                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                                        },
-                                    }}
-                                />
+                            primary="Облачная синхронизация" 
+                            secondary={
+                                syncStatus.isSyncing 
+                                    ? "Синхронизация..." 
+                                    : syncStatus.lastSync 
+                                    ? `Последняя синхронизация: ${syncStatus.lastSync.toLocaleTimeString()}`
+                                    : syncStatus.error
+                                    ? `Ошибка: ${syncStatus.error}`
+                                    : "Автоматическая синхронизация через Supabase"
                             }
-                            label=""
+                            secondaryTypographyProps={{
+                                sx: { 
+                                    color: syncStatus.error 
+                                        ? '#FFB3BA' 
+                                        : syncStatus.isSyncing 
+                                        ? '#6C6FF9'
+                                        : mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
                         />
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            {iCloudSync && !syncStatus.isSyncing && (
+                                <Button
+                                    size="small"
+                                    onClick={syncNow}
+                                    sx={{
+                                        minWidth: 'auto',
+                                        px: 2,
+                                        color: '#6C6FF9',
+                                        fontSize: '0.75rem',
+                                        '&:hover': {
+                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.05)',
+                                        }
+                                    }}
+                                >
+                                    Sync
+                                </Button>
+                            )}
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={iCloudSync}
+                                        onChange={(e) => setICloudSync(e.target.checked)}
+                                        sx={{
+                                            '& .MuiSwitch-switchBase.Mui-checked': {
+                                                color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                            },
+                                            '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                            },
+                                        }}
+                                    />
+                                }
+                                label=""
+                            />
+                        </Box>
                     </ListItem>
 
                     <Divider />
