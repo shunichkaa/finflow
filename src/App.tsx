@@ -1,17 +1,17 @@
 import React from 'react';
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
-import Budgets from "./src/BudgetList/pages/Budgets";
-import Dashboard from "./src/BudgetList/pages/Dashboard";
-import Analytics from "./src/BudgetList/pages/Analytics";
-import Goals from "./src/BudgetList/pages/Goals";
-import Profile from "./src/BudgetList/pages/Profile";
-import {Auth} from "./src/components/auth/Auth";
-import {ProtectedRoute} from "./src/components/auth/ProtectedRoute";
-import {Layout} from "./src/components/Layout";
-import {OAuthCallback} from "./src/components/auth/OAuthCallback.tsx";
-import {ErrorBoundary} from "./src/components/ErrorBoundary";
-import NotFound from "./src/pages/NotFound";
-import ServerError from "./src/pages/ServerError";
+import Budgets from "./BudgetList/pages/Budgets";
+import Dashboard from "./BudgetList/pages/Dashboard";
+import Analytics from "./BudgetList/pages/Analytics";
+import Goals from "./BudgetList/pages/Goals";
+import Profile from "./BudgetList/pages/Profile";
+import {Auth} from "./components/auth/Auth";
+import {ProtectedRoute} from "./components/auth/ProtectedRoute";
+import {Layout} from "./components/Layout";
+import {OAuthCallback} from "./components/auth/OAuthCallback.tsx";
+import {ErrorBoundary} from "./components/ErrorBoundary";
+import NotFound from "./pages/NotFound";
+import ServerError from "./pages/ServerError";
 
 function App() {
     return (
@@ -84,3 +84,4 @@ function App() {
 }
 
 export default App;
+
