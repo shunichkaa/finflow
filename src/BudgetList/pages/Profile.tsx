@@ -232,38 +232,43 @@ export default function Profile() {
 
             {/* Профиль пользователя */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-                <Box display="flex" alignItems="center" mb={3}>
-                    <Avatar 
-                        src={avatar || undefined}
-                        sx={{ width: 64, height: 64, mr: 2, bgcolor: 'primary.main' }}
-                    >
-                        {!avatar && <Person fontSize="large" />}
-                    </Avatar>
-                    <Box>
-                    <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                        {nickname || session?.user?.email || 'Пользователь'}
-                    </Typography>
-                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', mt: 0.5 }}>
-                            {session?.user?.email}
-                        </Typography>
+                <Box display="flex" alignItems="center" justifyContent="space-between">
+                    <Box display="flex" alignItems="center">
+                        <Avatar 
+                            src={avatar || undefined}
+                            sx={{ width: 64, height: 64, mr: 2, bgcolor: 'primary.main' }}
+                        >
+                            {!avatar && <Person fontSize="large" />}
+                        </Avatar>
+                        <Box>
+                            <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+                                {nickname || session?.user?.email || 'Пользователь'}
+                            </Typography>
+                            <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', mt: 0.5 }}>
+                                {session?.user?.email}
+                            </Typography>
+                        </Box>
                     </Box>
+                    
+                    <Button
+                        variant="outlined"
+                        startIcon={<Edit />}
+                        onClick={handleEditProfile}
+                        sx={{ 
+                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                            borderRadius: 2,
+                            px: 2,
+                            py: 1,
+                            '&:hover': {
+                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
+                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                            }
+                        }}
+                    >
+                        Редактировать
+                    </Button>
                 </Box>
-                
-                <Button
-                    variant="outlined"
-                    startIcon={<Edit />}
-                    onClick={handleEditProfile}
-                    sx={{ 
-                        borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                        '&:hover': {
-                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
-                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
-                        }
-                    }}
-                >
-                    Редактировать профиль
-                </Button>
             </Paper>
 
             {/* Настройки */}
