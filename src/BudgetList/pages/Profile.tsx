@@ -52,14 +52,13 @@ export default function Profile() {
         const { mode, toggleTheme } = useThemeMode();
         const { currency, setCurrency, avatar, setAvatar, nickname, setNickname } = useSettingsStore();
         const { session, loading: authLoading } = useAuth();
-        const [iCloudSync, setICloudSync] = useState(false);
         const [notifications, setNotifications] = useState(true);
         const [backupEnabled, setBackupEnabled] = useState(true);
         const [snackbarOpen, setSnackbarOpen] = useState(false);
         const [snackbarMessage, setSnackbarMessage] = useState('');
         
-        // Cloud sync
-        const { status: syncStatus, syncNow } = useCloudSync(iCloudSync);
+        // Cloud sync - always enabled
+        const { status: syncStatus, syncNow } = useCloudSync(true);
         
         // Состояние для редактирования профиля
         const [editModalOpen, setEditModalOpen] = useState(false);
@@ -392,7 +391,7 @@ export default function Profile() {
                     <ListItem>
                         <ListItemIcon>
                             <CloudSync sx={{ 
-                                color: syncStatus.isSyncing ? '#6C6FF9' : undefined,
+                                color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FFB3BA' : mode === 'dark' ? '#FFFFFF' : '#272B3E'),
                                 animation: syncStatus.isSyncing ? 'spin 1s linear infinite' : 'none',
                                 '@keyframes spin': {
                                     '0%': { transform: 'rotate(0deg)' },
@@ -402,90 +401,79 @@ export default function Profile() {
                         </ListItemIcon>
                         <ListItemText 
                             primary="Облачная синхронизация" 
-                            secondary={
-                                syncStatus.isSyncing 
-                                    ? "Синхронизация..." 
-                                    : syncStatus.lastSync 
-                                    ? `Последняя синхронизация: ${syncStatus.lastSync.toLocaleTimeString()}`
-                                    : syncStatus.error
-                                    ? `Ошибка: ${syncStatus.error}`
-                                    : "Автоматическая синхронизация через Supabase"
-                            }
+                            secondary="Автоматическая синхронизация"
                             secondaryTypographyProps={{
                                 sx: { 
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
+                        />
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                            {/* Статус синхронизации */}
+                            <Typography 
+                                variant="caption" 
+                                sx={{ 
                                     color: syncStatus.error 
                                         ? '#FFB3BA' 
                                         : syncStatus.isSyncing 
                                         ? '#6C6FF9'
-                                        : mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
-                        />
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            {iCloudSync && !syncStatus.isSyncing && (
-                                <Button
-                                    size="small"
-                                    onClick={syncNow}
-                                    sx={{
-                                        minWidth: 'auto',
-                                        px: 2,
-                                        color: '#6C6FF9',
-                                        fontSize: '0.75rem',
-                                        '&:hover': {
-                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.05)',
-                                        }
-                                    }}
-                                >
-                                    Sync
-                                </Button>
-                            )}
-                            <FormControlLabel
-                                control={
-                                    <Switch
-                                        checked={iCloudSync}
-                                        onChange={(e) => setICloudSync(e.target.checked)}
-                                        sx={{
-                                            '& .MuiSwitch-switchBase.Mui-checked': {
-                                                color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                                            },
-                                            '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                                            },
-                                        }}
-                                    />
-                                }
-                                label=""
-                            />
+                                        : '#B5EAD7',
+                                    fontSize: '0.7rem',
+                                    fontWeight: 600,
+                                    minWidth: '80px',
+                                    textAlign: 'right'
+                                }}
+                            >
+                                {syncStatus.isSyncing 
+                                    ? "Синхронизация..." 
+                                    : syncStatus.error
+                                    ? "Ошибка"
+                                    : syncStatus.lastSync
+                                    ? "Синхронизировано"
+                                    : "Готово"}
+                            </Typography>
+                            
+                            {/* Кнопка Sync */}
+                            <Button
+                                variant="contained"
+                                size="small"
+                                disabled={syncStatus.isSyncing}
+                                onClick={async () => {
+                                    try {
+                                        await syncNow();
+                                        setSnackbarMessage('✅ Данные успешно синхронизированы');
+                                        setSnackbarOpen(true);
+                                    } catch (error) {
+                                        setSnackbarMessage('❌ Ошибка синхронизации');
+                                        setSnackbarOpen(true);
+                                    }
+                                }}
+                                sx={{
+                                    minWidth: '70px',
+                                    px: 2,
+                                    py: 0.8,
+                                    borderRadius: 2,
+                                    background: '#6C6FF9',
+                                    color: '#FFFFFF',
+                                    fontSize: '0.75rem',
+                                    fontWeight: 600,
+                                    textTransform: 'none',
+                                    boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
+                                    '&:hover': {
+                                        background: '#6C6FF9',
+                                        boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
+                                        transform: 'translateY(-1px)',
+                                    },
+                                    '&:disabled': {
+                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
+                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
+                                    },
+                                    transition: 'all 0.3s ease',
+                                }}
+                            >
+                                {syncStatus.isSyncing ? 'Синхр...' : 'Sync'}
+                            </Button>
                         </Box>
-                    </ListItem>
-
-                    <Divider />
-
-                    <ListItem>
-                        <ListItemIcon>
-                            <Backup />
-                        </ListItemIcon>
-                        <ListItemText 
-                            primary="Автоматическое резервное копирование" 
-                            secondary="Создавать резервные копии данных"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={backupEnabled}
-                                    onChange={(e) => setBackupEnabled(e.target.checked)}
-                                    sx={{
-                                        '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                                        },
-                                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                                        },
-                                    }}
-                                />
-                            }
-                            label=""
-                        />
                     </ListItem>
                 </List>
             </Paper>
