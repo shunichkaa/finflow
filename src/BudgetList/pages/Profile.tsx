@@ -340,13 +340,23 @@ export default function Profile() {
 
                 <List>
                     {/* Тема */}
-                    <ListItem>
-                        <ListItemIcon>
+                    <ListItem sx={{ flexWrap: { xs: 'nowrap', sm: 'nowrap' }, alignItems: 'flex-start', py: 2 }}>
+                        <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mt: 1 }}>
                             <Palette sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
                         </ListItemIcon>
                         <ListItemText 
                             primary="Темная тема" 
                             secondary="Переключить между светлой и темной темой"
+                            primaryTypographyProps={{
+                                sx: { fontSize: { xs: '0.95rem', sm: '1rem' } }
+                            }}
+                            secondaryTypographyProps={{
+                                sx: { 
+                                    display: { xs: 'none', sm: 'block' },
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
+                            sx={{ pr: 1, flexShrink: 1 }}
                         />
                         <FormControlLabel
                             control={
@@ -364,6 +374,7 @@ export default function Profile() {
                                 />
                             }
                             label=""
+                            sx={{ ml: 'auto', flexShrink: 0 }}
                         />
                     </ListItem>
 
@@ -441,20 +452,26 @@ export default function Profile() {
                 </Typography>
 
                 <List>
-                    <ListItem>
-                        <ListItemIcon>
+                    <ListItem sx={{ flexWrap: 'nowrap', alignItems: 'flex-start', py: 2 }}>
+                        <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mt: 1 }}>
                             <NotificationsIcon sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
                         </ListItemIcon>
                         <ListItemText 
                             primary="Включить уведомления"
                             secondary="Получать уведомления о важных событиях"
+                            primaryTypographyProps={{
+                                sx: { fontSize: { xs: '0.95rem', sm: '1rem' } }
+                            }}
                             secondaryTypographyProps={{
                                 sx: {
+                                    display: { xs: 'none', sm: 'block' },
                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
                                 }
                             }}
+                            sx={{ pr: 1, flexShrink: 1 }}
                         />
                         <FormControlLabel
+                            sx={{ ml: 'auto', flexShrink: 0 }}
                             control={
                                 <Switch
                                     checked={notificationsEnabled}
@@ -567,7 +584,7 @@ export default function Profile() {
                                 {/* Разделитель */}
                                 <Typography 
                                     variant="h6" 
-                                    sx={{ 
+                                    sx={{
                                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                         fontWeight: 600,
                                     }}
