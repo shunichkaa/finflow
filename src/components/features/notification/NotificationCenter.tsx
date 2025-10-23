@@ -47,11 +47,13 @@ export const NotificationCenter: React.FC = () => {
             >
                 <Badge 
                     badgeContent={unreadCount} 
+                    variant={unreadCount > 0 ? "standard" : "dot"}
                     sx={{
                         '& .MuiBadge-badge': {
-                            backgroundColor: '#FFB3BA',
-                            color: '#272B3E',
-                            fontWeight: 600,
+                            backgroundColor: unreadCount > 0 ? '#FF3B3B' : '#6C6FF9',
+                            color: '#FFFFFF',
+                            fontWeight: 700,
+                            boxShadow: '0 2px 8px rgba(255, 59, 59, 0.4)',
                         }
                     }}
                 >

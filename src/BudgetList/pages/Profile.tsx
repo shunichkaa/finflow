@@ -333,7 +333,7 @@ export default function Profile() {
             </Paper>
 
             {/* Настройки */}
-            <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
+            <Paper sx={{ p: 3, mb: 3, borderRadius: 3, minHeight: 300 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                     Настройки
                 </Typography>

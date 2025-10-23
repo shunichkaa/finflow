@@ -129,7 +129,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
         <Box sx={{ 
                 width: '100%', 
                 height: 350, 
-                p: 2,
+                p: { xs: 1, sm: 2 },
                 position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
@@ -143,7 +143,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart 
                     data={chartData} 
-                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                    margin={{ top: 20, right: 10, left: 0, bottom: 20 }}
                     animationBegin={0}
                     animationDuration={1500}
                     animationEasing="ease-out"

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Avatar,
     Box,
@@ -43,13 +43,13 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     const [sidebarOpen, setSidebarOpen] = useState(defaultSidebarOpen);
 
     const isLoginPage = location.pathname === '/login';
-    
+
     // Подключаем уведомления
     useNotifications();
-    
+
     // Подключаем ежедневные напоминания
     useDailyReminder();
-    
+
     // Автоматически закрываем мобильное меню при изменении маршрута
     useEffect(() => {
         setMobileOpen(false);
@@ -393,62 +393,62 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         </Box>
 
                         <Box sx={{flexGrow: 1}}/>
-                        
+
                         {/* Notification Center */}
-                        <NotificationCenter />
-                        
+                        <NotificationCenter/>
+
                         {/* Profile and Logout buttons for desktop when sidebar is closed */}
                         {!sidebarOpen && !isLoginPage && (
-                            <Box sx={{ 
-                                display: { xs: 'none', md: 'flex' }, 
-                                gap: 1, 
+                            <Box sx={{
+                                display: {xs: 'none', md: 'flex'},
+                                gap: 1,
                                 ml: 2,
                                 alignItems: 'center'
                             }}>
-                            <IconButton
-                                onClick={handleProfileClick}
-                                sx={{
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    transition: 'all 0.2s ease',
-                                    '&:hover': {
-                                        background: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
-                                    },
-                                }}
-                            >
-                                <Avatar
-                                    src={avatar || undefined}
+                                <IconButton
+                                    onClick={handleProfileClick}
                                     sx={{
-                                        width: 32,
-                                        height: 32,
-                                        bgcolor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                                        fontSize: '0.875rem',
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        transition: 'all 0.2s ease',
+                                        '&:hover': {
+                                            background: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                        },
                                     }}
                                 >
-                                    {!avatar && <Person sx={{fontSize: '1.2rem'}}/>}
-                                </Avatar>
-                            </IconButton>
-                            <Button
-                                onClick={handleLogout}
-                                variant="outlined"
-                                size="small"
-                                sx={{
-                                    borderRadius: 2,
-                                    px: 2,
-                                    py: 0.75,
-                                    borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    fontWeight: 500,
-                                    textTransform: 'none',
-                                    transition: 'all 0.2s ease',
-                                    '&:hover': {
-                                        borderColor: '#6C6FF9',
-                                        backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
-                                    },
-                                }}
-                            >
-                                {t('logout', 'Выйти')}
-                            </Button>
-                        </Box>
+                                    <Avatar
+                                        src={avatar || undefined}
+                                        sx={{
+                                            width: 32,
+                                            height: 32,
+                                            bgcolor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                            fontSize: '0.875rem',
+                                        }}
+                                    >
+                                        {!avatar && <Person sx={{fontSize: '1.2rem'}}/>}
+                                    </Avatar>
+                                </IconButton>
+                                <Button
+                                    onClick={handleLogout}
+                                    variant="outlined"
+                                    size="small"
+                                    sx={{
+                                        borderRadius: 2,
+                                        px: 2,
+                                        py: 0.75,
+                                        borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        fontWeight: 500,
+                                        textTransform: 'none',
+                                        transition: 'all 0.2s ease',
+                                        '&:hover': {
+                                            borderColor: '#6C6FF9',
+                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                        },
+                                    }}
+                                >
+                                    {t('logout', 'Выйти')}
+                                </Button>
+                            </Box>
                         )}
                     </Toolbar>
                 </Box>
