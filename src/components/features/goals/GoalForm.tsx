@@ -15,6 +15,7 @@ import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 import { useSettingsStore } from '../../../Budgets/store/useSettingsStore';
 import { useGoalsStore } from '../../../Budgets/store/useGoalsStore';
 import { Goal, CreateGoalInput } from '../../../Budgets/types';
+import { NumberInput } from '../../ui/NumberInput.tsx';
 
 interface GoalFormProps {
     initialGoal?: Goal;
@@ -129,18 +130,18 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     }}
                 />
                 
-                <TextField
+                <NumberInput
                     label={t('targetAmount', 'Целевая сумма')}
-                    type="number"
-                    value={formData.targetAmount}
-                    onChange={(e) => handleInputChange('targetAmount', parseFloat(e.target.value) || 0)}
+                    value={String(formData.targetAmount)}
+                    onChange={(value) => handleInputChange('targetAmount', parseFloat(value) || 0)}
                     fullWidth
                     error={!!errors.targetAmount}
                     helperText={errors.targetAmount}
+                    allowDecimal={true}
                     InputProps={{
                         endAdornment: (
                             <Typography variant="body2" sx={{ 
-                                color: mode === 'dark' ? 'rgba(245, 245, 220, 0.6)' : 'rgba(6, 0, 171, 0.6)' 
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(39, 43, 62, 0.6)' 
                             }}>
                                 {currency}
                             </Typography>
@@ -148,27 +149,27 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     }}
                     sx={{
                         '& .MuiOutlinedInput-root': {
-                            backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
+                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(199, 206, 234, 0.2)',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         },
                         '& .MuiInputLabel-root': {
-                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.8)',
                         },
                     }}
                 />
                 
-                <TextField
+                <NumberInput
                     label={t('currentAmount', 'Текущая сумма')}
-                    type="number"
-                    value={formData.currentAmount}
-                    onChange={(e) => handleInputChange('currentAmount', parseFloat(e.target.value) || 0)}
+                    value={String(formData.currentAmount)}
+                    onChange={(value) => handleInputChange('currentAmount', parseFloat(value) || 0)}
                     fullWidth
                     error={!!errors.currentAmount}
                     helperText={errors.currentAmount}
+                    allowDecimal={true}
                     InputProps={{
                         endAdornment: (
                             <Typography variant="body2" sx={{ 
-                                color: mode === 'dark' ? 'rgba(245, 245, 220, 0.6)' : 'rgba(6, 0, 171, 0.6)' 
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(39, 43, 62, 0.6)' 
                             }}>
                                 {currency}
                             </Typography>
@@ -176,11 +177,11 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     }}
                     sx={{
                         '& .MuiOutlinedInput-root': {
-                            backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
+                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(199, 206, 234, 0.2)',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         },
                         '& .MuiInputLabel-root': {
-                            color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.8)',
                         },
                     }}
                 />

@@ -14,7 +14,8 @@ import { useTranslation } from 'react-i18next';
 import { TransactionType, Transaction } from '../../../Budgets/types';
 import { useFinanceStore } from '../../../Budgets/store/useFinanceStore.ts';
 import { getCategoriesByType, getCategoryIcon, getCategoryName } from '../../../Budgets/utils/categories.tsx';
-import {DatePickerField} from "../../ui/DatePickerField.tsx";
+import { DatePickerField } from "../../ui/DatePickerField.tsx";
+import { NumberInput } from "../../ui/NumberInput.tsx";
 
 interface TransactionFormData {
     amount: string;
@@ -96,23 +97,19 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, ini
                     control={control}
                     rules={{
                         required: t('amountRequired'),
-                        pattern: {
-                            value: /^\d+(\.\d{1,2})?$/,
-                            message: t('invalidAmount'),
-                        },
                         validate: (value) =>
                             parseFloat(value) > 0 || t('amountMustBePositive'),
                     }}
                     render={({ field }) => (
-                        <TextField
-                            {...field}
+                        <NumberInput
+                            value={field.value}
+                            onChange={field.onChange}
                             label={t('amount')}
-                            type="number"
-                            inputProps={{ step: '0.01', min: '0' }}
                             error={!!errors.amount}
                             helperText={errors.amount?.message}
                             fullWidth
                             required
+                            allowDecimal={true}
                         />
                     )}
                 />

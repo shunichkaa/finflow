@@ -8,6 +8,7 @@ import type {Budget} from '../../../Budgets/types';
 import {BudgetPeriod} from '../../../Budgets/types';
 import {EXPENSE_CATEGORIES, getCategoryIcon, getCategoryName} from '../../../Budgets/utils/categories.tsx';
 import {useThemeMode} from '../../../Budgets/theme/ThemeContext';
+import {NumberInput} from '../../ui/NumberInput.tsx';
 
 interface BudgetFormData {
     category: string;
@@ -159,15 +160,15 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                         validate: (value) => parseFloat(value) > 0 || t('limitMustBePositive'),
                     }}
                     render={({field}) => (
-                        <TextField
-                            {...field}
+                        <NumberInput
+                            value={field.value}
+                            onChange={field.onChange}
                             label={t('limit')}
-                            type="number"
-                            inputProps={{step: '0.01', min: '0'}}
                             error={!!errors.limit}
                             helperText={errors.limit?.message}
                             fullWidth
                             required
+                            allowDecimal={true}
                         />
                     )}
                 />
