@@ -9,10 +9,17 @@ interface SettingsStore {
     currency: Currency;
     avatar: string | null;
     nickname: string;
+    // Настройки уведомлений
+    notificationsEnabled: boolean;
+    notificationTime: string; // формат "HH:mm"
+    dailyReminderEnabled: boolean;
     setLanguage: (language: Language) => void;
     setCurrency: (currency: Currency) => void;
     setAvatar: (avatar: string | null) => void;
     setNickname: (nickname: string) => void;
+    setNotificationsEnabled: (enabled: boolean) => void;
+    setNotificationTime: (time: string) => void;
+    setDailyReminderEnabled: (enabled: boolean) => void;
 }
 
 export const useSettingsStore = create<SettingsStore>()(
@@ -22,11 +29,17 @@ export const useSettingsStore = create<SettingsStore>()(
             currency: 'EUR',
             avatar: null,
             nickname: '',
+            notificationsEnabled: true,
+            notificationTime: '20:00',
+            dailyReminderEnabled: true,
 
             setLanguage: (language) => set({ language }),
             setCurrency: (currency) => set({ currency }),
             setAvatar: (avatar) => set({ avatar }),
             setNickname: (nickname) => set({ nickname }),
+            setNotificationsEnabled: (enabled) => set({ notificationsEnabled: enabled }),
+            setNotificationTime: (time) => set({ notificationTime: time }),
+            setDailyReminderEnabled: (enabled) => set({ dailyReminderEnabled: enabled }),
         }),
         {
             name: 'finflow-settings',

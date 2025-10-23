@@ -23,6 +23,7 @@ import {supabase} from '../lib/supabaseClient';
 import {GradientBackground} from './ui/GradientBackground';
 import {NotificationCenter} from './features/notification/NotificationCenter';
 import {useNotifications} from '../Budgets/hooks/useNotifications';
+import {useDailyReminder} from '../Budgets/hooks/useDailyReminder';
 
 const drawerWidth = 280;
 
@@ -45,6 +46,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     
     // Подключаем уведомления
     useNotifications();
+    
+    // Подключаем ежедневные напоминания
+    useDailyReminder();
     
     // Автоматически закрываем мобильное меню при изменении маршрута
     useEffect(() => {

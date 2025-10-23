@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Goal, CreateGoalInput } from '../types';
 import { triggerSync } from '../utils/cloudSyncTrigger';
+import { useNotificationStore } from './useNotificationStore';
 
 interface GoalsState {
     goals: Goal[];
@@ -29,6 +30,15 @@ export const useGoalsStore = create<GoalsState>()(
                 set((state) => ({
                     goals: [...state.goals, newGoal],
                 }));
+                
+                // Уведомление о создании копилки
+                useNotificationStore.getState().addNotification({
+                    type: 'goal',
+                    severity: 'success',
+                    title: 'Копилка создана',
+                    message: `Копилка "${goalData.name}" успешно создана`,
+                });
+                
                 triggerSync();
             },
             

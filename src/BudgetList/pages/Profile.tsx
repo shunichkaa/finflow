@@ -37,7 +37,10 @@ import {
     PhotoCamera,
     Visibility,
     VisibilityOff,
-    Close
+    Close,
+    Schedule,
+    AccessTime,
+    Notifications as NotificationsIcon
 } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
@@ -50,7 +53,20 @@ export default function Profile() {
     try {
         const { i18n } = useTranslation();
         const { mode, toggleTheme } = useThemeMode();
-        const { currency, setCurrency, avatar, setAvatar, nickname, setNickname } = useSettingsStore();
+        const { 
+            currency, 
+            setCurrency, 
+            avatar, 
+            setAvatar, 
+            nickname, 
+            setNickname,
+            notificationsEnabled,
+            setNotificationsEnabled,
+            notificationTime,
+            setNotificationTime,
+            dailyReminderEnabled,
+            setDailyReminderEnabled
+        } = useSettingsStore();
         const { session, loading: authLoading } = useAuth();
         const [notifications, setNotifications] = useState(true);
         const [backupEnabled, setBackupEnabled] = useState(true);
@@ -475,6 +491,118 @@ export default function Profile() {
                             </Button>
                         </Box>
                     </ListItem>
+                </List>
+            </Paper>
+
+            {/* Уведомления */}
+            <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
+                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+                    Уведомления
+                </Typography>
+
+                <List>
+                    <ListItem>
+                        <ListItemIcon>
+                            <NotificationsIcon sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }} />
+                        </ListItemIcon>
+                        <ListItemText 
+                            primary="Включить уведомления"
+                            secondary="Получать уведомления о важных событиях"
+                            secondaryTypographyProps={{
+                                sx: {
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={notificationsEnabled}
+                                    onChange={(e) => setNotificationsEnabled(e.target.checked)}
+                                    sx={{
+                                        '& .MuiSwitch-switchBase.Mui-checked': {
+                                            color: '#6C6FF9',
+                                        },
+                                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                            backgroundColor: '#6C6FF9',
+                                        },
+                                    }}
+                                />
+                            }
+                            label=""
+                        />
+                    </ListItem>
+
+                    <ListItem>
+                        <ListItemIcon>
+                            <Schedule sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }} />
+                        </ListItemIcon>
+                        <ListItemText 
+                            primary="Ежедневное напоминание"
+                            secondary="Напоминать о внесении транзакций"
+                            secondaryTypographyProps={{
+                                sx: {
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={dailyReminderEnabled}
+                                    onChange={(e) => setDailyReminderEnabled(e.target.checked)}
+                                    disabled={!notificationsEnabled}
+                                    sx={{
+                                        '& .MuiSwitch-switchBase.Mui-checked': {
+                                            color: '#6C6FF9',
+                                        },
+                                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                            backgroundColor: '#6C6FF9',
+                                        },
+                                    }}
+                                />
+                            }
+                            label=""
+                        />
+                    </ListItem>
+
+                    {notificationsEnabled && dailyReminderEnabled && (
+                        <ListItem>
+                            <ListItemIcon>
+                                <AccessTime sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }} />
+                            </ListItemIcon>
+                            <ListItemText 
+                                primary="Время напоминания"
+                                secondary="Когда отправлять ежедневное напоминание"
+                                secondaryTypographyProps={{
+                                    sx: {
+                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                    }
+                                }}
+                            />
+                            <TextField
+                                type="time"
+                                value={notificationTime}
+                                onChange={(e) => setNotificationTime(e.target.value)}
+                                size="small"
+                                sx={{
+                                    width: '120px',
+                                    '& .MuiOutlinedInput-root': {
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        '& fieldset': {
+                                            borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : '#EFF0F6',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: '#6C6FF9',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#6C6FF9',
+                                        },
+                                    },
+                                }}
+                            />
+                        </ListItem>
+                    )}
                 </List>
             </Paper>
 
