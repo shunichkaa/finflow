@@ -725,13 +725,15 @@ export default function Profile() {
                     </Box>
 
                     {/* Аватар */}
-                    <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
-                        <Avatar
-                            src={avatar || undefined}
-                            sx={{ width: 80, height: 80, mb: 2, bgcolor: 'primary.main' }}
-                        >
-                            {!avatar && <Person fontSize="large" />}
-                        </Avatar>
+                    <Box mb={3}>
+                        <Box display="flex" flexDirection="column" alignItems="center" mb={2}>
+                            <Avatar
+                                src={avatar || undefined}
+                                sx={{ width: 80, height: 80, mb: 2, bgcolor: 'primary.main' }}
+                            >
+                                {!avatar && <Person fontSize="large" />}
+                            </Avatar>
+                        </Box>
                         <input
                             type="file"
                             ref={fileInputRef}
@@ -740,16 +742,16 @@ export default function Profile() {
                             style={{ display: 'none' }}
                         />
                         <Button
+                            fullWidth
                             variant="outlined"
                             startIcon={<PhotoCamera />}
                             onClick={() => fileInputRef.current?.click()}
-                            size="small"
                             sx={{ 
-                                borderColor: 'rgba(6, 0, 171, 0.3)',
-                                color: '#272B3E',
+                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&:hover': {
-                                    borderColor: 'rgba(6, 0, 171, 0.6)',
-                                    backgroundColor: 'rgba(6, 0, 171, 0.1)',
+                                    borderColor: '#6C6FF9',
+                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
                                 }
                             }}
                         >
