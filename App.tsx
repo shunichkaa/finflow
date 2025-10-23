@@ -1,3 +1,4 @@
+import React from 'react';
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import Budgets from "./src/BudgetList/pages/Budgets";
 import Dashboard from "./src/BudgetList/pages/Dashboard";

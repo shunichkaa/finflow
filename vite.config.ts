@@ -5,7 +5,6 @@ export default defineConfig({
     plugins: [
         react({
             jsxRuntime: 'automatic',
-            jsxImportSource: 'react',
             babel: {
                 plugins: []
             }
@@ -17,10 +16,10 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 manualChunks: {
-                    vendor: ['react', 'react-dom'],
-                    mui: ['@mui/material', '@mui/icons-material'],
-                    router: ['react-router-dom'],
-                    supabase: ['@supabase/supabase-js']
+                    'react-vendor': ['react', 'react-dom', 'react/jsx-runtime'],
+                    'mui': ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
+                    'router': ['react-router-dom'],
+                    'supabase': ['@supabase/supabase-js']
                 }
             }
         }
@@ -32,5 +31,8 @@ export default defineConfig({
     define: {
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
         global: 'globalThis'
+    },
+    optimizeDeps: {
+        include: ['react', 'react-dom', 'react/jsx-runtime']
     }
 })
