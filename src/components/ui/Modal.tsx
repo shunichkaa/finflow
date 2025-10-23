@@ -33,7 +33,7 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children }) 
             PaperProps={{
                 sx: {
                     borderRadius: fullScreen ? 0 : 3,
-                    bgcolor: mode === 'dark' ? '#1a1a1a' : '#ffffff',
+                    bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                     backdropFilter: 'blur(10px)',
                 },
             }}
@@ -42,21 +42,21 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children }) 
                 display: 'flex', 
                 justifyContent: 'space-between', 
                 alignItems: 'center',
-                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
-                bgcolor: mode === 'dark' ? '#1a1a1a' : '#ffffff',
+                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
             }}>
                 {title}
                 <IconButton
                     onClick={onClose}
                     size="small"
-                    sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}
+                    sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}
                 >
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
             <DialogContent sx={{ 
-                bgcolor: mode === 'dark' ? '#1a1a1a' : '#ffffff',
-                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
+                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
             }}>
                 {children}
             </DialogContent>

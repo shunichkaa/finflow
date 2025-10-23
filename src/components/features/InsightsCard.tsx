@@ -50,10 +50,10 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
             borderRadius: 3, 
             boxShadow: 2,
             backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.8)' : 'rgba(255, 255, 255, 0.25)',
-            color: mode === 'dark' ? '#FFFFFF' : '#0600AB'
+            color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
         }}>
             <CardContent>
-                <Typography variant="h6" gutterBottom sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+                <Typography variant="h6" gutterBottom sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                     {t('insights.title', 'AI-инсайты')}
                 </Typography>
 
@@ -64,7 +64,7 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
                             mb: 2,
                             p: 1.5,
                             borderRadius: 2,
-                            backgroundColor: mode === 'dark' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(168, 163, 246, 0.05)'
+                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(168, 163, 246, 0.05)'
                         }}
                     >
                         <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -84,7 +84,7 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
                             )}
                         </Box>
 
-                        <Typography variant="subtitle1" fontWeight={600} mt={1} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+                        <Typography variant="subtitle1" fontWeight={600} mt={1} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                             {insight.title}
                         </Typography>
 

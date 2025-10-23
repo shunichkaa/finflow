@@ -104,7 +104,7 @@ export const RecurringTransactions: React.FC = () => {
                  background: mode === 'dark'
                      ? 'rgba(6, 0, 171, 0.5)'
                      : 'rgba(234, 234, 244, 0.5)',
-                        color: mode === 'dark' ? '#FCF9F9' : '#0600AB',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         fontWeight: 'bold',
                         '&:hover': {
                      background: mode === 'dark'
@@ -158,7 +158,7 @@ export const RecurringTransactions: React.FC = () => {
                  background: mode === 'dark'
                      ? 'rgba(6, 0, 171, 0.5)'
                      : 'rgba(234, 234, 244, 0.5)',
-                                color: mode === 'dark' ? '#FCF9F9' : '#0600AB',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 fontWeight: 'bold',
                                 '&:hover': {
                      background: mode === 'dark'

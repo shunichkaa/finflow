@@ -139,8 +139,8 @@ export const GlassmorphismCards: React.FC = () => {
         {
             title: 'Support',
             subtitle: 'Customer service',
-            gradient: 'linear-gradient(135deg, rgba(151, 125, 255, 0.2) 0%, rgba(151, 125, 255, 0.1) 100%)',
-            glowColor: 'rgba(151, 125, 255, 0.3)',
+            gradient: 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.1) 100%)',
+            glowColor: 'rgba(108, 111, 249, 0.3)',
         },
         {
             title: 'Design',
@@ -173,7 +173,7 @@ export const GlassmorphismCards: React.FC = () => {
             <Typography
                 variant="h5"
                 sx={{
-                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                     fontWeight: 600,
                     mb: 3,
                     textAlign: 'center',

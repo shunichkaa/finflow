@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-    AppBar,
     Avatar,
     Box,
     Button,
@@ -39,7 +38,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
 
     const [mobileOpen, setMobileOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(defaultSidebarOpen);
-    
+
     const isLoginPage = location.pathname === '/login';
 
     const handleDrawerToggle = () => {
@@ -68,22 +67,22 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
 
     const drawer = (
         <Box sx={{
-            display: 'flex', 
-            flexDirection: 'column', 
-            height: '100vh', 
-            backgroundColor: '#FFFFFF',
-            borderRight: '1px solid #EFF0F6',
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100vh',
+            backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
+            borderRight: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
             transition: 'all 0.3s ease',
             position: 'relative',
             overflow: 'hidden',
         }}>
             {/* Sidebar Header */}
             <Box sx={{
-                backgroundColor: '#FFFFFF',
-                borderBottom: '1px solid #EFF0F6',
+                backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
+                borderBottom: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
                 position: 'relative',
             }}>
-                <Toolbar sx={{ minHeight: { xs: 64, sm: 70 } }}>
+                <Toolbar sx={{minHeight: {xs: 64, sm: 70}}}>
                     <IconButton
                         onClick={handleDrawerToggle}
                         sx={{
@@ -97,37 +96,37 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     >
                         <Close/>
                     </IconButton>
-                    
-                    <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, ml: 1 }}>
+
+                    <Box sx={{display: 'flex', alignItems: 'center', flexGrow: 1, ml: 1}}>
                         <IconButton
                             color="inherit"
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             sx={{
                                 display: {xs: 'none', sm: 'block'},
-                                color: '#272B3E',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 mr: 2,
                                 transition: 'all 0.2s ease',
                                 '&:hover': {
-                                    background: '#EFF0F6',
+                                    background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
                                 },
                             }}
                         >
                             {sidebarOpen ? <ChevronLeft/> : <MenuIcon/>}
                         </IconButton>
-                        
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+
+                        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
                             <Typography
                                 variant="h6"
                                 noWrap
                                 onClick={handleLogoClick}
                                 sx={{
                                     cursor: 'pointer',
-                                    color: '#272B3E', // Midnight Blue
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     fontWeight: 700,
                                     letterSpacing: '-0.02em',
                                     transition: 'all 0.2s ease',
                                     '&:hover': {
-                                        color: '#6C6FF9', // Cornflower Blue
+                                        color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                     }
                                 }}
                             >
@@ -136,7 +135,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             <Typography
                                 variant="caption"
                                 sx={{
-                                    color: '#272B3E',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     opacity: 0.6,
                                     fontSize: '0.7rem',
                                     lineHeight: 1,
@@ -153,8 +152,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             </Box>
 
             {/* Navigation */}
-            <Box sx={{ flexGrow: 1, overflow: 'auto', px: 2, py: 3 }}>
-                <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Box sx={{flexGrow: 1, overflow: 'auto', px: 2, py: 3}}>
+                <List sx={{display: 'flex', flexDirection: 'column', gap: 1}}>
                     {navItems.map((item) => (
                         <ListItem key={item.path} disablePadding>
                             <ListItemButton
@@ -167,21 +166,21 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     borderRadius: 2,
                                     py: 1.5,
                                     px: 2,
-                                    color: '#272B3E',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     transition: 'background-color 0.2s ease, color 0.2s ease',
                                     background: 'transparent',
                                     '&.Mui-selected': {
-                                        background: '#EFF0F6',
-                                        color: '#6C6FF9',
+                                        background: mode === 'dark' ? 'rgba(108, 111, 249, 0.15)' : '#EFF0F6',
+                                        color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                         '&:hover': {
-                                            background: '#EFF0F6',
+                                            background: mode === 'dark' ? 'rgba(108, 111, 249, 0.15)' : '#EFF0F6',
                                         }
                                     },
                                     '&:hover': {
-                                        background: '#EFF0F6',
+                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
                                     },
                                     '&:focus': {
-                                        background: '#EFF0F6',
+                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
                                     },
                                     // Убираем все overlay эффекты
                                     '& .MuiTouchRipple-root': {
@@ -205,9 +204,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
 
             {/* Bottom Buttons */}
             <Divider sx={{
-                borderColor: '#EFF0F6'
+                borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6'
             }}/>
-            <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+            <Box sx={{p: 2, display: 'flex', flexDirection: 'column', gap: 1.5}}>
                 <Button
                     onClick={handleProfileClick}
                     fullWidth
@@ -215,27 +214,27 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     startIcon={
                         <Avatar
                             src={avatar || undefined}
-                            sx={{ 
-                                width: 28, 
-                                height: 28, 
-                                bgcolor: '#6C6FF9', // Cornflower Blue
+                            sx={{
+                                width: 28,
+                                height: 28,
+                                bgcolor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                 fontSize: '0.875rem',
                             }}
                         >
-                            {!avatar && <Person sx={{ fontSize: '1.1rem' }} />}
+                            {!avatar && <Person sx={{fontSize: '1.1rem'}}/>}
                         </Avatar>
                     }
                     sx={{
                         borderRadius: 2,
                         py: 1.5,
-                        borderColor: '#6C6FF9',
-                        color: '#272B3E',
+                        borderColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         fontWeight: 500,
-                        background: '#FFFFFF',
+                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
                         transition: 'all 0.2s ease',
                         '&:hover': {
-                            background: '#EFF0F6',
-                            borderColor: '#6C6FF9',
+                            background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                            borderColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                         },
                     }}
                 >
@@ -248,15 +247,19 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     sx={{
                         borderRadius: 2,
                         py: 1.5,
-                        background: '#6C6FF9', // Плоский Cornflower Blue
+                        background: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                         color: '#FFFFFF',
                         fontWeight: 600,
                         textTransform: 'none',
-                        boxShadow: '0 2px 8px rgba(108, 111, 249, 0.2)',
+                        boxShadow: mode === 'dark'
+                            ? '0 2px 8px rgba(108, 111, 249, 0.2)'
+                            : '0 2px 8px rgba(108, 111, 249, 0.2)',
                         transition: 'all 0.2s ease',
                         '&:hover': {
-                            background: '#6C6FF9',
-                            boxShadow: '0 4px 12px rgba(108, 111, 249, 0.3)',
+                            background: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                            boxShadow: mode === 'dark'
+                                ? '0 4px 12px rgba(108, 111, 249, 0.3)'
+                                : '0 4px 12px rgba(108, 111, 249, 0.3)',
                         },
                     }}
                 >
@@ -271,168 +274,168 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             <Box sx={{display: 'flex'}}>
                 <CssBaseline/>
 
-            {/* Main AppBar */}
-            <Box
-                component="header"
-                sx={{
-                    position: 'fixed',
-                    top: 0,
-                    left: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
-                    right: 0,
-                    zIndex: (theme) => theme.zIndex.drawer - 1,
-                    backgroundColor: '#FFFFFF',
-                    color: '#272B3E',
-                    borderBottom: '1px solid #EFF0F6',
-                    boxShadow: '0 2px 8px rgba(39, 43, 62, 0.08)',
-                    transition: 'all 0.3s ease',
-                }}
-            >
-                <Toolbar sx={{ minHeight: { xs: 64, sm: 70 } }}>
-                    {/* Mobile Menu */}
-                    <Box sx={{display: 'flex', alignItems: 'center', ml: 1}}>
+                {/* Main AppBar */}
+                <Box
+                    component="header"
+                    sx={{
+                        position: 'fixed',
+                        top: 0,
+                        left: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
+                        right: 0,
+                        zIndex: (theme) => theme.zIndex.drawer - 1,
+                        backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                        borderBottom: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
+                        boxShadow: mode === 'dark' ? '0 2px 8px rgba(0, 0, 0, 0.3)' : '0 2px 8px rgba(39, 43, 62, 0.08)',
+                        transition: 'all 0.3s ease',
+                    }}
+                >
+                    <Toolbar sx={{minHeight: {xs: 64, sm: 70}}}>
+                        {/* Mobile Menu */}
+                        <Box sx={{display: 'flex', alignItems: 'center', ml: 1}}>
+                            <IconButton
+                                color="inherit"
+                                edge="start"
+                                onClick={handleDrawerToggle}
+                                sx={{
+                                    mr: 2,
+                                    display: {sm: 'none'},
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    transition: 'all 0.2s ease',
+                                    '&:hover': {
+                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                                    },
+                                }}
+                            >
+                                <MenuIcon/>
+                            </IconButton>
+
+                            {!sidebarOpen && (
+                                <>
                                     <IconButton
                                         color="inherit"
-                                        edge="start"
-                                        onClick={handleDrawerToggle}
+                                        onClick={() => setSidebarOpen(!sidebarOpen)}
                                         sx={{
+                                            display: {xs: 'none', sm: 'block'},
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             mr: 2,
-                                            display: {sm: 'none'},
-                                            color: '#272B3E',
                                             transition: 'all 0.2s ease',
                                             '&:hover': {
-                                                background: '#EFF0F6',
+                                                background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
                                             },
                                         }}
                                     >
                                         <MenuIcon/>
                                     </IconButton>
 
-                        {!sidebarOpen && (
-                            <>
-                                <IconButton
-                                    color="inherit"
-                                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                                    sx={{
-                                        display: {xs: 'none', sm: 'block'},
-                                        color: '#272B3E',
-                                        mr: 2,
-                                        transition: 'all 0.2s ease',
-                                        '&:hover': {
-                                            background: '#EFF0F6',
-                                        },
-                                    }}
-                                >
-                                    <MenuIcon/>
-                                </IconButton>
+                                    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
+                                        <Typography
+                                            variant="h6"
+                                            noWrap
+                                            onClick={handleLogoClick}
+                                            sx={{
+                                                cursor: 'pointer',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                                fontWeight: 700,
+                                                letterSpacing: '-0.02em',
+                                                transition: 'all 0.2s ease',
+                                                '&:hover': {
+                                                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                                }
+                                            }}
+                                        >
+                                            {t('appName')}
+                                        </Typography>
+                                        <Typography
+                                            variant="caption"
+                                            sx={{
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                                opacity: 0.6,
+                                                fontSize: '0.7rem',
+                                                lineHeight: 1,
+                                                mt: 0.5,
+                                                fontWeight: 400,
+                                                letterSpacing: '-0.01em',
+                                            }}
+                                        >
+                                            {t('tagline')}
+                                        </Typography>
+                                    </Box>
+                                </>
+                            )}
+                        </Box>
 
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                    <Typography
-                                        variant="h6"
-                                        noWrap
-                                        onClick={handleLogoClick}
-                                        sx={{
-                                            cursor: 'pointer',
-                                            color: '#272B3E',
-                                            fontWeight: 700,
-                                            letterSpacing: '-0.02em',
-                                            transition: 'all 0.2s ease',
-                                            '&:hover': {
-                                                color: '#6C6FF9',
-                                            }
-                                        }}
-                                    >
-                                        {t('appName')}
-                                    </Typography>
-                                    <Typography
-                                        variant="caption"
-                                        sx={{
-                                            color: '#272B3E',
-                                            opacity: 0.6,
-                                            fontSize: '0.7rem',
-                                            lineHeight: 1,
-                                            mt: 0.5,
-                                            fontWeight: 400,
-                                            letterSpacing: '-0.01em',
-                                        }}
-                                    >
-                                        {t('tagline')}
-                                    </Typography>
-                                </Box>
-                            </>
-                        )}
-                    </Box>
+                        <Box sx={{flexGrow: 1}}/>
+                    </Toolbar>
+                </Box>
 
-                    <Box sx={{ flexGrow: 1 }} />
-                </Toolbar>
-            </Box>
-
-            {/* Mobile Drawer */}
-            <Drawer
-                variant="temporary"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-                ModalProps={{
-                    keepMounted: true,
-                }}
-                sx={{
-                    display: {xs: 'block', sm: 'none'},
-                    '& .MuiDrawer-paper': {
-                        boxSizing: 'border-box',
-                        width: {xs: '85vw', sm: drawerWidth},
-                        maxWidth: drawerWidth,
-                        transition: 'transform 0.3s ease',
-                        boxShadow: 'none',
-                        border: 'none',
-                    },
-                    '& .MuiBackdrop-root': {
-                        backgroundColor: 'rgba(39, 43, 62, 0.5)',
-                    }
-                }}
-            >
-                {drawer}
-            </Drawer>
-
-            {/* Desktop Sidebar */}
-            {!isLoginPage && (
+                {/* Mobile Drawer */}
                 <Drawer
-                    variant="permanent"
+                    variant="temporary"
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                    ModalProps={{
+                        keepMounted: true,
+                    }}
                     sx={{
-                        display: {xs: 'none', sm: 'block'},
+                        display: {xs: 'block', sm: 'none'},
                         '& .MuiDrawer-paper': {
                             boxSizing: 'border-box',
-                            width: sidebarOpen ? drawerWidth : 0,
-                            border: 'none',
-                            overflow: 'hidden',
-                            transition: 'width 0.3s ease',
+                            width: {xs: '85vw', sm: drawerWidth},
+                            maxWidth: drawerWidth,
+                            transition: 'transform 0.3s ease',
                             boxShadow: 'none',
+                            border: 'none',
                         },
+                        '& .MuiBackdrop-root': {
+                            backgroundColor: 'rgba(39, 43, 62, 0.5)',
+                        }
                     }}
-                    open={sidebarOpen}
                 >
-                <Box sx={{
-                    opacity: sidebarOpen ? 1 : 0,
-                    transition: 'opacity 0.3s ease',
-                }}>
                     {drawer}
-                </Box>
-            </Drawer>
-            )}
+                </Drawer>
 
-            {/* Main Content */}
-            <Box
-                component="main"
-                sx={{
-                    flexGrow: 1,
-                    p: {xs: 2, sm: 3},
-                    width: '100%',
-                    mt: {xs: 8, sm: 9},
-                    ml: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                }}
-            >
-                {children ?? <Outlet/>}
+                {/* Desktop Sidebar */}
+                {!isLoginPage && (
+                    <Drawer
+                        variant="permanent"
+                        sx={{
+                            display: {xs: 'none', sm: 'block'},
+                            '& .MuiDrawer-paper': {
+                                boxSizing: 'border-box',
+                                width: sidebarOpen ? drawerWidth : 0,
+                                border: 'none',
+                                overflow: 'hidden',
+                                transition: 'width 0.3s ease',
+                                boxShadow: 'none',
+                            },
+                        }}
+                        open={sidebarOpen}
+                    >
+                        <Box sx={{
+                            opacity: sidebarOpen ? 1 : 0,
+                            transition: 'opacity 0.3s ease',
+                        }}>
+                            {drawer}
+                        </Box>
+                    </Drawer>
+                )}
+
+                {/* Main Content */}
+                <Box
+                    component="main"
+                    sx={{
+                        flexGrow: 1,
+                        p: {xs: 2, sm: 3},
+                        width: '100%',
+                        mt: {xs: 8, sm: 9},
+                        ml: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    }}
+                >
+                    {children ?? <Outlet/>}
+                </Box>
             </Box>
-        </Box>
         </GradientBackground>
     );
 };

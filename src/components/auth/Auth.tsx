@@ -124,8 +124,8 @@ export const Auth: React.FC = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                     background: mode === 'dark' 
-                        ? 'linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #3d3d5c 100%)'
-                        : '#F5F6FA', // Правильный фон из Style Guide
+                        ? '#272B3E'
+                        : '#F5F6FA',
                 backgroundAttachment: 'fixed',
                 p: 2,
                 position: 'relative',
@@ -137,8 +137,8 @@ export const Auth: React.FC = () => {
                     right: 0,
                     bottom: 0,
                         background: mode === 'dark'
-                            ? 'radial-gradient(circle at 20% 80%, rgba(74, 74, 106, 0.2) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(151, 125, 255, 0.15) 0%, transparent 60%)'
-                            : 'radial-gradient(circle at 20% 80%, rgba(151, 125, 255, 0.15) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(255, 204, 242, 0.12) 0%, transparent 60%)',
+                            ? 'radial-gradient(circle at 20% 80%, rgba(74, 74, 106, 0.2) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(108, 111, 249, 0.15) 0%, transparent 60%)'
+                            : 'radial-gradient(circle at 20% 80%, rgba(108, 111, 249, 0.15) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(255, 204, 242, 0.12) 0%, transparent 60%)',
                     pointerEvents: 'none',
                     zIndex: 0,
                 },
@@ -151,7 +151,7 @@ export const Auth: React.FC = () => {
                     width: '80%',
                     height: '80%',
                     background: mode === 'dark'
-                        ? 'radial-gradient(circle, rgba(0, 51, 255, 0.05) 0%, transparent 70%)'
+                        ? 'radial-gradient(circle, rgba(108, 111, 249, 0.05) 0%, transparent 70%)'
                         : 'radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%)',
                     pointerEvents: 'none',
                     zIndex: 0,
@@ -205,7 +205,7 @@ export const Auth: React.FC = () => {
                             💰 {t('appName', 'FinFlow')}
                         </Typography>
                         <Typography variant="h6" sx={{
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : '#8F9BB3',
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : '#272B3E',
                             fontSize: {xs: '16px', md: '18px'},
                             fontWeight: 500
                         }}>
@@ -225,8 +225,8 @@ export const Auth: React.FC = () => {
                                 borderRadius: 3,
                                 borderColor: mode === 'dark' 
                                     ? 'rgba(255, 255, 255, 0.2)' 
-                                    : 'rgba(151, 125, 255, 0.3)',
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    : 'rgba(108, 111, 249, 0.3)',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 fontWeight: 600,
                                 textTransform: 'none',
                                 fontSize: '1rem',
@@ -236,14 +236,14 @@ export const Auth: React.FC = () => {
                                     : 'rgba(252, 248, 245, 0.6)',
                                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                 '&:hover': {
-                                    borderColor: mode === 'dark' ? '#977DFF' : '#977DFF',
+                                    borderColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                     backgroundColor: mode === 'dark' 
-                                        ? 'rgba(151, 125, 255, 0.15)' 
-                                        : 'rgba(151, 125, 255, 0.1)',
+                                        ? 'rgba(108, 111, 249, 0.15)' 
+                                        : 'rgba(108, 111, 249, 0.1)',
                                     transform: 'translateY(-2px)',
                                     boxShadow: mode === 'dark' 
-                                        ? '0 8px 24px rgba(151, 125, 255, 0.3)'
-                                        : '0 8px 24px rgba(151, 125, 255, 0.2)',
+                                        ? '0 8px 24px rgba(108, 111, 249, 0.3)'
+                                        : '0 8px 24px rgba(108, 111, 249, 0.2)',
                                 },
                                 '&:active': {
                                     transform: 'scale(0.98)',
@@ -251,7 +251,7 @@ export const Auth: React.FC = () => {
                                 '&:disabled': {
                                     borderColor: mode === 'dark' 
                                         ? 'rgba(255, 255, 255, 0.1)' 
-                                        : 'rgba(151, 125, 255, 0.15)',
+                                        : 'rgba(108, 111, 249, 0.15)',
                                     color: mode === 'dark' 
                                         ? 'rgba(255, 255, 255, 0.3)' 
                                         : 'rgba(6, 0, 171, 0.3)',
@@ -266,12 +266,12 @@ export const Auth: React.FC = () => {
                         my: 2,
                         borderColor: mode === 'dark' 
                             ? 'rgba(255, 255, 255, 0.1)' 
-                            : 'rgba(151, 125, 255, 0.2)'
+                            : 'rgba(108, 111, 249, 0.2)'
                     }}>
                         <Typography variant="body1" sx={{
                             color: mode === 'dark' 
                                 ? 'rgba(255, 255, 255, 0.6)' 
-                                : '#8F9BB3', 
+                                : '#272B3E', 
                             px: 2,
                             fontWeight: 500,
                             fontSize: {xs: '14px', md: '16px'}
@@ -306,15 +306,15 @@ export const Auth: React.FC = () => {
                                             ? 'rgba(58, 58, 60, 0.75)' 
                                             : 'rgba(252, 248, 245, 0.75)',
                                         border: mode === 'dark' 
-                                            ? '1px solid rgba(151, 125, 255, 0.2)' 
-                                            : '1px solid rgba(151, 125, 255, 0.2)',
+                                            ? '1px solid rgba(108, 111, 249, 0.2)' 
+                                            : '1px solid rgba(108, 111, 249, 0.2)',
                                     },
                                     '&.Mui-focused': {
                                         backgroundColor: mode === 'dark' 
                                             ? 'rgba(58, 58, 60, 0.85)' 
                                             : 'rgba(252, 248, 245, 0.85)',
-                                        border: '1px solid #977DFF',
-                                        boxShadow: '0 4px 16px rgba(151, 125, 255, 0.15)',
+                                        border: '1px solid #6C6FF9',
+                                        boxShadow: '0 4px 16px rgba(108, 111, 249, 0.15)',
                                     },
                                     '& fieldset': {
                                         border: 'none',
@@ -325,11 +325,11 @@ export const Auth: React.FC = () => {
                                         ? 'rgba(255, 255, 255, 0.7)' 
                                         : 'rgba(6, 0, 171, 0.7)',
                                     '&.Mui-focused': {
-                                        color: '#977DFF',
+                                        color: '#6C6FF9',
                                     },
                                 },
                                 '& .MuiOutlinedInput-input': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 }
                             }}
                         />
@@ -356,15 +356,15 @@ export const Auth: React.FC = () => {
                                             ? 'rgba(58, 58, 60, 0.75)' 
                                             : 'rgba(252, 248, 245, 0.75)',
                                         border: mode === 'dark' 
-                                            ? '1px solid rgba(151, 125, 255, 0.2)' 
-                                            : '1px solid rgba(151, 125, 255, 0.2)',
+                                            ? '1px solid rgba(108, 111, 249, 0.2)' 
+                                            : '1px solid rgba(108, 111, 249, 0.2)',
                                     },
                                     '&.Mui-focused': {
                                         backgroundColor: mode === 'dark' 
                                             ? 'rgba(58, 58, 60, 0.85)' 
                                             : 'rgba(252, 248, 245, 0.85)',
-                                        border: '1px solid #977DFF',
-                                        boxShadow: '0 4px 16px rgba(151, 125, 255, 0.15)',
+                                        border: '1px solid #6C6FF9',
+                                        boxShadow: '0 4px 16px rgba(108, 111, 249, 0.15)',
                                     },
                                     '& fieldset': {
                                         border: 'none',
@@ -375,11 +375,11 @@ export const Auth: React.FC = () => {
                                         ? 'rgba(255, 255, 255, 0.7)' 
                                         : 'rgba(6, 0, 171, 0.7)',
                                     '&.Mui-focused': {
-                                        color: '#977DFF',
+                                        color: '#6C6FF9',
                                     },
                                 },
                                 '& .MuiOutlinedInput-input': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 }
                             }}
                         />
@@ -393,13 +393,13 @@ export const Auth: React.FC = () => {
                                     backgroundColor: mode === 'dark' 
                                         ? 'rgba(255, 107, 107, 0.15)' 
                                         : 'rgba(255, 107, 107, 0.1)',
-                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     border: mode === 'dark' 
                                         ? '1px solid rgba(255, 107, 107, 0.3)' 
                                         : '1px solid rgba(255, 107, 107, 0.2)',
                                     backdropFilter: 'blur(20px)',
                                     '& .MuiAlert-icon': {
-                                        color: '#FF6B6B',
+                                        color: '#FFB3BA',
                                     }
                                 }}
                             >
@@ -415,13 +415,13 @@ export const Auth: React.FC = () => {
                                     backgroundColor: mode === 'dark' 
                                         ? 'rgba(150, 206, 180, 0.15)' 
                                         : 'rgba(150, 206, 180, 0.1)',
-                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     border: mode === 'dark' 
                                         ? '1px solid rgba(150, 206, 180, 0.3)' 
                                         : '1px solid rgba(150, 206, 180, 0.2)',
                                     backdropFilter: 'blur(20px)',
                                     '& .MuiAlert-icon': {
-                                        color: '#96CEB4',
+                                        color: '#B5EAD7',
                                     }
                                 }}
                             >
@@ -437,32 +437,32 @@ export const Auth: React.FC = () => {
                                 py: 1.8,
                                 borderRadius: 3,
                                 background: mode === 'dark'
-                                    ? 'linear-gradient(135deg, #8B5CF6 0%, #977DFF 100%)'
-                                    : 'linear-gradient(135deg, #977DFF 0%, #8B5CF6 100%)',
+                                    ? '#6C6FF9'
+                                    : '#6C6FF9',
                                 color: '#FFFFFF',
                                 fontWeight: 600,
                                 fontSize: '1rem',
                                 textTransform: 'none',
                                 boxShadow: mode === 'dark'
-                                    ? '0 8px 24px rgba(0, 51, 255, 0.4)'
-                                    : '0 8px 24px rgba(151, 125, 255, 0.3)',
+                                    ? '0 8px 24px rgba(108, 111, 249, 0.4)'
+                                    : '0 8px 24px rgba(108, 111, 249, 0.3)',
                                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                 '&:hover': {
                                     background: mode === 'dark'
-                                        ? 'linear-gradient(135deg, #0028CC 0%, #7B5EE6 100%)'
-                                        : 'linear-gradient(135deg, #7B5EE6 0%, #0028CC 100%)',
+                                        ? '#6C6FF9'
+                                        : '#6C6FF9',
                                     transform: 'translateY(-2px)',
                                     boxShadow: mode === 'dark'
-                                        ? '0 12px 32px rgba(0, 51, 255, 0.5)'
-                                        : '0 12px 32px rgba(151, 125, 255, 0.4)',
+                                        ? '0 12px 32px rgba(108, 111, 249, 0.5)'
+                                        : '0 12px 32px rgba(108, 111, 249, 0.4)',
                                 },
                                 '&:active': {
                                     transform: 'scale(0.98)',
                                 },
                                 '&:disabled': {
                                     background: mode === 'dark'
-                                        ? 'rgba(151, 125, 255, 0.2)'
-                                        : 'rgba(151, 125, 255, 0.3)',
+                                        ? 'rgba(108, 111, 249, 0.2)'
+                                        : 'rgba(108, 111, 249, 0.3)',
                                     color: mode === 'dark'
                                         ? 'rgba(255, 255, 255, 0.3)'
                                         : 'rgba(255, 255, 255, 0.6)',
@@ -481,7 +481,7 @@ export const Auth: React.FC = () => {
                         <Typography variant="body1" sx={{
                             color: mode === 'dark' 
                                 ? 'rgba(255, 255, 255, 0.6)' 
-                                : '#8F9BB3',
+                                : '#272B3E',
                             fontWeight: 500,
                             fontSize: {xs: '14px', md: '16px'}
                         }}>
@@ -496,15 +496,15 @@ export const Auth: React.FC = () => {
                             }}
                             sx={{
                                 textTransform: 'none',
-                                color: mode === 'dark' ? '#977DFF' : '#977DFF',
+                                color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                 fontWeight: 600,
                                 borderRadius: 2,
                                 transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                                 '&:hover': {
                                     backgroundColor: mode === 'dark'
-                                        ? 'rgba(151, 125, 255, 0.15)'
-                                        : 'rgba(151, 125, 255, 0.1)',
-                                    color: mode === 'dark' ? '#B8A6FF' : '#7B5EE6',
+                                        ? 'rgba(108, 111, 249, 0.15)'
+                                        : 'rgba(108, 111, 249, 0.1)',
+                                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                 }
                             }}
                             disabled={loading || !!oauthLoading}

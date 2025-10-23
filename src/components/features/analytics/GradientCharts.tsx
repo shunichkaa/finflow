@@ -101,25 +101,25 @@ export const GradientCharts: React.FC = () => {
 
     const gradients = [
         {
-            gradient: 'linear-gradient(135deg, #F2E6EE 0%, #977DFF 100%)',
+            gradient: 'linear-gradient(135deg, #EFF0F6 0%, #6C6FF9 100%)',
             title: 'Доходы',
             subtitle: 'Месячная статистика',
-            glowColor: 'rgba(151, 125, 255, 0.3)',
+            glowColor: 'rgba(108, 111, 249, 0.3)',
         },
         {
-            gradient: 'linear-gradient(135deg, #FFCCF2 0%, #8B5CF6 50%, #7C3AED 100%)',
+            gradient: 'linear-gradient(135deg, #FFE5F1 0%, #6C6FF9 50%, #6C6FF9 100%)',
             title: 'Расходы',
             subtitle: 'По категориям',
             glowColor: 'rgba(0, 51, 255, 0.3)',
         },
         {
-            gradient: 'linear-gradient(135deg, #977DFF 0%, #8B5CF6 50%, #7C3AED 100%)',
+            gradient: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 50%, #6C6FF9 100%)',
             title: 'Бюджет',
             subtitle: 'Остаток средств',
-            glowColor: 'rgba(151, 125, 255, 0.3)',
+            glowColor: 'rgba(108, 111, 249, 0.3)',
         },
         {
-            gradient: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #2d2d44 100%)',
+            gradient: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 50%, #272B3E 100%)',
             title: 'Сбережения',
             subtitle: 'Накопления',
             glowColor: 'rgba(0, 51, 255, 0.4)',
@@ -131,7 +131,7 @@ export const GradientCharts: React.FC = () => {
             <Typography
                 variant="h5"
                 sx={{
-                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                     fontWeight: 600,
                     mb: 3,
                     textAlign: 'center',

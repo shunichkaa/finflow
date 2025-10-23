@@ -47,147 +47,151 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
         <Paper sx={{ 
             p: 2.5, 
             mb: 2,
-            backdropFilter: 'blur(40px) saturate(180%)',
-            backgroundColor: mode === 'dark' ? 'rgba(28, 28, 30, 0.85)' : 'rgba(252, 248, 245, 0.7)',
-            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(252, 248, 245, 0.9)',
-            borderRadius: 6,
+            backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
+            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
+            borderRadius: 3,
             boxShadow: mode === 'dark' 
-                ? '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
-                : '0 8px 32px rgba(31, 38, 135, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
-            position: 'relative',
-            overflow: 'hidden',
+                ? '0 2px 8px rgba(0, 0, 0, 0.3)' 
+                : '0 2px 8px rgba(39, 43, 62, 0.08)',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            '&::before': {
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: '1px',
-                background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
-            },
         }}>
-            <Stack spacing={1.5}>
-                {/* Компактная строка с фильтрами */}
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ xs: 'stretch', sm: 'center' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: { xs: 1, sm: 0 } }}>
-                        <FilterListIcon sx={{ 
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
-                            fontSize: 20
-                        }} />
-                        <Typography variant="body2" sx={{ 
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(6, 0, 171, 0.8)',
-                            fontWeight: 500,
-                            display: { xs: 'block', sm: 'none' }
-                        }}>
-                            {t('filters')}
-                        </Typography>
-                    </Box>
-                    
-                    {/* Тип транзакции */}
-                    <TextField
-                        select
-                        size="small"
-                        label={t('type')}
-                        value={type}
-                        onChange={(e) => onTypeChange(e.target.value as TransactionType | 'all')}
-                        sx={{
-                            minWidth: { xs: '100%', sm: 120 },
-                            '& .MuiOutlinedInput-root': {
-                                backgroundColor: mode === 'dark' ? 'rgba(58, 58, 60, 0.6)' : 'rgba(252, 248, 245, 0.6)',
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
-                                borderRadius: 3,
+            <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                gap: 2, 
+                flexDirection: { xs: 'column', sm: 'row' },
+                width: '100%'
+            }}>
+                <Box 
+                    onClick={onReset}
+                    sx={{ 
+                        display: { xs: 'none', sm: 'flex' }, 
+                        alignItems: 'center', 
+                        cursor: 'pointer',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        '&:hover': {
+                            transform: 'scale(1.1)',
+                        }
+                    }}
+                >
+                    <FilterListIcon sx={{ 
+                        color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                        fontSize: 24
+                    }} />
+                </Box>
+                
+                {/* Тип транзакции */}
+                <TextField
+                    select
+                    size="small"
+                    label={t('type')}
+                    value={type}
+                    onChange={(e) => onTypeChange(e.target.value as TransactionType | 'all')}
+                    sx={{
+                        minWidth: { xs: '100%', sm: 140 },
+                        flex: { sm: '1 1 auto' },
+                        maxWidth: { sm: 160 },
+                        '& .MuiOutlinedInput-root': {
+                            backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                        },
+                        '& .MuiInputLabel-root': {
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
+                            '&.Mui-focused': {
+                                color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                             },
-                            '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
-                                '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#977DFF' : '#977DFF',
-                                },
-                            }
-                        }}
-                    >
-                        <MenuItem value="all">{t('allTypes')}</MenuItem>
-                        <MenuItem value="expense">{t('expense')}</MenuItem>
-                        <MenuItem value="income">{t('income')}</MenuItem>
-                    </TextField>
+                        }
+                    }}
+                >
+                    <MenuItem value="all">{t('allTypes')}</MenuItem>
+                    <MenuItem value="expense">{t('expense')}</MenuItem>
+                    <MenuItem value="income">{t('income')}</MenuItem>
+                </TextField>
 
-                    {/* Категория */}
-                    <TextField
-                        select
-                        size="small"
-                        label={t('category')}
-                        value={category}
-                        onChange={(e) => onCategoryChange(e.target.value)}
-                        sx={{
-                            minWidth: { xs: '100%', sm: 140 },
-                            '& .MuiOutlinedInput-root': {
-                                backgroundColor: mode === 'dark' ? 'rgba(58, 58, 60, 0.6)' : 'rgba(252, 248, 245, 0.6)',
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
-                                borderRadius: 3,
+                {/* Категория */}
+                <TextField
+                    select
+                    size="small"
+                    label={t('category')}
+                    value={category}
+                    onChange={(e) => onCategoryChange(e.target.value)}
+                    sx={{
+                        minWidth: { xs: '100%', sm: 160 },
+                        flex: { sm: '1 1 auto' },
+                        maxWidth: { sm: 200 },
+                        '& .MuiOutlinedInput-root': {
+                            backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                        },
+                        '& .MuiInputLabel-root': {
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
+                            '&.Mui-focused': {
+                                color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                             },
-                            '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
-                                '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#977DFF' : '#977DFF',
-                                },
-                            }
-                        }}
-                    >
-                        <MenuItem value="">{t('allCategories')}</MenuItem>
-                        {ALL_CATEGORIES.map((cat) => (
-                            <MenuItem key={cat.id} value={cat.id}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                    {getCategoryIcon(cat.icon, 16)}
-                                    <span>{getCategoryName(cat.id, t)}</span>
-                                </Box>
-                            </MenuItem>
-                        ))}
-                    </TextField>
+                        }
+                    }}
+                >
+                    <MenuItem value="">{t('allCategories')}</MenuItem>
+                    {ALL_CATEGORIES.map((cat) => (
+                        <MenuItem key={cat.id} value={cat.id}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                {getCategoryIcon(cat.icon, 16)}
+                                <span>{getCategoryName(cat.id, t)}</span>
+                            </Box>
+                        </MenuItem>
+                    ))}
+                </TextField>
 
-                    {/* Даты */}
-                    <Box sx={{ display: 'flex', gap: 1, width: { xs: '100%', sm: 'auto' } }}>
-                        <DatePickerField
-                            label={t('from')}
-                            value={dateFrom}
-                            onChange={onDateFromChange}
-                        />
+                {/* От */}
+                <DatePickerField
+                    label={t('from')}
+                    value={dateFrom}
+                    onChange={onDateFromChange}
+                    sx={{ 
+                        minWidth: { xs: '100%', sm: 130 },
+                        flex: { sm: '1 1 auto' },
+                        maxWidth: { sm: 150 }
+                    }}
+                />
 
-                        <DatePickerField
-                            label={t('to')}
-                            value={dateTo}
-                            onChange={onDateToChange}
-                        />
-                    </Box>
+                {/* До */}
+                <DatePickerField
+                    label={t('to')}
+                    value={dateTo}
+                    onChange={onDateToChange}
+                    sx={{ 
+                        minWidth: { xs: '100%', sm: 130 },
+                        flex: { sm: '1 1 auto' },
+                        maxWidth: { sm: 150 }
+                    }}
+                />
 
-                    {/* Кнопка сброса */}
-                    <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<ClearIcon />}
-                        onClick={onReset}
-                        sx={{
-                            minWidth: { xs: '100%', sm: 'auto' },
-                            px: 2,
-                            borderRadius: 3,
-                            borderColor: mode === 'dark' ? 'rgba(151, 125, 255, 0.3)' : 'rgba(151, 125, 255, 0.3)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
-                            backdropFilter: 'blur(20px)',
-                            background: mode === 'dark' ? 'rgba(58, 58, 60, 0.4)' : 'rgba(151, 125, 255, 0.05)',
-                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                            '&:hover': {
-                                borderColor: '#977DFF',
-                                backgroundColor: mode === 'dark' ? 'rgba(151, 125, 255, 0.15)' : 'rgba(151, 125, 255, 0.1)',
-                                transform: 'translateY(-2px)',
-                                boxShadow: mode === 'dark' 
-                                    ? '0 6px 20px rgba(151, 125, 255, 0.3)'
-                                    : '0 6px 20px rgba(151, 125, 255, 0.15)',
-                            }
-                        }}
-                    >
-                        {t('reset')}
-                    </Button>
-                </Stack>
-            </Stack>
+                {/* Кнопка сброса - только крестик */}
+                <Box
+                    onClick={onReset}
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 40,
+                        height: 40,
+                        minWidth: 40,
+                        borderRadius: 2,
+                        border: `1px solid ${mode === 'dark' ? '#6C6FF9' : '#6C6FF9'}`,
+                        color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        '&:hover': {
+                            backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                            transform: 'translateY(-2px)',
+                        }
+                    }}
+                >
+                    <ClearIcon sx={{ fontSize: 20 }} />
+                </Box>
+            </Box>
         </Paper>
     );
 };

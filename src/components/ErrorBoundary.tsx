@@ -43,7 +43,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                     p: 4,
                     textAlign: 'center',
                     borderRadius: 3,
-                    backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.8)' : 'rgba(255, 255, 255, 0.25)',
+                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.25)',
                     border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(148, 163, 184, 0.1)',
                 }}
             >
@@ -58,7 +58,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                     ⚠️
                 </Box>
 
-                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                     Ой, что-то не так, уже исправляем...
                 </Typography>
 
@@ -69,17 +69,17 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                         onClick={handleGoHome}
                         sx={{
                         background: mode === 'dark' 
-                            ? 'rgba(99, 102, 241, 0.8)'
+                            ? 'rgba(108, 111, 249, 0.8)'
                             : 'rgba(168, 163, 246, 0.8)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             fontWeight: 'bold',
                             '&:hover': {
                                 background: mode === 'dark' 
-                                    ? 'rgba(99, 102, 241, 1)'
+                                    ? 'rgba(108, 111, 249, 1)'
                                     : 'rgba(168, 163, 246, 1)',
                                 transform: 'translateY(-2px)',
                                 boxShadow: mode === 'dark' 
-                                    ? '0 6px 20px rgba(99, 102, 241, 0.4)'
+                                    ? '0 6px 20px rgba(108, 111, 249, 0.4)'
                                     : '0 6px 20px rgba(168, 163, 246, 0.4)',
                             }
                         }}

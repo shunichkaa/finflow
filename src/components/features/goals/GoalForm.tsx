@@ -86,7 +86,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
         <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
             <Stack spacing={3}>
                 <Typography variant="h6" sx={{ 
-                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                     fontWeight: 'bold',
                     textAlign: 'center'
                 }}>
@@ -103,7 +103,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         },
                         '& .MuiInputLabel-root': {
                             color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
@@ -121,7 +121,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         },
                         '& .MuiInputLabel-root': {
                             color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
@@ -149,7 +149,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         },
                         '& .MuiInputLabel-root': {
                             color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
@@ -177,7 +177,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         },
                         '& .MuiInputLabel-root': {
                             color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
@@ -195,7 +195,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         },
                         '& .MuiInputLabel-root': {
                             color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(6, 0, 171, 0.8)',
@@ -213,7 +213,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                         background: mode === 'dark' 
                             ? 'rgba(6, 0, 171, 0.8)'
                             : 'rgba(234, 234, 244, 0.8)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         fontWeight: 'bold',
                         '&:hover': {
                             background: mode === 'dark' 

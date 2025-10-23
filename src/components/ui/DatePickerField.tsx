@@ -53,7 +53,7 @@ export const DatePickerField: React.FC<DatePickerFieldProps> = ({ label, value, 
                             minWidth: 130,
                             '& .MuiOutlinedInput-root': {
                                 backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             },
                             '& .MuiInputLabel-root': {
                                 color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',

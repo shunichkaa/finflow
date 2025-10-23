@@ -55,14 +55,19 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                 <Card elevation={2} sx={{
                     flex: 1, 
                     minWidth: 0,
-                    backgroundColor: mode === 'dark' ? 'rgba(234, 234, 244, 0.3)' : 'rgba(234, 234, 244, 0.4)',
-                    border: mode === 'dark' ? '1px solid rgba(234, 234, 244, 0.3)' : '1px solid rgba(234, 234, 244, 0.4)'
+                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(234, 234, 244, 0.4)',
+                    border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(234, 234, 244, 0.4)'
                 }}>
-                    <CardContent>
-                        <Typography variant="body2" sx={{ color: '#272B3E' }} gutterBottom>
+                    <CardContent sx={{ 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center',
+                        '&:last-child': { pb: 2 }
+                    }}>
+                        <Typography variant="body2" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                             {t('totalBudgets')}
                         </Typography>
-                        <Typography variant="h4" fontWeight="bold" sx={{ color: '#272B3E' }}>
+                        <Typography variant="h4" fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                             {budgets.length}
                         </Typography>
                     </CardContent>
@@ -73,20 +78,25 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                     flex: 1, 
                     minWidth: 0,
                     backgroundColor: exceededBudgets > 0 
-                        ? (mode === 'dark' ? 'rgba(255, 185, 141, 0.3)' : 'rgba(255, 185, 141, 0.4)')
-                        : (mode === 'dark' ? 'rgba(254, 222, 233, 0.3)' : 'rgba(254, 222, 233, 0.4)'),
+                        ? (mode === 'dark' ? 'rgba(255, 179, 186, 0.15)' : 'rgba(255, 185, 141, 0.4)')
+                        : (mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(254, 222, 233, 0.4)'),
                     border: exceededBudgets > 0 
-                        ? (mode === 'dark' ? '1px solid rgba(255, 185, 141, 0.3)' : '1px solid rgba(255, 185, 141, 0.4)')
-                        : (mode === 'dark' ? '1px solid rgba(254, 222, 233, 0.3)' : '1px solid rgba(254, 222, 233, 0.4)')
+                        ? (mode === 'dark' ? '1px solid rgba(255, 179, 186, 0.3)' : '1px solid rgba(255, 185, 141, 0.4)')
+                        : (mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(254, 222, 233, 0.4)')
                 }}>
-                    <CardContent>
-                        <Typography variant="body2" sx={{ color: '#272B3E' }} gutterBottom>
+                    <CardContent sx={{ 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center',
+                        '&:last-child': { pb: 2 }
+                    }}>
+                        <Typography variant="body2" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                             {t('exceededBudgets')}
                         </Typography>
                         <Typography
                             variant="h4"
                             fontWeight="bold"
-                            sx={{ color: '#272B3E' }}
+                            sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}
                         >
                             {exceededBudgets}
                         </Typography>
@@ -108,7 +118,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                     const statusColor = getBudgetStatusColor(status);
                     const remaining = budget.limit - spent;
                     const daysLeft = getDaysLeftInPeriod(budget.period);
-                    const categoryColor = category?.color || '#96CEB4';
+                    const categoryColor = category?.color || '#B5EAD7';
 
                     return (
                         <Card key={budget.id} elevation={2}
@@ -117,7 +127,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                   display: 'flex', 
                                   flexDirection: 'column',
                                   backdropFilter: 'blur(40px) saturate(180%)',
-                                  backgroundColor: mode === 'dark' ? 'rgba(28, 28, 30, 0.85)' : 'rgba(252, 248, 245, 0.7)',
+                                  backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(252, 248, 245, 0.7)',
                                   border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(252, 248, 245, 0.9)',
                                   borderRadius: 2,
                                   boxShadow: mode === 'dark' 
@@ -158,10 +168,10 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                                 }
                                             }}
                                             sx={{
-                                                color: '#272B3E',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 '&:hover': {
-                                                    color: '#6C6FF9',
-                                                    backgroundColor: '#EFF0F6',
+                                                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
                                                 }
                                             }}
                                         >
@@ -175,7 +185,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                     variant="h6" 
                                     fontWeight="700"
                                     sx={{ 
-                                        color: '#272B3E',
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                         mb: 0.5,
                                         fontSize: '1.1rem'
                                     }}
@@ -197,7 +207,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             borderRadius: 2
                                         }}
                                     />
-                                    <Typography variant="caption" sx={{ color: '#272B3E', opacity: 0.7, fontSize: '0.75rem' }}>
+                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E', opacity: 0.7, fontSize: '0.75rem' }}>
                                         {(() => {
                                             if (daysLeft === 0) {
                                                 return t('lastDay');
@@ -217,15 +227,15 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                         icon={<WarningIcon/>} 
                                         sx={{
                                             mb: 2,
-                                            backgroundColor: '#FFB3BA',
-                                            color: '#272B3E',
-                                            border: '1px solid #FFB3BA',
+                                            backgroundColor: mode === 'dark' ? 'rgba(255, 179, 186, 0.2)' : '#FFB3BA',
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                            border: mode === 'dark' ? '1px solid rgba(255, 179, 186, 0.3)' : '1px solid #FFB3BA',
                                             borderRadius: 3,
                                             '& .MuiAlert-icon': {
-                                                color: '#272B3E',
+                                                color: mode === 'dark' ? '#FFB3BA' : '#272B3E',
                                             },
                                             '& .MuiAlert-message': {
-                                                color: '#272B3E',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 fontWeight: 500,
                                             }
                                         }}
@@ -239,15 +249,15 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                         severity="warning" 
                                         sx={{
                                             mb: 2,
-                                            backgroundColor: '#FFD7BA',
-                                            color: '#272B3E',
-                                            border: '1px solid #FFD7BA',
+                                            backgroundColor: mode === 'dark' ? 'rgba(255, 215, 186, 0.2)' : '#FFD7BA',
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                            border: mode === 'dark' ? '1px solid rgba(255, 215, 186, 0.3)' : '1px solid #FFD7BA',
                                             borderRadius: 3,
                                             '& .MuiAlert-icon': {
-                                                color: '#272B3E',
+                                                color: mode === 'dark' ? '#FFD7BA' : '#272B3E',
                                             },
                                             '& .MuiAlert-message': {
-                                                color: '#272B3E',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 fontWeight: 500,
                                             }
                                         }}
@@ -263,7 +273,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             variant="body1" 
                                             fontWeight="700"
                                             sx={{ 
-                                                color: '#272B3E',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 fontSize: '0.95rem'
                                             }}
                                         >
@@ -273,7 +283,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             variant="body1" 
                                             fontWeight="600"
                                             sx={{ 
-                                                color: '#272B3E',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 opacity: 0.6,
                                                 fontSize: '0.95rem'
                                             }}
@@ -281,7 +291,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             {formatCurrency(budget.limit, currency)}
                                         </Typography>
                                     </Box>
-                                    <                                    <LinearProgress
+                                    <LinearProgress
                                         variant="determinate"
                                         value={Math.min(percentage, 100)}
                                         sx={{
@@ -303,13 +313,13 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             sx={{ 
                                                 p: 2, 
                                                 borderRadius: 2,
-                                                backgroundColor: '#EFF0F6',
+                                                backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
                                             }}
                                         >
                                             <Typography 
                                                 variant="caption" 
                                                 sx={{ 
-                                                    color: '#272B3E',
+                                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                     opacity: 0.7,
                                                     display: 'block',
                                                     mb: 0.5,

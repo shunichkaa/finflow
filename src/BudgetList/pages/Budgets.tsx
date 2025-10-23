@@ -36,7 +36,7 @@ const Budgets: React.FC = () => {
                     gutterBottom 
                     fontWeight="700"
                     sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         mb: 1
                     }}
                 >
@@ -58,8 +58,8 @@ const Budgets: React.FC = () => {
                     onClick={() => setIsModalOpen(true)}
                     sx={{
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)'
-                            : 'linear-gradient(135deg, #A8A3F6 0%, #F6D5EE 100%)',
+                            ? 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)'
+                            : 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                         color: '#FFFFFF',
                         fontWeight: 600,
                         px: 4,
@@ -67,13 +67,13 @@ const Budgets: React.FC = () => {
                         borderRadius: 3,
                         textTransform: 'none',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(99, 102, 241, 0.4)'
+                            ? '0 8px 24px rgba(108, 111, 249, 0.4)'
                             : '0 8px 24px rgba(168, 163, 246, 0.4)',
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&:hover': {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 32px rgba(99, 102, 241, 0.5)'
+                                ? '0 12px 32px rgba(108, 111, 249, 0.5)'
                                 : '0 12px 32px rgba(168, 163, 246, 0.5)',
                         }
                     }}

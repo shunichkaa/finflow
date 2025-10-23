@@ -70,7 +70,7 @@ export default function Profile() {
         if (authLoading) {
             return (
                 <Container maxWidth="md" sx={{ py: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
-                    <Typography variant="h6" sx={{ color: '#0600AB' }}>
+                    <Typography variant="h6" sx={{ color: '#272B3E' }}>
                         Загрузка...
                     </Typography>
                 </Container>
@@ -207,7 +207,7 @@ export default function Profile() {
 
     return (
         <Container maxWidth="md" sx={{ py: 4 }}>
-            <Typography variant="h4" gutterBottom sx={{ mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+            <Typography variant="h4" gutterBottom sx={{ mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                 Личный кабинет
             </Typography>
 
@@ -221,7 +221,7 @@ export default function Profile() {
                         {!avatar && <Person fontSize="large" />}
                     </Avatar>
                     <Box>
-                    <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+                    <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                         {nickname || session?.user?.email || 'Пользователь'}
                     </Typography>
                         <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', mt: 0.5 }}>
@@ -235,11 +235,11 @@ export default function Profile() {
                     startIcon={<Edit />}
                     onClick={handleEditProfile}
                     sx={{ 
-                        borderColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                        borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         '&:hover': {
-                            borderColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.8)' : 'rgba(151, 125, 255, 0.8)',
-                            backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.1)' : 'rgba(151, 125, 255, 0.1)',
+                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
+                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
                         }
                     }}
                 >
@@ -249,7 +249,7 @@ export default function Profile() {
 
             {/* Настройки */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                     Настройки
                 </Typography>
 
@@ -270,10 +270,10 @@ export default function Profile() {
                                     onChange={toggleTheme || (() => {})}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#8B5CF6' : '#977DFF',
+                                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                         },
                                         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
+                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                                         },
                                     }}
                                 />
@@ -299,7 +299,7 @@ export default function Profile() {
                                 onChange={(e) => changeLanguage(e.target.value)}
                                 sx={{
                                     '& .MuiSelect-select': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     },
                                 }}
                             >
@@ -329,7 +329,7 @@ export default function Profile() {
                                 onChange={(e) => handleCurrencyChange(e.target.value)}
                                 sx={{
                                     '& .MuiSelect-select': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     },
                                 }}
                             >
@@ -364,10 +364,10 @@ export default function Profile() {
                                     onChange={(e) => setNotifications(e.target.checked)}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#8B5CF6' : '#977DFF',
+                                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                         },
                                         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
+                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                                         },
                                     }}
                                 />
@@ -380,7 +380,7 @@ export default function Profile() {
 
             {/* Синхронизация */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                     Синхронизация
                 </Typography>
 
@@ -400,10 +400,10 @@ export default function Profile() {
                                     onChange={(e) => setICloudSync(e.target.checked)}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#8B5CF6' : '#977DFF',
+                                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                         },
                                         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
+                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                                         },
                                     }}
                                 />
@@ -429,10 +429,10 @@ export default function Profile() {
                                     onChange={(e) => setBackupEnabled(e.target.checked)}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#8B5CF6' : '#977DFF',
+                                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                         },
                                         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
+                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                                         },
                                     }}
                                 />
@@ -445,7 +445,7 @@ export default function Profile() {
 
             {/* Управление данными */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                     Управление данными
                 </Typography>
 
@@ -455,11 +455,11 @@ export default function Profile() {
                         startIcon={<Backup />}
                         onClick={handleExportData}
                         sx={{ 
-                            borderColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             '&:hover': {
-                                borderColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.8)' : 'rgba(151, 125, 255, 0.8)',
-                                backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.1)' : 'rgba(151, 125, 255, 0.1)',
+                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
+                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
                             }
                         }}
                     >
@@ -471,11 +471,11 @@ export default function Profile() {
                         startIcon={<Security />}
                         onClick={handleEditProfile}
                         sx={{ 
-                            borderColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.5)' : 'rgba(151, 125, 255, 0.5)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             '&:hover': {
-                                borderColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.8)' : 'rgba(151, 125, 255, 0.8)',
-                                backgroundColor: mode === 'dark' ? 'rgba(0, 51, 255, 0.1)' : 'rgba(151, 125, 255, 0.1)',
+                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
+                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
                             }
                         }}
                     >
@@ -488,10 +488,10 @@ export default function Profile() {
                         startIcon={<Delete />}
                         onClick={handleDeleteAccount}
                         sx={{ 
-                            borderColor: '#ff6b6b',
-                            color: '#ff6b6b',
+                            borderColor: '#FFB3BA',
+                            color: '#FFB3BA',
                             '&:hover': {
-                                borderColor: '#ff5252',
+                                borderColor: '#FFB3BA',
                                 backgroundColor: 'rgba(255, 107, 107, 0.1)',
                             }
                         }}
@@ -509,8 +509,8 @@ export default function Profile() {
                     onClick={handleSave}
                     sx={{
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, rgba(0, 51, 255, 0.8) 0%, rgba(151, 125, 255, 0.6) 100%)'
-                            : 'linear-gradient(135deg, rgba(151, 125, 255, 0.8) 0%, rgba(255, 204, 242, 0.6) 100%)',
+                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.8) 0%, rgba(108, 111, 249, 0.6) 100%)'
+                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.8) 0%, rgba(255, 204, 242, 0.6) 100%)',
                         color: '#FFFFFF',
                         fontWeight: 'bold',
                         px: 4,
@@ -518,12 +518,12 @@ export default function Profile() {
                         borderRadius: 2,
                         '&:hover': {
                             background: mode === 'dark' 
-                                ? 'linear-gradient(135deg, rgba(0, 51, 255, 0.9) 0%, rgba(151, 125, 255, 0.8) 100%)'
-                                : 'linear-gradient(135deg, rgba(151, 125, 255, 0.9) 0%, rgba(255, 204, 242, 0.8) 100%)',
+                                ? 'linear-gradient(135deg, rgba(0, 51, 255, 0.9) 0%, rgba(108, 111, 249, 0.8) 100%)'
+                                : 'linear-gradient(135deg, rgba(108, 111, 249, 0.9) 0%, rgba(255, 204, 242, 0.8) 100%)',
                             transform: 'translateY(-1px)',
                             boxShadow: mode === 'dark' 
                                 ? '0 6px 20px rgba(0, 51, 255, 0.4)'
-                                : '0 6px 20px rgba(151, 125, 255, 0.4)',
+                                : '0 6px 20px rgba(108, 111, 249, 0.4)',
                         }
                     }}
                 >
@@ -546,14 +546,14 @@ export default function Profile() {
                         width: { xs: '90%', sm: 500 },
                         maxHeight: '90vh',
                         overflow: 'auto',
-                        bgcolor: mode === 'dark' ? '#1a1a1a' : '#ffffff',
+                        bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                         borderRadius: 3,
                         boxShadow: 24,
                         p: 4,
                     }}
                 >
                     <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-                        <Typography variant="h5" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+                        <Typography variant="h5" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                             Редактировать профиль
                         </Typography>
                         <IconButton onClick={handleCloseEditModal} size="small">
@@ -583,7 +583,7 @@ export default function Profile() {
                             size="small"
                             sx={{ 
                                 borderColor: 'rgba(6, 0, 171, 0.3)',
-                                color: '#0600AB',
+                                color: '#272B3E',
                                 '&:hover': {
                                     borderColor: 'rgba(6, 0, 171, 0.6)',
                                     backgroundColor: 'rgba(6, 0, 171, 0.1)',
@@ -610,13 +610,13 @@ export default function Profile() {
                                     borderColor: 'rgba(6, 0, 171, 0.6)',
                                 },
                                 '&.Mui-focused fieldset': {
-                                    borderColor: '#0600AB',
+                                    borderColor: '#272B3E',
                                 },
                             },
                             '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 },
                             },
                         }}
@@ -639,13 +639,13 @@ export default function Profile() {
                                     borderColor: 'rgba(6, 0, 171, 0.6)',
                                 },
                                 '&.Mui-focused fieldset': {
-                                    borderColor: '#0600AB',
+                                    borderColor: '#272B3E',
                                 },
                             },
                             '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 },
                             },
                         }}
@@ -653,7 +653,7 @@ export default function Profile() {
 
                     <Divider sx={{ my: 2 }} />
 
-                    <Typography variant="h6" sx={{ mb: 2, color: mode === 'dark' ? '#FFFFFF' : '#0600AB' }}>
+                    <Typography variant="h6" sx={{ mb: 2, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                         Изменить пароль
                     </Typography>
 
@@ -686,13 +686,13 @@ export default function Profile() {
                                     borderColor: 'rgba(6, 0, 171, 0.6)',
                                 },
                                 '&.Mui-focused fieldset': {
-                                    borderColor: '#0600AB',
+                                    borderColor: '#272B3E',
                                 },
                             },
                             '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 },
                             },
                         }}
@@ -715,13 +715,13 @@ export default function Profile() {
                                     borderColor: 'rgba(6, 0, 171, 0.6)',
                                 },
                                 '&.Mui-focused fieldset': {
-                                    borderColor: '#0600AB',
+                                    borderColor: '#272B3E',
                                 },
                             },
                             '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 },
                             },
                         }}
@@ -744,13 +744,13 @@ export default function Profile() {
                                     borderColor: 'rgba(6, 0, 171, 0.6)',
                                 },
                                 '&.Mui-focused fieldset': {
-                                    borderColor: '#0600AB',
+                                    borderColor: '#272B3E',
                                 },
                             },
                             '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 },
                             },
                         }}
@@ -763,7 +763,7 @@ export default function Profile() {
                             onClick={handleCloseEditModal}
                             sx={{ 
                                 borderColor: 'rgba(6, 0, 171, 0.3)',
-                                color: '#0600AB',
+                                color: '#272B3E',
                                 '&:hover': {
                                     borderColor: 'rgba(6, 0, 171, 0.6)',
                                     backgroundColor: 'rgba(6, 0, 171, 0.1)',
@@ -777,7 +777,7 @@ export default function Profile() {
                             onClick={handleSaveProfile}
                             sx={{
                                 background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.8) 0%, rgba(248, 229, 229, 0.6) 100%)',
-                                color: '#0600AB',
+                                color: '#272B3E',
                                 fontWeight: 'bold',
                                 '&:hover': {
                                     background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.9) 0%, rgba(248, 229, 229, 0.8) 100%)',
@@ -805,7 +805,7 @@ export default function Profile() {
         console.error('Error in Profile component:', error);
         return (
             <Container maxWidth="md" sx={{ py: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
-                <Typography variant="h6" sx={{ color: '#ff6b6b' }}>
+                <Typography variant="h6" sx={{ color: '#FFB3BA' }}>
                     Произошла ошибка при загрузке страницы
                 </Typography>
             </Container>

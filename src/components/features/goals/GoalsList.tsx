@@ -85,7 +85,7 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                         backgroundColor: mode === 'dark' 
                             ? 'rgba(100, 200, 150, 0.8)'
                             : 'rgba(254, 222, 233, 0.8)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         fontWeight: '600',
                         px: 4,
                         py: 1.5,
@@ -120,7 +120,7 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                 background: mode === 'dark' 
                                     ? 'rgba(6, 0, 171, 0.8)'
                                     : 'rgba(234, 234, 244, 0.8)',
-                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 border: mode === 'dark' 
                                     ? '1px solid rgba(6, 0, 171, 0.3)'
                                     : '1px solid rgba(234, 234, 244, 0.3)',
@@ -137,7 +137,7 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
                                     <Box sx={{ flexGrow: 1 }}>
                                         <Typography variant="h6" fontWeight="bold" sx={{ 
-                                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             mb: 1
                                         }}>
                                             {goal.name}
@@ -212,10 +212,10 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                             '& .MuiLinearProgress-bar': {
                                                 borderRadius: 4,
                                                 background: percentage >= 100 
-                                                    ? 'linear-gradient(90deg, #96CEB4 0%, #96CEB4CC 100%)'
+                                                    ? 'linear-gradient(90deg, #B5EAD7 0%, #B5EAD7CC 100%)'
                                                     : percentage >= 75 
-                                                        ? 'linear-gradient(90deg, #FFEAA7 0%, #FFEAA7CC 100%)'
-                                                        : 'linear-gradient(90deg, #6366F1 0%, #6366F1CC 100%)',
+                                                        ? 'linear-gradient(90deg, #FFD7BA 0%, #FFD7BACC 100%)'
+                                                        : 'linear-gradient(90deg, #6C6FF9 0%, #6C6FF9CC 100%)',
                                             },
                                         }}
                                     />
@@ -231,7 +231,7 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                                 backgroundColor: goal.isCompleted 
                                                     ? (mode === 'dark' ? 'rgba(100, 200, 150, 0.3)' : 'rgba(254, 222, 233, 0.5)')
                                                     : (mode === 'dark' ? 'rgba(255, 185, 141, 0.3)' : 'rgba(255, 185, 141, 0.5)'),
-                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 fontWeight: 'bold'
                                             }}
                                         />

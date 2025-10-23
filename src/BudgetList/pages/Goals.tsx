@@ -43,18 +43,18 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
 // Иконки для копилок
 const GOAL_ICONS = [
-    { id: 'travel', icon: FlightIcon, name: 'Путешествие', color: '#4ECDC4' },
-    { id: 'home', icon: HomeIcon, name: 'Жильё', color: '#A8A3F6' },
-    { id: 'car', icon: DirectionsCarIcon, name: 'Автомобиль', color: '#96CEB4' },
-    { id: 'education', icon: SchoolIcon, name: 'Образование', color: '#FFEAA7' },
-    { id: 'wedding', icon: FavoriteIcon, name: 'Свадьба', color: '#F6D5EE' },
-    { id: 'laptop', icon: LaptopMacIcon, name: 'Техника', color: '#6366F1' },
-    { id: 'jewelry', icon: DiamondIcon, name: 'Украшения', color: '#F6D5EE' },
-    { id: 'savings', icon: SavingsIcon, name: 'Накопления', color: '#96CEB4' },
-    { id: 'vacation', icon: BeachAccessIcon, name: 'Отпуск', color: '#4ECDC4' },
-    { id: 'phone', icon: PhoneIphoneIcon, name: 'Телефон', color: '#8B5CF6' },
-    { id: 'camera', icon: CameraAltIcon, name: 'Камера', color: '#6366F1' },
-    { id: 'fitness', icon: FitnessCenterIcon, name: 'Фитнес', color: '#96CEB4' },
+    { id: 'travel', icon: FlightIcon, name: 'Путешествие', color: '#B5EAD7' },
+    { id: 'home', icon: HomeIcon, name: 'Жильё', color: '#6C6FF9' },
+    { id: 'car', icon: DirectionsCarIcon, name: 'Автомобиль', color: '#B5EAD7' },
+    { id: 'education', icon: SchoolIcon, name: 'Образование', color: '#FFD7BA' },
+    { id: 'wedding', icon: FavoriteIcon, name: 'Свадьба', color: '#6C6FF9' },
+    { id: 'laptop', icon: LaptopMacIcon, name: 'Техника', color: '#6C6FF9' },
+    { id: 'jewelry', icon: DiamondIcon, name: 'Украшения', color: '#6C6FF9' },
+    { id: 'savings', icon: SavingsIcon, name: 'Накопления', color: '#B5EAD7' },
+    { id: 'vacation', icon: BeachAccessIcon, name: 'Отпуск', color: '#B5EAD7' },
+    { id: 'phone', icon: PhoneIphoneIcon, name: 'Телефон', color: '#6C6FF9' },
+    { id: 'camera', icon: CameraAltIcon, name: 'Камера', color: '#6C6FF9' },
+    { id: 'fitness', icon: FitnessCenterIcon, name: 'Фитнес', color: '#B5EAD7' },
 ];
 
 const Goals: React.FC = () => {
@@ -192,7 +192,7 @@ const Goals: React.FC = () => {
                     gutterBottom 
                     fontWeight="700"
                     sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         mb: 1
                     }}
                 >
@@ -216,8 +216,8 @@ const Goals: React.FC = () => {
                     onClick={handleOpenDialog}
                     sx={{
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)'
-                            : 'linear-gradient(135deg, #A8A3F6 0%, #F6D5EE 100%)',
+                            ? 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)'
+                            : 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                         color: '#FFFFFF',
                         fontWeight: 600,
                         px: 4,
@@ -225,12 +225,12 @@ const Goals: React.FC = () => {
                         borderRadius: 3,
                         textTransform: 'none',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(99, 102, 241, 0.4)'
+                            ? '0 8px 24px rgba(108, 111, 249, 0.4)'
                             : '0 8px 24px rgba(168, 163, 246, 0.4)',
                         '&:hover': {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 32px rgba(99, 102, 241, 0.5)'
+                                ? '0 12px 32px rgba(108, 111, 249, 0.5)'
                                 : '0 12px 32px rgba(168, 163, 246, 0.5)',
                         }
                     }}
@@ -318,7 +318,7 @@ const Goals: React.FC = () => {
                                                     sx={{
                                                         color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
                                                         '&:hover': {
-                                                            color: '#FF6B6B',
+                                                            color: '#FFB3BA',
                                                             backgroundColor: 'rgba(255, 107, 107, 0.1)',
                                                         }
                                                     }}
@@ -333,7 +333,7 @@ const Goals: React.FC = () => {
                                             variant="h5" 
                                             fontWeight="700"
                                             sx={{ 
-                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 mb: 1,
                                                 fontSize: '1.5rem'
                                             }}
@@ -401,11 +401,11 @@ const Goals: React.FC = () => {
                                                     label={daysLeft > 0 ? `${daysLeft} ${daysLeft === 1 ? 'день' : daysLeft < 5 ? 'дня' : 'дней'} до цели` : 'Срок истёк'}
                                                     sx={{
                                                         backgroundColor: daysLeft > 0 
-                                                            ? `${iconData.color}20`
-                                                            : 'rgba(255, 107, 107, 0.2)',
+                                                            ? mode === 'dark' ? 'rgba(108, 111, 249, 0.2)' : 'rgba(108, 111, 249, 0.15)'
+                                                            : 'rgba(255, 179, 186, 0.2)',
                                                         color: daysLeft > 0 
-                                                            ? iconData.color
-                                                            : '#FF6B6B',
+                                                            ? '#6C6FF9'
+                                                            : '#FFB3BA',
                                                         fontWeight: 600,
                                                         fontSize: '0.9rem',
                                                         height: 36,
@@ -472,7 +472,7 @@ const Goals: React.FC = () => {
                 }}
             >
                 <DialogTitle sx={{ 
-                    color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                     fontWeight: 600,
                     pb: 1
                 }}>
@@ -615,13 +615,13 @@ const Goals: React.FC = () => {
                                         fullWidth: true,
                                         sx: {
                                             '& .MuiOutlinedInput-root': {
-                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             },
                                             '& .MuiInputLabel-root': {
                                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                             },
                                             '& .MuiSvgIcon-root': {
-                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             }
                                         }
                                     },
@@ -637,29 +637,29 @@ const Goals: React.FC = () => {
                                                     : '0 12px 40px rgba(6, 0, 171, 0.2)',
                                             },
                                             '& .MuiPickersDay-root': {
-                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 '&.Mui-selected': {
-                                                    backgroundColor: mode === 'dark' ? '#6366F1' : '#A8A3F6',
+                                                    backgroundColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                                     '&:hover': {
-                                                        backgroundColor: mode === 'dark' ? '#4F46E5' : '#8B85E8',
+                                                        backgroundColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                                     }
                                                 },
                                                 '&:hover': {
                                                     backgroundColor: mode === 'dark' 
-                                                        ? 'rgba(99, 102, 241, 0.2)' 
+                                                        ? 'rgba(108, 111, 249, 0.2)' 
                                                         : 'rgba(168, 163, 246, 0.2)',
                                                 }
                                             },
                                             '& .MuiPickersCalendarHeader-root': {
-                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             },
                                             '& .MuiDayCalendar-weekDayLabel': {
                                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
                                             },
                                             '& .MuiPickersYear-yearButton': {
-                                                color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 '&.Mui-selected': {
-                                                    backgroundColor: mode === 'dark' ? '#6366F1' : '#A8A3F6',
+                                                    backgroundColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                                 }
                                             }
                                         }
@@ -686,8 +686,8 @@ const Goals: React.FC = () => {
                                 disabled={!goalName || !targetAmount}
                                 sx={{
                                     background: mode === 'dark' 
-                                        ? 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)'
-                                        : 'linear-gradient(135deg, #A8A3F6 0%, #F6D5EE 100%)',
+                                        ? 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)'
+                                        : 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                                     color: '#FFFFFF',
                                     fontWeight: 600,
                                 }}

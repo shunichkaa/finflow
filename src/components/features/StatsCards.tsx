@@ -47,8 +47,8 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
             icon: <AccountBalanceWalletIcon sx={{ fontSize: 40 }} />,
             color: balance >= 0 ? 'primary' : 'error',
             bgGradient: balance >= 0
-                ? 'linear-gradient(135deg, #96CEB4 0%, #4ECDC4 100%)'
-                : 'linear-gradient(135deg, #FF6B6B 0%, #8B5CF6 100%)',
+                ? 'linear-gradient(135deg, #B5EAD7 0%, #B5EAD7 100%)'
+                : 'linear-gradient(135deg, #FFB3BA 0%, #6C6FF9 100%)',
             filterType: 'all',
         },
         {
@@ -56,7 +56,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
             value: totalIncome,
             icon: <TrendingUpIcon sx={{ fontSize: 40 }} />,
             color: 'success',
-            bgGradient: 'linear-gradient(135deg, #96CEB4 0%, #4ECDC4 100%)',
+            bgGradient: 'linear-gradient(135deg, #B5EAD7 0%, #B5EAD7 100%)',
             filterType: 'income',
         },
         {
@@ -64,7 +64,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
             value: totalExpense,
             icon: <TrendingDownIcon sx={{ fontSize: 40 }} />,
             color: 'error',
-            bgGradient: 'linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%)',
+            bgGradient: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
             filterType: 'expense',
         },
     ];
@@ -80,7 +80,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                             ? 'rgba(15, 15, 35, 0.4)'
                             : 'rgba(255, 255, 255, 0.2)',
                         border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         position: 'relative',
                         overflow: 'hidden',
                         cursor: onFilterClick ? 'pointer' : 'default',

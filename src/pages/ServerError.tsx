@@ -24,7 +24,7 @@ const ServerError: React.FC = () => {
                     p: 4,
                     textAlign: 'center',
                     borderRadius: 3,
-                    backgroundColor: '#f8fafc',
+                    backgroundColor: '#F5F6FA',
                     border: '1px solid rgba(148, 163, 184, 0.1)',
                 }}
             >
@@ -33,7 +33,7 @@ const ServerError: React.FC = () => {
                     sx={{
                         fontSize: '6rem',
                         mb: 2,
-                        color: '#ef4444',
+                        color: '#FFB3BA',
                     }}
                 >
                     ⚡
@@ -61,7 +61,7 @@ const ServerError: React.FC = () => {
                         background: mode === 'dark' 
                             ? 'rgba(101, 70, 51, 0.5)'
                             : 'rgba(234, 234, 244, 0.5)',
-                            color: mode === 'dark' ? '#FCF9F9' : '#0600AB',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             fontWeight: 'bold',
                             px: 4,
                             py: 1.5,
@@ -84,13 +84,13 @@ const ServerError: React.FC = () => {
                         onClick={handleReload}
                         size="large"
                         sx={{
-                            borderColor: '#64748b',
-                            color: '#64748b',
+                            borderColor: '#272B3E',
+                            color: '#272B3E',
                             px: 4,
                             py: 1.5,
                             borderRadius: 2,
                             '&:hover': {
-                                borderColor: '#475569',
+                                borderColor: '#272B3E',
                                 backgroundColor: 'rgba(100, 116, 139, 0.04)',
                             },
                         }}

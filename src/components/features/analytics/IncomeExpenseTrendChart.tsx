@@ -135,8 +135,8 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 alignItems: 'center',
                 justifyContent: 'center',
                 background: mode === 'dark'
-                    ? 'radial-gradient(circle at 50% 50%, rgba(74, 74, 106, 0.08) 0%, rgba(151, 125, 255, 0.05) 50%, transparent 100%)'
-                    : 'radial-gradient(circle at 50% 50%, rgba(151, 125, 255, 0.05) 0%, rgba(255, 204, 242, 0.03) 50%, transparent 100%)',
+                    ? 'radial-gradient(circle at 50% 50%, rgba(74, 74, 106, 0.08) 0%, rgba(108, 111, 249, 0.05) 50%, transparent 100%)'
+                    : 'radial-gradient(circle at 50% 50%, rgba(108, 111, 249, 0.05) 0%, rgba(255, 204, 242, 0.03) 50%, transparent 100%)',
             borderRadius: 4,
             overflow: 'hidden'
         }}>
@@ -151,23 +151,23 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                     <defs>
                         {/* iOS 26 Liquid Glass Gradients for Lines */}
                         <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#96CEB4" stopOpacity={0.8}/>
-                            <stop offset="50%" stopColor="#4ECDC4" stopOpacity={0.6}/>
-                            <stop offset="100%" stopColor="#96CEB4" stopOpacity={0.4}/>
+                            <stop offset="0%" stopColor="#B5EAD7" stopOpacity={0.8}/>
+                            <stop offset="50%" stopColor="#B5EAD7" stopOpacity={0.6}/>
+                            <stop offset="100%" stopColor="#B5EAD7" stopOpacity={0.4}/>
                         </linearGradient>
                             <linearGradient id="expenseGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor={mode === 'dark' ? '#B8A6FF' : '#8B5CF6'} stopOpacity={0.8}/>
-                                <stop offset="50%" stopColor={mode === 'dark' ? '#8B5CF6' : '#6366F1'} stopOpacity={0.6}/>
-                                <stop offset="100%" stopColor={mode === 'dark' ? '#B8A6FF' : '#8B5CF6'} stopOpacity={0.4}/>
+                                <stop offset="0%" stopColor={mode === 'dark' ? '#6C6FF9' : '#6C6FF9'} stopOpacity={0.8}/>
+                                <stop offset="50%" stopColor={mode === 'dark' ? '#6C6FF9' : '#6C6FF9'} stopOpacity={0.6}/>
+                                <stop offset="100%" stopColor={mode === 'dark' ? '#6C6FF9' : '#6C6FF9'} stopOpacity={0.4}/>
                             </linearGradient>
                         {/* Area gradients for glass effect */}
                         <linearGradient id="incomeArea" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#96CEB4" stopOpacity={0.3}/>
-                            <stop offset="100%" stopColor="#96CEB4" stopOpacity={0.05}/>
+                            <stop offset="0%" stopColor="#B5EAD7" stopOpacity={0.3}/>
+                            <stop offset="100%" stopColor="#B5EAD7" stopOpacity={0.05}/>
                         </linearGradient>
                             <linearGradient id="expenseArea" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor={mode === 'dark' ? '#B8A6FF' : '#8B5CF6'} stopOpacity={0.3}/>
-                                <stop offset="100%" stopColor={mode === 'dark' ? '#B8A6FF' : '#8B5CF6'} stopOpacity={0.05}/>
+                                <stop offset="0%" stopColor={mode === 'dark' ? '#6C6FF9' : '#6C6FF9'} stopOpacity={0.3}/>
+                                <stop offset="100%" stopColor={mode === 'dark' ? '#6C6FF9' : '#6C6FF9'} stopOpacity={0.05}/>
                             </linearGradient>
                         {/* Glass glow filter */}
                         <filter id="glassGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -180,38 +180,38 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                     </defs>
                     <CartesianGrid 
                         strokeDasharray="8 8" 
-                        stroke={mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(151, 125, 255, 0.15)'}
+                        stroke={mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(108, 111, 249, 0.15)'}
                         strokeWidth={1}
                     />
                     <XAxis
                         dataKey="date"
-                        tick={{fontSize: 12, fill: mode === 'dark' ? '#FFFFFF' : '#0600AB', fontWeight: 500}}
+                        tick={{fontSize: 12, fill: mode === 'dark' ? '#FFFFFF' : '#272B3E', fontWeight: 500}}
                         interval={period === 'year' ? 1 : period === 'month' ? 4 : 0}
-                        axisLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(151, 125, 255, 0.2)', strokeWidth: 1.5}}
-                        tickLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(151, 125, 255, 0.2)'}}
+                        axisLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(108, 111, 249, 0.2)', strokeWidth: 1.5}}
+                        tickLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(108, 111, 249, 0.2)'}}
                     />
                     <YAxis
-                        tick={{fontSize: 12, fill: mode === 'dark' ? '#FFFFFF' : '#0600AB', fontWeight: 500}}
+                        tick={{fontSize: 12, fill: mode === 'dark' ? '#FFFFFF' : '#272B3E', fontWeight: 500}}
                         tickFormatter={(value) => formatCurrency(value, currency)}
-                        axisLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(151, 125, 255, 0.2)', strokeWidth: 1.5}}
-                        tickLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(151, 125, 255, 0.2)'}}
+                        axisLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(108, 111, 249, 0.2)', strokeWidth: 1.5}}
+                        tickLine={{stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(108, 111, 249, 0.2)'}}
                     />
                     <Tooltip
                         formatter={(value: number) => formatCurrency(value, currency)}
                         contentStyle={{
-                            backgroundColor: mode === 'dark' ? 'rgba(28, 28, 30, 0.98)' : 'rgba(252, 248, 245, 0.98)',
-                            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(151, 125, 255, 0.3)',
+                            backgroundColor: mode === 'dark' ? '#272B3E' : 'rgba(252, 248, 245, 0.98)',
+                            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(108, 111, 249, 0.3)',
                             borderRadius: '16px',
                             backdropFilter: 'blur(40px) saturate(180%)',
                             boxShadow: mode === 'dark' 
                                 ? '0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                                : '0 12px 40px rgba(151, 125, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                                : '0 12px 40px rgba(108, 111, 249, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             padding: '12px 16px',
                             fontWeight: 600
                         }}
                         labelStyle={{
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             fontWeight: 700,
                             marginBottom: '8px'
                         }}
@@ -220,7 +220,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         wrapperStyle={{ 
                             paddingTop: '20px',
                             fontSize: '14px',
-                            color: mode === 'dark' ? '#FFFFFF' : '#0600AB',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             fontWeight: 600
                         }}
                     />
@@ -241,7 +241,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         type="monotone"
                         dataKey="expense"
                         name={t('expense')}
-                        stroke="#64C7F8"
+                        stroke="#6C6FF9"
                         strokeWidth={3}
                         dot={false}
                         activeDot={false}
