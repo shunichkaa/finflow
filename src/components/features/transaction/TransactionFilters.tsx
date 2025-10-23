@@ -126,9 +126,9 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         },
                     }}
                     sx={{
-                        minWidth: { xs: '100%', sm: 160 },
+                        minWidth: { xs: '100%', sm: 180 },
                         flex: { sm: '1 1 auto' },
-                        maxWidth: { sm: 200 },
+                        maxWidth: { sm: 280 },
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
@@ -158,9 +158,9 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     value={dateFrom}
                     onChange={onDateFromChange}
                     sx={{ 
-                        minWidth: { xs: '100%', sm: 130 },
-                        flex: { sm: '1 1 auto' },
-                        maxWidth: { sm: 150 }
+                        minWidth: { xs: '100%', sm: 110 },
+                        flex: { sm: '0 1 auto' },
+                        maxWidth: { sm: 130 }
                     }}
                 />
 
@@ -170,9 +170,9 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     value={dateTo}
                     onChange={onDateToChange}
                     sx={{ 
-                        minWidth: { xs: '100%', sm: 130 },
-                        flex: { sm: '1 1 auto' },
-                        maxWidth: { sm: 150 }
+                        minWidth: { xs: '100%', sm: 110 },
+                        flex: { sm: '0 1 auto' },
+                        maxWidth: { sm: 130 }
                     }}
                 />
 

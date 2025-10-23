@@ -274,14 +274,15 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             mb: 2,
                                             borderRadius: 2,
                                             backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
+                                            display: 'flex',
+                                            alignItems: 'baseline',
+                                            gap: 1,
                                         }}
                                     >
                                         <Typography 
                                             variant="caption" 
                                             sx={{ 
                                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
-                                                display: 'block',
-                                                mb: 0.5,
                                                 fontSize: '0.75rem',
                                                 fontWeight: 600,
                                             }}
