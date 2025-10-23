@@ -44,6 +44,7 @@ import { useSettingsStore, Currency } from '../../Budgets/store/useSettingsStore
 import { useAuth } from '../../Budgets/hooks/useAuth';
 import { useCloudSync } from '../../Budgets/hooks/useCloudSync';
 import { triggerSync } from '../../Budgets/utils/cloudSyncTrigger';
+import { supabase } from '../../lib/supabaseClient';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import IOSTimePicker from '../../components/ui/IOSTimePicker';
 
@@ -183,9 +184,74 @@ export default function Profile() {
     const handleCloseEditModal = () => {
         setEditModalOpen(false);
         // Сброс полей
+        setNewEmail('');
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
+    };
+
+    const handleSaveProfile = async () => {
+        try {
+            // Проверка пароля
+            if (newPassword) {
+                if (newPassword.length < 6) {
+                    setSnackbarMessage('Пароль должен содержать минимум 6 символов');
+                    setSnackbarOpen(true);
+                    return;
+                }
+                if (newPassword !== confirmPassword) {
+                    setSnackbarMessage('Пароли не совпадают');
+                    setSnackbarOpen(true);
+                    return;
+                }
+                
+                // Обновление пароля через Supabase
+                const { error: passwordError } = await supabase.auth.updateUser({
+                    password: newPassword
+                });
+                
+                if (passwordError) {
+                    setSnackbarMessage(`Ошибка смены пароля: ${passwordError.message}`);
+                    setSnackbarOpen(true);
+                    return;
+                }
+                
+                setSnackbarMessage('Пароль успешно изменён!');
+                setSnackbarOpen(true);
+            }
+
+            // Проверка email
+            if (newEmail && newEmail !== session?.user?.email) {
+                // Обновление email через Supabase
+                const { error: emailError } = await supabase.auth.updateUser({
+                    email: newEmail
+                });
+                
+                if (emailError) {
+                    setSnackbarMessage(`Ошибка смены email: ${emailError.message}`);
+                    setSnackbarOpen(true);
+                    return;
+                }
+                
+                setSnackbarMessage('Письмо с подтверждением отправлено на новый email!');
+                setSnackbarOpen(true);
+            }
+
+            // Если никаких изменений не было
+            if (!newPassword && !newEmail) {
+                setSnackbarMessage('Изменения сохранены');
+                setSnackbarOpen(true);
+            }
+
+            // Закрываем модальное окно после небольшой задержки
+            setTimeout(() => {
+                handleCloseEditModal();
+            }, 1500);
+        } catch (error) {
+            console.error('Error saving profile:', error);
+            setSnackbarMessage('Произошла ошибка при сохранении');
+            setSnackbarOpen(true);
+        }
     };
 
     return (
@@ -830,25 +896,137 @@ export default function Profile() {
                             },
                         }}
                     />
+                        
+                        {/* Email */}
+                        <TextField
+                            label="Новый Email (опционально)"
+                            type="email"
+                            value={newEmail}
+                            onChange={(e) => setNewEmail(e.target.value)}
+                            placeholder={session?.user?.email}
+                            margin="normal"
+                            helperText="Подтверждение будет отправлено на старый email"
+                            sx={{
+                                maxWidth: 350,
+                                width: '100%',
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: 'rgba(6, 0, 171, 0.3)',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: 'rgba(6, 0, 171, 0.6)',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#272B3E',
+                                    },
+                                },
+                                '& .MuiInputLabel-root': {
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    '&.Mui-focused': {
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    },
+                                },
+                            }}
+                        />
+
+                        {/* Новый пароль */}
+                        <TextField
+                            label="Новый пароль (опционально)"
+                            type="password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            margin="normal"
+                            helperText="Минимум 6 символов"
+                            sx={{
+                                maxWidth: 350,
+                                width: '100%',
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: 'rgba(6, 0, 171, 0.3)',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: 'rgba(6, 0, 171, 0.6)',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#272B3E',
+                                    },
+                                },
+                                '& .MuiInputLabel-root': {
+                                    color: mode === 'dark' ? '#FFFFFF' : '#FFFFFF',
+                                    '&.Mui-focused': {
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    },
+                                },
+                            }}
+                        />
+
+                        {/* Подтверждение пароля */}
+                        {newPassword && (
+                            <TextField
+                                label="Подтвердите новый пароль"
+                                type="password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                margin="normal"
+                                error={newPassword !== confirmPassword && confirmPassword.length > 0}
+                                helperText={newPassword !== confirmPassword && confirmPassword.length > 0 ? "Пароли не совпадают" : ""}
+                                sx={{
+                                    maxWidth: 350,
+                                    width: '100%',
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: 'rgba(6, 0, 171, 0.3)',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: 'rgba(6, 0, 171, 0.6)',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#272B3E',
+                                        },
+                                    },
+                                    '& .MuiInputLabel-root': {
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        '&.Mui-focused': {
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        },
+                                    },
+                                }}
+                            />
+                        )}
                     </Box>
 
                     {/* Кнопки */}
                     <Box display="flex" gap={2} justifyContent="flex-end" mt={3}>
                         <Button
-                            variant="contained"
+                            variant="outlined"
                             onClick={handleCloseEditModal}
                             sx={{
-                                background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.8) 0%, rgba(248, 229, 229, 0.6) 100%)',
-                                color: '#272B3E',
+                                borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
                                 fontWeight: 'bold',
                                 '&:hover': {
-                                    background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.9) 0%, rgba(248, 229, 229, 0.8) 100%)',
-                                    transform: 'translateY(-1px)',
-                                    boxShadow: '0 6px 20px rgba(6, 0, 171, 0.2)',
+                                    borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)',
+                                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(39, 43, 62, 0.05)',
                                 }
                             }}
                         >
-                            Закрыть
+                            Отмена
+                        </Button>
+                        <Button
+                            variant="contained"
+                            onClick={handleSaveProfile}
+                            sx={{
+                                background: 'linear-gradient(135deg, #6C6FF9 0%, #A8A3F6 100%)',
+                                color: '#FFFFFF',
+                                fontWeight: 'bold',
+                                '&:hover': {
+                                    background: 'linear-gradient(135deg, #5B5EE8 0%, #9794E5 100%)',
+                                    transform: 'translateY(-1px)',
+                                    boxShadow: '0 6px 20px rgba(108, 111, 249, 0.4)',
+                                }
+                            }}
+                        >
+                            Сохранить изменения
                         </Button>
                     </Box>
                 </Box>
@@ -896,3 +1074,4 @@ export default function Profile() {
         );
     }
 }
+
