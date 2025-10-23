@@ -788,35 +788,6 @@ export default function Profile() {
                         }}
                     />
 
-                    {/* Email */}
-                    <TextField
-                        fullWidth
-                        label="Email"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        margin="normal"
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderColor: 'rgba(6, 0, 171, 0.3)',
-                                },
-                                '&:hover fieldset': {
-                                    borderColor: 'rgba(6, 0, 171, 0.6)',
-                                },
-                                '&.Mui-focused fieldset': {
-                                    borderColor: '#272B3E',
-                                },
-                            },
-                            '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                },
-                            },
-                        }}
-                    />
-
                     {/* Кнопки */}
                     <Box display="flex" gap={2} justifyContent="flex-end" mt={3}>
                         <Button
