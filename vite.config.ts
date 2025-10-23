@@ -6,20 +6,29 @@ export default defineConfig({
         react({
             jsxRuntime: 'automatic',
             babel: {
-                plugins: []
+                plugins: [],
+                compact: false
             }
         })
     ],
     build: {
         outDir: 'dist',
         sourcemap: false,
+        commonjsOptions: {
+            include: [/node_modules/],
+            transformMixedEsModules: true
+        },
         rollupOptions: {
             output: {
                 manualChunks: {
-                    'react-vendor': ['react', 'react-dom', 'react/jsx-runtime'],
+                    'react-vendor': ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
                     'mui': ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
                     'router': ['react-router-dom'],
                     'supabase': ['@supabase/supabase-js']
+                },
+                globals: {
+                    'react': 'React',
+                    'react-dom': 'ReactDOM'
                 }
             }
         }
@@ -33,6 +42,12 @@ export default defineConfig({
         global: 'globalThis'
     },
     optimizeDeps: {
-        include: ['react', 'react-dom', 'react/jsx-runtime']
+        include: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
+        esbuildOptions: {
+            jsx: 'automatic'
+        }
+    },
+    resolve: {
+        dedupe: ['react', 'react-dom']
     }
 })
