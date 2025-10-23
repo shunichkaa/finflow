@@ -318,7 +318,7 @@ const Goals: React.FC = () => {
                                             align="center"
                                             sx={{ 
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                                mb: 3,
+                                                mb: 2,
                                                 minHeight: 48,
                                                 display: 'flex',
                                                 alignItems: 'center',
