@@ -580,27 +580,145 @@ export default function Profile() {
                                     }
                                 }}
                             />
-                            <TextField
-                                type="time"
-                                value={notificationTime}
-                                onChange={(e) => setNotificationTime(e.target.value)}
-                                size="small"
-                                sx={{
-                                    width: '120px',
-                                    '& .MuiOutlinedInput-root': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                        '& fieldset': {
-                                            borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : '#EFF0F6',
+                            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+                                {/* Часы */}
+                                <Select
+                                    value={notificationTime.split(':')[0]}
+                                    onChange={(e) => {
+                                        const minutes = notificationTime.split(':')[1];
+                                        setNotificationTime(`${e.target.value}:${minutes}`);
+                                    }}
+                                    size="small"
+                                    MenuProps={{
+                                        PaperProps: {
+                                            style: {
+                                                maxHeight: 250,
+                                            },
                                         },
-                                        '&:hover fieldset': {
-                                            borderColor: '#6C6FF9',
+                                    }}
+                                    sx={{
+                                        width: '70px',
+                                        backgroundColor: mode === 'dark' 
+                                            ? 'rgba(108, 111, 249, 0.15)' 
+                                            : 'rgba(108, 111, 249, 0.08)',
+                                        borderRadius: '12px',
+                                        '& .MuiSelect-select': {
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                            fontSize: '1.1rem',
+                                            fontWeight: 600,
+                                            fontFamily: 'Nunito, system-ui, sans-serif',
+                                            textAlign: 'center',
+                                            padding: '10px 8px',
+                                        },
+                                        '& fieldset': {
+                                            borderColor: mode === 'dark' 
+                                                ? 'rgba(108, 111, 249, 0.3)' 
+                                                : 'rgba(108, 111, 249, 0.2)',
+                                            borderWidth: '2px',
+                                        },
+                                        '&:hover': {
+                                            backgroundColor: mode === 'dark' 
+                                                ? 'rgba(108, 111, 249, 0.2)' 
+                                                : 'rgba(108, 111, 249, 0.12)',
+                                            '& fieldset': {
+                                                borderColor: '#6C6FF9',
+                                            },
                                         },
                                         '&.Mui-focused fieldset': {
                                             borderColor: '#6C6FF9',
+                                            borderWidth: '2px',
                                         },
-                                    },
-                                }}
-                            />
+                                    }}
+                                >
+                                    {Array.from({ length: 24 }, (_, i) => (
+                                        <MenuItem 
+                                            key={i} 
+                                            value={String(i).padStart(2, '0')}
+                                            sx={{
+                                                justifyContent: 'center',
+                                                fontWeight: 600,
+                                                fontSize: '1.05rem',
+                                            }}
+                                        >
+                                            {String(i).padStart(2, '0')}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                                
+                                <Typography 
+                                    variant="h6" 
+                                    sx={{ 
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    :
+                                </Typography>
+                                
+                                {/* Минуты */}
+                                <Select
+                                    value={notificationTime.split(':')[1]}
+                                    onChange={(e) => {
+                                        const hours = notificationTime.split(':')[0];
+                                        setNotificationTime(`${hours}:${e.target.value}`);
+                                    }}
+                                    size="small"
+                                    MenuProps={{
+                                        PaperProps: {
+                                            style: {
+                                                maxHeight: 250,
+                                            },
+                                        },
+                                    }}
+                                    sx={{
+                                        width: '70px',
+                                        backgroundColor: mode === 'dark' 
+                                            ? 'rgba(108, 111, 249, 0.15)' 
+                                            : 'rgba(108, 111, 249, 0.08)',
+                                        borderRadius: '12px',
+                                        '& .MuiSelect-select': {
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                            fontSize: '1.1rem',
+                                            fontWeight: 600,
+                                            fontFamily: 'Nunito, system-ui, sans-serif',
+                                            textAlign: 'center',
+                                            padding: '10px 8px',
+                                        },
+                                        '& fieldset': {
+                                            borderColor: mode === 'dark' 
+                                                ? 'rgba(108, 111, 249, 0.3)' 
+                                                : 'rgba(108, 111, 249, 0.2)',
+                                            borderWidth: '2px',
+                                        },
+                                        '&:hover': {
+                                            backgroundColor: mode === 'dark' 
+                                                ? 'rgba(108, 111, 249, 0.2)' 
+                                                : 'rgba(108, 111, 249, 0.12)',
+                                            '& fieldset': {
+                                                borderColor: '#6C6FF9',
+                                            },
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#6C6FF9',
+                                            borderWidth: '2px',
+                                        },
+                                    }}
+                                >
+                                    {['00', '15', '30', '45'].map((minute) => (
+                                        <MenuItem 
+                                            key={minute} 
+                                            value={minute}
+                                            sx={{
+                                                justifyContent: 'center',
+                                                fontWeight: 600,
+                                                fontSize: '1.05rem',
+                                            }}
+                                        >
+                                            {minute}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </Box>
                         </ListItem>
                     )}
                 </List>
