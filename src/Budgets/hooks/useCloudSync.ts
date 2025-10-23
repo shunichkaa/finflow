@@ -5,6 +5,7 @@ import { useGoalsStore } from '../store/useGoalsStore';
 import { useAuth } from './useAuth';
 import type { Transaction, Budget } from '../types';
 import type { Goal } from '../types';
+import { setGlobalSyncTrigger } from '../utils/cloudSyncTrigger';
 
 interface SyncStatus {
     isSyncing: boolean;
@@ -210,6 +211,16 @@ export const useCloudSync = (enabled: boolean) => {
             return () => clearTimeout(timeoutId);
         }
     }, [transactions, budgets, goals]);
+
+    // Устанавливаем глобальный триггер синхронизации
+    useEffect(() => {
+        if (enabled && session?.user?.id) {
+            setGlobalSyncTrigger(syncToCloud);
+        }
+        return () => {
+            setGlobalSyncTrigger(async () => {});
+        };
+    }, [enabled, session?.user?.id]);
 
     return {
         status,

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Goal, CreateGoalInput } from '../types';
+import { triggerSync } from '../utils/cloudSyncTrigger';
 
 interface GoalsState {
     goals: Goal[];
@@ -28,6 +29,7 @@ export const useGoalsStore = create<GoalsState>()(
                 set((state) => ({
                     goals: [...state.goals, newGoal],
                 }));
+                triggerSync();
             },
             
             updateGoal: (id: string, updates: Partial<Goal>) => {
@@ -36,12 +38,14 @@ export const useGoalsStore = create<GoalsState>()(
                         goal.id === id ? { ...goal, ...updates } : goal
                     ),
                 }));
+                triggerSync();
             },
             
             deleteGoal: (id: string) => {
                 set((state) => ({
                     goals: state.goals.filter((goal) => goal.id !== id),
                 }));
+                triggerSync();
             },
             
             addToGoal: (id: string, amount: number) => {
@@ -58,6 +62,7 @@ export const useGoalsStore = create<GoalsState>()(
                         return goal;
                     }),
                 }));
+                triggerSync();
             },
             
             completeGoal: (id: string) => {
@@ -66,6 +71,7 @@ export const useGoalsStore = create<GoalsState>()(
                         goal.id === id ? { ...goal, isCompleted: true } : goal
                     ),
                 }));
+                triggerSync();
             },
             
             setGoals: (goals: Goal[]) => {

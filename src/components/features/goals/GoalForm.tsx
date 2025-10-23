@@ -48,7 +48,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
         }
         
         if (formData.targetAmount <= 0) {
-            newErrors.targetAmount = t('targetAmountRequired', 'Целевая сумма должна быть больше 0');
+            newErrors.targetAmount = t('targetAmountRequired', 'Итоговая сумма должна быть больше 0');
         }
         
         if (formData.currentAmount < 0) {
@@ -131,7 +131,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                 />
                 
                 <NumberInput
-                    label={t('targetAmount', 'Целевая сумма')}
+                    label={t('targetAmount', 'Итоговая сумма')}
                     value={String(formData.targetAmount)}
                     onChange={(value) => handleInputChange('targetAmount', parseFloat(value) || 0)}
                     fullWidth

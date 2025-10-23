@@ -346,7 +346,7 @@ const Goals: React.FC = () => {
                                                     }
                                                 }}
                                             />
-                                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1 }}>
                                                 <Typography 
                                                     variant="body2" 
                                                     fontWeight="600"
@@ -355,7 +355,7 @@ const Goals: React.FC = () => {
                                                         fontSize: '0.9rem'
                                                     }}
                                                 >
-                                                    {goal.currentAmount.toLocaleString()} {currency}
+                                                    {goal.currentAmount.toLocaleString()}{' '}{currency}
                                                 </Typography>
                                                 <Typography 
                                                     variant="body2" 
@@ -365,7 +365,7 @@ const Goals: React.FC = () => {
                                                         fontSize: '0.9rem'
                                                     }}
                                                 >
-                                                    {goal.targetAmount.toLocaleString()} {currency}
+                                                    {goal.targetAmount.toLocaleString()}{' '}{currency}
                                                 </Typography>
                                             </Box>
                                         </Box>

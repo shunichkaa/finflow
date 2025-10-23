@@ -96,12 +96,10 @@ const Budgets: React.FC = () => {
                 setIsModalOpen(false);
                 setEditingBudgetId(null);
             }} title={editingBudget ? t('editBudget') : t('createBudget')}>
-                <Box sx={{width: {xs: '100%', sm: 520}}}>
-                    <BudgetForm initialBudget={editingBudget ?? undefined} onSuccess={() => {
-                        setIsModalOpen(false);
-                        setEditingBudgetId(null);
-                    }}/>
-                </Box>
+                <BudgetForm initialBudget={editingBudget ?? undefined} onSuccess={() => {
+                    setIsModalOpen(false);
+                    setEditingBudgetId(null);
+                }}/>
             </Modal>
         </Container>
     );

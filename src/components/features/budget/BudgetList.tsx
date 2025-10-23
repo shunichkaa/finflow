@@ -319,11 +319,11 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             <Typography 
                                                 variant="caption" 
                                                 sx={{ 
-                                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                                    opacity: 0.7,
+                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
                                                     display: 'block',
                                                     mb: 0.5,
-                                                    fontSize: '0.75rem'
+                                                    fontSize: '0.75rem',
+                                                    fontWeight: 600,
                                                 }}
                                             >
                                                 {t('remaining')}:
@@ -332,7 +332,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                                 variant="body1" 
                                                 fontWeight="700"
                                                 sx={{ 
-                                                    color: categoryColor,
+                                                    color: mode === 'dark' ? categoryColor : '#272B3E',
                                                     fontSize: '0.95rem'
                                                 }}
                                             >

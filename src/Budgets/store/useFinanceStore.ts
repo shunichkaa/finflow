@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { v4 as uuid } from 'uuid';
 import type { Transaction, Budget, CreateTransactionInput, CreateBudgetInput } from '../types';
+import { triggerSync } from '../utils/cloudSyncTrigger';
 
 // ============================================
 // ИНТЕРФЕЙС STORE
@@ -42,7 +43,7 @@ export const useFinanceStore = create<FinanceStore>()(
 
             // ===== МЕТОДЫ ДЛЯ ТРАНЗАКЦИЙ =====
 
-            addTransaction: (transaction) =>
+            addTransaction: (transaction) => {
                 set((state) => ({
                     transactions: [
                         ...state.transactions,
@@ -52,19 +53,25 @@ export const useFinanceStore = create<FinanceStore>()(
                             createdAt: new Date(),
                         },
                     ],
-                })),
+                }));
+                triggerSync();
+            },
 
-            updateTransaction: (id, data) =>
+            updateTransaction: (id, data) => {
                 set((state) => ({
                     transactions: state.transactions.map((t) =>
                         t.id === id ? { ...t, ...data } : t
                     ),
-                })),
+                }));
+                triggerSync();
+            },
 
-            deleteTransaction: (id) =>
+            deleteTransaction: (id) => {
                 set((state) => ({
                     transactions: state.transactions.filter((t) => t.id !== id),
-                })),
+                }));
+                triggerSync();
+            },
 
             setTransactions: (transactions) =>
                 set(() => ({
@@ -73,7 +80,7 @@ export const useFinanceStore = create<FinanceStore>()(
 
             // ===== МЕТОДЫ ДЛЯ БЮДЖЕТОВ =====
 
-            addBudget: (budget) =>
+            addBudget: (budget) => {
                 set((state) => ({
                     budgets: [
                         ...state.budgets,
@@ -82,19 +89,25 @@ export const useFinanceStore = create<FinanceStore>()(
                             id: uuid(),
                         },
                     ],
-                })),
+                }));
+                triggerSync();
+            },
 
-            updateBudget: (id, data) =>
+            updateBudget: (id, data) => {
                 set((state) => ({
                     budgets: state.budgets.map((b) =>
                         b.id === id ? { ...b, ...data } : b
                     ),
-                })),
+                }));
+                triggerSync();
+            },
 
-            deleteBudget: (id) =>
+            deleteBudget: (id) => {
                 set((state) => ({
                     budgets: state.budgets.filter((b) => b.id !== id),
-                })),
+                }));
+                triggerSync();
+            },
 
             setBudgets: (budgets) =>
                 set(() => ({
