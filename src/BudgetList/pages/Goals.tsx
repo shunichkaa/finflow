@@ -634,6 +634,11 @@ const Goals: React.FC = () => {
                     setDetailOpen(false);
                     setSelectedGoal(null);
                 }}
+                onEdit={() => {
+                    if (selectedGoal) {
+                        handleEditGoal(selectedGoal.id);
+                    }
+                }}
             />
         </Container>
     );

@@ -119,9 +119,28 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                 <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                     {goal.name}
                 </Typography>
-                <IconButton onClick={onClose} size="small">
-                    <CloseIcon sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }} />
-                </IconButton>
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                    {onEdit && (
+                        <IconButton 
+                            onClick={() => {
+                                onEdit();
+                                onClose();
+                            }} 
+                            size="small"
+                            sx={{
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                '&:hover': {
+                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                }
+                            }}
+                        >
+                            <EditIcon />
+                        </IconButton>
+                    )}
+                    <IconButton onClick={onClose} size="small">
+                        <CloseIcon sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }} />
+                    </IconButton>
+                </Box>
             </DialogTitle>
 
             <DialogContent sx={{ pt: 3 }}>

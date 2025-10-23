@@ -265,7 +265,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         },
                     }}
                 >
-                    {nickname || 'Личный кабинет'}
+                    {nickname || 'Профиль'}
                 </Button>
                 <Button
                     onClick={handleLogout}
@@ -396,6 +396,58 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         
                         {/* Notification Center */}
                         <NotificationCenter />
+                        
+                        {/* Profile and Logout buttons for tablet/desktop */}
+                        <Box sx={{ 
+                            display: { xs: 'none', sm: 'flex' }, 
+                            gap: 1, 
+                            ml: 2,
+                            alignItems: 'center'
+                        }}>
+                            <IconButton
+                                onClick={handleProfileClick}
+                                sx={{
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    transition: 'all 0.2s ease',
+                                    '&:hover': {
+                                        background: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                    },
+                                }}
+                            >
+                                <Avatar
+                                    src={avatar || undefined}
+                                    sx={{
+                                        width: 32,
+                                        height: 32,
+                                        bgcolor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                        fontSize: '0.875rem',
+                                    }}
+                                >
+                                    {!avatar && <Person sx={{fontSize: '1.2rem'}}/>}
+                                </Avatar>
+                            </IconButton>
+                            <Button
+                                onClick={handleLogout}
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    borderRadius: 2,
+                                    px: 2,
+                                    py: 0.75,
+                                    borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    fontWeight: 500,
+                                    textTransform: 'none',
+                                    transition: 'all 0.2s ease',
+                                    '&:hover': {
+                                        borderColor: '#6C6FF9',
+                                        backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                    },
+                                }}
+                            >
+                                {t('logout', 'Выйти')}
+                            </Button>
+                        </Box>
                     </Toolbar>
                 </Box>
 

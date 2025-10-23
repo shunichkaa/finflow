@@ -151,8 +151,8 @@ const resources = {
             confirmDeleteRecurring: 'Удалить повторяющуюся транзакцию?',
             topExpenses: 'Топ-5 расходов',
             
-            // Личный кабинет
-            profile: 'Личный кабинет',
+            // Профиль
+            profile: 'Профиль',
             settings: 'Настройки',
             darkTheme: 'Темная тема',
             language: 'Язык интерфейса',

@@ -29,14 +29,10 @@ import {
     Language,
     AttachMoney,
     CloudSync,
-    Security,
-    Notifications,
     Backup,
     Delete,
     Edit,
     PhotoCamera,
-    Visibility,
-    VisibilityOff,
     Close,
     Schedule,
     AccessTime,
@@ -69,13 +65,11 @@ export default function Profile() {
             setDailyReminderEnabled
         } = useSettingsStore();
         const { session, loading: authLoading } = useAuth();
-        const [notifications, setNotifications] = useState(true);
-        const [backupEnabled, setBackupEnabled] = useState(true);
         const [snackbarOpen, setSnackbarOpen] = useState(false);
         const [snackbarMessage, setSnackbarMessage] = useState('');
         
         // Cloud sync - always enabled
-        const { status: syncStatus, syncNow } = useCloudSync(true);
+        const { status: syncStatus, syncNow, loadFromCloud } = useCloudSync(true);
         
         // Состояние для редактирования профиля
         const [editModalOpen, setEditModalOpen] = useState(false);
@@ -190,7 +184,7 @@ export default function Profile() {
     return (
         <Container maxWidth="md" sx={{ py: 4 }}>
             <Typography variant="h4" gutterBottom sx={{ mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                Личный кабинет
+                Профиль
             </Typography>
 
             {/* Профиль пользователя */}
@@ -333,35 +327,6 @@ export default function Profile() {
                         </FormControl>
                     </ListItem>
 
-                    <Divider />
-
-                    {/* Уведомления */}
-                    <ListItem>
-                        <ListItemIcon>
-                            <Notifications />
-                        </ListItemIcon>
-                        <ListItemText 
-                            primary="Уведомления" 
-                            secondary="Получать уведомления о важных событиях"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={notifications}
-                                    onChange={(e) => setNotifications(e.target.checked)}
-                                    sx={{
-                                        '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                                        },
-                                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                                        },
-                                    }}
-                                />
-                            }
-                            label=""
-                        />
-                    </ListItem>
                 </List>
             </Paper>
 
@@ -432,7 +397,7 @@ export default function Profile() {
                                         setSnackbarOpen(true);
                                     }
                                 }}
-                                sx={{
+                                    sx={{
                                     minWidth: '70px',
                                     px: 2,
                                     py: 0.8,
@@ -652,6 +617,37 @@ export default function Profile() {
                         gap: 2
                     }}
                 >
+                    <Button
+                        variant="outlined"
+                        startIcon={<CloudSync />}
+                        onClick={async () => {
+                            try {
+                                await loadFromCloud();
+                                setSnackbarMessage('✅ Данные успешно загружены из облака');
+                                setSnackbarOpen(true);
+                            } catch (error) {
+                                setSnackbarMessage('❌ Ошибка загрузки данных');
+                                setSnackbarOpen(true);
+                            }
+                        }}
+                        sx={{ 
+                            flex: '1 1 auto',
+                            minWidth: '200px',
+                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                            borderRadius: 2,
+                            py: 1.5,
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            '&:hover': {
+                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
+                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                transform: 'translateY(-2px)',
+                            }
+                        }}
+                    >
+                        Загрузить из облака
+                    </Button>
+
                     <Button
                         variant="outlined"
                         startIcon={<Backup />}

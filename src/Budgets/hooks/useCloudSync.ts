@@ -204,12 +204,23 @@ export const useCloudSync = (enabled: boolean) => {
         }
     };
 
-    // Начальная загрузка данных при включении синхронизации (только один раз для каждого пользователя)
+    // Начальная загрузка данных при включении синхронизации
+    // Загружаем данные всегда при входе пользователя для обеспечения синхронизации между устройствами
+    const prevUserIdRef = useRef<string | null>(null);
+    
     useEffect(() => {
-        if (enabled && session?.user?.id && !hasInitialLoaded(session.user.id)) {
-            syncFromCloud().then(() => {
-                markInitialLoaded(session.user.id);
-            });
+        if (enabled && session?.user?.id) {
+            // Проверяем, изменился ли пользователь (новый вход или смена пользователя)
+            const userChanged = prevUserIdRef.current !== session.user.id;
+            prevUserIdRef.current = session.user.id;
+            
+            // Если это новый пользователь или еще не загружали данные для текущего пользователя
+            if (userChanged || !hasInitialLoaded(session.user.id)) {
+                console.log('🔄 Loading data from cloud for user:', session.user.id);
+                syncFromCloud().then(() => {
+                    markInitialLoaded(session.user.id);
+                });
+            }
         }
     }, [enabled, session?.user?.id]);
 
