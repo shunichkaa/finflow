@@ -647,8 +647,8 @@ export default function Profile() {
 
                 <Box 
                     sx={{ 
-                        display: 'grid',
-                        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+                        display: 'flex',
+                        flexWrap: 'wrap',
                         gap: 2
                     }}
                 >
@@ -656,8 +656,9 @@ export default function Profile() {
                         variant="outlined"
                         startIcon={<Backup />}
                         onClick={handleExportData}
-                        fullWidth
                         sx={{ 
+                            flex: '1 1 auto',
+                            minWidth: '200px',
                             borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             borderRadius: 2,
@@ -678,16 +679,17 @@ export default function Profile() {
                         color="error"
                         startIcon={<Delete />}
                         onClick={handleDeleteAccount}
-                        fullWidth
                         sx={{ 
-                            borderColor: '#FFB3BA',
-                            color: '#FFB3BA',
+                            flex: '1 1 auto',
+                            minWidth: '200px',
+                            borderColor: '#FF3B3B',
+                            color: '#FF3B3B',
                             borderRadius: 2,
                             py: 1.5,
                             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
-                                borderColor: '#FFB3BA',
-                                backgroundColor: 'rgba(255, 179, 186, 0.1)',
+                                borderColor: '#FF3B3B',
+                                backgroundColor: 'rgba(255, 59, 59, 0.1)',
                                 transform: 'translateY(-2px)',
                             }
                         }}

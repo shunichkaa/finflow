@@ -17,6 +17,7 @@ import {
     Add as AddIcon,
     Remove as RemoveIcon,
     TrendingUp as TrendingUpIcon,
+    Edit as EditIcon,
 } from '@mui/icons-material';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 import { useSettingsStore } from '../../../Budgets/store/useSettingsStore';
@@ -28,6 +29,7 @@ interface GoalDetailProps {
     goal: Goal | null;
     open: boolean;
     onClose: () => void;
+    onEdit?: () => void;
 }
 
 // Мотивационные фразы
@@ -44,7 +46,7 @@ const motivationalPhrases = [
     "Твоя цель уже близко! 🎁",
 ];
 
-export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose }) => {
+export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onEdit }) => {
     const { mode } = useThemeMode();
     const { currency } = useSettingsStore();
     const { addToGoal, updateGoal } = useGoalsStore();
