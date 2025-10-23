@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Avatar,
     Box,
@@ -21,6 +21,8 @@ import {useThemeMode} from '../Budgets/theme/ThemeContext';
 import {useSettingsStore} from '../Budgets/store/useSettingsStore';
 import {supabase} from '../lib/supabaseClient';
 import {GradientBackground} from './ui/GradientBackground';
+import {NotificationCenter} from './features/notification/NotificationCenter';
+import {useNotifications} from '../Budgets/hooks/useNotifications';
 
 const drawerWidth = 280;
 
@@ -40,6 +42,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     const [sidebarOpen, setSidebarOpen] = useState(defaultSidebarOpen);
 
     const isLoginPage = location.pathname === '/login';
+    
+    // Подключаем уведомления
+    useNotifications();
+    
+    // Автоматически закрываем мобильное меню при изменении маршрута
+    useEffect(() => {
+        setMobileOpen(false);
+    }, [location.pathname]);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -366,6 +376,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         </Box>
 
                         <Box sx={{flexGrow: 1}}/>
+                        
+                        {/* Notification Center */}
+                        <NotificationCenter />
                     </Toolbar>
                 </Box>
 

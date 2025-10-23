@@ -508,22 +508,18 @@ export default function Profile() {
                     size="large"
                     onClick={handleSave}
                     sx={{
-                        background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.8) 0%, rgba(108, 111, 249, 0.6) 100%)'
-                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.8) 0%, rgba(255, 204, 242, 0.6) 100%)',
+                        background: '#6C6FF9',
                         color: '#FFFFFF',
                         fontWeight: 'bold',
                         px: 4,
                         py: 1.5,
                         borderRadius: 2,
+                        boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&:hover': {
-                            background: mode === 'dark' 
-                                ? 'linear-gradient(135deg, rgba(0, 51, 255, 0.9) 0%, rgba(108, 111, 249, 0.8) 100%)'
-                                : 'linear-gradient(135deg, rgba(108, 111, 249, 0.9) 0%, rgba(255, 204, 242, 0.8) 100%)',
-                            transform: 'translateY(-1px)',
-                            boxShadow: mode === 'dark' 
-                                ? '0 6px 20px rgba(0, 51, 255, 0.4)'
-                                : '0 6px 20px rgba(108, 111, 249, 0.4)',
+                            background: '#6C6FF9',
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
                         }
                     }}
                 >

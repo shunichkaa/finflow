@@ -226,26 +226,26 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.8) 100%)'
-                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.8) 100%)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#FFFFFF',
+                            ? 'linear-gradient(135deg, rgba(181, 234, 215, 0.2) 0%, rgba(181, 234, 215, 0.35) 100%)'
+                            : 'linear-gradient(135deg, rgba(181, 234, 215, 0.6) 0%, rgba(181, 234, 215, 0.9) 100%)',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark' 
-                            ? '0 8px 24px rgba(108, 111, 249, 0.3)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.3)',
+                            ? '0 8px 24px rgba(181, 234, 215, 0.15)'
+                            : '0 8px 24px rgba(181, 234, 215, 0.3)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark' 
-                                ? '0 12px 30px rgba(108, 111, 249, 0.5)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.5)',
+                                ? '0 12px 30px rgba(181, 234, 215, 0.25)'
+                                : '0 12px 30px rgba(181, 234, 215, 0.5)',
                         }
                     }}
                 >
                     <CardContent sx={{p: 3}}>
-                        <Typography variant="body2" sx={{color: 'rgba(255, 255, 255, 0.9)', mb: 1}}>
+                        <Typography variant="body2" sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(39, 43, 62, 0.8)', mb: 1}}>
                             {t('income')}
                         </Typography>
-                        <Typography variant="h5" fontWeight="bold" sx={{color: '#FFFFFF'}}>
+                        <Typography variant="h5" fontWeight="bold" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
                             {formatCurrency(stats.income, currency)}
                         </Typography>
                     </CardContent>
@@ -256,18 +256,18 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.8) 100%)'
-                            : 'linear-gradient(135deg, rgba(255, 229, 241, 0.6) 0%, rgba(255, 229, 241, 0.9) 100%)',
+                            ? 'linear-gradient(135deg, rgba(255, 179, 186, 0.2) 0%, rgba(255, 179, 186, 0.35) 100%)'
+                            : 'linear-gradient(135deg, rgba(255, 179, 186, 0.6) 0%, rgba(255, 179, 186, 0.9) 100%)',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark' 
-                            ? '0 8px 24px rgba(108, 111, 249, 0.3)'
-                            : '0 8px 24px rgba(255, 229, 241, 0.3)',
+                            ? '0 8px 24px rgba(255, 179, 186, 0.15)'
+                            : '0 8px 24px rgba(255, 179, 186, 0.3)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark' 
-                                ? '0 12px 30px rgba(108, 111, 249, 0.5)'
-                                : '0 12px 30px rgba(255, 229, 241, 0.5)',
+                                ? '0 12px 30px rgba(255, 179, 186, 0.25)'
+                                : '0 12px 30px rgba(255, 179, 186, 0.5)',
                         }
                     }}
                 >
@@ -286,18 +286,18 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.8) 100%)'
-                            : 'linear-gradient(135deg, rgba(255, 229, 241, 0.6) 0%, rgba(255, 229, 241, 0.9) 100%)',
+                            ? 'linear-gradient(135deg, rgba(199, 206, 234, 0.2) 0%, rgba(199, 206, 234, 0.35) 100%)'
+                            : 'linear-gradient(135deg, rgba(199, 206, 234, 0.6) 0%, rgba(199, 206, 234, 0.9) 100%)',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark' 
-                            ? '0 8px 24px rgba(108, 111, 249, 0.3)'
-                            : '0 8px 24px rgba(255, 229, 241, 0.3)',
+                            ? '0 8px 24px rgba(199, 206, 234, 0.15)'
+                            : '0 8px 24px rgba(199, 206, 234, 0.3)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark' 
-                                ? '0 12px 30px rgba(108, 111, 249, 0.5)'
-                                : '0 12px 30px rgba(255, 229, 241, 0.5)',
+                                ? '0 12px 30px rgba(199, 206, 234, 0.25)'
+                                : '0 12px 30px rgba(199, 206, 234, 0.5)',
                         }
                     }}
                 >
@@ -316,18 +316,18 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.5) 0%, rgba(108, 111, 249, 0.7) 100%)'
-                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.4) 0%, rgba(239, 240, 246, 0.6) 100%)',
+                            ? 'linear-gradient(135deg, rgba(255, 215, 186, 0.2) 0%, rgba(255, 215, 186, 0.35) 100%)'
+                            : 'linear-gradient(135deg, rgba(255, 215, 186, 0.6) 0%, rgba(255, 215, 186, 0.9) 100%)',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark' 
-                            ? '0 8px 24px rgba(108, 111, 249, 0.3)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.3)',
+                            ? '0 8px 24px rgba(255, 215, 186, 0.15)'
+                            : '0 8px 24px rgba(255, 215, 186, 0.3)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark' 
-                                ? '0 12px 30px rgba(108, 111, 249, 0.5)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.5)',
+                                ? '0 12px 30px rgba(255, 215, 186, 0.25)'
+                                : '0 12px 30px rgba(255, 215, 186, 0.5)',
                         }
                     }}
                 >

@@ -674,7 +674,7 @@ const Goals: React.FC = () => {
                                 onClick={() => setOpenDialog(false)}
                                 fullWidth
                                 sx={{
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
                                 }}
                             >
                                 Отмена
@@ -685,11 +685,16 @@ const Goals: React.FC = () => {
                                 fullWidth
                                 disabled={!goalName || !targetAmount}
                                 sx={{
-                                    background: mode === 'dark' 
-                                        ? 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)'
-                                        : 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                                    background: '#6C6FF9',
                                     color: '#FFFFFF',
                                     fontWeight: 600,
+                                    boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    '&:hover': {
+                                        background: '#6C6FF9',
+                                        transform: 'translateY(-2px)',
+                                        boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
+                                    }
                                 }}
                             >
                                 {editingGoal ? 'Сохранить' : 'Создать'}
