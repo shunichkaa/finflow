@@ -186,6 +186,7 @@ export const useCloudSync = (enabled: boolean) => {
                 lastSync: null,
                 error: error instanceof Error ? error.message : 'Sync failed'
             });
+            throw error; // Пробрасываем ошибку наружу
         }
     };
 
