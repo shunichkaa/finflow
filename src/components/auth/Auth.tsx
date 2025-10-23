@@ -125,7 +125,7 @@ export const Auth: React.FC = () => {
                 alignItems: 'center',
                     background: mode === 'dark' 
                         ? 'linear-gradient(135deg, #1a1a2e 0%, #2d2d44 50%, #3d3d5c 100%)'
-                        : 'linear-gradient(135deg, #F2E6EE 0%, #FFCCF2 50%, #977DFF 100%)',
+                        : '#F5F6FA', // Правильный фон из Style Guide
                 backgroundAttachment: 'fixed',
                 p: 2,
                 position: 'relative',
@@ -195,11 +195,20 @@ export const Auth: React.FC = () => {
                         },
                     }}
                 >
-                    <Box sx={{textAlign: 'center', mb: 2}}>
-                        <Typography variant="h4" fontWeight={700} sx={{color: mode === 'dark' ? '#FFFFFF' : '#0600AB', mb: 1}}>
+                    <Box sx={{textAlign: 'center', mb: 3}}>
+                        <Typography variant="h3" fontWeight={700} sx={{
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E', 
+                            mb: 1.5,
+                            fontSize: {xs: '28px', md: '32px'},
+                            letterSpacing: '-0.02em'
+                        }}>
                             💰 {t('appName', 'FinFlow')}
                         </Typography>
-                        <Typography variant="subtitle1" sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(6, 0, 171, 0.7)'}}>
+                        <Typography variant="h6" sx={{
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : '#8F9BB3',
+                            fontSize: {xs: '16px', md: '18px'},
+                            fontWeight: 500
+                        }}>
                             {authMode === 'login' ? t('auth.login', 'Вход в аккаунт') : t('auth.signup', 'Создание аккаунта')}
                         </Typography>
                     </Box>
@@ -259,12 +268,13 @@ export const Auth: React.FC = () => {
                             ? 'rgba(255, 255, 255, 0.1)' 
                             : 'rgba(151, 125, 255, 0.2)'
                     }}>
-                        <Typography variant="body2" sx={{
+                        <Typography variant="body1" sx={{
                             color: mode === 'dark' 
                                 ? 'rgba(255, 255, 255, 0.6)' 
-                                : 'rgba(6, 0, 171, 0.6)', 
+                                : '#8F9BB3', 
                             px: 2,
-                            fontWeight: 500
+                            fontWeight: 500,
+                            fontSize: {xs: '14px', md: '16px'}
                         }}>
                             {t('auth.or', 'или')}
                         </Typography>
@@ -468,11 +478,12 @@ export const Auth: React.FC = () => {
                     </Box>
 
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={1}>
-                        <Typography variant="body2" sx={{
+                        <Typography variant="body1" sx={{
                             color: mode === 'dark' 
                                 ? 'rgba(255, 255, 255, 0.6)' 
-                                : 'rgba(6, 0, 171, 0.6)',
-                            fontWeight: 500
+                                : '#8F9BB3',
+                            fontWeight: 500,
+                            fontSize: {xs: '14px', md: '16px'}
                         }}>
                             {authMode === 'login' ? t('auth.noAccount', 'Нет аккаунта?') : t('auth.hasAccount', 'Уже есть аккаунт?')}
                         </Typography>

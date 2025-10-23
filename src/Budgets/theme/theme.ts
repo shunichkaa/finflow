@@ -42,15 +42,15 @@ const lightThemeOptions: ThemeOptions = {
             contrastText: '#FFFFFF',
         },
         background: {
-            default: '#ECF0F3', // Neumorphic Gray Background
+            default: '#F5F6FA', // Main background (из Style Guide)
             paper: '#FFFFFF', // Crystal White for cards
         },
         text: {
-            primary: '#272B3E', // Midnight Blue for primary text
-            secondary: 'rgba(39, 43, 62, 0.7)',
-            disabled: '#A6B4C8',
+            primary: '#272B3E', // Midnight Blue (из Style Guide)
+            secondary: '#8F9BB3', // Secondary text (из Style Guide)
+            disabled: '#C5CEE0', // Disabled text
         },
-        divider: 'rgba(166, 180, 200, 0.2)',
+        divider: 'rgba(143, 155, 179, 0.2)',
     },
     typography: {
         fontFamily: [
@@ -69,28 +69,28 @@ const lightThemeOptions: ThemeOptions = {
         ].join(','),
         h1: {
             fontWeight: 700, // Bold
-            fontSize: '24px',
+            fontSize: '28px', // Увеличено с 24px
             letterSpacing: '-0.02em',
             lineHeight: 1.3,
             color: '#272B3E',
         },
         h2: {
-            fontWeight: 500, // Medium
-            fontSize: '18px',
+            fontWeight: 600, // Medium (увеличено)
+            fontSize: '22px', // Увеличено с 18px
             letterSpacing: '-0.01em',
             lineHeight: 1.4,
             color: '#272B3E',
         },
         h3: {
-            fontWeight: 400, // Regular
-            fontSize: '14px',
+            fontWeight: 600, // Увеличено
+            fontSize: '18px', // Увеличено с 14px
             letterSpacing: '0em',
             lineHeight: 1.5,
             color: '#272B3E',
         },
         h4: {
-            fontWeight: 400, // Regular
-            fontSize: '12px',
+            fontWeight: 500, // Увеличено
+            fontSize: '16px', // Увеличено с 12px
             letterSpacing: '0em',
             lineHeight: 1.5,
             color: '#272B3E',
@@ -103,18 +103,18 @@ const lightThemeOptions: ThemeOptions = {
         },
         h6: {
             fontWeight: 500,
-            fontSize: '12px',
+            fontSize: '13px', // Увеличено с 12px
             letterSpacing: '0em',
             lineHeight: 1.5,
         },
         body1: {
-            fontSize: '14px',
+            fontSize: '16px', // Увеличено с 14px
             fontWeight: 400,
             lineHeight: 1.6,
             letterSpacing: '0em',
         },
         body2: {
-            fontSize: '12px',
+            fontSize: '14px', // Увеличено с 12px
             fontWeight: 400,
             lineHeight: 1.5,
             letterSpacing: '0em',
@@ -143,7 +143,7 @@ const lightThemeOptions: ThemeOptions = {
                     overflow: 'auto',
                 },
                 body: {
-                    background: '#ECF0F3',
+                    background: '#F5F6FA', // Правильный фон из Style Guide
                     backgroundAttachment: 'fixed',
                     minHeight: '100vh',
                     margin: 0,
@@ -155,24 +155,24 @@ const lightThemeOptions: ThemeOptions = {
         MuiButton: {
             styleOverrides: {
                 root: {
-                    borderRadius: 25, // 20-30px as per spec
+                    borderRadius: 24, // 20-24px
                     padding: '12px 24px',
                     fontSize: '14px',
                     fontWeight: 500,
                     textTransform: 'none',
-                    background: '#ECF0F3',
+                    background: '#FFFFFF', // Белый фон кнопок
                     border: 'none',
                     color: '#272B3E',
                     // Top Layer (raised)
-                    boxShadow: '-12px -12px 20px rgba(255, 255, 255, 0.8), 12px 12px 20px rgba(166, 180, 200, 0.4)',
+                    boxShadow: '-10px -10px 20px rgba(255, 255, 255, 0.8), 10px 10px 20px rgba(174, 174, 192, 0.4)',
                     transition: 'all 0.3s ease',
                     '&:hover': {
-                        boxShadow: '-14px -14px 24px rgba(255, 255, 255, 0.9), 14px 14px 24px rgba(166, 180, 200, 0.5)',
+                        boxShadow: '-12px -12px 24px rgba(255, 255, 255, 0.9), 12px 12px 24px rgba(174, 174, 192, 0.5)',
                         transform: 'translateY(-1px)',
                     },
                     '&:active': {
                         // Pressed state
-                        boxShadow: 'inset -8px -8px 16px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(166, 180, 200, 0.5)',
+                        boxShadow: 'inset -5px -5px 10px rgba(255, 255, 255, 0.5), inset 5px 5px 10px rgba(174, 174, 192, 0.5)',
                         transform: 'translateY(0)',
                     },
                 },
@@ -207,7 +207,7 @@ const lightThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     borderRadius: 32, // 24-32px для карточек
-                    background: '#ECF0F3',
+                    background: '#FFFFFF', // Белый фон карточек из Style Guide
                     border: 'none',
                     padding: '24px',
                     // Raised element shadow
@@ -224,7 +224,7 @@ const lightThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     borderRadius: 32,
-                    background: '#ECF0F3',
+                    background: '#FFFFFF', // Белый фон
                     border: 'none',
                     boxShadow: '-10px -10px 20px rgba(255, 255, 255, 0.8), 10px 10px 20px rgba(174, 174, 192, 0.4)',
                     transition: 'all 0.3s ease',
@@ -243,9 +243,9 @@ const lightThemeOptions: ThemeOptions = {
         MuiAppBar: {
             styleOverrides: {
                 root: {
-                    background: '#ECF0F3',
+                    background: '#FFFFFF', // Белый фон AppBar
                     borderBottom: 'none',
-                    boxShadow: '-10px -10px 20px rgba(255, 255, 255, 0.8), 10px 10px 20px rgba(174, 174, 192, 0.4)',
+                    boxShadow: '0 2px 16px rgba(174, 174, 192, 0.15)',
                     color: '#272B3E',
                 },
             },
@@ -253,9 +253,9 @@ const lightThemeOptions: ThemeOptions = {
         MuiDrawer: {
             styleOverrides: {
                 paper: {
-                    background: '#ECF0F3',
+                    background: '#FFFFFF', // Белый фон Drawer
                     borderRight: 'none',
-                    boxShadow: '15px 0 30px rgba(174, 174, 192, 0.4), -5px 0 15px rgba(255, 255, 255, 0.8)',
+                    boxShadow: '15px 0 30px rgba(174, 174, 192, 0.15)',
                 },
             },
         },
@@ -264,7 +264,7 @@ const lightThemeOptions: ThemeOptions = {
                 root: {
                     '& .MuiOutlinedInput-root': {
                         borderRadius: 20, // 16-20px для inputs
-                        background: '#ECF0F3',
+                        background: '#FFFFFF', // Белый фон
                         transition: 'all 0.3s ease',
                         '& fieldset': {
                             border: 'none', // NO BORDERS!
@@ -292,7 +292,7 @@ const lightThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     borderRadius: 20,
-                    background: '#ECF0F3',
+                    background: '#FFFFFF',
                     boxShadow: 'inset -3px -3px 8px rgba(255, 255, 255, 0.5), inset 3px 3px 8px rgba(174, 174, 192, 0.5)',
                     '& fieldset': {
                         border: 'none',
@@ -307,7 +307,7 @@ const lightThemeOptions: ThemeOptions = {
             styleOverrides: {
                 paper: {
                     borderRadius: 20,
-                    background: '#ECF0F3',
+                    background: '#FFFFFF',
                     border: 'none',
                     boxShadow: '-12px -12px 24px rgba(255, 255, 255, 0.8), 12px 12px 24px rgba(174, 174, 192, 0.4)',
                     marginTop: '8px',
@@ -325,11 +325,11 @@ const lightThemeOptions: ThemeOptions = {
                     background: 'transparent',
                     color: '#272B3E',
                     '&:hover': {
-                        background: '#ECF0F3',
+                        background: '#F5F6FA',
                         boxShadow: '-6px -6px 12px rgba(255, 255, 255, 0.8), 6px 6px 12px rgba(174, 174, 192, 0.3)',
                     },
                     '&.Mui-selected': {
-                        background: '#ECF0F3',
+                        background: '#F5F6FA',
                         color: '#6C6FF9',
                         boxShadow: 'inset -3px -3px 6px rgba(255, 255, 255, 0.5), inset 3px 3px 6px rgba(174, 174, 192, 0.5)',
                         '&:hover': {
@@ -343,9 +343,9 @@ const lightThemeOptions: ThemeOptions = {
             styleOverrides: {
                 paper: {
                     borderRadius: 24,
-                    background: '#ECF0F3',
+                    background: '#FFFFFF',
                     border: 'none',
-                    boxShadow: '20px 20px 40px rgba(163, 177, 198, 0.7), -20px -20px 40px rgba(255, 255, 255, 0.6)',
+                    boxShadow: '0 20px 60px rgba(174, 174, 192, 0.3)',
                     padding: '32px',
                 },
             },
