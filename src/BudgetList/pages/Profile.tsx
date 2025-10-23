@@ -896,7 +896,16 @@ export default function Profile() {
                             },
                         }}
                     />
-                        
+                    </Box>
+
+                    {/* Divider для визуального разделения */}
+                    <Divider sx={{ my: 3, borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)' }}>
+                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)' }}>
+                            Безопасность
+                        </Typography>
+                    </Divider>
+
+                    <Box display="flex" flexDirection="column" alignItems="center">
                         {/* Email */}
                         <TextField
                             label="Новый Email (опционально)"
@@ -935,6 +944,7 @@ export default function Profile() {
                             type="password"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
+                            placeholder="••••••••"
                             margin="normal"
                             helperText="Минимум 6 символов"
                             sx={{

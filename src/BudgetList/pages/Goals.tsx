@@ -313,8 +313,8 @@ const Goals: React.FC = () => {
 
                                         {/* Название */}
                                         <Typography 
-                                            variant="h6" 
-                                            fontWeight="600"
+                                            variant="h5" 
+                                            fontWeight="700"
                                             align="center"
                                             sx={{ 
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
@@ -323,6 +323,7 @@ const Goals: React.FC = () => {
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
+                                                fontSize: { xs: '1.3rem', sm: '1.5rem' },
                                             }}
                                         >
                                             {goal.name}
