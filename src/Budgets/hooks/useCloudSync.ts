@@ -104,14 +104,16 @@ export const useCloudSync = (enabled: boolean) => {
                 lastSync: new Date(),
                 error: null
             });
-        } catch (error) {
-            console.error('Sync error:', error);
-            setStatus({
-                isSyncing: false,
-                lastSync: null,
-                error: error instanceof Error ? error.message : 'Sync failed'
-            });
-        }
+                } catch (error) {
+                    console.error('Sync from cloud error:', error);
+                    const errorMessage = error instanceof Error ? error.message : 'Sync failed';
+                    console.error('Error details:', errorMessage);
+                    setStatus({
+                        isSyncing: false,
+                        lastSync: null,
+                        error: errorMessage
+                    });
+                }
     };
 
     // Сохранение данных в облако
@@ -180,11 +182,21 @@ export const useCloudSync = (enabled: boolean) => {
                 error: null
             });
         } catch (error) {
-            console.error('Sync error:', error);
+            console.error('Sync to cloud error:', error);
+            const errorMessage = error instanceof Error ? error.message : 'Sync failed';
+            console.error('Error details:', errorMessage);
+            
+            // Более детальное логирование для конкретных ошибок
+            if (error instanceof Error && error.message.includes('relation')) {
+                console.error('❌ Таблицы не созданы в Supabase! Выполните SQL миграцию из supabase_migration.sql');
+            } else if (error instanceof Error && error.message.includes('policy')) {
+                console.error('❌ RLS политики блокируют доступ! Проверьте настройки безопасности в Supabase');
+            }
+            
             setStatus({
                 isSyncing: false,
                 lastSync: null,
-                error: error instanceof Error ? error.message : 'Sync failed'
+                error: errorMessage
             });
             throw error; // Пробрасываем ошибку наружу
         }

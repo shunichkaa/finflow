@@ -314,7 +314,7 @@ export default function Profile() {
                             <Language />
                         </ListItemIcon>
                         <ListItemText 
-                            primary="Язык интерфейса" 
+                            primary="Язык" 
                             secondary="Выберите язык приложения"
                         />
                         <FormControl size="small" sx={{ minWidth: 120 }}>
