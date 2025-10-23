@@ -220,9 +220,18 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         wrapperStyle={{ 
                             paddingTop: '20px',
                             fontSize: '14px',
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             fontWeight: 600
                         }}
+                        iconType="line"
+                        formatter={(value) => (
+                            <span style={{ 
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                fontWeight: 600,
+                                fontSize: '14px'
+                            }}>
+                                {value}
+                            </span>
+                        )}
                     />
                     <Line
                         type="monotone"
