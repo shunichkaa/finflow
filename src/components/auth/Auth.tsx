@@ -11,7 +11,7 @@ import {
     Divider,
     Alert
 } from '@mui/material';
-import { Google, Login, PersonAdd } from '@mui/icons-material';
+import { Google, Login, PersonAdd, Apple } from '@mui/icons-material';
 import {supabase} from '../../lib/supabaseClient';
 import {useNavigate} from "react-router-dom";
 import { useTranslation } from 'react-i18next';
@@ -84,7 +84,7 @@ export const Auth: React.FC = () => {
         }
     };
 
-    const handleOAuthLogin = async (provider: 'google') => {
+    const handleOAuthLogin = async (provider: 'google' | 'apple') => {
         try {
             setOauthLoading(provider);
             setError('');
@@ -93,10 +93,10 @@ export const Auth: React.FC = () => {
                 provider: provider,
                 options: {
                     redirectTo: `${window.location.origin}/oauth-callback`,
-                    queryParams: {
+                    queryParams: provider === 'google' ? {
                         access_type: 'offline',
                         prompt: 'consent',
-                    }
+                    } : undefined
                 }
             });
 
@@ -254,12 +254,62 @@ export const Auth: React.FC = () => {
                                         : 'rgba(108, 111, 249, 0.15)',
                                     color: mode === 'dark' 
                                         ? 'rgba(255, 255, 255, 0.3)' 
-                                        : 'rgba(6, 0, 171, 0.3)',
+                                        : 'rgba(39, 43, 62, 0.3)',
                                 }
                             }}
                         >
                             {oauthLoading === 'google' ? t('auth.loading', 'Загрузка...') : t('auth.continueWithGoogle', 'Продолжить с Google')}
                         </Button>
+
+                        {/* Apple Sign In - Disabled (requires paid Apple Developer account $99/year) */}
+                        {/* 
+                        <Button
+                            variant="outlined"
+                            fullWidth
+                            startIcon={oauthLoading === 'apple' ? <CircularProgress size={20} /> : <Apple />}
+                            onClick={() => handleOAuthLogin('apple')}
+                            disabled={!!oauthLoading}
+                            sx={{
+                                py: 1.8,
+                                borderRadius: 3,
+                                borderColor: mode === 'dark' 
+                                    ? 'rgba(255, 255, 255, 0.2)' 
+                                    : 'rgba(39, 43, 62, 0.3)',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                fontWeight: 600,
+                                textTransform: 'none',
+                                fontSize: '1rem',
+                                backdropFilter: 'blur(20px)',
+                                background: mode === 'dark' 
+                                    ? 'rgba(58, 58, 60, 0.4)' 
+                                    : 'rgba(252, 248, 245, 0.6)',
+                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                '&:hover': {
+                                    borderColor: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(255, 255, 255, 0.1)' 
+                                        : 'rgba(39, 43, 62, 0.05)',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: mode === 'dark' 
+                                        ? '0 8px 24px rgba(255, 255, 255, 0.15)'
+                                        : '0 8px 24px rgba(39, 43, 62, 0.15)',
+                                },
+                                '&:active': {
+                                    transform: 'scale(0.98)',
+                                },
+                                '&:disabled': {
+                                    borderColor: mode === 'dark' 
+                                        ? 'rgba(255, 255, 255, 0.1)' 
+                                        : 'rgba(39, 43, 62, 0.15)',
+                                    color: mode === 'dark' 
+                                        ? 'rgba(255, 255, 255, 0.3)' 
+                                        : 'rgba(39, 43, 62, 0.3)',
+                                }
+                            }}
+                        >
+                            {oauthLoading === 'apple' ? t('auth.loading', 'Загрузка...') : t('auth.continueWithApple', 'Продолжить с Apple')}
+                        </Button>
+                        */}
                     </Stack>
 
                     <Divider sx={{
