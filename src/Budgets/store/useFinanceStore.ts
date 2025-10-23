@@ -16,11 +16,13 @@ export interface FinanceStore {
     addTransaction: (transaction: CreateTransactionInput) => void;
     updateTransaction: (id: string, data: Partial<Transaction>) => void;
     deleteTransaction: (id: string) => void;
+    setTransactions: (transactions: Transaction[]) => void;
 
     // ===== ACTIONS - BUDGETS =====
     addBudget: (budget: CreateBudgetInput) => void;
     updateBudget: (id: string, data: Partial<Budget>) => void;
     deleteBudget: (id: string) => void;
+    setBudgets: (budgets: Budget[]) => void;
 
     // ===== UTILITY =====
     clearAllData: () => void;
@@ -64,6 +66,11 @@ export const useFinanceStore = create<FinanceStore>()(
                     transactions: state.transactions.filter((t) => t.id !== id),
                 })),
 
+            setTransactions: (transactions) =>
+                set(() => ({
+                    transactions,
+                })),
+
             // ===== МЕТОДЫ ДЛЯ БЮДЖЕТОВ =====
 
             addBudget: (budget) =>
@@ -87,6 +94,11 @@ export const useFinanceStore = create<FinanceStore>()(
             deleteBudget: (id) =>
                 set((state) => ({
                     budgets: state.budgets.filter((b) => b.id !== id),
+                })),
+
+            setBudgets: (budgets) =>
+                set(() => ({
+                    budgets,
                 })),
 
             // ===== UTILITY =====

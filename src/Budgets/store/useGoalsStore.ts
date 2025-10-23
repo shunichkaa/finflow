@@ -9,6 +9,7 @@ interface GoalsState {
     deleteGoal: (id: string) => void;
     addToGoal: (id: string, amount: number) => void;
     completeGoal: (id: string) => void;
+    setGoals: (goals: Goal[]) => void;
 }
 
 export const useGoalsStore = create<GoalsState>()(
@@ -64,6 +65,12 @@ export const useGoalsStore = create<GoalsState>()(
                     goals: state.goals.map((goal) =>
                         goal.id === id ? { ...goal, isCompleted: true } : goal
                     ),
+                }));
+            },
+            
+            setGoals: (goals: Goal[]) => {
+                set(() => ({
+                    goals,
                 }));
             },
         }),
