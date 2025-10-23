@@ -96,23 +96,20 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                                     '& .MuiToggleButton-root': {
                                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                         borderColor: mode === 'dark' 
-                                            ? 'rgba(100, 200, 150, 0.3)' 
-                                            : 'rgba(254, 222, 233, 0.3)',
+                                            ? 'rgba(108, 111, 249, 0.3)' 
+                                            : '#EFF0F6',
                                         backgroundColor: 'transparent',
                                         '&:hover': {
                                             backgroundColor: mode === 'dark' 
-                                                ? 'rgba(100, 200, 150, 0.1)' 
-                                                : 'rgba(254, 222, 233, 0.1)',
+                                                ? 'rgba(108, 111, 249, 0.1)' 
+                                                : '#EFF0F6',
                                         },
                                         '&.Mui-selected': {
-                                            backgroundColor: mode === 'dark' 
-                                                ? 'rgba(100, 200, 150, 0.8)' 
-                                                : 'rgba(254, 222, 233, 0.8)',
-                                            color: mode === 'dark' ? '#272B3E' : '#272B3E',
+                                            backgroundColor: '#6C6FF9',
+                                            color: '#FFFFFF',
+                                            borderColor: '#6C6FF9',
                                             '&:hover': {
-                                                backgroundColor: mode === 'dark' 
-                                                    ? 'rgba(100, 200, 150, 0.9)' 
-                                                    : 'rgba(254, 222, 233, 0.9)',
+                                                backgroundColor: '#6C6FF9',
                                             }
                                         }
                                     }
@@ -178,11 +175,11 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                 {/* Info */}
                 <Box sx={{
                     backgroundColor: mode === 'dark' 
-                        ? 'rgba(100, 200, 150, 0.1)' 
-                        : 'rgba(254, 222, 233, 0.1)',
+                        ? 'rgba(108, 111, 249, 0.1)' 
+                        : 'rgba(199, 206, 234, 0.2)',
                     border: `1px solid ${mode === 'dark' 
-                        ? 'rgba(100, 200, 150, 0.3)' 
-                        : 'rgba(254, 222, 233, 0.3)'}`,
+                        ? 'rgba(108, 111, 249, 0.3)' 
+                        : '#C7CEEA'}`,
                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                     p: 2, 
                     borderRadius: 2

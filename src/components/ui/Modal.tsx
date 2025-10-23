@@ -30,11 +30,12 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children }) 
             fullScreen={fullScreen}
             maxWidth="sm"
             fullWidth
+            scroll="paper"
             PaperProps={{
                 sx: {
                     borderRadius: fullScreen ? 0 : 3,
                     bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
-                    backdropFilter: 'blur(10px)',
+                    maxHeight: fullScreen ? '100vh' : 'calc(100vh - 64px)',
                 },
             }}
         >
@@ -44,6 +45,8 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children }) 
                 alignItems: 'center',
                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                 bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
+                borderBottom: `1px solid ${mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6'}`,
+                flexShrink: 0,
             }}>
                 {title}
                 <IconButton
@@ -57,6 +60,8 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children }) 
             <DialogContent sx={{ 
                 bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                overflow: 'auto',
+                py: 3,
             }}>
                 {children}
             </DialogContent>

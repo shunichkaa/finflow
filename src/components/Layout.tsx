@@ -57,15 +57,24 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
 
     const handleLogoClick = () => {
         navigate('/dashboard');
+        // Закрываем меню при клике на лого
+        setMobileOpen(false);
+        setSidebarOpen(false);
     };
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
         navigate('/login');
+        // Закрываем меню при выходе
+        setMobileOpen(false);
+        setSidebarOpen(false);
     };
 
     const handleProfileClick = () => {
         navigate('/profile');
+        // Закрываем меню при переходе в профиль
+        setMobileOpen(false);
+        setSidebarOpen(false);
     };
 
     const navItems = [
@@ -170,7 +179,11 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 component={Link}
                                 to={item.path}
                                 selected={location.pathname === item.path}
-                                onClick={() => setMobileOpen(false)}
+                                onClick={(e) => {
+                                    // Закрываем меню при клике на пункт навигации (и мобильное, и десктопное)
+                                    setMobileOpen(false);
+                                    setSidebarOpen(false);
+                                }}
                                 disableRipple
                                 sx={{
                                     borderRadius: 2,

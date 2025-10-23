@@ -134,27 +134,40 @@ const lightThemeOptions: ThemeOptions = {
     },
     components: {
         MuiCssBaseline: {
-            styleOverrides: {
-                '*': {
-                    margin: 0,
-                    padding: 0,
-                },
-                'html, body, #root': {
-                    margin: 0,
-                    padding: 0,
-                    width: '100%',
-                    height: '100%',
-                    overflow: 'auto',
-                },
-                body: {
-                    background: '#EFF0F6', // Athens Gray - минимализм
-                    backgroundAttachment: 'fixed',
-                    minHeight: '100vh',
-                    margin: 0,
-                    padding: 0,
-                },
-                '@import': "url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap')",
-            },
+            styleOverrides: `
+                @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap');
+                
+                * {
+                    margin: 0;
+                    padding: 0;
+                }
+                
+                html, body, #root {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: auto;
+                }
+                
+                body {
+                    background: #EFF0F6;
+                    background-attachment: fixed;
+                    min-height: 100vh;
+                    margin: 0;
+                    padding: 0;
+                }
+                
+                /* Убираем стрелочки в number inputs */
+                input[type=number]::-webkit-inner-spin-button,
+                input[type=number]::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+                input[type=number] {
+                    -moz-appearance: textfield;
+                }
+            `,
         },
         MuiButton: {
             styleOverrides: {
