@@ -75,6 +75,10 @@ export default function Profile() {
         // Состояние для редактирования профиля
         const [editModalOpen, setEditModalOpen] = useState(false);
         const [timePickerOpen, setTimePickerOpen] = useState(false);
+        const [newEmail, setNewEmail] = useState('');
+        const [currentPassword, setCurrentPassword] = useState('');
+        const [newPassword, setNewPassword] = useState('');
+        const [confirmPassword, setConfirmPassword] = useState('');
         const fileInputRef = useRef<HTMLInputElement>(null);
 
         // Показываем загрузку пока аутентификация не завершена
@@ -430,7 +434,7 @@ export default function Profile() {
                 </List>
             </Paper>
 
-            {/* Уведомления */}
+                    {/* Уведомления */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                     Уведомления
@@ -454,7 +458,14 @@ export default function Profile() {
                             control={
                                 <Switch
                                     checked={notificationsEnabled}
-                                    onChange={(e) => setNotificationsEnabled(e.target.checked)}
+                                    onChange={(e) => {
+                                        const enabled = e.target.checked;
+                                        setNotificationsEnabled(enabled);
+                                        if (!enabled) {
+                                            setDailyReminderEnabled(false);
+                                        }
+                                        setTimeout(() => triggerSync(), 100);
+                                    }}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
                                             color: '#6C6FF9',
@@ -487,7 +498,10 @@ export default function Profile() {
                             control={
                                 <Switch
                                         checked={dailyReminderEnabled}
-                                        onChange={(e) => setDailyReminderEnabled(e.target.checked)}
+                                        onChange={(e) => {
+                                            setDailyReminderEnabled(e.target.checked);
+                                            setTimeout(() => triggerSync(), 100);
+                                        }}
                                         disabled={!notificationsEnabled}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
@@ -504,19 +518,13 @@ export default function Profile() {
                         </Box>
 
                         {notificationsEnabled && dailyReminderEnabled && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', pl: 7 }}>
-                                <ListItemText 
-                                    primary="Время напоминания"
-                                    secondary="Когда отправлять ежедневное напоминание"
-                                    secondaryTypographyProps={{
-                                        sx: {
-                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                        }
-                                    }}
-                                />
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pl: 7, pr: 2 }}>
+                                <Typography sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)', fontSize: '0.9rem' }}>
+                                    Время напоминания
+                                </Typography>
                             <Box 
                                 onClick={() => setTimePickerOpen(true)}
-                                sx={{ 
+                                    sx={{
                                     display: 'inline-flex', 
                                     gap: 1, 
                                     alignItems: 'center',
@@ -722,20 +730,30 @@ export default function Profile() {
                         <Typography variant="h5" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                             Редактировать профиль
                         </Typography>
-                        <IconButton onClick={handleCloseEditModal} size="small">
+                        <IconButton 
+                            onClick={handleCloseEditModal} 
+                            size="small"
+                            sx={{
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
+                                '&:hover': {
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
+                                }
+                            }}
+                        >
                             <Close />
                         </IconButton>
                     </Box>
 
                     {/* Аватар */}
-                    <Box mb={3}>
+                    <Box mb={3} display="flex" flexDirection="column" alignItems="center">
                         <Box display="flex" flexDirection="column" alignItems="center" mb={2}>
-                            <Avatar
-                                src={avatar || undefined}
-                                sx={{ width: 80, height: 80, mb: 2, bgcolor: 'primary.main' }}
-                            >
-                                {!avatar && <Person fontSize="large" />}
-                            </Avatar>
+                        <Avatar
+                            src={avatar || undefined}
+                            sx={{ width: 80, height: 80, mb: 2, bgcolor: 'primary.main' }}
+                        >
+                            {!avatar && <Person fontSize="large" />}
+                        </Avatar>
                         </Box>
                         <input
                             type="file"
@@ -745,11 +763,11 @@ export default function Profile() {
                             style={{ display: 'none' }}
                         />
                         <Button
-                            fullWidth
                             variant="outlined"
                             startIcon={<PhotoCamera />}
                             onClick={() => fileInputRef.current?.click()}
                             sx={{ 
+                                maxWidth: 250,
                                 borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&:hover': {
@@ -762,18 +780,20 @@ export default function Profile() {
                         </Button>
                     </Box>
 
+                    <Box display="flex" flexDirection="column" alignItems="center">
                     {/* Никнейм */}
                     <TextField
-                        fullWidth
                         label="Никнейм"
                         value={nickname}
-                        onChange={(e) => {
-                            setNickname(e.target.value);
-                            // Синхронизация nickname с облаком
-                            setTimeout(() => triggerSync(), 500);
-                        }}
+                            onChange={(e) => {
+                                setNickname(e.target.value);
+                                // Синхронизация nickname с облаком
+                                setTimeout(() => triggerSync(), 500);
+                            }}
                         margin="normal"
                         sx={{
+                                maxWidth: 350,
+                                width: '100%',
                             '& .MuiOutlinedInput-root': {
                                 '& fieldset': {
                                     borderColor: 'rgba(6, 0, 171, 0.3)',
@@ -782,17 +802,18 @@ export default function Profile() {
                                     borderColor: 'rgba(6, 0, 171, 0.6)',
                                 },
                                 '&.Mui-focused fieldset': {
-                                    borderColor: '#272B3E',
+                                        borderColor: '#272B3E',
                                 },
                             },
                             '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                '&.Mui-focused': {
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                '&.Mui-focused': {
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 },
                             },
                         }}
                     />
+                    </Box>
 
                     {/* Кнопки */}
                     <Box display="flex" gap={2} justifyContent="flex-end" mt={3}>

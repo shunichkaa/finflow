@@ -41,8 +41,14 @@ export const useCloudSync = (enabled: boolean) => {
     // Настройки пользователя
     const avatar = useSettingsStore(state => state.avatar);
     const nickname = useSettingsStore(state => state.nickname);
+    const notificationTime = useSettingsStore(state => state.notificationTime);
+    const dailyReminderEnabled = useSettingsStore(state => state.dailyReminderEnabled);
+    const notificationsEnabled = useSettingsStore(state => state.notificationsEnabled);
     const setAvatar = useSettingsStore(state => state.setAvatar);
     const setNickname = useSettingsStore(state => state.setNickname);
+    const setNotificationTime = useSettingsStore(state => state.setNotificationTime);
+    const setDailyReminderEnabled = useSettingsStore(state => state.setDailyReminderEnabled);
+    const setNotificationsEnabled = useSettingsStore(state => state.setNotificationsEnabled);
 
     // Загрузка данных из облака
     const syncFromCloud = async () => {
@@ -117,6 +123,9 @@ export const useCloudSync = (enabled: boolean) => {
                 if (!settingsError && settingsData) {
                     if (settingsData.avatar) setAvatar(settingsData.avatar);
                     if (settingsData.nickname) setNickname(settingsData.nickname);
+                    if (settingsData.notification_time) setNotificationTime(settingsData.notification_time);
+                    if (typeof settingsData.daily_reminder_enabled === 'boolean') setDailyReminderEnabled(settingsData.daily_reminder_enabled);
+                    if (typeof settingsData.notifications_enabled === 'boolean') setNotificationsEnabled(settingsData.notifications_enabled);
                 }
                 // Если настроек нет (новый пользователь), это не ошибка - просто продолжаем
             } catch (settingsErr) {
@@ -208,6 +217,9 @@ export const useCloudSync = (enabled: boolean) => {
                     user_id: session.user.id,
                     avatar: avatar || null,
                     nickname: nickname || '',
+                    notification_time: notificationTime,
+                    daily_reminder_enabled: dailyReminderEnabled,
+                    notifications_enabled: notificationsEnabled,
                 };
 
                 const { error: settingsError } = await supabase
