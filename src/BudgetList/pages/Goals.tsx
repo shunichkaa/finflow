@@ -25,6 +25,7 @@ import { GlassCard } from '../../components/ui/GlassCard';
 import { useGoalsStore } from '../../Budgets/store/useGoalsStore';
 import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
 import { formatCurrency } from '../../Budgets/utils/formatters';
+import { GoalDetail } from '../../components/features/goals/GoalDetail';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -73,6 +74,10 @@ const Goals: React.FC = () => {
     const [currentAmount, setCurrentAmount] = useState('');
     const [targetDate, setTargetDate] = useState<Date | null>(null);
     const [editingGoal, setEditingGoal] = useState<string | null>(null);
+    
+    // Детальный просмотр копилки
+    const [selectedGoal, setSelectedGoal] = useState<any | null>(null);
+    const [detailOpen, setDetailOpen] = useState(false);
 
     const formatNumberWithSpaces = (value: string): string => {
         // Удаляем все пробелы и нечисловые символы кроме точки
@@ -270,183 +275,100 @@ const Goals: React.FC = () => {
                         const IconComponent = iconData.icon;
 
                         return (
-                            <Grid item xs={12} sm={12} md={6} lg={6} key={goal.id}>
+                            <Grid item xs={12} sm={6} md={4} key={goal.id}>
                                 <GlassCard 
                                     glowColor={iconData.color + '40'}
+                                    onClick={() => {
+                                        setSelectedGoal(goal);
+                                        setDetailOpen(true);
+                                    }}
                                     sx={{ 
                                         height: '100%',
-                                        minHeight: 500,
-                                        aspectRatio: { xs: 'auto', sm: '1 / 1' },
-                                        display: 'flex',
-                                        flexDirection: 'column',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease',
+                                        '&:hover': {
+                                            transform: 'translateY(-4px)',
+                                            boxShadow: `0 8px 24px ${iconData.color}40`,
+                                        },
                                         opacity: goal.isCompleted ? 0.7 : 1,
                                     }}
                                 >
-                                    <Box sx={{ p: 4, display: 'flex', flexDirection: 'column', height: '100%' }}>
-                                        {/* Верхняя часть с иконкой и действиями */}
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 4 }}>
+                                    <Box sx={{ p: 3, display: 'flex', flexDirection: 'column' }}>
+                                        {/* Иконка */}
+                                        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
                                             <Box 
                                                 sx={{ 
-                                                    width: 72, 
-                                                    height: 72, 
-                                                    borderRadius: 4,
+                                                    width: 64, 
+                                                    height: 64, 
+                                                    borderRadius: 3,
                                                     background: `linear-gradient(135deg, ${iconData.color}20 0%, ${iconData.color}40 100%)`,
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                     justifyContent: 'center',
                                                 }}
                                             >
-                                                <IconComponent sx={{ fontSize: 40, color: iconData.color }} />
-                                            </Box>
-                                            <Box sx={{ display: 'flex', gap: 0.5 }}>
-                                                <IconButton
-                                                    size="small"
-                                                    onClick={() => handleEditGoal(goal.id)}
-                                                    sx={{
-                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
-                                                        '&:hover': {
-                                                            color: iconData.color,
-                                                            backgroundColor: `${iconData.color}20`,
-                                                        }
-                                                    }}
-                                                >
-                                                    <EditIcon fontSize="small" />
-                                                </IconButton>
-                                                <IconButton
-                                                    size="small"
-                                                    onClick={() => handleDeleteGoal(goal.id)}
-                                                    sx={{
-                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
-                                                        '&:hover': {
-                                                            color: '#FFB3BA',
-                                                            backgroundColor: 'rgba(255, 107, 107, 0.1)',
-                                                        }
-                                                    }}
-                                                >
-                                                    <DeleteIcon fontSize="small" />
-                                                </IconButton>
+                                                <IconComponent sx={{ fontSize: 36, color: iconData.color }} />
                                             </Box>
                                         </Box>
 
-                                        {/* Название и описание */}
+                                        {/* Название */}
                                         <Typography 
-                                            variant="h5" 
-                                            fontWeight="700"
+                                            variant="h6" 
+                                            fontWeight="600"
+                                            align="center"
                                             sx={{ 
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                                mb: 1,
-                                                fontSize: '1.5rem'
+                                                mb: 3,
+                                                minHeight: 48,
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
                                             }}
                                         >
                                             {goal.name}
                                         </Typography>
-                                        {goal.description && (
-                                            <Typography 
-                                                variant="body1" 
-                                                sx={{ 
-                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
-                                                    mb: 3,
-                                                    fontSize: '1rem'
-                                                }}
-                                            >
-                                                {goal.description}
-                                            </Typography>
-                                        )}
 
                                         {/* Прогресс */}
-                                        <Box sx={{ mb: 3 }}>
-                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
-                                                <Typography 
-                                                    variant="h6" 
-                                                    fontWeight="700"
-                                                    sx={{ 
-                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(6, 0, 171, 0.9)',
-                                                        fontSize: '1.1rem'
-                                                    }}
-                                                >
-                                                    {formatCurrency(goal.currentAmount, currency)}
-                                                </Typography>
-                                                <Typography 
-                                                    variant="h6" 
-                                                    fontWeight="600"
-                                                    sx={{ 
-                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(6, 0, 171, 0.6)',
-                                                        fontSize: '1.1rem'
-                                                    }}
-                                                >
-                                                    {formatCurrency(goal.targetAmount, currency)}
-                                                </Typography>
-                                            </Box>
+                                        <Box>
                                             <LinearProgress
                                                 variant="determinate"
                                                 value={Math.min(percentage, 100)}
                                                 sx={{
-                                                    height: 12,
-                                                    borderRadius: 6,
+                                                    height: 10,
+                                                    borderRadius: 2,
+                                                    mb: 1,
                                                     backgroundColor: mode === 'dark' 
                                                         ? 'rgba(255, 255, 255, 0.1)' 
-                                                        : 'rgba(6, 0, 171, 0.1)',
+                                                        : '#EFF0F6',
                                                     '& .MuiLinearProgress-bar': {
-                                                        borderRadius: 4,
-                                                        background: `linear-gradient(90deg, ${iconData.color} 0%, ${iconData.color}CC 100%)`,
+                                                        borderRadius: 2,
+                                                        backgroundColor: iconData.color,
                                                     }
                                                 }}
                                             />
-                                        </Box>
-
-                                        {/* Информация */}
-                                        <Stack spacing={2} sx={{ mt: 'auto' }}>
-                                            {daysLeft !== null && (
-                                                <Chip
-                                                    label={daysLeft > 0 ? `${daysLeft} ${daysLeft === 1 ? 'день' : daysLeft < 5 ? 'дня' : 'дней'} до цели` : 'Срок истёк'}
-                                                    sx={{
-                                                        backgroundColor: daysLeft > 0 
-                                                            ? mode === 'dark' ? 'rgba(108, 111, 249, 0.2)' : 'rgba(108, 111, 249, 0.15)'
-                                                            : 'rgba(255, 179, 186, 0.2)',
-                                                        color: daysLeft > 0 
-                                                            ? '#6C6FF9'
-                                                            : '#FFB3BA',
-                                                        fontWeight: 600,
-                                                        fontSize: '0.9rem',
-                                                        height: 36,
-                                                        borderRadius: 2
-                                                    }}
-                                                />
-                                            )}
-                                            {recommendedDaily && recommendedDaily > 0 && (
-                                                <Box 
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <Typography 
+                                                    variant="body2" 
+                                                    fontWeight="600"
                                                     sx={{ 
-                                                        p: 2.5, 
-                                                        borderRadius: 3,
-                                                        backgroundColor: mode === 'dark' 
-                                                            ? 'rgba(255, 255, 255, 0.05)' 
-                                                            : 'rgba(6, 0, 171, 0.05)',
+                                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                                        fontSize: '0.9rem'
                                                     }}
                                                 >
-                                                    <Typography 
-                                                        variant="body2" 
-                                                        sx={{ 
-                                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
-                                                            display: 'block',
-                                                            mb: 1,
-                                                            fontSize: '0.875rem'
-                                                        }}
-                                                    >
-                                                        Рекомендуется откладывать:
-                                                    </Typography>
-                                                    <Typography 
-                                                        variant="h6" 
-                                                        fontWeight="700"
-                                                        sx={{ 
-                                                            color: iconData.color,
-                                                            fontSize: '1.1rem'
-                                                        }}
-                                                    >
-                                                        {formatCurrency(recommendedDaily, currency)} / день
-                                                    </Typography>
-                                                </Box>
-                                            )}
-                                        </Stack>
+                                                    {goal.currentAmount.toLocaleString()} {currency}
+                                                </Typography>
+                                                <Typography 
+                                                    variant="body2" 
+                                                    fontWeight="500"
+                                                    sx={{ 
+                                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)',
+                                                        fontSize: '0.9rem'
+                                                    }}
+                                                >
+                                                    {goal.targetAmount.toLocaleString()} {currency}
+                                                </Typography>
+                                            </Box>
+                                        </Box>
                                     </Box>
                                 </GlassCard>
                             </Grid>
@@ -703,6 +625,16 @@ const Goals: React.FC = () => {
                     </Stack>
                 </DialogContent>
             </Dialog>
+
+            {/* Детальный просмотр копилки */}
+            <GoalDetail
+                goal={selectedGoal}
+                open={detailOpen}
+                onClose={() => {
+                    setDetailOpen(false);
+                    setSelectedGoal(null);
+                }}
+            />
         </Container>
     );
 };

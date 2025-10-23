@@ -51,6 +51,7 @@ export interface Goal {
     targetDate?: Date;
     createdAt: Date;
     isCompleted: boolean;
+    icon?: string; // ID иконки из GOAL_ICONS
 }
 
 /**
