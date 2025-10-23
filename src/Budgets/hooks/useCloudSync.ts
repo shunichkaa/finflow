@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { useFinanceStore } from '../store/useFinanceStore';
 import { useGoalsStore } from '../store/useGoalsStore';
 import { useAuth } from './useAuth';
+import type { Transaction, Budget } from '../types';
+import type { Goal } from '../types';
 
 interface SyncStatus {
     isSyncing: boolean;
@@ -16,11 +18,16 @@ export const useCloudSync = (enabled: boolean) => {
         lastSync: null,
         error: null
     });
+    
+    const isInitialLoad = useRef(true);
 
     const { session } = useAuth();
     const transactions = useFinanceStore(state => state.transactions);
     const budgets = useFinanceStore(state => state.budgets);
     const goals = useGoalsStore(state => state.goals);
+    const setTransactions = useFinanceStore(state => state.setTransactions);
+    const setBudgets = useFinanceStore(state => state.setBudgets);
+    const setGoals = useGoalsStore(state => state.setGoals);
 
     // Загрузка данных из облака
     const syncFromCloud = async () => {
@@ -53,17 +60,35 @@ export const useCloudSync = (enabled: boolean) => {
 
             if (goalsError) throw goalsError;
 
-            // Обновляем локальное состояние (если данные есть)
-            if (transactionsData && transactionsData.length > 0) {
-                useFinanceStore.setState({ transactions: transactionsData });
+            // Преобразуем данные (строки дат → Date objects)
+            if (transactionsData) {
+                const parsedTransactions: Transaction[] = transactionsData.map((tx: any) => ({
+                    ...tx,
+                    date: new Date(tx.date),
+                    createdAt: new Date(tx.created_at),
+                }));
+                setTransactions(parsedTransactions);
             }
 
-            if (budgetsData && budgetsData.length > 0) {
-                useFinanceStore.setState({ budgets: budgetsData });
+            if (budgetsData) {
+                const parsedBudgets: Budget[] = budgetsData.map((b: any) => ({
+                    ...b,
+                    limit: b.limit_amount, // Map DB column to app field
+                    limitAmount: b.limit_amount,
+                }));
+                setBudgets(parsedBudgets);
             }
 
-            if (goalsData && goalsData.length > 0) {
-                useGoalsStore.setState({ goals: goalsData });
+            if (goalsData) {
+                const parsedGoals: Goal[] = goalsData.map((g: any) => ({
+                    ...g,
+                    targetAmount: g.target_amount,
+                    currentAmount: g.current_amount,
+                    isCompleted: g.is_completed,
+                    deadline: g.deadline ? new Date(g.deadline) : undefined,
+                    createdAt: new Date(g.created_at),
+                }));
+                setGoals(parsedGoals);
             }
 
             setStatus({
@@ -88,39 +113,56 @@ export const useCloudSync = (enabled: boolean) => {
         setStatus(prev => ({ ...prev, isSyncing: true, error: null }));
 
         try {
-            // Сохранение транзакций
-            const transactionsWithUserId = transactions.map(tx => ({
-                ...tx,
-                user_id: session.user.id
+            // Сохранение транзакций (map app fields → DB columns)
+            const transactionsForDB = transactions.map(tx => ({
+                id: tx.id,
+                user_id: session.user.id,
+                type: tx.type,
+                amount: tx.amount,
+                category: tx.category,
+                description: tx.description || null,
+                date: tx.date.toISOString(),
+                tags: tx.tags || [],
+                created_at: tx.createdAt.toISOString(),
             }));
 
             const { error: txError } = await supabase
                 .from('transactions')
-                .upsert(transactionsWithUserId, { onConflict: 'id' });
+                .upsert(transactionsForDB, { onConflict: 'id' });
 
             if (txError) throw txError;
 
-            // Сохранение бюджетов
-            const budgetsWithUserId = budgets.map(budget => ({
-                ...budget,
-                user_id: session.user.id
+            // Сохранение бюджетов (map app fields → DB columns)
+            const budgetsForDB = budgets.map(budget => ({
+                id: budget.id,
+                user_id: session.user.id,
+                category: budget.category,
+                limit_amount: budget.limit || budget.limitAmount,
+                period: budget.period,
             }));
 
             const { error: budgetError } = await supabase
                 .from('budgets')
-                .upsert(budgetsWithUserId, { onConflict: 'id' });
+                .upsert(budgetsForDB, { onConflict: 'id' });
 
             if (budgetError) throw budgetError;
 
-            // Сохранение целей
-            const goalsWithUserId = goals.map(goal => ({
-                ...goal,
-                user_id: session.user.id
+            // Сохранение целей (map app fields → DB columns)
+            const goalsForDB = goals.map(goal => ({
+                id: goal.id,
+                user_id: session.user.id,
+                name: goal.name,
+                target_amount: goal.targetAmount,
+                current_amount: goal.currentAmount,
+                deadline: goal.deadline ? goal.deadline.toISOString() : null,
+                icon: goal.icon || null,
+                is_completed: goal.isCompleted,
+                created_at: goal.createdAt.toISOString(),
             }));
 
             const { error: goalsError } = await supabase
                 .from('goals')
-                .upsert(goalsWithUserId, { onConflict: 'id' });
+                .upsert(goalsForDB, { onConflict: 'id' });
 
             if (goalsError) throw goalsError;
 
@@ -139,13 +181,17 @@ export const useCloudSync = (enabled: boolean) => {
         }
     };
 
-    // Автоматическая синхронизация при изменениях
+    // Начальная загрузка данных при включении синхронизации
     useEffect(() => {
-        if (enabled && session?.user?.id) {
-            // Загружаем данные при включении синхронизации
+        if (enabled && session?.user?.id && isInitialLoad.current) {
             syncFromCloud();
+            isInitialLoad.current = false;
+        }
+    }, [enabled, session?.user?.id]);
 
-            // Автосохранение каждые 30 секунд
+    // Автосохранение каждые 30 секунд
+    useEffect(() => {
+        if (enabled && session?.user?.id && !isInitialLoad.current) {
             const interval = setInterval(() => {
                 syncToCloud();
             }, 30000);
@@ -154,16 +200,16 @@ export const useCloudSync = (enabled: boolean) => {
         }
     }, [enabled, session?.user?.id]);
 
-    // Синхронизация при изменении данных
+    // Синхронизация при изменении данных (debounced)
     useEffect(() => {
-        if (enabled && session?.user?.id && transactions.length > 0) {
+        if (enabled && session?.user?.id && !isInitialLoad.current) {
             const timeoutId = setTimeout(() => {
                 syncToCloud();
             }, 2000); // Debounce 2 секунды
 
             return () => clearTimeout(timeoutId);
         }
-    }, [transactions, budgets, goals, enabled, session?.user?.id]);
+    }, [transactions, budgets, goals]);
 
     return {
         status,
