@@ -116,6 +116,15 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     label={t('category')}
                     value={category}
                     onChange={(e) => onCategoryChange(e.target.value)}
+                    SelectProps={{
+                        MenuProps: {
+                            PaperProps: {
+                                style: {
+                                    maxHeight: 300,
+                                },
+                            },
+                        },
+                    }}
                     sx={{
                         minWidth: { xs: '100%', sm: 160 },
                         flex: { sm: '1 1 auto' },

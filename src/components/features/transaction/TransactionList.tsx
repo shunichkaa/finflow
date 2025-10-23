@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Box, Divider, IconButton, List, ListItem, Typography } from '@mui/material';
+import { Box, IconButton, List, ListItem, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useTranslation } from 'react-i18next';
@@ -60,7 +60,6 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
 
                 return (
                     <Fragment key={transaction.id}>
-                        {index > 0 && <Divider />}
                         <ListItem
                             sx={{
                                 display: 'flex',

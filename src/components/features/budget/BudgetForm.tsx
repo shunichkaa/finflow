@@ -140,6 +140,15 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                             fullWidth
                             required
                             disabled={!!initialBudget}
+                            SelectProps={{
+                                MenuProps: {
+                                    PaperProps: {
+                                        style: {
+                                            maxHeight: 300,
+                                        },
+                                    },
+                                },
+                            }}
                         >
                             {availableCategories.map((cat) => (
                                 <MenuItem key={cat.id} value={cat.id}>

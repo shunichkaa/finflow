@@ -119,24 +119,33 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, ini
                     control={control}
                     rules={{ required: t('categoryRequired') }}
                     render={({ field }) => (
-                        <TextField
-                            {...field}
-                            select
-                            label={t('category')}
-                            error={!!errors.category}
-                            helperText={errors.category?.message}
-                            fullWidth
-                            required
-                        >
-                            {categories.map((cat) => (
-                                <MenuItem key={cat.id} value={cat.id}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        {getCategoryIcon(cat.icon, 20)}
-                                        <span>{getCategoryName(cat.id, t)}</span>
-                                    </Box>
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                    <TextField
+                        {...field}
+                        select
+                        label={t('category')}
+                        error={!!errors.category}
+                        helperText={errors.category?.message}
+                        fullWidth
+                        required
+                        SelectProps={{
+                            MenuProps: {
+                                PaperProps: {
+                                    style: {
+                                        maxHeight: 300,
+                                    },
+                                },
+                            },
+                        }}
+                    >
+                        {categories.map((cat) => (
+                            <MenuItem key={cat.id} value={cat.id}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    {getCategoryIcon(cat.icon, 20)}
+                                    <span>{getCategoryName(cat.id, t)}</span>
+                                </Box>
+                            </MenuItem>
+                        ))}
+                    </TextField>
                     )}
                 />
 
