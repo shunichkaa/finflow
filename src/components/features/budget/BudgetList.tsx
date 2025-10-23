@@ -207,7 +207,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             borderRadius: 2
                                         }}
                                     />
-                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E', opacity: 0.7, fontSize: '0.75rem' }}>
+                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E', opacity: 0.9, fontSize: '0.75rem', fontWeight: 600 }}>
                                         {(() => {
                                             if (daysLeft === 0) {
                                                 return t('lastDay');

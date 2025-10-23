@@ -395,7 +395,8 @@ const Goals: React.FC = () => {
             >
                 <DialogTitle sx={{ 
                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                    fontWeight: 600,
+                    fontWeight: 700,
+                    fontSize: '1.5rem',
                     pb: 1
                 }}>
                     {editingGoal ? 'Редактировать копилку' : 'Создать копилку'}

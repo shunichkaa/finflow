@@ -460,7 +460,7 @@ const Analytics: React.FC = () => {
                                         display: 'flex',
                                         justifyContent: 'space-between',
                                         alignItems: 'center',
-                                        p: 2.5,
+                                        p: { xs: 1.5, sm: 2 },
                                         bgcolor: mode === 'dark' 
                                             ? 'rgba(232, 244, 253, 0.1)' 
                                             : 'rgba(255, 255, 255, 0.6)',
@@ -480,11 +480,11 @@ const Analytics: React.FC = () => {
                                         }
                                     }}
                                 >
-                                    <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
+                                    <Box sx={{display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 1.5 }}}>
                                         <Box
                                             sx={{
-                                                width: 40,
-                                                height: 40,
+                                                width: { xs: 32, sm: 36 },
+                                                height: { xs: 32, sm: 36 },
                                                 borderRadius: '50%',
                                                 bgcolor: mode === 'dark' 
                                                     ? (index === 0 ? 'rgba(108, 111, 249, 0.5)' : index === 1 ? 'rgba(168, 163, 246, 0.5)' : index === 2 ? 'rgba(255, 179, 186, 0.5)' : index === 3 ? 'rgba(255, 218, 193, 0.5)' : 'rgba(255, 235, 204, 0.5)')
@@ -493,7 +493,7 @@ const Analytics: React.FC = () => {
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
                                                 fontWeight: 'bold',
-                                                fontSize: '1.1rem',
+                                                fontSize: { xs: '0.9rem', sm: '1rem' },
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 border: mode === 'dark' 
                                                     ? '2px solid rgba(108, 111, 249, 0.3)'
@@ -503,20 +503,20 @@ const Analytics: React.FC = () => {
                                             {index + 1}
                                         </Box>
                                         <Box>
-                                            <Typography variant="body1" fontWeight="bold" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                                            <Typography variant="body2" fontWeight="bold" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
                                                 {getCategoryName(transaction.category, t)}
                                             </Typography>
-                                            <Typography variant="caption" sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.7)'}}>
+                                            <Typography variant="caption" sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.7)', fontSize: '0.7rem'}}>
                                                 {new Date(transaction.date).toLocaleDateString('ru-RU')}
                                             </Typography>
                                             {transaction.description && (
-                                                <Typography variant="body2" sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.7)'}}>
+                                                <Typography variant="caption" sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.7)', display: 'block', fontSize: '0.7rem'}}>
                                                     {transaction.description}
                                                 </Typography>
                                             )}
                                         </Box>
                                     </Box>
-                                    <Typography variant="h6" fontWeight="bold" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                                    <Typography variant="body1" fontWeight="bold" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E', fontSize: { xs: '0.95rem', sm: '1.1rem' }}}>
                                         {formatCurrency(transaction.amount, currency)}
                                     </Typography>
                                 </Box>

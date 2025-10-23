@@ -161,7 +161,8 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                         ))}
                     </Pie>
                     <Tooltip
-                        formatter={(value: number) => formatCurrency(value, currency)}
+                        formatter={(value: number, name: string) => [formatCurrency(value, currency), name + ':']}
+                        separator=" "
                         contentStyle={{
                             backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                             border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(108, 111, 249, 0.2)',
