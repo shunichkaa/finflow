@@ -203,18 +203,11 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose }) =
                         )}
 
                         {/* Осталось */}
-                        <Box sx={{
-                            p: 2,
-                            borderRadius: 2,
-                            background: mode === 'dark' 
-                                ? 'rgba(255, 215, 186, 0.1)' 
-                                : 'rgba(255, 215, 186, 0.2)',
-                            border: `1px solid ${mode === 'dark' ? 'rgba(255, 215, 186, 0.3)' : '#FFD7BA'}`,
-                        }}>
-                            <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
-                                Осталось
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
+                                Осталось:
                             </Typography>
-                            <Typography variant="h5" fontWeight={700} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+                            <Typography variant="h6" fontWeight={700} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                                 {remaining.toLocaleString()} {currency}
                             </Typography>
                         </Box>

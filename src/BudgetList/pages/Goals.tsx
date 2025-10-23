@@ -499,9 +499,9 @@ const Goals: React.FC = () => {
                             required
                         />
 
-                        {/* Целевая сумма */}
+                        {/* Итоговая сумма */}
                         <TextField
-                            label="Целевая сумма"
+                            label="Итоговая сумма"
                             type="text"
                             value={targetAmount}
                             onChange={handleTargetAmountChange}
