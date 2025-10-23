@@ -397,10 +397,10 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         {/* Notification Center */}
                         <NotificationCenter />
                         
-                        {/* Profile and Logout buttons for tablet/desktop when sidebar is closed */}
-                        {!sidebarOpen && (
+                        {/* Profile and Logout buttons for desktop when sidebar is closed */}
+                        {!sidebarOpen && !isLoginPage && (
                             <Box sx={{ 
-                                display: { xs: 'none', sm: 'flex' }, 
+                                display: { xs: 'none', md: 'flex' }, 
                                 gap: 1, 
                                 ml: 2,
                                 alignItems: 'center'
@@ -465,11 +465,11 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         display: {xs: 'block', sm: 'none'},
                         '& .MuiDrawer-paper': {
                             boxSizing: 'border-box',
-                            width: {xs: '85vw', sm: drawerWidth},
-                            maxWidth: drawerWidth,
+                            width: drawerWidth,
                             transition: 'transform 0.3s ease',
                             boxShadow: 'none',
                             border: 'none',
+                            overflowX: 'hidden',
                         },
                         '& .MuiBackdrop-root': {
                             backgroundColor: 'rgba(39, 43, 62, 0.5)',

@@ -266,6 +266,41 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                     </Alert>
                                 )}
 
+                                {/* Осталось */}
+                                {remaining > 0 && (
+                                    <Box 
+                                        sx={{ 
+                                            p: 2, 
+                                            mb: 2,
+                                            borderRadius: 2,
+                                            backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
+                                        }}
+                                    >
+                                        <Typography 
+                                            variant="caption" 
+                                            sx={{ 
+                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
+                                                display: 'block',
+                                                mb: 0.5,
+                                                fontSize: '0.75rem',
+                                                fontWeight: 600,
+                                            }}
+                                        >
+                                            {t('remaining')}:
+                                        </Typography>
+                                        <Typography 
+                                            variant="body1" 
+                                            fontWeight="700"
+                                            sx={{ 
+                                                color: mode === 'dark' ? categoryColor : '#272B3E',
+                                                fontSize: '0.95rem'
+                                            }}
+                                        >
+                                            {formatCurrency(remaining, currency)}
+                                        </Typography>
+                                    </Box>
+                                )}
+
                                 {/* Прогресс */}
                                 <Box sx={{ mb: 2 }}>
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
@@ -304,42 +339,6 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             }
                                         }}
                                     />
-                                </Box>
-
-                                {/* Информация */}
-                                <Box sx={{ mt: 'auto' }}>
-                                    {remaining > 0 && (
-                                        <Box 
-                                            sx={{ 
-                                                p: 2, 
-                                                borderRadius: 2,
-                                                backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
-                                            }}
-                                        >
-                                            <Typography 
-                                                variant="caption" 
-                                                sx={{ 
-                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
-                                                    display: 'block',
-                                                    mb: 0.5,
-                                                    fontSize: '0.75rem',
-                                                    fontWeight: 600,
-                                                }}
-                                            >
-                                                {t('remaining')}:
-                                            </Typography>
-                                            <Typography 
-                                                variant="body1" 
-                                                fontWeight="700"
-                                                sx={{ 
-                                                    color: mode === 'dark' ? categoryColor : '#272B3E',
-                                                    fontSize: '0.95rem'
-                                                }}
-                                            >
-                                                {formatCurrency(remaining, currency)}
-                                            </Typography>
-                                        </Box>
-                                    )}
                                 </Box>
                             </Box>
                         </Card>
