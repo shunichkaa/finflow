@@ -449,17 +449,28 @@ export default function Profile() {
                     Управление данными
                 </Typography>
 
-                <Box display="flex" gap={2} flexWrap="wrap">
+                <Box 
+                    sx={{ 
+                        display: 'grid',
+                        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+                        gap: 2
+                    }}
+                >
                     <Button
                         variant="outlined"
                         startIcon={<Backup />}
                         onClick={handleExportData}
+                        fullWidth
                         sx={{ 
                             borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                            borderRadius: 2,
+                            py: 1.5,
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
                                 borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
                                 backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                transform: 'translateY(-2px)',
                             }
                         }}
                     >
@@ -470,12 +481,17 @@ export default function Profile() {
                         variant="outlined"
                         startIcon={<Security />}
                         onClick={handleEditProfile}
+                        fullWidth
                         sx={{ 
                             borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                            borderRadius: 2,
+                            py: 1.5,
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
                                 borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
                                 backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                transform: 'translateY(-2px)',
                             }
                         }}
                     >
@@ -487,12 +503,17 @@ export default function Profile() {
                         color="error"
                         startIcon={<Delete />}
                         onClick={handleDeleteAccount}
+                        fullWidth
                         sx={{ 
                             borderColor: '#FFB3BA',
                             color: '#FFB3BA',
+                            borderRadius: 2,
+                            py: 1.5,
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
                                 borderColor: '#FFB3BA',
-                                backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                                backgroundColor: 'rgba(255, 179, 186, 0.1)',
+                                transform: 'translateY(-2px)',
                             }
                         }}
                     >
