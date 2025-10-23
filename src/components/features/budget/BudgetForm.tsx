@@ -188,7 +188,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                     borderRadius: 2
                 }}>
                     <Typography variant="body2">
-                        💡 {selectedPeriod === 'monthly' ? t('monthlyBudgetInfo') : t('weeklyBudgetInfo')}
+                        {selectedPeriod === 'monthly' ? t('monthlyBudgetInfo') : t('weeklyBudgetInfo')}
                     </Typography>
                 </Box>
 

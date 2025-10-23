@@ -228,53 +228,27 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         type="monotone"
                         dataKey="income"
                         name={t('income')}
-                        stroke="url(#incomeGradient)"
-                        strokeWidth={4}
-                        dot={{
-                            r: 5, 
-                            fill: '#96CEB4', 
-                            stroke: '#FFFFFF', 
-                            strokeWidth: 3,
-                            filter: 'drop-shadow(0 4px 8px rgba(150, 206, 180, 0.5))'
-                        }}
-                        activeDot={{
-                            r: 8, 
-                            fill: '#96CEB4', 
-                            stroke: '#FFFFFF', 
-                            strokeWidth: 3.5,
-                            filter: 'drop-shadow(0 6px 12px rgba(150, 206, 180, 0.7))'
-                        }}
+                        stroke="#6C6FF9"
+                        strokeWidth={3}
+                        dot={false}
+                        activeDot={false}
                         animationBegin={200}
                         animationDuration={1200}
                         animationEasing="ease-out"
                         isAnimationActive={true}
-                        filter="url(#glassGlow)"
                     />
                     <Line
                         type="monotone"
                         dataKey="expense"
                         name={t('expense')}
-                        stroke="url(#expenseGradient)"
-                        strokeWidth={4}
-                        dot={{
-                            r: 5, 
-                            fill: mode === 'dark' ? '#977DFF' : '#8B5CF6', 
-                            stroke: '#FFFFFF', 
-                            strokeWidth: 3,
-                            filter: `drop-shadow(0 4px 8px ${mode === 'dark' ? 'rgba(151, 125, 255, 0.5)' : 'rgba(139, 92, 246, 0.5)'})`
-                        }}
-                        activeDot={{
-                            r: 8, 
-                            fill: mode === 'dark' ? '#977DFF' : '#8B5CF6', 
-                            stroke: '#FFFFFF', 
-                            strokeWidth: 3.5,
-                            filter: `drop-shadow(0 6px 12px ${mode === 'dark' ? 'rgba(151, 125, 255, 0.7)' : 'rgba(139, 92, 246, 0.7)'})`
-                        }}
+                        stroke="#64C7F8"
+                        strokeWidth={3}
+                        dot={false}
+                        activeDot={false}
                         animationBegin={400}
                         animationDuration={1200}
                         animationEasing="ease-out"
                         isAnimationActive={true}
-                        filter="url(#glassGlow)"
                     />
                 </LineChart>
             </ResponsiveContainer>

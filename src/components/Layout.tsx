@@ -71,76 +71,28 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             display: 'flex', 
             flexDirection: 'column', 
             height: '100vh', 
-            backdropFilter: 'blur(80px) saturate(220%)',
-            WebkitBackdropFilter: 'blur(80px) saturate(220%)',
-            backgroundColor: mode === 'dark' 
-                ? 'rgba(28, 28, 30, 0.75)'
-                : 'rgba(255, 255, 255, 0.45)',
-            borderRight: mode === 'dark' 
-                ? '1.5px solid rgba(255, 255, 255, 0.18)' 
-                : '1.5px solid rgba(255, 255, 255, 0.6)',
-            boxShadow: mode === 'dark'
-                ? `8px 0 32px rgba(0, 0, 0, 0.5),
-                   inset 1px 0 0 rgba(255, 255, 255, 0.15),
-                   0 0 60px rgba(151, 125, 255, 0.1)`
-                : `8px 0 32px rgba(151, 125, 255, 0.12),
-                   inset 1px 0 0 rgba(255, 255, 255, 0.8),
-                   0 0 60px rgba(151, 125, 255, 0.08)`,
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            backgroundColor: '#FFFFFF',
+            borderRight: '1px solid #EFF0F6',
+            transition: 'all 0.3s ease',
             position: 'relative',
             overflow: 'hidden',
-            '&::before': {
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                width: '1px',
-                height: '100%',
-                background: mode === 'dark'
-                    ? 'linear-gradient(180deg, transparent, rgba(151, 125, 255, 0.5), transparent)'
-                    : 'linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.9), transparent)',
-            }
         }}>
             {/* Sidebar Header */}
-            <AppBar position="static" elevation={0} sx={{
-                backdropFilter: 'blur(60px) saturate(200%)',
-                WebkitBackdropFilter: 'blur(60px) saturate(200%)',
-                backgroundColor: 'transparent',
-                borderBottom: 'none',
-                boxShadow: 'none',
-                background: mode === 'dark'
-                    ? 'linear-gradient(180deg, rgba(28, 28, 30, 0.95) 0%, rgba(28, 28, 30, 0.85) 100%)'
-                    : 'linear-gradient(180deg, rgba(252, 248, 245, 0.95) 0%, rgba(252, 248, 245, 0.85) 100%)',
+            <Box sx={{
+                backgroundColor: '#FFFFFF',
+                borderBottom: '1px solid #EFF0F6',
                 position: 'relative',
-                '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: '1px',
-                    background: mode === 'dark'
-                        ? 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.3), transparent)'
-                        : 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.2), transparent)',
-                }
             }}>
                 <Toolbar sx={{ minHeight: { xs: 64, sm: 70 } }}>
                     <IconButton
                         onClick={handleDrawerToggle}
                         sx={{
                             display: {sm: 'none'},
-                            color: mode === 'dark' ? '#977DFF' : '#977DFF',
-                            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                            color: '#272B3E',
+                            transition: 'all 0.2s ease',
                             '&:hover': {
-                                background: mode === 'dark' 
-                                    ? 'rgba(151, 125, 255, 0.15)' 
-                                    : 'rgba(151, 125, 255, 0.1)',
-                                color: mode === 'dark' ? '#B8A6FF' : '#7B5EE6',
-                                transform: 'scale(1.1)',
+                                background: '#EFF0F6',
                             },
-                            '&:active': {
-                                transform: 'scale(0.95)',
-                            }
                         }}
                     >
                         <Close/>
@@ -152,19 +104,12 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             sx={{
                                 display: {xs: 'none', sm: 'block'},
-                                color: mode === 'dark' ? '#977DFF' : '#977DFF',
+                                color: '#272B3E',
                                 mr: 2,
-                                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                                transition: 'all 0.2s ease',
                                 '&:hover': {
-                                    background: mode === 'dark' 
-                                        ? 'rgba(151, 125, 255, 0.15)' 
-                                        : 'rgba(151, 125, 255, 0.1)',
-                                    color: mode === 'dark' ? '#B8A6FF' : '#7B5EE6',
-                                    transform: 'scale(1.1)',
+                                    background: '#EFF0F6',
                                 },
-                                '&:active': {
-                                    transform: 'scale(0.95)',
-                                }
                             }}
                         >
                             {sidebarOpen ? <ChevronLeft/> : <MenuIcon/>}
@@ -177,13 +122,12 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 onClick={handleLogoClick}
                                 sx={{
                                     cursor: 'pointer',
-                                    color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
+                                    color: '#272B3E', // Midnight Blue
                                     fontWeight: 700,
                                     letterSpacing: '-0.02em',
-                                    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    transition: 'all 0.2s ease',
                                     '&:hover': {
-                                        color: '#007AFF',
-                                        transform: 'scale(1.02)',
+                                        color: '#6C6FF9', // Cornflower Blue
                                     }
                                 }}
                             >
@@ -192,7 +136,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             <Typography
                                 variant="caption"
                                 sx={{
-                                    color: mode === 'dark' ? '#EBEBF5' : '#3c3c43',
+                                    color: '#272B3E',
+                                    opacity: 0.6,
                                     fontSize: '0.7rem',
                                     lineHeight: 1,
                                     mt: 0.5,
@@ -205,7 +150,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         </Box>
                     </Box>
                 </Toolbar>
-            </AppBar>
+            </Box>
 
             {/* Navigation */}
             <Box sx={{ flexGrow: 1, overflow: 'auto', px: 2, py: 3 }}>
@@ -217,45 +162,31 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 to={item.path}
                                 selected={location.pathname === item.path}
                                 onClick={() => setMobileOpen(false)}
+                                disableRipple
                                 sx={{
-                                    borderRadius: 3,
+                                    borderRadius: 2,
                                     py: 1.5,
                                     px: 2,
-                                    color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
-                                    backdropFilter: 'blur(20px)',
-                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    position: 'relative',
-                                    overflow: 'hidden',
+                                    color: '#272B3E',
+                                    transition: 'background-color 0.2s ease, color 0.2s ease',
+                                    background: 'transparent',
                                     '&.Mui-selected': {
-                                        background: mode === 'dark' 
-                                            ? 'rgba(10, 132, 255, 0.25)' 
-                                            : 'rgba(0, 122, 255, 0.12)',
-                                        color: '#007AFF',
-                                        boxShadow: mode === 'dark'
-                                            ? '0 4px 12px rgba(10, 132, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                                            : '0 4px 12px rgba(0, 122, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+                                        background: '#EFF0F6',
+                                        color: '#6C6FF9',
                                         '&:hover': {
-                                            background: mode === 'dark' 
-                                                ? 'rgba(10, 132, 255, 0.35)' 
-                                                : 'rgba(0, 122, 255, 0.18)',
-                                            transform: 'translateY(-2px)',
-                                            boxShadow: mode === 'dark'
-                                                ? '0 6px 16px rgba(10, 132, 255, 0.4)'
-                                                : '0 6px 16px rgba(0, 122, 255, 0.2)',
+                                            background: '#EFF0F6',
                                         }
                                     },
                                     '&:hover': {
-                                        background: mode === 'dark' 
-                                            ? 'rgba(10, 132, 255, 0.15)' 
-                                            : 'rgba(0, 122, 255, 0.08)',
-                                        transform: 'translateY(-2px)',
-                                        boxShadow: mode === 'dark'
-                                            ? '0 4px 12px rgba(0, 0, 0, 0.2)'
-                                            : '0 4px 12px rgba(0, 0, 0, 0.06)',
+                                        background: '#EFF0F6',
                                     },
-                                    '&:active': {
-                                        transform: 'scale(0.98)',
-                                    }
+                                    '&:focus': {
+                                        background: '#EFF0F6',
+                                    },
+                                    // Убираем все overlay эффекты
+                                    '& .MuiTouchRipple-root': {
+                                        display: 'none',
+                                    },
                                 }}
                             >
                                 <ListItemText
@@ -274,9 +205,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
 
             {/* Bottom Buttons */}
             <Divider sx={{
-                borderColor: mode === 'dark' 
-                    ? 'rgba(255, 255, 255, 0.1)' 
-                    : 'rgba(0, 0, 0, 0.05)'
+                borderColor: '#EFF0F6'
             }}/>
             <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                 <Button
@@ -289,40 +218,25 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             sx={{ 
                                 width: 28, 
                                 height: 28, 
-                                bgcolor: '#007AFF',
+                                bgcolor: '#6C6FF9', // Cornflower Blue
                                 fontSize: '0.875rem',
-                                boxShadow: '0 2px 8px rgba(0, 122, 255, 0.3)',
                             }}
                         >
                             {!avatar && <Person sx={{ fontSize: '1.1rem' }} />}
                         </Avatar>
                     }
                     sx={{
-                        borderRadius: 3,
+                        borderRadius: 2,
                         py: 1.5,
-                        borderColor: mode === 'dark' 
-                            ? 'rgba(10, 132, 255, 0.3)'
-                            : 'rgba(0, 122, 255, 0.2)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
+                        borderColor: '#6C6FF9',
+                        color: '#272B3E',
                         fontWeight: 500,
-                        backdropFilter: 'blur(20px)',
-                        background: mode === 'dark'
-                            ? 'rgba(58, 58, 60, 0.4)'
-                            : 'rgba(0, 122, 255, 0.05)',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        background: '#FFFFFF',
+                        transition: 'all 0.2s ease',
                         '&:hover': {
-                            background: mode === 'dark' 
-                                ? 'rgba(10, 132, 255, 0.15)'
-                                : 'rgba(0, 122, 255, 0.1)',
-                            borderColor: '#007AFF',
-                            transform: 'translateY(-2px)',
-                            boxShadow: mode === 'dark' 
-                                ? '0 6px 20px rgba(10, 132, 255, 0.3)'
-                                : '0 6px 20px rgba(0, 122, 255, 0.15)',
+                            background: '#EFF0F6',
+                            borderColor: '#6C6FF9',
                         },
-                        '&:active': {
-                            transform: 'scale(0.98)',
-                        }
                     }}
                 >
                     {nickname || 'Личный кабинет'}
@@ -332,27 +246,18 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     fullWidth
                     variant="contained"
                     sx={{
-                        borderRadius: 3,
+                        borderRadius: 2,
                         py: 1.5,
-                        background: mode === 'dark' 
-                            ? 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)'
-                            : 'linear-gradient(135deg, #A8A3F6 0%, #F6D5EE 100%)',
+                        background: '#6C6FF9', // Плоский Cornflower Blue
                         color: '#FFFFFF',
                         fontWeight: 600,
                         textTransform: 'none',
-                        boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(99, 102, 241, 0.4)'
-                            : '0 8px 24px rgba(168, 163, 246, 0.4)',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        boxShadow: '0 2px 8px rgba(108, 111, 249, 0.2)',
+                        transition: 'all 0.2s ease',
                         '&:hover': {
-                            transform: 'translateY(-2px)',
-                            boxShadow: mode === 'dark'
-                                ? '0 12px 32px rgba(99, 102, 241, 0.5)'
-                                : '0 12px 32px rgba(168, 163, 246, 0.5)',
+                            background: '#6C6FF9',
+                            boxShadow: '0 4px 12px rgba(108, 111, 249, 0.3)',
                         },
-                        '&:active': {
-                            transform: 'scale(0.98)',
-                        }
                     }}
                 >
                     {t('logout', 'Logout')}
@@ -367,59 +272,40 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 <CssBaseline/>
 
             {/* Main AppBar */}
-            <AppBar
-                position="fixed"
+            <Box
+                component="header"
                 sx={{
+                    position: 'fixed',
+                    top: 0,
+                    left: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
+                    right: 0,
                     zIndex: (theme) => theme.zIndex.drawer - 1,
-                    width: {sm: (sidebarOpen && !isLoginPage) ? `calc(100% - ${drawerWidth}px)` : '100%'},
-                    ml: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
-                    backdropFilter: 'blur(80px) saturate(220%)',
-                    WebkitBackdropFilter: 'blur(80px) saturate(220%)',
-                    backgroundColor: 'transparent',
-                    color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
-                    borderBottom: 'none',
-                    boxShadow: 'none',
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                    '&::after': {
-                        content: '""',
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        height: '1px',
-                        background: mode === 'dark'
-                            ? 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.2), transparent)'
-                            : 'linear-gradient(90deg, transparent, rgba(151, 125, 255, 0.15), transparent)',
-                        opacity: 0.6,
-                    }
+                    backgroundColor: '#FFFFFF',
+                    color: '#272B3E',
+                    borderBottom: '1px solid #EFF0F6',
+                    boxShadow: '0 2px 8px rgba(39, 43, 62, 0.08)',
+                    transition: 'all 0.3s ease',
                 }}
             >
                 <Toolbar sx={{ minHeight: { xs: 64, sm: 70 } }}>
                     {/* Mobile Menu */}
                     <Box sx={{display: 'flex', alignItems: 'center', ml: 1}}>
-                        <IconButton
-                            color="inherit"
-                            edge="start"
-                            onClick={handleDrawerToggle}
-                            sx={{
-                                mr: 2,
-                                display: {sm: 'none'},
-                                color: mode === 'dark' ? '#977DFF' : '#977DFF',
-                                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                                '&:hover': {
-                                    background: mode === 'dark' 
-                                        ? 'rgba(151, 125, 255, 0.15)' 
-                                        : 'rgba(151, 125, 255, 0.1)',
-                                    color: mode === 'dark' ? '#B8A6FF' : '#7B5EE6',
-                                    transform: 'scale(1.1)',
-                                },
-                                '&:active': {
-                                    transform: 'scale(0.95)',
-                                }
-                            }}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
+                                    <IconButton
+                                        color="inherit"
+                                        edge="start"
+                                        onClick={handleDrawerToggle}
+                                        sx={{
+                                            mr: 2,
+                                            display: {sm: 'none'},
+                                            color: '#272B3E',
+                                            transition: 'all 0.2s ease',
+                                            '&:hover': {
+                                                background: '#EFF0F6',
+                                            },
+                                        }}
+                                    >
+                                        <MenuIcon/>
+                                    </IconButton>
 
                         {!sidebarOpen && (
                             <>
@@ -428,19 +314,12 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     onClick={() => setSidebarOpen(!sidebarOpen)}
                                     sx={{
                                         display: {xs: 'none', sm: 'block'},
-                                        color: mode === 'dark' ? '#977DFF' : '#977DFF',
+                                        color: '#272B3E',
                                         mr: 2,
-                                        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                                        transition: 'all 0.2s ease',
                                         '&:hover': {
-                                            background: mode === 'dark' 
-                                                ? 'rgba(151, 125, 255, 0.15)' 
-                                                : 'rgba(151, 125, 255, 0.1)',
-                                            color: mode === 'dark' ? '#B8A6FF' : '#7B5EE6',
-                                            transform: 'scale(1.1)',
+                                            background: '#EFF0F6',
                                         },
-                                        '&:active': {
-                                            transform: 'scale(0.95)',
-                                        }
                                     }}
                                 >
                                     <MenuIcon/>
@@ -453,13 +332,12 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                         onClick={handleLogoClick}
                                         sx={{
                                             cursor: 'pointer',
-                                            color: mode === 'dark' ? '#FFFFFF' : '#1c1c1e',
+                                            color: '#272B3E',
                                             fontWeight: 700,
                                             letterSpacing: '-0.02em',
-                                            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                                            transition: 'all 0.2s ease',
                                             '&:hover': {
-                                                color: '#007AFF',
-                                                transform: 'scale(1.02)',
+                                                color: '#6C6FF9',
                                             }
                                         }}
                                     >
@@ -468,7 +346,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     <Typography
                                         variant="caption"
                                         sx={{
-                                            color: mode === 'dark' ? '#EBEBF5' : '#3c3c43',
+                                            color: '#272B3E',
+                                            opacity: 0.6,
                                             fontSize: '0.7rem',
                                             lineHeight: 1,
                                             mt: 0.5,
@@ -485,7 +364,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
 
                     <Box sx={{ flexGrow: 1 }} />
                 </Toolbar>
-            </AppBar>
+            </Box>
 
             {/* Mobile Drawer */}
             <Drawer
@@ -499,18 +378,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     display: {xs: 'block', sm: 'none'},
                     '& .MuiDrawer-paper': {
                         boxSizing: 'border-box',
-                        width: {xs: '100vw', sm: drawerWidth},
+                        width: {xs: '85vw', sm: drawerWidth},
                         maxWidth: drawerWidth,
-                        transition: 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                        boxShadow: mode === 'dark'
-                            ? '8px 0 40px rgba(0, 0, 0, 0.6)'
-                            : '8px 0 40px rgba(151, 125, 255, 0.15)',
+                        transition: 'transform 0.3s ease',
+                        boxShadow: 'none',
+                        border: 'none',
                     },
                     '& .MuiBackdrop-root': {
-                        backdropFilter: 'blur(10px)',
-                        backgroundColor: mode === 'dark'
-                            ? 'rgba(0, 0, 0, 0.5)'
-                            : 'rgba(151, 125, 255, 0.1)',
+                        backgroundColor: 'rgba(39, 43, 62, 0.5)',
                     }
                 }}
             >
@@ -528,17 +403,15 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             width: sidebarOpen ? drawerWidth : 0,
                             border: 'none',
                             overflow: 'hidden',
-                            transition: 'width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                            boxShadow: mode === 'dark'
-                                ? '8px 0 40px rgba(0, 0, 0, 0.6)'
-                                : '8px 0 40px rgba(151, 125, 255, 0.15)',
+                            transition: 'width 0.3s ease',
+                            boxShadow: 'none',
                         },
                     }}
                     open={sidebarOpen}
                 >
                 <Box sx={{
                     opacity: sidebarOpen ? 1 : 0,
-                    transition: 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transition: 'opacity 0.3s ease',
                 }}>
                     {drawer}
                 </Box>

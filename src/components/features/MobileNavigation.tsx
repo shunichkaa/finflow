@@ -29,13 +29,13 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
         {
             id: 'dashboard',
             label: 'Главная',
-            icon: '📊',
+            icon: '■',
             path: '/'
         },
         {
             id: 'transactions',
             label: 'Транзакции',
-            icon: '💳',
+            icon: '▪',
             path: '/transactions',
             badge: 3
         },
@@ -48,13 +48,13 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
         {
             id: 'budgets',
             label: 'Бюджеты',
-            icon: '💰',
+            icon: '●',
             path: '/budgets'
         },
         {
             id: 'profile',
             label: 'Профиль',
-            icon: '👤',
+            icon: '◆',
             path: '/profile'
         }
     ];

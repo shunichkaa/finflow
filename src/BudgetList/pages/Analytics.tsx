@@ -407,7 +407,7 @@ const Analytics: React.FC = () => {
                         textAlign: 'left', 
                         color: mode === 'dark' ? '#FFFFFF' : '#0600AB'
                     }}>
-                        📈 {t('incomeVsExpenses')}
+                        {t('incomeVsExpenses')}
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
                         <IncomeExpenseTrendChart transactions={filteredTransactions} period={period}
