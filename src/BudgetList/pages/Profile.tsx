@@ -79,11 +79,6 @@ export default function Profile() {
         
         // Состояние для редактирования профиля
         const [editModalOpen, setEditModalOpen] = useState(false);
-        const [email, setEmail] = useState(session?.user?.email || '');
-        const [currentPassword, setCurrentPassword] = useState('');
-        const [newPassword, setNewPassword] = useState('');
-        const [confirmPassword, setConfirmPassword] = useState('');
-        const [showPasswords, setShowPasswords] = useState(false);
         const [timePickerOpen, setTimePickerOpen] = useState(false);
         const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -190,40 +185,6 @@ export default function Profile() {
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
-    };
-
-    const handleSaveProfile = async () => {
-        try {
-            // Валидация паролей
-            if (newPassword && newPassword !== confirmPassword) {
-                setSnackbarMessage('Пароли не совпадают');
-                setSnackbarOpen(true);
-                return;
-            }
-
-            if (newPassword && newPassword.length < 6) {
-                setSnackbarMessage('Пароль должен содержать минимум 6 символов');
-                setSnackbarOpen(true);
-                return;
-            }
-
-            // Сохраняем никнейм в глобальное состояние
-            setNickname(nickname);
-
-            // Здесь будет логика сохранения изменений
-            // Пока что просто показываем сообщение об успехе
-            setSnackbarMessage('Профиль успешно обновлен');
-            setSnackbarOpen(true);
-            setEditModalOpen(false);
-            
-            // Сброс полей
-            setCurrentPassword('');
-            setNewPassword('');
-            setConfirmPassword('');
-        } catch (error) {
-            setSnackbarMessage('Ошибка при сохранении профиля');
-            setSnackbarOpen(true);
-        }
     };
 
     return (
@@ -414,7 +375,7 @@ export default function Profile() {
                     <ListItem>
                         <ListItemIcon>
                             <CloudSync sx={{ 
-                                color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FFB3BA' : mode === 'dark' ? '#FFFFFF' : '#272B3E'),
+                                color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FF3B3B' : mode === 'dark' ? '#FFFFFF' : '#272B3E'),
                                 animation: syncStatus.isSyncing ? 'spin 1s linear infinite' : 'none',
                                 '@keyframes spin': {
                                     '0%': { transform: 'rotate(0deg)' },
@@ -714,27 +675,6 @@ export default function Profile() {
 
                     <Button
                         variant="outlined"
-                        startIcon={<Security />}
-                        onClick={handleEditProfile}
-                        fullWidth
-                        sx={{ 
-                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                            borderRadius: 2,
-                            py: 1.5,
-                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                            '&:hover': {
-                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
-                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
-                                transform: 'translateY(-2px)',
-                            }
-                        }}
-                    >
-                        Изменить пароль
-                    </Button>
-
-                    <Button
-                        variant="outlined"
                         color="error"
                         startIcon={<Delete />}
                         onClick={handleDeleteAccount}
@@ -756,32 +696,6 @@ export default function Profile() {
                     </Button>
                 </Box>
             </Paper>
-
-            {/* Кнопка сохранения */}
-            <Box display="flex" justifyContent="center" mt={4}>
-                <Button
-                    variant="contained"
-                    size="large"
-                    onClick={handleSave}
-                    sx={{
-                        background: '#6C6FF9',
-                        color: '#FFFFFF',
-                        fontWeight: 'bold',
-                        px: 4,
-                        py: 1.5,
-                        borderRadius: 2,
-                        boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        '&:hover': {
-                            background: '#6C6FF9',
-                            transform: 'translateY(-2px)',
-                            boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
-                        }
-                    }}
-                >
-                    Сохранить настройки
-                </Button>
-            </Box>
 
             {/* Модальное окно редактирования профиля */}
             <Modal
@@ -903,130 +817,11 @@ export default function Profile() {
                         }}
                     />
 
-                    <Divider sx={{ my: 2 }} />
-
-                    <Typography variant="h6" sx={{ mb: 2, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                        Изменить пароль
-                    </Typography>
-
-                    {/* Текущий пароль */}
-                    <TextField
-                        fullWidth
-                        label="Текущий пароль"
-                        type={showPasswords ? 'text' : 'password'}
-                        value={currentPassword}
-                        onChange={(e) => setCurrentPassword(e.target.value)}
-                        margin="normal"
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        onClick={() => setShowPasswords(!showPasswords)}
-                                        edge="end"
-                                    >
-                                        {showPasswords ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-                        }}
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderColor: 'rgba(6, 0, 171, 0.3)',
-                                },
-                                '&:hover fieldset': {
-                                    borderColor: 'rgba(6, 0, 171, 0.6)',
-                                },
-                                '&.Mui-focused fieldset': {
-                                    borderColor: '#272B3E',
-                                },
-                            },
-                            '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                },
-                            },
-                        }}
-                    />
-
-                    {/* Новый пароль */}
-                    <TextField
-                        fullWidth
-                        label="Новый пароль"
-                        type={showPasswords ? 'text' : 'password'}
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        margin="normal"
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderColor: 'rgba(6, 0, 171, 0.3)',
-                                },
-                                '&:hover fieldset': {
-                                    borderColor: 'rgba(6, 0, 171, 0.6)',
-                                },
-                                '&.Mui-focused fieldset': {
-                                    borderColor: '#272B3E',
-                                },
-                            },
-                            '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                },
-                            },
-                        }}
-                    />
-
-                    {/* Подтверждение пароля */}
-                    <TextField
-                        fullWidth
-                        label="Подтвердите новый пароль"
-                        type={showPasswords ? 'text' : 'password'}
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        margin="normal"
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderColor: 'rgba(6, 0, 171, 0.3)',
-                                },
-                                '&:hover fieldset': {
-                                    borderColor: 'rgba(6, 0, 171, 0.6)',
-                                },
-                                '&.Mui-focused fieldset': {
-                                    borderColor: '#272B3E',
-                                },
-                            },
-                            '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                '&.Mui-focused': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                },
-                            },
-                        }}
-                    />
-
                     {/* Кнопки */}
                     <Box display="flex" gap={2} justifyContent="flex-end" mt={3}>
                         <Button
-                            variant="outlined"
-                            onClick={handleCloseEditModal}
-                            sx={{ 
-                                borderColor: 'rgba(6, 0, 171, 0.3)',
-                                color: '#272B3E',
-                                '&:hover': {
-                                    borderColor: 'rgba(6, 0, 171, 0.6)',
-                                    backgroundColor: 'rgba(6, 0, 171, 0.1)',
-                                }
-                            }}
-                        >
-                            Отмена
-                        </Button>
-                        <Button
                             variant="contained"
-                            onClick={handleSaveProfile}
+                            onClick={handleCloseEditModal}
                             sx={{
                                 background: 'linear-gradient(135deg, rgba(234, 234, 244, 0.8) 0%, rgba(248, 229, 229, 0.6) 100%)',
                                 color: '#272B3E',
@@ -1038,7 +833,7 @@ export default function Profile() {
                                 }
                             }}
                         >
-                            Сохранить
+                            Закрыть
                         </Button>
                     </Box>
                 </Box>
