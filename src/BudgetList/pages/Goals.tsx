@@ -135,12 +135,16 @@ const Goals: React.FC = () => {
             name: goalName,
             targetAmount: parseFormattedNumber(targetAmount),
             currentAmount: parseFormattedNumber(currentAmount),
-            targetDate: targetDate || undefined,
+            targetDate: targetDate ? targetDate : undefined,
             icon: selectedIcon,
         };
 
         if (editingGoal) {
-            updateGoal(editingGoal, goalData);
+            // При редактировании явно передаем все поля, включая targetDate
+            updateGoal(editingGoal, {
+                ...goalData,
+                targetDate: targetDate ? targetDate : undefined,
+            });
         } else {
             addGoal(goalData as any);
         }

@@ -102,11 +102,14 @@ export const useCloudSync = (enabled: boolean) => {
 
             if (goalsData) {
                 const parsedGoals: Goal[] = goalsData.map((g: any) => ({
-                    ...g,
+                    id: g.id,
+                    name: g.name,
+                    description: g.description,
                     targetAmount: g.target_amount,
                     currentAmount: g.current_amount,
                     isCompleted: g.is_completed,
-                    deadline: g.deadline ? new Date(g.deadline) : undefined,
+                    targetDate: g.deadline ? new Date(g.deadline) : undefined,
+                    icon: g.icon || undefined,
                     createdAt: new Date(g.created_at),
                 }));
                 setGoals(parsedGoals);
@@ -195,10 +198,11 @@ export const useCloudSync = (enabled: boolean) => {
                 id: goal.id,
                 user_id: session.user.id,
                 name: goal.name,
+                description: goal.description || null,
                 target_amount: goal.targetAmount,
                 current_amount: goal.currentAmount,
-                deadline: goal.deadline 
-                    ? (goal.deadline instanceof Date ? goal.deadline.toISOString() : new Date(goal.deadline).toISOString())
+                deadline: goal.targetDate 
+                    ? (goal.targetDate instanceof Date ? goal.targetDate.toISOString() : new Date(goal.targetDate).toISOString())
                     : null,
                 icon: goal.icon || null,
                 is_completed: goal.isCompleted,
