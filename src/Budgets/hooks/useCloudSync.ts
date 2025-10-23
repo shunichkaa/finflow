@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { useFinanceStore } from '../store/useFinanceStore';
 import { useGoalsStore } from '../store/useGoalsStore';
+import { useSettingsStore } from '../store/useSettingsStore';
 import { useAuth } from './useAuth';
 import type { Transaction, Budget } from '../types';
 import type { Goal } from '../types';
@@ -36,6 +37,12 @@ export const useCloudSync = (enabled: boolean) => {
     const setTransactions = useFinanceStore(state => state.setTransactions);
     const setBudgets = useFinanceStore(state => state.setBudgets);
     const setGoals = useGoalsStore(state => state.setGoals);
+    
+    // Настройки пользователя
+    const avatar = useSettingsStore(state => state.avatar);
+    const nickname = useSettingsStore(state => state.nickname);
+    const setAvatar = useSettingsStore(state => state.setAvatar);
+    const setNickname = useSettingsStore(state => state.setNickname);
 
     // Загрузка данных из облака
     const syncFromCloud = async () => {
@@ -97,6 +104,23 @@ export const useCloudSync = (enabled: boolean) => {
                     createdAt: new Date(g.created_at),
                 }));
                 setGoals(parsedGoals);
+            }
+
+            // Загрузка настроек пользователя
+            try {
+                const { data: settingsData, error: settingsError } = await supabase
+                    .from('user_settings')
+                    .select('*')
+                    .eq('user_id', session.user.id)
+                    .single();
+
+                if (!settingsError && settingsData) {
+                    if (settingsData.avatar) setAvatar(settingsData.avatar);
+                    if (settingsData.nickname) setNickname(settingsData.nickname);
+                }
+                // Если настроек нет (новый пользователь), это не ошибка - просто продолжаем
+            } catch (settingsErr) {
+                console.log('User settings not found or error loading, using local settings');
             }
 
             setStatus({
@@ -177,6 +201,25 @@ export const useCloudSync = (enabled: boolean) => {
                 .upsert(goalsForDB, { onConflict: 'id' });
 
             if (goalsError) throw goalsError;
+
+            // Сохранение настроек пользователя
+            try {
+                const settingsForDB = {
+                    user_id: session.user.id,
+                    avatar: avatar || null,
+                    nickname: nickname || '',
+                };
+
+                const { error: settingsError } = await supabase
+                    .from('user_settings')
+                    .upsert(settingsForDB, { onConflict: 'user_id' });
+
+                if (settingsError) {
+                    console.log('Settings sync error (non-critical):', settingsError.message);
+                }
+            } catch (settingsErr) {
+                console.log('Settings sync error (non-critical):', settingsErr);
+            }
 
             setStatus({
                 isSyncing: false,

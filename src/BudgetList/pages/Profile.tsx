@@ -43,6 +43,7 @@ import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 import { useSettingsStore, Currency } from '../../Budgets/store/useSettingsStore';
 import { useAuth } from '../../Budgets/hooks/useAuth';
 import { useCloudSync } from '../../Budgets/hooks/useCloudSync';
+import { triggerSync } from '../../Budgets/utils/cloudSyncTrigger';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import IOSTimePicker from '../../components/ui/IOSTimePicker';
 
@@ -164,6 +165,8 @@ export default function Profile() {
             const reader = new FileReader();
             reader.onload = (e) => {
                 setAvatar(e.target?.result as string);
+                // Синхронизация аватарки с облаком
+                setTimeout(() => triggerSync(), 100);
             };
             reader.readAsDataURL(file);
         }
@@ -764,7 +767,11 @@ export default function Profile() {
                         fullWidth
                         label="Никнейм"
                         value={nickname}
-                        onChange={(e) => setNickname(e.target.value)}
+                        onChange={(e) => {
+                            setNickname(e.target.value);
+                            // Синхронизация nickname с облаком
+                            setTimeout(() => triggerSync(), 500);
+                        }}
                         margin="normal"
                         sx={{
                             '& .MuiOutlinedInput-root': {
