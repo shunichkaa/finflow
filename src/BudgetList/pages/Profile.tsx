@@ -48,6 +48,7 @@ import { useSettingsStore, Currency } from '../../Budgets/store/useSettingsStore
 import { useAuth } from '../../Budgets/hooks/useAuth';
 import { useCloudSync } from '../../Budgets/hooks/useCloudSync';
 import getSymbolFromCurrency from 'currency-symbol-map';
+import IOSTimePicker from '../../components/ui/IOSTimePicker';
 
 export default function Profile() {
     try {
@@ -83,6 +84,7 @@ export default function Profile() {
         const [newPassword, setNewPassword] = useState('');
         const [confirmPassword, setConfirmPassword] = useState('');
         const [showPasswords, setShowPasswords] = useState(false);
+        const [timePickerOpen, setTimePickerOpen] = useState(false);
         const fileInputRef = useRef<HTMLInputElement>(null);
 
         // Показываем загрузку пока аутентификация не завершена
@@ -585,51 +587,17 @@ export default function Profile() {
                                     }
                                 }}
                             />
-                            <Box sx={{ position: 'relative', display: 'flex', gap: 1, alignItems: 'center' }}>
-                                {/* Скрытый селектор */}
-                                <Select
-                                    value={notificationTime}
-                                    onChange={(e) => setNotificationTime(e.target.value)}
-                                    size="small"
-                                    MenuProps={{
-                                        PaperProps: {
-                                            style: {
-                                                maxHeight: 300,
-                                            },
-                                        },
-                                    }}
-                                    sx={{
-                                        position: 'absolute',
-                                        opacity: 0,
-                                        pointerEvents: 'none',
-                                        width: '100px',
-                                    }}
-                                >
-                                    {Array.from({ length: 24 }, (_, hour) => 
-                                        ['00', '15', '30', '45'].map((minute) => (
-                                            <MenuItem 
-                                                key={`${hour}:${minute}`}
-                                                value={`${String(hour).padStart(2, '0')}:${minute}`}
-                                                sx={{
-                                                    justifyContent: 'center',
-                                                    fontWeight: 600,
-                                                    fontSize: '1.05rem',
-                                                }}
-                                            >
-                                                {`${String(hour).padStart(2, '0')}:${minute}`}
-                                            </MenuItem>
-                                        ))
-                                    ).flat()}
-                                </Select>
-
+                            <Box 
+                                onClick={() => setTimePickerOpen(true)}
+                                sx={{ 
+                                    display: 'inline-flex', 
+                                    gap: 1, 
+                                    alignItems: 'center',
+                                    cursor: 'pointer',
+                                }}
+                            >
                                 {/* Визуальное отображение часов */}
                                 <Box
-                                    onClick={(e) => {
-                                        const select = e.currentTarget.parentElement?.querySelector('.MuiSelect-select');
-                                        if (select) {
-                                            (select as HTMLElement).click();
-                                        }
-                                    }}
                                     sx={{
                                         width: '60px',
                                         backgroundColor: mode === 'dark' 
@@ -639,7 +607,6 @@ export default function Profile() {
                                         border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
                                         padding: '10px 8px',
                                         textAlign: 'center',
-                                        cursor: 'pointer',
                                         transition: 'all 0.3s ease',
                                         '&:hover': {
                                             backgroundColor: mode === 'dark' 
@@ -675,12 +642,6 @@ export default function Profile() {
 
                                 {/* Визуальное отображение минут */}
                                 <Box
-                                    onClick={(e) => {
-                                        const select = e.currentTarget.parentElement?.querySelector('.MuiSelect-select');
-                                        if (select) {
-                                            (select as HTMLElement).click();
-                                        }
-                                    }}
                                     sx={{
                                         width: '60px',
                                         backgroundColor: mode === 'dark' 
@@ -690,7 +651,6 @@ export default function Profile() {
                                         border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
                                         padding: '10px 8px',
                                         textAlign: 'center',
-                                        cursor: 'pointer',
                                         transition: 'all 0.3s ease',
                                         '&:hover': {
                                             backgroundColor: mode === 'dark' 
@@ -1090,6 +1050,14 @@ export default function Profile() {
                 autoHideDuration={3000}
                 onClose={() => setSnackbarOpen(false)}
                 message={snackbarMessage}
+            />
+
+            {/* iOS Time Picker */}
+            <IOSTimePicker
+                open={timePickerOpen}
+                onClose={() => setTimePickerOpen(false)}
+                value={notificationTime}
+                onChange={setNotificationTime}
             />
         </Container>
     );
