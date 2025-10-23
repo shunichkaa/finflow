@@ -146,8 +146,9 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                             <Box sx={{ p: 3, display: 'flex', flexDirection: 'column', height: '100%' }}>
                                 {/* Верхняя часть с иконкой и действиями */}
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2.5 }}>
-                                    <Box 
-                                        sx={{ 
+                                    <IconButton
+                                        onClick={() => onEdit?.(budget.id)}
+                                        sx={{
                                             width: 56, 
                                             height: 56, 
                                             borderRadius: 3,
@@ -155,10 +156,13 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',
+                                            '&:hover': {
+                                                background: `linear-gradient(135deg, ${categoryColor}30 0%, ${categoryColor}50 100%)`,
+                                            }
                                         }}
                                     >
                                         {getCategoryIcon(category?.icon || 'more', 32)}
-                                    </Box>
+                                    </IconButton>
                                     <Box sx={{ display: 'flex', gap: 0.5 }}>
                                         <IconButton
                                             size="small"
