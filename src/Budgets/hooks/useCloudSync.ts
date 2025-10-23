@@ -131,9 +131,9 @@ export const useCloudSync = (enabled: boolean) => {
                 amount: tx.amount,
                 category: tx.category,
                 description: tx.description || null,
-                date: tx.date.toISOString(),
+                date: tx.date instanceof Date ? tx.date.toISOString() : new Date(tx.date).toISOString(),
                 tags: tx.tags || [],
-                created_at: tx.createdAt.toISOString(),
+                created_at: tx.createdAt instanceof Date ? tx.createdAt.toISOString() : new Date(tx.createdAt).toISOString(),
             }));
 
             const { error: txError } = await supabase
@@ -164,10 +164,12 @@ export const useCloudSync = (enabled: boolean) => {
                 name: goal.name,
                 target_amount: goal.targetAmount,
                 current_amount: goal.currentAmount,
-                deadline: goal.deadline ? goal.deadline.toISOString() : null,
+                deadline: goal.deadline 
+                    ? (goal.deadline instanceof Date ? goal.deadline.toISOString() : new Date(goal.deadline).toISOString())
+                    : null,
                 icon: goal.icon || null,
                 is_completed: goal.isCompleted,
-                created_at: goal.createdAt.toISOString(),
+                created_at: goal.createdAt instanceof Date ? goal.createdAt.toISOString() : new Date(goal.createdAt).toISOString(),
             }));
 
             const { error: goalsError } = await supabase
