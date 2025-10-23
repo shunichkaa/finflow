@@ -116,7 +116,14 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                 alignItems: 'center',
                 pb: 2,
             }}>
-                <Typography variant="h5" fontWeight={700} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+                <Typography 
+                    variant="h4" 
+                    fontWeight={700} 
+                    sx={{ 
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                        fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
+                    }}
+                >
                     {goal.name}
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1 }}>
