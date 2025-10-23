@@ -1,5 +1,4 @@
-import React from 'react';
-import {useMemo, useState} from 'react';
+import React, { useMemo, useState } from 'react';
 import {Box, Card, CardContent, Container, Paper, ToggleButton, ToggleButtonGroup, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next';
 import {useSettingsStore} from "../../Budgets/store/useSettingsStore";

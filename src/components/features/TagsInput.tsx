@@ -1,5 +1,4 @@
-import React from 'react';
-import {KeyboardEvent, useState} from 'react';
+import React, { KeyboardEvent, useState } from 'react';
 import {Autocomplete, Box, Chip, TextField} from '@mui/material';
 import {LocalOffer} from '@mui/icons-material';
 import {useTranslation} from 'react-i18next';

@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { Fragment, useState } from 'react';
 import { Box, Divider, IconButton, List, ListItem, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -25,9 +24,9 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
     const storeTransactions = useFinanceStore((state) => state.transactions);
     const deleteTransaction = useFinanceStore((state) => state.deleteTransaction);
     const { currency } = useSettingsStore();
-    const [editingTxId, setEditingTxId] = React.useState<string | null>(null);
-    const [isEditOpen, setIsEditOpen] = React.useState(false);
-    const [isAddOpen, setIsAddOpen] = React.useState(false);
+    const [editingTxId, setEditingTxId] = useState<string | null>(null);
+    const [isEditOpen, setIsEditOpen] = useState(false);
+    const [isAddOpen, setIsAddOpen] = useState(false);
 
     const transactions = propTransactions || storeTransactions;
 
@@ -60,7 +59,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                 const categoryName = getCategoryName(transaction.category, t);
 
                 return (
-                    <React.Fragment key={transaction.id}>
+                    <Fragment key={transaction.id}>
                         {index > 0 && <Divider />}
                         <ListItem
                             sx={{
@@ -276,7 +275,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                 </Box>
                             </Box>
                         </ListItem>
-                    </React.Fragment>
+                    </Fragment>
                 );
             })}
             {/* Edit transaction modal */}
