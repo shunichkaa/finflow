@@ -228,108 +228,6 @@ export default function Profile() {
                 </Box>
             </Paper>
 
-            {/* Настройки */}
-            <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                    Настройки
-                </Typography>
-
-                <List>
-                    {/* Тема */}
-                    <ListItem>
-                        <ListItemIcon>
-                            <Palette />
-                        </ListItemIcon>
-                        <ListItemText 
-                            primary="Темная тема" 
-                            secondary="Переключить между светлой и темной темой"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={mode === 'dark'}
-                                    onChange={toggleTheme || (() => {})}
-                                    sx={{
-                                        '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                                        },
-                                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                                        },
-                                    }}
-                                />
-                            }
-                            label=""
-                        />
-                    </ListItem>
-
-                    <Divider />
-
-                    {/* Язык */}
-                    <ListItem>
-                        <ListItemIcon>
-                            <Language />
-                        </ListItemIcon>
-                        <ListItemText 
-                            primary="Язык" 
-                            secondary="Выберите язык приложения"
-                        />
-                        <FormControl size="small" sx={{ minWidth: 120 }}>
-                            <Select
-                                value={i18n?.language || 'ru'}
-                                onChange={(e) => changeLanguage(e.target.value)}
-                                sx={{
-                                    '& .MuiSelect-select': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    },
-                                }}
-                            >
-                                {languages.map((lang) => (
-                                    <MenuItem key={lang.code} value={lang.code}>
-                                        {lang.nativeName}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </ListItem>
-
-                    <Divider />
-
-                    {/* Валюта */}
-                    <ListItem>
-                        <ListItemIcon>
-                            <AttachMoney />
-                        </ListItemIcon>
-                        <ListItemText 
-                            primary="Валюта" 
-                            secondary="Основная валюта для отображения сумм"
-                        />
-                        <FormControl size="small" sx={{ minWidth: 120 }}>
-                            <Select
-                                value={currency || 'EUR'}
-                                onChange={(e) => handleCurrencyChange(e.target.value)}
-                                sx={{
-                                    '& .MuiSelect-select': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    },
-                                }}
-                            >
-                                {currencies.map((curr) => {
-                                    const symbol = getSymbolFromCurrency(curr.code);
-                                    const displaySymbol = symbol && symbol !== curr.code ? symbol : '';
-                                    return (
-                                        <MenuItem key={curr.code} value={curr.code}>
-                                            {displaySymbol} {curr.code} - {curr.name}
-                                        </MenuItem>
-                                    );
-                                })}
-                            </Select>
-                        </FormControl>
-                    </ListItem>
-
-                </List>
-            </Paper>
-
             {/* Синхронизация */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
@@ -340,7 +238,7 @@ export default function Profile() {
                     <ListItem>
                         <ListItemIcon>
                             <CloudSync sx={{ 
-                                color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FF3B3B' : mode === 'dark' ? '#FFFFFF' : '#272B3E'),
+                                color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FF3B3B' : mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'),
                                 animation: syncStatus.isSyncing ? 'spin 1s linear infinite' : 'none',
                                 '@keyframes spin': {
                                     '0%': { transform: 'rotate(0deg)' },
@@ -427,6 +325,108 @@ export default function Profile() {
                 </List>
             </Paper>
 
+            {/* Настройки */}
+            <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
+                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+                    Настройки
+                </Typography>
+
+                <List>
+                    {/* Тема */}
+                    <ListItem>
+                        <ListItemIcon>
+                            <Palette sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                        </ListItemIcon>
+                        <ListItemText 
+                            primary="Темная тема" 
+                            secondary="Переключить между светлой и темной темой"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={mode === 'dark'}
+                                    onChange={toggleTheme || (() => {})}
+                                    sx={{
+                                        '& .MuiSwitch-switchBase.Mui-checked': {
+                                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                        },
+                                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                        },
+                                    }}
+                                />
+                            }
+                            label=""
+                        />
+                    </ListItem>
+
+                    <Divider />
+
+                    {/* Язык */}
+                    <ListItem>
+                        <ListItemIcon>
+                            <Language sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                        </ListItemIcon>
+                        <ListItemText 
+                            primary="Язык" 
+                            secondary="Выберите язык приложения"
+                        />
+                        <FormControl size="small" sx={{ minWidth: 120 }}>
+                            <Select
+                                value={i18n?.language || 'ru'}
+                                onChange={(e) => changeLanguage(e.target.value)}
+                                sx={{
+                                    '& .MuiSelect-select': {
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    },
+                                }}
+                            >
+                                {languages.map((lang) => (
+                                    <MenuItem key={lang.code} value={lang.code}>
+                                        {lang.nativeName}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </ListItem>
+
+                    <Divider />
+
+                    {/* Валюта */}
+                    <ListItem>
+                        <ListItemIcon>
+                            <AttachMoney sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                        </ListItemIcon>
+                        <ListItemText 
+                            primary="Валюта" 
+                            secondary="Основная валюта для отображения сумм"
+                        />
+                        <FormControl size="small" sx={{ minWidth: 120 }}>
+                            <Select
+                                value={currency || 'EUR'}
+                                onChange={(e) => handleCurrencyChange(e.target.value)}
+                                sx={{
+                                    '& .MuiSelect-select': {
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    },
+                                }}
+                            >
+                                {currencies.map((curr) => {
+                                    const symbol = getSymbolFromCurrency(curr.code);
+                                    const displaySymbol = symbol && symbol !== curr.code ? symbol : '';
+                                    return (
+                                        <MenuItem key={curr.code} value={curr.code}>
+                                            {displaySymbol} {curr.code} - {curr.name}
+                                        </MenuItem>
+                                    );
+                                })}
+                            </Select>
+                        </FormControl>
+                    </ListItem>
+
+                </List>
+            </Paper>
+
             {/* Уведомления */}
             <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
@@ -436,7 +436,7 @@ export default function Profile() {
                 <List>
                     <ListItem>
                         <ListItemIcon>
-                            <NotificationsIcon sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }} />
+                            <NotificationsIcon sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
                         </ListItemIcon>
                         <ListItemText 
                             primary="Включить уведомления"
@@ -466,53 +466,51 @@ export default function Profile() {
                         />
                     </ListItem>
 
-                    <ListItem>
+                    <ListItem sx={{ flexDirection: 'column', alignItems: 'stretch', gap: 2 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <ListItemIcon>
-                            <Schedule sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }} />
+                                <Schedule sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
                         </ListItemIcon>
                         <ListItemText 
-                            primary="Ежедневное напоминание"
-                            secondary="Напоминать о внесении транзакций"
-                            secondaryTypographyProps={{
-                                sx: {
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
+                                primary="Ежедневное напоминание"
+                                secondary="Напоминать о внесении транзакций"
+                                secondaryTypographyProps={{
+                                    sx: {
+                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                    }
+                                }}
                         />
                         <FormControlLabel
                             control={
                                 <Switch
-                                    checked={dailyReminderEnabled}
-                                    onChange={(e) => setDailyReminderEnabled(e.target.checked)}
-                                    disabled={!notificationsEnabled}
+                                        checked={dailyReminderEnabled}
+                                        onChange={(e) => setDailyReminderEnabled(e.target.checked)}
+                                        disabled={!notificationsEnabled}
                                     sx={{
                                         '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: '#6C6FF9',
+                                                color: '#6C6FF9',
                                         },
                                         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: '#6C6FF9',
+                                                backgroundColor: '#6C6FF9',
                                         },
                                     }}
                                 />
                             }
                             label=""
                         />
-                    </ListItem>
+                        </Box>
 
-                    {notificationsEnabled && dailyReminderEnabled && (
-                        <ListItem>
-                            <ListItemIcon>
-                                <AccessTime sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }} />
-                            </ListItemIcon>
-                            <ListItemText 
-                                primary="Время напоминания"
-                                secondary="Когда отправлять ежедневное напоминание"
-                                secondaryTypographyProps={{
-                                    sx: {
-                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                    }
-                                }}
-                            />
+                        {notificationsEnabled && dailyReminderEnabled && (
+                            <Box sx={{ display: 'flex', alignItems: 'center', pl: 7 }}>
+                                <ListItemText 
+                                    primary="Время напоминания"
+                                    secondary="Когда отправлять ежедневное напоминание"
+                                    secondaryTypographyProps={{
+                                        sx: {
+                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                        }
+                                    }}
+                                />
                             <Box 
                                 onClick={() => setTimePickerOpen(true)}
                                 sx={{ 
@@ -599,8 +597,9 @@ export default function Profile() {
                                     </Typography>
                                 </Box>
                             </Box>
-                        </ListItem>
-                    )}
+                        </Box>
+                        )}
+                    </ListItem>
                 </List>
             </Paper>
 

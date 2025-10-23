@@ -143,8 +143,10 @@ const Analytics: React.FC = () => {
                             borderRadius: 2,
                             px: 3,
                             py: 1.5,
+                            minWidth: '100px',
                             fontWeight: 'bold',
                             textTransform: 'none',
+                            textAlign: 'center',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
@@ -159,7 +161,7 @@ const Analytics: React.FC = () => {
                             }
                         }}
                     >
-{t('week')}
+                        {t('week')}
                     </ToggleButton>
                     <ToggleButton 
                         value="month"
@@ -167,8 +169,10 @@ const Analytics: React.FC = () => {
                             borderRadius: 2,
                             px: 3,
                             py: 1.5,
+                            minWidth: '100px',
                             fontWeight: 'bold',
                             textTransform: 'none',
+                            textAlign: 'center',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
@@ -183,7 +187,7 @@ const Analytics: React.FC = () => {
                             }
                         }}
                     >
-{t('month')}
+                        {t('month')}
                     </ToggleButton>
                     <ToggleButton 
                         value="year"
@@ -191,8 +195,10 @@ const Analytics: React.FC = () => {
                             borderRadius: 2,
                             px: 3,
                             py: 1.5,
+                            minWidth: '100px',
                             fontWeight: 'bold',
                             textTransform: 'none',
+                            textAlign: 'center',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark' 
@@ -207,7 +213,7 @@ const Analytics: React.FC = () => {
                             }
                         }}
                     >
-{t('year')}
+                        {t('year')}
                     </ToggleButton>
                 </ToggleButtonGroup>
             </Box>
@@ -481,8 +487,8 @@ const Analytics: React.FC = () => {
                                                 height: 40,
                                                 borderRadius: '50%',
                                                 bgcolor: mode === 'dark' 
-                                                    ? (index === 0 ? 'rgba(255, 185, 141, 0.6)' : index === 1 ? 'rgba(254, 222, 233, 0.6)' : index === 2 ? 'rgba(248, 229, 229, 0.6)' : index === 3 ? 'rgba(239, 240, 246, 0.6)' : 'rgba(255, 185, 141, 0.6)')
-                                                    : (index === 0 ? 'rgba(255, 185, 141, 0.6)' : index === 1 ? 'rgba(254, 222, 233, 0.6)' : index === 2 ? 'rgba(248, 229, 229, 0.6)' : index === 3 ? 'rgba(239, 240, 246, 0.6)' : 'rgba(255, 185, 141, 0.6)'),
+                                                    ? (index === 0 ? 'rgba(108, 111, 249, 0.5)' : index === 1 ? 'rgba(168, 163, 246, 0.5)' : index === 2 ? 'rgba(255, 179, 186, 0.5)' : index === 3 ? 'rgba(255, 218, 193, 0.5)' : 'rgba(255, 235, 204, 0.5)')
+                                                    : (index === 0 ? 'rgba(108, 111, 249, 0.3)' : index === 1 ? 'rgba(168, 163, 246, 0.3)' : index === 2 ? 'rgba(255, 179, 186, 0.3)' : index === 3 ? 'rgba(255, 218, 193, 0.3)' : 'rgba(255, 235, 204, 0.3)'),
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
@@ -490,8 +496,8 @@ const Analytics: React.FC = () => {
                                                 fontSize: '1.1rem',
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 border: mode === 'dark' 
-                                                    ? '2px solid rgba(39, 43, 62, 0.3)'
-                                                    : '2px solid rgba(39, 43, 62, 0.3)',
+                                                    ? '2px solid rgba(108, 111, 249, 0.3)'
+                                                    : '2px solid rgba(108, 111, 249, 0.2)',
                                             }}
                                         >
                                             {index + 1}

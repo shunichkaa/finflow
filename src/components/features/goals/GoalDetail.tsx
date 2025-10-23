@@ -116,7 +116,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                 alignItems: 'center',
                 pb: 2,
             }}>
-                <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+                <Typography variant="h5" fontWeight={700} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                     {goal.name}
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1 }}>
@@ -207,6 +207,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         {/* Дни до цели */}
                         {daysRemaining !== null && (
                             <Box sx={{
+                                flex: 1,
                                 p: 2,
                                 borderRadius: 2,
                                 background: mode === 'dark' 
@@ -224,11 +225,19 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         )}
 
                         {/* Осталось */}
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
+                        <Box sx={{
+                            flex: 1,
+                            p: 2,
+                            borderRadius: 2,
+                            background: mode === 'dark' 
+                                ? 'rgba(108, 111, 249, 0.1)' 
+                                : 'rgba(199, 206, 234, 0.2)',
+                            border: `1px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : '#C7CEEA'}`,
+                        }}>
+                            <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
                                 Осталось:
                             </Typography>
-                            <Typography variant="h6" fontWeight={700} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+                            <Typography variant="h5" fontWeight={700} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                                 {remaining.toLocaleString()} {currency}
                             </Typography>
                         </Box>

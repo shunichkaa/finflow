@@ -397,13 +397,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         {/* Notification Center */}
                         <NotificationCenter />
                         
-                        {/* Profile and Logout buttons for tablet/desktop */}
-                        <Box sx={{ 
-                            display: { xs: 'none', sm: 'flex' }, 
-                            gap: 1, 
-                            ml: 2,
-                            alignItems: 'center'
-                        }}>
+                        {/* Profile and Logout buttons for tablet/desktop when sidebar is closed */}
+                        {!sidebarOpen && (
+                            <Box sx={{ 
+                                display: { xs: 'none', sm: 'flex' }, 
+                                gap: 1, 
+                                ml: 2,
+                                alignItems: 'center'
+                            }}>
                             <IconButton
                                 onClick={handleProfileClick}
                                 sx={{
@@ -448,6 +449,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 {t('logout', 'Выйти')}
                             </Button>
                         </Box>
+                        )}
                     </Toolbar>
                 </Box>
 

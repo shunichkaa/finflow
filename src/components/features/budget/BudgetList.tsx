@@ -78,10 +78,10 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                     flex: 1, 
                     minWidth: 0,
                     backgroundColor: exceededBudgets > 0 
-                        ? (mode === 'dark' ? 'rgba(255, 179, 186, 0.15)' : 'rgba(255, 185, 141, 0.4)')
+                        ? (mode === 'dark' ? 'rgba(255, 59, 59, 0.2)' : 'rgba(255, 179, 186, 0.5)')
                         : (mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(254, 222, 233, 0.4)'),
                     border: exceededBudgets > 0 
-                        ? (mode === 'dark' ? '1px solid rgba(255, 179, 186, 0.3)' : '1px solid rgba(255, 185, 141, 0.4)')
+                        ? (mode === 'dark' ? '1px solid rgba(255, 59, 59, 0.4)' : '1px solid rgba(255, 179, 186, 0.6)')
                         : (mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(254, 222, 233, 0.4)')
                 }}>
                     <CardContent sx={{ 
