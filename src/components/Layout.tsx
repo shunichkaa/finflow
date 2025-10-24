@@ -183,7 +183,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 component={Link}
                                 to={item.path}
                                 selected={location.pathname === item.path}
-                                onClick={(e) => {
+                                                        onClick={(_e) => {
                                     // Закрываем меню при клике на пункт навигации (и мобильное, и десктопное)
                                     setMobileOpen(false);
                                     setSidebarOpen(false);

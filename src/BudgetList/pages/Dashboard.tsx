@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Box, Typography, Paper, Button } from '@mui/material';
+import { Container, Box, Typography, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from "react-i18next";
 import { useFinanceStore } from '../../Budgets/store/useFinanceStore.ts';
@@ -9,7 +9,6 @@ import { TransactionList } from '../../components/features/transaction/Transacti
 import { TransactionFilters } from '../../components/features/transaction/TransactionFilters.tsx';
 import { TransactionForm } from '../../components/features/transaction/TransactionForm.tsx';
 import { Modal } from '../../components/ui/Modal.tsx';
-import { GlassButton } from '../../components/ui/GlassButton.tsx';
 import { GlassCard } from '../../components/ui/GlassCard.tsx';
 import { useTransactionFilters } from '../../Budgets/hooks/useTransactionFilters.ts';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';

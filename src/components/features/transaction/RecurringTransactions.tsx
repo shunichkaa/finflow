@@ -35,6 +35,7 @@ export const RecurringTransactions: React.FC = () => {
     const addTransaction = useFinanceStore(state => state.addTransaction);
 
     const [formOpen, setFormOpen] = useState(false);
+    const [editingTransaction, setEditingTransaction] = useState<RecurringTransaction | null>(null);
     const dueRecurring = getDueRecurring();
 
     // Функции форматирования должны быть внутри компонента чтобы иметь доступ к t()
@@ -99,7 +100,10 @@ export const RecurringTransactions: React.FC = () => {
                 <Button 
                     variant="contained" 
                     startIcon={<Add/>} 
-                    onClick={() => setFormOpen(true)}
+                    onClick={() => {
+                        setEditingTransaction(null);
+                        setFormOpen(true);
+                    }}
                     sx={{
                  background: mode === 'dark'
                      ? 'rgba(6, 0, 171, 0.5)'
@@ -153,7 +157,10 @@ export const RecurringTransactions: React.FC = () => {
                         <Button 
                             variant="contained" 
                             startIcon={<Add/>} 
-                            onClick={() => setFormOpen(true)}
+                            onClick={() => {
+                                setEditingTransaction(null);
+                                setFormOpen(true);
+                            }}
                             sx={{
                  background: mode === 'dark'
                      ? 'rgba(6, 0, 171, 0.5)'
@@ -235,7 +242,9 @@ export const RecurringTransactions: React.FC = () => {
                                                 onChange={() => toggleRecurring(rec.id)}
                                                 color="primary"
                                             />
-                                            <IconButton size="small" onClick={() => { /* TODO: Edit */
+                                            <IconButton size="small" onClick={() => {
+                                                setEditingTransaction(rec);
+                                                setFormOpen(true);
                                             }}>
                                                 <Edit/>
                                             </IconButton>
@@ -259,8 +268,15 @@ export const RecurringTransactions: React.FC = () => {
                 </List>
             )}
 
-            {/* Форма создания */}
-            <RecurringTransactionForm open={formOpen} onClose={() => setFormOpen(false)}/>
+            {/* Форма создания/редактирования */}
+            <RecurringTransactionForm 
+                open={formOpen} 
+                onClose={() => {
+                    setFormOpen(false);
+                    setEditingTransaction(null);
+                }}
+                editingTransaction={editingTransaction}
+            />
         </Container>
     );
 };

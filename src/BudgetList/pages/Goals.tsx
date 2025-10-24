@@ -4,9 +4,7 @@ import {
     Box, 
     Typography, 
     Grid, 
-    IconButton, 
     LinearProgress,
-    Chip,
     Stack,
     TextField,
     Dialog,
@@ -24,11 +22,9 @@ import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { useGoalsStore } from '../../Budgets/store/useGoalsStore';
 import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
-import { formatCurrency } from '../../Budgets/utils/formatters';
 import { GoalDetail } from '../../components/features/goals/GoalDetail';
+import { Goal } from '../../Budgets/types';
 import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import FlightIcon from '@mui/icons-material/Flight';
 import HomeIcon from '@mui/icons-material/Home';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
@@ -76,7 +72,7 @@ const Goals: React.FC = () => {
     const [editingGoal, setEditingGoal] = useState<string | null>(null);
     
     // Детальный просмотр копилки
-    const [selectedGoal, setSelectedGoal] = useState<any | null>(null);
+    const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
     const [detailOpen, setDetailOpen] = useState(false);
 
     const formatNumberWithSpaces = (value: string): string => {
@@ -124,7 +120,7 @@ const Goals: React.FC = () => {
         setTargetAmount(formatNumberWithSpaces(goal.targetAmount.toString()));
         setCurrentAmount(formatNumberWithSpaces(goal.currentAmount.toString()));
         setTargetDate(goal.targetDate ? new Date(goal.targetDate) : null);
-        setSelectedIcon((goal as any).icon || 'savings');
+        setSelectedIcon(goal.icon || 'savings');
         setOpenDialog(true);
     };
 
@@ -146,7 +142,7 @@ const Goals: React.FC = () => {
                 targetDate: targetDate ? targetDate : undefined,
             });
         } else {
-            addGoal(goalData as any);
+            addGoal(goalData);
         }
 
         setOpenDialog(false);
@@ -157,7 +153,7 @@ const Goals: React.FC = () => {
         setSelectedIcon('savings');
     };
 
-    const handleDeleteGoal = (goalId: string) => {
+    const _handleDeleteGoal = (goalId: string) => {
         if (window.confirm('Вы уверены, что хотите удалить эту копилку?')) {
             deleteGoal(goalId);
         }
@@ -273,9 +269,9 @@ const Goals: React.FC = () => {
                 <Grid container spacing={3}>
                     {sortedGoals.map((goal) => {
                         const percentage = (goal.currentAmount / goal.targetAmount) * 100;
-                        const daysLeft = getDaysLeft(goal.targetDate);
-                        const recommendedDaily = getRecommendedDaily(goal.targetAmount, goal.currentAmount, goal.targetDate);
-                        const iconData = GOAL_ICONS.find(i => i.id === (goal as any).icon) || GOAL_ICONS[7];
+                        const _daysLeft = getDaysLeft(goal.targetDate);
+                        const _recommendedDaily = getRecommendedDaily(goal.targetAmount, goal.currentAmount, goal.targetDate);
+                        const iconData = GOAL_ICONS.find(i => i.id === goal.icon) || GOAL_ICONS[7];
                         const IconComponent = iconData.icon;
 
                         return (

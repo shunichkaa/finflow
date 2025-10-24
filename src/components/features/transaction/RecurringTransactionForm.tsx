@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Dialog,
     DialogTitle,
@@ -19,11 +19,12 @@ import {
 import {useTranslation} from 'react-i18next';
 import {Repeat, TrendingUp, TrendingDown} from '@mui/icons-material';
 import {useRecurringStore} from "../../../Budgets/store/useRecurringStore.ts";
-import {RecurringFrequency} from "../../../Budgets/types/recurring.ts";
+import {RecurringFrequency, RecurringTransaction} from "../../../Budgets/types/recurring.ts";
 
 interface RecurringTransactionFormProps {
     open: boolean;
     onClose: () => void;
+    editingTransaction?: RecurringTransaction | null;
 }
 
 const expenseCategories = [
@@ -39,20 +40,35 @@ const expenseCategories = [
 ];
 const incomeCategories = ['salary', 'freelance', 'investment', 'gift'];
 
-export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> = ({open, onClose}) => {
+export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> = ({open, onClose, editingTransaction}) => {
     const {t} = useTranslation();
     const addRecurring = useRecurringStore(state => state.addRecurring);
+    const updateRecurring = useRecurringStore(state => state.updateRecurring);
 
-    const [type, setType] = useState<'income' | 'expense'>('expense');
-    const [amount, setAmount] = useState('');
-    const [category, setCategory] = useState('');
-    const [description, setDescription] = useState('');
-    const [frequency, setFrequency] = useState<RecurringFrequency>('monthly');
-    const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
-    const [endDate, setEndDate] = useState('');
-    const [dayOfMonth, setDayOfMonth] = useState('1');
+    const [type, setType] = useState<'income' | 'expense'>(editingTransaction?.type || 'expense');
+    const [amount, setAmount] = useState(editingTransaction?.amount.toString() || '');
+    const [category, setCategory] = useState(editingTransaction?.category || '');
+    const [description, setDescription] = useState(editingTransaction?.description || '');
+    const [frequency, setFrequency] = useState<RecurringFrequency>(editingTransaction?.frequency || 'monthly');
+    const [startDate, setStartDate] = useState(editingTransaction?.startDate || new Date().toISOString().split('T')[0]);
+    const [endDate, setEndDate] = useState(editingTransaction?.endDate || '');
+    const [dayOfMonth, setDayOfMonth] = useState(editingTransaction?.dayOfMonth?.toString() || '1');
 
     const categories = type === 'income' ? incomeCategories : expenseCategories;
+
+    // Обновляем состояние при изменении редактируемой транзакции
+    useEffect(() => {
+        if (editingTransaction) {
+            setType(editingTransaction.type);
+            setAmount(editingTransaction.amount.toString());
+            setCategory(editingTransaction.category);
+            setDescription(editingTransaction.description);
+            setFrequency(editingTransaction.frequency);
+            setStartDate(editingTransaction.startDate);
+            setEndDate(editingTransaction.endDate || '');
+            setDayOfMonth(editingTransaction.dayOfMonth?.toString() || '1');
+        }
+    }, [editingTransaction]);
 
     const handleSubmit = () => {
         if (!amount || !category || parseFloat(amount) <= 0) return;
@@ -72,10 +88,14 @@ export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> =
             startDate,
             endDate: endDate || undefined,
             dayOfMonth: frequency === 'monthly' || frequency === 'yearly' ? parseInt(dayOfMonth) : undefined,
-            isActive: true, // добавлено для соответствия типу RecurringTransaction
+            isActive: true,
         };
 
-        addRecurring(recurringData);
+        if (editingTransaction) {
+            updateRecurring(editingTransaction.id, recurringData);
+        } else {
+            addRecurring(recurringData);
+        }
         handleClose();
     };
 
@@ -95,7 +115,7 @@ export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> =
         <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
             <DialogTitle sx={{display: 'flex', alignItems: 'center', gap: 1}}>
                 <Repeat />
-                {t('recurringTransaction')}
+                {editingTransaction ? t('editRecurring') : t('recurringTransaction')}
             </DialogTitle>
             <DialogContent>
                 <Box sx={{display: 'flex', flexDirection: 'column', gap: 2, mt: 2}}>

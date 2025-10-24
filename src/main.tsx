@@ -4,11 +4,6 @@ import App from "./App.tsx";
 import './i18n/config';
 import { ThemeContextProvider } from './Budgets/theme/ThemeProvider';
 
-// Временный фикс для production - некоторые библиотеки требуют глобальный React
-if (typeof window !== 'undefined') {
-    (window as any).React = React;
-}
-
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );

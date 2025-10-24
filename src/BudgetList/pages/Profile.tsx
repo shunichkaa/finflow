@@ -16,12 +16,10 @@ import {
     ListItemText,
     ListItemIcon,
     Avatar,
-    Alert,
     Snackbar,
     Modal,
     TextField,
-    IconButton,
-    InputAdornment
+    IconButton
 } from '@mui/material';
 import {
     Person,
@@ -35,7 +33,6 @@ import {
     PhotoCamera,
     Close,
     Schedule,
-    AccessTime,
     Notifications as NotificationsIcon
 } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
@@ -49,9 +46,8 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import IOSTimePicker from '../../components/ui/IOSTimePicker';
 
 export default function Profile() {
-    try {
-        const { i18n } = useTranslation();
-        const { mode, toggleTheme } = useThemeMode();
+    const { i18n } = useTranslation();
+    const { mode, toggleTheme } = useThemeMode();
         const { 
             currency, 
             setCurrency, 
@@ -77,7 +73,7 @@ export default function Profile() {
         const [editModalOpen, setEditModalOpen] = useState(false);
         const [timePickerOpen, setTimePickerOpen] = useState(false);
         const [newEmail, setNewEmail] = useState('');
-        const [currentPassword, setCurrentPassword] = useState('');
+        const [_currentPassword, setCurrentPassword] = useState('');
         const [newPassword, setNewPassword] = useState('');
         const [confirmPassword, setConfirmPassword] = useState('');
         const fileInputRef = useRef<HTMLInputElement>(null);
@@ -146,7 +142,7 @@ export default function Profile() {
         }
     };
 
-    const handleSave = () => {
+    const _handleSave = () => {
         setSnackbarMessage('Настройки сохранены');
         setSnackbarOpen(true);
     };
@@ -363,7 +359,7 @@ export default function Profile() {
                                         await syncNow();
                                         setSnackbarMessage('✅ Данные успешно синхронизированы');
                                         setSnackbarOpen(true);
-                                    } catch (error) {
+                                    } catch (_error) {
                                         setSnackbarMessage('❌ Ошибка синхронизации');
                                         setSnackbarOpen(true);
                                     }
@@ -718,7 +714,7 @@ export default function Profile() {
                                 await loadFromCloud();
                                 setSnackbarMessage('✅ Данные успешно загружены из облака');
                                 setSnackbarOpen(true);
-                            } catch (error) {
+                            } catch (_error) {
                                 setSnackbarMessage('❌ Ошибка загрузки данных');
                                 setSnackbarOpen(true);
                             }
@@ -1059,29 +1055,5 @@ export default function Profile() {
             />
         </Container>
     );
-    } catch (error) {
-        console.error('Error in Profile component:', error);
-        return (
-            <Container maxWidth="md" sx={{ py: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
-                <Box sx={{ 
-                    textAlign: 'center',
-                    p: 4,
-                    borderRadius: 3,
-                    backgroundColor: 'rgba(255, 59, 59, 0.1)',
-                    border: '2px solid #FF3B3B'
-                }}>
-                    <Typography variant="h3" sx={{ color: '#FF3B3B', mb: 2, fontWeight: 700 }}>
-                        ⚠️
-                    </Typography>
-                    <Typography variant="h5" sx={{ color: '#FF3B3B', fontWeight: 600 }}>
-                    Произошла ошибка при загрузке страницы
-                </Typography>
-                    <Typography variant="body1" sx={{ color: '#FF3B3B', mt: 2, opacity: 0.8 }}>
-                        Попробуйте перезагрузить страницу
-                    </Typography>
-                </Box>
-            </Container>
-        );
-    }
 }
 

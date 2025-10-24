@@ -8,6 +8,39 @@ import type { Transaction, Budget } from '../types';
 import type { Goal } from '../types';
 import { setGlobalSyncTrigger } from '../utils/cloudSyncTrigger';
 
+// Типы для данных из Supabase
+interface SupabaseTransaction {
+    id: string;
+    amount: number;
+    type: 'income' | 'expense';
+    category: string;
+    description: string;
+    date: string;
+    created_at: string;
+    user_id: string;
+}
+
+interface SupabaseBudget {
+    id: string;
+    category: string;
+    limit_amount: number;
+    period: 'monthly' | 'weekly';
+    user_id: string;
+}
+
+interface SupabaseGoal {
+    id: string;
+    name: string;
+    description?: string;
+    target_amount: number;
+    current_amount: number;
+    is_completed: boolean;
+    deadline?: string;
+    icon?: string;
+    created_at: string;
+    user_id: string;
+}
+
 interface SyncStatus {
     isSyncing: boolean;
     lastSync: Date | null;
@@ -83,7 +116,7 @@ export const useCloudSync = (enabled: boolean) => {
 
             // Преобразуем данные (строки дат → Date objects)
             if (transactionsData) {
-                const parsedTransactions: Transaction[] = transactionsData.map((tx: any) => ({
+                const parsedTransactions: Transaction[] = (transactionsData as SupabaseTransaction[]).map((tx) => ({
                     ...tx,
                     date: new Date(tx.date),
                     createdAt: new Date(tx.created_at),
@@ -92,7 +125,7 @@ export const useCloudSync = (enabled: boolean) => {
             }
 
             if (budgetsData) {
-                const parsedBudgets: Budget[] = budgetsData.map((b: any) => ({
+                const parsedBudgets: Budget[] = (budgetsData as SupabaseBudget[]).map((b) => ({
                     ...b,
                     limit: b.limit_amount, // Map DB column to app field
                     limitAmount: b.limit_amount,
@@ -101,7 +134,7 @@ export const useCloudSync = (enabled: boolean) => {
             }
 
             if (goalsData) {
-                const parsedGoals: Goal[] = goalsData.map((g: any) => ({
+                const parsedGoals: Goal[] = (goalsData as SupabaseGoal[]).map((g) => ({
                     id: g.id,
                     name: g.name,
                     description: g.description,

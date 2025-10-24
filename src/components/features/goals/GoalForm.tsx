@@ -76,7 +76,7 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
         onSuccess();
     };
     
-    const handleInputChange = (field: keyof CreateGoalInput, value: any) => {
+    const handleInputChange = (field: keyof CreateGoalInput, value: string | number | Date | undefined) => {
         setFormData(prev => ({ ...prev, [field]: value }));
         if (errors[field]) {
             setErrors(prev => ({ ...prev, [field]: '' }));
