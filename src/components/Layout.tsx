@@ -315,6 +315,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         borderBottom: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
                         boxShadow: mode === 'dark' ? '0 2px 8px rgba(0, 0, 0, 0.3)' : '0 2px 8px rgba(39, 43, 62, 0.08)',
                         transition: 'all 0.3s ease',
+                        borderRadius: {xs: '20px', sm: 0}, // Скругленные углы только на мобильных
+                        margin: {xs: '8px', sm: 0}, // Отступы для мобильных чтобы показать скругление
                     }}
                 >
                     <Toolbar sx={{
