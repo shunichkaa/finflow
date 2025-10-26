@@ -140,6 +140,8 @@ const lightThemeOptions: ThemeOptions = {
                 * {
                     margin: 0;
                     padding: 0;
+                    WebkitFontSmoothing: 'antialiased',
+                    MozOsxFontSmoothing: 'grayscale',
                 }
                 
                 html, body, #root {
@@ -938,13 +940,13 @@ const darkThemeOptions: ThemeOptions = {
                         background: 'rgba(108, 111, 249, 0.6)',
                     },
                 },
-                    body: {
-                        background: 'linear-gradient(135deg, #272B3E 0%, #272B3E 50%, #272B3E 100%)',
-                        backgroundAttachment: 'fixed',
-                        minHeight: '100vh',
-                        margin: 0,
-                        padding: 0,
-                    },
+                body: {
+                    background: 'linear-gradient(135deg, #272B3E 0%, #272B3E 50%, #272B3E 100%)',
+                    backgroundAttachment: 'fixed',
+                    minHeight: '100vh',
+                    margin: 0,
+                    padding: 0,
+                },
             },
         },
         MuiButton: {
