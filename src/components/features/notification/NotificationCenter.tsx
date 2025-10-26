@@ -39,8 +39,8 @@ export const NotificationCenter: React.FC = () => {
                 onClick={handleOpen}
                 sx={{
                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.05)',
-                    borderRadius: '16px', // Скругленные углы как у бургер-меню
+                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#F5F5F5',
+                    borderRadius: '20px', // Еще более скругленные углы
                     width: 48,
                     height: 48,
                     minWidth: 48,
@@ -49,13 +49,13 @@ export const NotificationCenter: React.FC = () => {
                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     boxShadow: mode === 'dark' 
                         ? '0 2px 8px rgba(0, 0, 0, 0.2)' 
-                        : '0 2px 8px rgba(39, 43, 62, 0.08)',
+                        : '0 2px 8px rgba(0, 0, 0, 0.1)',
                     '&:hover': {
-                        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(39, 43, 62, 0.1)',
+                        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : '#E8E8E8',
                         transform: 'scale(1.05)',
                         boxShadow: mode === 'dark' 
                             ? '0 6px 16px rgba(0, 0, 0, 0.4)' 
-                            : '0 6px 16px rgba(39, 43, 62, 0.2)',
+                            : '0 6px 16px rgba(0, 0, 0, 0.15)',
                     },
                     '&:active': {
                         transform: 'scale(0.95)',
