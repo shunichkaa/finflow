@@ -1,34 +1,49 @@
 import React from 'react';
+import { Box, BoxProps } from '@mui/material';
+import { designTokens } from '../../Budgets/theme/designTokens';
 
-interface ContainerProps {
-    children: React.ReactNode;
-    className?: string;
-    size?: 'sm' | 'md' | 'lg' | 'full';
+interface ContainerProps extends BoxProps {
+  variant?: 'default' | 'centered' | 'fullWidth';
+  children: React.ReactNode;
 }
 
 export const Container: React.FC<ContainerProps> = ({ 
-    children, 
-    className = '', 
-    size = 'lg' 
+  variant = 'default', 
+  children, 
+  sx, 
+  ...props 
 }) => {
-    const sizes = {
-        sm: 'max-w-2xl',   // 672px
-        md: 'max-w-4xl',   // 896px
-        lg: 'max-w-6xl',   // 1152px
-        full: 'max-w-7xl'  // 1280px
-    };
+  const getVariantStyles = () => {
+    switch (variant) {
+      case 'centered':
+        return {
+          maxWidth: designTokens.breakpoints.lg,
+          margin: '0 auto',
+          padding: `0 ${designTokens.spacing.lg}`,
+        };
+      case 'fullWidth':
+        return {
+          width: '100%',
+          padding: `0 ${designTokens.spacing.md}`,
+        };
+      default:
+        return {
+          maxWidth: designTokens.breakpoints.md,
+          margin: '0 auto',
+          padding: `0 ${designTokens.spacing.md}`,
+        };
+    }
+  };
 
-    return (
-        <div className={`
-            w-full 
-            ${sizes[size]}
-            mx-auto 
-            px-4 md:px-6 lg:px-8
-            ${className}
-        `.trim().replace(/\s+/g, ' ')}>
-            {children}
-        </div>
-    );
+  return (
+    <Box
+      sx={{
+        ...getVariantStyles(),
+        ...sx,
+      }}
+      {...props}
+    >
+      {children}
+    </Box>
+  );
 };
-
-

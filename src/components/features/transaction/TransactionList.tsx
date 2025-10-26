@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Box, IconButton, List, ListItem, Typography } from '@mui/material';
+import { Box, List, ListItem } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useTranslation } from 'react-i18next';
@@ -8,10 +8,14 @@ import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 import { useFinanceStore } from '../../../Budgets/store/useFinanceStore.ts';
 import { useSettingsStore } from '../../../Budgets/store/useSettingsStore.ts';
 import { getCategoryById, getCategoryIcon, getCategoryName } from '../../../Budgets/utils/categories.tsx';
-import { formatCurrency, formatDate } from '../../../Budgets/utils/formatters.ts';
+import { formatDate } from '../../../Budgets/utils/formatters.ts';
 import { Transaction } from '../../../Budgets/types';
 import { Modal } from '../../ui/Modal.tsx';
 import { TransactionForm } from './TransactionForm.tsx';
+import { Text } from '../../ui/Text';
+import { CustomIconButton } from '../../ui/CustomIconButton';
+import { AmountDisplay } from '../../ui/AmountDisplay';
+import { designTokens } from '../../../Budgets/theme/designTokens';
 
 interface TransactionListProps {
     transactions?: Transaction[];
@@ -37,12 +41,12 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
     if (transactions.length === 0) {
         return (
             <Box sx={{ textAlign: 'center', py: 8 }}>
-                <Typography variant="h6" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)', mb: 2 }}>
+                <Text variant="h6" color="secondary" sx={{ mb: 2 }}>
                      {t('noTransactions')}
-                </Typography>
-                <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)' }}>
+                </Text>
+                <Text variant="body2" color="secondary">
                     {t('addFirst')}
-                </Typography>
+                </Text>
             </Box>
         );
     }
@@ -70,15 +74,13 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                 alignItems: { xs: 'stretch', sm: 'center' },
                             }}
                         >
-                            {/* Мобильная версия - вертикальная компоновка */}
                             <Box sx={{ 
                                 display: { xs: 'flex', sm: 'none' }, 
                                 width: '100%', 
                                 flexDirection: 'column', 
-                                gap: 1 
+                                gap: designTokens.spacing.sm 
                             }}>
-                                {/* Верхняя строка: иконка, название, сумма */}
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: designTokens.spacing.sm }}>
                                     <Box
                                         onClick={() => { setEditingTxId(transaction.id); setIsEditOpen(true); }}
                                         role="button"
@@ -89,17 +91,15 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                             justifyContent: 'center',
                                             width: 40,
                                             height: 40,
-                                            borderRadius: 2,
-                                            bgcolor:
-                                                theme.palette.mode === 'dark'
-                                                    ? category?.color + '40'
-                                                    : category?.color,
-                                            color:
-                                                theme.palette.mode === 'dark'
-                                                    ? category?.color
-                                                    : '#272B3E',
+                                            borderRadius: designTokens.borderRadius.md,
+                                            bgcolor: theme.palette.mode === 'dark' ? category?.color + '40' : category?.color,
+                                            color: theme.palette.mode === 'dark' ? category?.color : designTokens.colors.light.text,
                                             flexShrink: 0,
-                                            cursor: 'pointer'
+                                            cursor: 'pointer',
+                                            transition: designTokens.transitions.normal,
+                                            '&:hover': {
+                                                transform: 'scale(1.05)',
+                                            }
                                         }}
                                     >
                                         {category?.icon ? getCategoryIcon(category.icon, 20) : (
@@ -108,63 +108,46 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                     </Box>
                                     
                                     <Box sx={{ flexGrow: 1, minWidth: 0 }}>
-                                        <Typography variant="body1" fontWeight={600} noWrap>
+                                        <Text variant="body1" weight="semibold" noWrap>
                                             {categoryName}
-                                        </Typography>
+                                        </Text>
                                     </Box>
                                     
-                                    <Typography
-                                        variant="h5"
-                                        fontWeight="bold"
-                                        sx={{ 
-                                            whiteSpace: 'nowrap',
-                                            color: transaction.type === 'income' 
-                                                ? '#B5EAD7'
-                                                : '#FFB3BA'
-                                        }}
-                                    >
-                                        {transaction.type === 'income' ? '+' : '-'}
-                                        {formatCurrency(transaction.amount, currency)}
-                                    </Typography>
+                                    <AmountDisplay
+                                        amount={transaction.amount}
+                                        currency={currency}
+                                        type={transaction.type}
+                                        size="large"
+                                    />
                                 </Box>
                                 
-                                {/* Нижняя строка: дата, кнопки */}
                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)' }}>
+                                    <Text variant="caption" color="secondary">
                                         {formatDate(transaction.date)}
-                                    </Typography>
+                                    </Text>
                                     
-                                    <IconButton
+                                    <CustomIconButton
+                                        variant="danger"
                                         size="small"
-                                        color="error"
                                         onClick={() => handleDelete(transaction.id)}
                                     >
                                         <DeleteIcon fontSize="small" />
-                                    </IconButton>
+                                    </CustomIconButton>
                                 </Box>
                                 
-                                {/* Описание (если есть) */}
                                 {transaction.description && (
-                                    <Typography
-                                        variant="body2"
-                                        sx={{
-                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
-                                            fontSize: '0.875rem'
-                                        }}
-                                    >
+                                    <Text variant="body2" color="secondary" sx={{ fontSize: designTokens.typography.fontSize.sm }}>
                                         {transaction.description}
-                                    </Typography>
+                                    </Text>
                                 )}
                             </Box>
 
-                            {/* Десктопная версия - горизонтальная компоновка */}
                             <Box sx={{ 
                                 display: { xs: 'none', sm: 'flex' }, 
                                 width: '100%', 
                                 alignItems: 'center', 
-                                gap: 2 
+                                gap: designTokens.spacing.md 
                             }}>
-                                {/* Иконка категории */}
                                 <Box
                                     onClick={() => { setEditingTxId(transaction.id); setIsEditOpen(true); }}
                                     role="button"
@@ -175,17 +158,15 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         justifyContent: 'center',
                                         width: 48,
                                         height: 48,
-                                        borderRadius: 2,
-                                        bgcolor:
-                                            theme.palette.mode === 'dark'
-                                                ? category?.color + '40'
-                                                : category?.color,
-                                        color:
-                                            theme.palette.mode === 'dark'
-                                                ? category?.color
-                                                : '#272B3E',
+                                        borderRadius: designTokens.borderRadius.md,
+                                        bgcolor: theme.palette.mode === 'dark' ? category?.color + '40' : category?.color,
+                                        color: theme.palette.mode === 'dark' ? category?.color : designTokens.colors.light.text,
                                         flexShrink: 0,
-                                        cursor: 'pointer'
+                                        cursor: 'pointer',
+                                        transition: designTokens.transitions.normal,
+                                        '&:hover': {
+                                            transform: 'scale(1.05)',
+                                        }
                                     }}
                                 >
                                     {category?.icon ? getCategoryIcon(category.icon, 24) : (
@@ -193,60 +174,43 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                     )}
                                 </Box>
 
-                                {/* Информация о транзакции */}
                                 <Box sx={{ flexGrow: 1, minWidth: 0 }}>
-                                    <Typography variant="body1" fontWeight={600} noWrap sx={{ mb: 0.5 }}>
+                                    <Text variant="body1" weight="semibold" noWrap sx={{ mb: 0.5 }}>
                                         {categoryName}
-                                    </Typography>
+                                    </Text>
                                     {transaction.description && (
-                                        <Typography
+                                        <Text
                                             variant="body2"
+                                            color="secondary"
                                             sx={{
                                                 overflow: 'hidden',
                                                 textOverflow: 'ellipsis',
                                                 whiteSpace: 'nowrap',
-                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
                                             }}
                                         >
                                             {transaction.description}
-                                        </Typography>
+                                        </Text>
                                     )}
-                                    <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)' }}>
+                                    <Text variant="caption" color="secondary">
                                         {formatDate(transaction.date)}
-                                    </Typography>
+                                    </Text>
                                 </Box>
 
-                                {/* Сумма и кнопки */}
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: 1,
-                                        flexShrink: 0,
-                                    }}
-                                >
-                                    <Typography
-                                        variant="h6"
-                                        fontWeight="bold"
-                                        sx={{ 
-                                            whiteSpace: 'nowrap',
-                                            color: transaction.type === 'income' 
-                                                ? '#B5EAD7'
-                                                : '#FFB3BA'
-                                        }}
-                                    >
-                                        {transaction.type === 'income' ? '+' : '-'}
-                                        {formatCurrency(transaction.amount, currency)}
-                                    </Typography>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: designTokens.spacing.sm, flexShrink: 0 }}>
+                                    <AmountDisplay
+                                        amount={transaction.amount}
+                                        currency={currency}
+                                        type={transaction.type}
+                                        size="medium"
+                                    />
                                     
-                                    
-                                    <IconButton
+                                    <CustomIconButton
+                                        variant="danger"
                                         size="small"
-                                        color="error"
                                         onClick={() => handleDelete(transaction.id)}
                                     >
                                         <DeleteIcon fontSize="small" />
-                                    </IconButton>
+                                    </CustomIconButton>
                                 </Box>
                             </Box>
                         </ListItem>
@@ -267,7 +231,6 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                 )}
             </Modal>
             
-            {/* Add transaction modal */}
             <Modal
                 open={isAddOpen}
                 onClose={() => setIsAddOpen(false)}

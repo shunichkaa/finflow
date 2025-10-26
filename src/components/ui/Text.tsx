@@ -1,34 +1,62 @@
 import React from 'react';
+import { Typography, TypographyProps } from '@mui/material';
+import { designTokens } from '../../Budgets/theme/designTokens';
+import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
-interface TextProps {
-    children: React.ReactNode;
-    variant?: 'h1' | 'h2' | 'h3' | 'body' | 'small' | 'caption';
-    className?: string;
-    as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span' | 'div';
+interface TextProps extends Omit<TypographyProps, 'color'> {
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'caption' | 'overline';
+  color?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info' | 'inherit';
+  weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold';
+  children: React.ReactNode;
 }
 
 export const Text: React.FC<TextProps> = ({ 
-    children, 
-    variant = 'body', 
-    className = '',
-    as 
+  variant = 'body1',
+  color = 'primary',
+  weight = 'normal',
+  children,
+  sx,
+  ...props 
 }) => {
-    const styles = {
-        h1: 'text-2xl md:text-3xl lg:text-4xl font-bold text-[#272B3E] leading-tight tracking-tight',
-        h2: 'text-xl md:text-2xl lg:text-3xl font-semibold text-[#272B3E] leading-tight',
-        h3: 'text-lg md:text-xl lg:text-2xl font-semibold text-[#272B3E] leading-snug',
-        body: 'text-sm md:text-base lg:text-lg text-[#272B3E] leading-relaxed',
-        small: 'text-xs md:text-sm text-[#272B3E] leading-relaxed',
-        caption: 'text-xs text-[#272B3E] leading-normal'
-    };
+  const { mode } = useThemeMode();
 
-    const Component = as || (variant.startsWith('h') ? variant as 'h1' | 'h2' | 'h3' : 'p');
+  const getColorValue = () => {
+    switch (color) {
+      case 'primary':
+        return mode === 'dark' ? designTokens.colors.dark.text : designTokens.colors.light.text;
+      case 'secondary':
+        return mode === 'dark' ? designTokens.colors.dark.textSecondary : designTokens.colors.light.textSecondary;
+      case 'success':
+        return designTokens.colors.success.main;
+      case 'error':
+        return designTokens.colors.error.main;
+      case 'warning':
+        return designTokens.colors.warning.main;
+      case 'info':
+        return designTokens.colors.info.main;
+      case 'inherit':
+        return 'inherit';
+      default:
+        return mode === 'dark' ? designTokens.colors.dark.text : designTokens.colors.light.text;
+    }
+  };
 
-    return (
-        <Component className={`${styles[variant]} ${className}`.trim()}>
-            {children}
-        </Component>
-    );
+  const getFontWeight = () => {
+    return designTokens.typography.fontWeight[weight];
+  };
+
+  return (
+    <Typography
+      variant={variant}
+      sx={{
+        color: getColorValue(),
+        fontWeight: getFontWeight(),
+        fontFamily: designTokens.typography.fontFamily.primary,
+        ...sx,
+      }}
+      {...props}
+    >
+      {children}
+    </Typography>
+  );
 };
-
-

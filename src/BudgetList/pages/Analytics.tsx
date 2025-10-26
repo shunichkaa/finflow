@@ -8,6 +8,7 @@ import {IncomeExpenseTrendChart} from "../../components/features/analytics/Incom
 import {ExpensesPieChart} from "../../components/features/analytics/ExpensesPieChart.tsx";
 import {getCategoryName} from "../../Budgets/utils/categories";
 import {useThemeMode} from "../../Budgets/theme/ThemeContext";
+import {AmountDisplay} from "../../components/ui/AmountDisplay";
 
 type Period = 'week' | 'month' | 'year';
 
@@ -515,9 +516,13 @@ const Analytics: React.FC = () => {
                                             )}
                                         </Box>
                                     </Box>
-                                    <Typography variant="body1" fontWeight="bold" sx={{color: '#FFB3BA', fontSize: { xs: '0.95rem', sm: '1.1rem' }}}>
-                                        {formatCurrency(transaction.amount, currency)}
-                                    </Typography>
+                                    <AmountDisplay
+                                        amount={transaction.amount}
+                                        currency={currency}
+                                        type="expense"
+                                        size="medium"
+                                        sx={{ fontSize: { xs: '0.95rem', sm: '1.1rem' } }}
+                                    />
                                 </Box>
                             ))}
                         {filteredTransactions.filter(t => t.type === 'expense').length === 0 && (
