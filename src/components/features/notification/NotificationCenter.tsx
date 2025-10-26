@@ -39,10 +39,28 @@ export const NotificationCenter: React.FC = () => {
                 onClick={handleOpen}
                 sx={{
                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                    transition: 'all 0.2s ease',
+                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.05)',
+                    borderRadius: '16px', // Скругленные углы как у бургер-меню
+                    width: 48,
+                    height: 48,
+                    minWidth: 48,
+                    minHeight: 48,
+                    padding: 0,
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    boxShadow: mode === 'dark' 
+                        ? '0 2px 8px rgba(0, 0, 0, 0.2)' 
+                        : '0 2px 8px rgba(39, 43, 62, 0.08)',
                     '&:hover': {
-                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
-                    }
+                        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(39, 43, 62, 0.1)',
+                        transform: 'scale(1.05)',
+                        boxShadow: mode === 'dark' 
+                            ? '0 6px 16px rgba(0, 0, 0, 0.4)' 
+                            : '0 6px 16px rgba(39, 43, 62, 0.2)',
+                    },
+                    '&:active': {
+                        transform: 'scale(0.95)',
+                        transition: 'transform 0.1s ease',
+                    },
                 }}
             >
                 <Badge 
