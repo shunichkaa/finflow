@@ -25,33 +25,36 @@ import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
 import { GoalDetail } from '../../components/features/goals/GoalDetail';
 import { Goal } from '../../Budgets/types';
 import AddIcon from '@mui/icons-material/Add';
-import FlightIcon from '@mui/icons-material/Flight';
-import HomeIcon from '@mui/icons-material/Home';
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import SchoolIcon from '@mui/icons-material/School';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LaptopMacIcon from '@mui/icons-material/LaptopMac';
-import DiamondIcon from '@mui/icons-material/Diamond';
-import SavingsIcon from '@mui/icons-material/Savings';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
-import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import { designTokens } from '../../Budgets/theme/designTokens';
 
-// Иконки для копилок
 const GOAL_ICONS = [
-    { id: 'travel', icon: FlightIcon, name: 'Путешествие', color: '#B5EAD7' },
-    { id: 'home', icon: HomeIcon, name: 'Жильё', color: '#6C6FF9' },
-    { id: 'car', icon: DirectionsCarIcon, name: 'Автомобиль', color: '#B5EAD7' },
-    { id: 'education', icon: SchoolIcon, name: 'Образование', color: '#FFD7BA' },
-    { id: 'wedding', icon: FavoriteIcon, name: 'Свадьба', color: '#6C6FF9' },
-    { id: 'laptop', icon: LaptopMacIcon, name: 'Техника', color: '#6C6FF9' },
-    { id: 'jewelry', icon: DiamondIcon, name: 'Украшения', color: '#6C6FF9' },
-    { id: 'savings', icon: SavingsIcon, name: 'Накопления', color: '#B5EAD7' },
-    { id: 'vacation', icon: BeachAccessIcon, name: 'Отпуск', color: '#B5EAD7' },
-    { id: 'phone', icon: PhoneIphoneIcon, name: 'Телефон', color: '#6C6FF9' },
-    { id: 'camera', icon: CameraAltIcon, name: 'Камера', color: '#6C6FF9' },
-    { id: 'fitness', icon: FitnessCenterIcon, name: 'Фитнес', color: '#B5EAD7' },
+    { id: 'travel', icon: '✈', name: 'Путешествие' },
+    { id: 'home', icon: '🏠', name: 'Жильё' },
+    { id: 'car', icon: '🚗', name: 'Автомобиль' },
+    { id: 'education', icon: '📚', name: 'Образование' },
+    { id: 'wedding', icon: '💍', name: 'Свадьба' },
+    { id: 'laptop', icon: '💻', name: 'Техника' },
+    { id: 'jewelry', icon: '💎', name: 'Украшения' },
+    { id: 'savings', icon: '💰', name: 'Накопления' },
+    { id: 'vacation', icon: '🏖', name: 'Отпуск' },
+    { id: 'phone', icon: '📱', name: 'Телефон' },
+    { id: 'camera', icon: '📷', name: 'Камера' },
+    { id: 'fitness', icon: '💪', name: 'Фитнес' },
+    { id: 'gift', icon: '🎁', name: 'Подарок' },
+    { id: 'music', icon: '🎵', name: 'Музыка' },
+    { id: 'art', icon: '🎨', name: 'Искусство' },
+    { id: 'book', icon: '📖', name: 'Книги' },
+];
+
+const GOAL_COLORS = [
+    { id: 'blue', color: '#6C6FF9', name: 'Синий' },
+    { id: 'green', color: '#B5EAD7', name: 'Зеленый' },
+    { id: 'pink', color: '#FFB3BA', name: 'Розовый' },
+    { id: 'yellow', color: '#FFD93D', name: 'Желтый' },
+    { id: 'purple', color: '#D4A5FF', name: 'Фиолетовый' },
+    { id: 'orange', color: '#FFB366', name: 'Оранжевый' },
+    { id: 'teal', color: '#87CEEB', name: 'Бирюзовый' },
+    { id: 'red', color: '#FF6B6B', name: 'Красный' },
 ];
 
 const Goals: React.FC = () => {
@@ -65,6 +68,7 @@ const Goals: React.FC = () => {
 
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedIcon, setSelectedIcon] = useState('savings');
+    const [selectedColor, setSelectedColor] = useState('blue');
     const [goalName, setGoalName] = useState('');
     const [targetAmount, setTargetAmount] = useState('');
     const [currentAmount, setCurrentAmount] = useState('');
@@ -133,6 +137,7 @@ const Goals: React.FC = () => {
             currentAmount: parseFormattedNumber(currentAmount),
             targetDate: targetDate ? targetDate : undefined,
             icon: selectedIcon,
+            color: GOAL_COLORS.find(c => c.id === selectedColor)?.color || '#6C6FF9',
         };
 
         if (editingGoal) {
@@ -151,6 +156,7 @@ const Goals: React.FC = () => {
         setCurrentAmount('');
         setTargetDate(null);
         setSelectedIcon('savings');
+        setSelectedColor('blue');
     };
 
     const _handleDeleteGoal = (goalId: string) => {
@@ -418,7 +424,8 @@ const Goals: React.FC = () => {
                 </Typography>
                             <Grid container spacing={2}>
                                 {GOAL_ICONS.map((iconData) => {
-                                    const IconComp = iconData.icon;
+                                    const selectedColorData = GOAL_COLORS.find(c => c.id === selectedColor);
+                                    const iconColor = selectedColorData?.color || '#6C6FF9';
                                     const isSelected = selectedIcon === iconData.id;
                                     return (
                                         <Grid item xs={3} sm={2} key={iconData.id}>
@@ -427,70 +434,91 @@ const Goals: React.FC = () => {
                                                 sx={{
                                                     width: '100%',
                                                     aspectRatio: '1',
-                                                    borderRadius: 3,
+                                                    borderRadius: designTokens.borderRadius.lg,
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                     justifyContent: 'center',
                                                     cursor: 'pointer',
                                                     position: 'relative',
                                                     background: isSelected
-                                                        ? `linear-gradient(135deg, ${iconData.color}50 0%, ${iconData.color}70 100%)`
+                                                        ? `linear-gradient(135deg, ${iconColor}20 0%, ${iconColor}30 100%)`
                                                         : mode === 'dark'
                                                             ? 'rgba(255, 255, 255, 0.05)'
-                                                            : 'rgba(6, 0, 171, 0.05)',
+                                                            : 'rgba(39, 43, 62, 0.05)',
                                                     border: isSelected
-                                                        ? `3px solid ${iconData.color}`
+                                                        ? `2px solid ${iconColor}`
                                                         : mode === 'dark'
-                                                            ? '2px solid rgba(255, 255, 255, 0.1)'
-                                                            : '2px solid rgba(6, 0, 171, 0.1)',
+                                                            ? '1px solid rgba(255, 255, 255, 0.1)'
+                                                            : '1px solid rgba(39, 43, 62, 0.1)',
                                                     boxShadow: isSelected
-                                                        ? `0 8px 24px ${iconData.color}40, 0 0 0 4px ${iconData.color}20`
+                                                        ? `0 4px 12px ${iconColor}30`
                                                         : 'none',
-                                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                                    transition: designTokens.transitions.normal,
                                                     transform: isSelected ? 'scale(1.05)' : 'scale(1)',
-                                                    '&::before': isSelected ? {
-                                                        content: '""',
-                                                        position: 'absolute',
-                                                        inset: -8,
-                                                        borderRadius: 3,
-                                                        background: `radial-gradient(circle at center, ${iconData.color}30 0%, transparent 70%)`,
-                                                        animation: 'pulse 2s ease-in-out infinite',
-                                                        zIndex: -1,
-                                                    } : {},
                                                     '&:hover': {
-                                                        transform: 'scale(1.15) translateY(-4px)',
-                                                        background: `linear-gradient(135deg, ${iconData.color}40 0%, ${iconData.color}60 100%)`,
-                                                        boxShadow: `0 12px 32px ${iconData.color}50, 0 0 0 3px ${iconData.color}30`,
-                                                        border: `2px solid ${iconData.color}`,
+                                                        transform: 'scale(1.1)',
+                                                        background: `linear-gradient(135deg, ${iconColor}15 0%, ${iconColor}25 100%)`,
+                                                        boxShadow: `0 6px 16px ${iconColor}20`,
                                                     },
-                                                    '@keyframes pulse': {
-                                                        '0%, 100%': {
-                                                            opacity: 0.6,
-                                                            transform: 'scale(1)',
-                                                        },
-                                                        '50%': {
-                                                            opacity: 1,
-                                                            transform: 'scale(1.1)',
-                                                        },
-                                                    }
                                                 }}
                                             >
-                                                <IconComp 
-                                                    sx={{ 
-                                                        fontSize: 32, 
-                                                        color: iconData.color,
-                                                        filter: isSelected 
-                                                            ? `drop-shadow(0 4px 8px ${iconData.color}60)`
-                                                            : 'none',
-                                                        transition: 'all 0.3s',
-                                                    }} 
-                                                />
+                                                <Typography
+                                                    sx={{
+                                                        fontSize: '2rem',
+                                                        lineHeight: 1,
+                                                        filter: isSelected ? 'none' : 'grayscale(0.3)',
+                                                    }}
+                                                >
+                                                    {iconData.icon}
+                                                </Typography>
                                             </Box>
                                         </Grid>
                                     );
                                 })}
                             </Grid>
             </Box>
+
+                        <Typography 
+                            variant="body2" 
+                            sx={{ 
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
+                                mb: 1.5,
+                                fontWeight: 500
+                            }}
+                        >
+                            Выберите цвет:
+                        </Typography>
+                        <Grid container spacing={1}>
+                            {GOAL_COLORS.map((colorData) => {
+                                const isSelected = selectedColor === colorData.id;
+                                return (
+                                    <Grid item xs={3} sm={2} key={colorData.id}>
+                                        <Box
+                                            onClick={() => setSelectedColor(colorData.id)}
+                                            sx={{
+                                                width: '100%',
+                                                aspectRatio: '1',
+                                                borderRadius: designTokens.borderRadius.full,
+                                                backgroundColor: colorData.color,
+                                                cursor: 'pointer',
+                                                border: isSelected
+                                                    ? `3px solid ${mode === 'dark' ? '#FFFFFF' : '#272B3E'}`
+                                                    : `2px solid ${mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(39, 43, 62, 0.2)'}`,
+                                                boxShadow: isSelected
+                                                    ? `0 0 0 4px ${colorData.color}30`
+                                                    : 'none',
+                                                transition: designTokens.transitions.normal,
+                                                transform: isSelected ? 'scale(1.1)' : 'scale(1)',
+                                                '&:hover': {
+                                                    transform: 'scale(1.15)',
+                                                    boxShadow: `0 0 0 2px ${colorData.color}50`,
+                                                },
+                                            }}
+                                        />
+                                    </Grid>
+                                );
+                            })}
+                        </Grid>
 
                         {/* Название */}
                         <TextField
