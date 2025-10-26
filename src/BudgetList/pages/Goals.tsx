@@ -28,24 +28,40 @@ import { Goal } from '../../Budgets/types';
 import AddIcon from '@mui/icons-material/Add';
 import { designTokens } from '../../Budgets/theme/designTokens';
 import { migrateGoalIcon } from '../../Budgets/utils/migrationHelpers';
+import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import HomeIcon from '@mui/icons-material/Home';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import SchoolIcon from '@mui/icons-material/School';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ComputerIcon from '@mui/icons-material/Computer';
+import DiamondIcon from '@mui/icons-material/Diamond';
+import SavingsIcon from '@mui/icons-material/Savings';
+import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import SmartphoneIcon from '@mui/icons-material/Smartphone';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import PaletteIcon from '@mui/icons-material/Palette';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 const GOAL_ICONS = [
-    { id: 'travel', icon: '✈️', name: 'Путешествие', color: '#87CEEB' },
-    { id: 'home', icon: '🏠', name: 'Жильё', color: '#FFB3BA' },
-    { id: 'car', icon: '🚗', name: 'Автомобиль', color: '#BAE1DA' },
-    { id: 'education', icon: '📚', name: 'Образование', color: '#FFD7BA' },
-    { id: 'wedding', icon: '💍', name: 'Свадьба', color: '#FFE5F1' },
-    { id: 'laptop', icon: '💻', name: 'Техника', color: '#C7CEEA' },
-    { id: 'jewelry', icon: '💎', name: 'Украшения', color: '#D4BBDD' },
-    { id: 'savings', icon: '💰', name: 'Накопления', color: '#B5EAD7' },
-    { id: 'vacation', icon: '🏖️', name: 'Отпуск', color: '#FFDAC1' },
-    { id: 'phone', icon: '📱', name: 'Телефон', color: '#C3E5E1' },
-    { id: 'camera', icon: '📷', name: 'Камера', color: '#E0D5F3' },
-    { id: 'fitness', icon: '💪', name: 'Фитнес', color: '#B5EAD7' },
-    { id: 'gift', icon: '🎁', name: 'Подарок', color: '#FFE5F1' },
-    { id: 'music', icon: '🎵', name: 'Музыка', color: '#D4E5F3' },
-    { id: 'art', icon: '🎨', name: 'Искусство', color: '#D4BBDD' },
-    { id: 'book', icon: '📖', name: 'Книги', color: '#FFD7BA' },
+    { id: 'travel', icon: FlightTakeoffIcon, name: 'Путешествие', color: '#87CEEB' },
+    { id: 'home', icon: HomeIcon, name: 'Жильё', color: '#FFB3BA' },
+    { id: 'car', icon: DirectionsCarIcon, name: 'Автомобиль', color: '#BAE1DA' },
+    { id: 'education', icon: SchoolIcon, name: 'Образование', color: '#FFD7BA' },
+    { id: 'wedding', icon: FavoriteIcon, name: 'Свадьба', color: '#FFE5F1' },
+    { id: 'laptop', icon: ComputerIcon, name: 'Техника', color: '#C7CEEA' },
+    { id: 'jewelry', icon: DiamondIcon, name: 'Украшения', color: '#D4BBDD' },
+    { id: 'savings', icon: SavingsIcon, name: 'Накопления', color: '#B5EAD7' },
+    { id: 'vacation', icon: BeachAccessIcon, name: 'Отпуск', color: '#FFDAC1' },
+    { id: 'phone', icon: SmartphoneIcon, name: 'Телефон', color: '#C3E5E1' },
+    { id: 'camera', icon: CameraAltIcon, name: 'Камера', color: '#E0D5F3' },
+    { id: 'fitness', icon: FitnessCenterIcon, name: 'Фитнес', color: '#B5EAD7' },
+    { id: 'gift', icon: CardGiftcardIcon, name: 'Подарок', color: '#FFE5F1' },
+    { id: 'music', icon: MusicNoteIcon, name: 'Музыка', color: '#D4E5F3' },
+    { id: 'art', icon: PaletteIcon, name: 'Искусство', color: '#D4BBDD' },
+    { id: 'book', icon: MenuBookIcon, name: 'Книги', color: '#FFD7BA' },
 ];
 
 
@@ -301,7 +317,7 @@ const Goals: React.FC = () => {
                                                     justifyContent: 'center',
                                                 }}
                                             >
-                                                <span style={{ fontSize: '36px' }}>{iconData.icon}</span>
+                                                {<iconData.icon sx={{ fontSize: 36, color: iconData.color }} />}
                                             </Box>
                                         </Box>
 
@@ -449,7 +465,12 @@ const Goals: React.FC = () => {
                                                     },
                                                 }}
                                             >
-                                                <span style={{ fontSize: '2rem' }}>{iconData.icon}</span>
+                                                <iconData.icon 
+                                                    sx={{
+                                                        fontSize: '2rem',
+                                                        color: isSelected ? iconColor : mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)',
+                                                    }}
+                                                />
                                             </Box>
                                         </Grid>
                                     );
