@@ -318,7 +318,7 @@ export default function Profile() {
                         </ListItemIcon>
                         <ListItemText 
                             primary="Облачная синхронизация" 
-                            secondary="Автоматическая синхронизация"
+                            secondary="Автоматическая"
                             secondaryTypographyProps={{
                                 sx: { 
                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
@@ -346,7 +346,7 @@ export default function Profile() {
                                     : syncStatus.error
                                     ? "Ошибка"
                                     : syncStatus.lastSync
-                                    ? "Синхронизировано"
+                                    ? "Готово"
                                     : "Готово"}
                             </Typography>
                             
@@ -366,13 +366,13 @@ export default function Profile() {
                                     }
                                 }}
                                 sx={{
-                                    minWidth: '70px',
-                                    px: 2,
+                                    minWidth: '60px',
+                                    px: 1.5,
                                     py: 0.8,
                                     borderRadius: 2,
                                     background: '#6C6FF9',
                                     color: '#FFFFFF',
-                                    fontSize: '0.75rem',
+                                    fontSize: '0.7rem',
                                     fontWeight: 600,
                                     textTransform: 'none',
                                     boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
@@ -388,7 +388,7 @@ export default function Profile() {
                                     transition: 'all 0.3s ease',
                                 }}
                             >
-                                {syncStatus.isSyncing ? 'Синхр...' : 'Sync'}
+                                {syncStatus.isSyncing ? '...' : 'Sync'}
                             </Button>
                         </Box>
                     </ListItem>
