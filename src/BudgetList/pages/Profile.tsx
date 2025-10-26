@@ -304,7 +304,7 @@ export default function Profile() {
                 </Typography>
 
                 <List>
-                    <ListItem>
+                    <ListItem sx={{ py: 1.5 }}>
                         <ListItemIcon>
                             <CloudSync sx={{ 
                                 color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FF3B3B' : mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'),
@@ -324,7 +324,7 @@ export default function Profile() {
                                 }
                             }}
                         />
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
                             {/* Статус синхронизации */}
                             <Typography 
                                 variant="caption" 
@@ -336,8 +336,8 @@ export default function Profile() {
                                         : '#B5EAD7',
                                     fontSize: '0.7rem',
                                     fontWeight: 600,
-                                    minWidth: '80px',
-                                    textAlign: 'right'
+                                    textAlign: 'right',
+                                    whiteSpace: 'nowrap'
                                 }}
                             >
                                 {syncStatus.isSyncing 
@@ -364,7 +364,7 @@ export default function Profile() {
                                         setSnackbarOpen(true);
                                     }
                                 }}
-                                    sx={{
+                                sx={{
                                     minWidth: '70px',
                                     px: 2,
                                     py: 0.8,
