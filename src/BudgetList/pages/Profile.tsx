@@ -278,21 +278,22 @@ export default function Profile() {
                 
                 <Button
                     variant="outlined"
-                    startIcon={<Edit />}
                     onClick={handleEditProfile}
                     sx={{ 
-                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                            borderRadius: 2,
-                            px: 2,
-                            py: 1,
+                        borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                        borderRadius: 2,
+                        minWidth: 48,
+                        width: 48,
+                        height: 48,
+                        p: 0,
                         '&:hover': {
-                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
-                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
+                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
                         }
                     }}
                 >
-                        Редактировать
+                    <Edit />
                 </Button>
                 </Box>
             </Paper>
