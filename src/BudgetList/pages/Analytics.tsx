@@ -515,7 +515,7 @@ const Analytics: React.FC = () => {
                                             )}
                                         </Box>
                                     </Box>
-                                    <Typography variant="body1" fontWeight="bold" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E', fontSize: { xs: '0.95rem', sm: '1.1rem' }}}>
+                                    <Typography variant="body1" fontWeight="bold" sx={{color: '#FFB3BA', fontSize: { xs: '0.95rem', sm: '1.1rem' }}}>
                                         {formatCurrency(transaction.amount, currency)}
                                     </Typography>
                                 </Box>

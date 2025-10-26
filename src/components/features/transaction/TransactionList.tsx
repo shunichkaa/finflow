@@ -231,8 +231,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         sx={{ 
                                             whiteSpace: 'nowrap',
                                             color: transaction.type === 'income' 
-                                                ? (mode === 'dark' ? '#FFFFFF' : '#272B3E')
-                                                : (mode === 'dark' ? '#FFFFFF' : '#272B3E')
+                                                ? '#B5EAD7'
+                                                : '#FFB3BA'
                                         }}
                                     >
                                         {transaction.type === 'income' ? '+' : '-'}
