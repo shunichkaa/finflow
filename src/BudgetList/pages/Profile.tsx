@@ -325,31 +325,7 @@ export default function Profile() {
                                 }
                             }}
                         />
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
-                            {/* Статус синхронизации */}
-                            <Typography 
-                                variant="caption" 
-                                sx={{ 
-                                    color: syncStatus.error 
-                                        ? '#FFB3BA' 
-                                        : syncStatus.isSyncing 
-                                        ? '#6C6FF9'
-                                        : '#B5EAD7',
-                                    fontSize: '0.7rem',
-                                    fontWeight: 600,
-                                    textAlign: 'right',
-                                    whiteSpace: 'nowrap'
-                                }}
-                            >
-                                {syncStatus.isSyncing 
-                                    ? "Синхронизация..." 
-                                    : syncStatus.error
-                                    ? "Ошибка"
-                                    : syncStatus.lastSync
-                                    ? "Готово"
-                                    : "Готово"}
-                            </Typography>
-                            
+                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
                             {/* Кнопка Sync */}
                             <Button
                                 variant="contained"
@@ -390,6 +366,30 @@ export default function Profile() {
                             >
                                 {syncStatus.isSyncing ? '...' : 'Sync'}
                             </Button>
+                            
+                            {/* Статус синхронизации */}
+                            <Typography 
+                                variant="caption" 
+                                sx={{ 
+                                    color: syncStatus.error 
+                                        ? '#FFB3BA' 
+                                        : syncStatus.isSyncing 
+                                        ? '#6C6FF9'
+                                        : '#B5EAD7',
+                                    fontSize: '0.7rem',
+                                    fontWeight: 600,
+                                    textAlign: 'center',
+                                    whiteSpace: 'nowrap'
+                                }}
+                            >
+                                {syncStatus.isSyncing 
+                                    ? "Синхронизация..." 
+                                    : syncStatus.error
+                                    ? "Ошибка"
+                                    : syncStatus.lastSync
+                                    ? "Готово"
+                                    : "Готово"}
+                            </Typography>
                         </Box>
                     </ListItem>
                 </List>
