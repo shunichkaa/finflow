@@ -322,8 +322,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     <Toolbar sx={{
                         minHeight: {xs: 64, sm: 70},
                         justifyContent: 'space-between',
-                        px: {xs: 2, sm: 3},
-                        position: 'relative'
+                        px: {xs: 2, sm: 3}
                     }}>
                         {/* Left side - Logo and Desktop Menu */}
                         <Box sx={{display: 'flex', alignItems: 'center'}}>
@@ -336,10 +335,10 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     backgroundColor: 'transparent',
                                     borderRadius: '50%',
-                                    width: 40,
-                                    height: 40,
-                                    minWidth: 40,
-                                    minHeight: 40,
+                                    width: {xs: 36, sm: 40},
+                                    height: {xs: 36, sm: 40},
+                                    minWidth: {xs: 36, sm: 40},
+                                    minHeight: {xs: 36, sm: 40},
                                     padding: 0,
                                     transition: 'all 0.2s ease',
                                     '&:hover': {
@@ -411,20 +410,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         </Box>
 
                         {/* Right side - Notifications (always visible) */}
-                        <Box sx={{
-                            position: 'absolute',
-                            right: {xs: 16, sm: 24},
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            zIndex: 1
-                        }}>
+                        <Box sx={{display: 'flex', alignItems: 'center'}}>
                             <NotificationCenter/>
                         </Box>
 
                         {/* Profile and Logout buttons for desktop when sidebar is closed */}
                         {!sidebarOpen && !isLoginPage && (
                             <Box sx={{
-                                display: {xs: 'none', md: 'flex'},
+                                display: {xs: 'none', lg: 'flex'},
                                 gap: 1,
                                 ml: 2,
                                 alignItems: 'center'
