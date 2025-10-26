@@ -402,62 +402,83 @@ export default function Profile() {
 
                 <List>
                     {/* Тема */}
-                    <ListItem sx={{ flexWrap: { xs: 'nowrap', sm: 'nowrap' }, alignItems: 'flex-start', py: 2 }}>
-                        <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mt: 1 }}>
-                            <Palette sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                        </ListItemIcon>
-                        <ListItemText 
-                            primary="Темная тема" 
-                            secondary="Переключить между светлой и темной темой"
-                            primaryTypographyProps={{
-                                sx: { fontSize: { xs: '0.95rem', sm: '1rem' } }
+                    <ListItem sx={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'space-between',
+                        py: 2,
+                        px: 0,
+                        flexWrap: 'nowrap'
+                    }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
+                            <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mr: 1 }}>
+                                <Palette sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                            </ListItemIcon>
+                            <ListItemText 
+                                primary="Темная тема" 
+                                secondary="Переключить между светлой и темной темой"
+                                primaryTypographyProps={{
+                                    sx: { fontSize: { xs: '0.95rem', sm: '1rem' } }
+                                }}
+                                secondaryTypographyProps={{
+                                    sx: { 
+                                        display: { xs: 'none', sm: 'block' },
+                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                    }
+                                }}
+                                sx={{ flex: 1, minWidth: 0 }}
+                            />
+                        </Box>
+                        <Switch
+                            checked={mode === 'dark'}
+                            onChange={toggleTheme || (() => {})}
+                            sx={{
+                                flexShrink: 0,
+                                '& .MuiSwitch-switchBase.Mui-checked': {
+                                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                },
+                                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                },
                             }}
-                            secondaryTypographyProps={{
-                                sx: { 
-                                    display: { xs: 'none', sm: 'block' },
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
-                            sx={{ pr: 1, flexShrink: 1 }}
-                        />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={mode === 'dark'}
-                                    onChange={toggleTheme || (() => {})}
-                                    sx={{
-                                        '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                                        },
-                                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                                        },
-                                    }}
-                                />
-                            }
-                            label=""
-                            sx={{ ml: 'auto', flexShrink: 0 }}
                         />
                     </ListItem>
 
                     <Divider />
 
                     {/* Язык */}
-                    <ListItem>
-                        <ListItemIcon>
-                            <Language sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                        </ListItemIcon>
-                        <ListItemText 
-                            primary="Язык" 
-                            secondary="Выберите язык приложения"
-                        />
-                        <FormControl size="small" sx={{ minWidth: 120 }}>
+                    <ListItem sx={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'space-between',
+                        py: 2,
+                        px: 0,
+                        flexWrap: 'nowrap'
+                    }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
+                            <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mr: 1 }}>
+                                <Language sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                            </ListItemIcon>
+                            <ListItemText 
+                                primary="Язык" 
+                                secondary="Выберите язык приложения"
+                                secondaryTypographyProps={{
+                                    sx: {
+                                        display: { xs: 'none', sm: 'block' },
+                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                    }
+                                }}
+                                sx={{ flex: 1, minWidth: 0 }}
+                            />
+                        </Box>
+                        <FormControl size="small" sx={{ minWidth: { xs: 100, sm: 120 }, flexShrink: 0 }}>
                             <Select
                                 value={i18n?.language || 'ru'}
                                 onChange={(e) => changeLanguage(e.target.value)}
                                 sx={{
                                     '& .MuiSelect-select': {
                                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        fontSize: { xs: '0.85rem', sm: '0.9rem' }
                                     },
                                 }}
                             >
@@ -473,21 +494,38 @@ export default function Profile() {
                     <Divider />
 
                     {/* Валюта */}
-                    <ListItem>
-                        <ListItemIcon>
-                            <AttachMoney sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                        </ListItemIcon>
-                        <ListItemText 
-                            primary="Валюта" 
-                            secondary="Основная валюта для отображения сумм"
-                        />
-                        <FormControl size="small" sx={{ minWidth: 120 }}>
+                    <ListItem sx={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'space-between',
+                        py: 2,
+                        px: 0,
+                        flexWrap: 'nowrap'
+                    }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
+                            <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mr: 1 }}>
+                                <AttachMoney sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                            </ListItemIcon>
+                            <ListItemText 
+                                primary="Валюта" 
+                                secondary="Основная валюта для отображения сумм"
+                                secondaryTypographyProps={{
+                                    sx: {
+                                        display: { xs: 'none', sm: 'block' },
+                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                    }
+                                }}
+                                sx={{ flex: 1, minWidth: 0 }}
+                            />
+                        </Box>
+                        <FormControl size="small" sx={{ minWidth: { xs: 100, sm: 120 }, flexShrink: 0 }}>
                             <Select
                                 value={currency || 'EUR'}
                                 onChange={(e) => handleCurrencyChange(e.target.value)}
                                 sx={{
                                     '& .MuiSelect-select': {
                                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        fontSize: { xs: '0.85rem', sm: '0.9rem' }
                                     },
                                 }}
                             >
@@ -514,86 +552,95 @@ export default function Profile() {
                 </Typography>
 
                 <List>
-                    <ListItem sx={{ flexWrap: 'nowrap', alignItems: 'flex-start', py: 2 }}>
-                        <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mt: 1 }}>
-                            <NotificationsIcon sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                        </ListItemIcon>
-                        <ListItemText 
-                            primary="Включить уведомления"
-                            secondary="Получать уведомления о важных событиях"
-                            primaryTypographyProps={{
-                                sx: { fontSize: { xs: '0.95rem', sm: '1rem' } }
-                            }}
-                            secondaryTypographyProps={{
-                                sx: {
-                                    display: { xs: 'none', sm: 'block' },
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
-                            sx={{ pr: 1, flexShrink: 1 }}
-                        />
-                        <FormControlLabel
-                            sx={{ ml: 'auto', flexShrink: 0 }}
-                            control={
-                                <Switch
-                                    checked={notificationsEnabled}
-                                    onChange={(e) => {
-                                        const enabled = e.target.checked;
-                                        setNotificationsEnabled(enabled);
-                                        if (!enabled) {
-                                            setDailyReminderEnabled(false);
-                                        }
-                                        setTimeout(() => triggerSync(), 100);
-                                    }}
-                                    sx={{
-                                        '& .MuiSwitch-switchBase.Mui-checked': {
-                                            color: '#6C6FF9',
-                                        },
-                                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                            backgroundColor: '#6C6FF9',
-                                        },
-                                    }}
-                                />
-                            }
-                            label=""
-                        />
-                    </ListItem>
-
-                    <ListItem sx={{ flexDirection: 'column', alignItems: 'stretch', gap: 2 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <ListItemIcon>
-                                <Schedule sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                        </ListItemIcon>
-                        <ListItemText 
-                                primary="Ежедневное напоминание"
-                                secondary="Напоминать о внесении транзакций"
+                    <ListItem sx={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'space-between',
+                        py: 2,
+                        px: 0,
+                        flexWrap: 'nowrap'
+                    }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
+                            <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mr: 1 }}>
+                                <NotificationsIcon sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                            </ListItemIcon>
+                            <ListItemText 
+                                primary="Включить уведомления"
+                                secondary="Получать уведомления о важных событиях"
+                                primaryTypographyProps={{
+                                    sx: { fontSize: { xs: '0.95rem', sm: '1rem' } }
+                                }}
                                 secondaryTypographyProps={{
                                     sx: {
+                                        display: { xs: 'none', sm: 'block' },
                                         color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
                                     }
                                 }}
+                                sx={{ flex: 1, minWidth: 0 }}
+                            />
+                        </Box>
+                        <Switch
+                            checked={notificationsEnabled}
+                            onChange={(e) => {
+                                const enabled = e.target.checked;
+                                setNotificationsEnabled(enabled);
+                                if (!enabled) {
+                                    setDailyReminderEnabled(false);
+                                }
+                                setTimeout(() => triggerSync(), 100);
+                            }}
+                            sx={{
+                                flexShrink: 0,
+                                '& .MuiSwitch-switchBase.Mui-checked': {
+                                    color: '#6C6FF9',
+                                },
+                                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                    backgroundColor: '#6C6FF9',
+                                },
+                            }}
                         />
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                        checked={dailyReminderEnabled}
-                                        onChange={(e) => {
-                                            setDailyReminderEnabled(e.target.checked);
-                                            setTimeout(() => triggerSync(), 100);
-                                        }}
-                                        disabled={!notificationsEnabled}
-                                    sx={{
-                                        '& .MuiSwitch-switchBase.Mui-checked': {
-                                                color: '#6C6FF9',
-                                        },
-                                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                                backgroundColor: '#6C6FF9',
-                                        },
+                    </ListItem>
+
+                    <ListItem sx={{ flexDirection: 'column', alignItems: 'stretch', gap: 2, py: 2 }}>
+                        <Box sx={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            justifyContent: 'space-between',
+                            flexWrap: 'nowrap'
+                        }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
+                                <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mr: 1 }}>
+                                    <Schedule sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                                </ListItemIcon>
+                                <ListItemText 
+                                    primary="Ежедневное напоминание"
+                                    secondary="Напоминать о внесении транзакций"
+                                    secondaryTypographyProps={{
+                                        sx: {
+                                            display: { xs: 'none', sm: 'block' },
+                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                        }
                                     }}
+                                    sx={{ flex: 1, minWidth: 0 }}
                                 />
-                            }
-                            label=""
-                        />
+                            </Box>
+                            <Switch
+                                checked={dailyReminderEnabled}
+                                onChange={(e) => {
+                                    setDailyReminderEnabled(e.target.checked);
+                                    setTimeout(() => triggerSync(), 100);
+                                }}
+                                disabled={!notificationsEnabled}
+                                sx={{
+                                    flexShrink: 0,
+                                    '& .MuiSwitch-switchBase.Mui-checked': {
+                                        color: '#6C6FF9',
+                                    },
+                                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                        backgroundColor: '#6C6FF9',
+                                    },
+                                }}
+                            />
                         </Box>
 
                         {notificationsEnabled && dailyReminderEnabled && (
