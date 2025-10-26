@@ -317,35 +317,45 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         transition: 'all 0.3s ease',
                     }}
                 >
-                    <Toolbar sx={{minHeight: {xs: 64, sm: 70}}}>
-                        {/* Mobile Menu */}
-                        <Box sx={{display: 'flex', alignItems: 'center', ml: 1}}>
+                    <Toolbar sx={{
+                        minHeight: {xs: 64, sm: 70},
+                        justifyContent: 'space-between',
+                        px: {xs: 2, sm: 3}
+                    }}>
+                        {/* Left side - Logo and Desktop Menu */}
+                        <Box sx={{display: 'flex', alignItems: 'center'}}>
                             <IconButton
                                 color="inherit"
                                 edge="start"
                                 onClick={handleDrawerToggle}
                                 sx={{
-                                    mr: 2,
                                     display: {sm: 'none'},
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.05)',
-                                    borderRadius: 3,
+                                    borderRadius: '16px', // Более скругленные углы
                                     width: 48,
                                     height: 48,
-                                    transition: 'all 0.3s ease',
+                                    minWidth: 48,
+                                    minHeight: 48,
+                                    padding: 0,
+                                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    boxShadow: mode === 'dark' 
+                                        ? '0 2px 8px rgba(0, 0, 0, 0.2)' 
+                                        : '0 2px 8px rgba(39, 43, 62, 0.08)',
                                     '&:hover': {
                                         backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(39, 43, 62, 0.1)',
                                         transform: 'scale(1.05)',
                                         boxShadow: mode === 'dark' 
-                                            ? '0 4px 12px rgba(0, 0, 0, 0.3)' 
-                                            : '0 4px 12px rgba(39, 43, 62, 0.15)',
+                                            ? '0 6px 16px rgba(0, 0, 0, 0.4)' 
+                                            : '0 6px 16px rgba(39, 43, 62, 0.2)',
                                     },
                                     '&:active': {
                                         transform: 'scale(0.95)',
+                                        transition: 'transform 0.1s ease',
                                     },
                                 }}
                             >
-                                <MenuIcon sx={{ fontSize: 24 }} />
+                                <MenuIcon sx={{ fontSize: 24, fontWeight: 500 }} />
                             </IconButton>
 
                             {!sidebarOpen && (
@@ -403,10 +413,11 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             )}
                         </Box>
 
-                        <Box sx={{flexGrow: 1}}/>
-
-                        {/* Notification Center */}
-                        <NotificationCenter/>
+                        {/* Right side - Notifications and Profile */}
+                        <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+                            {/* Notification Center */}
+                            <NotificationCenter/>
+                        </Box>
 
                         {/* Profile and Logout buttons for desktop when sidebar is closed */}
                         {!sidebarOpen && !isLoginPage && (
