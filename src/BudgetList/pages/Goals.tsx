@@ -48,16 +48,7 @@ const GOAL_ICONS = [
     { id: 'book', icon: '📖', name: 'Книги', color: '#FFD7BA' },
 ];
 
-const GOAL_COLORS = [
-    { id: 'blue', color: '#6C6FF9', name: 'Синий' },
-    { id: 'green', color: '#B5EAD7', name: 'Зеленый' },
-    { id: 'pink', color: '#FFB3BA', name: 'Розовый' },
-    { id: 'yellow', color: '#FFD93D', name: 'Желтый' },
-    { id: 'purple', color: '#D4A5FF', name: 'Фиолетовый' },
-    { id: 'orange', color: '#FFB366', name: 'Оранжевый' },
-    { id: 'teal', color: '#87CEEB', name: 'Бирюзовый' },
-    { id: 'red', color: '#FF6B6B', name: 'Красный' },
-];
+
 
 const Goals: React.FC = () => {
     const { t } = useTranslation();
@@ -70,7 +61,7 @@ const Goals: React.FC = () => {
 
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedIcon, setSelectedIcon] = useState('savings');
-    const [selectedColor, setSelectedColor] = useState('blue');
+
     const [goalName, setGoalName] = useState('');
     const [targetAmount, setTargetAmount] = useState('');
     const [currentAmount, setCurrentAmount] = useState('');
@@ -139,7 +130,6 @@ const Goals: React.FC = () => {
             currentAmount: parseFormattedNumber(currentAmount),
             targetDate: targetDate ? targetDate : undefined,
             icon: selectedIcon,
-            color: GOAL_COLORS.find(c => c.id === selectedColor)?.color || '#6C6FF9',
         };
 
         if (editingGoal) {
@@ -158,7 +148,6 @@ const Goals: React.FC = () => {
         setCurrentAmount('');
         setTargetDate(null);
         setSelectedIcon('savings');
-        setSelectedColor('blue');
     };
 
     const _handleDeleteGoal = (goalId: string) => {
@@ -423,8 +412,7 @@ const Goals: React.FC = () => {
                 </Typography>
                             <Grid container spacing={2}>
                                 {GOAL_ICONS.map((iconData) => {
-                                    const selectedColorData = GOAL_COLORS.find(c => c.id === selectedColor);
-                                    const iconColor = selectedColorData?.color || '#6C6FF9';
+                                    const iconColor = iconData.color;
                                     const isSelected = selectedIcon === iconData.id;
                                     return (
                                         <Grid key={iconData.id}>
@@ -469,47 +457,7 @@ const Goals: React.FC = () => {
                             </Grid>
             </Box>
 
-                        <Typography 
-                            variant="body2" 
-                            sx={{ 
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
-                                mb: 1.5,
-                                fontWeight: 500
-                            }}
-                        >
-                            Выберите цвет:
-                        </Typography>
-                        <Grid container spacing={1}>
-                            {GOAL_COLORS.map((colorData) => {
-                                const isSelected = selectedColor === colorData.id;
-                                return (
-                                    <Grid key={colorData.id}>
-                                        <Box
-                                            onClick={() => setSelectedColor(colorData.id)}
-                                            sx={{
-                                                width: '100%',
-                                                aspectRatio: '1',
-                                                borderRadius: designTokens.borderRadius.full,
-                                                backgroundColor: colorData.color,
-                                                cursor: 'pointer',
-                                                border: isSelected
-                                                    ? `3px solid ${mode === 'dark' ? '#FFFFFF' : '#272B3E'}`
-                                                    : `2px solid ${mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(39, 43, 62, 0.2)'}`,
-                                                boxShadow: isSelected
-                                                    ? `0 0 0 4px ${colorData.color}30`
-                                                    : 'none',
-                                                transition: designTokens.transitions.normal,
-                                                transform: isSelected ? 'scale(1.1)' : 'scale(1)',
-                                                '&:hover': {
-                                                    transform: 'scale(1.15)',
-                                                    boxShadow: `0 0 0 2px ${colorData.color}50`,
-                                                },
-                                            }}
-                                        />
-                                    </Grid>
-                                );
-                            })}
-                        </Grid>
+                        
 
                         {/* Название */}
                         <TextField
