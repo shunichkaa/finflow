@@ -328,13 +328,24 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     mr: 2,
                                     display: {sm: 'none'},
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    transition: 'all 0.2s ease',
+                                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.05)',
+                                    borderRadius: 3,
+                                    width: 48,
+                                    height: 48,
+                                    transition: 'all 0.3s ease',
                                     '&:hover': {
-                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                                        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(39, 43, 62, 0.1)',
+                                        transform: 'scale(1.05)',
+                                        boxShadow: mode === 'dark' 
+                                            ? '0 4px 12px rgba(0, 0, 0, 0.3)' 
+                                            : '0 4px 12px rgba(39, 43, 62, 0.15)',
+                                    },
+                                    '&:active': {
+                                        transform: 'scale(0.95)',
                                     },
                                 }}
                             >
-                                <MenuIcon/>
+                                <MenuIcon sx={{ fontSize: 24 }} />
                             </IconButton>
 
                             {!sidebarOpen && (

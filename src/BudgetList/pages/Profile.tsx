@@ -402,38 +402,24 @@ export default function Profile() {
 
                 <List>
                     {/* Тема */}
-                    <ListItem sx={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        justifyContent: 'space-between',
-                        py: 2,
-                        px: 0,
-                        flexWrap: 'nowrap'
-                    }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
-                            <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mr: 1 }}>
-                                <Palette sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                            </ListItemIcon>
-                            <ListItemText 
-                                primary="Темная тема" 
-                                secondary="Переключить между светлой и темной темой"
-                                primaryTypographyProps={{
-                                    sx: { fontSize: { xs: '0.95rem', sm: '1rem' } }
-                                }}
-                                secondaryTypographyProps={{
-                                    sx: { 
-                                        display: { xs: 'none', sm: 'block' },
-                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                    }
-                                }}
-                                sx={{ flex: 1, minWidth: 0 }}
-                            />
-                        </Box>
+                    <ListItem sx={{ py: 1.5 }}>
+                        <ListItemIcon>
+                            <Palette sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                        </ListItemIcon>
+                        <ListItemText 
+                            primary="Темная тема" 
+                            secondary="Переключить между светлой и темной темой"
+                            secondaryTypographyProps={{
+                                sx: { 
+                                    display: { xs: 'none', sm: 'block' },
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
+                        />
                         <Switch
                             checked={mode === 'dark'}
                             onChange={toggleTheme || (() => {})}
                             sx={{
-                                flexShrink: 0,
                                 '& .MuiSwitch-switchBase.Mui-checked': {
                                     color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                 },
@@ -447,38 +433,27 @@ export default function Profile() {
                     <Divider />
 
                     {/* Язык */}
-                    <ListItem sx={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        justifyContent: 'space-between',
-                        py: 2,
-                        px: 0,
-                        flexWrap: 'nowrap'
-                    }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
-                            <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mr: 1 }}>
-                                <Language sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                            </ListItemIcon>
-                            <ListItemText 
-                                primary="Язык" 
-                                secondary="Выберите язык приложения"
-                                secondaryTypographyProps={{
-                                    sx: {
-                                        display: { xs: 'none', sm: 'block' },
-                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                    }
-                                }}
-                                sx={{ flex: 1, minWidth: 0 }}
-                            />
-                        </Box>
-                        <FormControl size="small" sx={{ minWidth: { xs: 100, sm: 120 }, flexShrink: 0 }}>
+                    <ListItem sx={{ py: 1.5 }}>
+                        <ListItemIcon>
+                            <Language sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                        </ListItemIcon>
+                        <ListItemText 
+                            primary="Язык" 
+                            secondary="Выберите язык приложения"
+                            secondaryTypographyProps={{
+                                sx: {
+                                    display: { xs: 'none', sm: 'block' },
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
+                        />
+                        <FormControl size="small" sx={{ minWidth: 120 }}>
                             <Select
                                 value={i18n?.language || 'ru'}
                                 onChange={(e) => changeLanguage(e.target.value)}
                                 sx={{
                                     '& .MuiSelect-select': {
                                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                        fontSize: { xs: '0.85rem', sm: '0.9rem' }
                                     },
                                 }}
                             >
@@ -494,38 +469,27 @@ export default function Profile() {
                     <Divider />
 
                     {/* Валюта */}
-                    <ListItem sx={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        justifyContent: 'space-between',
-                        py: 2,
-                        px: 0,
-                        flexWrap: 'nowrap'
-                    }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
-                            <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mr: 1 }}>
-                                <AttachMoney sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                            </ListItemIcon>
-                            <ListItemText 
-                                primary="Валюта" 
-                                secondary="Основная валюта для отображения сумм"
-                                secondaryTypographyProps={{
-                                    sx: {
-                                        display: { xs: 'none', sm: 'block' },
-                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                    }
-                                }}
-                                sx={{ flex: 1, minWidth: 0 }}
-                            />
-                        </Box>
-                        <FormControl size="small" sx={{ minWidth: { xs: 100, sm: 120 }, flexShrink: 0 }}>
+                    <ListItem sx={{ py: 1.5 }}>
+                        <ListItemIcon>
+                            <AttachMoney sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                        </ListItemIcon>
+                        <ListItemText 
+                            primary="Валюта" 
+                            secondary="Основная валюта для отображения сумм"
+                            secondaryTypographyProps={{
+                                sx: {
+                                    display: { xs: 'none', sm: 'block' },
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
+                        />
+                        <FormControl size="small" sx={{ minWidth: 120 }}>
                             <Select
                                 value={currency || 'EUR'}
                                 onChange={(e) => handleCurrencyChange(e.target.value)}
                                 sx={{
                                     '& .MuiSelect-select': {
                                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                        fontSize: { xs: '0.85rem', sm: '0.9rem' }
                                     },
                                 }}
                             >
@@ -552,33 +516,20 @@ export default function Profile() {
                 </Typography>
 
                 <List>
-                    <ListItem sx={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        justifyContent: 'space-between',
-                        py: 2,
-                        px: 0,
-                        flexWrap: 'nowrap'
-                    }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
-                            <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mr: 1 }}>
-                                <NotificationsIcon sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                            </ListItemIcon>
-                            <ListItemText 
-                                primary="Включить уведомления"
-                                secondary="Получать уведомления о важных событиях"
-                                primaryTypographyProps={{
-                                    sx: { fontSize: { xs: '0.95rem', sm: '1rem' } }
-                                }}
-                                secondaryTypographyProps={{
-                                    sx: {
-                                        display: { xs: 'none', sm: 'block' },
-                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                    }
-                                }}
-                                sx={{ flex: 1, minWidth: 0 }}
-                            />
-                        </Box>
+                    <ListItem sx={{ py: 1.5 }}>
+                        <ListItemIcon>
+                            <NotificationsIcon sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                        </ListItemIcon>
+                        <ListItemText 
+                            primary="Включить уведомления"
+                            secondary="Получать уведомления о важных событиях"
+                            secondaryTypographyProps={{
+                                sx: {
+                                    display: { xs: 'none', sm: 'block' },
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
+                        />
                         <Switch
                             checked={notificationsEnabled}
                             onChange={(e) => {
@@ -590,7 +541,6 @@ export default function Profile() {
                                 setTimeout(() => triggerSync(), 100);
                             }}
                             sx={{
-                                flexShrink: 0,
                                 '& .MuiSwitch-switchBase.Mui-checked': {
                                     color: '#6C6FF9',
                                 },
@@ -601,29 +551,21 @@ export default function Profile() {
                         />
                     </ListItem>
 
-                    <ListItem sx={{ flexDirection: 'column', alignItems: 'stretch', gap: 2, py: 2 }}>
-                        <Box sx={{ 
-                            display: 'flex', 
-                            alignItems: 'center', 
-                            justifyContent: 'space-between',
-                            flexWrap: 'nowrap'
-                        }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center', flex: 1, minWidth: 0 }}>
-                                <ListItemIcon sx={{ minWidth: { xs: 40, sm: 56 }, mr: 1 }}>
-                                    <Schedule sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                                </ListItemIcon>
-                                <ListItemText 
-                                    primary="Ежедневное напоминание"
-                                    secondary="Напоминать о внесении транзакций"
-                                    secondaryTypographyProps={{
-                                        sx: {
-                                            display: { xs: 'none', sm: 'block' },
-                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                        }
-                                    }}
-                                    sx={{ flex: 1, minWidth: 0 }}
-                                />
-                            </Box>
+                    <ListItem sx={{ flexDirection: 'column', alignItems: 'stretch', gap: 2, py: 1.5 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <ListItemIcon>
+                                <Schedule sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                            </ListItemIcon>
+                            <ListItemText 
+                                primary="Ежедневное напоминание"
+                                secondary="Напоминать о внесении транзакций"
+                                secondaryTypographyProps={{
+                                    sx: {
+                                        display: { xs: 'none', sm: 'block' },
+                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                    }
+                                }}
+                            />
                             <Switch
                                 checked={dailyReminderEnabled}
                                 onChange={(e) => {
@@ -632,7 +574,6 @@ export default function Profile() {
                                 }}
                                 disabled={!notificationsEnabled}
                                 sx={{
-                                    flexShrink: 0,
                                     '& .MuiSwitch-switchBase.Mui-checked': {
                                         color: '#6C6FF9',
                                     },
