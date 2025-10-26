@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Box,
     Card,
@@ -45,13 +44,6 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
         if (window.confirm(t('confirmDeleteGoal', 'Вы уверены, что хотите удалить эту цель?'))) {
             deleteGoal(id);
         }
-    };
-
-    const getProgressColor = (percentage: number) => {
-        if (percentage >= 100) return 'success';
-        if (percentage >= 75) return 'primary';
-        if (percentage >= 50) return 'warning';
-        return 'error';
     };
 
     const getDaysLeft = (targetDate?: Date) => {

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     Box,
     Button,
     CircularProgress,
     Fade,
     Paper,
-    Stack,
     TextField,
     Typography,
     Divider,
-    Alert
+    Alert,
+    Stack
 } from '@mui/material';
-import { Google, Login, PersonAdd, Apple } from '@mui/icons-material';
+import { Google, Login, PersonAdd } from '@mui/icons-material';
 import {supabase} from '../../lib/supabaseClient';
 import {useNavigate} from "react-router-dom";
 import { useTranslation } from 'react-i18next';

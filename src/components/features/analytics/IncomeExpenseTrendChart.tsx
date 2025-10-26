@@ -144,9 +144,6 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 <LineChart 
                     data={chartData} 
                     margin={{ top: 20, right: 10, left: 0, bottom: 20 }}
-                    animationBegin={0}
-                    animationDuration={1500}
-                    animationEasing="ease-out"
                 >
                     <defs>
                         {/* iOS 26 Liquid Glass Gradients for Lines */}

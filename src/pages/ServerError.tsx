@@ -28,7 +28,7 @@ const ServerError: React.FC = () => {
                     border: '1px solid rgba(148, 163, 184, 0.1)',
                 }}
             >
-                {/* Иллюстрация 500 */}
+                {}
                 <Box
                     sx={{
                         fontSize: '6rem',
@@ -51,7 +51,7 @@ const ServerError: React.FC = () => {
                     Произошла внутренняя ошибка сервера. Мы уже работаем над её исправлением.
                 </Typography>
 
-                {/* Кнопки действий */}
+                {}
                 <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
                     <Button
                         variant="contained"

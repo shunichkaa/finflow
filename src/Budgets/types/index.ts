@@ -1,24 +1,12 @@
-// ============================================
-// БАЗОВЫЕ ТИПЫ
-// ============================================
 
-/**
- * Тип транзакции - либо доход, либо расход
- */
+
 export type TransactionType = 'income' | 'expense';
 
-/**
- * Период для бюджета
- */
+
 export type BudgetPeriod = 'monthly' | 'weekly';
 
-// ============================================
-// ИНТЕРФЕЙСЫ
-// ============================================
 
-/**
- * Транзакция - основная сущность приложения
- */
+
 export interface Transaction {
     id: string;
     amount: number;
@@ -29,9 +17,7 @@ export interface Transaction {
     createdAt: Date;
 }
 
-/**
- * Бюджет - лимит расходов на категорию
- */
+
 export interface Budget {
     id: string;
     category: string;
@@ -39,9 +25,7 @@ export interface Budget {
     period: BudgetPeriod;
 }
 
-/**
- * Цель/копилка - накопление на определенную цель
- */
+
 export interface Goal {
     id: string;
     name: string;
@@ -54,9 +38,7 @@ export interface Goal {
     icon?: string; // ID иконки из GOAL_ICONS
 }
 
-/**
- * Категория - группировка транзакций
- */
+
 export interface Category {
     id: string;
     name: string;
@@ -66,17 +48,11 @@ export interface Category {
 }
 
 
-// ============================================
-// UTILITY TYPES
-// ============================================
 
 export type CreateTransactionInput = Omit<Transaction, 'id' | 'createdAt'>;
 export type CreateBudgetInput = Omit<Budget, 'id'>;
 export type CreateGoalInput = Omit<Goal, 'id' | 'createdAt' | 'isCompleted'>;
 
-// ============================================
-// ФИЛЬТРЫ
-// ============================================
 
 export interface TransactionFilters {
     type?: TransactionType | 'all';

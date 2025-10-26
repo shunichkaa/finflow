@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import Budgets from "./BudgetList/pages/Budgets";
 import Dashboard from "./BudgetList/pages/Dashboard";
@@ -84,4 +84,3 @@ function App() {
 }
 
 export default App;
-

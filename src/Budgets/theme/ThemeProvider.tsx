@@ -10,7 +10,6 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
         if (saved === 'dark' || saved === 'light') {
             return saved;
         }
-        // Автоматическое определение темы по системным настройкам
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     });
 
@@ -18,12 +17,10 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
         localStorage.setItem('theme-mode', mode);
     }, [mode]);
 
-    // Слушаем изменения системной темы
     useEffect(() => {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         const handleChange = (e: MediaQueryListEvent) => {
             const saved = localStorage.getItem('theme-mode');
-            // Переключаем только если пользователь не выбрал тему вручную
             if (!saved || saved === 'auto') {
                 setMode(e.matches ? 'dark' : 'light');
             }

@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from 'react';
+import { Component, ReactNode } from 'react';
 import { Box, Typography, Button, Container, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useThemeMode } from '../Budgets/theme/ThemeContext';
@@ -47,7 +47,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                     border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(148, 163, 184, 0.1)',
                 }}
             >
-                {/* Иконка ошибки */}
+                {}
                 <Box
                     sx={{
                         fontSize: '4rem',
@@ -62,7 +62,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                     Ой, что-то не так, уже исправляем...
                 </Typography>
 
-                {/* Кнопки действий */}
+                {}
                 <Box sx={{ mt: 4, display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
                     <Button
                         variant="contained"
@@ -128,13 +128,11 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         console.error('ErrorBoundary caught an error:', error, errorInfo);
         
         this.setState({
-            error,
-            errorInfo,
+            error: error,
+            errorInfo: errorInfo,
         });
 
-        // Отправка ошибки в сервис мониторинга (если есть)
         if (process.env.NODE_ENV === 'production') {
-            // Здесь можно добавить отправку в Sentry, LogRocket и т.д.
             console.error('Production error:', {
                 error: error.toString(),
                 errorInfo: errorInfo.componentStack,
@@ -170,14 +168,11 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     }
 }
 
-// Хук для использования ErrorBoundary в функциональных компонентах
 export const useErrorHandler = () => {
     return (error: Error, errorInfo?: React.ErrorInfo) => {
         console.error('Error caught by useErrorHandler:', error, errorInfo);
         
-        // Можно добавить дополнительную логику обработки ошибок
         if (process.env.NODE_ENV === 'production') {
-            // Отправка в сервис мониторинга
         }
     };
 };

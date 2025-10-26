@@ -3,6 +3,7 @@ import React from 'react';
 import {Box, Card, CardContent, LinearProgress, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next';
 import {forecastNextMonth, predictDepletion, recommendedDailyLimit} from "../../../Budgets/utils/forecasting.ts";
+import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 
 interface ForecastWidgetProps {
     expensesHistory: number[];
@@ -20,6 +21,7 @@ export const ForecastWidget: React.FC<ForecastWidgetProps> = ({
                                                                   fixedExpenses
                                                               }) => {
     const {t} = useTranslation();
+    const { mode } = useThemeMode();
 
     const nextMonthForecast = forecastNextMonth(expensesHistory);
     const daysLeft = predictDepletion(balance, dailyAverage);

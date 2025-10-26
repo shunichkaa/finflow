@@ -1,14 +1,12 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import {
     Container,
     Paper,
     Typography,
     Box,
     Switch,
-    FormControlLabel,
     Select,
     MenuItem,
-    FormControl,
     Button,
     Divider,
     List,
@@ -19,7 +17,8 @@ import {
     Snackbar,
     Modal,
     TextField,
-    IconButton
+    IconButton,
+    FormControl
 } from '@mui/material';
 import {
     Person,
@@ -73,7 +72,7 @@ export default function Profile() {
         const [editModalOpen, setEditModalOpen] = useState(false);
         const [timePickerOpen, setTimePickerOpen] = useState(false);
         const [newEmail, setNewEmail] = useState('');
-        const [_currentPassword, setCurrentPassword] = useState('');
+        const [_currentPassword, _setCurrentPassword] = useState('');
         const [newPassword, setNewPassword] = useState('');
         const [confirmPassword, setConfirmPassword] = useState('');
         const fileInputRef = useRef<HTMLInputElement>(null);
@@ -181,7 +180,7 @@ export default function Profile() {
         setEditModalOpen(false);
         // Сброс полей
         setNewEmail('');
-        setCurrentPassword('');
+        _setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
     };
@@ -1045,4 +1044,3 @@ export default function Profile() {
         </Container>
     );
 }
-

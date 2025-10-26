@@ -11,7 +11,6 @@ export const useDailyReminder = () => {
             return;
         }
 
-        // Запрашиваем разрешение на уведомления
         const requestNotificationPermission = async () => {
             if ('Notification' in window && Notification.permission === 'default') {
                 await Notification.requestPermission();
@@ -22,14 +21,11 @@ export const useDailyReminder = () => {
             const now = new Date();
             const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
             
-            // Проверяем, совпадает ли текущее время с установленным временем напоминания
             if (currentTime === notificationTime) {
                 const lastReminderDate = localStorage.getItem('lastReminderDate');
                 const today = now.toDateString();
 
-                // Отправляем напоминание только один раз в день
                 if (lastReminderDate !== today) {
-                    // Добавляем уведомление в интерфейс
                     addNotification({
                         type: 'reminder',
                         severity: 'info',
@@ -37,7 +33,6 @@ export const useDailyReminder = () => {
                         message: 'Не забудьте внести свои транзакции за сегодня! 📝',
                     });
 
-                    // Отправляем браузерное уведомление
                     if ('Notification' in window && Notification.permission === 'granted') {
                         new Notification('FinFlow - Напоминание', {
                             body: 'Не забудьте внести свои транзакции за сегодня! 📝',
@@ -54,13 +49,10 @@ export const useDailyReminder = () => {
             }
         };
 
-        // Запрашиваем разрешение при первом запуске
         requestNotificationPermission();
 
-        // Проверяем каждую минуту
         const interval = setInterval(checkAndSendReminder, 60000);
 
-        // Проверяем сразу при монтировании
         checkAndSendReminder();
 
         return () => clearInterval(interval);

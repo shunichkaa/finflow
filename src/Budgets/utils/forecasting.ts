@@ -1,5 +1,4 @@
 
-// Экспоненциальное сглаживание
 export function exponentialSmoothing(data: number[], alpha: number): number[] {
     if (data.length === 0) return [];
     if (alpha < 0 || alpha > 1) alpha = 0.3; // Валидация alpha
@@ -10,7 +9,6 @@ export function exponentialSmoothing(data: number[], alpha: number): number[] {
     return result;
 }
 
-// Линейная регрессия (y = slope * x + intercept)
 export function linearRegression(data: { x: number; y: number }[]) {
     if (data.length === 0) {
         return {
@@ -45,9 +43,7 @@ export function linearRegression(data: { x: number; y: number }[]) {
     };
 }
 
-// === Утилиты для конкретных прогнозов ===
 
-// Прогноз расходов на следующий месяц
 export function forecastNextMonth(expenses: number[]): number {
     if (expenses.length === 0) return 0;
     const smoothed = exponentialSmoothing(expenses, 0.3);
@@ -55,13 +51,11 @@ export function forecastNextMonth(expenses: number[]): number {
     return Math.round(last);
 }
 
-// Когда закончатся деньги при текущих тратах
 export function predictDepletion(balance: number, dailyExpenses: number): number {
     if (dailyExpenses <= 0) return Infinity;
     return Math.ceil(balance / dailyExpenses); // в днях
 }
 
-// Рекомендуемый ежедневный лимит (на основе среднего за последние месяцы)
 export function recommendedDailyLimit(monthlyIncome: number, fixedExpenses: number, avgVariableExpenses: number): number {
     if (monthlyIncome <= 0) return 0;
     const available = monthlyIncome - fixedExpenses;

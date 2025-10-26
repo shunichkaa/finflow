@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import dayjs from 'dayjs';
 import { 
     Container, 
     Box, 
     Typography, 
     Grid, 
     LinearProgress,
-    Stack,
     TextField,
     Dialog,
     DialogContent,
     DialogTitle,
     Button,
-    InputAdornment
+    InputAdornment,
+    Stack
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -26,24 +27,25 @@ import { GoalDetail } from '../../components/features/goals/GoalDetail';
 import { Goal } from '../../Budgets/types';
 import AddIcon from '@mui/icons-material/Add';
 import { designTokens } from '../../Budgets/theme/designTokens';
+import { migrateGoalIcon } from '../../Budgets/utils/migrationHelpers';
 
 const GOAL_ICONS = [
-    { id: 'travel', icon: '✈', name: 'Путешествие' },
-    { id: 'home', icon: '🏠', name: 'Жильё' },
-    { id: 'car', icon: '🚗', name: 'Автомобиль' },
-    { id: 'education', icon: '📚', name: 'Образование' },
-    { id: 'wedding', icon: '💍', name: 'Свадьба' },
-    { id: 'laptop', icon: '💻', name: 'Техника' },
-    { id: 'jewelry', icon: '💎', name: 'Украшения' },
-    { id: 'savings', icon: '💰', name: 'Накопления' },
-    { id: 'vacation', icon: '🏖', name: 'Отпуск' },
-    { id: 'phone', icon: '📱', name: 'Телефон' },
-    { id: 'camera', icon: '📷', name: 'Камера' },
-    { id: 'fitness', icon: '💪', name: 'Фитнес' },
-    { id: 'gift', icon: '🎁', name: 'Подарок' },
-    { id: 'music', icon: '🎵', name: 'Музыка' },
-    { id: 'art', icon: '🎨', name: 'Искусство' },
-    { id: 'book', icon: '📖', name: 'Книги' },
+    { id: 'travel', icon: '✈️', name: 'Путешествие', color: '#87CEEB' },
+    { id: 'home', icon: '🏠', name: 'Жильё', color: '#FFB3BA' },
+    { id: 'car', icon: '🚗', name: 'Автомобиль', color: '#BAE1DA' },
+    { id: 'education', icon: '📚', name: 'Образование', color: '#FFD7BA' },
+    { id: 'wedding', icon: '💍', name: 'Свадьба', color: '#FFE5F1' },
+    { id: 'laptop', icon: '💻', name: 'Техника', color: '#C7CEEA' },
+    { id: 'jewelry', icon: '💎', name: 'Украшения', color: '#D4BBDD' },
+    { id: 'savings', icon: '💰', name: 'Накопления', color: '#B5EAD7' },
+    { id: 'vacation', icon: '🏖️', name: 'Отпуск', color: '#FFDAC1' },
+    { id: 'phone', icon: '📱', name: 'Телефон', color: '#C3E5E1' },
+    { id: 'camera', icon: '📷', name: 'Камера', color: '#E0D5F3' },
+    { id: 'fitness', icon: '💪', name: 'Фитнес', color: '#B5EAD7' },
+    { id: 'gift', icon: '🎁', name: 'Подарок', color: '#FFE5F1' },
+    { id: 'music', icon: '🎵', name: 'Музыка', color: '#D4E5F3' },
+    { id: 'art', icon: '🎨', name: 'Искусство', color: '#D4BBDD' },
+    { id: 'book', icon: '📖', name: 'Книги', color: '#FFD7BA' },
 ];
 
 const GOAL_COLORS = [
@@ -64,7 +66,7 @@ const Goals: React.FC = () => {
     const goals = useGoalsStore((state) => state.goals);
     const addGoal = useGoalsStore((state) => state.addGoal);
     const updateGoal = useGoalsStore((state) => state.updateGoal);
-    const deleteGoal = useGoalsStore((state) => state.deleteGoal);
+    const _deleteGoal = useGoalsStore((state) => state.deleteGoal);
 
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedIcon, setSelectedIcon] = useState('savings');
@@ -161,7 +163,7 @@ const Goals: React.FC = () => {
 
     const _handleDeleteGoal = (goalId: string) => {
         if (window.confirm('Вы уверены, что хотите удалить эту копилку?')) {
-            deleteGoal(goalId);
+            _deleteGoal(goalId);
         }
     };
 
@@ -275,13 +277,10 @@ const Goals: React.FC = () => {
                 <Grid container spacing={3}>
                     {sortedGoals.map((goal) => {
                         const percentage = (goal.currentAmount / goal.targetAmount) * 100;
-                        const _daysLeft = getDaysLeft(goal.targetDate);
-                        const _recommendedDaily = getRecommendedDaily(goal.targetAmount, goal.currentAmount, goal.targetDate);
                         const iconData = GOAL_ICONS.find(i => i.id === goal.icon) || GOAL_ICONS[7];
-                        const IconComponent = iconData.icon;
 
                         return (
-                            <Grid item xs={12} sm={6} md={4} key={goal.id}>
+                            <Grid key={goal.id}>
                                 <GlassCard 
                                     glowColor={iconData.color + '40'}
                                     onClick={() => {
@@ -313,7 +312,7 @@ const Goals: React.FC = () => {
                                                     justifyContent: 'center',
                                                 }}
                                             >
-                                                <IconComponent sx={{ fontSize: 36, color: iconData.color }} />
+                                                <span style={{ fontSize: '36px' }}>{iconData.icon}</span>
                                             </Box>
                                         </Box>
 
@@ -428,7 +427,7 @@ const Goals: React.FC = () => {
                                     const iconColor = selectedColorData?.color || '#6C6FF9';
                                     const isSelected = selectedIcon === iconData.id;
                                     return (
-                                        <Grid item xs={3} sm={2} key={iconData.id}>
+                                        <Grid key={iconData.id}>
                                             <Box
                                                 onClick={() => setSelectedIcon(iconData.id)}
                                                 sx={{
@@ -462,15 +461,7 @@ const Goals: React.FC = () => {
                                                     },
                                                 }}
                                             >
-                                                <Typography
-                                                    sx={{
-                                                        fontSize: '2rem',
-                                                        lineHeight: 1,
-                                                        filter: isSelected ? 'none' : 'grayscale(0.3)',
-                                                    }}
-                                                >
-                                                    {iconData.icon}
-                                                </Typography>
+                                                <span style={{ fontSize: '2rem' }}>{iconData.icon}</span>
                                             </Box>
                                         </Grid>
                                     );
@@ -492,7 +483,7 @@ const Goals: React.FC = () => {
                             {GOAL_COLORS.map((colorData) => {
                                 const isSelected = selectedColor === colorData.id;
                                 return (
-                                    <Grid item xs={3} sm={2} key={colorData.id}>
+                                    <Grid key={colorData.id}>
                                         <Box
                                             onClick={() => setSelectedColor(colorData.id)}
                                             sx={{
@@ -561,7 +552,7 @@ const Goals: React.FC = () => {
                             <DatePicker
                                 label="Дата завершения"
                                 value={targetDate}
-                                onChange={(newValue) => setTargetDate(newValue)}
+                                onChange={(value) => setTargetDate(value && dayjs.isDayjs(value) ? value.toDate() : value as Date | null)}
                                 slotProps={{
                                     textField: {
                                         fullWidth: true,

@@ -2,15 +2,12 @@ import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Переводы
 const resources = {
     ru: {
         translation: {
-            // Основное
             appName: 'FinFlow',
             tagline: 'Умное управление финансами',
 
-            // Действия
             addTransaction: 'Добавить транзакцию',
             newTransaction: 'Новая транзакция',
             save: 'Сохранить',
@@ -18,14 +15,12 @@ const resources = {
             delete: 'Удалить',
             reset: 'Сбросить',
 
-            // Финансы
             balance: 'Баланс',
             income: 'Доходы',
             expense: 'Расходы',
             transactions: 'Транзакции',
             noData: 'Нет данных',
 
-            // Навигация / страницы
             dashboard: 'Главная',
             analytics: 'Аналитика',
             budgets: 'Бюджеты',
@@ -38,18 +33,15 @@ const resources = {
             editBudget: 'Редактировать бюджет',
             edit: 'Редактировать',
 
-            // Периоды
             week: 'Неделя',
             month: 'Месяц',
             year: 'Год',
 
-            // Статистика
             savingsRate: 'Процент экономии',
             expenseDistribution: 'Распределение расходов',
             incomeVsExpenses: 'Доходы vs Расходы',
             noTransactionData: 'Нет данных о транзакциях',
 
-            // Форма
             amount: 'Сумма',
             category: 'Категория',
             description: 'Описание',
@@ -57,19 +49,16 @@ const resources = {
             type: 'Тип',
             descriptionPlaceholder: 'Например: Покупка продуктов',
 
-            // Фильтры
             filters: 'Фильтры',
             allTypes: 'Все типы',
             allCategories: 'Все категории',
             from: 'От',
             to: 'До',
 
-            // Сообщения
             noTransactions: 'Транзакций пока нет',
             addFirst: 'Добавьте первую транзакцию',
             confirmDelete: 'Удалить транзакцию?',
 
-            // Категории - Расходы
             'category.food': 'Еда и продукты',
             'category.transport': 'Транспорт',
             'category.housing': 'Жильё',
@@ -81,18 +70,15 @@ const resources = {
             'category.cafe': 'Кафе/рестораны',
             'category.other': 'Другое',
 
-            // Категории - Доходы
             'category.salary': 'Зарплата',
             'category.freelance': 'Фриланс',
             'category.investment': 'Инвестиции',
             'category.gift': 'Подарки',
 
-            // Настройки
             'settings.language': 'Язык',
             'settings.currency': 'Валюта',
             'settings.theme': 'Тема',
 
-            // Бюджет форма/страницы
             period: 'Период',
             weekly: 'Еженедельно',
             monthly: 'Ежемесячно',
@@ -114,24 +100,20 @@ const resources = {
             limitLabel: 'Лимит',
             used: 'использовано',
 
-            // Экспорт
             export: 'Экспорт',
             exportCSV: 'Экспорт CSV',
             exportExcel: 'Экспорт Excel',
             exportPDF: 'Экспорт PDF',
             topExpenses: 'Топ-5 расходов',
 
-            // Финансовое здоровье
             financialHealth: 'Финансовое здоровье',
             excellent: 'Отлично! Продолжайте в том же духе',
             good: 'Хорошо, есть куда расти',
             needsImprovement: 'Требуется улучшение',
 
-            // Цели
             goals: 'Цели',
             goalsDescription: 'Ставьте финансовые цели и отслеживайте прогресс их достижения',
             
-            // Копилка
             savings: 'Копилка',
             savingsDescription: 'Создавайте копилки для накопления на важные цели',
             myGoals: 'Мои цели',
@@ -243,24 +225,20 @@ const resources = {
             'settings.currency': 'Currency',
             'settings.theme': 'Theme',
 
-            // Export
             export: 'Export',
             exportCSV: 'Export CSV',
             exportExcel: 'Export Excel',
             exportPDF: 'Export PDF',
             topExpenses: 'Top 5 Expenses',
 
-            // Financial Health
             financialHealth: 'Financial Health',
             excellent: 'Excellent! Keep up the good work',
             good: 'Good, room for improvement',
             needsImprovement: 'Needs improvement',
 
-            // Goals
             goals: 'Goals',
             goalsDescription: 'Set financial goals and track your progress',
             
-            // Savings
             savings: 'Savings',
             savingsDescription: 'Create savings jars for important goals',
             myGoals: 'My Goals',
@@ -372,20 +350,17 @@ const resources = {
             'settings.currency': 'Devise',
             'settings.theme': 'Thème',
 
-            // Export
             export: 'Exporter',
             exportCSV: 'Exporter CSV',
             exportExcel: 'Exporter Excel',
             exportPDF: 'Exporter PDF',
             topExpenses: 'Top 5 des dépenses',
 
-            // Santé financière
             financialHealth: 'Santé financière',
             excellent: 'Excellent ! Continuez comme ça',
             good: 'Bien, possibilité d\'amélioration',
             needsImprovement: 'Nécessite des améliorations',
 
-            // Objectifs
             goals: 'Objectifs',
             goalsDescription: 'Fixez des objectifs financiers et suivez vos progrès',
             savings: 'Épargne',
@@ -499,20 +474,17 @@ const resources = {
             'settings.currency': 'Währung',
             'settings.theme': 'Theme',
 
-            // Export
             export: 'Exportieren',
             exportCSV: 'CSV exportieren',
             exportExcel: 'Excel exportieren',
             exportPDF: 'PDF exportieren',
             topExpenses: 'Top 5 Ausgaben',
 
-            // Finanzielle Gesundheit
             financialHealth: 'Finanzielle Gesundheit',
             excellent: 'Ausgezeichnet! Weiter so',
             good: 'Gut, Verbesserungspotenzial vorhanden',
             needsImprovement: 'Verbesserungsbedarf',
 
-            // Ziele
             goals: 'Ziele',
             goalsDescription: 'Setzen Sie finanzielle Ziele und verfolgen Sie Ihren Fortschritt',
             savings: 'Sparschwein',
@@ -626,20 +598,17 @@ const resources = {
             'settings.currency': 'Moneda',
             'settings.theme': 'Tema',
 
-            // Export
             export: 'Exportar',
             exportCSV: 'Exportar CSV',
             exportExcel: 'Exportar Excel',
             exportPDF: 'Exportar PDF',
             topExpenses: 'Top 5 Gastos',
 
-            // Salud financiera
             financialHealth: 'Salud financiera',
             excellent: '¡Excelente! Sigue así',
             good: 'Bien, hay margen de mejora',
             needsImprovement: 'Necesita mejora',
 
-            // Metas
             goals: 'Metas',
             goalsDescription: 'Establece metas financieras y sigue tu progreso',
             savings: 'Alcancía',
@@ -753,20 +722,17 @@ const resources = {
             'settings.currency': 'Valuta',
             'settings.theme': 'Tema',
 
-            // Export
             export: 'Izvezi',
             exportCSV: 'Izvezi CSV',
             exportExcel: 'Izvezi Excel',
             exportPDF: 'Izvezi PDF',
             topExpenses: 'Top 5 Rashoda',
 
-            // Finansijsko zdravlje
             financialHealth: 'Finansijsko zdravlje',
             excellent: 'Odlično! Nastavite tako',
             good: 'Dobro, ima prostora za poboljšanje',
             needsImprovement: 'Potrebno poboljšanje',
 
-            // Ciljevi
             goals: 'Ciljevi',
             goalsDescription: 'Postavite finansijske ciljeve i pratite napredak',
             savings: 'Kasica',

@@ -11,7 +11,6 @@ export const useAuth = () => {
         supabase.auth.getSession().then(({data, error}) => {
             if (error) {
                 console.error('Auth session error:', error);
-                // Если ошибка связана с refresh token, очищаем сессию
                 if (error.message.includes('refresh') || error.message.includes('token')) {
                     supabase.auth.signOut();
                 }

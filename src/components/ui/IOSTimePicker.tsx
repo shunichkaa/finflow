@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
     Dialog,
-    DialogContent,
     DialogActions,
     Button,
     Box,
@@ -248,4 +247,3 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
 };
 
 export default IOSTimePicker;
-

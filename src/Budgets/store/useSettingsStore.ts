@@ -9,7 +9,6 @@ interface SettingsStore {
     currency: Currency;
     avatar: string | null;
     nickname: string;
-    // Настройки уведомлений
     notificationsEnabled: boolean;
     notificationTime: string; // формат "HH:mm"
     dailyReminderEnabled: boolean;

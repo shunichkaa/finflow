@@ -2,15 +2,12 @@ import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Переводы
 const resources = {
     ru: {
         translation: {
-            // Основное
             appName: 'FinFlow',
             tagline: 'Умное управление финансами',
 
-            // Действия
             addTransaction: 'Добавить транзакцию',
             newTransaction: 'Новая транзакция',
             save: 'Сохранить',
@@ -19,14 +16,12 @@ const resources = {
             reset: 'Сбросить',
             logout: 'Выйти',
 
-            // Финансы
             balance: 'Баланс',
             income: 'Доходы',
             expense: 'Расходы',
             transactions: 'Транзакции',
             noData: 'Нет данных',
 
-            // Навигация / страницы
             dashboard: 'Главная',
             analytics: 'Аналитика',
             budgets: 'Бюджеты',
@@ -39,12 +34,10 @@ const resources = {
             editBudget: 'Редактировать бюджет',
             edit: 'Редактировать',
 
-            // Периоды
             week: 'Неделя',
             month: 'Месяц',
             year: 'Год',
 
-            // Статистика
             savingsRate: 'Процент экономии',
             expenseDistribution: 'Распределение расходов',
             incomeVsExpenses: 'Доходы vs Расходы',
@@ -60,7 +53,6 @@ const resources = {
             positiveBalance: 'Положительный баланс',
             negativeBalance: 'Отрицательный баланс',
 
-            // Форма
             amount: 'Сумма',
             category: 'Категория',
             description: 'Описание',
@@ -68,19 +60,16 @@ const resources = {
             type: 'Тип',
             descriptionPlaceholder: 'Например: Покупка продуктов',
 
-            // Фильтры
             filters: 'Фильтры',
             allTypes: 'Все типы',
             allCategories: 'Все категории',
             from: 'От',
             to: 'До',
 
-            // Сообщения
             noTransactions: 'Транзакций пока нет',
             addFirst: 'Добавьте первую транзакцию',
             confirmDelete: 'Удалить транзакцию?',
 
-            // Категории - Расходы
             'category.food': 'Еда и продукты',
             'category.transport': 'Транспорт',
             'category.housing': 'Жильё',
@@ -92,18 +81,15 @@ const resources = {
             'category.cafe': 'Кафе/рестораны',
             'category.other': 'Другое',
 
-            // Категории - Доходы
             'category.salary': 'Зарплата',
             'category.freelance': 'Фриланс',
             'category.investment': 'Инвестиции',
             'category.gift': 'Подарки',
 
-            // Настройки
             'settings.language': 'Язык',
             'settings.currency': 'Валюта',
             'settings.theme': 'Тема',
 
-            // Бюджет форма/страницы
             period: 'Период',
             weekly: 'Еженедельно',
             monthly: 'Ежемесячно',
@@ -125,7 +111,6 @@ const resources = {
             limitLabel: 'Лимит',
             used: 'использовано',
 
-            // Повторяющиеся транзакции
             recurringTransactions: 'Повторяющиеся транзакции',
             recurringTransaction: 'Повторяющаяся транзакция',
             recurringDescription: 'Автоматические платежи и поступления',
@@ -152,7 +137,6 @@ const resources = {
             confirmDeleteRecurring: 'Удалить повторяющуюся транзакцию?',
             topExpenses: 'Топ-5 расходов',
             
-            // Профиль
             profile: 'Профиль',
             settings: 'Настройки',
             darkTheme: 'Темная тема',
@@ -270,7 +254,6 @@ const resources = {
             'settings.theme': 'Theme',
             topExpenses: 'Top 5 Expenses',
             
-            // Profile
             profile: 'Profile',
             settings: 'Settings',
             darkTheme: 'Dark Theme',

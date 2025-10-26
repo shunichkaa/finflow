@@ -5,44 +5,32 @@ import type { Transaction, Budget, CreateTransactionInput, CreateBudgetInput } f
 import { triggerSync } from '../utils/cloudSyncTrigger';
 import { useNotificationStore } from './useNotificationStore';
 
-// ============================================
-// ИНТЕРФЕЙС STORE
-// ============================================
 
 export interface FinanceStore {
-    // ===== STATE =====
     transactions: Transaction[];
     budgets: Budget[];
 
-    // ===== ACTIONS - TRANSACTIONS =====
     addTransaction: (transaction: CreateTransactionInput) => void;
     updateTransaction: (id: string, data: Partial<Transaction>) => void;
     deleteTransaction: (id: string) => void;
     setTransactions: (transactions: Transaction[]) => void;
 
-    // ===== ACTIONS - BUDGETS =====
     addBudget: (budget: CreateBudgetInput) => void;
     updateBudget: (id: string, data: Partial<Budget>) => void;
     deleteBudget: (id: string) => void;
     setBudgets: (budgets: Budget[]) => void;
 
-    // ===== UTILITY =====
     clearAllData: () => void;
     addTestData: () => void;
 }
 
-// ============================================
-// СОЗДАНИЕ STORE
-// ============================================
 
 export const useFinanceStore = create<FinanceStore>()(
     persist(
         (set) => ({
-            // ===== НАЧАЛЬНОЕ СОСТОЯНИЕ =====
             transactions: [],
             budgets: [],
 
-            // ===== МЕТОДЫ ДЛЯ ТРАНЗАКЦИЙ =====
 
             addTransaction: (transaction) => {
                 set((state) => ({
@@ -56,7 +44,6 @@ export const useFinanceStore = create<FinanceStore>()(
                     ],
                 }));
                 
-                // Уведомление о добавлении транзакции
                 useNotificationStore.getState().addNotification({
                     type: 'reminder',
                     severity: 'success',
@@ -88,7 +75,6 @@ export const useFinanceStore = create<FinanceStore>()(
                     transactions,
                 })),
 
-            // ===== МЕТОДЫ ДЛЯ БЮДЖЕТОВ =====
 
             addBudget: (budget) => {
                 set((state) => ({
@@ -101,7 +87,6 @@ export const useFinanceStore = create<FinanceStore>()(
                     ],
                 }));
                 
-                // Уведомление о создании бюджета
                 useNotificationStore.getState().addNotification({
                     type: 'budget',
                     severity: 'success',
@@ -133,7 +118,6 @@ export const useFinanceStore = create<FinanceStore>()(
                     budgets,
                 })),
 
-            // ===== UTILITY =====
 
             clearAllData: () =>
                 set(() => ({

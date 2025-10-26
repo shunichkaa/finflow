@@ -1,8 +1,6 @@
 import type {ThemeOptions} from "@mui/material";
 import {createTheme} from "@mui/material/styles";
 
-// Minimalist Design System - Sofia Pro Font + Clean Flat UI
-// ТОЛЬКО 5 ЦВЕТОВ: #6C6FF9, #6C6FF9, #272B3E, #EFF0F6, #FFFFFF
 const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
@@ -160,7 +158,7 @@ const lightThemeOptions: ThemeOptions = {
                     padding: 0;
                 }
                 
-                /* Убираем стрелочки в number inputs */
+                
                 input[type=number]::-webkit-inner-spin-button,
                 input[type=number]::-webkit-outer-spin-button {
                     -webkit-appearance: none;
@@ -787,7 +785,6 @@ const lightThemeOptions: ThemeOptions = {
     },
 };
 
-// Dark Theme - Минималистичная палитра
 const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',

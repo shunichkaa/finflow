@@ -19,7 +19,6 @@ import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import {OverridableComponent} from '@mui/material/OverridableComponent';
 import {SvgIconTypeMap} from '@mui/material/SvgIcon';
 
-// Маппинг иконок с корректным типом
 const iconComponents: Record<string, OverridableComponent<SvgIconTypeMap<Record<string, unknown>, 'svg'>>> = {
     restaurant: RestaurantIcon,
     cafe: LocalCafeIcon,
@@ -38,13 +37,11 @@ const iconComponents: Record<string, OverridableComponent<SvgIconTypeMap<Record<
     wallet: AccountBalanceWalletIcon,
 };
 
-// Функция для получения иконки
 export const getCategoryIcon = (iconName: string, size: number = 24): React.ReactElement => {
     const IconComponent = iconComponents[iconName] || MoreHorizIcon;
     return <IconComponent sx={{ fontSize: size }} />;
 };
 
-// Функция для перевода названия категории
 export const getCategoryName = (categoryId: string, t: (key: string) => string) => {
     const categoryKeys: Record<string, string> = {
         '1': 'category.food',
@@ -66,7 +63,6 @@ export const getCategoryName = (categoryId: string, t: (key: string) => string) 
     return t(categoryKeys[categoryId] || 'category.other');
 };
 
-// Категории расходов - Пастельная палитра (минимализм)
 export const EXPENSE_CATEGORIES: Category[] = [
     {id: '1', name: 'Еда и продукты', type: 'expense', icon: 'restaurant', color: '#FFB3BA'},
     {id: '2', name: 'Транспорт', type: 'expense', icon: 'car', color: '#BAE1DA'},
@@ -80,7 +76,6 @@ export const EXPENSE_CATEGORIES: Category[] = [
     {id: '10', name: 'Другое', type: 'expense', icon: 'more', color: '#E0D5F3'},
 ];
 
-// Категории доходов - Пастельная палитра (минимализм)
 export const INCOME_CATEGORIES: Category[] = [
     {id: '11', name: 'Зарплата', type: 'income', icon: 'work', color: '#B5EAD7'},
     {id: '12', name: 'Фриланс', type: 'income', icon: 'laptop', color: '#BAE1DA'},

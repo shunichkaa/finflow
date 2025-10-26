@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, ButtonProps, Box } from '@mui/material';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
@@ -10,7 +9,6 @@ interface GlassButtonProps extends ButtonProps {
 
 export const GlassButton: React.FC<GlassButtonProps> = ({ 
     children, 
-    glowColor, 
     intensity = 'medium',
     shimmer = true,
     sx,
@@ -45,9 +43,6 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
     };
 
     const intensityValues = getIntensityValues();
-    const defaultGlowColor = mode === 'dark' 
-        ? 'rgba(10, 132, 255, 0.3)' 
-        : 'rgba(0, 122, 255, 0.15)';
 
     return (
         <Button

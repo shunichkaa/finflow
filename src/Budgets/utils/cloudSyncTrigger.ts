@@ -1,5 +1,3 @@
-// Глобальная функция для триггера синхронизации
-// Будет установлена в useCloudSync hook
 
 let globalSyncTrigger: (() => Promise<void>) | null = null;
 

@@ -1,7 +1,5 @@
-import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
-import { useTranslation } from 'react-i18next';
 
 interface GlassmorphismCardProps {
     title: string;
@@ -126,8 +124,7 @@ const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
 };
 
 export const GlassmorphismCards: React.FC = () => {
-    const { mode } = useThemeMode();
-    const { t } = useTranslation();
+    const { mode: _mode } = useThemeMode();
 
     const cards = [
         {
@@ -173,7 +170,7 @@ export const GlassmorphismCards: React.FC = () => {
             <Typography
                 variant="h5"
                 sx={{
-                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                    color: _mode === 'dark' ? '#FFFFFF' : '#272B3E',
                     fontWeight: 600,
                     mb: 3,
                     textAlign: 'center',
@@ -184,7 +181,7 @@ export const GlassmorphismCards: React.FC = () => {
             
             <Grid container spacing={3}>
                 {cards.map((card, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
+                    <Grid xs={12} sm={6} md={4} key={index}>
                         <GlassmorphismCard
                             title={card.title}
                             subtitle={card.subtitle}

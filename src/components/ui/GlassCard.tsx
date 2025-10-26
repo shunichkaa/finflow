@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardProps, Box, keyframes } from '@mui/material';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
@@ -9,24 +8,6 @@ interface GlassCardProps extends CardProps {
     animated?: boolean;
 }
 
-const shimmer = keyframes`
-    0% {
-        background-position: -1000px 0;
-    }
-    100% {
-        background-position: 1000px 0;
-    }
-`;
-
-const float = keyframes`
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
-`;
-
 const glow = keyframes`
     0%, 100% {
         opacity: 0.5;
@@ -36,13 +17,9 @@ const glow = keyframes`
     }
 `;
 
-const premiumEasing = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
-
 export const GlassCard: React.FC<GlassCardProps> = ({ 
     children, 
-    glowColor, 
     intensity = 'premium',
-    animated = true,
     sx,
     ...props 
 }) => {

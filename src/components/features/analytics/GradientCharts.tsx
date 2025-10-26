@@ -1,7 +1,5 @@
-import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
-import { useTranslation } from 'react-i18next';
 
 interface GradientBarProps {
     gradient: string;
@@ -96,8 +94,7 @@ const GradientBar: React.FC<GradientBarProps> = ({
 };
 
 export const GradientCharts: React.FC = () => {
-    const { mode } = useThemeMode();
-    const { t } = useTranslation();
+    const { mode: _mode } = useThemeMode();
 
     const gradients = [
         {
@@ -131,7 +128,7 @@ export const GradientCharts: React.FC = () => {
             <Typography
                 variant="h5"
                 sx={{
-                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                    color: _mode === 'dark' ? '#FFFFFF' : '#272B3E',
                     fontWeight: 600,
                     mb: 3,
                     textAlign: 'center',
@@ -142,7 +139,7 @@ export const GradientCharts: React.FC = () => {
             
             <Grid container spacing={3}>
                 {gradients.map((item, index) => (
-                    <Grid item xs={12} sm={6} md={3} key={index}>
+                    <Grid xs={12} sm={6} md={3} key={index}>
                         <GradientBar
                             gradient={item.gradient}
                             title={item.title}

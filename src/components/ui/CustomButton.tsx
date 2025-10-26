@@ -25,7 +25,7 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
       case 'primary':
         return {
           backgroundColor: designTokens.colors.primary.main,
-          color: designTokens.colors.white,
+          color: '#FFFFFF',
           border: `1px solid ${designTokens.colors.primary.main}`,
           '&:hover': {
             backgroundColor: designTokens.colors.primary.dark,
@@ -45,7 +45,7 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
       case 'success':
         return {
           backgroundColor: designTokens.colors.success.main,
-          color: designTokens.colors.white,
+          color: '#FFFFFF',
           border: `1px solid ${designTokens.colors.success.main}`,
           '&:hover': {
             backgroundColor: designTokens.colors.success.dark,
@@ -55,7 +55,7 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
       case 'error':
         return {
           backgroundColor: designTokens.colors.error.main,
-          color: designTokens.colors.white,
+          color: '#FFFFFF',
           border: `1px solid ${designTokens.colors.error.main}`,
           '&:hover': {
             backgroundColor: designTokens.colors.error.dark,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     Box,
     Button,
@@ -8,9 +8,7 @@ import {
     IconButton,
     LinearProgress,
     Stack,
-    TextField,
     Typography,
-    Chip,
 } from '@mui/material';
 import {
     Close as CloseIcon,
@@ -49,7 +47,7 @@ const motivationalPhrases = [
 export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onEdit }) => {
     const { mode } = useThemeMode();
     const { currency } = useSettingsStore();
-    const { addToGoal, updateGoal } = useGoalsStore();
+    const { addToGoal } = useGoalsStore();
     
     const [amount, setAmount] = useState('');
     const [showMotivation, setShowMotivation] = useState(false);
@@ -348,4 +346,3 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
         </Dialog>
     );
 };
-

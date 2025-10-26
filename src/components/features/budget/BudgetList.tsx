@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Alert, Box, Card, CardContent, Chip, IconButton, LinearProgress, Typography,} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import WarningIcon from '@mui/icons-material/Warning';
@@ -13,7 +11,6 @@ import {
     calculateBudgetSpent,
     getBudgetPercentage,
     getBudgetStatus,
-    getBudgetStatusColor,
     getDaysLeftInPeriod,
 } from '../../../Budgets/utils/budgetCalculations.ts';
 
@@ -115,7 +112,6 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                     const spent = calculateBudgetSpent(budget, transactions);
                     const percentage = getBudgetPercentage(spent, budget.limit);
                     const status = getBudgetStatus(percentage);
-                    const statusColor = getBudgetStatusColor(status);
                     const remaining = budget.limit - spent;
                     const daysLeft = getDaysLeftInPeriod(budget.period);
                     const categoryColor = category?.color || '#B5EAD7';

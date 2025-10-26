@@ -1,13 +1,8 @@
-import React from 'react';
-
 import {
     Box,
     TextField,
     MenuItem,
-    Stack,
-    Button,
     Paper,
-    Typography,
 } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -157,11 +152,6 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     label={t('from')}
                     value={dateFrom}
                     onChange={onDateFromChange}
-                    sx={{ 
-                        minWidth: { xs: '100%', sm: 110 },
-                        flex: { sm: '0 1 auto' },
-                        maxWidth: { sm: 130 }
-                    }}
                 />
 
                 {/* До */}
@@ -169,11 +159,6 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     label={t('to')}
                     value={dateTo}
                     onChange={onDateToChange}
-                    sx={{ 
-                        minWidth: { xs: '100%', sm: 110 },
-                        flex: { sm: '0 1 auto' },
-                        maxWidth: { sm: 130 }
-                    }}
                 />
 
                 {/* Кнопка сброса - только крестик */}

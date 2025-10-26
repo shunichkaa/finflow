@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Box, List, ListItem } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -24,7 +24,7 @@ interface TransactionListProps {
 export const TransactionList: React.FC<TransactionListProps> = ({ transactions: propTransactions }) => {
     const { t } = useTranslation();
     const theme = useTheme();
-    const { mode } = useThemeMode();
+    const { mode: _mode } = useThemeMode();
     const storeTransactions = useFinanceStore((state) => state.transactions);
     const deleteTransaction = useFinanceStore((state) => state.deleteTransaction);
     const { currency } = useSettingsStore();
@@ -57,7 +57,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
 
     return (
         <List sx={{ p: 0 }}>
-            {sortedTransactions.map((transaction, index) => {
+            {sortedTransactions.map((transaction) => {
                 const category = getCategoryById(transaction.category);
 
                 const categoryName = getCategoryName(transaction.category, t);

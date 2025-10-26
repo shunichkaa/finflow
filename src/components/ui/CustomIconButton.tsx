@@ -25,7 +25,7 @@ export const CustomIconButton: React.FC<CustomIconButtonProps> = ({
       case 'primary':
         return {
           backgroundColor: designTokens.colors.primary.main,
-          color: designTokens.colors.white,
+          color: '#FFFFFF',
           '&:hover': {
             backgroundColor: designTokens.colors.primary.dark,
             transform: 'scale(1.05)',

@@ -44,13 +44,10 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
 
     const isLoginPage = location.pathname === '/login';
 
-    // Подключаем уведомления
     useNotifications();
 
-    // Подключаем ежедневные напоминания
     useDailyReminder();
 
-    // Автоматически закрываем мобильное меню при изменении маршрута
     useEffect(() => {
         setMobileOpen(false);
     }, [location.pathname]);
@@ -61,7 +58,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
 
     const handleLogoClick = () => {
         navigate('/dashboard');
-        // Закрываем меню при клике на лого
         setMobileOpen(false);
         setSidebarOpen(false);
     };
@@ -69,14 +65,12 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     const handleLogout = async () => {
         await supabase.auth.signOut();
         navigate('/login');
-        // Закрываем меню при выходе
         setMobileOpen(false);
         setSidebarOpen(false);
     };
 
     const handleProfileClick = () => {
         navigate('/profile');
-        // Закрываем меню при переходе в профиль
         setMobileOpen(false);
         setSidebarOpen(false);
     };
@@ -99,7 +93,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             position: 'relative',
             overflow: 'hidden',
         }}>
-            {/* Sidebar Header */}
+            {}
             <Box sx={{
                 backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                 borderBottom: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
@@ -174,7 +168,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 </Toolbar>
             </Box>
 
-            {/* Navigation */}
+            {}
             <Box sx={{flexGrow: 1, overflow: 'auto', px: 2, py: 3}}>
                 <List sx={{display: 'flex', flexDirection: 'column', gap: 1}}>
                     {navItems.map((item) => (
@@ -184,7 +178,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 to={item.path}
                                 selected={location.pathname === item.path}
                                                         onClick={(_e) => {
-                                    // Закрываем меню при клике на пункт навигации (и мобильное, и десктопное)
                                     setMobileOpen(false);
                                     setSidebarOpen(false);
                                 }}
@@ -209,7 +202,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     '&:focus': {
                                         background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
                                     },
-                                    // Убираем все overlay эффекты
                                     '& .MuiTouchRipple-root': {
                                         display: 'none',
                                     },
@@ -229,7 +221,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 </List>
             </Box>
 
-            {/* Bottom Buttons */}
+            {}
             <Divider sx={{
                 borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6'
             }}/>
@@ -301,7 +293,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             <Box sx={{display: 'flex'}}>
                 <CssBaseline/>
 
-                {/* Main AppBar */}
+                {}
                 <Box
                     component="header"
                     sx={{
@@ -324,7 +316,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         justifyContent: 'space-between',
                         px: {xs: 2, sm: 3}
                     }}>
-                        {/* Left side - Logo and Desktop Menu */}
+                        {}
                         <Box sx={{display: 'flex', alignItems: 'center'}}>
                             <IconButton
                                 color="inherit"
@@ -409,12 +401,12 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             )}
                         </Box>
 
-                        {/* Right side - Notifications, Profile and Logout buttons */}
+                        {}
                         <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-                            {/* Notifications (always visible) */}
+                            {}
                             <NotificationCenter/>
                             
-                            {/* Profile and Logout buttons for desktop when sidebar is closed */}
+                            {}
                             {!sidebarOpen && !isLoginPage && (
                                 <>
                                     <IconButton
@@ -468,7 +460,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     </Toolbar>
                 </Box>
 
-                {/* Mobile Drawer */}
+                {}
                 <Drawer
                     variant="temporary"
                     open={mobileOpen}
@@ -494,7 +486,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     {drawer}
                 </Drawer>
 
-                {/* Desktop Sidebar */}
+                {}
                 {!isLoginPage && (
                     <Drawer
                         variant="permanent"
@@ -520,7 +512,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     </Drawer>
                 )}
 
-                {/* Main Content */}
+                {}
                 <Box
                     component="main"
                     sx={{

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Typography, Button, Container } from '@mui/material';
+import { Box, Typography, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useThemeMode } from '../Budgets/theme/ThemeContext';
 import { GlassButton } from '../components/ui/GlassButton';
@@ -58,7 +58,7 @@ const NotFound: React.FC = () => {
                     }
                 }}
             >
-                {/* Иллюстрация 404 */}
+                {}
                 <Box
                     sx={{
                         fontSize: '8rem',
@@ -120,7 +120,7 @@ const NotFound: React.FC = () => {
                     К сожалению, запрашиваемая страница не существует или была перемещена.
                 </Typography>
 
-                {/* Кнопка возврата */}
+                {}
                 <GlassButton
                     variant="contained"
                     onClick={handleGoHome}

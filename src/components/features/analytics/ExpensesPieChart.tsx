@@ -93,7 +93,7 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
             borderRadius: 4,
             overflow: 'visible'
         }}>
-            {/* Текст в центре */}
+            {}
             <Box sx={{
                 position: 'absolute',
                 top: '50%',

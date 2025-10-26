@@ -10,6 +10,9 @@ if (typeof window !== 'undefined') {
     (window as any).React = React;
 }
 
+import { clearOldGoalsData } from './Budgets/utils/clearOldData';
+clearOldGoalsData();
+
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );

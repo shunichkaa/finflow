@@ -83,7 +83,7 @@ const Budgets: React.FC = () => {
             </Box>
 
 
-            {/* Budget List */}
+            {}
             <Box sx={{width: '100%'}}>
                 <BudgetList onEdit={(id) => {
                     setEditingBudgetId(id);
@@ -91,7 +91,7 @@ const Budgets: React.FC = () => {
                 }}/>
             </Box>
 
-            {/* Modal */}
+            {}
             <Modal open={isModalOpen} onClose={() => {
                 setIsModalOpen(false);
                 setEditingBudgetId(null);

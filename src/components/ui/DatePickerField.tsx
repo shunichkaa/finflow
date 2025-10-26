@@ -12,6 +12,8 @@ import 'dayjs/locale/es';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
+type PickerValue = Dayjs | null;
+
 interface DatePickerFieldProps {
     label: string;
     value: string;
@@ -34,9 +36,9 @@ export const DatePickerField: React.FC<DatePickerFieldProps> = ({ label, value, 
 
     const currentLocale = localeMap[i18n.language] || 'en';
 
-    const handleChange = (newValue: Dayjs | null) => {
-        if (newValue) {
-            onChange(newValue.format('YYYY-MM-DD'));
+    const handleChange = (value: PickerValue, _context: any) => {
+        if (value) {
+            onChange(value.format('YYYY-MM-DD'));
         }
     };
 

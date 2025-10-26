@@ -27,9 +27,7 @@ export const exportToCSV = (transactions: Transaction[], filename: string) => {
     document.body.removeChild(link);
 };
 
-// Экспорт в Excel (упрощенный CSV с расширением .xls)
 export const exportToExcel = (transactions: Transaction[], budgets: Budget[], filename: string) => {
-    // Транзакции
     const transactionHeaders = ['Дата', 'Тип', 'Категория', 'Сумма', 'Описание'];
     const transactionRows = transactions.map(t => [
         new Date(t.date).toLocaleDateString('ru-RU'),
@@ -39,7 +37,6 @@ export const exportToExcel = (transactions: Transaction[], budgets: Budget[], fi
         t.description || '',
     ]);
 
-    // Бюджеты
     const budgetHeaders = ['Категория', 'Лимит', 'Период'];
     const budgetRows = budgets.map(b => [
         b.category,
@@ -69,7 +66,6 @@ export const exportToExcel = (transactions: Transaction[], budgets: Budget[], fi
     document.body.removeChild(link);
 };
 
-// Экспорт в PDF (упрощенная версия - создаем HTML и открываем для печати)
 export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
     const income = transactions
         .filter(t => t.type === 'income')

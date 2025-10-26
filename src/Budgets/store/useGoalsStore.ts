@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 import { Goal, CreateGoalInput } from '../types';
 import { triggerSync } from '../utils/cloudSyncTrigger';
 import { useNotificationStore } from './useNotificationStore';
+import { migrateGoalIcon } from '../utils/migrationHelpers';
 
 interface GoalsState {
     goals: Goal[];
@@ -31,7 +32,6 @@ export const useGoalsStore = create<GoalsState>()(
                     goals: [...state.goals, newGoal],
                 }));
                 
-                // Уведомление о создании копилки
                 useNotificationStore.getState().addNotification({
                     type: 'goal',
                     severity: 'success',
@@ -85,13 +85,27 @@ export const useGoalsStore = create<GoalsState>()(
             },
             
             setGoals: (goals: Goal[]) => {
+                const migratedGoals = goals.map(goal => ({
+                    ...goal,
+                    icon: migrateGoalIcon(goal.icon)
+                }));
                 set(() => ({
-                    goals,
+                    goals: migratedGoals,
                 }));
             },
         }),
         {
             name: 'goals-storage',
+            version: 2,
+            migrate: (persistedState: any) => {
+                if (persistedState?.goals) {
+                    persistedState.goals = persistedState.goals.map((goal: Goal) => ({
+                        ...goal,
+                        icon: migrateGoalIcon(goal.icon)
+                    }));
+                }
+                return persistedState as GoalsState;
+            },
         }
     )
 );

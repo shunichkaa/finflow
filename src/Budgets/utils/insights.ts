@@ -12,7 +12,6 @@ export interface Insight {
     };
 }
 
-// Вычисляем среднее и стандартное отклонение
 function mean(values: number[]): number {
     if (values.length === 0) return 0;
     return values.reduce((a, b) => a + b, 0) / values.length;
@@ -24,7 +23,6 @@ function stdDev(values: number[]): number {
     return Math.sqrt(variance);
 }
 
-// Детектор аномалий по стандартному отклонению
 export function detectAnomalies(expenses: Record<string, number>): Insight[] {
     const categories = Object.keys(expenses);
     const values = Object.values(expenses);
@@ -58,7 +56,6 @@ export function detectAnomalies(expenses: Record<string, number>): Insight[] {
     return insights;
 }
 
-// Сравнение с предыдущим месяцем
 export function compareWithPreviousMonth(current: Record<string, number>, previous: Record<string, number>): Insight[] {
     const insights: Insight[] = [];
 
@@ -89,7 +86,6 @@ export function compareWithPreviousMonth(current: Record<string, number>, previo
     return insights;
 }
 
-// Дополнительные «мягкие» подсказки
 export function generateGeneralInsights(balance: number, daysToSalary: number): Insight[] {
     const insights: Insight[] = [];
 
@@ -123,7 +119,6 @@ export function generateGeneralInsights(balance: number, daysToSalary: number): 
     return insights;
 }
 
-// Основная функция — объединяет все типы инсайтов
 export function generateInsights({
                                      currentMonthExpenses,
                                      previousMonthExpenses,

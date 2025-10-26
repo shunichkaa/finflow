@@ -3,7 +3,6 @@ import {getCategoryById} from './categories';
 import {formatCurrency, formatDate} from './formatters';
 import type { Currency } from '../store/useSettingsStore';
 
-// Экспорт в CSV
 export const exportToCSV = (
     transactions: Transaction[],
     currency: Currency
@@ -33,7 +32,6 @@ export const exportToCSV = (
     link.click();
 };
 
-// Экспорт в JSON
 export const exportToJSON = (
     transactions: Transaction[],
     budgets: Budget[]
@@ -58,7 +56,6 @@ export const exportToJSON = (
     link.click();
 };
 
-// Импорт из JSON
 interface ImportedData {
     transactions: {
         date: string;

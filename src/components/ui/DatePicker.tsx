@@ -6,6 +6,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ru';
 
+type PickerValue = Dayjs | null;
+
 interface DatePickerProps {
     label: string;
     value: string;
@@ -23,9 +25,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                                                           helperText,
                                                           required,
                                                       }) => {
-    const handleChange = (newValue: Dayjs | null) => {
-        if (newValue) {
-            onChange(newValue.format('YYYY-MM-DD'));
+    const handleChange = (value: PickerValue, _context: any) => {
+        if (value) {
+            onChange(value.format('YYYY-MM-DD'));
         }
     };
 

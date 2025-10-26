@@ -16,7 +16,6 @@ class NotificationService {
         this.listeners.forEach((listener) => listener(notification));
     }
 
-    // === Примеры триггеров ===
     budgetExceeded(category: string, amount: number) {
         this.trigger({
             type: 'budget',

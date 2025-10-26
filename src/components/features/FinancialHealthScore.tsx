@@ -4,6 +4,7 @@ import {Box, Card, CardContent, LinearProgress, Typography} from '@mui/material'
 import {useTranslation} from 'react-i18next';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 interface FinancialHealthScoreProps {
     income: number;
@@ -19,6 +20,7 @@ export const FinancialHealthScore: React.FC<FinancialHealthScoreProps> = ({
                                                                               totalBudgets,
                                                                           }) => {
     const {t} = useTranslation();
+    const { mode } = useThemeMode();
 
     // Расчет скора (0-100)
     const savingsRate = income > 0 ? ((income - expenses) / income) * 100 : 0;
