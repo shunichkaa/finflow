@@ -30,18 +30,17 @@ interface GoalDetailProps {
     onEdit?: () => void;
 }
 
-// Мотивационные фразы
 const motivationalPhrases = [
-    "Отличная работа! Ещё чуть-чуть! 🎯",
-    "Ты молодец! Цель всё ближе! 💪",
-    "Так держать! Прогресс налицо! ✨",
-    "Шаг за шагом к мечте! 🌟",
-    "Ты на верном пути! 🚀",
-    "Продолжай в том же духе! 💎",
-    "Каждый рубль приближает к цели! 💰",
-    "Ты справишься! Верь в себя! ⭐",
-    "Маленькие шаги = большой результат! 🎪",
-    "Твоя цель уже близко! 🎁",
+    { text: "Отличная работа! Ещё чуть-чуть!", emoji: "🎯" },
+    { text: "Ты молодец! Цель всё ближе!", emoji: "💪" },
+    { text: "Так держать! Прогресс налицо!", emoji: "✨" },
+    { text: "Шаг за шагом к мечте!", emoji: "🌟" },
+    { text: "Ты на верном пути!", emoji: "🚀" },
+    { text: "Продолжай в том же духе!", emoji: "💎" },
+    { text: "Каждый рубль приближает к цели!", emoji: "💰" },
+    { text: "Ты справишься! Верь в себя!", emoji: "⭐" },
+    { text: "Маленькие шаги = большой результат!", emoji: "🎪" },
+    { text: "Твоя цель уже близко!", emoji: "🎁" },
 ];
 
 export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onEdit }) => {
@@ -57,36 +56,30 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
 
     const progress = (goal.currentAmount / goal.targetAmount) * 100;
     const remaining = goal.targetAmount - goal.currentAmount;
-    
-    // Расчёт дней до цели
+
     const daysRemaining = goal.targetDate 
         ? Math.ceil((new Date(goal.targetDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
         : null;
-    
-    // Рекомендуемая сумма в день
+
     const dailyRecommendation = daysRemaining && daysRemaining > 0
         ? remaining / daysRemaining
         : 0;
 
-    // Добавление средств
     const handleAddFunds = () => {
         const amountNum = parseFloat(amount);
         if (amountNum > 0) {
             addToGoal(goal.id, amountNum);
-            
-            // Показываем мотивационную фразу
+
             const randomPhrase = motivationalPhrases[Math.floor(Math.random() * motivationalPhrases.length)];
-            setMotivationText(randomPhrase);
+            setMotivationText(randomPhrase.text + ' ' + randomPhrase.emoji);
             setShowMotivation(true);
             
             setAmount('');
-            
-            // Скрываем через 3 секунды
+
             setTimeout(() => setShowMotivation(false), 3000);
         }
     };
 
-    // Снятие средств
     const handleWithdraw = () => {
         const amountNum = parseFloat(amount);
         if (amountNum > 0 && amountNum <= goal.currentAmount) {
@@ -164,7 +157,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                                 to: { opacity: 1, transform: 'translateY(0)' },
                             },
                         }}>
-                            <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+                            <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E', whiteSpace: 'pre-line' }}>
                                 {motivationText}
                             </Typography>
                         </Box>

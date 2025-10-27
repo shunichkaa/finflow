@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-import {uuid} from "@supabase/supabase-js/dist/main/lib/helpers";
+import { v4 as uuid } from 'uuid';
 
 export interface Notification {
     id: string;

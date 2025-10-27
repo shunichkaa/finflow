@@ -295,17 +295,42 @@ export default function Profile() {
                     <Edit />
                 </Button>
                 </Box>
-            </Paper>
 
-            {/* Синхронизация */}
-            <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                    Синхронизация
-                </Typography>
+    {/* Настройки */}
+    <Paper sx={{ p: 3, mb: 3, borderRadius: 3, minHeight: 300 }}>
+        <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+            {t('settings.title')}
+        </Typography>
 
-                <List>
-                    <ListItem sx={{ py: 1.5 }}>
-                        <ListItemIcon>
+        <List>
+            {/* Тема */}
+            <ListItem sx={{ py: 1.5 }}>
+                <ListItemIcon>
+                    <Palette sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                </ListItemIcon>
+                <ListItemText 
+                    primary="Темная тема" 
+                    secondary="Переключить между светлой и темной темой"
+                    secondaryTypographyProps={{
+                        sx: { 
+                            display: { xs: 'none', sm: 'block' },
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                        }
+                    }}
+                />
+                <Switch
+                    checked={mode === 'dark'}
+                    onChange={toggleTheme || (() => {})}
+                    sx={{
+                        '& .MuiSwitch-switchBase.Mui-checked': {
+                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                        },
+                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                        },
+                    }}
+                />
+            </ListItem>
                             <CloudSync sx={{ 
                                 color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FF3B3B' : mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'),
                                 animation: syncStatus.isSyncing ? 'spin 1s linear infinite' : 'none',
@@ -316,8 +341,8 @@ export default function Profile() {
                             }} />
                         </ListItemIcon>
                         <ListItemText 
-                            primary="Облачная синхронизация" 
-                            secondary="Автоматическая"
+                            primary={t('sync.cloudSync')} 
+                            secondary={t('sync.automatic')}
                             secondaryTypographyProps={{
                                 sx: { 
                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
