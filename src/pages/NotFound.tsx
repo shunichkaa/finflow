@@ -2,11 +2,13 @@ import React from 'react';
 
 import { Box, Typography, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../Budgets/theme/ThemeContext';
 import { GlassButton } from '../components/ui/GlassButton';
 
 const NotFound: React.FC = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const {mode} = useThemeMode();
 
     const handleGoHome = () => {
@@ -105,7 +107,7 @@ const NotFound: React.FC = () => {
                         mb: 2,
                     }}
                 >
-                    Страница не найдена
+                    {t('notFound.title', 'Страница не найдена')}
                 </Typography>
 
                 <Typography 
@@ -117,7 +119,7 @@ const NotFound: React.FC = () => {
                         lineHeight: 1.6,
                     }}
                 >
-                    К сожалению, запрашиваемая страница не существует или была перемещена.
+                    {t('notFound.description', 'К сожалению, запрашиваемая страница не существует или была перемещена.')}
                 </Typography>
 
                 {}
@@ -137,7 +139,7 @@ const NotFound: React.FC = () => {
                         fontSize: '1.1rem',
                     }}
                 >
-                    Вернуться на главную
+                    {t('notFound.goHome', 'Вернуться на главную')}
                 </GlassButton>
             </Box>
         </Container>

@@ -92,7 +92,7 @@ const Analytics: React.FC = () => {
                         color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
                     }}
                 >
-                    Анализ ваших финансов и трендов
+                    {t('analytics.subtitle', 'Анализ ваших финансов и трендов')}
                 </Typography>
                 <Typography variant="body1" sx={{
                     textAlign: 'left', 

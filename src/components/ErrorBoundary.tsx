@@ -1,6 +1,7 @@
 import { Component, ReactNode } from 'react';
 import { Box, Typography, Button, Container, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../Budgets/theme/ThemeContext';
 
 interface ErrorBoundaryState {
@@ -22,6 +23,7 @@ interface ErrorFallbackProps {
 
 const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetError }) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const {mode} = useThemeMode();
 
     const handleGoHome = () => {
@@ -59,7 +61,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                 </Box>
 
                 <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                    Ой, что-то не так, уже исправляем...
+                    {t('errorBoundary.title', 'Ой, что-то не так, уже исправляем...')}
                 </Typography>
 
                 {}
@@ -84,7 +86,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                             }
                         }}
                     >
-                        Вернуться на главную
+                        {t('errorBoundary.goHome', 'Вернуться на главную')}
                     </Button>
                     <Button
                         variant="outlined"
@@ -98,7 +100,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetEr
                             },
                         }}
                     >
-                        Перезагрузить страницу
+                        {t('errorBoundary.reload', 'Перезагрузить страницу')}
                     </Button>
                 </Box>
             </Paper>

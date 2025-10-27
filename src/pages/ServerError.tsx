@@ -2,10 +2,12 @@ import React from 'react';
 
 import { Box, Typography, Button, Container, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../Budgets/theme/ThemeContext';
 
 const ServerError: React.FC = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const {mode} = useThemeMode();
 
     const handleGoHome = () => {
@@ -44,11 +46,11 @@ const ServerError: React.FC = () => {
                 </Typography>
 
                 <Typography variant="h5" gutterBottom fontWeight="600" color="text.primary">
-                    Что-то пошло не так
+                    {t('serverError.title', 'Что-то пошло не так')}
                 </Typography>
 
                 <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-                    Произошла внутренняя ошибка сервера. Мы уже работаем над её исправлением.
+                    {t('serverError.description', 'Произошла внутренняя ошибка сервера. Мы уже работаем над её исправлением.')}
                 </Typography>
 
                 {}
@@ -77,7 +79,7 @@ const ServerError: React.FC = () => {
                             },
                         }}
                     >
-                        Вернуться на главную
+                        {t('serverError.goHome', 'Вернуться на главную')}
                     </Button>
                     <Button
                         variant="outlined"
@@ -95,7 +97,7 @@ const ServerError: React.FC = () => {
                             },
                         }}
                     >
-                        Попробовать снова
+                        {t('serverError.reload', 'Попробовать снова')}
                     </Button>
                 </Box>
             </Paper>

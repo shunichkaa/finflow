@@ -17,6 +17,7 @@ import {
     TrendingUp as TrendingUpIcon,
     Edit as EditIcon,
 } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 import { useSettingsStore } from '../../../Budgets/store/useSettingsStore';
 import { useGoalsStore } from '../../../Budgets/store/useGoalsStore';
@@ -31,19 +32,20 @@ interface GoalDetailProps {
 }
 
 const motivationalPhrases = [
-    { text: "Отличная работа! Ещё чуть-чуть!", emoji: "🎯" },
-    { text: "Ты молодец! Цель всё ближе!", emoji: "💪" },
-    { text: "Так держать! Прогресс налицо!", emoji: "✨" },
-    { text: "Шаг за шагом к мечте!", emoji: "🌟" },
-    { text: "Ты на верном пути!", emoji: "🚀" },
-    { text: "Продолжай в том же духе!", emoji: "💎" },
-    { text: "Каждый рубль приближает к цели!", emoji: "💰" },
-    { text: "Ты справишься! Верь в себя!", emoji: "⭐" },
-    { text: "Маленькие шаги = большой результат!", emoji: "🎪" },
-    { text: "Твоя цель уже близко!", emoji: "🎁" },
+    { text: "motivation.excellent", emoji: "🎯" },
+    { text: "motivation.great", emoji: "💪" },
+    { text: "motivation.keepGoing", emoji: "✨" },
+    { text: "motivation.stepByStep", emoji: "🌟" },
+    { text: "motivation.rightPath", emoji: "🚀" },
+    { text: "motivation.continue", emoji: "💎" },
+    { text: "motivation.everyRub", emoji: "💰" },
+    { text: "motivation.believe", emoji: "⭐" },
+    { text: "motivation.smallSteps", emoji: "🎪" },
+    { text: "motivation.almostThere", emoji: "🎁" },
 ];
 
 export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onEdit }) => {
+    const { t } = useTranslation();
     const { mode } = useThemeMode();
     const { currency } = useSettingsStore();
     const { addToGoal } = useGoalsStore();
@@ -71,7 +73,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
             addToGoal(goal.id, amountNum);
 
             const randomPhrase = motivationalPhrases[Math.floor(Math.random() * motivationalPhrases.length)];
-            setMotivationText(randomPhrase.text + ' ' + randomPhrase.emoji);
+            setMotivationText(t(randomPhrase.text) + ' ' + randomPhrase.emoji);
             setShowMotivation(true);
             
             setAmount('');
@@ -143,7 +145,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
 
             <DialogContent sx={{ pt: 3 }}>
                 <Stack spacing={3}>
-                    {/* Мотивационная фраза */}
+                    {/* Motivational phrase */}
                     {showMotivation && (
                         <Box sx={{
                             p: 2,
@@ -163,11 +165,11 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         </Box>
                     )}
 
-                    {/* Прогресс */}
+                    {/* Progress */}
                     <Box>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                             <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
-                                Прогресс
+                                {t('goalDetail.progress')}
                             </Typography>
                             <Typography variant="body2" fontWeight={600} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                                 {progress.toFixed(1)}%
@@ -196,13 +198,13 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         </Box>
                     </Box>
 
-                    {/* Статистика */}
+                    {/* Statistics */}
                     <Box sx={{
                         display: 'grid',
                         gridTemplateColumns: '1fr 1fr',
                         gap: 2,
                     }}>
-                        {/* Дни до цели */}
+                        {/* Days to goal */}
                         {daysRemaining !== null && (
                             <Box sx={{
                                 flex: 1,
@@ -214,7 +216,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                                 border: `1px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : '#C7CEEA'}`,
                             }}>
                                 <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
-                                    Дней до цели:
+                                    {t('goalDetail.daysLeft')}:
                                 </Typography>
                                 <Typography variant="h5" fontWeight={700} sx={{ color: daysRemaining > 0 ? '#6C6FF9' : '#FFB3BA' }}>
                                     {daysRemaining > 0 ? daysRemaining : 0}
@@ -222,7 +224,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                             </Box>
                         )}
 
-                        {/* Осталось */}
+                        {/* Remaining */}
                         <Box sx={{
                             flex: 1,
                             p: 2,
@@ -233,7 +235,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                             border: `1px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : '#C7CEEA'}`,
                         }}>
                             <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
-                                Осталось:
+                                {t('goalDetail.remaining')}:
                             </Typography>
                             <Typography variant="h5" fontWeight={700} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                                 {remaining.toLocaleString()} {currency}
@@ -241,7 +243,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         </Box>
                     </Box>
 
-                    {/* Рекомендация */}
+                    {/* Recommendation */}
                     {dailyRecommendation > 0 && (
                         <Box sx={{
                             p: 2,
@@ -255,20 +257,20 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                             <TrendingUpIcon sx={{ color: '#B5EAD7', fontSize: 32 }} />
                             <Box>
                                 <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
-                                    Рекомендуется откладывать
+                                    {t('goalDetail.recommendedDaily')}
                                 </Typography>
                                 <Typography variant="h6" fontWeight={700} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                                    {dailyRecommendation.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {currency} / день
+                                    {dailyRecommendation.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {currency} {t('goalDetail.perDay')}
                                 </Typography>
                             </Box>
                         </Box>
                     )}
 
-                    {/* Описание */}
+                    {/* Description */}
                     {goal.description && (
                         <Box>
                             <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
-                                Описание
+                                {t('goalDetail.description')}
                             </Typography>
                             <Typography variant="body2" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E', mt: 0.5 }}>
                                 {goal.description}
@@ -276,16 +278,16 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         </Box>
                     )}
 
-                    {/* Управление средствами */}
+                    {/* Fund Management */}
                     <Box>
                         <Typography variant="subtitle2" gutterBottom sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                            Управление средствами
+                            {t('goalDetail.fundManagement')}
                         </Typography>
                         <Stack spacing={2}>
                             <NumberInput
                                 value={amount}
                                 onChange={setAmount}
-                                label="Сумма"
+                                label={t('goalDetail.amount')}
                                 fullWidth
                                 allowDecimal={true}
                                 InputProps={{
@@ -312,7 +314,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                                         },
                                     }}
                                 >
-                                    Добавить
+                                    {t('goalDetail.add')}
                                 </Button>
                                 <Button
                                     variant="outlined"
@@ -329,7 +331,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                                         },
                                     }}
                                 >
-                                    Снять
+                                    {t('goalDetail.withdraw')}
                                 </Button>
                             </Box>
                         </Stack>
