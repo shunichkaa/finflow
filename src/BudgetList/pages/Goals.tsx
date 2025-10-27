@@ -69,7 +69,6 @@ const Goals: React.FC = () => {
     const goals = useGoalsStore((state) => state.goals);
     const addGoal = useGoalsStore((state) => state.addGoal);
     const updateGoal = useGoalsStore((state) => state.updateGoal);
-    const _deleteGoal = useGoalsStore((state) => state.deleteGoal);
 
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedIcon, setSelectedIcon] = useState('savings');
@@ -145,18 +144,24 @@ const Goals: React.FC = () => {
         setOpenDialog(false);
     };
 
-    const _handleDeleteGoal = (goalId: string) => {
-        if (window.confirm(t('savingsGoal.deleteConfirm', 'Are you sure you want to delete this savings goal?'))) {
-            _deleteGoal(goalId);
-        }
-    };
-
     const sortedGoals = [...goals].sort((a, b) => {
         if (a.isCompleted !== b.isCompleted) {
             return a.isCompleted ? 1 : -1;
         }
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
+
+    const getLocale = (): Locale => {
+        const locales: Record<string, Locale> = {
+            ru,
+            en: enUS,
+            fr,
+            de,
+            es,
+            me: ru
+        };
+        return locales[i18n.language] || enUS;
+    };
 
     return (
         <Container
@@ -241,6 +246,7 @@ const Goals: React.FC = () => {
                     {sortedGoals.map((goal) => {
                         const percentage = (goal.currentAmount / goal.targetAmount) * 100;
                         const iconData = GOAL_ICONS.find(i => i.id === goal.icon) || GOAL_ICONS[7];
+                        const IconComponent = iconData.icon;
 
                         return (
                             <Grid key={goal.id} item xs={12} sm={6} md={4} lg={3}>
@@ -274,7 +280,7 @@ const Goals: React.FC = () => {
                                                     justifyContent: 'center',
                                                 }}
                                             >
-                                                {<iconData.icon sx={{ fontSize: 36, color: iconData.color }} />}
+                                                <IconComponent sx={{ fontSize: 36, color: iconData.color }} />
                                             </Box>
                                         </Box>
 
@@ -348,13 +354,15 @@ const Goals: React.FC = () => {
                 onClose={() => setOpenDialog(false)}
                 maxWidth="sm"
                 fullWidth
-                PaperProps={{
-                    sx: {
-                        borderRadius: 4,
-                        background: mode === 'dark'
-                            ? 'rgba(15, 15, 35, 0.95)'
-                            : 'rgba(255, 255, 255, 0.95)',
-                        backdropFilter: 'blur(20px)',
+                slotProps={{
+                    paper: {
+                        sx: {
+                            borderRadius: 4,
+                            background: mode === 'dark'
+                                ? 'rgba(15, 15, 35, 0.95)'
+                                : 'rgba(255, 255, 255, 0.95)',
+                            backdropFilter: 'blur(20px)',
+                        }
                     }
                 }}
             >
@@ -383,7 +391,8 @@ const Goals: React.FC = () => {
                                 {GOAL_ICONS.map((iconData) => {
                                     const iconColor = iconData.color;
                                     const isSelected = selectedIcon === iconData.id;
-                                    
+                                    const IconComponent = iconData.icon;
+
                                     return (
                                         <Grid item xs={3} sm={2} key={iconData.id}>
                                             <Box
@@ -396,25 +405,25 @@ const Goals: React.FC = () => {
                                                     alignItems: 'center',
                                                     justifyContent: 'center',
                                                     cursor: 'pointer',
-                                                    backgroundColor: isSelected 
-                                                        ? `${iconColor}30` 
-                                                        : mode === 'dark' 
-                                                            ? 'rgba(255, 255, 255, 0.05)' 
+                                                    backgroundColor: isSelected
+                                                        ? `${iconColor}30`
+                                                        : mode === 'dark'
+                                                            ? 'rgba(255, 255, 255, 0.05)'
                                                             : 'rgba(6, 0, 171, 0.05)',
                                                     border: `2px solid ${isSelected ? iconColor : 'transparent'}`,
                                                     transition: 'all 0.2s ease',
                                                     '&:hover': {
                                                         transform: 'scale(1.05)',
-                                                        backgroundColor: isSelected 
-                                                            ? `${iconColor}30` 
-                                                            : mode === 'dark' 
-                                                                ? 'rgba(255, 255, 255, 0.1)' 
+                                                        backgroundColor: isSelected
+                                                            ? `${iconColor}30`
+                                                            : mode === 'dark'
+                                                                ? 'rgba(255, 255, 255, 0.1)'
                                                                 : 'rgba(6, 0, 171, 0.1)',
                                                     }
                                                 }}
                                             >
-                                                <iconData.icon sx={{ 
-                                                    fontSize: 24, 
+                                                <IconComponent sx={{
+                                                    fontSize: 24,
                                                     color: isSelected ? iconColor : (mode === 'dark' ? '#FFFFFF' : '#272B3E'),
                                                     opacity: isSelected ? 1 : 0.7
                                                 }} />
@@ -438,10 +447,11 @@ const Goals: React.FC = () => {
                             onChange={handleTargetAmountChange}
                             fullWidth
                             required
-                            InputProps={{
-                                endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
+                            slotProps={{
+                                input: {
+                                    endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
+                                }
                             }}
-                            sx={{ mb: 2 }}
                         />
 
                         <TextField
@@ -449,24 +459,18 @@ const Goals: React.FC = () => {
                             value={currentAmount}
                             onChange={handleCurrentAmountChange}
                             fullWidth
-                            InputProps={{
-                                endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
+                            slotProps={{
+                                input: {
+                                    endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
+                                }
                             }}
-                            sx={{ mb: 2 }}
                         />
 
-                        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={({
-                            ru,
-                            en: enUS,
-                            fr,
-                            de,
-                            es,
-                            me: ru
-                        } as unknown as Record<string, Locale>)[i18n.language] || enUS}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={getLocale()}>
                             <DatePicker
                                 label={t('savingsGoal.targetDate', 'Target date (optional)')}
                                 value={targetDate}
-                                onChange={(newValue) => setTargetDate(newValue)}
+                                onChange={(newValue) => setTargetDate(newValue as Date | null)}
                                 slotProps={{
                                     textField: {
                                         fullWidth: true,
@@ -475,7 +479,7 @@ const Goals: React.FC = () => {
                             />
                         </LocalizationProvider>
 
-                        <Stack direction="row" spacing={2} sx={{ mt: 4, justifyContent: 'flex-end' }}>
+                        <Stack direction="row" spacing={2} sx={{ justifyContent: 'flex-end' }}>
                             <Button
                                 onClick={() => setOpenDialog(false)}
                                 sx={{
@@ -500,27 +504,28 @@ const Goals: React.FC = () => {
                                         transform: 'translateY(-2px)',
                                         boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
                                     }
-                                }}>
+                                }}
+                            >
                                 {t('save', 'Save')}
                             </Button>
                         </Stack>
-                    </DialogContent>
-                </Dialog>
+                    </Stack>
+                </DialogContent>
+            </Dialog>
 
-                <GoalDetail
-                    goal={selectedGoal}
-                    open={detailOpen}
-                    onClose={() => {
-                        setDetailOpen(false);
-                        setSelectedGoal(null);
-                    }}
-                    onEdit={() => {
-                        if (selectedGoal) {
-                            handleEditGoal(selectedGoal.id);
-                        }
-                    }}
-                />
-
+            <GoalDetail
+                goal={selectedGoal}
+                open={detailOpen}
+                onClose={() => {
+                    setDetailOpen(false);
+                    setSelectedGoal(null);
+                }}
+                onEdit={() => {
+                    if (selectedGoal) {
+                        handleEditGoal(selectedGoal.id);
+                    }
+                }}
+            />
         </Container>
     );
 };
