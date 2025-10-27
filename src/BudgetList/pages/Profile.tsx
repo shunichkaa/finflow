@@ -295,9 +295,10 @@ export default function Profile() {
                     <Edit />
                 </Button>
                 </Box>
+            </Paper>
 
-    {/* Настройки */}
-    <Paper sx={{ p: 3, mb: 3, borderRadius: 3, minHeight: 300 }}>
+            {/* Настройки */}
+            <Paper sx={{ p: 3, mb: 3, borderRadius: 3, minHeight: 300 }}>
         <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
             {t('settings.title')}
         </Typography>
@@ -331,96 +332,100 @@ export default function Profile() {
                     }}
                 />
             </ListItem>
-                            <CloudSync sx={{ 
-                                color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FF3B3B' : mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'),
-                                animation: syncStatus.isSyncing ? 'spin 1s linear infinite' : 'none',
-                                '@keyframes spin': {
-                                    '0%': { transform: 'rotate(0deg)' },
-                                    '100%': { transform: 'rotate(360deg)' }
-                                }
-                            }} />
-                        </ListItemIcon>
-                        <ListItemText 
-                            primary={t('sync.cloudSync')} 
-                            secondary={t('sync.automatic')}
-                            secondaryTypographyProps={{
-                                sx: { 
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
-                        />
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
-                            {/* Кнопка Sync */}
-                            <Button
-                                variant="contained"
-                                size="small"
-                                disabled={syncStatus.isSyncing}
-                                onClick={async () => {
-                                    try {
-                                        await syncNow();
-                                        setSnackbarMessage('✅ Данные успешно синхронизированы');
-                                        setSnackbarOpen(true);
-                                    } catch (_error) {
-                                        setSnackbarMessage('❌ Ошибка синхронизации');
-                                        setSnackbarOpen(true);
-                                    }
-                                }}
-                                sx={{
-                                    minWidth: '60px',
-                                    px: 1.5,
-                                    py: 0.8,
-                                    borderRadius: 2,
-                                    background: '#6C6FF9',
-                                    color: '#FFFFFF',
-                                    fontSize: '0.7rem',
-                                    fontWeight: 600,
-                                    textTransform: 'none',
-                                    boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
-                                    '&:hover': {
-                                        background: '#6C6FF9',
-                                        boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
-                                        transform: 'translateY(-1px)',
-                                    },
-                                    '&:disabled': {
-                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
-                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
-                                    },
-                                    transition: 'all 0.3s ease',
-                                }}
-                            >
-                                {syncStatus.isSyncing ? '...' : 'Sync'}
-                            </Button>
-                            
-                            {/* Статус синхронизации */}
-                            <Typography 
-                                variant="caption" 
-                                sx={{ 
-                                    color: syncStatus.error 
-                                        ? '#FFB3BA' 
-                                        : syncStatus.isSyncing 
-                                        ? '#6C6FF9'
-                                        : '#B5EAD7',
-                                    fontSize: '0.7rem',
-                                    fontWeight: 600,
-                                    textAlign: 'center',
-                                    whiteSpace: 'nowrap'
-                                }}
-                            >
-                                {syncStatus.isSyncing 
-                                    ? "Синхронизация..." 
-                                    : syncStatus.error
-                                    ? "Ошибка"
-                                    : syncStatus.lastSync
-                                    ? "Готово"
-                                    : "Готово"}
-                            </Typography>
-                        </Box>
-                    </ListItem>
-                </List>
-            </Paper>
+            
+            {/* Cloud Sync */}
+            <ListItem sx={{ py: 1.5 }}>
+                <ListItemIcon>
+                    <CloudSync sx={{ 
+                        color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FF3B3B' : mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'),
+                        animation: syncStatus.isSyncing ? 'spin 1s linear infinite' : 'none',
+                        '@keyframes spin': {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' }
+                        }
+                    }} />
+                </ListItemIcon>
+                <ListItemText 
+                    primary={t('sync.cloudSync')} 
+                    secondary={t('sync.automatic')}
+                    secondaryTypographyProps={{
+                        sx: { 
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                        }
+                    }}
+                />
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+                    {/* Кнопка Sync */}
+                    <Button
+                        variant="contained"
+                        size="small"
+                        disabled={syncStatus.isSyncing}
+                        onClick={async () => {
+                            try {
+                                await syncNow();
+                                setSnackbarMessage('✅ Данные успешно синхронизированы');
+                                setSnackbarOpen(true);
+                            } catch (_error) {
+                                setSnackbarMessage('❌ Ошибка синхронизации');
+                                setSnackbarOpen(true);
+                            }
+                        }}
+                        sx={{
+                            minWidth: '60px',
+                            px: 1.5,
+                            py: 0.8,
+                            borderRadius: 2,
+                            background: '#6C6FF9',
+                            color: '#FFFFFF',
+                            fontSize: '0.7rem',
+                            fontWeight: 600,
+                            textTransform: 'none',
+                            boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
+                            '&:hover': {
+                                background: '#6C6FF9',
+                                boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
+                                transform: 'translateY(-1px)',
+                            },
+                            '&:disabled': {
+                                background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
+                            },
+                            transition: 'all 0.3s ease',
+                        }}
+                    >
+                        {syncStatus.isSyncing ? '...' : 'Sync'}
+                    </Button>
+                    
+                    {/* Статус синхронизации */}
+                    <Typography 
+                        variant="caption" 
+                        sx={{ 
+                            color: syncStatus.error 
+                                ? '#FFB3BA' 
+                                : syncStatus.isSyncing 
+                                ? '#6C6FF9'
+                                : '#B5EAD7',
+                            fontSize: '0.7rem',
+                            fontWeight: 600,
+                            textAlign: 'center',
+                            whiteSpace: 'nowrap'
+                        }}
+                    >
+                        {syncStatus.isSyncing 
+                            ? "Синхронизация..." 
+                            : syncStatus.error
+                            ? "Ошибка"
+                            : syncStatus.lastSync
+                            ? "Готово"
+                            : "Готово"}
+                    </Typography>
+                </Box>
+            </ListItem>
+        </List>
+    </Paper>
 
-            {/* Настройки */}
-            <Paper sx={{ p: 3, mb: 3, borderRadius: 3, minHeight: 300 }}>
+    {/* Настройки */}
+    <Paper sx={{ p: 3, mb: 3, borderRadius: 3, minHeight: 300 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                     Настройки
                 </Typography>
