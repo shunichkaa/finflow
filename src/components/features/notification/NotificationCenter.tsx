@@ -3,25 +3,37 @@ import {
     Badge,
     Box,
     Button,
-    Card,
-    CardContent,
     Divider,
     IconButton,
-    ListItemText,
     Menu,
     MenuItem,
     Typography
 } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import {formatDistanceToNow} from 'date-fns';
-import {ru} from 'date-fns/locale';
-import {useNotificationStore} from "../../../Budgets/store/useNotificationStore.ts";
-import {useThemeMode} from "../../../Budgets/theme/ThemeContext";
+import { formatDistanceToNow } from 'date-fns';
+import { enUS, ru, fr, de, es } from 'date-fns/locale';
+import type { Locale } from 'date-fns';
+import { useTranslation } from 'react-i18next';
+import { useNotificationStore } from "../../../Budgets/store/useNotificationStore.ts";
+import { useThemeMode } from "../../../Budgets/theme/ThemeContext";
+
+const locales: Record<string, Locale> = {
+    en: enUS,
+    ru,
+    fr,
+    de,
+    es,
+    me: ru
+};
+
+const getLocale = (lang: string): Locale => locales[lang] || enUS;
 
 export const NotificationCenter: React.FC = () => {
-    const {notifications, markAsRead, markAllAsRead, unreadCount} = useNotificationStore();
-    const {mode} = useThemeMode();
+    const { t, i18n } = useTranslation();
+    const { notifications, markAsRead, markAllAsRead, unreadCount } = useNotificationStore();
+    const { mode } = useThemeMode();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const locale = getLocale(i18n.language);
 
     const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -35,7 +47,7 @@ export const NotificationCenter: React.FC = () => {
 
     return (
         <Box>
-            <IconButton 
+            <IconButton
                 onClick={handleOpen}
                 sx={{
                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
@@ -57,8 +69,8 @@ export const NotificationCenter: React.FC = () => {
                     },
                 }}
             >
-                <Badge 
-                    badgeContent={unreadCount} 
+                <Badge
+                    badgeContent={unreadCount}
                     variant={unreadCount > 0 ? "standard" : "dot"}
                     sx={{
                         '& .MuiBadge-badge': {
@@ -69,7 +81,7 @@ export const NotificationCenter: React.FC = () => {
                         }
                     }}
                 >
-                    <NotificationsIcon/>
+                    <NotificationsIcon />
                 </Badge>
             </IconButton>
 
@@ -77,153 +89,126 @@ export const NotificationCenter: React.FC = () => {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                PaperProps={{
-                    sx: {
-                        width: 340,
-                        maxHeight: 400,
-                        backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
-                        border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
-                        borderRadius: 3,
-                        boxShadow: mode === 'dark' 
-                            ? '0 8px 24px rgba(0, 0, 0, 0.4)' 
-                            : '0 8px 24px rgba(39, 43, 62, 0.15)',
+                slotProps={{
+                    paper: {
+                        sx: {
+                            width: 340,
+                            maxHeight: 400,
+                            backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
+                            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
+                            borderRadius: 3,
+                            boxShadow: mode === 'dark'
+                                ? '0 8px 24px rgba(0, 0, 0, 0.4)'
+                                : '0 8px 24px rgba(39, 43, 62, 0.15)',
+                        }
                     }
                 }}
             >
                 <Box px={2} py={1.5} display="flex" justifyContent="space-between" alignItems="center">
-                    <Typography 
-                        variant="subtitle1" 
-                        fontWeight={600}
-                        sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            fontWeight: 600,
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                        }}
                     >
-                        Уведомления
+                        {t('notifications.title', 'Notifications')}
                     </Typography>
-                    <Button 
-                        onClick={handleMarkAll} 
+                    <Button
+                        onClick={handleMarkAll}
                         size="small"
                         sx={{
                             color: '#6C6FF9',
+                            textTransform: 'none',
                             fontSize: '0.75rem',
+                            p: 0,
+                            minWidth: 'auto',
                             '&:hover': {
-                                background: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.05)',
+                                backgroundColor: 'transparent',
+                                textDecoration: 'underline',
                             }
                         }}
                     >
-                        Прочитать все
+                        {t('notifications.markAllAsRead', 'Mark all as read')}
                     </Button>
                 </Box>
-                <Divider sx={{ borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6' }}/>
+                <Divider sx={{ mb: 1 }} />
 
                 {notifications.length === 0 ? (
-                    <MenuItem disabled>
-                        <Typography 
+                    <Box sx={{ p: 3, textAlign: 'center' }}>
+                        <Typography
                             variant="body2"
-                            sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)' }}
-                        >
-                            Нет уведомлений
-                        </Typography>
-                    </MenuItem>
-                ) : (
-                    notifications.slice(0, 8).map((n) => (
-                        <MenuItem
-                            key={n.id}
-                            onClick={() => markAsRead(n.id)}
                             sx={{
-                                opacity: n.read ? 0.6 : 1,
-                                whiteSpace: 'normal',
-                                alignItems: 'flex-start',
-                                py: 1.5,
-                                borderRadius: 1,
-                                mx: 0.5,
-                                my: 0.25,
-                                '&:hover': {
-                                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
-                                }
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)'
                             }}
                         >
-                            <ListItemText
-                                primary={
-                                    <Typography 
+                            {t('notifications.noNotifications', 'No notifications')}
+                        </Typography>
+                    </Box>
+                ) : (
+                    <Box>
+                        {notifications.slice(0, 8).map((n) => (
+                            <MenuItem
+                                key={n.id}
+                                onClick={() => {
+                                    markAsRead(n.id);
+                                    handleClose();
+                                }}
+                                sx={{
+                                    py: 1.5,
+                                    px: 2,
+                                    backgroundColor: !n.read
+                                        ? mode === 'dark'
+                                            ? 'rgba(108, 111, 249, 0.1)'
+                                            : 'rgba(108, 111, 249, 0.05)'
+                                        : 'transparent',
+                                    '&:hover': {
+                                        backgroundColor: mode === 'dark'
+                                            ? 'rgba(255, 255, 255, 0.05)'
+                                            : 'rgba(39, 43, 62, 0.05)',
+                                    }
+                                }}
+                            >
+                                <Box sx={{ width: '100%' }}>
+                                    <Typography
                                         fontWeight={600}
                                         sx={{
-                                            color: n.severity === 'error' 
-                                                ? '#FFB3BA' 
+                                            color: n.severity === 'error'
+                                                ? '#FFB3BA'
                                                 : n.severity === 'success'
-                                                ? '#B5EAD7'
-                                                : mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                                                    ? '#B5EAD7'
+                                                    : mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                            mb: 0.5
                                         }}
                                     >
                                         {n.title}
                                     </Typography>
-                                }
-                                secondary={
-                                    <>
-                                        <Typography 
-                                            variant="body2"
-                                            sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}
-                                        >
-                                            {n.message}
-                                        </Typography>
-                                        <Typography 
-                                            variant="caption" 
-                                            sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)' }}
-                                        >
-                                            {formatDistanceToNow(n.timestamp, {addSuffix: true, locale: ru})}
-                                        </Typography>
-                                    </>
-                                }
-                            />
-                        </MenuItem>
-                    ))
-                )}
-
-                {notifications.length > 8 && (
-                    <>
-                        <Divider sx={{ borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6' }}/>
-                        <MenuItem sx={{ justifyContent: 'center', py: 1 }}>
-                            <Button 
-                                fullWidth 
-                                size="small" 
-                                onClick={() => {/* open full page */}}
-                                sx={{
-                                    color: '#6C6FF9',
-                                    fontWeight: 600,
-                                    '&:hover': {
-                                        background: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.05)',
-                                    }
-                                }}
-                            >
-                                Показать все
-                            </Button>
-                        </MenuItem>
-                    </>
+                                    <Typography
+                                        variant="body2"
+                                        sx={{
+                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
+                                            mb: 0.5
+                                        }}
+                                    >
+                                        {n.message}
+                                    </Typography>
+                                    <Typography
+                                        variant="caption"
+                                        sx={{
+                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)'
+                                        }}
+                                    >
+                                        {formatDistanceToNow(new Date(n.timestamp), {
+                                            addSuffix: true,
+                                            locale: locale
+                                        })}
+                                    </Typography>
+                                </Box>
+                            </MenuItem>
+                        ))}
+                    </Box>
                 )}
             </Menu>
         </Box>
-    );
-};
-
-// Отдельно — вариант страницы всех уведомлений:
-export const NotificationsPage: React.FC = () => {
-    const {notifications, markAsRead} = useNotificationStore();
-
-    return (
-        <Card sx={{borderRadius: 3, boxShadow: 2, maxWidth: 600, mx: 'auto', mt: 4}}>
-            <CardContent>
-                <Typography variant="h5" gutterBottom>Все уведомления</Typography>
-                <Divider sx={{mb: 2}}/>
-
-                {notifications.map((n) => (
-                    <Box key={n.id} mb={2} onClick={() => markAsRead(n.id)}>
-                        <Typography fontWeight={600}>{n.title}</Typography>
-                        <Typography variant="body2" color="text.secondary">{n.message}</Typography>
-                        <Typography variant="caption" color="text.disabled">
-                            {formatDistanceToNow(n.timestamp, {addSuffix: true, locale: ru})}
-                        </Typography>
-                        <Divider sx={{mt: 1}}/>
-                    </Box>
-                ))}
-            </CardContent>
-        </Card>
     );
 };
