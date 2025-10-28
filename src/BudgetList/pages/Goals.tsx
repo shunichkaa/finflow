@@ -319,9 +319,6 @@ const Goals: React.FC = () => {
                             ? 'rgba(15,15,35,0.95)'
                             : 'rgba(255,255,255,0.95)',
                         backdropFilter: 'blur(20px)',
-                        maxHeight: {xs: '85vh', sm: 'auto'}, // Авто высота на десктопе
-                        display: 'flex',
-                        flexDirection: 'column',
                         m: {xs: 2, sm: 3},
                     }
                 }}
@@ -330,19 +327,13 @@ const Goals: React.FC = () => {
                     color: mode === 'dark' ? '#fff' : '#272B3E',
                     fontWeight: 700,
                     fontSize: {xs: '1.25rem', sm: '1.5rem'},
-                    pb: 1,
-                    flexShrink: 0,
+                    pb: 2,
                 }}>
                     {editingGoal ? t('savingsGoal.editTitle', 'Edit Goal') : t('savingsGoal.createTitle', 'Create Goal')}
                 </DialogTitle>
 
-                <DialogContent sx={{
-                    flex: 1,
-                    overflow: {xs: 'auto', sm: 'visible'}, // Убираем скролл на десктопе
-                    pb: 1,
-                }}>
+                <DialogContent>
                     <Stack spacing={3} sx={{mt: 1}}>
-                        {/* Секция иконок */}
                         <Box>
                             <Typography variant="body2"
                                         sx={{
@@ -406,7 +397,6 @@ const Goals: React.FC = () => {
                             </Box>
                         </Box>
 
-                        {/* Поля формы */}
                         <TextField
                             label={t('savingsGoal.goalName', 'Goal name')}
                             value={goalName}
@@ -453,11 +443,9 @@ const Goals: React.FC = () => {
                     </Stack>
                 </DialogContent>
 
-                {/* Кнопки */}
                 <Box sx={{
                     p: 3,
-                    pt: 0,
-                    flexShrink: 0,
+                    pt: 2,
                     borderTop: mode === 'dark'
                         ? '1px solid rgba(255,255,255,0.1)'
                         : '1px solid rgba(39,43,62,0.1)',
