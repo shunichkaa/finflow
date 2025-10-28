@@ -312,8 +312,8 @@ const Goals: React.FC = () => {
                 onClose={() => setOpenDialog(false)}
                 maxWidth="sm"
                 fullWidth
-                sx={{
-                    '& .MuiDialog-paper': {
+                PaperProps={{
+                    sx: {
                         borderRadius: 4,
                         background: mode === 'dark'
                             ? 'rgba(15,15,35,0.95)'
@@ -332,7 +332,7 @@ const Goals: React.FC = () => {
                     {editingGoal ? t('savingsGoal.editTitle', 'Edit Goal') : t('savingsGoal.createTitle', 'Create Goal')}
                 </DialogTitle>
 
-                <DialogContent sx={{pb: 1, overflow: 'visible'}}>
+                <DialogContent sx={{pb: 3}}>
                     <Stack spacing={2.5} sx={{mt: 0.5}}>
                         <Box>
                             <Typography variant="body2"
@@ -413,7 +413,19 @@ const Goals: React.FC = () => {
                             required
                             slotProps={{
                                 input: {
-                                    endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
+                                    endAdornment: (
+                                        <InputAdornment
+                                            position="end"
+                                            sx={{minWidth: 'auto', ml: 1}}
+                                        >
+                                            {currency}
+                                        </InputAdornment>
+                                    )
+                                }
+                            }}
+                            sx={{
+                                '& .MuiInputBase-input': {
+                                    pr: {xs: 5, sm: 4}
                                 }
                             }}
                         />
@@ -425,7 +437,19 @@ const Goals: React.FC = () => {
                             fullWidth
                             slotProps={{
                                 input: {
-                                    endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
+                                    endAdornment: (
+                                        <InputAdornment
+                                            position="end"
+                                            sx={{minWidth: 'auto', ml: 1}}
+                                        >
+                                            {currency}
+                                        </InputAdornment>
+                                    )
+                                }
+                            }}
+                            sx={{
+                                '& .MuiInputBase-input': {
+                                    pr: {xs: 5, sm: 4}
                                 }
                             }}
                         />
@@ -436,44 +460,49 @@ const Goals: React.FC = () => {
                                 value={targetDate}
                                 onChange={(newValue) => setTargetDate(newValue as Date | null)}
                                 slotProps={{
-                                    textField: {fullWidth: true}
+                                    textField: {
+                                        fullWidth: true,
+                                        sx: {
+                                            '& .MuiInputBase-input': {
+                                                pr: {xs: 5, sm: 4}
+                                            }
+                                        }
+                                    }
                                 }}
                             />
                         </LocalizationProvider>
+
+                        <Box sx={{
+                            display: 'flex',
+                            justifyContent: {xs: 'center', sm: 'flex-end'},
+                            pt: 2
+                        }}>
+                            <Button
+                                variant="contained"
+                                onClick={handleSaveGoal}
+                                sx={{
+                                    background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                                    color: '#fff',
+                                    fontWeight: 600,
+                                    px: {xs: 6, sm: 4},
+                                    py: 1.5,
+                                    borderRadius: 3,
+                                    textTransform: 'none',
+                                    minWidth: {xs: '200px', sm: 'auto'},
+                                    boxShadow: mode === 'dark'
+                                        ? '0 8px 24px rgba(108,111,249,0.4)'
+                                        : '0 8px 24px rgba(168,163,246,0.4)',
+                                    '&:hover': {
+                                        transform: 'translateY(-2px)',
+                                        boxShadow: '0 12px 32px rgba(108,111,249,0.5)',
+                                    }
+                                }}
+                            >
+                                {editingGoal ? t('save', 'Save') : t('create', 'Create')}
+                            </Button>
+                        </Box>
                     </Stack>
                 </DialogContent>
-
-                <Box sx={{
-                    px: 3,
-                    pb: 3,
-                    pt: 2,
-                }}>
-                    <Stack direction="row" spacing={2} sx={{justifyContent: 'flex-end'}}>
-                        <Button
-                            variant="contained"
-                            onClick={handleSaveGoal}
-                            sx={{
-                                background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
-                                color: '#fff',
-                                fontWeight: 600,
-                                px: 4,
-                                py: 1.5,
-                                borderRadius: 3,
-                                textTransform: 'none',
-                                minWidth: 'auto',
-                                boxShadow: mode === 'dark'
-                                    ? '0 8px 24px rgba(108,111,249,0.4)'
-                                    : '0 8px 24px rgba(168,163,246,0.4)',
-                                '&:hover': {
-                                    transform: 'translateY(-2px)',
-                                    boxShadow: '0 12px 32px rgba(108,111,249,0.5)',
-                                }
-                            }}
-                        >
-                            {editingGoal ? t('save', 'Save') : t('create', 'Create')}
-                        </Button>
-                    </Stack>
-                </Box>
             </Dialog>
 
             {selectedGoal && (
