@@ -66,7 +66,7 @@ export default function Profile() {
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
     // Cloud sync - always enabled
-    const {status: syncStatus, syncNow, loadFromCloud} = useCloudSync(true);
+    const {status: _syncStatus, syncNow: _syncNow, loadFromCloud} = useCloudSync(true);
 
     // Состояние для редактирования профиля
     const [editModalOpen, setEditModalOpen] = useState(false);
@@ -125,9 +125,9 @@ export default function Profile() {
         {code: 'me', nativeName: 'Crnogorski'},
     ];
 
-    const changeLanguage = (languageCode: string) => {
+    const changeLanguage = async (languageCode: string) => {
         if (i18n && i18n.changeLanguage) {
-            i18n.changeLanguage(languageCode);
+            await i18n.changeLanguage(languageCode);
             setSnackbarMessage(t('languageChanged'));
             setSnackbarOpen(true);
         }
@@ -237,8 +237,9 @@ export default function Profile() {
 
     return (
         <Container maxWidth="md" sx={{py: 4}}>
+            {/* ИСПРАВЛЕННАЯ СТРОКА - используем 'profile' вместо 'Profile' */}
             <Typography variant="h4" gutterBottom sx={{mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
-                {t('Profile')}
+                {t('profile')}
             </Typography>
 
             {/* Профиль пользователя */}
@@ -302,12 +303,6 @@ export default function Profile() {
                         <ListItemText
                             primary={t('theme.dark')}
                             secondary={t('theme.switch')}
-                            secondaryTypographyProps={{
-                                sx: {
-                                    display: {xs: 'none', sm: 'block'},
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
                         />
                         <Switch
                             checked={mode === 'dark'}
@@ -335,12 +330,6 @@ export default function Profile() {
                         <ListItemText
                             primary={t('settings.language')}
                             secondary={t('settings.languageSelect')}
-                            secondaryTypographyProps={{
-                                sx: {
-                                    display: {xs: 'none', sm: 'block'},
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
                         />
                         <FormControl size="small" sx={{minWidth: 120}}>
                             <Select
@@ -372,12 +361,6 @@ export default function Profile() {
                         <ListItemText
                             primary={t('settings.currency')}
                             secondary={t('settings.currencySelect')}
-                            secondaryTypographyProps={{
-                                sx: {
-                                    display: {xs: 'none', sm: 'block'},
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
                         />
                         <FormControl size="small" sx={{minWidth: 120}}>
                             <Select
@@ -419,12 +402,6 @@ export default function Profile() {
                         <ListItemText
                             primary={t('notifications.enable')}
                             secondary={t('notifications.description')}
-                            secondaryTypographyProps={{
-                                sx: {
-                                    display: {xs: 'none', sm: 'block'},
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
                         />
                         <Switch
                             checked={notificationsEnabled}
@@ -456,12 +433,6 @@ export default function Profile() {
                             <ListItemText
                                 primary={t('dailyReminder')}
                                 secondary={t('dailyReminderDescription')}
-                                secondaryTypographyProps={{
-                                    sx: {
-                                        display: {xs: 'none', sm: 'block'},
-                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                    }
-                                }}
                             />
                             <Switch
                                 checked={dailyReminderEnabled}
@@ -608,7 +579,7 @@ export default function Profile() {
                                 await loadFromCloud();
                                 setSnackbarMessage(t('dataLoadSuccess'));
                                 setSnackbarOpen(true);
-                            } catch (_error) {
+                            } catch {
                                 setSnackbarMessage(t('dataLoadError'));
                                 setSnackbarOpen(true);
                             }
@@ -693,7 +664,7 @@ export default function Profile() {
                         width: {xs: '90%', sm: 500},
                         maxHeight: '90vh',
                         overflow: 'auto',
-                        bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
+                        backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                         borderRadius: 3,
                         boxShadow: 24,
                         p: 4,
@@ -723,7 +694,7 @@ export default function Profile() {
                         <Box display="flex" flexDirection="column" alignItems="center" mb={2}>
                             <Avatar
                                 src={avatar || undefined}
-                                sx={{width: 80, height: 80, mb: 2, bgcolor: 'primary.main'}}
+                                sx={{width: 80, height: 80, mb: 2, backgroundColor: 'primary.main'}}
                             >
                                 {!avatar && <Person fontSize="large"/>}
                             </Avatar>
