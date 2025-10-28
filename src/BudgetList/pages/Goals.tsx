@@ -319,7 +319,9 @@ const Goals: React.FC = () => {
                             ? 'rgba(15,15,35,0.95)'
                             : 'rgba(255,255,255,0.95)',
                         backdropFilter: 'blur(20px)',
-                        overflow: 'hidden', // Убираем скролл
+                        maxHeight: '90vh', // Ограничиваем максимальную высоту
+                        display: 'flex',
+                        flexDirection: 'column',
                     }
                 }}
             >
@@ -327,11 +329,16 @@ const Goals: React.FC = () => {
                     color: mode === 'dark' ? '#fff' : '#272B3E',
                     fontWeight: 700,
                     fontSize: '1.5rem',
-                    pb: 1
+                    pb: 1,
+                    flexShrink: 0, // Запрещаем сжатие заголовка
                 }}>
                     {editingGoal ? t('savingsGoal.editTitle', 'Edit Goal') : t('savingsGoal.createTitle', 'Create Goal')}
                 </DialogTitle>
-                <DialogContent sx={{overflow: 'hidden'}}> {/* Убираем скролл */}
+                <DialogContent sx={{
+                    flex: 1,
+                    overflow: 'auto', // Включаем скролл только для контента
+                    pb: 2,
+                }}>
                     <Stack spacing={3} sx={{mt: 2}}>
                         <Box>
                             <Typography variant="body2"
@@ -439,38 +446,51 @@ const Goals: React.FC = () => {
                                 }}
                             />
                         </LocalizationProvider>
-
-                        <Stack direction="row" spacing={2} sx={{justifyContent: 'flex-end'}}>
-                            <Button
-                                onClick={() => setOpenDialog(false)}
-                                sx={{
-                                    color: mode === 'dark'
-                                        ? 'rgba(255,255,255,0.7)'
-                                        : 'rgba(39,43,62,0.7)',
-                                    textTransform: 'none',
-                                    fontWeight: 500,
-                                }}
-                            >
-                                {t('cancel', 'Cancel')}
-                            </Button>
-                            <Button
-                                variant="contained"
-                                onClick={handleSaveGoal}
-                                sx={{
-                                    background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
-                                    color: '#fff',
-                                    fontWeight: 600,
-                                    px: 4,
-                                    borderRadius: 3,
-                                    textTransform: 'none',
-                                    '&:hover': {transform: 'translateY(-2px)'}
-                                }}
-                            >
-                                {editingGoal ? t('save', 'Save') : t('create', 'Create')}
-                            </Button>
-                        </Stack>
                     </Stack>
                 </DialogContent>
+
+                {/* Кнопки вынесены за пределы DialogContent */}
+                <Box sx={{
+                    p: 3,
+                    pt: 0,
+                    flexShrink: 0, // Запрещаем сжатие кнопок
+                    borderTop: mode === 'dark'
+                        ? '1px solid rgba(255,255,255,0.1)'
+                        : '1px solid rgba(39,43,62,0.1)',
+                }}>
+                    <Stack direction="row" spacing={2} sx={{justifyContent: 'flex-end'}}>
+                        <Button
+                            onClick={() => setOpenDialog(false)}
+                            sx={{
+                                color: mode === 'dark'
+                                    ? 'rgba(255,255,255,0.7)'
+                                    : 'rgba(39,43,62,0.7)',
+                                textTransform: 'none',
+                                fontWeight: 500,
+                                minWidth: 'auto',
+                                px: {xs: 2, sm: 3},
+                            }}
+                        >
+                            {t('cancel', 'Cancel')}
+                        </Button>
+                        <Button
+                            variant="contained"
+                            onClick={handleSaveGoal}
+                            sx={{
+                                background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                                color: '#fff',
+                                fontWeight: 600,
+                                px: {xs: 3, sm: 4},
+                                borderRadius: 3,
+                                textTransform: 'none',
+                                minWidth: 'auto',
+                                '&:hover': {transform: 'translateY(-2px)'}
+                            }}
+                        >
+                            {editingGoal ? t('save', 'Save') : t('create', 'Create')}
+                        </Button>
+                    </Stack>
+                </Box>
             </Dialog>
 
             {selectedGoal && (
