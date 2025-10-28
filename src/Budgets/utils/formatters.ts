@@ -1,4 +1,4 @@
-import { Currency, useSettingsStore } from '../store/useSettingsStore';
+import {Currency, useSettingsStore} from '../store/useSettingsStore';
 
 export const formatCurrency = (amount: number, currency: Currency = 'EUR') => {
     const currencySymbols: Record<Currency, string> = {
@@ -38,10 +38,9 @@ export const formatCurrency = (amount: number, currency: Currency = 'EUR') => {
 };
 
 export const formatDate = (date: Date) => {
-    const language = useSettingsStore.getState().language || 'ru';
-    return new Intl.DateTimeFormat(language, {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-    }).format(new Date(date));
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${day}.${month}.${year}`;
 };

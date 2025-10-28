@@ -45,7 +45,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import IOSTimePicker from '../../components/ui/IOSTimePicker';
 
 export default function Profile() {
-    const { t, i18n } = useTranslation();
+    const {t, i18n} = useTranslation();
     const {mode, toggleTheme} = useThemeMode();
     const {
         currency,
@@ -77,7 +77,6 @@ export default function Profile() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    // Показываем загрузку пока аутентификация не завершена
     if (authLoading) {
         return (
             <Container maxWidth="md"
@@ -142,7 +141,6 @@ export default function Profile() {
         }
     };
 
-    // removed unused _handleSave
 
     const handleExportData = () => {
         setSnackbarMessage(t('dataExported', 'Данные экспортированы'));
@@ -156,14 +154,12 @@ export default function Profile() {
         }
     };
 
-    // Функции для редактирования профиля
     const handleAvatarUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
                 setAvatar(e.target?.result as string);
-                // Синхронизация аватарки с облаком
                 setTimeout(() => triggerSync(), 100);
             };
             reader.readAsDataURL(file);
@@ -176,7 +172,6 @@ export default function Profile() {
 
     const handleCloseEditModal = () => {
         setEditModalOpen(false);
-        // Сброс полей
         setNewEmail('');
         _setCurrentPassword('');
         setNewPassword('');
@@ -185,7 +180,6 @@ export default function Profile() {
 
     const handleSaveProfile = async () => {
         try {
-            // Проверка пароля
             if (newPassword) {
                 if (newPassword.length < 6) {
                     setSnackbarMessage('Пароль должен содержать минимум 6 символов');
@@ -198,7 +192,6 @@ export default function Profile() {
                     return;
                 }
 
-                // Обновление пароля через Supabase
                 const {error: passwordError} = await supabase.auth.updateUser({
                     password: newPassword
                 });
@@ -213,9 +206,7 @@ export default function Profile() {
                 setSnackbarOpen(true);
             }
 
-            // Проверка email
             if (newEmail && newEmail !== session?.user?.email) {
-                // Обновление email через Supabase
                 const {error: emailError} = await supabase.auth.updateUser({
                     email: newEmail
                 });
@@ -230,13 +221,11 @@ export default function Profile() {
                 setSnackbarOpen(true);
             }
 
-            // Если никаких изменений не было
             if (!newPassword && !newEmail) {
                 setSnackbarMessage('Изменения сохранены');
                 setSnackbarOpen(true);
             }
 
-            // Закрываем модальное окно после небольшой задержки
             setTimeout(() => {
                 handleCloseEditModal();
             }, 1500);
@@ -296,133 +285,6 @@ export default function Profile() {
                         <Edit/>
                     </Button>
                 </Box>
-            </Paper>
-
-            {/* Настройки */}
-            <Paper sx={{p: 3, mb: 3, borderRadius: 3, minHeight: 300}}>
-                <Typography variant="h6" gutterBottom sx={{mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
-                    {t('settings')}
-                </Typography>
-
-                <List>
-                    {/* Тема */}
-                    <ListItem sx={{py: 1.5}}>
-                        <ListItemIcon>
-                            <Palette
-                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
-                        </ListItemIcon>
-                        <ListItemText
-                            primary="Темная тема"
-                            secondary="Переключить между светлой и темной темой"
-                            secondaryTypographyProps={{
-                                sx: {
-                                    display: {xs: 'none', sm: 'block'},
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
-                        />
-                        <Switch
-                            checked={mode === 'dark'}
-                            onChange={toggleTheme || (() => {
-                            })}
-                            sx={{
-                                '& .MuiSwitch-switchBase.Mui-checked': {
-                                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                                },
-                                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                                },
-                            }}
-                        />
-                    </ListItem>
-
-                    {/* Cloud Sync */}
-                    <ListItem sx={{py: 1.5}}>
-                        <ListItemIcon>
-                            <CloudSync sx={{
-                                color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FF3B3B' : mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'),
-                                animation: syncStatus.isSyncing ? 'spin 1s linear infinite' : 'none',
-                                '@keyframes spin': {
-                                    '0%': {transform: 'rotate(0deg)'},
-                                    '100%': {transform: 'rotate(360deg)'}
-                                }
-                            }}/>
-                        </ListItemIcon>
-                        <ListItemText
-                            primary={t('sync.cloudSync')}
-                            secondary={t('sync.automatic')}
-                            secondaryTypographyProps={{
-                                sx: {
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                                }
-                            }}
-                        />
-                        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1}}>
-                            {/* Кнопка Sync */}
-                            <Button
-                                variant="contained"
-                                size="small"
-                                disabled={syncStatus.isSyncing}
-                                onClick={async () => {
-                                    try {
-                                        await syncNow();
-                                        setSnackbarMessage(t('dataLoadSuccess', '✅ Данные успешно синхронизированы'));
-                                        setSnackbarOpen(true);
-                                    } catch (_error) {
-                                        setSnackbarMessage(t('sync.error', '❌ Ошибка синхронизации'));
-                                        setSnackbarOpen(true);
-                                    }
-                                }}
-                                sx={{
-                                    minWidth: '60px',
-                                    px: 1.5,
-                                    py: 0.8,
-                                    borderRadius: 2,
-                                    background: '#6C6FF9',
-                                    color: '#FFFFFF',
-                                    fontSize: '0.7rem',
-                                    fontWeight: 600,
-                                    textTransform: 'none',
-                                    boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
-                                    '&:hover': {
-                                        background: '#6C6FF9',
-                                        boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
-                                        transform: 'translateY(-1px)',
-                                    },
-                                    '&:disabled': {
-                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
-                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
-                                    },
-                                    transition: 'all 0.3s ease',
-                                }}
-                            >
-                                {syncStatus.isSyncing ? '...' : t('sync.button', 'Синхронизация')}
-                            </Button>
-
-                            {/* Статус синхронизации */}
-                            <Typography
-                                variant="caption"
-                                sx={{
-                                    color: syncStatus.error
-                                        ? '#FFB3BA'
-                                        : syncStatus.isSyncing
-                                            ? '#6C6FF9'
-                                            : '#B5EAD7',
-                                    fontSize: '0.7rem',
-                                    fontWeight: 600,
-                                    textAlign: 'center',
-                                    whiteSpace: 'nowrap'
-                                }}
-                            >
-                                {syncStatus.isSyncing
-                                    ? t('sync.syncing', 'Синхронизация...')
-                                    : syncStatus.error
-                                        ? t('sync.error', 'Ошибка')
-                                        : t('sync.done', 'Готово')}
-                            </Typography>
-                        </Box>
-                    </ListItem>
-                </List>
             </Paper>
 
             {/* Настройки */}
@@ -540,7 +402,6 @@ export default function Profile() {
                             </Select>
                         </FormControl>
                     </ListItem>
-
                 </List>
             </Paper>
 
