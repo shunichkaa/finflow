@@ -82,38 +82,38 @@ export default function Profile() {
             <Container maxWidth="md"
                        sx={{py: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh'}}>
                 <Typography variant="h6" sx={{color: '#272B3E'}}>
-                    {t('loading', 'Загрузка...')}
+                    {t('loading')}
                 </Typography>
             </Container>
         );
     }
 
     const currencies = [
-        {code: 'RUB', name: 'Russian Ruble'},
-        {code: 'USD', name: 'US Dollar'},
-        {code: 'EUR', name: 'Euro'},
-        {code: 'GBP', name: 'British Pound'},
-        {code: 'JPY', name: 'Japanese Yen'},
-        {code: 'CAD', name: 'Canadian Dollar'},
-        {code: 'AUD', name: 'Australian Dollar'},
-        {code: 'CHF', name: 'Swiss Franc'},
-        {code: 'CNY', name: 'Chinese Yuan'},
-        {code: 'SEK', name: 'Swedish Krona'},
-        {code: 'NOK', name: 'Norwegian Krone'},
-        {code: 'DKK', name: 'Danish Krone'},
-        {code: 'PLN', name: 'Polish Zloty'},
-        {code: 'CZK', name: 'Czech Koruna'},
-        {code: 'HUF', name: 'Hungarian Forint'},
-        {code: 'BGN', name: 'Bulgarian Lev'},
-        {code: 'RON', name: 'Romanian Leu'},
-        {code: 'HRK', name: 'Croatian Kuna'},
-        {code: 'TRY', name: 'Turkish Lira'},
-        {code: 'UAH', name: 'Ukrainian Hryvnia'},
-        {code: 'KZT', name: 'Kazakhstani Tenge'},
-        {code: 'BYN', name: 'Belarusian Ruble'},
-        {code: 'MXN', name: 'Mexican Peso'},
-        {code: 'BRL', name: 'Brazilian Real'},
-        {code: 'INR', name: 'Indian Rupee'},
+        {code: 'RUB', name: t('currencies.ruble', 'Russian Ruble')},
+        {code: 'USD', name: t('currencies.dollar', 'US Dollar')},
+        {code: 'EUR', name: t('currencies.euro', 'Euro')},
+        {code: 'GBP', name: t('currencies.pound', 'British Pound')},
+        {code: 'JPY', name: t('currencies.yen', 'Japanese Yen')},
+        {code: 'CAD', name: t('currencies.cad', 'Canadian Dollar')},
+        {code: 'AUD', name: t('currencies.aud', 'Australian Dollar')},
+        {code: 'CHF', name: t('currencies.franc', 'Swiss Franc')},
+        {code: 'CNY', name: t('currencies.yuan', 'Chinese Yuan')},
+        {code: 'SEK', name: t('currencies.krona', 'Swedish Krona')},
+        {code: 'NOK', name: t('currencies.krone', 'Norwegian Krone')},
+        {code: 'DKK', name: t('currencies.kroneDKK', 'Danish Krone')},
+        {code: 'PLN', name: t('currencies.zloty', 'Polish Zloty')},
+        {code: 'CZK', name: t('currencies.koruna', 'Czech Koruna')},
+        {code: 'HUF', name: t('currencies.forint', 'Hungarian Forint')},
+        {code: 'BGN', name: t('currencies.lev', 'Bulgarian Lev')},
+        {code: 'RON', name: t('currencies.leu', 'Romanian Leu')},
+        {code: 'HRK', name: t('currencies.kuna', 'Croatian Kuna')},
+        {code: 'TRY', name: t('currencies.lira', 'Turkish Lira')},
+        {code: 'UAH', name: t('currencies.hryvnia', 'Ukrainian Hryvnia')},
+        {code: 'KZT', name: t('currencies.tenge', 'Kazakhstani Tenge')},
+        {code: 'BYN', name: t('currencies.byn', 'Belarusian Ruble')},
+        {code: 'MXN', name: t('currencies.peso', 'Mexican Peso')},
+        {code: 'BRL', name: t('currencies.real', 'Brazilian Real')},
+        {code: 'INR', name: t('currencies.rupee', 'Indian Rupee')},
     ];
 
     const languages = [
@@ -128,7 +128,7 @@ export default function Profile() {
     const changeLanguage = (languageCode: string) => {
         if (i18n && i18n.changeLanguage) {
             i18n.changeLanguage(languageCode);
-            setSnackbarMessage(t('languageChanged', 'Язык изменен'));
+            setSnackbarMessage(t('languageChanged'));
             setSnackbarOpen(true);
         }
     };
@@ -136,20 +136,19 @@ export default function Profile() {
     const handleCurrencyChange = (currencyCode: string) => {
         if (setCurrency) {
             setCurrency(currencyCode as Currency);
-            setSnackbarMessage(t('currencyChanged', 'Валюта изменена'));
+            setSnackbarMessage(t('currencyChanged'));
             setSnackbarOpen(true);
         }
     };
 
-
     const handleExportData = () => {
-        setSnackbarMessage(t('dataExported', 'Данные экспортированы'));
+        setSnackbarMessage(t('dataExported'));
         setSnackbarOpen(true);
     };
 
     const handleDeleteAccount = () => {
-        if (window.confirm(t('deleteAccountConfirm', 'Вы уверены, что хотите удалить аккаунт? Это действие нельзя отменить.'))) {
-            setSnackbarMessage(t('deleteAccountWip', 'Функция удаления аккаунта в разработке'));
+        if (window.confirm(t('deleteAccountConfirm'))) {
+            setSnackbarMessage(t('deleteAccountWip'));
             setSnackbarOpen(true);
         }
     };
@@ -182,12 +181,12 @@ export default function Profile() {
         try {
             if (newPassword) {
                 if (newPassword.length < 6) {
-                    setSnackbarMessage('Пароль должен содержать минимум 6 символов');
+                    setSnackbarMessage(t('passwordTooShort'));
                     setSnackbarOpen(true);
                     return;
                 }
                 if (newPassword !== confirmPassword) {
-                    setSnackbarMessage('Пароли не совпадают');
+                    setSnackbarMessage(t('passwordMismatch'));
                     setSnackbarOpen(true);
                     return;
                 }
@@ -197,12 +196,12 @@ export default function Profile() {
                 });
 
                 if (passwordError) {
-                    setSnackbarMessage(`Ошибка смены пароля: ${passwordError.message}`);
+                    setSnackbarMessage(t('passwordChangeErrorPrefix') + passwordError.message);
                     setSnackbarOpen(true);
                     return;
                 }
 
-                setSnackbarMessage('Пароль успешно изменён!');
+                setSnackbarMessage(t('passwordChanged'));
                 setSnackbarOpen(true);
             }
 
@@ -212,17 +211,17 @@ export default function Profile() {
                 });
 
                 if (emailError) {
-                    setSnackbarMessage(`Ошибка смены email: ${emailError.message}`);
+                    setSnackbarMessage(t('emailChangeErrorPrefix') + emailError.message);
                     setSnackbarOpen(true);
                     return;
                 }
 
-                setSnackbarMessage('Письмо с подтверждением отправлено на новый email!');
+                setSnackbarMessage(t('emailChangeSent'));
                 setSnackbarOpen(true);
             }
 
             if (!newPassword && !newEmail) {
-                setSnackbarMessage('Изменения сохранены');
+                setSnackbarMessage(t('changesSaved'));
                 setSnackbarOpen(true);
             }
 
@@ -231,7 +230,7 @@ export default function Profile() {
             }, 1500);
         } catch (error) {
             console.error('Error saving profile:', error);
-            setSnackbarMessage('Произошла ошибка при сохранении');
+            setSnackbarMessage(t('saveError'));
             setSnackbarOpen(true);
         }
     };
@@ -239,7 +238,7 @@ export default function Profile() {
     return (
         <Container maxWidth="md" sx={{py: 4}}>
             <Typography variant="h4" gutterBottom sx={{mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
-                {t('profile', 'Профиль')}
+                {t('profile')}
             </Typography>
 
             {/* Профиль пользователя */}
@@ -254,7 +253,7 @@ export default function Profile() {
                         </Avatar>
                         <Box>
                             <Typography variant="h6" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
-                                {nickname || session?.user?.email || t('user', 'Пользователь')}
+                                {nickname || session?.user?.email || t('user')}
                             </Typography>
                             <Typography variant="body2" sx={{
                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
@@ -301,8 +300,8 @@ export default function Profile() {
                                 sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
                         </ListItemIcon>
                         <ListItemText
-                            primary={t('darkTheme', 'Темная тема')}
-                            secondary={t('themeToggleHint', 'Переключить между светлой и темной темой')}
+                            primary={t('theme.dark')}
+                            secondary={t('theme.switch')}
                             secondaryTypographyProps={{
                                 sx: {
                                     display: {xs: 'none', sm: 'block'},
@@ -334,8 +333,8 @@ export default function Profile() {
                                 sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
                         </ListItemIcon>
                         <ListItemText
-                            primary={t('language', 'Язык')}
-                            secondary={t('languageHint', 'Выберите язык приложения')}
+                            primary={t('settings.language')}
+                            secondary={t('settings.languageSelect')}
                             secondaryTypographyProps={{
                                 sx: {
                                     display: {xs: 'none', sm: 'block'},
@@ -371,8 +370,8 @@ export default function Profile() {
                                 sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
                         </ListItemIcon>
                         <ListItemText
-                            primary={t('currency', 'Валюта')}
-                            secondary={t('currencyHint', 'Основная валюта для отображения сумм')}
+                            primary={t('settings.currency')}
+                            secondary={t('settings.currencySelect')}
                             secondaryTypographyProps={{
                                 sx: {
                                     display: {xs: 'none', sm: 'block'},
@@ -607,10 +606,10 @@ export default function Profile() {
                         onClick={async () => {
                             try {
                                 await loadFromCloud();
-                                setSnackbarMessage('✅ Данные успешно загружены из облака');
+                                setSnackbarMessage(t('dataLoadSuccess'));
                                 setSnackbarOpen(true);
                             } catch (_error) {
-                                setSnackbarMessage('❌ Ошибка загрузки данных');
+                                setSnackbarMessage(t('dataLoadError'));
                                 setSnackbarOpen(true);
                             }
                         }}
@@ -857,7 +856,7 @@ export default function Profile() {
                                     },
                                 },
                                 '& .MuiInputLabel-root': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#FFFFFF',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     '&.Mui-focused': {
                                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     },

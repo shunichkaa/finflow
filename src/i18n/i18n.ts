@@ -79,8 +79,12 @@ const resources = {
             'category.gift': 'Подарки',
 
             'settings.language': 'Язык',
+            'settings.languageSelect': 'Выберите язык приложения',
             'settings.currency': 'Валюта',
+            'settings.currencySelect': 'Основная валюта для отображения сумм',
             'settings.theme': 'Тема',
+            'theme.dark': 'Темная тема',
+            'theme.switch': 'Переключить между светлой и темной темой',
 
             period: 'Период',
             weekly: 'Еженедельно',
@@ -116,7 +120,7 @@ const resources = {
 
             goals: 'Цели',
             goalsDescription: 'Ставьте финансовые цели и отслеживайте прогресс их достижения',
-            
+
             savings: 'Копилка',
             savingsDescription: 'Создавайте копилки для накопления на важные цели',
             myGoals: 'Мои цели',
@@ -137,7 +141,7 @@ const resources = {
             completed: 'Завершено',
             inProgress: 'В процессе',
             overdue: 'Просрочено',
-            
+
             // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Создавайте цели накоплений для важных финансовых целей',
             'savingsGoal.createButton': 'Создать цель накопления',
@@ -150,7 +154,7 @@ const resources = {
             'savingsGoal.targetAmount': 'Целевая сумма',
             'savingsGoal.currentAmount': 'Текущая сумма',
             'savingsGoal.targetDate': 'Целевая дата (необязательно)',
-            
+
             // Goal Detail translations
             'goalDetail.progress': 'Прогресс',
             'goalDetail.daysLeft': 'Дней до цели',
@@ -162,32 +166,32 @@ const resources = {
             'goalDetail.amount': 'Сумма',
             'goalDetail.add': 'Добавить',
             'goalDetail.withdraw': 'Снять',
-            
-        // Motivational phrases
-        'motivation.excellent': 'Отличная работа! Ещё чуть-чуть!',
-        'motivation.great': 'Ты молодец! Цель всё ближе!',
-        'motivation.keepGoing': 'Так держать! Прогресс налицо!',
-        'motivation.stepByStep': 'Шаг за шагом к мечте!',
-        'motivation.rightPath': 'Ты на верном пути!',
-        'motivation.continue': 'Продолжай в том же духе!',
-        'motivation.everyRub': 'Каждый рубль приближает к цели!',
-        'motivation.believe': 'Ты справишься! Верь в себя!',
-        'motivation.smallSteps': 'Маленькие шаги = большой результат!',
-        'motivation.almostThere': 'Твоя цель уже близко!',
 
-        // Error pages translations
-        'errorBoundary.title': 'Ой, что-то не так, уже исправляем...',
-        'errorBoundary.goHome': 'Вернуться на главную',
-        'errorBoundary.reload': 'Перезагрузить страницу',
+            // Motivational phrases
+            'motivation.excellent': 'Отличная работа! Ещё чуть-чуть!',
+            'motivation.great': 'Ты молодец! Цель всё ближе!',
+            'motivation.keepGoing': 'Так держать! Прогресс налицо!',
+            'motivation.stepByStep': 'Шаг за шагом к мечте!',
+            'motivation.rightPath': 'Ты на верном пути!',
+            'motivation.continue': 'Продолжай в том же духе!',
+            'motivation.everyRub': 'Каждый рубль приближает к цели!',
+            'motivation.believe': 'Ты справишься! Верь в себя!',
+            'motivation.smallSteps': 'Маленькие шаги = большой результат!',
+            'motivation.almostThere': 'Твоя цель уже близко!',
 
-        'serverError.title': 'Что-то пошло не так',
-        'serverError.description': 'Произошла внутренняя ошибка сервера. Мы уже работаем над её исправлением.',
-        'serverError.goHome': 'Вернуться на главную',
-        'serverError.reload': 'Попробовать снова',
+            // Error pages translations
+            'errorBoundary.title': 'Ой, что-то не так, уже исправляем...',
+            'errorBoundary.goHome': 'Вернуться на главную',
+            'errorBoundary.reload': 'Перезагрузить страницу',
 
-        'notFound.title': 'Страница не найдена',
-        'notFound.description': 'К сожалению, запрашиваемая страница не существует или была перемещена.',
-        'notFound.goHome': 'Вернуться на главную',
+            'serverError.title': 'Что-то пошло не так',
+            'serverError.description': 'Произошла внутренняя ошибка сервера. Мы уже работаем над её исправлением.',
+            'serverError.goHome': 'Вернуться на главную',
+            'serverError.reload': 'Попробовать снова',
+
+            'notFound.title': 'Страница не найдена',
+            'notFound.description': 'К сожалению, запрашиваемая страница не существует или была перемещена.',
+            'notFound.goHome': 'Вернуться на главную',
             notifications: 'Уведомления',
             'notifications.enable': 'Включить уведомления',
             'notifications.description': 'Получать уведомления о важных событиях',
@@ -326,8 +330,12 @@ const resources = {
             'category.investment': 'Investment',
             'category.gift': 'Gifts',
             'settings.language': 'Language',
+            'settings.languageSelect': 'Select application language',
             'settings.currency': 'Currency',
+            'settings.currencySelect': 'Main currency for displaying amounts',
             'settings.theme': 'Theme',
+            'theme.dark': 'Dark theme',
+            'theme.switch': 'Switch between light and dark theme',
 
             export: 'Export',
             exportCSV: 'Export CSV',
@@ -342,7 +350,7 @@ const resources = {
 
             goals: 'Goals',
             goalsDescription: 'Set financial goals and track your progress',
-            
+
             savings: 'Savings',
             savingsDescription: 'Create savings jars for important goals',
             myGoals: 'My Goals',
@@ -363,7 +371,7 @@ const resources = {
             completed: 'Completed',
             inProgress: 'In Progress',
             overdue: 'Overdue',
-            
+
             // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Create savings goals for your important financial targets',
             'savingsGoal.createButton': 'Create Savings Goal',
@@ -376,7 +384,7 @@ const resources = {
             'savingsGoal.targetAmount': 'Target amount',
             'savingsGoal.currentAmount': 'Current amount',
             'savingsGoal.targetDate': 'Target date (optional)',
-            
+
             // Goal Detail translations
             'goalDetail.progress': 'Progress',
             'goalDetail.daysLeft': 'Days to goal',
@@ -388,7 +396,7 @@ const resources = {
             'goalDetail.amount': 'Amount',
             'goalDetail.add': 'Add',
             'goalDetail.withdraw': 'Withdraw',
-            
+
             // Motivational phrases
             'motivation.excellent': 'Excellent work! Just a little more!',
             'motivation.great': 'You\'re doing great! Goal is getting closer!',
@@ -495,7 +503,7 @@ const resources = {
             edit: 'Modifier',
 
             week: 'Semaine',
-            month: 'Mes',
+            month: 'Mois',
             year: 'Année',
 
             savingsRate: 'Taux d\'épargne',
@@ -552,8 +560,12 @@ const resources = {
             'category.investment': 'Investissement',
             'category.gift': 'Cadeaux',
             'settings.language': 'Langue',
+            'settings.languageSelect': 'Choisir la langue de l\'application',
             'settings.currency': 'Devise',
+            'settings.currencySelect': 'Devise principale pour afficher les montants',
             'settings.theme': 'Thème',
+            'theme.dark': 'Thème sombre',
+            'theme.switch': 'Basculer entre le thème clair et le thème sombre',
 
             export: 'Exporter',
             exportCSV: 'Exporter CSV',
@@ -588,7 +600,7 @@ const resources = {
             completed: 'Terminé',
             inProgress: 'En cours',
             overdue: 'En retard',
-            
+
             // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Créez des objectifs d\'épargne pour vos cibles financières importantes',
             'savingsGoal.createButton': 'Créer un objectif d\'épargne',
@@ -601,7 +613,7 @@ const resources = {
             'savingsGoal.targetAmount': 'Montant cible',
             'savingsGoal.currentAmount': 'Montant actuel',
             'savingsGoal.targetDate': 'Date cible (optionnel)',
-            
+
             // Goal Detail translations
             'goalDetail.progress': 'Progrès',
             'goalDetail.daysLeft': 'Jours jusqu\'à l\'objectif',
@@ -613,7 +625,7 @@ const resources = {
             'goalDetail.amount': 'Montant',
             'goalDetail.add': 'Ajouter',
             'goalDetail.withdraw': 'Retirer',
-            
+
             // Motivational phrases
             'motivation.excellent': 'Excellent travail ! Encore un peu !',
             'motivation.great': 'Tu fais du bon travail ! L\'objectif se rapproche !',
@@ -643,7 +655,7 @@ const resources = {
             'notifications.enable': 'Activer les notifications',
             'notifications.description': 'Recevoir des alertes sur les événements importants',
             dailyReminder: 'Rappel quotidien',
-            dailyReminderDescription: 'Rappeler d’ajouter des transactions',
+            dailyReminderDescription: 'Rappeler d\'ajouter des transactions',
             reminderTime: 'Heure du rappel',
             dataManagement: 'Gestion des données',
             user: 'Utilisateur',
@@ -777,8 +789,12 @@ const resources = {
             'category.investment': 'Investition',
             'category.gift': 'Geschenke',
             'settings.language': 'Sprache',
+            'settings.languageSelect': 'Anwendungssprache auswählen',
             'settings.currency': 'Währung',
+            'settings.currencySelect': 'Hauptwährung zur Anzeige von Beträgen',
             'settings.theme': 'Theme',
+            'theme.dark': 'Dunkles Thema',
+            'theme.switch': 'Wechseln zwischen hellem und dunklem Thema',
 
             export: 'Exportieren',
             exportCSV: 'CSV exportieren',
@@ -813,7 +829,7 @@ const resources = {
             completed: 'Abgeschlossen',
             inProgress: 'In Bearbeitung',
             overdue: 'Überfällig',
-            
+
             // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Erstellen Sie Sparziele für Ihre wichtigen finanziellen Ziele',
             'savingsGoal.createButton': 'Sparziel erstellen',
@@ -826,7 +842,7 @@ const resources = {
             'savingsGoal.targetAmount': 'Zielbetrag',
             'savingsGoal.currentAmount': 'Aktueller Betrag',
             'savingsGoal.targetDate': 'Zieldatum (optional)',
-            
+
             // Goal Detail translations
             'goalDetail.progress': 'Fortschritt',
             'goalDetail.daysLeft': 'Tage bis zum Ziel',
@@ -838,7 +854,7 @@ const resources = {
             'goalDetail.amount': 'Betrag',
             'goalDetail.add': 'Hinzufügen',
             'goalDetail.withdraw': 'Abheben',
-            
+
             // Motivational phrases
             'motivation.excellent': 'Ausgezeichnete Arbeit! Noch ein bisschen mehr!',
             'motivation.great': 'Du machst das großartig! Das Ziel rückt näher!',
@@ -945,7 +961,7 @@ const resources = {
             edit: 'Editar',
 
             week: 'Semana',
-            month: 'Mois',
+            month: 'Mes',
             year: 'Año',
 
             savingsRate: 'Tasa de ahorro',
@@ -1002,8 +1018,12 @@ const resources = {
             'category.investment': 'Inversión',
             'category.gift': 'Regalos',
             'settings.language': 'Idioma',
+            'settings.languageSelect': 'Seleccionar idioma de la aplicación',
             'settings.currency': 'Moneda',
+            'settings.currencySelect': 'Moneda principal para mostrar cantidades',
             'settings.theme': 'Tema',
+            'theme.dark': 'Tema oscuro',
+            'theme.switch': 'Cambiar entre tema claro y oscuro',
 
             export: 'Exportar',
             exportCSV: 'Exportar CSV',
@@ -1038,7 +1058,7 @@ const resources = {
             completed: 'Completado',
             inProgress: 'En progreso',
             overdue: 'Vencido',
-            
+
             // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Crea metas de ahorro para tus objetivos financieros importantes',
             'savingsGoal.createButton': 'Crear meta de ahorro',
@@ -1051,7 +1071,7 @@ const resources = {
             'savingsGoal.targetAmount': 'Cantidad objetivo',
             'savingsGoal.currentAmount': 'Cantidad actual',
             'savingsGoal.targetDate': 'Fecha objetivo (opcional)',
-            
+
             // Goal Detail translations
             'goalDetail.progress': 'Progreso',
             'goalDetail.daysLeft': 'Días hasta la meta',
@@ -1063,7 +1083,7 @@ const resources = {
             'goalDetail.amount': 'Cantidad',
             'goalDetail.add': 'Agregar',
             'goalDetail.withdraw': 'Retirar',
-            
+
             // Motivational phrases
             'motivation.excellent': '¡Excelente trabajo! ¡Solo un poco más!',
             'motivation.great': '¡Lo estás haciendo genial! ¡La meta se acerca!',
@@ -1227,8 +1247,12 @@ const resources = {
             'category.investment': 'Investicije',
             'category.gift': 'Pokloni',
             'settings.language': 'Jezik',
+            'settings.languageSelect': 'Izaberi jezik aplikacije',
             'settings.currency': 'Valuta',
+            'settings.currencySelect': 'Glavna valuta za prikaz iznosa',
             'settings.theme': 'Tema',
+            'theme.dark': 'Tamna tema',
+            'theme.switch': 'Prebacivanje između svijetle i tamne teme',
 
             export: 'Izvezi',
             exportCSV: 'Izvezi CSV',
@@ -1263,7 +1287,7 @@ const resources = {
             completed: 'Završeno',
             inProgress: 'U toku',
             overdue: 'Zakašnjelo',
-            
+
             // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Napravite ciljeve štednje za vaše važne finansijske ciljeve',
             'savingsGoal.createButton': 'Napravi cilj štednje',
@@ -1276,7 +1300,7 @@ const resources = {
             'savingsGoal.targetAmount': 'Ciljani iznos',
             'savingsGoal.currentAmount': 'Trenutni iznos',
             'savingsGoal.targetDate': 'Ciljani datum (opciono)',
-            
+
             // Goal Detail translations
             'goalDetail.progress': 'Napredak',
             'goalDetail.daysLeft': 'Dana do cilja',
@@ -1288,7 +1312,7 @@ const resources = {
             'goalDetail.amount': 'Iznos',
             'goalDetail.add': 'Dodaj',
             'goalDetail.withdraw': 'Podigni',
-            
+
             // Motivational phrases
             'motivation.excellent': 'Odličan rad! Još malo!',
             'motivation.great': 'Odlično radiš! Cilj se približava!',
