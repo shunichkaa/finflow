@@ -7,7 +7,6 @@ const resources = {
         translation: {
             appName: 'FinFlow',
             tagline: 'Умное управление финансами',
-
             addTransaction: 'Добавить транзакцию',
             newTransaction: 'Новая транзакция',
             save: 'Сохранить',
