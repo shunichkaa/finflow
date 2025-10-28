@@ -238,7 +238,7 @@ export default function Profile() {
     return (
         <Container maxWidth="md" sx={{py: 4}}>
             <Typography variant="h4" gutterBottom sx={{mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
-                {t('profile')}
+                {t('Profile')}
             </Typography>
 
             {/* Профиль пользователя */}
