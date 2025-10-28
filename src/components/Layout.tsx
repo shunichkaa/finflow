@@ -82,6 +82,11 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
         {path: '/goals', label: t('savings', 'Копилка')},
     ];
 
+    const getCurrentPageTitle = () => {
+        const currentItem = navItems.find(item => item.path === location.pathname);
+        return currentItem ? currentItem.label : t('appName');
+    };
+
     const drawer = (
         <Box sx={{
             display: 'flex',
@@ -93,7 +98,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             position: 'relative',
             overflow: 'hidden',
         }}>
-            {}
             <Box sx={{
                 backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                 borderBottom: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
@@ -168,7 +172,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 </Toolbar>
             </Box>
 
-            {}
             <Box sx={{flexGrow: 1, overflow: 'auto', px: 2, py: 3}}>
                 <List sx={{display: 'flex', flexDirection: 'column', gap: 1}}>
                     {navItems.map((item) => (
@@ -177,7 +180,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 component={Link}
                                 to={item.path}
                                 selected={location.pathname === item.path}
-                                                        onClick={(_e) => {
+                                onClick={(_e) => {
                                     setMobileOpen(false);
                                     setSidebarOpen(false);
                                 }}
@@ -221,7 +224,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                 </List>
             </Box>
 
-            {}
             <Divider sx={{
                 borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6'
             }}/>
@@ -293,7 +295,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             <Box sx={{display: 'flex'}}>
                 <CssBaseline/>
 
-                {}
                 <Box
                     component="header"
                     sx={{
@@ -307,8 +308,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         borderBottom: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
                         boxShadow: mode === 'dark' ? '0 2px 8px rgba(0, 0, 0, 0.3)' : '0 2px 8px rgba(39, 43, 62, 0.08)',
                         transition: 'all 0.3s ease',
-                        borderRadius: {xs: '20px', sm: 0}, // Скругленные углы только на мобильных
-                        margin: {xs: '8px', sm: 0}, // Отступы для мобильных чтобы показать скругление
+                        borderRadius: {xs: '20px', sm: 0},
+                        margin: {xs: '8px', sm: 0},
                     }}
                 >
                     <Toolbar sx={{
@@ -316,7 +317,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         justifyContent: 'space-between',
                         px: {xs: 2, sm: 3}
                     }}>
-                        {}
                         <Box sx={{display: 'flex', alignItems: 'center'}}>
                             <IconButton
                                 color="inherit"
@@ -346,6 +346,19 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 <MenuIcon sx={{ fontSize: 24, fontWeight: 500 }} />
                             </IconButton>
 
+                            <Typography
+                                variant="h6"
+                                sx={{
+                                    display: {xs: 'block', sm: 'none'},
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    fontWeight: 600,
+                                    fontSize: '1.1rem',
+                                    ml: 2,
+                                }}
+                            >
+                                {getCurrentPageTitle()}
+                            </Typography>
+
                             {!sidebarOpen && (
                                 <>
                                     <IconButton
@@ -364,7 +377,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                         <MenuIcon/>
                                     </IconButton>
 
-                                    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
+                                    <Box sx={{display: {xs: 'none', sm: 'flex'}, flexDirection: 'column', alignItems: 'flex-start'}}>
                                         <Typography
                                             variant="h6"
                                             noWrap
@@ -401,12 +414,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             )}
                         </Box>
 
-                        {}
                         <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-                            {}
                             <NotificationCenter/>
-                            
-                            {}
+
                             {!sidebarOpen && !isLoginPage && (
                                 <>
                                     <IconButton
@@ -460,7 +470,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     </Toolbar>
                 </Box>
 
-                {}
                 <Drawer
                     variant="temporary"
                     open={mobileOpen}
@@ -486,7 +495,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     {drawer}
                 </Drawer>
 
-                {}
                 {!isLoginPage && (
                     <Drawer
                         variant="permanent"
@@ -512,7 +520,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     </Drawer>
                 )}
 
-                {}
                 <Box
                     component="main"
                     sx={{
