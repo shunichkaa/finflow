@@ -327,13 +327,13 @@ const Goals: React.FC = () => {
                     color: mode === 'dark' ? '#fff' : '#272B3E',
                     fontWeight: 700,
                     fontSize: {xs: '1.25rem', sm: '1.5rem'},
-                    pb: 2,
+                    pb: 1,
                 }}>
                     {editingGoal ? t('savingsGoal.editTitle', 'Edit Goal') : t('savingsGoal.createTitle', 'Create Goal')}
                 </DialogTitle>
 
-                <DialogContent>
-                    <Stack spacing={3} sx={{mt: 1}}>
+                <DialogContent sx={{pb: 1, overflow: 'visible'}}>
+                    <Stack spacing={2.5} sx={{mt: 0.5}}>
                         <Box>
                             <Typography variant="body2"
                                         sx={{
@@ -351,7 +351,7 @@ const Goals: React.FC = () => {
                                     xs: 'repeat(4, 1fr)',
                                     sm: 'repeat(6, 1fr)'
                                 },
-                                gap: 2
+                                gap: 1.5
                             }}>
                                 {GOAL_ICONS.map((iconData) => {
                                     const isSelected = selectedIcon === iconData.id;
@@ -385,7 +385,7 @@ const Goals: React.FC = () => {
                                             }}
                                         >
                                             <IconComponent sx={{
-                                                fontSize: 24,
+                                                fontSize: 20,
                                                 color: isSelected
                                                     ? iconData.color
                                                     : (mode === 'dark' ? '#fff' : '#272B3E'),
@@ -444,8 +444,9 @@ const Goals: React.FC = () => {
                 </DialogContent>
 
                 <Box sx={{
-                    p: 3,
-                    pt: 2,
+                    px: 3,
+                    pb: 2.5,
+                    pt: 1.5,
                     borderTop: mode === 'dark'
                         ? '1px solid rgba(255,255,255,0.1)'
                         : '1px solid rgba(39,43,62,0.1)',
