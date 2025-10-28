@@ -21,53 +21,6 @@ import { useTranslation } from "react-i18next";
 import { useNotificationStore } from "../../../Budgets/store/useNotificationStore.ts";
 import { useThemeMode } from "../../../Budgets/theme/ThemeContext";
 
-const notificationTranslations = {
-    ru: {
-        notifications: {
-            title: 'Уведомления',
-            markAllAsRead: 'Прочитать все',
-            noNotifications: 'Нет уведомлений'
-        }
-    },
-    en: {
-        notifications: {
-            title: 'Notifications',
-            markAllAsRead: 'Mark all as read',
-            noNotifications: 'No notifications'
-        }
-    },
-    fr: {
-        notifications: {
-            title: 'Notifications',
-            markAllAsRead: 'Tout marquer comme lu',
-            noNotifications: 'Aucune notification'
-        }
-    },
-    de: {
-        notifications: {
-            title: 'Benachrichtigungen',
-            markAllAsRead: 'Alle als gelesen markieren',
-            noNotifications: 'Keine Benachrichtigungen'
-        }
-    },
-    es: {
-        notifications: {
-            title: 'Notificaciones',
-            markAllAsRead: 'Marcar todo como leído',
-            noNotifications: 'No hay notificaciones'
-        }
-    },
-    me: {
-        notifications: {
-            title: 'Obavještenja',
-            markAllAsRead: 'Označi sve kao pročitano',
-            noNotifications: 'Nema obavještenja'
-        }
-    }
-};
-
-// Register translations once when component mounts
-
 const locales: Record<string, Locale> = {
     en: enUS,
     ru,

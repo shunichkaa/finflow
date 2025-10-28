@@ -319,6 +319,7 @@ const Goals: React.FC = () => {
                             ? 'rgba(15,15,35,0.95)'
                             : 'rgba(255,255,255,0.95)',
                         backdropFilter: 'blur(20px)',
+                        overflow: 'hidden', // Убираем скролл
                     }
                 }}
             >
@@ -330,7 +331,7 @@ const Goals: React.FC = () => {
                 }}>
                     {editingGoal ? t('savingsGoal.editTitle', 'Edit Goal') : t('savingsGoal.createTitle', 'Create Goal')}
                 </DialogTitle>
-                <DialogContent>
+                <DialogContent sx={{overflow: 'hidden'}}> {/* Убираем скролл */}
                     <Stack spacing={3} sx={{mt: 2}}>
                         <Box>
                             <Typography variant="body2"
