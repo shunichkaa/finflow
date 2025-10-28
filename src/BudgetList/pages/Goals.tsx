@@ -319,10 +319,10 @@ const Goals: React.FC = () => {
                             ? 'rgba(15,15,35,0.95)'
                             : 'rgba(255,255,255,0.95)',
                         backdropFilter: 'blur(20px)',
-                        maxHeight: '85vh', // Уменьшил максимальную высоту
+                        maxHeight: {xs: '85vh', sm: 'auto'}, // Авто высота на десктопе
                         display: 'flex',
                         flexDirection: 'column',
-                        m: {xs: 2, sm: 3}, // Отступы для мобильных
+                        m: {xs: 2, sm: 3},
                     }
                 }}
             >
@@ -338,23 +338,19 @@ const Goals: React.FC = () => {
 
                 <DialogContent sx={{
                     flex: 1,
-                    overflow: 'auto',
-                    pb: 1, // Уменьшил отступ снизу
-                    '& .MuiStack-root': {
-                        gap: {xs: 2, sm: 3}, // Меньшие отступы на мобильных
-                    }
+                    overflow: {xs: 'auto', sm: 'visible'}, // Убираем скролл на десктопе
+                    pb: 1,
                 }}>
-                    <Stack spacing={{xs: 2, sm: 3}} sx={{mt: 1}}>
-                        {/* Секция иконок - уменьшаем на мобильных */}
+                    <Stack spacing={3} sx={{mt: 1}}>
+                        {/* Секция иконок */}
                         <Box>
                             <Typography variant="body2"
                                         sx={{
                                             color: mode === 'dark'
                                                 ? 'rgba(255,255,255,0.7)'
                                                 : 'rgba(39,43,62,0.7)',
-                                            mb: 1,
-                                            fontWeight: 500,
-                                            fontSize: {xs: '0.875rem', sm: '0.9rem'}
+                                            mb: 1.5,
+                                            fontWeight: 500
                                         }}>
                                 {t('savingsGoal.selectIcon', 'Select icon')}
                             </Typography>
@@ -364,7 +360,7 @@ const Goals: React.FC = () => {
                                     xs: 'repeat(4, 1fr)',
                                     sm: 'repeat(6, 1fr)'
                                 },
-                                gap: {xs: 1, sm: 2} // Меньшие отступы на мобильных
+                                gap: 2
                             }}>
                                 {GOAL_ICONS.map((iconData) => {
                                     const isSelected = selectedIcon === iconData.id;
@@ -375,7 +371,7 @@ const Goals: React.FC = () => {
                                             onClick={() => setSelectedIcon(iconData.id)}
                                             sx={{
                                                 aspectRatio: '1',
-                                                borderRadius: 1.5,
+                                                borderRadius: 2,
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
@@ -398,7 +394,7 @@ const Goals: React.FC = () => {
                                             }}
                                         >
                                             <IconComponent sx={{
-                                                fontSize: {xs: 20, sm: 24}, // Меньшие иконки на мобильных
+                                                fontSize: 24,
                                                 color: isSelected
                                                     ? iconData.color
                                                     : (mode === 'dark' ? '#fff' : '#272B3E'),
@@ -410,14 +406,13 @@ const Goals: React.FC = () => {
                             </Box>
                         </Box>
 
-                        {/* Поля формы с уменьшенными отступами */}
+                        {/* Поля формы */}
                         <TextField
                             label={t('savingsGoal.goalName', 'Goal name')}
                             value={goalName}
                             onChange={(e) => setGoalName(e.target.value)}
                             fullWidth
                             required
-                            size="small"
                         />
 
                         <TextField
@@ -426,7 +421,6 @@ const Goals: React.FC = () => {
                             onChange={handleTargetAmountChange}
                             fullWidth
                             required
-                            size="small"
                             slotProps={{
                                 input: {
                                     endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
@@ -439,7 +433,6 @@ const Goals: React.FC = () => {
                             value={currentAmount}
                             onChange={handleCurrentAmountChange}
                             fullWidth
-                            size="small"
                             slotProps={{
                                 input: {
                                     endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
@@ -453,20 +446,17 @@ const Goals: React.FC = () => {
                                 value={targetDate}
                                 onChange={(newValue) => setTargetDate(newValue as Date | null)}
                                 slotProps={{
-                                    textField: {
-                                        fullWidth: true,
-                                        size: "small"
-                                    }
+                                    textField: {fullWidth: true}
                                 }}
                             />
                         </LocalizationProvider>
                     </Stack>
                 </DialogContent>
 
-                {/* Кнопки - адаптивные для мобильных */}
+                {/* Кнопки */}
                 <Box sx={{
-                    p: {xs: 2, sm: 3},
-                    pt: 1,
+                    p: 3,
+                    pt: 0,
                     flexShrink: 0,
                     borderTop: mode === 'dark'
                         ? '1px solid rgba(255,255,255,0.1)'
@@ -482,8 +472,7 @@ const Goals: React.FC = () => {
                                 textTransform: 'none',
                                 fontWeight: 500,
                                 minWidth: 'auto',
-                                px: {xs: 2, sm: 3},
-                                fontSize: {xs: '0.875rem', sm: '0.9rem'}
+                                px: 3,
                             }}
                         >
                             {t('cancel', 'Cancel')}
@@ -495,12 +484,11 @@ const Goals: React.FC = () => {
                                 background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                                 color: '#fff',
                                 fontWeight: 600,
-                                px: {xs: 2, sm: 4},
-                                borderRadius: 2,
+                                px: 4,
+                                borderRadius: 3,
                                 textTransform: 'none',
                                 minWidth: 'auto',
-                                fontSize: {xs: '0.875rem', sm: '0.9rem'},
-                                '&:hover': {transform: 'translateY(-1px)'}
+                                '&:hover': {transform: 'translateY(-2px)'}
                             }}
                         >
                             {editingGoal ? t('save', 'Save') : t('create', 'Create')}
