@@ -319,35 +319,42 @@ const Goals: React.FC = () => {
                             ? 'rgba(15,15,35,0.95)'
                             : 'rgba(255,255,255,0.95)',
                         backdropFilter: 'blur(20px)',
-                        maxHeight: '90vh', // Ограничиваем максимальную высоту
+                        maxHeight: '85vh', // Уменьшил максимальную высоту
                         display: 'flex',
                         flexDirection: 'column',
+                        m: {xs: 2, sm: 3}, // Отступы для мобильных
                     }
                 }}
             >
                 <DialogTitle sx={{
                     color: mode === 'dark' ? '#fff' : '#272B3E',
                     fontWeight: 700,
-                    fontSize: '1.5rem',
+                    fontSize: {xs: '1.25rem', sm: '1.5rem'},
                     pb: 1,
-                    flexShrink: 0, // Запрещаем сжатие заголовка
+                    flexShrink: 0,
                 }}>
                     {editingGoal ? t('savingsGoal.editTitle', 'Edit Goal') : t('savingsGoal.createTitle', 'Create Goal')}
                 </DialogTitle>
+
                 <DialogContent sx={{
                     flex: 1,
-                    overflow: 'auto', // Включаем скролл только для контента
-                    pb: 2,
+                    overflow: 'auto',
+                    pb: 1, // Уменьшил отступ снизу
+                    '& .MuiStack-root': {
+                        gap: {xs: 2, sm: 3}, // Меньшие отступы на мобильных
+                    }
                 }}>
-                    <Stack spacing={3} sx={{mt: 2}}>
+                    <Stack spacing={{xs: 2, sm: 3}} sx={{mt: 1}}>
+                        {/* Секция иконок - уменьшаем на мобильных */}
                         <Box>
                             <Typography variant="body2"
                                         sx={{
                                             color: mode === 'dark'
                                                 ? 'rgba(255,255,255,0.7)'
                                                 : 'rgba(39,43,62,0.7)',
-                                            mb: 1.5,
-                                            fontWeight: 500
+                                            mb: 1,
+                                            fontWeight: 500,
+                                            fontSize: {xs: '0.875rem', sm: '0.9rem'}
                                         }}>
                                 {t('savingsGoal.selectIcon', 'Select icon')}
                             </Typography>
@@ -357,7 +364,7 @@ const Goals: React.FC = () => {
                                     xs: 'repeat(4, 1fr)',
                                     sm: 'repeat(6, 1fr)'
                                 },
-                                gap: 2
+                                gap: {xs: 1, sm: 2} // Меньшие отступы на мобильных
                             }}>
                                 {GOAL_ICONS.map((iconData) => {
                                     const isSelected = selectedIcon === iconData.id;
@@ -368,7 +375,7 @@ const Goals: React.FC = () => {
                                             onClick={() => setSelectedIcon(iconData.id)}
                                             sx={{
                                                 aspectRatio: '1',
-                                                borderRadius: 2,
+                                                borderRadius: 1.5,
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
@@ -391,7 +398,7 @@ const Goals: React.FC = () => {
                                             }}
                                         >
                                             <IconComponent sx={{
-                                                fontSize: 24,
+                                                fontSize: {xs: 20, sm: 24}, // Меньшие иконки на мобильных
                                                 color: isSelected
                                                     ? iconData.color
                                                     : (mode === 'dark' ? '#fff' : '#272B3E'),
@@ -403,12 +410,14 @@ const Goals: React.FC = () => {
                             </Box>
                         </Box>
 
+                        {/* Поля формы с уменьшенными отступами */}
                         <TextField
                             label={t('savingsGoal.goalName', 'Goal name')}
                             value={goalName}
                             onChange={(e) => setGoalName(e.target.value)}
                             fullWidth
                             required
+                            size="small"
                         />
 
                         <TextField
@@ -417,6 +426,7 @@ const Goals: React.FC = () => {
                             onChange={handleTargetAmountChange}
                             fullWidth
                             required
+                            size="small"
                             slotProps={{
                                 input: {
                                     endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
@@ -429,6 +439,7 @@ const Goals: React.FC = () => {
                             value={currentAmount}
                             onChange={handleCurrentAmountChange}
                             fullWidth
+                            size="small"
                             slotProps={{
                                 input: {
                                     endAdornment: <InputAdornment position="end">{currency}</InputAdornment>
@@ -442,18 +453,21 @@ const Goals: React.FC = () => {
                                 value={targetDate}
                                 onChange={(newValue) => setTargetDate(newValue as Date | null)}
                                 slotProps={{
-                                    textField: {fullWidth: true}
+                                    textField: {
+                                        fullWidth: true,
+                                        size: "small"
+                                    }
                                 }}
                             />
                         </LocalizationProvider>
                     </Stack>
                 </DialogContent>
 
-                {/* Кнопки вынесены за пределы DialogContent */}
+                {/* Кнопки - адаптивные для мобильных */}
                 <Box sx={{
-                    p: 3,
-                    pt: 0,
-                    flexShrink: 0, // Запрещаем сжатие кнопок
+                    p: {xs: 2, sm: 3},
+                    pt: 1,
+                    flexShrink: 0,
                     borderTop: mode === 'dark'
                         ? '1px solid rgba(255,255,255,0.1)'
                         : '1px solid rgba(39,43,62,0.1)',
@@ -469,6 +483,7 @@ const Goals: React.FC = () => {
                                 fontWeight: 500,
                                 minWidth: 'auto',
                                 px: {xs: 2, sm: 3},
+                                fontSize: {xs: '0.875rem', sm: '0.9rem'}
                             }}
                         >
                             {t('cancel', 'Cancel')}
@@ -480,11 +495,12 @@ const Goals: React.FC = () => {
                                 background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                                 color: '#fff',
                                 fontWeight: 600,
-                                px: {xs: 3, sm: 4},
-                                borderRadius: 3,
+                                px: {xs: 2, sm: 4},
+                                borderRadius: 2,
                                 textTransform: 'none',
                                 minWidth: 'auto',
-                                '&:hover': {transform: 'translateY(-2px)'}
+                                fontSize: {xs: '0.875rem', sm: '0.9rem'},
+                                '&:hover': {transform: 'translateY(-1px)'}
                             }}
                         >
                             {editingGoal ? t('save', 'Save') : t('create', 'Create')}
