@@ -292,51 +292,6 @@ export default function Profile() {
                 {t('profile')}
             </Typography>
 
-            {/* Статус синхронизации */}
-            <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
-                <Box display="flex" alignItems="center" justifyContent="space-between" sx={{mb: 2}}>
-                    <Box display="flex" alignItems="center" gap={1}>
-                        <CloudSync sx={{color: getSyncStatusColor(), fontSize: 24}}/>
-                        <Box>
-                            <Typography variant="h6" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
-                                {t('sync.status', 'Статус синхронизации')}
-                            </Typography>
-                            <Typography variant="body2" sx={{
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
-                                fontStyle: 'italic'
-                            }}>
-                                {getSyncStatusText()}
-                            </Typography>
-                        </Box>
-                    </Box>
-                    <Button
-                        variant="contained"
-                        onClick={handleSyncNow}
-                        disabled={isSyncing}
-                        startIcon={<CloudSync/>}
-                        sx={{
-                            background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
-                            color: '#FFFFFF',
-                            fontWeight: 'bold',
-                            borderRadius: 2,
-                            px: 3,
-                            '&:hover': {
-                                background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
-                                transform: 'translateY(-1px)',
-                                boxShadow: '0 6px 20px rgba(108, 111, 249, 0.4)',
-                            },
-                            '&:disabled': {
-                                background: 'linear-gradient(135deg, #9E9E9E 0%, #757575 100%)',
-                                transform: 'none',
-                                boxShadow: 'none',
-                            }
-                        }}
-                    >
-                        {isSyncing ? t('sync.syncing', 'Синхронизация...') : t('data.syncNow', 'Синхронизировать')}
-                    </Button>
-                </Box>
-            </Paper>
-
             {/* Профиль пользователя */}
             <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
                 <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -378,6 +333,51 @@ export default function Profile() {
                         }}
                     >
                         <Edit/>
+                    </Button>
+                </Box>
+            </Paper>
+
+            {/* Статус синхронизации - ПЕРЕМЕЩЕНО ПОД АВАТАРКУ */}
+            <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
+                <Box display="flex" alignItems="center" justifyContent="space-between" sx={{mb: 2}}>
+                    <Box display="flex" alignItems="center" gap={1}>
+                        <CloudSync sx={{color: getSyncStatusColor(), fontSize: 24}}/>
+                        <Box>
+                            <Typography variant="h6" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                                {t('sync.status', 'Статус синхронизации')}
+                            </Typography>
+                            <Typography variant="body2" sx={{
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
+                                fontStyle: 'italic'
+                            }}>
+                                {getSyncStatusText()}
+                            </Typography>
+                        </Box>
+                    </Box>
+                    <Button
+                        variant="contained"
+                        onClick={handleSyncNow}
+                        disabled={isSyncing}
+                        startIcon={<CloudSync/>}
+                        sx={{
+                            background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                            color: '#FFFFFF',
+                            fontWeight: 'bold',
+                            borderRadius: 2,
+                            px: 3,
+                            '&:hover': {
+                                background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
+                                transform: 'translateY(-1px)',
+                                boxShadow: '0 6px 20px rgba(108, 111, 249, 0.4)',
+                            },
+                            '&:disabled': {
+                                background: 'linear-gradient(135deg, #9E9E9E 0%, #757575 100%)',
+                                transform: 'none',
+                                boxShadow: 'none',
+                            }
+                        }}
+                    >
+                        {isSyncing ? t('sync.syncing', 'Синхронизация...') : t('data.syncNow', 'Синхронизировать')}
                     </Button>
                 </Box>
             </Paper>
