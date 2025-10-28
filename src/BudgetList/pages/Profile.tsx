@@ -65,12 +65,12 @@ export default function Profile() {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
-    const {status: _syncStatus, syncNow: _syncNow, loadFromCloud} = useCloudSync(true);
+    const {status: syncStatus, syncNow, loadFromCloud} = useCloudSync(true);
 
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [timePickerOpen, setTimePickerOpen] = useState(false);
     const [newEmail, setNewEmail] = useState('');
-    const [_currentPassword, _setCurrentPassword] = useState('');
+    const [_currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -151,13 +151,21 @@ export default function Profile() {
         }
     };
 
-    const handleAvatarUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = (e) => {
+            reader.onload = async (e) => {
                 setAvatar(e.target?.result as string);
-                setTimeout(() => triggerSync(), 100);
+                try {
+                    await triggerSync();
+                    setSnackbarMessage(t('avatarUpdated'));
+                    setSnackbarOpen(true);
+                } catch (error) {
+                    console.error('Avatar sync error:', error);
+                    setSnackbarMessage(t('avatarUpdateError'));
+                    setSnackbarOpen(true);
+                }
             };
             reader.readAsDataURL(file);
         }
@@ -170,7 +178,7 @@ export default function Profile() {
     const handleCloseEditModal = () => {
         setEditModalOpen(false);
         setNewEmail('');
-        _setCurrentPassword('');
+        setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
     };
@@ -233,11 +241,101 @@ export default function Profile() {
         }
     };
 
+    const handleSyncNow = async () => {
+        try {
+            await syncNow();
+            setSnackbarMessage(t('syncCompleted'));
+            setSnackbarOpen(true);
+        } catch (error) {
+            console.error('Sync error:', error);
+            setSnackbarMessage(t('syncError'));
+            setSnackbarOpen(true);
+        }
+    };
+
+    const getSyncStatusColor = () => {
+        // Безопасное преобразование типа
+        const status = String(syncStatus);
+        switch (status) {
+            case 'syncing':
+                return '#6C6FF9';
+            case 'error':
+                return '#FF3B3B';
+            case 'success':
+                return '#4CAF50';
+            default:
+                return mode === 'dark' ? '#FFFFFF' : '#272B3E';
+        }
+    };
+
+    const getSyncStatusText = () => {
+        // Безопасное преобразование типа
+        const status = String(syncStatus);
+        switch (status) {
+            case 'syncing':
+                return t('sync.syncing', 'Синхронизация...');
+            case 'success':
+                return t('sync.upToDate', 'Данные синхронизированы');
+            case 'error':
+                return t('sync.error', 'Ошибка синхронизации');
+            default:
+                return t('sync.ready', 'Готов к синхронизации');
+        }
+    };
+
+    // Безопасная проверка статуса синхронизации
+    const isSyncing = String(syncStatus) === 'syncing';
+
     return (
         <Container maxWidth="md" sx={{py: 4}}>
             <Typography variant="h4" gutterBottom sx={{mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
                 {t('profile')}
             </Typography>
+
+            {/* Статус синхронизации */}
+            <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
+                <Box display="flex" alignItems="center" justifyContent="space-between" sx={{mb: 2}}>
+                    <Box display="flex" alignItems="center" gap={1}>
+                        <CloudSync sx={{color: getSyncStatusColor(), fontSize: 24}}/>
+                        <Box>
+                            <Typography variant="h6" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                                {t('sync.status', 'Статус синхронизации')}
+                            </Typography>
+                            <Typography variant="body2" sx={{
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
+                                fontStyle: 'italic'
+                            }}>
+                                {getSyncStatusText()}
+                            </Typography>
+                        </Box>
+                    </Box>
+                    <Button
+                        variant="contained"
+                        onClick={handleSyncNow}
+                        disabled={isSyncing}
+                        startIcon={<CloudSync/>}
+                        sx={{
+                            background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                            color: '#FFFFFF',
+                            fontWeight: 'bold',
+                            borderRadius: 2,
+                            px: 3,
+                            '&:hover': {
+                                background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
+                                transform: 'translateY(-1px)',
+                                boxShadow: '0 6px 20px rgba(108, 111, 249, 0.4)',
+                            },
+                            '&:disabled': {
+                                background: 'linear-gradient(135deg, #9E9E9E 0%, #757575 100%)',
+                                transform: 'none',
+                                boxShadow: 'none',
+                            }
+                        }}
+                    >
+                        {isSyncing ? t('sync.syncing', 'Синхронизация...') : t('data.syncNow', 'Синхронизировать')}
+                    </Button>
+                </Box>
+            </Paper>
 
             {/* Профиль пользователя */}
             <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
@@ -245,7 +343,7 @@ export default function Profile() {
                     <Box display="flex" alignItems="center">
                         <Avatar
                             src={avatar || undefined}
-                            sx={{width: 64, height: 64, mr: 2, bgcolor: '#6C6FF9'}}
+                            sx={{width: 64, height: 64, mr: 2, backgroundColor: '#6C6FF9'}}
                         >
                             {!avatar && <Person fontSize="large"/>}
                         </Avatar>
@@ -498,7 +596,7 @@ export default function Profile() {
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 fontSize: '1.1rem',
                                                 fontWeight: 600,
-                                                fontFamily: 'Nunito, system-ui, sans-serif',
+                                                fontFamily: 'system-ui, sans-serif',
                                             }}
                                         >
                                             {notificationTime.split(':')[0]}
@@ -542,7 +640,7 @@ export default function Profile() {
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 fontSize: '1.1rem',
                                                 fontWeight: 600,
-                                                fontFamily: 'Nunito, system-ui, sans-serif',
+                                                fontFamily: 'system-ui, sans-serif',
                                             }}
                                         >
                                             {notificationTime.split(':')[1]}
@@ -561,13 +659,7 @@ export default function Profile() {
                     {t('dataManagement')}
                 </Typography>
 
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        gap: 2
-                    }}
-                >
+                <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 2}}>
                     <Button
                         variant="outlined"
                         startIcon={<CloudSync/>}
@@ -755,7 +847,6 @@ export default function Profile() {
                         />
                     </Box>
 
-                    {/* Divider для визуального разделения */}
                     <Divider sx={{
                         my: 3,
                         borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)'
