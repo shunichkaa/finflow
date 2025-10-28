@@ -65,10 +65,8 @@ export default function Profile() {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
-    // Cloud sync - always enabled
     const {status: _syncStatus, syncNow: _syncNow, loadFromCloud} = useCloudSync(true);
 
-    // Состояние для редактирования профиля
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [timePickerOpen, setTimePickerOpen] = useState(false);
     const [newEmail, setNewEmail] = useState('');

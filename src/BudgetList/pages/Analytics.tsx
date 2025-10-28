@@ -63,6 +63,24 @@ const Analytics: React.FC = () => {
         return {income, expenses, balance, savingsRate};
     }, [filteredTransactions]);
 
+    const getCardBackground = () => {
+        return mode === 'dark'
+            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
+            : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)';
+    };
+
+    const getPaperBackground = () => {
+        return mode === 'dark'
+            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.15) 0%, rgba(108, 111, 249, 0.25) 100%)'
+            : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)';
+    };
+
+    const getTopExpensesBackground = () => {
+        return mode === 'dark'
+            ? 'rgba(108, 111, 249, 0.15)'
+            : 'rgba(239, 240, 246, 0.8)';
+    };
+
     return (
         <Container
             maxWidth="xl"
@@ -90,14 +108,14 @@ const Analytics: React.FC = () => {
                 <Typography
                     variant="body1"
                     sx={{
-                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
+                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
                     }}
                 >
                     {t('analytics.subtitle', 'Анализ ваших финансов и трендов')}
                 </Typography>
                 <Typography variant="body1" sx={{
                     textAlign: 'left',
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.7)'
+                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
                 }}>
                     {t('analyticsDescription')}
                 </Typography>
@@ -232,19 +250,17 @@ const Analytics: React.FC = () => {
                     elevation={3}
                     sx={{
                         borderRadius: 3,
-                        background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
-                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.9) 100%)',
+                        background: getCardBackground(),
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
                             ? '0 8px 24px rgba(108, 111, 249, 0.15)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.3)',
+                            : '0 8px 24px rgba(108, 111, 249, 0.2)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
                                 ? '0 12px 30px rgba(108, 111, 249, 0.25)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.5)',
+                                : '0 12px 30px rgba(108, 111, 249, 0.3)',
                         }
                     }}
                 >
@@ -266,19 +282,17 @@ const Analytics: React.FC = () => {
                     elevation={3}
                     sx={{
                         borderRadius: 3,
-                        background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
-                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.9) 100%)',
+                        background: getCardBackground(),
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
                             ? '0 8px 24px rgba(108, 111, 249, 0.15)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.3)',
+                            : '0 8px 24px rgba(108, 111, 249, 0.2)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
                                 ? '0 12px 30px rgba(108, 111, 249, 0.25)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.5)',
+                                : '0 12px 30px rgba(108, 111, 249, 0.3)',
                         }
                     }}
                 >
@@ -300,19 +314,17 @@ const Analytics: React.FC = () => {
                     elevation={3}
                     sx={{
                         borderRadius: 3,
-                        background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
-                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.9) 100%)',
+                        background: getCardBackground(),
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
                             ? '0 8px 24px rgba(108, 111, 249, 0.15)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.3)',
+                            : '0 8px 24px rgba(108, 111, 249, 0.2)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
                                 ? '0 12px 30px rgba(108, 111, 249, 0.25)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.5)',
+                                : '0 12px 30px rgba(108, 111, 249, 0.3)',
                         }
                     }}
                 >
@@ -334,19 +346,17 @@ const Analytics: React.FC = () => {
                     elevation={3}
                     sx={{
                         borderRadius: 3,
-                        background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
-                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.9) 100%)',
+                        background: getCardBackground(),
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
                             ? '0 8px 24px rgba(108, 111, 249, 0.15)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.3)',
+                            : '0 8px 24px rgba(108, 111, 249, 0.2)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
                                 ? '0 12px 30px rgba(108, 111, 249, 0.25)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.5)',
+                                : '0 12px 30px rgba(108, 111, 249, 0.3)',
                         }
                     }}
                 >
@@ -377,9 +387,7 @@ const Analytics: React.FC = () => {
                     sx={{
                         p: {xs: 2, sm: 3},
                         borderRadius: 3,
-                        background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.8) 100%)'
-                            : 'linear-gradient(135deg, rgba(239, 240, 246, 0.6) 0%, rgba(239, 240, 246, 0.8) 100%)',
+                        background: getPaperBackground(),
                         border: mode === 'dark'
                             ? '1px solid rgba(108, 111, 249, 0.3)'
                             : '1px solid rgba(239, 240, 246, 0.3)',
@@ -391,7 +399,7 @@ const Analytics: React.FC = () => {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark'
                                 ? '0 8px 25px rgba(108, 111, 249, 0.2)'
-                                : '0 8px 25px rgba(239, 240, 246, 0.2)',
+                                : '0 8px 25px rgba(108, 111, 249, 0.15)',
                         }
                     }}
                 >
@@ -412,9 +420,7 @@ const Analytics: React.FC = () => {
                     sx={{
                         p: {xs: 2, sm: 3},
                         borderRadius: 3,
-                        background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.8) 100%)'
-                            : 'linear-gradient(135deg, rgba(239, 240, 246, 0.6) 0%, rgba(239, 240, 246, 0.8) 100%)',
+                        background: getPaperBackground(),
                         border: mode === 'dark'
                             ? '1px solid rgba(108, 111, 249, 0.3)'
                             : '1px solid rgba(239, 240, 246, 0.3)',
@@ -426,7 +432,7 @@ const Analytics: React.FC = () => {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark'
                                 ? '0 8px 25px rgba(108, 111, 249, 0.2)'
-                                : '0 8px 25px rgba(239, 240, 246, 0.2)',
+                                : '0 8px 25px rgba(108, 111, 249, 0.15)',
                         }
                     }}
                 >
@@ -451,9 +457,7 @@ const Analytics: React.FC = () => {
                     p: 3,
                     mt: 3,
                     borderRadius: 3,
-                    background: mode === 'dark'
-                        ? 'rgba(108, 111, 249, 0.8)'
-                        : 'rgba(239, 240, 246, 0.8)',
+                    background: getTopExpensesBackground(),
                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                     position: 'relative',
                     overflow: 'hidden',

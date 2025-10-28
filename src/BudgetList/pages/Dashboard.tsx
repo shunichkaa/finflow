@@ -71,7 +71,7 @@ const Dashboard = () => {
                     <Typography
                         variant="body1"
                         sx={{
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
                         }}
                     >
                         Управляйте своими финансами
