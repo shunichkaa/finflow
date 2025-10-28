@@ -82,11 +82,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
         {path: '/goals', label: t('savings', 'Копилка')},
     ];
 
-    const getCurrentPageTitle = () => {
-        const currentItem = navItems.find(item => item.path === location.pathname);
-        return currentItem ? currentItem.label : t('appName');
-    };
-
     const drawer = (
         <Box sx={{
             display: 'flex',
@@ -345,19 +340,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             >
                                 <MenuIcon sx={{ fontSize: 24, fontWeight: 500 }} />
                             </IconButton>
-
-                            <Typography
-                                variant="h6"
-                                sx={{
-                                    display: {xs: 'block', sm: 'none'},
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    fontWeight: 600,
-                                    fontSize: '1.1rem',
-                                    ml: 2,
-                                }}
-                            >
-                                {getCurrentPageTitle()}
-                            </Typography>
 
                             <IconButton
                                 color="inherit"
