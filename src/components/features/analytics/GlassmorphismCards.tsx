@@ -1,4 +1,4 @@
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 import React from 'react';
 
@@ -19,7 +19,6 @@ const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
                                                              }) => {
     const { mode } = useThemeMode();
 
-    // Use mode in styling to avoid unused variable warning
     const borderColor = mode === 'dark' ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.08)';
 
     return (
@@ -183,26 +182,27 @@ export const GlassmorphismCards: React.FC = () => {
                 🎨 Glassmorphism карточки
             </Typography>
 
-            <Grid container spacing={3}>
+            <Box
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: {
+                        xs: '1fr',
+                        sm: 'repeat(2, 1fr)',
+                        md: 'repeat(3, 1fr)'
+                    },
+                    gap: 3,
+                }}
+            >
                 {cards.map((card, index) => (
-                    <Grid
+                    <GlassmorphismCard
                         key={index}
-                        xs={12}
-                        sm={6}
-                        md={4}
-                        sx={{
-                            display: 'flex'
-                        }}
-                    >
-                        <GlassmorphismCard
-                            title={card.title}
-                            subtitle={card.subtitle}
-                            gradient={card.gradient}
-                            glowColor={card.glowColor}
-                        />
-                    </Grid>
+                        title={card.title}
+                        subtitle={card.subtitle}
+                        gradient={card.gradient}
+                        glowColor={card.glowColor}
+                    />
                 ))}
-            </Grid>
+            </Box>
         </Box>
     );
 };

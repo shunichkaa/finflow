@@ -2,7 +2,7 @@ import React from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import 'dayjs/locale/en';
 import 'dayjs/locale/fr';
@@ -11,8 +11,6 @@ import 'dayjs/locale/es';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
-type PickerValue = Dayjs | null;
-
 interface DatePickerFieldProps {
     label: string;
     value: string;
@@ -20,8 +18,8 @@ interface DatePickerFieldProps {
     error?: boolean;
     helperText?: string;
     disabled?: boolean;
-    minDate?: Dayjs | string;
-    maxDate?: Dayjs | string;
+    minDate?: string;
+    maxDate?: string;
     fullWidth?: boolean;
     size?: 'small' | 'medium';
     required?: boolean;
@@ -30,71 +28,68 @@ interface DatePickerFieldProps {
     openTo?: 'year' | 'month' | 'day';
     disableFuture?: boolean;
     disablePast?: boolean;
-    showTodayButton?: boolean;
-    disableHighlightToday?: boolean;
     clearable?: boolean;
 }
 
 export const DatePickerField: React.FC<DatePickerFieldProps> = ({
-    label,
-    value,
-    onChange,
-    error,
-    helperText,
-    disabled = false,
-    minDate,
-    maxDate,
-    fullWidth = false,
-    size = 'small',
-    required = false,
-    inputFormat = 'DD.MM.YYYY',
-    views,
-    openTo,
-    disableFuture = false,
-    disablePast = false,
-    showTodayButton = false,
-    disableHighlightToday = false,
-    clearable = false,
-}) => {
+                                                                    label,
+                                                                    value,
+                                                                    onChange,
+                                                                    error,
+                                                                    helperText,
+                                                                    disabled = false,
+                                                                    minDate,
+                                                                    maxDate,
+                                                                    fullWidth = false,
+                                                                    size = 'small',
+                                                                    required = false,
+                                                                    inputFormat = 'DD.MM.YYYY',
+                                                                    views,
+                                                                    openTo,
+                                                                    disableFuture = false,
+                                                                    disablePast = false,
+                                                                    clearable = false,
+                                                                }) => {
     const { i18n } = useTranslation();
     const { mode } = useThemeMode();
 
-    // Language mapping
     const localeMap: Record<string, string> = {
         ru: 'ru',
         en: 'en',
         fr: 'fr',
         de: 'de',
         es: 'es',
-        me: 'ru', // Montenegrin uses Russian format
+        me: 'ru',
     };
 
     const currentLocale = localeMap[i18n.language] || 'en';
 
-    const handleChange = (value: PickerValue) => {
-        if (value) {
-            onChange(value.format('YYYY-MM-DD'));
+    const handleChange = (newValue: unknown) => {
+        if (dayjs.isDayjs(newValue) && newValue.isValid()) {
+            onChange(newValue.format('YYYY-MM-DD'));
         } else if (clearable) {
             onChange('');
         }
     };
 
+    const dateValue = value ? dayjs(value) : null;
+    const minDateValue = minDate ? dayjs(minDate) : undefined;
+    const maxDateValue = maxDate ? dayjs(maxDate) : undefined;
+
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={currentLocale}>
             <DatePicker
                 label={label}
-                value={value ? dayjs(value) : null}
+                value={dateValue}
                 onChange={handleChange}
-                minDate={minDate ? (typeof minDate === 'string' ? dayjs(minDate) : minDate) : undefined}
-                maxDate={maxDate ? (typeof maxDate === 'string' ? dayjs(maxDate) : maxDate) : undefined}
+                minDate={minDateValue}
+                maxDate={maxDateValue}
                 disabled={disabled}
-                inputFormat={inputFormat}
+                format={inputFormat}
                 views={views}
                 openTo={openTo}
                 disableFuture={disableFuture}
                 disablePast={disablePast}
-                showTodayButton={showTodayButton}
-                disableHighlightToday={disableHighlightToday}
                 slotProps={{
                     textField: {
                         size,

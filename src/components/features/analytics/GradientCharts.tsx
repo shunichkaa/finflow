@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 
 interface GradientBarProps {
@@ -19,7 +19,6 @@ const GradientBar: React.FC<GradientBarProps> = ({
                                                  }) => {
     const { mode } = useThemeMode();
 
-    // Use mode in styling to avoid unused variable warning
     const borderColor = mode === 'dark' ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.08)';
 
     return (
@@ -146,13 +145,20 @@ export const GradientCharts: React.FC = () => {
                 📊 Графики и статистика
             </Typography>
 
-            <Grid container spacing={3}>
+            <Box
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: {
+                        xs: '1fr',
+                        sm: 'repeat(2, 1fr)',
+                        md: 'repeat(4, 1fr)'
+                    },
+                    gap: 3,
+                }}
+            >
                 {gradients.map((item, index) => (
-                    <Grid
+                    <Box
                         key={index}
-                        xs={12}
-                        sm={6}
-                        md={3}
                         sx={{
                             display: 'flex'
                         }}
@@ -164,9 +170,9 @@ export const GradientCharts: React.FC = () => {
                             height={180}
                             glowColor={item.glowColor}
                         />
-                    </Grid>
+                    </Box>
                 ))}
-            </Grid>
+            </Box>
         </Box>
     );
 };
