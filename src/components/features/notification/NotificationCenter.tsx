@@ -28,7 +28,7 @@ const srLatnLocale = {
 import { useTranslation } from "react-i18next";
 import { useNotificationStore } from "../../../Budgets/store/useNotificationStore.ts";
 import { useThemeMode } from "../../../Budgets/theme/ThemeContext";
-import i18n from 'i18next';
+// Use i18n from context to avoid multiple instances
 
 const notificationTranslations = {
     ru: {
@@ -75,10 +75,7 @@ const notificationTranslations = {
     }
 };
 
-// Add translations to i18n
-Object.entries(notificationTranslations).forEach(([lang, translations]) => {
-    i18n.addResourceBundle(lang, 'translation', translations, true, true);
-});
+// Register translations once when component mounts
 
 const locales: Record<string, Locale> = {
     en: enUS,
@@ -96,11 +93,11 @@ const getLocale = (lang: string): Locale => {
 };
 
 export const NotificationCenter: React.FC = () => {
-    const { t, i18n } = useTranslation();
+    const { t, i18n: i18nCtx } = useTranslation();
     const { notifications, markAsRead, markAllAsRead, unreadCount } = useNotificationStore();
     const { mode } = useThemeMode();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const locale = getLocale(i18n.language);
+    const locale = getLocale(i18nCtx.language);
 
     const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
