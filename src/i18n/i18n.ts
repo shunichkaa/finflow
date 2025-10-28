@@ -41,6 +41,7 @@ const resources = {
             reset: 'Сбросить',
             logout: 'Выйти',
             optional: 'необязательно',
+            create: 'Создать',
 
             balance: 'Баланс',
             income: 'Доходы',
@@ -218,9 +219,16 @@ const resources = {
             'notFound.title': 'Страница не найдена',
             'notFound.description': 'К сожалению, запрашиваемая страница не существует или была перемещена.',
             'notFound.goHome': 'Вернуться на главную',
+
+            // Уведомления
             notifications: 'Уведомления',
+            'notifications.title': 'Уведомления',
             'notifications.enable': 'Включить уведомления',
             'notifications.description': 'Получать уведомления о важных событиях',
+            'notifications.markAllAsRead': 'Отметить все как прочитанные',
+            'notifications.noNotifications': 'Нет уведомлений',
+            'notifications.new': 'Новые',
+
             dailyReminder: 'Ежедневное напоминание',
             dailyReminderDescription: 'Напоминать о внесении транзакций',
             reminderTime: 'Время напоминания',
@@ -332,6 +340,8 @@ const resources = {
             reset: 'Reset',
             optional: 'optional',
             logout: 'Logout',
+            create: 'Create',
+
             balance: 'Balance',
             income: 'Income',
             expense: 'Expenses',
@@ -502,9 +512,16 @@ const resources = {
             'notFound.title': 'Page not found',
             'notFound.description': 'Unfortunately, the requested page does not exist or has been moved.',
             'notFound.goHome': 'Return to main page',
+
+            // Notifications
             notifications: 'Notifications',
+            'notifications.title': 'Notifications',
             'notifications.enable': 'Enable notifications',
             'notifications.description': 'Receive alerts about important events',
+            'notifications.markAllAsRead': 'Mark all as read',
+            'notifications.noNotifications': 'No notifications',
+            'notifications.new': 'New',
+
             dailyReminder: 'Daily reminder',
             dailyReminderDescription: 'Remind to add transactions',
             reminderTime: 'Reminder time',
@@ -616,6 +633,8 @@ const resources = {
             reset: 'Réinitialiser',
             optional: 'facultatif',
             logout: 'Déconnexion',
+            create: 'Créer',
+
             balance: 'Solde',
             income: 'Revenus',
             expense: 'Dépenses',
@@ -784,9 +803,16 @@ const resources = {
             'notFound.title': 'Page non trouvée',
             'notFound.description': 'Malheureusement, la page demandée n\'existe pas ou a été déplacée.',
             'notFound.goHome': 'Retour à la page principale',
+
+            // Notifications
             notifications: 'Notifications',
+            'notifications.title': 'Notifications',
             'notifications.enable': 'Activer les notifications',
             'notifications.description': 'Recevoir des alertes sur les événements importants',
+            'notifications.markAllAsRead': 'Tout marquer comme lu',
+            'notifications.noNotifications': 'Aucune notification',
+            'notifications.new': 'Nouveau',
+
             dailyReminder: 'Rappel quotidien',
             dailyReminderDescription: 'Rappeler d\'ajouter des transactions',
             reminderTime: 'Heure du rappel',
@@ -899,6 +925,8 @@ const resources = {
             reset: 'Zurücksetzen',
             optional: 'optional',
             logout: 'Abmelden',
+            create: 'Erstellen',
+
             balance: 'Saldo',
             income: 'Einkommen',
             expense: 'Ausgaben',
@@ -1067,9 +1095,16 @@ const resources = {
             'notFound.title': 'Seite nicht gefunden',
             'notFound.description': 'Leider existiert die angeforderte Seite nicht oder wurde verschoben.',
             'notFound.goHome': 'Zur Hauptseite zurückkehren',
+
+            // Notifications
             notifications: 'Benachrichtigungen',
+            'notifications.title': 'Benachrichtigungen',
             'notifications.enable': 'Benachrichtigungen aktivieren',
             'notifications.description': 'Benachrichtigungen über wichtige Ereignisse erhalten',
+            'notifications.markAllAsRead': 'Alle als gelesen markieren',
+            'notifications.noNotifications': 'Keine Benachrichtigungen',
+            'notifications.new': 'Neu',
+
             dailyReminder: 'Tägliche Erinnerung',
             dailyReminderDescription: 'An das Hinzufügen von Transaktionen erinnern',
             reminderTime: 'Erinnerungszeit',
@@ -1182,6 +1217,8 @@ const resources = {
             reset: 'Restablecer',
             optional: 'opcional',
             logout: 'Cerrar sesión',
+            create: 'Crear',
+
             balance: 'Balance',
             income: 'Ingresos',
             expense: 'Gastos',
@@ -1350,9 +1387,16 @@ const resources = {
             'notFound.title': 'Página no encontrada',
             'notFound.description': 'Desafortunadamente, la página solicitada no existe o ha sido movida.',
             'notFound.goHome': 'Volver a la página principal',
+
+            // Notifications
             notifications: 'Notificaciones',
+            'notifications.title': 'Notificaciones',
             'notifications.enable': 'Activar notificaciones',
             'notifications.description': 'Recibir alertas sobre eventos importantes',
+            'notifications.markAllAsRead': 'Marcar todo como leído',
+            'notifications.noNotifications': 'No hay notificaciones',
+            'notifications.new': 'Nuevo',
+
             dailyReminder: 'Recordatorio diario',
             dailyReminderDescription: 'Recordar agregar transacciones',
             reminderTime: 'Hora del recordatorio',
@@ -1465,6 +1509,8 @@ const resources = {
             reset: 'Resetuj',
             optional: 'opciono',
             logout: 'Odjavi se',
+            create: 'Kreiraj',
+
             balance: 'Balans',
             income: 'Prihodi',
             expense: 'Rashodi',
@@ -1633,9 +1679,16 @@ const resources = {
             'notFound.title': 'Stranica nije pronađena',
             'notFound.description': 'Nažalost, tražena stranica ne postoji ili je premještena.',
             'notFound.goHome': 'Vrati se na glavnu stranicu',
+
+            // Notifications
             notifications: 'Obavještenja',
+            'notifications.title': 'Obavještenja',
             'notifications.enable': 'Uključi obavještenja',
             'notifications.description': 'Primajte obavještenja o važnim događajima',
+            'notifications.markAllAsRead': 'Označi sve kao pročitano',
+            'notifications.noNotifications': 'Nema obavještenja',
+            'notifications.new': 'Novo',
+
             dailyReminder: 'Dnevni podsjetnik',
             dailyReminderDescription: 'Podsjeti na unos transakcija',
             reminderTime: 'Vrijeme podsjetnika',
