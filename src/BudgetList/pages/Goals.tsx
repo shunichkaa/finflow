@@ -385,7 +385,7 @@ const Goals: React.FC = () => {
                                             }}
                                         >
                                             <IconComponent sx={{
-                                                fontSize: 18,
+                                                fontSize: 20,
                                                 color: isSelected
                                                     ? iconData.color
                                                     : (mode === 'dark' ? '#fff' : '#272B3E'),
