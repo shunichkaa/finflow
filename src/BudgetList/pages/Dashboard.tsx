@@ -71,39 +71,43 @@ const Dashboard = () => {
                     <Typography
                         variant="body1"
                         sx={{
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                            opacity: 0.7,
+                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
                         }}
                     >
                         Управляйте своими финансами
                     </Typography>
                 </Box>
 
-                {/* Add Transaction Button - Goals Style */}
+                {/* Add Transaction Button */}
                 <Button
                     variant="contained"
                     startIcon={<AddIcon/>}
                     onClick={() => setIsModalOpen(true)}
                     sx={{
-                        background: '#6C6FF9',
+                        background: mode === 'dark'
+                            ? 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)'
+                            : 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                         color: '#FFFFFF',
                         fontWeight: 600,
                         px: 4,
                         py: 1.5,
+                        borderRadius: 3,
                         textTransform: 'none',
-                        boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
+                        boxShadow: mode === 'dark'
+                            ? '0 8px 24px rgba(108, 111, 249, 0.4)'
+                            : '0 8px 24px rgba(168, 163, 246, 0.4)',
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&:hover': {
-                            background: '#6C6FF9',
                             transform: 'translateY(-2px)',
-                            boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
+                            boxShadow: mode === 'dark'
+                                ? '0 12px 32px rgba(108, 111, 249, 0.5)'
+                                : '0 12px 32px rgba(168, 163, 246, 0.5)',
                         }
                     }}
                 >
                     {t('addTransaction')}
                 </Button>
             </Box>
-
 
             <Container maxWidth="xl" sx={{px: {xs: 0, sm: 0.5}, pb: 1}}>
                 {/* Stats Cards */}
@@ -122,7 +126,7 @@ const Dashboard = () => {
                     onReset={reset}
                 />
 
-                {/* Transaction List - iOS Card */}
+                {/* Transaction List */}
                 <GlassCard
                     sx={{
                         p: {xs: 2, sm: 3},

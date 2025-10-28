@@ -10,7 +10,6 @@ import 'dayjs/locale/de';
 import 'dayjs/locale/es';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
-// Avoid importing internal types from MUI X
 
 type PickerValue = Dayjs | null;
 

@@ -13,20 +13,14 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { formatDistanceToNow } from 'date-fns';
 import { enUS, ru, fr, de, es } from 'date-fns/locale';
 import type { Locale } from 'date-fns';
-
-// Import and register locales
 import 'date-fns/locale/ru';
 import 'date-fns/locale/fr';
 import 'date-fns/locale/de';
 import 'date-fns/locale/es';
-
-// Custom 'me' locale not required; reuse 'ru'
 import { useTranslation } from "react-i18next";
 import { useNotificationStore } from "../../../Budgets/store/useNotificationStore.ts";
 import { useThemeMode } from "../../../Budgets/theme/ThemeContext";
-// Use i18n from context to avoid multiple instances
 
-// reserved for future use
 const notificationTranslations = {
     ru: {
         notifications: {

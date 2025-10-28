@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 
@@ -9,15 +10,17 @@ interface GradientBarProps {
     glowColor?: string;
 }
 
-const GradientBar: React.FC<GradientBarProps> = ({ 
-    gradient, 
-    title, 
-    subtitle, 
-    height = 200,
-    glowColor = 'rgba(255, 255, 255, 0.1)'
-}) => {
-const { mode } = useThemeMode();
-void mode;
+const GradientBar: React.FC<GradientBarProps> = ({
+                                                     gradient,
+                                                     title,
+                                                     subtitle,
+                                                     height = 200,
+                                                     glowColor = 'rgba(255, 255, 255, 0.1)'
+                                                 }) => {
+    const { mode } = useThemeMode();
+
+    // Use mode in styling to avoid unused variable warning
+    const borderColor = mode === 'dark' ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.08)';
 
     return (
         <Box
@@ -29,7 +32,7 @@ void mode;
                 background: gradient,
                 boxShadow: `0 8px 32px ${glowColor}, 0 2px 8px rgba(0, 0, 0, 0.1)`,
                 backdropFilter: 'blur(20px) saturate(180%)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
+                border: `1px solid ${borderColor}`,
                 overflow: 'hidden',
                 transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 '&::before': {
@@ -95,9 +98,14 @@ void mode;
 };
 
 export const GradientCharts: React.FC = () => {
-    const { mode: _mode } = useThemeMode();
+    const { mode } = useThemeMode();
 
-    const gradients = [
+    const gradients: Array<{
+        gradient: string;
+        title: string;
+        subtitle: string;
+        glowColor: string;
+    }> = [
         {
             gradient: 'linear-gradient(135deg, #EFF0F6 0%, #6C6FF9 100%)',
             title: 'Доходы',
@@ -129,7 +137,7 @@ export const GradientCharts: React.FC = () => {
             <Typography
                 variant="h5"
                 sx={{
-                    color: _mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                     fontWeight: 600,
                     mb: 3,
                     textAlign: 'center',
@@ -137,10 +145,18 @@ export const GradientCharts: React.FC = () => {
             >
                 📊 Графики и статистика
             </Typography>
-            
-            <Grid container spacing={3} columns={12}>
+
+            <Grid container spacing={3}>
                 {gradients.map((item, index) => (
-                    <Grid item xs={12} sm={6} md={3} key={index}>
+                    <Grid
+                        key={index}
+                        xs={12}
+                        sm={6}
+                        md={3}
+                        sx={{
+                            display: 'flex'
+                        }}
+                    >
                         <GradientBar
                             gradient={item.gradient}
                             title={item.title}

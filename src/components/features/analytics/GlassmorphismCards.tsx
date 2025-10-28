@@ -1,5 +1,6 @@
 import { Box, Typography, Grid } from '@mui/material';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
+import React from 'react';
 
 interface GlassmorphismCardProps {
     title: string;
@@ -9,15 +10,17 @@ interface GlassmorphismCardProps {
     glowColor?: string;
 }
 
-const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({ 
-    title, 
-    subtitle, 
-    icon,
-    gradient = 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-    glowColor = 'rgba(255, 255, 255, 0.1)'
-}) => {
-const { mode } = useThemeMode();
-void mode; // avoid unused var
+const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
+                                                                 title,
+                                                                 subtitle,
+                                                                 icon,
+                                                                 gradient = 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                                                                 glowColor = 'rgba(255, 255, 255, 0.1)'
+                                                             }) => {
+    const { mode } = useThemeMode();
+
+    // Use mode in styling to avoid unused variable warning
+    const borderColor = mode === 'dark' ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.08)';
 
     return (
         <Box
@@ -28,7 +31,7 @@ void mode; // avoid unused var
                 borderRadius: 4,
                 background: gradient,
                 backdropFilter: 'blur(40px) saturate(180%)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
+                border: `1px solid ${borderColor}`,
                 boxShadow: `0 8px 32px ${glowColor}, 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)`,
                 overflow: 'hidden',
                 transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
@@ -93,7 +96,7 @@ void mode; // avoid unused var
                         {icon}
                     </Box>
                 )}
-                
+
                 <Typography
                     variant="h6"
                     sx={{
@@ -106,7 +109,7 @@ void mode; // avoid unused var
                 >
                     {title}
                 </Typography>
-                
+
                 {subtitle && (
                     <Typography
                         variant="body2"
@@ -125,7 +128,7 @@ void mode; // avoid unused var
 };
 
 export const GlassmorphismCards: React.FC = () => {
-    const { mode: _mode } = useThemeMode();
+    const { mode } = useThemeMode();
 
     const cards = [
         {
@@ -171,7 +174,7 @@ export const GlassmorphismCards: React.FC = () => {
             <Typography
                 variant="h5"
                 sx={{
-                    color: _mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                     fontWeight: 600,
                     mb: 3,
                     textAlign: 'center',
@@ -179,10 +182,18 @@ export const GlassmorphismCards: React.FC = () => {
             >
                 🎨 Glassmorphism карточки
             </Typography>
-            
-            <Grid container spacing={3} columns={12}>
+
+            <Grid container spacing={3}>
                 {cards.map((card, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
+                    <Grid
+                        key={index}
+                        xs={12}
+                        sm={6}
+                        md={4}
+                        sx={{
+                            display: 'flex'
+                        }}
+                    >
                         <GlassmorphismCard
                             title={card.title}
                             subtitle={card.subtitle}

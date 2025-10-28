@@ -1,5 +1,5 @@
 import {Budget, Transaction} from "../types";
-import { useSettingsStore } from '../store/useSettingsStore';
+import {useSettingsStore} from '../store/useSettingsStore';
 
 export const exportToCSV = (transactions: Transaction[], filename: string) => {
     const language = useSettingsStore.getState().language || 'ru';
@@ -30,10 +30,9 @@ export const exportToCSV = (transactions: Transaction[], filename: string) => {
 };
 
 export const exportToExcel = (transactions: Transaction[], budgets: Budget[], filename: string) => {
-    const language = useSettingsStore.getState().language || 'ru';
     const transactionHeaders = ['Дата', 'Тип', 'Категория', 'Сумма', 'Описание'];
     const transactionRows = transactions.map(t => [
-        new Date(t.date).toLocaleDateString(language),
+        new Date(t.date).toLocaleDateString('ru'),
         t.type === 'income' ? 'Доход' : 'Расход',
         t.category,
         t.amount.toString(),
@@ -81,9 +80,11 @@ export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
     const balance = income - expenses;
 
     const language = useSettingsStore.getState().language || 'ru';
+    const currentDate = new Date().toLocaleDateString(language);
+
     const htmlContent = `
         <!DOCTYPE html>
-        <html>
+        <html lang="${language}">
         <head>
             <meta charset="utf-8">
             <title>FinFlow - Финансовый отчет</title>
@@ -180,7 +181,7 @@ export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
         </head>
         <body>
             <h1>FinFlow - Финансовый отчет</h1>
-            <div class="report-date">Дата формирования: ${new Date().toLocaleDateString('${language}')}</div>
+            <div class="report-date">Дата формирования: ${currentDate}</div>
             
             <div class="summary">
                 <h2>Сводка</h2>
@@ -219,7 +220,7 @@ export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
                     <tbody>
                         ${transactions.map(t => `
                             <tr>
-                                <td>${new Date(t.date).toLocaleDateString('${language}')}</td>
+                                <td>${new Date(t.date).toLocaleDateString(language)}</td>
                                 <td>${t.type === 'income' ? 'Доход' : 'Расход'}</td>
                                 <td>${t.category}</td>
                                 <td class="${t.type}">${t.amount.toFixed(2)} €</td>
@@ -269,7 +270,11 @@ export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
 
     const printWindow = window.open('', '_blank');
     if (printWindow) {
+        // Modern approach to avoid deprecated document.write
+        printWindow.document.open();
         printWindow.document.write(htmlContent);
         printWindow.document.close();
+
+        printWindow.focus();
     }
 };

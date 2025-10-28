@@ -233,18 +233,18 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(181, 234, 215, 0.2) 0%, rgba(181, 234, 215, 0.35) 100%)'
-                            : 'linear-gradient(135deg, rgba(181, 234, 215, 0.6) 0%, rgba(181, 234, 215, 0.9) 100%)',
+                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
+                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.9) 100%)',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(181, 234, 215, 0.15)'
-                            : '0 8px 24px rgba(181, 234, 215, 0.3)',
+                            ? '0 8px 24px rgba(108, 111, 249, 0.15)'
+                            : '0 8px 24px rgba(108, 111, 249, 0.3)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 30px rgba(181, 234, 215, 0.25)'
-                                : '0 12px 30px rgba(181, 234, 215, 0.5)',
+                                ? '0 12px 30px rgba(108, 111, 249, 0.25)'
+                                : '0 12px 30px rgba(108, 111, 249, 0.5)',
                         }
                     }}
                 >
@@ -267,18 +267,18 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(255, 179, 186, 0.2) 0%, rgba(255, 179, 186, 0.35) 100%)'
-                            : 'linear-gradient(135deg, rgba(255, 179, 186, 0.6) 0%, rgba(255, 179, 186, 0.9) 100%)',
+                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
+                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.9) 100%)',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(255, 179, 186, 0.15)'
-                            : '0 8px 24px rgba(255, 179, 186, 0.3)',
+                            ? '0 8px 24px rgba(108, 111, 249, 0.15)'
+                            : '0 8px 24px rgba(108, 111, 249, 0.3)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 30px rgba(255, 179, 186, 0.25)'
-                                : '0 12px 30px rgba(255, 179, 186, 0.5)',
+                                ? '0 12px 30px rgba(108, 111, 249, 0.25)'
+                                : '0 12px 30px rgba(108, 111, 249, 0.5)',
                         }
                     }}
                 >
@@ -301,18 +301,18 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(199, 206, 234, 0.2) 0%, rgba(199, 206, 234, 0.35) 100%)'
-                            : 'linear-gradient(135deg, rgba(199, 206, 234, 0.6) 0%, rgba(199, 206, 234, 0.9) 100%)',
+                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
+                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.9) 100%)',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(199, 206, 234, 0.15)'
-                            : '0 8px 24px rgba(199, 206, 234, 0.3)',
+                            ? '0 8px 24px rgba(108, 111, 249, 0.15)'
+                            : '0 8px 24px rgba(108, 111, 249, 0.3)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 30px rgba(199, 206, 234, 0.25)'
-                                : '0 12px 30px rgba(199, 206, 234, 0.5)',
+                                ? '0 12px 30px rgba(108, 111, 249, 0.25)'
+                                : '0 12px 30px rgba(108, 111, 249, 0.5)',
                         }
                     }}
                 >
@@ -335,18 +335,18 @@ const Analytics: React.FC = () => {
                     sx={{
                         borderRadius: 3,
                         background: mode === 'dark'
-                            ? 'linear-gradient(135deg, rgba(255, 215, 186, 0.2) 0%, rgba(255, 215, 186, 0.35) 100%)'
-                            : 'linear-gradient(135deg, rgba(255, 215, 186, 0.6) 0%, rgba(255, 215, 186, 0.9) 100%)',
+                            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
+                            : 'linear-gradient(135deg, rgba(108, 111, 249, 0.6) 0%, rgba(108, 111, 249, 0.9) 100%)',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(255, 215, 186, 0.15)'
-                            : '0 8px 24px rgba(255, 215, 186, 0.3)',
+                            ? '0 8px 24px rgba(108, 111, 249, 0.15)'
+                            : '0 8px 24px rgba(108, 111, 249, 0.3)',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 30px rgba(255, 215, 186, 0.25)'
-                                : '0 12px 30px rgba(255, 215, 186, 0.5)',
+                                ? '0 12px 30px rgba(108, 111, 249, 0.25)'
+                                : '0 12px 30px rgba(108, 111, 249, 0.5)',
                         }
                     }}
                 >
@@ -509,8 +509,8 @@ const Analytics: React.FC = () => {
                                                 height: {xs: 32, sm: 36},
                                                 borderRadius: '50%',
                                                 bgcolor: mode === 'dark'
-                                                    ? (index === 0 ? 'rgba(108, 111, 249, 0.5)' : index === 1 ? 'rgba(168, 163, 246, 0.5)' : index === 2 ? 'rgba(255, 179, 186, 0.5)' : index === 3 ? 'rgba(255, 218, 193, 0.5)' : 'rgba(255, 235, 204, 0.5)')
-                                                    : (index === 0 ? 'rgba(108, 111, 249, 0.3)' : index === 1 ? 'rgba(168, 163, 246, 0.3)' : index === 2 ? 'rgba(255, 179, 186, 0.3)' : index === 3 ? 'rgba(255, 218, 193, 0.3)' : 'rgba(255, 235, 204, 0.3)'),
+                                                    ? (index === 0 ? 'rgba(108, 111, 249, 0.5)' : index === 1 ? 'rgba(108, 111, 249, 0.4)' : index === 2 ? 'rgba(108, 111, 249, 0.3)' : index === 3 ? 'rgba(108, 111, 249, 0.2)' : 'rgba(108, 111, 249, 0.1)')
+                                                    : (index === 0 ? 'rgba(108, 111, 249, 0.3)' : index === 1 ? 'rgba(108, 111, 249, 0.25)' : index === 2 ? 'rgba(108, 111, 249, 0.2)' : index === 3 ? 'rgba(108, 111, 249, 0.15)' : 'rgba(108, 111, 249, 0.1)'),
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',

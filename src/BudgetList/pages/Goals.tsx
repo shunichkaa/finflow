@@ -43,22 +43,22 @@ import PaletteIcon from '@mui/icons-material/Palette';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 const GOAL_ICONS = [
-    {id: 'travel', icon: FlightTakeoffIcon, color: '#87CEEB'},
-    {id: 'home', icon: HomeIcon, color: '#FFB3BA'},
-    {id: 'car', icon: DirectionsCarIcon, color: '#BAE1DA'},
-    {id: 'education', icon: SchoolIcon, color: '#FFD7BA'},
-    {id: 'wedding', icon: FavoriteIcon, color: '#FFE5F1'},
-    {id: 'laptop', icon: ComputerIcon, color: '#C7CEEA'},
-    {id: 'jewelry', icon: DiamondIcon, color: '#D4BBDD'},
-    {id: 'savings', icon: SavingsIcon, color: '#B5EAD7'},
-    {id: 'vacation', icon: BeachAccessIcon, color: '#FFDAC1'},
-    {id: 'phone', icon: SmartphoneIcon, color: '#C3E5E1'},
-    {id: 'camera', icon: CameraAltIcon, color: '#E0D5F3'},
-    {id: 'fitness', icon: FitnessCenterIcon, color: '#B5EAD7'},
-    {id: 'gift', icon: CardGiftcardIcon, color: '#FFE5F1'},
-    {id: 'music', icon: MusicNoteIcon, color: '#D4E5F3'},
-    {id: 'art', icon: PaletteIcon, color: '#D4BBDD'},
-    {id: 'book', icon: MenuBookIcon, color: '#FFD7BA'},
+    {id: 'travel', icon: FlightTakeoffIcon, color: '#6C6FF9'},
+    {id: 'home', icon: HomeIcon, color: '#6C6FF9'},
+    {id: 'car', icon: DirectionsCarIcon, color: '#6C6FF9'},
+    {id: 'education', icon: SchoolIcon, color: '#6C6FF9'},
+    {id: 'wedding', icon: FavoriteIcon, color: '#6C6FF9'},
+    {id: 'laptop', icon: ComputerIcon, color: '#6C6FF9'},
+    {id: 'jewelry', icon: DiamondIcon, color: '#6C6FF9'},
+    {id: 'savings', icon: SavingsIcon, color: '#6C6FF9'},
+    {id: 'vacation', icon: BeachAccessIcon, color: '#6C6FF9'},
+    {id: 'phone', icon: SmartphoneIcon, color: '#6C6FF9'},
+    {id: 'camera', icon: CameraAltIcon, color: '#6C6FF9'},
+    {id: 'fitness', icon: FitnessCenterIcon, color: '#6C6FF9'},
+    {id: 'gift', icon: CardGiftcardIcon, color: '#6C6FF9'},
+    {id: 'music', icon: MusicNoteIcon, color: '#6C6FF9'},
+    {id: 'art', icon: PaletteIcon, color: '#6C6FF9'},
+    {id: 'book', icon: MenuBookIcon, color: '#6C6FF9'},
 ];
 
 const Goals: React.FC = () => {
@@ -156,7 +156,7 @@ const Goals: React.FC = () => {
                     {t('savings', 'Savings')}
                 </Typography>
                 <Typography variant="body1"
-                            sx={{color: mode === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(6,0,171,0.6)'}}>
+                            sx={{color: mode === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(39,43,62,0.6)'}}>
                     {t('savingsGoal.goalDescription', 'Create savings goals for your important financial targets')}
                 </Typography>
             </Box>
@@ -195,7 +195,7 @@ const Goals: React.FC = () => {
                     <Typography variant="body2" sx={{
                         color: mode === 'dark'
                             ? 'rgba(255,255,255,0.5)'
-                            : 'rgba(6,0,171,0.5)'
+                            : 'rgba(39,43,62,0.5)'
                     }}>
                         {t('savingsGoal.createFirstGoal', 'Create your first savings goal to get started')}
                     </Typography>
@@ -337,7 +337,7 @@ const Goals: React.FC = () => {
                                         sx={{
                                             color: mode === 'dark'
                                                 ? 'rgba(255,255,255,0.7)'
-                                                : 'rgba(6,0,171,0.7)',
+                                                : 'rgba(39,43,62,0.7)',
                                             mb: 1.5,
                                             fontWeight: 500
                                         }}>
@@ -369,7 +369,7 @@ const Goals: React.FC = () => {
                                                     ? `${iconData.color}30`
                                                     : mode === 'dark'
                                                         ? 'rgba(255,255,255,0.05)'
-                                                        : 'rgba(6,0,171,0.05)',
+                                                        : 'rgba(39,43,62,0.05)',
                                                 border: `2px solid ${isSelected ? iconData.color : 'transparent'}`,
                                                 transition: 'all 0.2s ease',
                                                 '&:hover': {
@@ -378,7 +378,7 @@ const Goals: React.FC = () => {
                                                         ? `${iconData.color}30`
                                                         : mode === 'dark'
                                                             ? 'rgba(255,255,255,0.1)'
-                                                            : 'rgba(6,0,171,0.1)',
+                                                            : 'rgba(39,43,62,0.1)',
                                                 }
                                             }}
                                         >
@@ -445,7 +445,7 @@ const Goals: React.FC = () => {
                                 sx={{
                                     color: mode === 'dark'
                                         ? 'rgba(255,255,255,0.7)'
-                                        : 'rgba(6,0,171,0.7)',
+                                        : 'rgba(39,43,62,0.7)',
                                     textTransform: 'none',
                                     fontWeight: 500,
                                 }}

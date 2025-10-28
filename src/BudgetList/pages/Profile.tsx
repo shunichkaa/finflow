@@ -237,7 +237,6 @@ export default function Profile() {
 
     return (
         <Container maxWidth="md" sx={{py: 4}}>
-            {/* ИСПРАВЛЕННАЯ СТРОКА - используем 'profile' вместо 'Profile' */}
             <Typography variant="h4" gutterBottom sx={{mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
                 {t('profile')}
             </Typography>
@@ -248,7 +247,7 @@ export default function Profile() {
                     <Box display="flex" alignItems="center">
                         <Avatar
                             src={avatar || undefined}
-                            sx={{width: 64, height: 64, mr: 2, bgcolor: 'primary.main'}}
+                            sx={{width: 64, height: 64, mr: 2, bgcolor: '#6C6FF9'}}
                         >
                             {!avatar && <Person fontSize="large"/>}
                         </Avatar>
@@ -257,7 +256,7 @@ export default function Profile() {
                                 {nickname || session?.user?.email || t('user')}
                             </Typography>
                             <Typography variant="body2" sx={{
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
                                 mt: 0.5
                             }}>
                                 {session?.user?.email}
@@ -298,7 +297,7 @@ export default function Profile() {
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
                             <Palette
-                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
+                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)'}}/>
                         </ListItemIcon>
                         <ListItemText
                             primary={t('theme.dark')}
@@ -310,10 +309,10 @@ export default function Profile() {
                             })}
                             sx={{
                                 '& .MuiSwitch-switchBase.Mui-checked': {
-                                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                    color: '#6C6FF9',
                                 },
                                 '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                    backgroundColor: '#6C6FF9',
                                 },
                             }}
                         />
@@ -325,7 +324,7 @@ export default function Profile() {
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
                             <Language
-                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
+                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)'}}/>
                         </ListItemIcon>
                         <ListItemText
                             primary={t('settings.language')}
@@ -356,7 +355,7 @@ export default function Profile() {
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
                             <AttachMoney
-                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
+                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)'}}/>
                         </ListItemIcon>
                         <ListItemText
                             primary={t('settings.currency')}
@@ -397,7 +396,7 @@ export default function Profile() {
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
                             <NotificationsIcon
-                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
+                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)'}}/>
                         </ListItemIcon>
                         <ListItemText
                             primary={t('notifications.enable')}
@@ -428,7 +427,7 @@ export default function Profile() {
                         <Box sx={{display: 'flex', alignItems: 'center'}}>
                             <ListItemIcon>
                                 <Schedule
-                                    sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
+                                    sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)'}}/>
                             </ListItemIcon>
                             <ListItemText
                                 primary={t('dailyReminder')}
@@ -461,7 +460,7 @@ export default function Profile() {
                                 pr: 2
                             }}>
                                 <Typography sx={{
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
                                     fontSize: '0.9rem'
                                 }}>
                                     {t('reminderTime')}
@@ -678,7 +677,7 @@ export default function Profile() {
                             onClick={handleCloseEditModal}
                             size="small"
                             sx={{
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
                                 '&:hover': {
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
@@ -694,7 +693,7 @@ export default function Profile() {
                         <Box display="flex" flexDirection="column" alignItems="center" mb={2}>
                             <Avatar
                                 src={avatar || undefined}
-                                sx={{width: 80, height: 80, mb: 2, backgroundColor: 'primary.main'}}
+                                sx={{width: 80, height: 80, mb: 2, backgroundColor: '#6C6FF9'}}
                             >
                                 {!avatar && <Person fontSize="large"/>}
                             </Avatar>
@@ -731,7 +730,6 @@ export default function Profile() {
                             value={nickname}
                             onChange={(e) => {
                                 setNickname(e.target.value);
-                                // Синхронизация nickname с облаком
                                 setTimeout(() => triggerSync(), 500);
                             }}
                             margin="normal"
@@ -740,13 +738,13 @@ export default function Profile() {
                                 width: '100%',
                                 '& .MuiOutlinedInput-root': {
                                     '& fieldset': {
-                                        borderColor: 'rgba(6, 0, 171, 0.3)',
+                                        borderColor: 'rgba(108, 111, 249, 0.3)',
                                     },
                                     '&:hover fieldset': {
-                                        borderColor: 'rgba(6, 0, 171, 0.6)',
+                                        borderColor: 'rgba(108, 111, 249, 0.6)',
                                     },
                                     '&.Mui-focused fieldset': {
-                                        borderColor: '#272B3E',
+                                        borderColor: '#6C6FF9',
                                     },
                                 },
                                 '& .MuiInputLabel-root': {
@@ -785,13 +783,13 @@ export default function Profile() {
                                 width: '100%',
                                 '& .MuiOutlinedInput-root': {
                                     '& fieldset': {
-                                        borderColor: 'rgba(6, 0, 171, 0.3)',
+                                        borderColor: 'rgba(108, 111, 249, 0.3)',
                                     },
                                     '&:hover fieldset': {
-                                        borderColor: 'rgba(6, 0, 171, 0.6)',
+                                        borderColor: 'rgba(108, 111, 249, 0.6)',
                                     },
                                     '&.Mui-focused fieldset': {
-                                        borderColor: '#272B3E',
+                                        borderColor: '#6C6FF9',
                                     },
                                 },
                                 '& .MuiInputLabel-root': {
@@ -817,13 +815,13 @@ export default function Profile() {
                                 width: '100%',
                                 '& .MuiOutlinedInput-root': {
                                     '& fieldset': {
-                                        borderColor: 'rgba(6, 0, 171, 0.3)',
+                                        borderColor: 'rgba(108, 111, 249, 0.3)',
                                     },
                                     '&:hover fieldset': {
-                                        borderColor: 'rgba(6, 0, 171, 0.6)',
+                                        borderColor: 'rgba(108, 111, 249, 0.6)',
                                     },
                                     '&.Mui-focused fieldset': {
-                                        borderColor: '#272B3E',
+                                        borderColor: '#6C6FF9',
                                     },
                                 },
                                 '& .MuiInputLabel-root': {
@@ -850,13 +848,13 @@ export default function Profile() {
                                     width: '100%',
                                     '& .MuiOutlinedInput-root': {
                                         '& fieldset': {
-                                            borderColor: 'rgba(6, 0, 171, 0.3)',
+                                            borderColor: 'rgba(108, 111, 249, 0.3)',
                                         },
                                         '&:hover fieldset': {
-                                            borderColor: 'rgba(6, 0, 171, 0.6)',
+                                            borderColor: 'rgba(108, 111, 249, 0.6)',
                                         },
                                         '&.Mui-focused fieldset': {
-                                            borderColor: '#272B3E',
+                                            borderColor: '#6C6FF9',
                                         },
                                     },
                                     '& .MuiInputLabel-root': {
@@ -877,7 +875,7 @@ export default function Profile() {
                             onClick={handleCloseEditModal}
                             sx={{
                                 borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
                                 fontWeight: 'bold',
                                 '&:hover': {
                                     borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)',
@@ -891,11 +889,11 @@ export default function Profile() {
                             variant="contained"
                             onClick={handleSaveProfile}
                             sx={{
-                                background: 'linear-gradient(135deg, #6C6FF9 0%, #A8A3F6 100%)',
+                                background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                                 color: '#FFFFFF',
                                 fontWeight: 'bold',
                                 '&:hover': {
-                                    background: 'linear-gradient(135deg, #5B5EE8 0%, #9794E5 100%)',
+                                    background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
                                     transform: 'translateY(-1px)',
                                     boxShadow: '0 6px 20px rgba(108, 111, 249, 0.4)',
                                 }
