@@ -72,7 +72,7 @@ export const DatePickerField: React.FC<DatePickerFieldProps> = ({
 
     const currentLocale = localeMap[i18n.language] || 'en';
 
-    const handleChange = (value: PickerValue, _context: PickerChangeHandlerContext<DateValidationError>) => {
+    const handleChange = (value: PickerValue) => {
         if (value) {
             onChange(value.format('YYYY-MM-DD'));
         } else if (clearable) {

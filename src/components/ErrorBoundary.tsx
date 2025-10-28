@@ -22,6 +22,7 @@ interface ErrorFallbackProps {
 }
 
 const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, errorInfo, resetError }) => {
+    void error; void errorInfo; // avoid unused warnings
     const navigate = useNavigate();
     const { t } = useTranslation();
     const {mode} = useThemeMode();

@@ -7,6 +7,7 @@ import {
     IconButton,
     Menu,
     MenuItem,
+    Typography,
 } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { formatDistanceToNow } from 'date-fns';
@@ -19,12 +20,7 @@ import 'date-fns/locale/fr';
 import 'date-fns/locale/de';
 import 'date-fns/locale/es';
 
-// Set Montenegrin locale to Serbian (similar enough for date formatting)
-const srLatnLocale = {
-    ...ru,
-    code: 'me',
-    formatDistance: (...args: any[]) => ru.formatDistance(...args).replace(/ru/g, 'me')
-} as Locale;
+// Custom 'me' locale not required; reuse 'ru'
 import { useTranslation } from "react-i18next";
 import { useNotificationStore } from "../../../Budgets/store/useNotificationStore.ts";
 import { useThemeMode } from "../../../Budgets/theme/ThemeContext";

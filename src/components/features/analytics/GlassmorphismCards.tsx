@@ -16,7 +16,8 @@ const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
     gradient = 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
     glowColor = 'rgba(255, 255, 255, 0.1)'
 }) => {
-    const { mode } = useThemeMode();
+const { mode } = useThemeMode();
+void mode; // avoid unused var
 
     return (
         <Box

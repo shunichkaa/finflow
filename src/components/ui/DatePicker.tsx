@@ -2,8 +2,9 @@ import React from 'react';
 import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import type { PickerChangeHandlerContext } from '@mui/x-date-pickers/models/helpers/pickers/usePicker/usePickerValue.types';
-import type { DateValidationError } from '@mui/x-date-pickers/models/errors/validation.types';
+// Relax types to avoid internal MUI types
+type PickerChangeHandlerContext<T = unknown> = T;
+type DateValidationError = unknown;
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ru';
 
@@ -71,14 +72,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 minDate={minDate ? (typeof minDate === 'string' ? dayjs(minDate) : minDate) : undefined}
                 maxDate={maxDate ? (typeof maxDate === 'string' ? dayjs(maxDate) : maxDate) : undefined}
                 disabled={disabled}
-                inputFormat={inputFormat || 'DD.MM.YYYY'}
+                format={inputFormat || 'DD.MM.YYYY'}
                 views={views}
                 openTo={openTo}
                 disableFuture={disableFuture}
                 disablePast={disablePast}
                 showTodayButton={showTodayButton}
                 disableHighlightToday={disableHighlightToday}
-                autoOk={autoOk}
+                // autoOk removed in MUI v6
                 slotProps={{
                     textField: {
                         fullWidth: fullWidth !== false,

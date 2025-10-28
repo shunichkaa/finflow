@@ -16,7 +16,8 @@ const GradientBar: React.FC<GradientBarProps> = ({
     height = 200,
     glowColor = 'rgba(255, 255, 255, 0.1)'
 }) => {
-    const { mode } = useThemeMode();
+const { mode } = useThemeMode();
+void mode;
 
     return (
         <Box

@@ -142,10 +142,7 @@ export default function Profile() {
         }
     };
 
-    const _handleSave = () => {
-        setSnackbarMessage(t('settingsSaved', 'Настройки сохранены'));
-        setSnackbarOpen(true);
-    };
+    // removed unused _handleSave
 
     const handleExportData = () => {
         setSnackbarMessage(t('dataExported', 'Данные экспортированы'));
