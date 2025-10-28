@@ -445,32 +445,10 @@ const Goals: React.FC = () => {
 
                 <Box sx={{
                     px: 3,
-                    pb: 2.5,
-                    pt: 1.5,
-                    borderTop: mode === 'dark'
-                        ? '1px solid rgba(255,255,255,0.1)'
-                        : '1px solid rgba(39,43,62,0.1)',
+                    pb: 3,
+                    pt: 2,
                 }}>
                     <Stack direction="row" spacing={2} sx={{justifyContent: 'flex-end'}}>
-                        <Button
-                            onClick={() => setOpenDialog(false)}
-                            sx={{
-                                color: mode === 'dark'
-                                    ? 'rgba(255,255,255,0.7)'
-                                    : 'rgba(39,43,62,0.7)',
-                                textTransform: 'none',
-                                fontWeight: 500,
-                                minWidth: 'auto',
-                                px: 3,
-                                py: 1,
-                                borderRadius: 3,
-                                border: mode === 'dark'
-                                    ? '1px solid rgba(255,255,255,0.2)'
-                                    : '1px solid rgba(39,43,62,0.2)',
-                            }}
-                        >
-                            {t('cancel', 'Cancel')}
-                        </Button>
                         <Button
                             variant="contained"
                             onClick={handleSaveGoal}
@@ -479,13 +457,16 @@ const Goals: React.FC = () => {
                                 color: '#fff',
                                 fontWeight: 600,
                                 px: 4,
-                                py: 1,
+                                py: 1.5,
                                 borderRadius: 3,
                                 textTransform: 'none',
                                 minWidth: 'auto',
+                                boxShadow: mode === 'dark'
+                                    ? '0 8px 24px rgba(108,111,249,0.4)'
+                                    : '0 8px 24px rgba(168,163,246,0.4)',
                                 '&:hover': {
                                     transform: 'translateY(-2px)',
-                                    boxShadow: '0 8px 24px rgba(108,111,249,0.5)',
+                                    boxShadow: '0 12px 32px rgba(108,111,249,0.5)',
                                 }
                             }}
                         >
