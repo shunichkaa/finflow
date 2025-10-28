@@ -7,6 +7,32 @@ const resources = {
         translation: {
             appName: 'FinFlow',
             tagline: 'Умное управление финансами',
+
+            // Аутентификация
+            auth: {
+                fillAllFields: 'Пожалуйста, заполните все поля',
+                validEmail: 'Введите корректный email',
+                passwordLength: 'Пароль должен быть минимум 6 символов',
+                loginSuccess: 'Вы успешно вошли!',
+                loginFailed: 'Не удалось войти. Проверьте данные.',
+                signupSuccess: 'Регистрация успешна! Проверьте почту для подтверждения.',
+                signupFailed: 'Не удалось зарегистрироваться.',
+                unknownError: 'Произошла неизвестная ошибка',
+                oauthError: 'Ошибка при входе через социальную сеть',
+                login: 'Вход в аккаунт',
+                signup: 'Создание аккаунта',
+                continueWithGoogle: 'Продолжить с Google',
+                continueWithApple: 'Продолжить с Apple',
+                loading: 'Загрузка...',
+                or: 'или',
+                email: 'Email',
+                password: 'Пароль',
+                loginButton: 'Войти',
+                signupButton: 'Зарегистрироваться',
+                noAccount: 'Нет аккаунта?',
+                hasAccount: 'Уже есть аккаунт?'
+            },
+
             addTransaction: 'Добавить транзакцию',
             newTransaction: 'Новая транзакция',
             save: 'Сохранить',
@@ -272,6 +298,32 @@ const resources = {
         translation: {
             appName: 'FinFlow',
             tagline: 'Smart Finance Management',
+
+            // Аутентификация
+            auth: {
+                fillAllFields: 'Please fill in all fields',
+                validEmail: 'Please enter a valid email',
+                passwordLength: 'Password must be at least 6 characters',
+                loginSuccess: 'You have successfully logged in!',
+                loginFailed: 'Failed to log in. Please check your credentials.',
+                signupSuccess: 'Registration successful! Please check your email for confirmation.',
+                signupFailed: 'Failed to register.',
+                unknownError: 'An unknown error occurred',
+                oauthError: 'Error logging in with social network',
+                login: 'Login to account',
+                signup: 'Create account',
+                continueWithGoogle: 'Continue with Google',
+                continueWithApple: 'Continue with Apple',
+                loading: 'Loading...',
+                or: 'or',
+                email: 'Email',
+                password: 'Password',
+                loginButton: 'Log In',
+                signupButton: 'Sign Up',
+                noAccount: 'Don\'t have an account?',
+                hasAccount: 'Already have an account?'
+            },
+
             addTransaction: 'Add Transaction',
             newTransaction: 'New Transaction',
             save: 'Save',
@@ -530,6 +582,32 @@ const resources = {
         translation: {
             appName: 'FinFlow',
             tagline: 'Gestion intelligente des finances',
+
+            // Аутентификация
+            auth: {
+                fillAllFields: 'Veuillez remplir tous les champs',
+                validEmail: 'Veuillez entrer un email valide',
+                passwordLength: 'Le mot de passe doit comporter au moins 6 caractères',
+                loginSuccess: 'Vous vous êtes connecté avec succès !',
+                loginFailed: 'Échec de la connexion. Veuillez vérifier vos identifiants.',
+                signupSuccess: 'Inscription réussie ! Veuillez vérifier votre email pour confirmation.',
+                signupFailed: 'Échec de l\'inscription.',
+                unknownError: 'Une erreur inconnue s\'est produite',
+                oauthError: 'Erreur lors de la connexion avec le réseau social',
+                login: 'Connexion au compte',
+                signup: 'Création de compte',
+                continueWithGoogle: 'Continuer avec Google',
+                continueWithApple: 'Continuer avec Apple',
+                loading: 'Chargement...',
+                or: 'ou',
+                email: 'Email',
+                password: 'Mot de passe',
+                loginButton: 'Se connecter',
+                signupButton: 'S\'inscrire',
+                noAccount: 'Vous n\'avez pas de compte ?',
+                hasAccount: 'Vous avez déjà un compte ?'
+            },
+
             addTransaction: 'Ajouter une transaction',
             newTransaction: 'Nouvelle transaction',
             save: 'Enregistrer',
@@ -787,6 +865,32 @@ const resources = {
         translation: {
             appName: 'FinFlow',
             tagline: 'Intelligente Finanzverwaltung',
+
+            // Аутентификация
+            auth: {
+                fillAllFields: 'Bitte füllen Sie alle Felder aus',
+                validEmail: 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
+                passwordLength: 'Das Passwort muss mindestens 6 Zeichen lang sein',
+                loginSuccess: 'Sie haben sich erfolgreich angemeldet!',
+                loginFailed: 'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.',
+                signupSuccess: 'Registrierung erfolgreich! Bitte überprüfen Sie Ihre E-Mail zur Bestätigung.',
+                signupFailed: 'Registrierung fehlgeschlagen.',
+                unknownError: 'Ein unbekannter Fehler ist aufgetreten',
+                oauthError: 'Fehler beim Anmelden über soziale Netzwerke',
+                login: 'Anmeldung zum Konto',
+                signup: 'Konto erstellen',
+                continueWithGoogle: 'Weiter mit Google',
+                continueWithApple: 'Weiter mit Apple',
+                loading: 'Wird geladen...',
+                or: 'oder',
+                email: 'E-Mail',
+                password: 'Passwort',
+                loginButton: 'Anmelden',
+                signupButton: 'Registrieren',
+                noAccount: 'Sie haben noch kein Konto?',
+                hasAccount: 'Sie haben bereits ein Konto?'
+            },
+
             addTransaction: 'Transaktion hinzufügen',
             newTransaction: 'Neue Transaktion',
             save: 'Speichern',
@@ -1044,6 +1148,32 @@ const resources = {
         translation: {
             appName: 'FinFlow',
             tagline: 'Gestión inteligente de finanzas',
+
+            // Аутентификация
+            auth: {
+                fillAllFields: 'Por favor, complete todos los campos',
+                validEmail: 'Por favor, introduzca un email válido',
+                passwordLength: 'La contraseña debe tener al menos 6 caracteres',
+                loginSuccess: '¡Ha iniciado sesión con éxito!',
+                loginFailed: 'Error al iniciar sesión. Por favor, verifique sus credenciales.',
+                signupSuccess: '¡Registro exitoso! Por favor, revise su email para confirmar.',
+                signupFailed: 'Error al registrarse.',
+                unknownError: 'Ocurrió un error desconocido',
+                oauthError: 'Error al iniciar sesión con la red social',
+                login: 'Iniciar sesión en la cuenta',
+                signup: 'Crear cuenta',
+                continueWithGoogle: 'Continuar con Google',
+                continueWithApple: 'Continuar con Apple',
+                loading: 'Cargando...',
+                or: 'o',
+                email: 'Email',
+                password: 'Contraseña',
+                loginButton: 'Iniciar Sesión',
+                signupButton: 'Registrarse',
+                noAccount: '¿No tienes una cuenta?',
+                hasAccount: '¿Ya tienes una cuenta?'
+            },
+
             addTransaction: 'Añadir transacción',
             newTransaction: 'Nueva transacción',
             save: 'Guardar',
@@ -1301,6 +1431,32 @@ const resources = {
         translation: {
             appName: 'FinFlow',
             tagline: 'Pametno upravljanje finansijama',
+
+            // Аутентификация
+            auth: {
+                fillAllFields: 'Molimo popunite sva polja',
+                validEmail: 'Molimo unesite važeću email adresu',
+                passwordLength: 'Lozinka mora imati najmanje 6 karaktera',
+                loginSuccess: 'Uspešno ste se prijavili!',
+                loginFailed: 'Neuspešna prijava. Molimo proverite vaše podatke.',
+                signupSuccess: 'Registracija uspešna! Molimo proverite vaš email za potvrdu.',
+                signupFailed: 'Neuspešna registracija.',
+                unknownError: 'Došlo je do nepoznate greške',
+                oauthError: 'Greška pri prijavi putem društvene mreže',
+                login: 'Prijava na nalog',
+                signup: 'Kreiranje naloga',
+                continueWithGoogle: 'Nastavi sa Google',
+                continueWithApple: 'Nastavi sa Apple',
+                loading: 'Učitavanje...',
+                or: 'ili',
+                email: 'Email',
+                password: 'Lozinka',
+                loginButton: 'Prijavi se',
+                signupButton: 'Registruj se',
+                noAccount: 'Nemate nalog?',
+                hasAccount: 'Već imate nalog?'
+            },
+
             addTransaction: 'Dodaj transakciju',
             newTransaction: 'Nova transakcija',
             save: 'Sačuvaj',
