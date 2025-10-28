@@ -18,6 +18,13 @@ const Budgets: React.FC = () => {
     const [editingBudgetId, setEditingBudgetId] = useState<string | null>(null);
     const editingBudget = useMemo(() => budgets.find(b => b.id === editingBudgetId) || null, [budgets, editingBudgetId]);
 
+    // Функция для получения фона как в аналитике
+    const getCardBackground = () => {
+        return mode === 'dark'
+            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
+            : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)';
+    };
+
     return (
         <Container
             maxWidth="xl"
@@ -82,16 +89,26 @@ const Budgets: React.FC = () => {
                 </Button>
             </Box>
 
-
-            {}
-            <Box sx={{width: '100%'}}>
+            {/* Budget List */}
+            <Box sx={{
+                width: '100%',
+                background: getCardBackground(),
+                borderRadius: 3,
+                border: mode === 'dark'
+                    ? '1px solid rgba(108, 111, 249, 0.3)'
+                    : '1px solid rgba(239, 240, 246, 0.3)',
+                boxShadow: mode === 'dark'
+                    ? '0 8px 24px rgba(108, 111, 249, 0.15)'
+                    : '0 8px 24px rgba(108, 111, 249, 0.2)',
+                p: 3
+            }}>
                 <BudgetList onEdit={(id) => {
                     setEditingBudgetId(id);
                     setIsModalOpen(true);
                 }}/>
             </Box>
 
-            {}
+            {/* Budget Form Modal */}
             <Modal open={isModalOpen} onClose={() => {
                 setIsModalOpen(false);
                 setEditingBudgetId(null);

@@ -29,6 +29,13 @@ const Dashboard = () => {
         filteredTransactions,
     } = useTransactionFilters(transactions);
 
+    // Функция для получения фона карточек как в аналитике
+    const getCardBackground = () => {
+        return mode === 'dark'
+            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
+            : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)';
+    };
+
     const handleStatsCardClick = (type: TransactionType | 'all') => {
         setType(type);
         document.getElementById('transactions-list')?.scrollIntoView({behavior: 'smooth'});
@@ -131,8 +138,19 @@ const Dashboard = () => {
                     sx={{
                         p: {xs: 2, sm: 3},
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                        background: getCardBackground(),
+                        border: mode === 'dark'
+                            ? '1px solid rgba(108, 111, 249, 0.3)'
+                            : '1px solid rgba(239, 240, 246, 0.3)',
+                        boxShadow: mode === 'dark'
+                            ? '0 8px 24px rgba(108, 111, 249, 0.15)'
+                            : '0 8px 24px rgba(108, 111, 249, 0.2)',
+                        transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         '&:hover': {
                             transform: 'translateY(-2px)',
+                            boxShadow: mode === 'dark'
+                                ? '0 12px 30px rgba(108, 111, 249, 0.25)'
+                                : '0 12px 30px rgba(108, 111, 249, 0.3)',
                         }
                     }}
                     id="transactions-list"
