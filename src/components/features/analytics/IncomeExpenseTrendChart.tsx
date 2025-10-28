@@ -18,6 +18,7 @@ export interface IncomeExpenseTrendChartProps {
 export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = ({
                                                                                     transactions,
                                                                                     period,
+                                                                                    noDataMessage,
                                                                                 }) => {
     const {t} = useTranslation();
     const {currency} = useSettingsStore();
@@ -28,13 +29,11 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
         const now = new Date();
         const data: { date: string; income: number; expense: number }[] = [];
 
-        // Защита от некорректных данных
         if (!transactions || !Array.isArray(transactions) || transactions.length === 0) {
             return data;
         }
 
         if (period === 'week') {
-            // Последние 7 дней
             for (let i = 6; i >= 0; i--) {
                 const date = new Date(now);
                 date.setDate(now.getDate() - i);
@@ -58,7 +57,6 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 });
             }
         } else if (period === 'month') {
-            // Последние 30 дней (как в Analytics.tsx)
             for (let i = 29; i >= 0; i--) {
                 const date = new Date(now);
                 date.setDate(now.getDate() - i);
@@ -82,7 +80,6 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 });
             }
         } else {
-            // Последние 12 месяцев
             for (let i = 11; i >= 0; i--) {
                 const monthDate = new Date(now);
                 monthDate.setMonth(now.getMonth() - i);
@@ -113,33 +110,26 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
 
     const hasData = chartData.some(d => d.income > 0 || d.expense > 0);
 
-    // Находим максимальное значение для настройки оси Y
     const maxValue = useMemo(() => {
         const allValues = chartData.flatMap(d => [d.income, d.expense]);
         const max = Math.max(...allValues, 0);
-
-        // Добавляем запас 10% от максимального значения для лучшего отображения
         return max > 0 ? max * 1.1 : 1000;
     }, [chartData]);
 
-    // Функция для форматирования значений на оси Y
     const formatYAxisTick = (value: number) => {
         if (value === 0) return '0';
 
-        // Для очень больших чисел используем сокращенный формат
         if (value >= 1000000) {
             return `${(value / 1000000).toFixed(1)}M`;
         } else if (value >= 1000) {
             return `${(value / 1000).toFixed(0)}K`;
         }
 
-        // Для обычных чисел используем компактный формат
         return new Intl.NumberFormat(language, {
             maximumFractionDigits: 0,
         }).format(value);
     };
 
-    // Определяем отступ слева в зависимости от максимального значения
     const getYAxisMargin = () => {
         if (maxValue >= 1000000) return 25;
         if (maxValue >= 100000) return 20;
@@ -148,7 +138,6 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
         return 5;
     };
 
-    // Определяем интервал для делений оси Y
     const getYAxisInterval = () => {
         if (maxValue >= 1000000) return 2;
         if (maxValue >= 100000) return 1;
@@ -166,9 +155,10 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
             }}>
                 <Typography sx={{
                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
-                    fontSize: '1rem'
+                    fontSize: '1rem',
+                    textAlign: 'center'
                 }}>
-                    {t('noTransactionData', 'Нет данных для отображения')}
+                    {noDataMessage || t('noTransactionData', 'Нет данных для отображения')}
                 </Typography>
             </Box>
         );

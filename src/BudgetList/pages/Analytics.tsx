@@ -138,7 +138,6 @@ const Analytics: React.FC = () => {
                 </Box>
             )}
 
-            {/* Period Selector */}
             <Box sx={{mb: 4, display: 'flex', justifyContent: 'flex-start'}}>
                 <ToggleButtonGroup
                     value={period}
@@ -237,7 +236,6 @@ const Analytics: React.FC = () => {
                 </ToggleButtonGroup>
             </Box>
 
-            {/* Stats Cards */}
             <Box
                 sx={{
                     display: 'grid',
@@ -375,7 +373,6 @@ const Analytics: React.FC = () => {
                 </Card>
             </Box>
 
-            {/* Charts */}
             <Box sx={{
                 display: 'grid',
                 gridTemplateColumns: {xs: '1fr', lg: '1fr 1fr'},
@@ -411,7 +408,12 @@ const Analytics: React.FC = () => {
                         {t('expenseDistribution')}
                     </Typography>
                     <Box sx={{flexGrow: 1, display: 'flex', alignItems: 'center'}}>
-                        <ExpensesPieChart transactions={filteredTransactions} noDataMessage={t('noTransactionData')}/>
+                        <ExpensesPieChart
+                            transactions={filteredTransactions}
+                            noDataMessage={t('noTransactionData')}
+                            noDataTextColor={mode === 'dark' ? '#FFFFFF' : '#272B3E'}
+                            noDataTextAlign="center"
+                        />
                     </Box>
                 </Paper>
 
@@ -444,13 +446,15 @@ const Analytics: React.FC = () => {
                         {t('incomeVsExpenses')}
                     </Typography>
                     <Box sx={{flexGrow: 1, display: 'flex', alignItems: 'center'}}>
-                        <IncomeExpenseTrendChart transactions={filteredTransactions} period={period}
-                                                 noDataMessage={t('noTransactionData')}/>
+                        <IncomeExpenseTrendChart
+                            transactions={filteredTransactions}
+                            period={period}
+                            noDataMessage={t('noTransactionData')}
+                        />
                     </Box>
                 </Paper>
             </Box>
 
-            {/* Top 5 Expenses */}
             <Paper
                 elevation={3}
                 sx={{
@@ -565,7 +569,7 @@ const Analytics: React.FC = () => {
                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.7)',
                                     fontSize: '1.1rem'
                                 }}>
-                                    {t('noExpenseData')}
+                                    {t('noTransactionData')}
                                 </Typography>
                             </Box>
                         )}

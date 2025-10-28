@@ -17,25 +17,28 @@ import type { Transaction } from '../../../Budgets/types';
 export interface ExpensesPieChartProps {
     transactions: Transaction[];
     noDataMessage?: string;
+    noDataTextColor?: string;
+    noDataTextAlign?: 'left' | 'center' | 'right';
 }
 
-// Современная градиентная палитра как на картинке
 const GRADIENT_COLORS = [
-    '#6C6FF9', // Фиолетовый
-    '#FF6B9D', // Розовый
-    '#FFB946', // Желтый
-    '#4ECDC4', // Бирюзовый
-    '#B5EAD7', // Мятный
-    '#C7CEEA', // Лавандовый
-    '#FFD7BA', // Персиковый
-    '#BAE1DA', // Светло-бирюзовый
-    '#FFB3BA', // Светло-розовый
-    '#D4BBDD', // Светло-фиолетовый
+    '#6C6FF9',
+    '#FF6B9D',
+    '#FFB946',
+    '#4ECDC4',
+    '#B5EAD7',
+    '#C7CEEA',
+    '#FFD7BA',
+    '#BAE1DA',
+    '#FFB3BA',
+    '#D4BBDD',
 ];
 
 export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                                                                       transactions,
                                                                       noDataMessage,
+                                                                      noDataTextColor,
+                                                                      noDataTextAlign = 'center',
                                                                   }) => {
     const { t } = useTranslation();
     const { currency } = useSettingsStore();
@@ -67,21 +70,28 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                     justifyContent: 'center',
                     alignItems: 'center',
                     minHeight: 300,
+                    width: '100%'
                 }}
             >
-                <Typography color="text.secondary">
-                    {noDataMessage || t('noExpenseData')}
+                <Typography
+                    sx={{
+                        color: noDataTextColor || (mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)'),
+                        textAlign: noDataTextAlign,
+                        fontSize: '1rem'
+                    }}
+                >
+                    {noDataMessage || t('noTransactionData', 'Нет данных о транзакциях')}
                 </Typography>
             </Box>
         );
     }
 
     const totalExpenses = chartData.reduce((sum, item) => sum + item.value, 0);
-    const topCategory = chartData[0]; // Самая большая категория для отображения в центре
+    const topCategory = chartData[0];
 
     return (
-        <Box sx={{ 
-            width: '100%', 
+        <Box sx={{
+            width: '100%',
             height: 450,
             position: 'relative',
             display: 'flex',
@@ -93,7 +103,6 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
             borderRadius: 4,
             overflow: 'visible'
         }}>
-            {}
             <Box sx={{
                 position: 'absolute',
                 top: '50%',
@@ -167,8 +176,8 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                             backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                             border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(108, 111, 249, 0.2)',
                             borderRadius: '12px',
-                            boxShadow: mode === 'dark' 
-                                ? '0 8px 24px rgba(0, 0, 0, 0.5)' 
+                            boxShadow: mode === 'dark'
+                                ? '0 8px 24px rgba(0, 0, 0, 0.5)'
                                 : '0 8px 24px rgba(108, 111, 249, 0.15)',
                             fontSize: '14px',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
