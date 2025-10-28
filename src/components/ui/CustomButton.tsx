@@ -1,10 +1,13 @@
 import React from 'react';
-import { Button, ButtonProps } from '@mui/material';
+import { Button } from '@mui/material';
+import type { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 import { designTokens } from '../../Budgets/theme/designTokens';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
-interface CustomButtonProps extends Omit<ButtonProps, 'color'> {
-  variant?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info' | 'ghost';
+type CustomVariant = 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info' | 'ghost';
+
+export interface CustomButtonProps extends Omit<MuiButtonProps, 'color' | 'variant'> {
+  variant?: CustomVariant;
   size?: 'small' | 'medium' | 'large';
   children: React.ReactNode;
 }
@@ -18,7 +21,7 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
 }) => {
   const { mode } = useThemeMode();
 
-  const getVariantStyles = () => {
+  const getVariantStyles = (): Record<string, any> => {
     const isDark = mode === 'dark';
     
     switch (variant) {

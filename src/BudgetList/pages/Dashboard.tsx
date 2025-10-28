@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import { Container, Box, Typography, Button } from '@mui/material';
+import {useState} from 'react';
+import {Box, Button, Container, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { useTranslation } from "react-i18next";
-import { useFinanceStore } from '../../Budgets/store/useFinanceStore.ts';
-import { TransactionType } from '../../Budgets/types';
-import { StatsCards } from '../../components/features/StatsCards.tsx';
-import { TransactionList } from '../../components/features/transaction/TransactionList.tsx';
-import { TransactionFilters } from '../../components/features/transaction/TransactionFilters.tsx';
-import { TransactionForm } from '../../components/features/transaction/TransactionForm.tsx';
-import { Modal } from '../../components/ui/Modal.tsx';
-import { GlassCard } from '../../components/ui/GlassCard.tsx';
-import { useTransactionFilters } from '../../Budgets/hooks/useTransactionFilters.ts';
-import { useThemeMode } from '../../Budgets/theme/ThemeContext';
+import {useTranslation} from "react-i18next";
+import {useFinanceStore} from '../../Budgets/store/useFinanceStore.ts';
+import {TransactionType} from '../../Budgets/types';
+import {StatsCards} from '../../components/features/StatsCards.tsx';
+import {TransactionList} from '../../components/features/transaction/TransactionList.tsx';
+import {TransactionFilters} from '../../components/features/transaction/TransactionFilters.tsx';
+import {TransactionForm} from '../../components/features/transaction/TransactionForm.tsx';
+import {Modal} from '../../components/ui/Modal.tsx';
+import {GlassCard} from '../../components/ui/GlassCard.tsx';
+import {useTransactionFilters} from '../../Budgets/hooks/useTransactionFilters.ts';
+import {useThemeMode} from '../../Budgets/theme/ThemeContext';
 
 const Dashboard = () => {
-    const { t } = useTranslation();
-    const { mode } = useThemeMode();
+    const {t} = useTranslation();
+    const {mode} = useThemeMode();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const transactions = useFinanceStore((state) => state.transactions);
 
@@ -31,15 +31,15 @@ const Dashboard = () => {
 
     const handleStatsCardClick = (type: TransactionType | 'all') => {
         setType(type);
-        document.getElementById('transactions-list')?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('transactions-list')?.scrollIntoView({behavior: 'smooth'});
     };
 
     return (
-        <Container 
-            maxWidth="xl" 
-            sx={{ 
-                py: 1, 
-                px: { xs: 0.5, sm: 1, md: 1.5 },
+        <Container
+            maxWidth="xl"
+            sx={{
+                py: 1,
+                px: {xs: 0.5, sm: 1, md: 1.5},
                 transition: (theme) => theme.transitions.create(['padding', 'transform'], {
                     easing: theme.transitions.easing.easeInOut,
                     duration: theme.transitions.duration.complex,
@@ -47,19 +47,19 @@ const Dashboard = () => {
             }}
         >
             {/* Header with add button */}
-            <Box sx={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center', 
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
                 mb: 4,
-                flexDirection: { xs: 'column', sm: 'row' },
-                gap: { xs: 2, sm: 0 }
+                flexDirection: {xs: 'column', sm: 'row'},
+                gap: {xs: 2, sm: 0}
             }}>
                 {/* Title */}
-                <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-                    <Typography 
-                        variant="h4" 
-                        gutterBottom 
+                <Box sx={{textAlign: {xs: 'center', sm: 'left'}}}>
+                    <Typography
+                        variant="h4"
+                        gutterBottom
                         fontWeight="700"
                         sx={{
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
@@ -68,8 +68,8 @@ const Dashboard = () => {
                     >
                         {t('dashboard')}
                     </Typography>
-                    <Typography 
-                        variant="body1" 
+                    <Typography
+                        variant="body1"
                         sx={{
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             opacity: 0.7,
@@ -78,11 +78,11 @@ const Dashboard = () => {
                         Управляйте своими финансами
                     </Typography>
                 </Box>
-                
+
                 {/* Add Transaction Button - Goals Style */}
                 <Button
                     variant="contained"
-                    startIcon={<AddIcon />}
+                    startIcon={<AddIcon/>}
                     onClick={() => setIsModalOpen(true)}
                     sx={{
                         background: '#6C6FF9',
@@ -105,9 +105,9 @@ const Dashboard = () => {
             </Box>
 
 
-            <Container maxWidth="xl" sx={{ px: {xs: 0, sm: 0.5}, pb: 1 }}>
+            <Container maxWidth="xl" sx={{px: {xs: 0, sm: 0.5}, pb: 1}}>
                 {/* Stats Cards */}
-                <StatsCards onFilterClick={handleStatsCardClick} />
+                <StatsCards onFilterClick={handleStatsCardClick}/>
 
                 {/* Filters */}
                 <TransactionFilters
@@ -123,31 +123,31 @@ const Dashboard = () => {
                 />
 
                 {/* Transaction List - iOS Card */}
-                <GlassCard 
-                    sx={{ 
-                        p: { xs: 2, sm: 3 }, 
+                <GlassCard
+                    sx={{
+                        p: {xs: 2, sm: 3},
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         '&:hover': {
                             transform: 'translateY(-2px)',
                         }
-                    }} 
+                    }}
                     id="transactions-list"
                     intensity="medium"
                 >
-                    <Box sx={{ 
-                        display: 'flex', 
-                        justifyContent: 'space-between', 
-                        alignItems: 'center', 
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
                         mb: 3,
                     }}>
-                        <Typography variant="h6" sx={{ 
+                        <Typography variant="h6" sx={{
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             fontWeight: 600,
                             letterSpacing: '-0.01em'
                         }}>
                             {t('transactions')} ({filteredTransactions.length})
                         </Typography>
-                        
+
                         <Box
                             onClick={() => setIsModalOpen(true)}
                             role="button"
@@ -174,10 +174,10 @@ const Dashboard = () => {
                                 }
                             }}
                         >
-                            <AddIcon sx={{ fontSize: 20 }} />
+                            <AddIcon sx={{fontSize: 20}}/>
                         </Box>
                     </Box>
-                    <TransactionList transactions={filteredTransactions} />
+                    <TransactionList transactions={filteredTransactions}/>
                 </GlassCard>
             </Container>
 
@@ -187,7 +187,7 @@ const Dashboard = () => {
                 onClose={() => setIsModalOpen(false)}
                 title={t('newTransaction')}
             >
-                <TransactionForm onSuccess={() => setIsModalOpen(false)} />
+                <TransactionForm onSuccess={() => setIsModalOpen(false)}/>
             </Modal>
         </Container>
     );

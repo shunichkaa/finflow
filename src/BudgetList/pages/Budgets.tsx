@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, {useMemo, useState} from 'react';
 import {Box, Button, Container, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {useTranslation} from 'react-i18next';
@@ -19,10 +19,10 @@ const Budgets: React.FC = () => {
     const editingBudget = useMemo(() => budgets.find(b => b.id === editingBudgetId) || null, [budgets, editingBudgetId]);
 
     return (
-        <Container 
-            maxWidth="xl" 
+        <Container
+            maxWidth="xl"
             sx={{
-                py: {xs: 0.5, sm: 1}, 
+                py: {xs: 0.5, sm: 1},
                 px: {xs: 0.5, sm: 1, md: 1.5},
                 transition: (theme) => theme.transitions.create(['padding', 'transform'], {
                     easing: theme.transitions.easing.easeInOut,
@@ -31,9 +31,9 @@ const Budgets: React.FC = () => {
             }}
         >
             <Box sx={{mb: 4}}>
-                <Typography 
-                    variant="h4" 
-                    gutterBottom 
+                <Typography
+                    variant="h4"
+                    gutterBottom
                     fontWeight="700"
                     sx={{
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
@@ -42,8 +42,8 @@ const Budgets: React.FC = () => {
                 >
                     {t('budgets')}
                 </Typography>
-                <Typography 
-                    variant="body1" 
+                <Typography
+                    variant="body1"
                     sx={{
                         color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
                         mb: 3
@@ -57,7 +57,7 @@ const Budgets: React.FC = () => {
                     startIcon={<AddIcon/>}
                     onClick={() => setIsModalOpen(true)}
                     sx={{
-                        background: mode === 'dark' 
+                        background: mode === 'dark'
                             ? 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)'
                             : 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                         color: '#FFFFFF',

@@ -4,6 +4,7 @@ import {Box, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next';
 import {useSettingsStore} from '../../../Budgets/store/useSettingsStore.ts';
 import {formatCurrency} from '../../../Budgets/utils/formatters.ts';
+import { useSettingsStore as useSettings } from '../../../Budgets/store/useSettingsStore';
 import {useThemeMode} from '../../../Budgets/theme/ThemeContext';
 import type {Transaction} from '../../../Budgets/types';
 
@@ -23,6 +24,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
     const {currency} = useSettingsStore();
     const {mode} = useThemeMode();
 
+    const language = useSettings().getState().language || 'ru';
     const chartData = useMemo(() => {
         const now = new Date();
         const data: { date: string; income: number; expense: number }[] = [];
@@ -47,7 +49,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 });
 
                 data.push({
-                    date: date.toLocaleDateString('ru-RU', {day: '2-digit', month: '2-digit'}),
+                    date: date.toLocaleDateString(language, {day: '2-digit', month: '2-digit'}),
                     income: dayTransactions
                         .filter(t => t.type === 'income')
                         .reduce((sum, t) => sum + t.amount, 0),
@@ -71,7 +73,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 });
 
                 data.push({
-                    date: date.toLocaleDateString('ru-RU', {day: '2-digit', month: '2-digit'}),
+                    date: date.toLocaleDateString(language, {day: '2-digit', month: '2-digit'}),
                     income: dayTransactions
                         .filter(t => t.type === 'income')
                         .reduce((sum, t) => sum + t.amount, 0),
@@ -96,7 +98,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 });
 
                 data.push({
-                    date: monthDate.toLocaleDateString('ru-RU', {month: 'short'}),
+                    date: monthDate.toLocaleDateString(language, {month: 'short'}),
                     income: monthTransactions
                         .filter(t => t.type === 'income')
                         .reduce((sum, t) => sum + t.amount, 0),

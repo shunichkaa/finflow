@@ -1,9 +1,11 @@
 import {Budget, Transaction} from "../types";
+import { useSettingsStore } from '../store/useSettingsStore';
 
 export const exportToCSV = (transactions: Transaction[], filename: string) => {
+    const language = useSettingsStore.getState().language || 'ru';
     const headers = ['Дата', 'Тип', 'Категория', 'Сумма', 'Описание'];
     const rows = transactions.map(t => [
-        new Date(t.date).toLocaleDateString('ru-RU'),
+        new Date(t.date).toLocaleDateString(language),
         t.type === 'income' ? 'Доход' : 'Расход',
         t.category,
         t.amount.toString(),
@@ -28,9 +30,10 @@ export const exportToCSV = (transactions: Transaction[], filename: string) => {
 };
 
 export const exportToExcel = (transactions: Transaction[], budgets: Budget[], filename: string) => {
+    const language = useSettingsStore.getState().language || 'ru';
     const transactionHeaders = ['Дата', 'Тип', 'Категория', 'Сумма', 'Описание'];
     const transactionRows = transactions.map(t => [
-        new Date(t.date).toLocaleDateString('ru-RU'),
+        new Date(t.date).toLocaleDateString(language),
         t.type === 'income' ? 'Доход' : 'Расход',
         t.category,
         t.amount.toString(),
@@ -77,6 +80,7 @@ export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
 
     const balance = income - expenses;
 
+    const language = useSettingsStore.getState().language || 'ru';
     const htmlContent = `
         <!DOCTYPE html>
         <html>
@@ -176,7 +180,7 @@ export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
         </head>
         <body>
             <h1>FinFlow - Финансовый отчет</h1>
-            <div class="report-date">Дата формирования: ${new Date().toLocaleDateString('ru-RU')}</div>
+            <div class="report-date">Дата формирования: ${new Date().toLocaleDateString('${language}')}</div>
             
             <div class="summary">
                 <h2>Сводка</h2>
@@ -215,7 +219,7 @@ export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
                     <tbody>
                         ${transactions.map(t => `
                             <tr>
-                                <td>${new Date(t.date).toLocaleDateString('ru-RU')}</td>
+                                <td>${new Date(t.date).toLocaleDateString('${language}')}</td>
                                 <td>${t.type === 'income' ? 'Доход' : 'Расход'}</td>
                                 <td>${t.category}</td>
                                 <td class="${t.type}">${t.amount.toFixed(2)} €</td>

@@ -7,15 +7,78 @@ import {
     IconButton,
     Menu,
     MenuItem,
-    Typography
 } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { formatDistanceToNow } from 'date-fns';
 import { enUS, ru, fr, de, es } from 'date-fns/locale';
 import type { Locale } from 'date-fns';
-import { useTranslation } from 'react-i18next';
+
+// Import and register locales
+import 'date-fns/locale/ru';
+import 'date-fns/locale/fr';
+import 'date-fns/locale/de';
+import 'date-fns/locale/es';
+
+// Set Montenegrin locale to Serbian (similar enough for date formatting)
+const srLatnLocale = {
+    ...ru,
+    code: 'me',
+    formatDistance: (...args: any[]) => ru.formatDistance(...args).replace(/ru/g, 'me')
+} as Locale;
+import { useTranslation } from "react-i18next";
 import { useNotificationStore } from "../../../Budgets/store/useNotificationStore.ts";
 import { useThemeMode } from "../../../Budgets/theme/ThemeContext";
+import i18n from 'i18next';
+
+const notificationTranslations = {
+    ru: {
+        notifications: {
+            title: 'Уведомления',
+            markAllAsRead: 'Прочитать все',
+            noNotifications: 'Нет уведомлений'
+        }
+    },
+    en: {
+        notifications: {
+            title: 'Notifications',
+            markAllAsRead: 'Mark all as read',
+            noNotifications: 'No notifications'
+        }
+    },
+    fr: {
+        notifications: {
+            title: 'Notifications',
+            markAllAsRead: 'Tout marquer comme lu',
+            noNotifications: 'Aucune notification'
+        }
+    },
+    de: {
+        notifications: {
+            title: 'Benachrichtigungen',
+            markAllAsRead: 'Alle als gelesen markieren',
+            noNotifications: 'Keine Benachrichtigungen'
+        }
+    },
+    es: {
+        notifications: {
+            title: 'Notificaciones',
+            markAllAsRead: 'Marcar todo como leído',
+            noNotifications: 'No hay notificaciones'
+        }
+    },
+    me: {
+        notifications: {
+            title: 'Obavještenja',
+            markAllAsRead: 'Označi sve kao pročitano',
+            noNotifications: 'Nema obavještenja'
+        }
+    }
+};
+
+// Add translations to i18n
+Object.entries(notificationTranslations).forEach(([lang, translations]) => {
+    i18n.addResourceBundle(lang, 'translation', translations, true, true);
+});
 
 const locales: Record<string, Locale> = {
     en: enUS,
@@ -26,7 +89,11 @@ const locales: Record<string, Locale> = {
     me: ru
 };
 
-const getLocale = (lang: string): Locale => locales[lang] || enUS;
+const normalizeLang = (lang: string) => lang.split('-')[0];
+const getLocale = (lang: string): Locale => {
+    const base = normalizeLang(lang);
+    return locales[base] || enUS;
+};
 
 export const NotificationCenter: React.FC = () => {
     const { t, i18n } = useTranslation();
@@ -60,7 +127,7 @@ export const NotificationCenter: React.FC = () => {
                     padding: 0,
                     transition: 'all 0.2s ease',
                     '&:hover': {
-                        backgroundColor: 'transparent',
+                        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)',
                         transform: 'scale(1.1)',
                     },
                     '&:active': {
@@ -109,10 +176,11 @@ export const NotificationCenter: React.FC = () => {
                         variant="h6"
                         sx={{
                             fontWeight: 600,
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                            fontSize: '1rem'
                         }}
                     >
-                        {t('notifications.title', 'Notifications')}
+                        {t('notifications.title')}
                     </Typography>
                     <Button
                         onClick={handleMarkAll}
@@ -129,7 +197,7 @@ export const NotificationCenter: React.FC = () => {
                             }
                         }}
                     >
-                        {t('notifications.markAllAsRead', 'Mark all as read')}
+                        {t('notifications.markAllAsRead')}
                     </Button>
                 </Box>
                 <Divider sx={{ mb: 1 }} />
@@ -142,7 +210,7 @@ export const NotificationCenter: React.FC = () => {
                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)'
                             }}
                         >
-                            {t('notifications.noNotifications', 'No notifications')}
+                            {t('notifications.noNotifications')}
                         </Typography>
                     </Box>
                 ) : (
@@ -164,8 +232,11 @@ export const NotificationCenter: React.FC = () => {
                                         : 'transparent',
                                     '&:hover': {
                                         backgroundColor: mode === 'dark'
-                                            ? 'rgba(255, 255, 255, 0.05)'
-                                            : 'rgba(39, 43, 62, 0.05)',
+                                            ? 'rgba(255, 255, 255, 0.08)'
+                                            : 'rgba(108, 111, 249, 0.08)',
+                                        '& .MuiTypography-root': {
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                                        }
                                     }
                                 }}
                             >

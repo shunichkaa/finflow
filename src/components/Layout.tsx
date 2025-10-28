@@ -282,7 +282,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         },
                     }}
                 >
-                    {t('logout', 'Logout')}
+                    {t('logout')}
                 </Button>
             </Box>
         </Box>
@@ -334,8 +334,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     padding: 0,
                                     transition: 'all 0.2s ease',
                                     '&:hover': {
-                                        backgroundColor: 'transparent',
-                                        transform: 'scale(1.1)',
+                                        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)',
+                                        transform: 'scale(1.06)',
                                     },
                                     '&:active': {
                                         transform: 'scale(0.95)',
@@ -452,7 +452,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                             },
                                         }}
                                     >
-                                        {t('logout', 'Выйти')}
+                                        {t('logout')}
                                     </Button>
                                 </>
                             )}

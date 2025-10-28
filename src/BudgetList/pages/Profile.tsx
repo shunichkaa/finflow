@@ -1,134 +1,135 @@
-import { useState, useRef } from 'react';
+import {useRef, useState} from 'react';
 import {
-    Container,
-    Paper,
-    Typography,
+    Avatar,
     Box,
-    Switch,
-    Select,
-    MenuItem,
     Button,
+    Container,
     Divider,
+    FormControl,
+    IconButton,
     List,
     ListItem,
-    ListItemText,
     ListItemIcon,
-    Avatar,
-    Snackbar,
+    ListItemText,
+    MenuItem,
     Modal,
+    Paper,
+    Select,
+    Snackbar,
+    Switch,
     TextField,
-    IconButton,
-    FormControl
+    Typography
 } from '@mui/material';
 import {
-    Person,
-    Palette,
-    Language,
     AttachMoney,
-    CloudSync,
     Backup,
+    Close,
+    CloudSync,
     Delete,
     Edit,
+    Language,
+    Notifications as NotificationsIcon,
+    Palette,
+    Person,
     PhotoCamera,
-    Close,
-    Schedule,
-    Notifications as NotificationsIcon
+    Schedule
 } from '@mui/icons-material';
-import { useTranslation } from 'react-i18next';
-import { useThemeMode } from '../../Budgets/theme/ThemeContext';
-import { useSettingsStore, Currency } from '../../Budgets/store/useSettingsStore';
-import { useAuth } from '../../Budgets/hooks/useAuth';
-import { useCloudSync } from '../../Budgets/hooks/useCloudSync';
-import { triggerSync } from '../../Budgets/utils/cloudSyncTrigger';
-import { supabase } from '../../lib/supabaseClient';
+import {useTranslation} from 'react-i18next';
+import {useThemeMode} from '../../Budgets/theme/ThemeContext';
+import {Currency, useSettingsStore} from '../../Budgets/store/useSettingsStore';
+import {useAuth} from '../../Budgets/hooks/useAuth';
+import {useCloudSync} from '../../Budgets/hooks/useCloudSync';
+import {triggerSync} from '../../Budgets/utils/cloudSyncTrigger';
+import {supabase} from '../../lib/supabaseClient';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import IOSTimePicker from '../../components/ui/IOSTimePicker';
 
 export default function Profile() {
-    const { i18n } = useTranslation();
-    const { mode, toggleTheme } = useThemeMode();
-        const { 
-            currency, 
-            setCurrency, 
-            avatar, 
-            setAvatar, 
-            nickname, 
-            setNickname,
-            notificationsEnabled,
-            setNotificationsEnabled,
-            notificationTime,
-            setNotificationTime,
-            dailyReminderEnabled,
-            setDailyReminderEnabled
-        } = useSettingsStore();
-        const { session, loading: authLoading } = useAuth();
-        const [snackbarOpen, setSnackbarOpen] = useState(false);
-        const [snackbarMessage, setSnackbarMessage] = useState('');
-        
-        // Cloud sync - always enabled
-        const { status: syncStatus, syncNow, loadFromCloud } = useCloudSync(true);
-        
-        // Состояние для редактирования профиля
-        const [editModalOpen, setEditModalOpen] = useState(false);
-        const [timePickerOpen, setTimePickerOpen] = useState(false);
-        const [newEmail, setNewEmail] = useState('');
-        const [_currentPassword, _setCurrentPassword] = useState('');
-        const [newPassword, setNewPassword] = useState('');
-        const [confirmPassword, setConfirmPassword] = useState('');
-        const fileInputRef = useRef<HTMLInputElement>(null);
+    const { t, i18n } = useTranslation();
+    const {mode, toggleTheme} = useThemeMode();
+    const {
+        currency,
+        setCurrency,
+        avatar,
+        setAvatar,
+        nickname,
+        setNickname,
+        notificationsEnabled,
+        setNotificationsEnabled,
+        notificationTime,
+        setNotificationTime,
+        dailyReminderEnabled,
+        setDailyReminderEnabled
+    } = useSettingsStore();
+    const {session, loading: authLoading} = useAuth();
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
-        // Показываем загрузку пока аутентификация не завершена
-        if (authLoading) {
-            return (
-                <Container maxWidth="md" sx={{ py: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
-                    <Typography variant="h6" sx={{ color: '#272B3E' }}>
-                        Загрузка...
-                    </Typography>
-                </Container>
-            );
-        }
+    // Cloud sync - always enabled
+    const {status: syncStatus, syncNow, loadFromCloud} = useCloudSync(true);
+
+    // Состояние для редактирования профиля
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [timePickerOpen, setTimePickerOpen] = useState(false);
+    const [newEmail, setNewEmail] = useState('');
+    const [_currentPassword, _setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    // Показываем загрузку пока аутентификация не завершена
+    if (authLoading) {
+        return (
+            <Container maxWidth="md"
+                       sx={{py: 4, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh'}}>
+                <Typography variant="h6" sx={{color: '#272B3E'}}>
+                    {t('loading', 'Загрузка...')}
+                </Typography>
+            </Container>
+        );
+    }
 
     const currencies = [
-        { code: 'RUB', name: 'Russian Ruble' },
-        { code: 'USD', name: 'US Dollar' },
-        { code: 'EUR', name: 'Euro' },
-        { code: 'GBP', name: 'British Pound' },
-        { code: 'JPY', name: 'Japanese Yen' },
-        { code: 'CAD', name: 'Canadian Dollar' },
-        { code: 'AUD', name: 'Australian Dollar' },
-        { code: 'CHF', name: 'Swiss Franc' },
-        { code: 'CNY', name: 'Chinese Yuan' },
-        { code: 'SEK', name: 'Swedish Krona' },
-        { code: 'NOK', name: 'Norwegian Krone' },
-        { code: 'DKK', name: 'Danish Krone' },
-        { code: 'PLN', name: 'Polish Zloty' },
-        { code: 'CZK', name: 'Czech Koruna' },
-        { code: 'HUF', name: 'Hungarian Forint' },
-        { code: 'BGN', name: 'Bulgarian Lev' },
-        { code: 'RON', name: 'Romanian Leu' },
-        { code: 'HRK', name: 'Croatian Kuna' },
-        { code: 'TRY', name: 'Turkish Lira' },
-        { code: 'UAH', name: 'Ukrainian Hryvnia' },
-        { code: 'KZT', name: 'Kazakhstani Tenge' },
-        { code: 'BYN', name: 'Belarusian Ruble' },
-        { code: 'MXN', name: 'Mexican Peso' },
-        { code: 'BRL', name: 'Brazilian Real' },
-        { code: 'INR', name: 'Indian Rupee' },
+        {code: 'RUB', name: 'Russian Ruble'},
+        {code: 'USD', name: 'US Dollar'},
+        {code: 'EUR', name: 'Euro'},
+        {code: 'GBP', name: 'British Pound'},
+        {code: 'JPY', name: 'Japanese Yen'},
+        {code: 'CAD', name: 'Canadian Dollar'},
+        {code: 'AUD', name: 'Australian Dollar'},
+        {code: 'CHF', name: 'Swiss Franc'},
+        {code: 'CNY', name: 'Chinese Yuan'},
+        {code: 'SEK', name: 'Swedish Krona'},
+        {code: 'NOK', name: 'Norwegian Krone'},
+        {code: 'DKK', name: 'Danish Krone'},
+        {code: 'PLN', name: 'Polish Zloty'},
+        {code: 'CZK', name: 'Czech Koruna'},
+        {code: 'HUF', name: 'Hungarian Forint'},
+        {code: 'BGN', name: 'Bulgarian Lev'},
+        {code: 'RON', name: 'Romanian Leu'},
+        {code: 'HRK', name: 'Croatian Kuna'},
+        {code: 'TRY', name: 'Turkish Lira'},
+        {code: 'UAH', name: 'Ukrainian Hryvnia'},
+        {code: 'KZT', name: 'Kazakhstani Tenge'},
+        {code: 'BYN', name: 'Belarusian Ruble'},
+        {code: 'MXN', name: 'Mexican Peso'},
+        {code: 'BRL', name: 'Brazilian Real'},
+        {code: 'INR', name: 'Indian Rupee'},
     ];
 
     const languages = [
-        { code: 'ru', nativeName: 'Русский' },
-        { code: 'en', nativeName: 'English' },
-        { code: 'fr', nativeName: 'Français' },
-        { code: 'de', nativeName: 'Deutsch' },
-        { code: 'es', nativeName: 'Español' },
-        { code: 'me', nativeName: 'Crnogorski' },
+        {code: 'ru', nativeName: 'Русский'},
+        {code: 'en', nativeName: 'English'},
+        {code: 'fr', nativeName: 'Français'},
+        {code: 'de', nativeName: 'Deutsch'},
+        {code: 'es', nativeName: 'Español'},
+        {code: 'me', nativeName: 'Crnogorski'},
     ];
 
     const changeLanguage = (languageCode: string) => {
         if (i18n && i18n.changeLanguage) {
             i18n.changeLanguage(languageCode);
-            setSnackbarMessage('Язык изменен');
+            setSnackbarMessage(t('languageChanged', 'Язык изменен'));
             setSnackbarOpen(true);
         }
     };
@@ -136,24 +137,24 @@ export default function Profile() {
     const handleCurrencyChange = (currencyCode: string) => {
         if (setCurrency) {
             setCurrency(currencyCode as Currency);
-            setSnackbarMessage('Валюта изменена');
+            setSnackbarMessage(t('currencyChanged', 'Валюта изменена'));
             setSnackbarOpen(true);
         }
     };
 
     const _handleSave = () => {
-        setSnackbarMessage('Настройки сохранены');
+        setSnackbarMessage(t('settingsSaved', 'Настройки сохранены'));
         setSnackbarOpen(true);
     };
 
     const handleExportData = () => {
-        setSnackbarMessage('Данные экспортированы');
+        setSnackbarMessage(t('dataExported', 'Данные экспортированы'));
         setSnackbarOpen(true);
     };
 
     const handleDeleteAccount = () => {
-        if (window.confirm('Вы уверены, что хотите удалить аккаунт? Это действие нельзя отменить.')) {
-            setSnackbarMessage('Функция удаления аккаунта в разработке');
+        if (window.confirm(t('deleteAccountConfirm', 'Вы уверены, что хотите удалить аккаунт? Это действие нельзя отменить.'))) {
+            setSnackbarMessage(t('deleteAccountWip', 'Функция удаления аккаунта в разработке'));
             setSnackbarOpen(true);
         }
     };
@@ -199,18 +200,18 @@ export default function Profile() {
                     setSnackbarOpen(true);
                     return;
                 }
-                
+
                 // Обновление пароля через Supabase
-                const { error: passwordError } = await supabase.auth.updateUser({
+                const {error: passwordError} = await supabase.auth.updateUser({
                     password: newPassword
                 });
-                
+
                 if (passwordError) {
                     setSnackbarMessage(`Ошибка смены пароля: ${passwordError.message}`);
                     setSnackbarOpen(true);
                     return;
                 }
-                
+
                 setSnackbarMessage('Пароль успешно изменён!');
                 setSnackbarOpen(true);
             }
@@ -218,16 +219,16 @@ export default function Profile() {
             // Проверка email
             if (newEmail && newEmail !== session?.user?.email) {
                 // Обновление email через Supabase
-                const { error: emailError } = await supabase.auth.updateUser({
+                const {error: emailError} = await supabase.auth.updateUser({
                     email: newEmail
                 });
-                
+
                 if (emailError) {
                     setSnackbarMessage(`Ошибка смены email: ${emailError.message}`);
                     setSnackbarOpen(true);
                     return;
                 }
-                
+
                 setSnackbarMessage('Письмо с подтверждением отправлено на новый email!');
                 setSnackbarOpen(true);
             }
@@ -250,205 +251,83 @@ export default function Profile() {
     };
 
     return (
-        <Container maxWidth="md" sx={{ py: 4 }}>
-            <Typography variant="h4" gutterBottom sx={{ mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                Профиль
+        <Container maxWidth="md" sx={{py: 4}}>
+            <Typography variant="h4" gutterBottom sx={{mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                {t('profile', 'Профиль')}
             </Typography>
 
             {/* Профиль пользователя */}
-            <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
+            <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
                 <Box display="flex" alignItems="center" justifyContent="space-between">
                     <Box display="flex" alignItems="center">
-                    <Avatar 
-                        src={avatar || undefined}
-                        sx={{ width: 64, height: 64, mr: 2, bgcolor: 'primary.main' }}
-                    >
-                        {!avatar && <Person fontSize="large" />}
-                    </Avatar>
-                    <Box>
-                            <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                        {nickname || session?.user?.email || 'Пользователь'}
-                    </Typography>
-                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', mt: 0.5 }}>
-                            {session?.user?.email}
-                        </Typography>
+                        <Avatar
+                            src={avatar || undefined}
+                            sx={{width: 64, height: 64, mr: 2, bgcolor: 'primary.main'}}
+                        >
+                            {!avatar && <Person fontSize="large"/>}
+                        </Avatar>
+                        <Box>
+                            <Typography variant="h6" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                                {nickname || session?.user?.email || t('user', 'Пользователь')}
+                            </Typography>
+                            <Typography variant="body2" sx={{
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
+                                mt: 0.5
+                            }}>
+                                {session?.user?.email}
+                            </Typography>
+                        </Box>
                     </Box>
-                </Box>
-                
-                <Button
-                    variant="outlined"
-                    onClick={handleEditProfile}
-                    sx={{ 
-                        borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                        borderRadius: 2,
-                        minWidth: 48,
-                        width: 48,
-                        height: 48,
-                        p: 0,
-                        '&:hover': {
-                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
-                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
-                        }
-                    }}
-                >
-                    <Edit />
-                </Button>
+
+                    <Button
+                        variant="outlined"
+                        onClick={handleEditProfile}
+                        sx={{
+                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                            borderRadius: 2,
+                            minWidth: 48,
+                            width: 48,
+                            height: 48,
+                            p: 0,
+                            '&:hover': {
+                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
+                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                            }
+                        }}
+                    >
+                        <Edit/>
+                    </Button>
                 </Box>
             </Paper>
 
             {/* Настройки */}
-            <Paper sx={{ p: 3, mb: 3, borderRadius: 3, minHeight: 300 }}>
-        <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-            {t('settings.title')}
-        </Typography>
-
-        <List>
-            {/* Тема */}
-            <ListItem sx={{ py: 1.5 }}>
-                <ListItemIcon>
-                    <Palette sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
-                </ListItemIcon>
-                <ListItemText 
-                    primary="Темная тема" 
-                    secondary="Переключить между светлой и темной темой"
-                    secondaryTypographyProps={{
-                        sx: { 
-                            display: { xs: 'none', sm: 'block' },
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                        }
-                    }}
-                />
-                <Switch
-                    checked={mode === 'dark'}
-                    onChange={toggleTheme || (() => {})}
-                    sx={{
-                        '& .MuiSwitch-switchBase.Mui-checked': {
-                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                        },
-                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                        },
-                    }}
-                />
-            </ListItem>
-            
-            {/* Cloud Sync */}
-            <ListItem sx={{ py: 1.5 }}>
-                <ListItemIcon>
-                    <CloudSync sx={{ 
-                        color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FF3B3B' : mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'),
-                        animation: syncStatus.isSyncing ? 'spin 1s linear infinite' : 'none',
-                        '@keyframes spin': {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg)' }
-                        }
-                    }} />
-                </ListItemIcon>
-                <ListItemText 
-                    primary={t('sync.cloudSync')} 
-                    secondary={t('sync.automatic')}
-                    secondaryTypographyProps={{
-                        sx: { 
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
-                        }
-                    }}
-                />
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
-                    {/* Кнопка Sync */}
-                    <Button
-                        variant="contained"
-                        size="small"
-                        disabled={syncStatus.isSyncing}
-                        onClick={async () => {
-                            try {
-                                await syncNow();
-                                setSnackbarMessage('✅ Данные успешно синхронизированы');
-                                setSnackbarOpen(true);
-                            } catch (_error) {
-                                setSnackbarMessage('❌ Ошибка синхронизации');
-                                setSnackbarOpen(true);
-                            }
-                        }}
-                        sx={{
-                            minWidth: '60px',
-                            px: 1.5,
-                            py: 0.8,
-                            borderRadius: 2,
-                            background: '#6C6FF9',
-                            color: '#FFFFFF',
-                            fontSize: '0.7rem',
-                            fontWeight: 600,
-                            textTransform: 'none',
-                            boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
-                            '&:hover': {
-                                background: '#6C6FF9',
-                                boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
-                                transform: 'translateY(-1px)',
-                            },
-                            '&:disabled': {
-                                background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
-                            },
-                            transition: 'all 0.3s ease',
-                        }}
-                    >
-                        {syncStatus.isSyncing ? '...' : 'Sync'}
-                    </Button>
-                    
-                    {/* Статус синхронизации */}
-                    <Typography 
-                        variant="caption" 
-                        sx={{ 
-                            color: syncStatus.error 
-                                ? '#FFB3BA' 
-                                : syncStatus.isSyncing 
-                                ? '#6C6FF9'
-                                : '#B5EAD7',
-                            fontSize: '0.7rem',
-                            fontWeight: 600,
-                            textAlign: 'center',
-                            whiteSpace: 'nowrap'
-                        }}
-                    >
-                        {syncStatus.isSyncing 
-                            ? "Синхронизация..." 
-                            : syncStatus.error
-                            ? "Ошибка"
-                            : syncStatus.lastSync
-                            ? "Готово"
-                            : "Готово"}
-                    </Typography>
-                </Box>
-            </ListItem>
-        </List>
-    </Paper>
-
-    {/* Настройки */}
-    <Paper sx={{ p: 3, mb: 3, borderRadius: 3, minHeight: 300 }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                    Настройки
+            <Paper sx={{p: 3, mb: 3, borderRadius: 3, minHeight: 300}}>
+                <Typography variant="h6" gutterBottom sx={{mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                    {t('settings')}
                 </Typography>
 
                 <List>
                     {/* Тема */}
-                    <ListItem sx={{ py: 1.5 }}>
+                    <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
-                            <Palette sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                            <Palette
+                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
                         </ListItemIcon>
-                        <ListItemText 
-                            primary="Темная тема" 
+                        <ListItemText
+                            primary="Темная тема"
                             secondary="Переключить между светлой и темной темой"
                             secondaryTypographyProps={{
-                                sx: { 
-                                    display: { xs: 'none', sm: 'block' },
+                                sx: {
+                                    display: {xs: 'none', sm: 'block'},
                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
                                 }
                             }}
                         />
                         <Switch
                             checked={mode === 'dark'}
-                            onChange={toggleTheme || (() => {})}
+                            onChange={toggleTheme || (() => {
+                            })}
                             sx={{
                                 '& .MuiSwitch-switchBase.Mui-checked': {
                                     color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
@@ -460,24 +339,152 @@ export default function Profile() {
                         />
                     </ListItem>
 
-                    <Divider />
-
-                    {/* Язык */}
-                    <ListItem sx={{ py: 1.5 }}>
+                    {/* Cloud Sync */}
+                    <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
-                            <Language sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                            <CloudSync sx={{
+                                color: syncStatus.isSyncing ? '#6C6FF9' : (syncStatus.error ? '#FF3B3B' : mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'),
+                                animation: syncStatus.isSyncing ? 'spin 1s linear infinite' : 'none',
+                                '@keyframes spin': {
+                                    '0%': {transform: 'rotate(0deg)'},
+                                    '100%': {transform: 'rotate(360deg)'}
+                                }
+                            }}/>
                         </ListItemIcon>
-                        <ListItemText 
-                            primary="Язык" 
-                            secondary="Выберите язык приложения"
+                        <ListItemText
+                            primary={t('sync.cloudSync')}
+                            secondary={t('sync.automatic')}
                             secondaryTypographyProps={{
                                 sx: {
-                                    display: { xs: 'none', sm: 'block' },
                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
                                 }
                             }}
                         />
-                        <FormControl size="small" sx={{ minWidth: 120 }}>
+                        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1}}>
+                            {/* Кнопка Sync */}
+                            <Button
+                                variant="contained"
+                                size="small"
+                                disabled={syncStatus.isSyncing}
+                                onClick={async () => {
+                                    try {
+                                        await syncNow();
+                                        setSnackbarMessage(t('dataLoadSuccess', '✅ Данные успешно синхронизированы'));
+                                        setSnackbarOpen(true);
+                                    } catch (_error) {
+                                        setSnackbarMessage(t('sync.error', '❌ Ошибка синхронизации'));
+                                        setSnackbarOpen(true);
+                                    }
+                                }}
+                                sx={{
+                                    minWidth: '60px',
+                                    px: 1.5,
+                                    py: 0.8,
+                                    borderRadius: 2,
+                                    background: '#6C6FF9',
+                                    color: '#FFFFFF',
+                                    fontSize: '0.7rem',
+                                    fontWeight: 600,
+                                    textTransform: 'none',
+                                    boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
+                                    '&:hover': {
+                                        background: '#6C6FF9',
+                                        boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
+                                        transform: 'translateY(-1px)',
+                                    },
+                                    '&:disabled': {
+                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
+                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
+                                    },
+                                    transition: 'all 0.3s ease',
+                                }}
+                            >
+                                {syncStatus.isSyncing ? '...' : t('sync.button', 'Синхронизация')}
+                            </Button>
+
+                            {/* Статус синхронизации */}
+                            <Typography
+                                variant="caption"
+                                sx={{
+                                    color: syncStatus.error
+                                        ? '#FFB3BA'
+                                        : syncStatus.isSyncing
+                                            ? '#6C6FF9'
+                                            : '#B5EAD7',
+                                    fontSize: '0.7rem',
+                                    fontWeight: 600,
+                                    textAlign: 'center',
+                                    whiteSpace: 'nowrap'
+                                }}
+                            >
+                                {syncStatus.isSyncing
+                                    ? t('sync.syncing', 'Синхронизация...')
+                                    : syncStatus.error
+                                        ? t('sync.error', 'Ошибка')
+                                        : t('sync.done', 'Готово')}
+                            </Typography>
+                        </Box>
+                    </ListItem>
+                </List>
+            </Paper>
+
+            {/* Настройки */}
+            <Paper sx={{p: 3, mb: 3, borderRadius: 3, minHeight: 300}}>
+                <Typography variant="h6" gutterBottom sx={{mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                    {t('settings')}
+                </Typography>
+
+                <List>
+                    {/* Тема */}
+                    <ListItem sx={{py: 1.5}}>
+                        <ListItemIcon>
+                            <Palette
+                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
+                        </ListItemIcon>
+                        <ListItemText
+                            primary={t('darkTheme', 'Темная тема')}
+                            secondary={t('themeToggleHint', 'Переключить между светлой и темной темой')}
+                            secondaryTypographyProps={{
+                                sx: {
+                                    display: {xs: 'none', sm: 'block'},
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
+                        />
+                        <Switch
+                            checked={mode === 'dark'}
+                            onChange={toggleTheme || (() => {
+                            })}
+                            sx={{
+                                '& .MuiSwitch-switchBase.Mui-checked': {
+                                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                },
+                                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                },
+                            }}
+                        />
+                    </ListItem>
+
+                    <Divider/>
+
+                    {/* Язык */}
+                    <ListItem sx={{py: 1.5}}>
+                        <ListItemIcon>
+                            <Language
+                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
+                        </ListItemIcon>
+                        <ListItemText
+                            primary={t('language', 'Язык')}
+                            secondary={t('languageHint', 'Выберите язык приложения')}
+                            secondaryTypographyProps={{
+                                sx: {
+                                    display: {xs: 'none', sm: 'block'},
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
+                                }
+                            }}
+                        />
+                        <FormControl size="small" sx={{minWidth: 120}}>
                             <Select
                                 value={i18n?.language || 'ru'}
                                 onChange={(e) => changeLanguage(e.target.value)}
@@ -496,24 +503,25 @@ export default function Profile() {
                         </FormControl>
                     </ListItem>
 
-                    <Divider />
+                    <Divider/>
 
                     {/* Валюта */}
-                    <ListItem sx={{ py: 1.5 }}>
+                    <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
-                            <AttachMoney sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                            <AttachMoney
+                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
                         </ListItemIcon>
-                        <ListItemText 
-                            primary="Валюта" 
-                            secondary="Основная валюта для отображения сумм"
+                        <ListItemText
+                            primary={t('currency', 'Валюта')}
+                            secondary={t('currencyHint', 'Основная валюта для отображения сумм')}
                             secondaryTypographyProps={{
                                 sx: {
-                                    display: { xs: 'none', sm: 'block' },
+                                    display: {xs: 'none', sm: 'block'},
                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
                                 }
                             }}
                         />
-                        <FormControl size="small" sx={{ minWidth: 120 }}>
+                        <FormControl size="small" sx={{minWidth: 120}}>
                             <Select
                                 value={currency || 'EUR'}
                                 onChange={(e) => handleCurrencyChange(e.target.value)}
@@ -539,23 +547,24 @@ export default function Profile() {
                 </List>
             </Paper>
 
-                    {/* Уведомления */}
-            <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                    Уведомления
+            {/* Уведомления */}
+            <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
+                <Typography variant="h6" gutterBottom sx={{mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                    {t('notifications')}
                 </Typography>
 
                 <List>
-                    <ListItem sx={{ py: 1.5 }}>
+                    <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
-                            <NotificationsIcon sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                            <NotificationsIcon
+                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
                         </ListItemIcon>
-                        <ListItemText 
-                            primary="Включить уведомления"
-                            secondary="Получать уведомления о важных событиях"
+                        <ListItemText
+                            primary={t('notifications.enable')}
+                            secondary={t('notifications.description')}
                             secondaryTypographyProps={{
                                 sx: {
-                                    display: { xs: 'none', sm: 'block' },
+                                    display: {xs: 'none', sm: 'block'},
                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
                                 }
                             }}
@@ -581,17 +590,18 @@ export default function Profile() {
                         />
                     </ListItem>
 
-                    <ListItem sx={{ flexDirection: 'column', alignItems: 'stretch', gap: 2, py: 1.5 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <ListItem sx={{flexDirection: 'column', alignItems: 'stretch', gap: 2, py: 1.5}}>
+                        <Box sx={{display: 'flex', alignItems: 'center'}}>
                             <ListItemIcon>
-                                <Schedule sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }} />
+                                <Schedule
+                                    sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'}}/>
                             </ListItemIcon>
-                            <ListItemText 
-                                primary="Ежедневное напоминание"
-                                secondary="Напоминать о внесении транзакций"
+                            <ListItemText
+                                primary={t('dailyReminder')}
+                                secondary={t('dailyReminderDescription')}
                                 secondaryTypographyProps={{
                                     sx: {
-                                        display: { xs: 'none', sm: 'block' },
+                                        display: {xs: 'none', sm: 'block'},
                                         color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)'
                                     }
                                 }}
@@ -615,110 +625,119 @@ export default function Profile() {
                         </Box>
 
                         {notificationsEnabled && dailyReminderEnabled && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pl: 7, pr: 2 }}>
-                                <Typography sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)', fontSize: '0.9rem' }}>
-                                    Время напоминания
+                            <Box sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                pl: 7,
+                                pr: 2
+                            }}>
+                                <Typography sx={{
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
+                                    fontSize: '0.9rem'
+                                }}>
+                                    {t('reminderTime')}
                                 </Typography>
-                            <Box 
-                                onClick={() => setTimePickerOpen(true)}
-                                    sx={{
-                                    display: 'inline-flex', 
-                                    gap: 1, 
-                                    alignItems: 'center',
-                                    cursor: 'pointer',
-                                }}
-                            >
-                                {/* Визуальное отображение часов */}
                                 <Box
+                                    onClick={() => setTimePickerOpen(true)}
                                     sx={{
-                                        width: '60px',
-                                        backgroundColor: mode === 'dark' 
-                                            ? 'rgba(108, 111, 249, 0.15)' 
-                                            : 'rgba(108, 111, 249, 0.08)',
-                                        borderRadius: '12px',
-                                        border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
-                                        padding: '10px 8px',
-                                        textAlign: 'center',
-                                        transition: 'all 0.3s ease',
-                                        '&:hover': {
-                                            backgroundColor: mode === 'dark' 
-                                                ? 'rgba(108, 111, 249, 0.2)' 
-                                                : 'rgba(108, 111, 249, 0.12)',
-                                            transform: 'translateY(-1px)',
-                                            borderColor: '#6C6FF9',
-                                        },
+                                        display: 'inline-flex',
+                                        gap: 1,
+                                        alignItems: 'center',
+                                        cursor: 'pointer',
                                     }}
                                 >
-                                    <Typography
+                                    {/* Визуальное отображение часов */}
+                                    <Box
                                         sx={{
-                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                            fontSize: '1.1rem',
-                                            fontWeight: 600,
-                                            fontFamily: 'Nunito, system-ui, sans-serif',
+                                            width: '60px',
+                                            backgroundColor: mode === 'dark'
+                                                ? 'rgba(108, 111, 249, 0.15)'
+                                                : 'rgba(108, 111, 249, 0.08)',
+                                            borderRadius: '12px',
+                                            border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
+                                            padding: '10px 8px',
+                                            textAlign: 'center',
+                                            transition: 'all 0.3s ease',
+                                            '&:hover': {
+                                                backgroundColor: mode === 'dark'
+                                                    ? 'rgba(108, 111, 249, 0.2)'
+                                                    : 'rgba(108, 111, 249, 0.12)',
+                                                transform: 'translateY(-1px)',
+                                                borderColor: '#6C6FF9',
+                                            },
                                         }}
                                     >
-                                        {notificationTime.split(':')[0]}
-                                    </Typography>
-                                </Box>
+                                        <Typography
+                                            sx={{
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                                fontSize: '1.1rem',
+                                                fontWeight: 600,
+                                                fontFamily: 'Nunito, system-ui, sans-serif',
+                                            }}
+                                        >
+                                            {notificationTime.split(':')[0]}
+                                        </Typography>
+                                    </Box>
 
-                                {/* Разделитель */}
-                                <Typography 
-                                    variant="h6" 
-                                    sx={{
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                        fontWeight: 600,
-                                    }}
-                                >
-                                    :
-                                </Typography>
-
-                                {/* Визуальное отображение минут */}
-                                <Box
-                                    sx={{
-                                        width: '60px',
-                                        backgroundColor: mode === 'dark' 
-                                            ? 'rgba(108, 111, 249, 0.15)' 
-                                            : 'rgba(108, 111, 249, 0.08)',
-                                        borderRadius: '12px',
-                                        border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
-                                        padding: '10px 8px',
-                                        textAlign: 'center',
-                                        transition: 'all 0.3s ease',
-                                        '&:hover': {
-                                            backgroundColor: mode === 'dark' 
-                                                ? 'rgba(108, 111, 249, 0.2)' 
-                                                : 'rgba(108, 111, 249, 0.12)',
-                                            transform: 'translateY(-1px)',
-                                            borderColor: '#6C6FF9',
-                                        },
-                                    }}
-                                >
+                                    {/* Разделитель */}
                                     <Typography
+                                        variant="h6"
                                         sx={{
                                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                            fontSize: '1.1rem',
                                             fontWeight: 600,
-                                            fontFamily: 'Nunito, system-ui, sans-serif',
                                         }}
                                     >
-                                        {notificationTime.split(':')[1]}
+                                        :
                                     </Typography>
+
+                                    {/* Визуальное отображение минут */}
+                                    <Box
+                                        sx={{
+                                            width: '60px',
+                                            backgroundColor: mode === 'dark'
+                                                ? 'rgba(108, 111, 249, 0.15)'
+                                                : 'rgba(108, 111, 249, 0.08)',
+                                            borderRadius: '12px',
+                                            border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
+                                            padding: '10px 8px',
+                                            textAlign: 'center',
+                                            transition: 'all 0.3s ease',
+                                            '&:hover': {
+                                                backgroundColor: mode === 'dark'
+                                                    ? 'rgba(108, 111, 249, 0.2)'
+                                                    : 'rgba(108, 111, 249, 0.12)',
+                                                transform: 'translateY(-1px)',
+                                                borderColor: '#6C6FF9',
+                                            },
+                                        }}
+                                    >
+                                        <Typography
+                                            sx={{
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                                fontSize: '1.1rem',
+                                                fontWeight: 600,
+                                                fontFamily: 'Nunito, system-ui, sans-serif',
+                                            }}
+                                        >
+                                            {notificationTime.split(':')[1]}
+                                        </Typography>
+                                    </Box>
                                 </Box>
                             </Box>
-                        </Box>
                         )}
                     </ListItem>
                 </List>
             </Paper>
 
             {/* Управление данными */}
-            <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-                <Typography variant="h6" gutterBottom sx={{ mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                    Управление данными
+            <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
+                <Typography variant="h6" gutterBottom sx={{mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                    {t('dataManagement')}
                 </Typography>
 
-                <Box 
-                    sx={{ 
+                <Box
+                    sx={{
                         display: 'flex',
                         flexWrap: 'wrap',
                         gap: 2
@@ -726,7 +745,7 @@ export default function Profile() {
                 >
                     <Button
                         variant="outlined"
-                        startIcon={<CloudSync />}
+                        startIcon={<CloudSync/>}
                         onClick={async () => {
                             try {
                                 await loadFromCloud();
@@ -737,7 +756,7 @@ export default function Profile() {
                                 setSnackbarOpen(true);
                             }
                         }}
-                        sx={{ 
+                        sx={{
                             flex: '1 1 auto',
                             minWidth: '200px',
                             borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
@@ -752,14 +771,14 @@ export default function Profile() {
                             }
                         }}
                     >
-                        Загрузить из облака
+                        {t('data.loadFromCloud')}
                     </Button>
 
                     <Button
                         variant="outlined"
-                        startIcon={<Backup />}
+                        startIcon={<Backup/>}
                         onClick={handleExportData}
-                        sx={{ 
+                        sx={{
                             flex: '1 1 auto',
                             minWidth: '200px',
                             borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
@@ -774,15 +793,15 @@ export default function Profile() {
                             }
                         }}
                     >
-                        Экспорт данных
+                        {t('data.exportData')}
                     </Button>
 
                     <Button
                         variant="outlined"
                         color="error"
-                        startIcon={<Delete />}
+                        startIcon={<Delete/>}
                         onClick={handleDeleteAccount}
-                        sx={{ 
+                        sx={{
                             flex: '1 1 auto',
                             minWidth: '200px',
                             borderColor: '#FF3B3B',
@@ -797,7 +816,7 @@ export default function Profile() {
                             }
                         }}
                     >
-                        Удалить аккаунт
+                        {t('profile.deleteAccount')}
                     </Button>
                 </Box>
             </Paper>
@@ -814,7 +833,7 @@ export default function Profile() {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: { xs: '90%', sm: 500 },
+                        width: {xs: '90%', sm: 500},
                         maxHeight: '90vh',
                         overflow: 'auto',
                         bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
@@ -824,11 +843,11 @@ export default function Profile() {
                     }}
                 >
                     <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-                        <Typography variant="h5" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                            Редактировать профиль
+                        <Typography variant="h5" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                            {t('profile.editProfile')}
                         </Typography>
-                        <IconButton 
-                            onClick={handleCloseEditModal} 
+                        <IconButton
+                            onClick={handleCloseEditModal}
                             size="small"
                             sx={{
                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
@@ -838,32 +857,32 @@ export default function Profile() {
                                 }
                             }}
                         >
-                            <Close />
+                            <Close/>
                         </IconButton>
                     </Box>
 
                     {/* Аватар */}
                     <Box mb={3} display="flex" flexDirection="column" alignItems="center">
                         <Box display="flex" flexDirection="column" alignItems="center" mb={2}>
-                        <Avatar
-                            src={avatar || undefined}
-                            sx={{ width: 80, height: 80, mb: 2, bgcolor: 'primary.main' }}
-                        >
-                            {!avatar && <Person fontSize="large" />}
-                        </Avatar>
+                            <Avatar
+                                src={avatar || undefined}
+                                sx={{width: 80, height: 80, mb: 2, bgcolor: 'primary.main'}}
+                            >
+                                {!avatar && <Person fontSize="large"/>}
+                            </Avatar>
                         </Box>
                         <input
                             type="file"
                             ref={fileInputRef}
                             onChange={handleAvatarUpload}
                             accept="image/*"
-                            style={{ display: 'none' }}
+                            style={{display: 'none'}}
                         />
                         <Button
                             variant="outlined"
-                            startIcon={<PhotoCamera />}
+                            startIcon={<PhotoCamera/>}
                             onClick={() => fileInputRef.current?.click()}
-                            sx={{ 
+                            sx={{
                                 maxWidth: 250,
                                 borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
@@ -873,62 +892,66 @@ export default function Profile() {
                                 }
                             }}
                         >
-                            Изменить фото
+                            {t('profile.changePhoto')}
                         </Button>
                     </Box>
 
                     <Box display="flex" flexDirection="column" alignItems="center">
-                    {/* Никнейм */}
-                    <TextField
-                        label="Никнейм"
-                        value={nickname}
+                        {/* Никнейм */}
+                        <TextField
+                            label={t('profile.nickname')}
+                            value={nickname}
                             onChange={(e) => {
                                 setNickname(e.target.value);
                                 // Синхронизация nickname с облаком
                                 setTimeout(() => triggerSync(), 500);
                             }}
-                        margin="normal"
-                        sx={{
+                            margin="normal"
+                            sx={{
                                 maxWidth: 350,
                                 width: '100%',
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderColor: 'rgba(6, 0, 171, 0.3)',
-                                },
-                                '&:hover fieldset': {
-                                    borderColor: 'rgba(6, 0, 171, 0.6)',
-                                },
-                                '&.Mui-focused fieldset': {
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: 'rgba(6, 0, 171, 0.3)',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: 'rgba(6, 0, 171, 0.6)',
+                                    },
+                                    '&.Mui-focused fieldset': {
                                         borderColor: '#272B3E',
+                                    },
                                 },
-                            },
-                            '& .MuiInputLabel-root': {
+                                '& .MuiInputLabel-root': {
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                '&.Mui-focused': {
+                                    '&.Mui-focused': {
                                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    },
                                 },
-                            },
-                        }}
-                    />
+                            }}
+                        />
                     </Box>
 
                     {/* Divider для визуального разделения */}
-                    <Divider sx={{ my: 3, borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)' }}>
-                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)' }}>
-                            Безопасность
+                    <Divider sx={{
+                        my: 3,
+                        borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)'
+                    }}>
+                        <Typography variant="body2"
+                                    sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)'}}>
+                            {t('security')}
                         </Typography>
                     </Divider>
 
                     <Box display="flex" flexDirection="column" alignItems="center">
                         {/* Email */}
                         <TextField
-                            label="Новый Email (опционально)"
+                            label={t('profile.newEmailOptional')}
                             type="email"
                             value={newEmail}
                             onChange={(e) => setNewEmail(e.target.value)}
                             placeholder={session?.user?.email}
                             margin="normal"
-                            helperText="Подтверждение будет отправлено на старый email"
+                            helperText={t('profile.emailHelper')}
                             sx={{
                                 maxWidth: 350,
                                 width: '100%',
@@ -954,13 +977,13 @@ export default function Profile() {
 
                         {/* Новый пароль */}
                         <TextField
-                            label="Новый пароль (опционально)"
+                            label={t('profile.newPasswordOptional')}
                             type="password"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                             placeholder="••••••••"
                             margin="normal"
-                            helperText="Минимум 6 символов"
+                            helperText={t('profile.passwordHelperMin')}
                             sx={{
                                 maxWidth: 350,
                                 width: '100%',
@@ -987,13 +1010,13 @@ export default function Profile() {
                         {/* Подтверждение пароля */}
                         {newPassword && (
                             <TextField
-                                label="Подтвердите новый пароль"
+                                label={t('profile.confirmNewPassword')}
                                 type="password"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 margin="normal"
                                 error={newPassword !== confirmPassword && confirmPassword.length > 0}
-                                helperText={newPassword !== confirmPassword && confirmPassword.length > 0 ? "Пароли не совпадают" : ""}
+                                helperText={newPassword !== confirmPassword && confirmPassword.length > 0 ? t('profile.passwordsMismatch') : ""}
                                 sx={{
                                     maxWidth: 350,
                                     width: '100%',
@@ -1034,7 +1057,7 @@ export default function Profile() {
                                 }
                             }}
                         >
-                            Отмена
+                            {t('cancel')}
                         </Button>
                         <Button
                             variant="contained"
@@ -1050,7 +1073,7 @@ export default function Profile() {
                                 }
                             }}
                         >
-                            Сохранить изменения
+                            {t('profile.saveChanges')}
                         </Button>
                     </Box>
                 </Box>

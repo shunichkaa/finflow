@@ -17,7 +17,7 @@ import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 import { useSettingsStore } from '../../../Budgets/store/useSettingsStore';
 import { useGoalsStore } from '../../../Budgets/store/useGoalsStore';
 import { Goal } from '../../../Budgets/types';
-import { formatCurrency } from '../../../Budgets/utils/formatters';
+import { formatCurrency, formatDate } from '../../../Budgets/utils/formatters';
 
 interface GoalsListProps {
     onEditGoal: (goal: Goal) => void;
@@ -248,7 +248,7 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                         <Typography variant="caption" sx={{ 
                                             color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 0, 171, 0.5)'
                                         }}>
-                                            {t('targetDate', 'Цель до')}: {goal.targetDate.toLocaleDateString('ru-RU')}
+                                            {t('targetDate', 'Цель до')}: {formatDate(goal.targetDate)}
                                         </Typography>
                                     )}
                                 </Box>

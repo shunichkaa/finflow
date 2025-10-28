@@ -21,6 +21,7 @@ import {useThemeMode} from "../../../Budgets/theme/ThemeContext";
 import {formatCurrency} from "../../../Budgets/utils/formatters.ts";
 import {RecurringTransactionForm} from "./RecurringTransactionForm.tsx";
 import {RecurringTransaction} from "../../../Budgets/types/recurring.ts";
+import { formatDate } from "../../../Budgets/utils/formatters";
 
 export const RecurringTransactions: React.FC = () => {
     const {t} = useTranslation();
@@ -54,7 +55,7 @@ export const RecurringTransactions: React.FC = () => {
 
     const formatEndDate = (dateString?: string) => {
         if (!dateString) return '';
-        return new Date(dateString).toLocaleDateString();
+        return formatDate(new Date(dateString));
     };
 
     const handleCreateDueTransactions = () => {
