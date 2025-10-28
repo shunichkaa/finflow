@@ -238,16 +238,16 @@ const Goals: React.FC = () => {
                                     <Box sx={{display: 'flex', justifyContent: 'center', mb: 2}}>
                                         <Box
                                             sx={{
-                                                width: 64,
-                                                height: 64,
-                                                borderRadius: 3,
+                                                width: 56,
+                                                height: 56,
+                                                borderRadius: 2.5,
                                                 background: `linear-gradient(135deg, ${iconData.color}20 0%, ${iconData.color}40 100%)`,
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
                                             }}
                                         >
-                                            <IconComponent sx={{fontSize: 36, color: iconData.color}}/>
+                                            <IconComponent sx={{fontSize: 32, color: iconData.color}}/>
                                         </Box>
                                     </Box>
 
@@ -462,6 +462,11 @@ const Goals: React.FC = () => {
                                 fontWeight: 500,
                                 minWidth: 'auto',
                                 px: 3,
+                                py: 1,
+                                borderRadius: 3,
+                                border: mode === 'dark'
+                                    ? '1px solid rgba(255,255,255,0.2)'
+                                    : '1px solid rgba(39,43,62,0.2)',
                             }}
                         >
                             {t('cancel', 'Cancel')}
@@ -474,10 +479,14 @@ const Goals: React.FC = () => {
                                 color: '#fff',
                                 fontWeight: 600,
                                 px: 4,
+                                py: 1,
                                 borderRadius: 3,
                                 textTransform: 'none',
                                 minWidth: 'auto',
-                                '&:hover': {transform: 'translateY(-2px)'}
+                                '&:hover': {
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: '0 8px 24px rgba(108,111,249,0.5)',
+                                }
                             }}
                         >
                             {editingGoal ? t('save', 'Save') : t('create', 'Create')}
