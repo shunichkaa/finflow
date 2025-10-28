@@ -138,9 +138,9 @@ export const GradientCharts: React.FC = () => {
                 📊 Графики и статистика
             </Typography>
             
-            <Grid container spacing={3}>
+            <Grid container spacing={3} columns={12}>
                 {gradients.map((item, index) => (
-                    <Grid xs={12} sm={6} md={3} key={index}>
+                    <Grid item xs={12} sm={6} md={3} key={index}>
                         <GradientBar
                             gradient={item.gradient}
                             title={item.title}

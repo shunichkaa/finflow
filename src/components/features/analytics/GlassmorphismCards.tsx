@@ -180,9 +180,9 @@ export const GlassmorphismCards: React.FC = () => {
                 🎨 Glassmorphism карточки
             </Typography>
             
-            <Grid container spacing={3}>
+            <Grid container spacing={3} columns={12}>
                 {cards.map((card, index) => (
-                    <Grid xs={12} sm={6} md={4} key={index}>
+                    <Grid item xs={12} sm={6} md={4} key={index}>
                         <GlassmorphismCard
                             title={card.title}
                             subtitle={card.subtitle}

@@ -26,6 +26,7 @@ import { useNotificationStore } from "../../../Budgets/store/useNotificationStor
 import { useThemeMode } from "../../../Budgets/theme/ThemeContext";
 // Use i18n from context to avoid multiple instances
 
+// reserved for future use
 const notificationTranslations = {
     ru: {
         notifications: {

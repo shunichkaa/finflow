@@ -52,7 +52,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     disablePast = false,
     showTodayButton = false,
     disableHighlightToday = false,
-    autoOk = true,
+    // autoOk removed in MUI v6
     clearable = false,
 }) => {
     const handleChange = (value: PickerValue, _context: PickerChangeHandlerContext<DateValidationError>) => {
