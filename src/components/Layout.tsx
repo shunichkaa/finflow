@@ -359,59 +359,21 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 {getCurrentPageTitle()}
                             </Typography>
 
-                            {!sidebarOpen && (
-                                <>
-                                    <IconButton
-                                        color="inherit"
-                                        onClick={() => setSidebarOpen(!sidebarOpen)}
-                                        sx={{
-                                            display: {xs: 'none', sm: 'block'},
-                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                            mr: 2,
-                                            transition: 'all 0.2s ease',
-                                            '&:hover': {
-                                                background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
-                                            },
-                                        }}
-                                    >
-                                        <MenuIcon/>
-                                    </IconButton>
-
-                                    <Box sx={{display: {xs: 'none', sm: 'flex'}, flexDirection: 'column', alignItems: 'flex-start'}}>
-                                        <Typography
-                                            variant="h6"
-                                            noWrap
-                                            onClick={handleLogoClick}
-                                            sx={{
-                                                cursor: 'pointer',
-                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                                fontWeight: 700,
-                                                letterSpacing: '-0.02em',
-                                                transition: 'all 0.2s ease',
-                                                '&:hover': {
-                                                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                                                }
-                                            }}
-                                        >
-                                            {t('appName')}
-                                        </Typography>
-                                        <Typography
-                                            variant="caption"
-                                            sx={{
-                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                                opacity: 0.6,
-                                                fontSize: '0.7rem',
-                                                lineHeight: 1,
-                                                mt: 0.5,
-                                                fontWeight: 400,
-                                                letterSpacing: '-0.01em',
-                                            }}
-                                        >
-                                            {t('tagline')}
-                                        </Typography>
-                                    </Box>
-                                </>
-                            )}
+                            <IconButton
+                                color="inherit"
+                                onClick={() => setSidebarOpen(!sidebarOpen)}
+                                sx={{
+                                    display: {xs: 'none', sm: 'block'},
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    mr: 2,
+                                    transition: 'all 0.2s ease',
+                                    '&:hover': {
+                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                                    },
+                                }}
+                            >
+                                <MenuIcon/>
+                            </IconButton>
                         </Box>
 
                         <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
