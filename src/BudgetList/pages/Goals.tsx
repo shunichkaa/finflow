@@ -156,7 +156,7 @@ const Goals: React.FC = () => {
                     {t('savings', 'Savings')}
                 </Typography>
                 <Typography variant="body1"
-                            sx={{color: mode === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(39,43,62,0.6)'}}>
+                            sx={{color: mode === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(6, 0, 171, 0.6)'}}>
                     {t('savingsGoal.goalDescription', 'Create savings goals for your important financial targets')}
                 </Typography>
             </Box>
