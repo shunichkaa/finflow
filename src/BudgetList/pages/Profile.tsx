@@ -254,7 +254,6 @@ export default function Profile() {
     };
 
     const getSyncStatusText = () => {
-        // Безопасное преобразование типа
         const status = String(syncStatus);
         switch (status) {
             case 'syncing':
@@ -268,7 +267,6 @@ export default function Profile() {
         }
     };
 
-    // Безопасная проверка статуса синхронизации
     const isSyncing = String(syncStatus) === 'syncing';
 
     return (
@@ -281,7 +279,6 @@ export default function Profile() {
                 {t('profile')}
             </Typography>
 
-            {/* Профиль пользователя */}
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
                 <Box display="flex" alignItems="center" justifyContent="space-between" sx={{flexWrap: {xs: 'wrap', sm: 'nowrap'}, gap: {xs: 2, sm: 0}}}>
                     <Box display="flex" alignItems="center" sx={{flex: 1, minWidth: 0}}>
@@ -337,7 +334,6 @@ export default function Profile() {
                 </Box>
             </Paper>
 
-            {/* Статус синхронизации */}
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
                 <Typography variant="h6" gutterBottom sx={{
                     mb: {xs: 2, sm: 3},
@@ -389,7 +385,6 @@ export default function Profile() {
                 </List>
             </Paper>
 
-            {/* Настройки */}
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
                 <Typography variant="h6" gutterBottom sx={{
                     mb: {xs: 2, sm: 3},
@@ -400,7 +395,6 @@ export default function Profile() {
                 </Typography>
 
                 <List>
-                    {/* Тема */}
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
                             <Palette
@@ -427,7 +421,6 @@ export default function Profile() {
 
                     <Divider/>
 
-                    {/* Язык */}
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
                             <Language
@@ -459,7 +452,6 @@ export default function Profile() {
 
                     <Divider/>
 
-                    {/* Валюта */}
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
                             <AttachMoney
@@ -495,7 +487,6 @@ export default function Profile() {
                 </List>
             </Paper>
 
-            {/* Уведомления */}
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
                 <Typography variant="h6" gutterBottom sx={{
                     mb: {xs: 2, sm: 3},
@@ -588,7 +579,6 @@ export default function Profile() {
                                         cursor: 'pointer',
                                     }}
                                 >
-                                    {/* Визуальное отображение часов */}
                                     <Box
                                         sx={{
                                             width: '60px',
@@ -621,7 +611,6 @@ export default function Profile() {
                                         </Typography>
                                     </Box>
 
-                                    {/* Разделитель */}
                                     <Typography
                                         variant="h6"
                                         sx={{
@@ -632,7 +621,6 @@ export default function Profile() {
                                         :
                                     </Typography>
 
-                                    {/* Визуальное отображение минут */}
                                     <Box
                                         sx={{
                                             width: '60px',
@@ -671,7 +659,6 @@ export default function Profile() {
                 </List>
             </Paper>
 
-            {/* Управление данными */}
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
                 <Typography variant="h6" gutterBottom sx={{
                     mb: {xs: 2, sm: 3},
@@ -762,7 +749,6 @@ export default function Profile() {
                 </Box>
             </Paper>
 
-            {/* Модальное окно редактирования профиля */}
             <Modal
                 open={editModalOpen}
                 onClose={handleCloseEditModal}
@@ -803,7 +789,6 @@ export default function Profile() {
                         </IconButton>
                     </Box>
 
-                    {/* Аватар */}
                     <Box mb={3} display="flex" flexDirection="column" alignItems="center">
                         <Box display="flex" flexDirection="column" alignItems="center" mb={2}>
                             <Avatar
@@ -817,226 +802,3 @@ export default function Profile() {
                             type="file"
                             ref={fileInputRef}
                             onChange={handleAvatarUpload}
-                            accept="image/*"
-                            style={{display: 'none'}}
-                        />
-                        <Button
-                            variant="outlined"
-                            startIcon={<PhotoCamera/>}
-                            onClick={() => fileInputRef.current?.click()}
-                            sx={{
-                                maxWidth: 250,
-                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                '&:hover': {
-                                    borderColor: '#6C6FF9',
-                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
-                                }
-                            }}
-                        >
-                            {t('profile.changePhoto')}
-                        </Button>
-                    </Box>
-
-                    <Box display="flex" flexDirection="column" alignItems="center">
-                        {/* Никнейм */}
-                        <TextField
-                            label={t('profile.nickname')}
-                            value={nickname}
-                            onChange={(e) => {
-                                setNickname(e.target.value);
-                                setTimeout(() => triggerSync(), 500);
-                            }}
-                            margin="normal"
-                            sx={{
-                                maxWidth: 350,
-                                width: '100%',
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'rgba(108, 111, 249, 0.3)',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'rgba(108, 111, 249, 0.6)',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#6C6FF9',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    '&.Mui-focused': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    },
-                                },
-                            }}
-                        />
-                    </Box>
-
-                    <Divider sx={{
-                        my: 3,
-                        borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)'
-                    }}>
-                        <Typography variant="body2"
-                                    sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)'}}>
-                            {t('security')}
-                        </Typography>
-                    </Divider>
-
-                    <Box display="flex" flexDirection="column" alignItems="center">
-                        {/* Email */}
-                        <TextField
-                            label={t('profile.newEmailOptional')}
-                            type="email"
-                            value={newEmail}
-                            onChange={(e) => setNewEmail(e.target.value)}
-                            placeholder={session?.user?.email}
-                            margin="normal"
-                            helperText={t('profile.emailHelper')}
-                            sx={{
-                                maxWidth: 350,
-                                width: '100%',
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'rgba(108, 111, 249, 0.3)',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'rgba(108, 111, 249, 0.6)',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#6C6FF9',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    '&.Mui-focused': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    },
-                                },
-                            }}
-                        />
-
-                        {/* Новый пароль */}
-                        <TextField
-                            label={t('profile.newPasswordOptional')}
-                            type="password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            placeholder="••••••••"
-                            margin="normal"
-                            helperText={t('profile.passwordHelperMin')}
-                            sx={{
-                                maxWidth: 350,
-                                width: '100%',
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'rgba(108, 111, 249, 0.3)',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'rgba(108, 111, 249, 0.6)',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#6C6FF9',
-                                    },
-                                },
-                                '& .MuiInputLabel-root': {
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    '&.Mui-focused': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    },
-                                },
-                            }}
-                        />
-
-                        {/* Подтверждение пароля */}
-                        {newPassword && (
-                            <TextField
-                                label={t('profile.confirmNewPassword')}
-                                type="password"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                margin="normal"
-                                error={newPassword !== confirmPassword && confirmPassword.length > 0}
-                                helperText={newPassword !== confirmPassword && confirmPassword.length > 0 ? t('profile.passwordsMismatch') : ""}
-                                sx={{
-                                    maxWidth: 350,
-                                    width: '100%',
-                                    '& .MuiOutlinedInput-root': {
-                                        '& fieldset': {
-                                            borderColor: 'rgba(108, 111, 249, 0.3)',
-                                        },
-                                        '&:hover fieldset': {
-                                            borderColor: 'rgba(108, 111, 249, 0.6)',
-                                        },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: '#6C6FF9',
-                                        },
-                                    },
-                                    '& .MuiInputLabel-root': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                        '&.Mui-focused': {
-                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                        },
-                                    },
-                                }}
-                            />
-                        )}
-                    </Box>
-
-                    {/* Кнопки */}
-                    <Box display="flex" gap={2} justifyContent="flex-end" mt={3}>
-                        <Button
-                            variant="outlined"
-                            onClick={handleCloseEditModal}
-                            sx={{
-                                borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
-                                fontWeight: 'bold',
-                                '&:hover': {
-                                    borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)',
-                                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(39, 43, 62, 0.05)',
-                                }
-                            }}
-                        >
-                            {t('cancel')}
-                        </Button>
-                        <Button
-                            variant="contained"
-                            onClick={handleSaveProfile}
-                            sx={{
-                                background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
-                                color: '#FFFFFF',
-                                fontWeight: 'bold',
-                                '&:hover': {
-                                    background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
-                                    transform: 'translateY(-1px)',
-                                    boxShadow: '0 6px 20px rgba(108, 111, 249, 0.4)',
-                                }
-                            }}
-                        >
-                            {t('profile.saveChanges')}
-                        </Button>
-                    </Box>
-                </Box>
-            </Modal>
-
-            {/* Snackbar для уведомлений */}
-            <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={3000}
-                onClose={() => setSnackbarOpen(false)}
-                message={snackbarMessage}
-            />
-
-            {/* iOS Time Picker */}
-            <IOSTimePicker
-                open={timePickerOpen}
-                onClose={() => setTimePickerOpen(false)}
-                value={notificationTime}
-                onChange={(time) => {
-                    setNotificationTime(time);
-                    setTimeout(() => triggerSync(), 100);
-                }}
-            />
-        </Container>
-    );
-}

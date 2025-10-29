@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export type Language = 'ru' | 'en' | 'fr' | 'de' | 'es' | 'me'; // ru - русский, en - английский, fr - французский, de - немецкий, es - испанский, me - черногорский
+export type Language = 'ru' | 'en' | 'fr' | 'de' | 'es' | 'me';
 export type Currency = 'EUR' | 'USD' | 'RUB' | 'GBP' | 'JPY' | 'CAD' | 'AUD' | 'CHF' | 'CNY' | 'SEK' | 'NOK' | 'DKK' | 'PLN' | 'CZK' | 'HUF' | 'BGN' | 'RON' | 'HRK' | 'TRY' | 'UAH' | 'KZT' | 'BYN' | 'MXN' | 'BRL' | 'INR';
 
 interface SettingsStore {
@@ -10,7 +10,7 @@ interface SettingsStore {
     avatar: string | null;
     nickname: string;
     notificationsEnabled: boolean;
-    notificationTime: string; // формат "HH:mm"
+    notificationTime: string;
     dailyReminderEnabled: boolean;
     setLanguage: (language: Language) => void;
     setCurrency: (currency: Currency) => void;

@@ -4,7 +4,6 @@ import App from "./App.tsx";
 import './i18n/i18n';
 import { ThemeContextProvider } from './Budgets/theme/ThemeProvider';
 
-// Type declaration for window extension (used by dev tools)
 declare global {
     interface Window {
         React?: typeof React;

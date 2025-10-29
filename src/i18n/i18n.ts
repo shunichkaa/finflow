@@ -8,7 +8,6 @@ const resources = {
             appName: 'FinFlow',
             tagline: 'Умное управление финансами',
 
-            // Аутентификация
             auth: {
                 fillAllFields: 'Пожалуйста, заполните все поля',
                 validEmail: 'Введите корректный email',

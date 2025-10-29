@@ -107,24 +107,6 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
                     alignItems: 'center',
                     position: 'relative',
                 }}>
-                    {/* Подсветка выбранного элемента */}
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: 0,
-                            right: 0,
-                            height: '44px',
-                            transform: 'translateY(-50%)',
-                            backgroundColor: selectedBg,
-                            borderTop: `1px solid ${borderColor}`,
-                            borderBottom: `1px solid ${borderColor}`,
-                            pointerEvents: 'none',
-                            zIndex: 1,
-                        }}
-                    />
-
-                    {/* Часы */}
                     <Box
                         ref={hoursRef}
                         onScroll={() => handleScroll(hoursRef, setHours)}
@@ -164,20 +146,6 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
                         ))}
                     </Box>
 
-                    {/* Разделитель */}
-                    <Typography 
-                        sx={{ 
-                            fontSize: '24px',
-                            fontWeight: 600,
-                            color: mode === 'dark' ? '#FFFFFF' : '#000000',
-                            position: 'relative',
-                            zIndex: 2,
-                        }}
-                    >
-                        :
-                    </Typography>
-
-                    {/* Минуты */}
                     <Box
                         ref={minutesRef}
                         onScroll={() => handleScroll(minutesRef, setMinutes)}

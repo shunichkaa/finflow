@@ -12,7 +12,6 @@ export interface CustomButtonProps extends Omit<MuiButtonProps, 'color' | 'varia
   children: React.ReactNode;
 }
 
-// Type for MUI sx prop styles
 type StyleObject = Record<string, string | number | object>;
 
 export const CustomButton: React.FC<CustomButtonProps> = ({ 

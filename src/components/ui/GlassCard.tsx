@@ -133,30 +133,3 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                 ...sx,
             }}
         >
-            {/* Ambient glow effect */}
-            <Box sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '80%',
-                height: '80%',
-                background: mode === 'dark'
-                    ? 'radial-gradient(circle, rgba(108, 111, 249, 0.08) 0%, transparent 70%)'
-                    : 'radial-gradient(circle, rgba(108, 111, 249, 0.05) 0%, transparent 70%)',
-                opacity: 0,
-                transition: 'opacity 0.5s ease',
-                pointerEvents: 'none',
-                zIndex: 0,
-                animation: `${glow} 4s ease-in-out infinite`,
-                '.MuiCard-root:hover &': {
-                    opacity: 1,
-                }
-            }} />
-            
-            <Box sx={{ position: 'relative', zIndex: 1 }}>
-                {children}
-            </Box>
-        </Card>
-    );
-};

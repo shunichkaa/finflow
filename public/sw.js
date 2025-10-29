@@ -1,7 +1,6 @@
 const CACHE_NAME = 'finflow-v1.2';
 const API_CACHE = 'finflow-api-v1';
 
-// Статические ресурсы
 const STATIC_URLS = [
 	'/',
 	'/static/css/main.css',
@@ -11,14 +10,12 @@ const STATIC_URLS = [
 	'/icon-512.png'
 ];
 
-// Стратегия кэширования
 const CACHE_STRATEGIES = {
 	STATIC: 'cache-first',
 	API: 'network-first',
 	IMAGES: 'cache-first'
 };
 
-// Установка - кэшируем статику
 self.addEventListener('install', (event) => {
 	console.log('Service Worker installing');
 	event.waitUntil(
@@ -28,7 +25,6 @@ self.addEventListener('install', (event) => {
 	);
 });
 
-// Активация - очистка старых кэшей
 self.addEventListener('activate', (event) => {
 	console.log('Service Worker activating');
 	event.waitUntil(
@@ -45,20 +41,16 @@ self.addEventListener('activate', (event) => {
 	);
 });
 
-// Fetch events
 self.addEventListener('fetch', (event) => {
 	const { request } = event;
 	const url = new URL(request.url);
 
-	// API запросы - Network First
 	if (url.pathname.startsWith('/api/')) {
 		event.respondWith(handleApiRequest(request));
 	}
-	// Статика - Cache First
 	else if (isStaticAsset(url)) {
 		event.respondWith(handleStaticRequest(request));
 	}
-	// Изображения - Cache First с обновлением
 	else if (request.destination === 'image') {
 		event.respondWith(handleImageRequest(request));
 	}
@@ -68,23 +60,19 @@ async function handleApiRequest(request) {
 	const cache = await caches.open(API_CACHE);
 
 	try {
-		// Пробуем сеть сначала
 		const networkResponse = await fetch(request);
 
-		// Кэшируем успешные ответы
 		if (networkResponse.ok) {
 			cache.put(request, networkResponse.clone());
 		}
 
 		return networkResponse;
 	} catch (error) {
-		// Fallback к кэшу
 		const cachedResponse = await cache.match(request);
 		if (cachedResponse) {
 			return cachedResponse;
 		}
 
-		// Оффлайн-ответ для API
 		return new Response(
 			JSON.stringify({
 				error: 'You are offline',
@@ -103,7 +91,6 @@ async function handleStaticRequest(request) {
 	const cachedResponse = await cache.match(request);
 
 	if (cachedResponse) {
-		// Обновляем кэш в фоне
 		fetch(request).then(response => {
 			if (response.ok) {
 				cache.put(request, response);
@@ -138,7 +125,6 @@ function isStaticAsset(url) {
 		url.pathname.endsWith('.js');
 }
 
-// Background sync для оффлайн-действий
 self.addEventListener('sync', (event) => {
 	if (event.tag === 'background-sync') {
 		console.log('Background sync triggered');
@@ -147,6 +133,5 @@ self.addEventListener('sync', (event) => {
 });
 
 async function doBackgroundSync() {
-	// Здесь можно синхронизировать оффлайн-данные
 	console.log('Syncing offline data...');
 }

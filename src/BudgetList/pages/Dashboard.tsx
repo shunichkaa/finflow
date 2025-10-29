@@ -53,16 +53,6 @@ const Dashboard = () => {
                 }),
             }}
         >
-            {/* Header with add button */}
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                mb: 4,
-                flexDirection: {xs: 'column', sm: 'row'},
-                gap: {xs: 2, sm: 0}
-            }}>
-                {/* Title */}
                 <Box sx={{textAlign: {xs: 'center', sm: 'left'}}}>
                     <Typography
                         variant="h4"
@@ -85,50 +75,8 @@ const Dashboard = () => {
                     </Typography>
                 </Box>
 
-                {/* Add Transaction Button */}
-                <Button
-                    variant="contained"
-                    startIcon={<AddIcon/>}
-                    onClick={() => setIsModalOpen(true)}
-                    sx={{
-                        background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
-                        color: '#FFFFFF',
-                        fontWeight: 600,
-                        px: {xs: 3, sm: 4},
-                        py: 1.5,
-                        borderRadius: 3,
-                        textTransform: 'none',
-                        boxShadow: '0 8px 24px rgba(108, 111, 249, 0.4)',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        '&:hover': {
-                            transform: 'translateY(-2px)',
-                            boxShadow: '0 12px 32px rgba(108, 111, 249, 0.5)',
-                            background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
-                        }
-                    }}
-                >
-                    {t('addTransaction')}
-                </Button>
-            </Box>
-
-            <Container maxWidth="xl" sx={{px: {xs: 1, sm: 0.5}, pb: 1}}>
-                {/* Stats Cards */}
                 <StatsCards onFilterClick={handleStatsCardClick}/>
 
-                {/* Filters */}
-                <TransactionFilters
-                    type={filters.type}
-                    category={filters.category}
-                    dateFrom={filters.dateFrom}
-                    dateTo={filters.dateTo}
-                    onTypeChange={setType}
-                    onCategoryChange={setCategory}
-                    onDateFromChange={setDateFrom}
-                    onDateToChange={setDateTo}
-                    onReset={reset}
-                />
-
-                {/* Transaction List */}
                 <GlassCard
                     sx={{
                         p: {xs: 2, sm: 3},
@@ -198,16 +146,3 @@ const Dashboard = () => {
                 </GlassCard>
             </Container>
 
-            {/* Add Transaction Modal */}
-            <Modal
-                open={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                title={t('newTransaction')}
-            >
-                <TransactionForm onSuccess={() => setIsModalOpen(false)}/>
-            </Modal>
-        </Container>
-    );
-};
-
-export default Dashboard;

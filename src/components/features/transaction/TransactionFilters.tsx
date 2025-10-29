@@ -95,35 +95,6 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     }} />
                 </Box>
                 
-                {/* Тип транзакции */}
-                <TextField
-                    select
-                    size="small"
-                    label={t('type')}
-                    value={type}
-                    onChange={(e) => handleTypeChange(e.target.value as TransactionType | 'all')}
-                    sx={{
-                        minWidth: { xs: '100%', sm: 140 },
-                        flex: { sm: '1 1 auto' },
-                        maxWidth: { sm: 160 },
-                        '& .MuiOutlinedInput-root': {
-                            backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                        },
-                        '& .MuiInputLabel-root': {
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
-                            '&.Mui-focused': {
-                                color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                            },
-                        }
-                    }}
-                >
-                    <MenuItem value="all">{t('allTypes')}</MenuItem>
-                    <MenuItem value="expense">{t('expense')}</MenuItem>
-                    <MenuItem value="income">{t('income')}</MenuItem>
-                </TextField>
-
-                {/* Категория */}
                 <TextField
                     select
                     size="small"
@@ -168,55 +139,3 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     )}
                 </TextField>
 
-                {/* От, До и кнопка сброса на одной строке на мобилке */}
-                <Box sx={{
-                    display: 'flex',
-                    gap: { xs: 1, sm: 2 },
-                    alignItems: 'center',
-                    width: { xs: '100%', sm: 'auto' },
-                    flexDirection: { xs: 'row', sm: 'row' },
-                    flex: { xs: '1 1 auto', sm: 'none' }
-                }}>
-                    <DatePickerField
-                        label={t('from')}
-                        value={dateFrom}
-                        onChange={onDateFromChange}
-                        fullWidth={false}
-                    />
-
-                    <DatePickerField
-                        label={t('to')}
-                        value={dateTo}
-                        onChange={onDateToChange}
-                        fullWidth={false}
-                    />
-
-                    <Box
-                        onClick={onReset}
-                        sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: { xs: 40, sm: 40 },
-                            height: { xs: 40, sm: 40 },
-                            minWidth: { xs: 40, sm: 40 },
-                            borderRadius: 2,
-                            border: `1px solid ${mode === 'dark' ? '#6C6FF9' : '#6C6FF9'}`,
-                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                            background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
-                            cursor: 'pointer',
-                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                            flexShrink: 0,
-                            '&:hover': {
-                                backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
-                                transform: 'translateY(-2px)',
-                            }
-                        }}
-                    >
-                        <ClearIcon sx={{ fontSize: 20 }} />
-                    </Box>
-                </Box>
-            </Box>
-        </Paper>
-    );
-};

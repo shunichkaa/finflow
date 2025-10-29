@@ -217,29 +217,3 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                     </Fragment>
                 );
             })}
-            {/* Edit transaction modal */}
-            <Modal
-                open={isEditOpen}
-                onClose={() => { setIsEditOpen(false); setEditingTxId(null); }}
-                title={t('save')}
-            >
-                {editingTxId && (
-                    <TransactionForm
-                        initialTransaction={sortedTransactions.find(tx => tx.id === editingTxId)}
-                        onSuccess={() => { setIsEditOpen(false); setEditingTxId(null); }}
-                    />
-                )}
-            </Modal>
-            
-            <Modal
-                open={isAddOpen}
-                onClose={() => setIsAddOpen(false)}
-                title={t('newTransaction')}
-            >
-                <TransactionForm
-                    onSuccess={() => setIsAddOpen(false)}
-                />
-            </Modal>
-        </List>
-    );
-};

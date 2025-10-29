@@ -89,26 +89,6 @@ const Budgets: React.FC = () => {
                 </Button>
             </Box>
 
-            {/* Budget List */}
-            <Box sx={{
-                width: '100%',
-                background: getCardBackground(),
-                borderRadius: 3,
-                border: mode === 'dark'
-                    ? '1px solid rgba(108, 111, 249, 0.3)'
-                    : '1px solid rgba(239, 240, 246, 0.3)',
-                boxShadow: mode === 'dark'
-                    ? '0 8px 24px rgba(108, 111, 249, 0.15)'
-                    : '0 8px 24px rgba(108, 111, 249, 0.2)',
-                p: 3
-            }}>
-                <BudgetList onEdit={(id) => {
-                    setEditingBudgetId(id);
-                    setIsModalOpen(true);
-                }}/>
-            </Box>
-
-            {/* Budget Form Modal */}
             <Modal open={isModalOpen} onClose={() => {
                 setIsModalOpen(false);
                 setEditingBudgetId(null);

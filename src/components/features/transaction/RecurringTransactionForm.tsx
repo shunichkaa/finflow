@@ -119,30 +119,6 @@ export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> =
             </DialogTitle>
             <DialogContent>
                 <Box sx={{display: 'flex', flexDirection: 'column', gap: 2, mt: 2}}>
-                    {/* Тип транзакции */}
-                    <ToggleButtonGroup
-                        value={type}
-                        exclusive
-                        onChange={(_, value) => {
-                            if (value) {
-                                setType(value);
-                                setCategory('');
-                            }
-                        }}
-                        fullWidth
-                        color={type === 'income' ? 'success' : 'error'}
-                    >
-                        <ToggleButton value="income">
-                            <TrendingUp sx={{mr: 1}} />
-                            {t('income')}
-                        </ToggleButton>
-                        <ToggleButton value="expense">
-                            <TrendingDown sx={{mr: 1}} />
-                            {t('expense')}
-                        </ToggleButton>
-                    </ToggleButtonGroup>
-
-                    {/* Сумма */}
                     <TextField
                         label={t('amount')}
                         type="number"
@@ -155,23 +131,6 @@ export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> =
                         }}
                     />
 
-                    {/* Категория */}
-                    <FormControl fullWidth required>
-                        <InputLabel>{t('category')}</InputLabel>
-                        <Select
-                            value={category}
-                            label={t('category')}
-                            onChange={(e) => setCategory(e.target.value)}
-                        >
-                            {categories.map((cat) => (
-                                <MenuItem key={cat} value={cat}>
-                                    {t(`category.${cat}`)}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-
-                    {/* Описание */}
                     <TextField
                         label={t('description')}
                         value={description}
@@ -180,22 +139,6 @@ export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> =
                         placeholder={t('descriptionPlaceholder')}
                     />
 
-                    {/* Частота */}
-                    <FormControl fullWidth required>
-                        <InputLabel>{t('frequency')}</InputLabel>
-                        <Select
-                            value={frequency}
-                            label={t('frequency')}
-                            onChange={(e) => setFrequency(e.target.value as RecurringFrequency)}
-                        >
-                            <MenuItem value="daily">{t('daily')}</MenuItem>
-                            <MenuItem value="weekly">{t('weekly')}</MenuItem>
-                            <MenuItem value="monthly">{t('monthly')}</MenuItem>
-                            <MenuItem value="yearly">{t('yearly')}</MenuItem>
-                        </Select>
-                    </FormControl>
-
-                    {/* День месяца для monthly/yearly */}
                     {(frequency === 'monthly' || frequency === 'yearly') && (
                         <TextField
                             label={t('dayOfMonth')}
@@ -207,18 +150,6 @@ export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> =
                         />
                     )}
 
-                    {/* Дата начала */}
-                    <TextField
-                        label={t('startDate')}
-                        type="date"
-                        value={startDate}
-                        onChange={(e) => setStartDate(e.target.value)}
-                        fullWidth
-                        required
-                        InputLabelProps={{shrink: true}}
-                    />
-
-                    {/* Дата окончания (опционально) */}
                     <TextField
                         label={t('endDate')}
                         type="date"

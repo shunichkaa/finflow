@@ -176,44 +176,6 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                     </Box>
                                 </Box>
 
-                                {/* Прогресс бар */}
-                                <Box sx={{ mb: 2 }}>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-                                        <Typography variant="body2" sx={{ 
-                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(6, 0, 171, 0.8)',
-                                            fontWeight: 'bold'
-                                        }}>
-                                            {formatCurrency(goal.currentAmount, currency)} / {formatCurrency(goal.targetAmount, currency)}
-                                        </Typography>
-                                        <Typography variant="body2" sx={{ 
-                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(6, 0, 171, 0.8)',
-                                            fontWeight: 'bold'
-                                        }}>
-                                            {percentage.toFixed(1)}%
-                                        </Typography>
-                                    </Box>
-                                    <LinearProgress
-                                        variant="determinate"
-                                        value={Math.min(percentage, 100)}
-                                        sx={{
-                                            height: 12,
-                                            borderRadius: 6,
-                                            backgroundColor: mode === 'dark' 
-                                                ? 'rgba(255, 255, 255, 0.1)' 
-                                                : 'rgba(6, 0, 171, 0.1)',
-                                            '& .MuiLinearProgress-bar': {
-                                                borderRadius: 4,
-                                                background: percentage >= 100 
-                                                    ? 'linear-gradient(90deg, #B5EAD7 0%, #B5EAD7CC 100%)'
-                                                    : percentage >= 75 
-                                                        ? 'linear-gradient(90deg, #FFD7BA 0%, #FFD7BACC 100%)'
-                                                        : 'linear-gradient(90deg, #6C6FF9 0%, #6C6FF9CC 100%)',
-                                            },
-                                        }}
-                                    />
-                                </Box>
-
-                                {/* Статус и дата */}
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
                                         <Chip

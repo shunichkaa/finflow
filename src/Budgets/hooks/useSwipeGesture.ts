@@ -132,7 +132,6 @@ export const useSwipeGesture = (config: SwipeConfig) => {
     };
 };
 
-// Хук для Pull-to-Refresh
 export const usePullToRefresh = (onRefresh: () => Promise<void>) => {
     const [isRefreshing, setIsRefreshing] = useState(false);
 

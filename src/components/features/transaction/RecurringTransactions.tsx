@@ -88,45 +88,6 @@ export const RecurringTransactions: React.FC = () => {
 
     return (
         <Container maxWidth="lg" sx={{py: 4}}>
-            {/* Заголовок */}
-            <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4}}>
-                <Box>
-                    <Typography variant="h4" fontWeight="bold" gutterBottom>
-                        {t('recurringTransactions')}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                        {t('recurringDescription')}
-                    </Typography>
-                </Box>
-                <Button 
-                    variant="contained" 
-                    startIcon={<Add/>} 
-                    onClick={() => {
-                        setEditingTransaction(null);
-                        setFormOpen(true);
-                    }}
-                    sx={{
-                 background: mode === 'dark'
-                     ? 'rgba(6, 0, 171, 0.5)'
-                     : 'rgba(234, 234, 244, 0.5)',
-                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                        fontWeight: 'bold',
-                        '&:hover': {
-                     background: mode === 'dark'
-                         ? 'rgba(6, 0, 171, 0.7)'
-                         : 'rgba(234, 234, 244, 0.7)',
-                            transform: 'translateY(-2px)',
-                     boxShadow: mode === 'dark'
-                         ? '0 6px 20px rgba(6, 0, 171, 0.4)'
-                         : '0 6px 20px rgba(234, 234, 244, 0.4)',
-                        }
-                    }}
-                >
-                    {t('addRecurring')}
-                </Button>
-            </Box>
-
-            {/* Предстоящие платежи */}
             {dueRecurring.length > 0 && (
                 <Alert
                     severity="info"
@@ -144,60 +105,6 @@ export const RecurringTransactions: React.FC = () => {
                 </Alert>
             )}
 
-            {/* Список повторяющихся транзакций */}
-            {recurring.length === 0 ? (
-                <Card elevation={2}>
-                    <CardContent sx={{textAlign: 'center', py: 8}}>
-                        <Repeat sx={{fontSize: 64, color: 'text.secondary', mb: 2}}/>
-                        <Typography variant="h6" color="text.secondary" gutterBottom>
-                            {t('noRecurringTransactions')}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary" sx={{mb: 3}}>
-                            {t('addFirstRecurring')}
-                        </Typography>
-                        <Button 
-                            variant="contained" 
-                            startIcon={<Add/>} 
-                            onClick={() => {
-                                setEditingTransaction(null);
-                                setFormOpen(true);
-                            }}
-                            sx={{
-                 background: mode === 'dark'
-                     ? 'rgba(6, 0, 171, 0.5)'
-                     : 'rgba(234, 234, 244, 0.5)',
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                fontWeight: 'bold',
-                                '&:hover': {
-                     background: mode === 'dark'
-                         ? 'rgba(6, 0, 171, 0.7)'
-                         : 'rgba(234, 234, 244, 0.7)',
-                                    transform: 'translateY(-2px)',
-                     boxShadow: mode === 'dark'
-                         ? '0 6px 20px rgba(6, 0, 171, 0.4)'
-                         : '0 6px 20px rgba(234, 234, 244, 0.4)',
-                                }
-                            }}
-                        >
-                            {t('addRecurring')}
-                        </Button>
-                    </CardContent>
-                </Card>
-            ) : (
-                <List sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
-                    {recurring.map((rec) => {
-                        const isDue = dueRecurring.some(d => d.id === rec.id);
-
-                        return (
-                            <Card key={rec.id} elevation={2}>
-                                <CardContent>
-                                    <Box sx={{
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'flex-start'
-                                    }}>
-                                        <Box sx={{flex: 1}}>
-                                            {/* Заголовок */}
                                             <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mb: 1}}>
                                                 <Typography variant="h6" fontWeight="bold">
                                                     {rec.description || t(`category.${rec.category}`)}
@@ -208,20 +115,6 @@ export const RecurringTransactions: React.FC = () => {
 													<Chip label={t('inactive')} size="small" variant="outlined"/>}
                                             </Box>
 
-                                            {/* Детали */}
-                                            <Box sx={{display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2}}>
-                                                <Chip
-                                                    label={formatCurrency(rec.amount, currency)}
-                                                    color={rec.type === 'income' ? 'success' : 'error'}
-                                                    size="small"
-                                                />
-                                                <Chip label={t(`category.${rec.category}`)} variant="outlined"
-                                                      size="small"/>
-                                                <Chip label={getFrequencyLabel(rec.frequency)}
-                                                      icon={<Repeat fontSize="small"/>} size="small"/>
-                                            </Box>
-
-                                            {/* Следующий платеж */}
                                             <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
                                                 <Schedule fontSize="small" color="action"/>
                                                 <Typography variant="body2" color="text.secondary">
@@ -236,40 +129,6 @@ export const RecurringTransactions: React.FC = () => {
                                             )}
                                         </Box>
 
-                                        {/* Действия */}
-                                        <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
-                                            <Switch
-                                                checked={rec.isActive}
-                                                onChange={() => toggleRecurring(rec.id)}
-                                                color="primary"
-                                            />
-                                            <IconButton size="small" onClick={() => {
-                                                setEditingTransaction(rec);
-                                                setFormOpen(true);
-                                            }}>
-                                                <Edit/>
-                                            </IconButton>
-                                            <IconButton
-                                                size="small"
-                                                color="error"
-                                                onClick={() => {
-                                                    if (confirm(t('confirmDeleteRecurring'))) {
-                                                        deleteRecurring(rec.id);
-                                                    }
-                                                }}
-                                            >
-                                                <Delete/>
-                                            </IconButton>
-                                        </Box>
-                                    </Box>
-                                </CardContent>
-                            </Card>
-                        );
-                    })}
-                </List>
-            )}
-
-            {/* Форма создания/редактирования */}
             <RecurringTransactionForm 
                 open={formOpen} 
                 onClose={() => {

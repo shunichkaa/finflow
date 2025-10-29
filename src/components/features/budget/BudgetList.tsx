@@ -40,15 +40,6 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
 
     return (
         <Box>
-            {/* Карточки статистики */}
-            <Box sx={{
-                display: 'flex',
-                flexDirection: { xs: 'column', sm: 'row' },
-                gap: { xs: 1.5, sm: 2 },
-                mb: { xs: 2, sm: 3 },
-                width: '100%'
-            }}>
-                {/* Всего бюджетов */}
                 <Card elevation={2} sx={{
                     flex: 1, 
                     minWidth: 0,
@@ -88,54 +79,6 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                     </CardContent>
                 </Card>
 
-                {/* Превышено бюджетов */}
-                <Card elevation={2} sx={{
-                    flex: 1, 
-                    minWidth: 0,
-                    backgroundColor: exceededBudgets > 0 
-                        ? (mode === 'dark' ? 'rgba(255, 59, 59, 0.2)' : 'rgba(255, 179, 186, 0.5)')
-                        : (mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(254, 222, 233, 0.4)'),
-                    border: exceededBudgets > 0 
-                        ? (mode === 'dark' ? '1px solid rgba(255, 59, 59, 0.4)' : '1px solid rgba(255, 179, 186, 0.6)')
-                        : (mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(254, 222, 233, 0.4)')
-                }}>
-                    <CardContent sx={{ 
-                        display: 'flex', 
-                        justifyContent: 'space-between', 
-                        alignItems: 'center',
-                        px: { xs: 1.5, sm: 2 },
-                        py: { xs: 1.5, sm: 2 },
-                        '&:last-child': { pb: { xs: 1.5, sm: 2 } }
-                    }}>
-                        <Typography 
-                            variant="body2" 
-                            sx={{ 
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                fontSize: { xs: '0.75rem', sm: '0.875rem' },
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                whiteSpace: 'nowrap',
-                                flex: 1,
-                                minWidth: 0
-                            }}
-                        >
-                            {t('exceededBudgets')}
-                        </Typography>
-                        <Typography
-                            variant="h4"
-                            fontWeight="bold"
-                            sx={{ 
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                fontSize: { xs: '1.5rem', sm: '2.125rem' }
-                            }}
-                        >
-                            {exceededBudgets}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Box>
-
-            {/* Список бюджетов */}
             <Box sx={{
                 display: 'grid', 
                 gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, 
@@ -174,49 +117,6 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                   },
                               }}>
                             <Box sx={{ p: { xs: 2, sm: 3 }, display: 'flex', flexDirection: 'column', height: '100%' }}>
-                                {/* Верхняя часть с иконкой и действиями */}
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: { xs: 2, sm: 2.5 }, gap: 1 }}>
-                                    <IconButton
-                                        onClick={() => onEdit?.(budget.id)}
-                                        sx={{
-                                            width: { xs: 48, sm: 56 }, 
-                                            height: { xs: 48, sm: 56 }, 
-                                            borderRadius: 3,
-                                            background: `linear-gradient(135deg, ${categoryColor}20 0%, ${categoryColor}40 100%)`,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            flexShrink: 0,
-                                            '&:hover': {
-                                                background: `linear-gradient(135deg, ${categoryColor}30 0%, ${categoryColor}50 100%)`,
-                                            }
-                                        }}
-                                    >
-                                        {getCategoryIcon(category?.icon || 'more', 32)}
-                                    </IconButton>
-                                    <Box sx={{ display: 'flex', gap: 0.5, flexShrink: 0 }}>
-                                        <IconButton
-                                            size="small"
-                                            onClick={() => {
-                                                if (window.confirm(t('confirmDeleteBudget'))) {
-                                                    deleteBudget(budget.id);
-                                                }
-                                            }}
-                                            sx={{
-                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                                padding: { xs: 0.75, sm: 1 },
-                                                '&:hover': {
-                                                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                                                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
-                                                }
-                                            }}
-                                        >
-                                            <DeleteIcon fontSize={window.innerWidth < 600 ? "small" : "medium"} />
-                                        </IconButton>
-                                    </Box>
-                                </Box>
-
-                                {/* Название */}
                                 <Typography 
                                     variant="h6" 
                                     fontWeight="700"
@@ -232,42 +132,6 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                     {getCategoryName(budget.category, t)}
                                 </Typography>
 
-                                {/* Период и дни - скрыто на мобилке */}
-                                <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: { xs: 0.75, sm: 1 }, alignItems: 'center', mb: { xs: 1.5, sm: 2 }, flexWrap: 'wrap' }}>
-                                    <Chip
-                                        label={t(budget.period === 'monthly' ? 'monthly' : 'weekly')}
-                                        size="small"
-                                        sx={{
-                                            backgroundColor: `${categoryColor}20`,
-                                            color: categoryColor,
-                                            fontWeight: 600,
-                                            fontSize: { xs: '0.7rem', sm: '0.75rem' },
-                                            height: { xs: 24, sm: 28 },
-                                            borderRadius: 2
-                                        }}
-                                    />
-                                    <Typography 
-                                        variant="caption" 
-                                        sx={{ 
-                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E', 
-                                            opacity: 0.9, 
-                                            fontSize: { xs: '0.7rem', sm: '0.75rem' }, 
-                                            fontWeight: 600 
-                                        }}
-                                    >
-                                        {(() => {
-                                            if (daysLeft === 0) {
-                                                return t('lastDay');
-                                            }
-                                            if (daysLeft === 1) {
-                                                return t('dayLeft');
-                                            }
-                                            return `${daysLeft} ${t('daysLeft')}`;
-                                        })()}
-                                    </Typography>
-                                </Box>
-
-                                {/* Warning for exceeded - упрощено на мобилке */}
                                 {status === 'exceeded' && (
                                         <Alert 
                                         severity="error" 
@@ -325,44 +189,6 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                     </Alert>
                                 )}
 
-                                {/* Осталось - скрыто на мобилке */}
-                                {remaining > 0 && (
-                                    <Box 
-                                        sx={{ 
-                                            p: { xs: 1.5, sm: 2 }, 
-                                            mb: { xs: 1.5, sm: 2 },
-                                            borderRadius: 2,
-                                            backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
-                                            display: { xs: 'none', sm: 'flex' },
-                                            alignItems: 'baseline',
-                                            gap: { xs: 0.75, sm: 1 },
-                                            flexWrap: 'wrap'
-                                        }}
-                                    >
-                                        <Typography 
-                                            variant="caption" 
-                                            sx={{ 
-                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
-                                                fontSize: { xs: '0.7rem', sm: '0.75rem' },
-                                                fontWeight: 600,
-                                            }}
-                                        >
-                                            {t('remaining')}:
-                                        </Typography>
-                                        <Typography 
-                                            variant="body1" 
-                                            fontWeight="700"
-                                            sx={{ 
-                                                color: mode === 'dark' ? categoryColor : '#272B3E',
-                                                fontSize: { xs: '0.875rem', sm: '0.95rem' }
-                                            }}
-                                        >
-                                            {formatCurrency(remaining, currency)}
-                                        </Typography>
-                                    </Box>
-                                )}
-
-                                {/* Прогресс */}
                                 <Box sx={{ mb: { xs: 1.5, sm: 2 }, mt: 'auto' }}>
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1, gap: 1, flexWrap: 'wrap' }}>
                                         <Typography 

@@ -145,27 +145,6 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
 
             <DialogContent sx={{ pt: 3 }}>
                 <Stack spacing={3}>
-                    {/* Motivational phrase */}
-                    {showMotivation && (
-                        <Box sx={{
-                            p: 2,
-                            borderRadius: 2,
-                            background: 'linear-gradient(135deg, rgba(181, 234, 215, 0.2) 0%, rgba(181, 234, 215, 0.4) 100%)',
-                            border: '1px solid #B5EAD7',
-                            textAlign: 'center',
-                            animation: 'fadeIn 0.3s ease-in',
-                            '@keyframes fadeIn': {
-                                from: { opacity: 0, transform: 'translateY(-10px)' },
-                                to: { opacity: 1, transform: 'translateY(0)' },
-                            },
-                        }}>
-                            <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E', whiteSpace: 'pre-line' }}>
-                                {motivationText}
-                            </Typography>
-                        </Box>
-                    )}
-
-                    {/* Progress */}
                     <Box>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                             <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
@@ -198,13 +177,6 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         </Box>
                     </Box>
 
-                    {/* Statistics */}
-                    <Box sx={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
-                        gap: 2,
-                    }}>
-                        {/* Days to goal */}
                         {daysRemaining !== null && (
                             <Box sx={{
                                 flex: 1,
@@ -224,44 +196,6 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                             </Box>
                         )}
 
-                        {/* Remaining */}
-                        <Box sx={{
-                            flex: 1,
-                            p: 2,
-                            borderRadius: 2,
-                            background: mode === 'dark' 
-                                ? 'rgba(108, 111, 249, 0.1)' 
-                                : 'rgba(199, 206, 234, 0.2)',
-                            border: `1px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : '#C7CEEA'}`,
-                            display: 'flex',
-                            flexDirection: { xs: 'row', sm: 'column' },
-                            alignItems: { xs: 'center', sm: 'flex-start' },
-                            justifyContent: { xs: 'space-between', sm: 'flex-start' },
-                            gap: { xs: 1, sm: 0.5 }
-                        }}>
-                            <Typography 
-                                variant="caption" 
-                                sx={{ 
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
-                                    fontSize: { xs: '0.75rem', sm: '0.875rem' }
-                                }}
-                            >
-                                {t('goalDetail.remaining')}:
-                            </Typography>
-                            <Typography 
-                                variant="h5" 
-                                fontWeight={700} 
-                                sx={{ 
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    fontSize: { xs: '1rem', sm: '1.5rem' }
-                                }}
-                            >
-                                {remaining.toLocaleString()} {currency}
-                            </Typography>
-                        </Box>
-                    </Box>
-
-                    {/* Recommendation */}
                     {dailyRecommendation > 0 && (
                         <Box sx={{
                             p: 2,
@@ -284,19 +218,6 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         </Box>
                     )}
 
-                    {/* Description */}
-                    {goal.description && (
-                        <Box>
-                            <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
-                                {t('goalDetail.description')}
-                            </Typography>
-                            <Typography variant="body2" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E', mt: 0.5 }}>
-                                {goal.description}
-                            </Typography>
-                        </Box>
-                    )}
-
-                    {/* Fund Management */}
                     <Box>
                         <Typography variant="subtitle2" gutterBottom sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                             {t('goalDetail.fundManagement')}

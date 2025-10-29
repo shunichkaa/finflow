@@ -81,7 +81,6 @@ export const useCloudSync = (enabled: boolean) => {
     const setDailyReminderEnabled = useSettingsStore(state => state.setDailyReminderEnabled);
     const setNotificationsEnabled = useSettingsStore(state => state.setNotificationsEnabled);
 
-    // Флаг для предотвращения синхронизации во время загрузки данных из облака
     const isLoadingFromCloudRef = useRef(false);
 
     const syncFromCloud = async () => {
@@ -122,9 +121,9 @@ export const useCloudSync = (enabled: boolean) => {
             }
 
             if (budgetsData) {
-                const parsedBudgets: Budget[] = (budgetsData as SupabaseBudget[]).map((b) => ({
+                const                 parsedBudgets: Budget[] = (budgetsData as SupabaseBudget[]).map((b) => ({
                     ...b,
-                    limit: b.limit_amount, // Map DB column to app field
+                    limit: b.limit_amount,
                     limitAmount: b.limit_amount,
                 }));
                 setBudgets(parsedBudgets);
@@ -178,7 +177,6 @@ export const useCloudSync = (enabled: boolean) => {
                         error: errorMessage
                     });
                 } finally {
-                    // Сбрасываем флаг после небольшой задержки, чтобы избежать немедленной синхронизации
                     setTimeout(() => {
                         isLoadingFromCloudRef.current = false;
                     }, 3000);
@@ -285,7 +283,7 @@ export const useCloudSync = (enabled: boolean) => {
                 lastSync: null,
                 error: errorMessage
             });
-            throw error; // Пробрасываем ошибку наружу
+            throw error;
         }
     };
 
@@ -319,7 +317,7 @@ export const useCloudSync = (enabled: boolean) => {
         if (enabled && session?.user?.id && hasInitialLoaded(session.user.id) && !isLoadingFromCloudRef.current) {
             const timeoutId = setTimeout(() => {
                 syncToCloud();
-            }, 2000); // Debounce 2 секунды
+            }, 2000);
 
             return () => clearTimeout(timeoutId);
         }

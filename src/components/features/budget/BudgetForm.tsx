@@ -80,52 +80,6 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
     return (
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3}>
-                {/* Period Toggle */}
-                <Box>
-                    <Typography variant="subtitle2" gutterBottom>
-                        {t('period')}
-                    </Typography>
-                    <Controller
-                        name="period"
-                        control={control}
-                        render={({field}) => (
-                            <ToggleButtonGroup
-                                {...field}
-                                exclusive
-                                fullWidth
-                                sx={{
-                                    '& .MuiToggleButton-root': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                        borderColor: mode === 'dark' 
-                                            ? 'rgba(255, 255, 255, 0.3)' 
-                                            : '#EFF0F6',
-                                        backgroundColor: 'transparent',
-                                        fontWeight: 600,
-                                        '&:hover': {
-                                            backgroundColor: mode === 'dark' 
-                                                ? 'rgba(255, 255, 255, 0.1)' 
-                                                : '#EFF0F6',
-                                        },
-                                        '&.Mui-selected': {
-                                            backgroundColor: '#6C6FF9',
-                                            color: '#FFFFFF',
-                                            borderColor: '#6C6FF9',
-                                            fontWeight: 700,
-                                            '&:hover': {
-                                                backgroundColor: '#6C6FF9',
-                                            }
-                                        }
-                                    }
-                                }}
-                            >
-                                <ToggleButton value="weekly">{t('weekly')}</ToggleButton>
-                                <ToggleButton value="monthly">{t('monthly')}</ToggleButton>
-                            </ToggleButtonGroup>
-                        )}
-                    />
-                </Box>
-
-                {/* Category */}
                 <Controller
                     name="category"
                     control={control}
@@ -162,29 +116,6 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                     )}
                 />
 
-                {/* Limit */}
-                <Controller
-                    name="limit"
-                    control={control}
-                    rules={{
-                        required: t('limitRequired'),
-                        validate: (value) => parseFloat(value) > 0 || t('limitMustBePositive'),
-                    }}
-                    render={({field}) => (
-                        <NumberInput
-                            value={field.value}
-                            onChange={field.onChange}
-                            label={t('limit')}
-                            error={!!errors.limit}
-                            helperText={errors.limit?.message}
-                            fullWidth
-                            required
-                            allowDecimal={true}
-                        />
-                    )}
-                />
-
-                {/* Info */}
                 <Box sx={{
                     backgroundColor: mode === 'dark' 
                         ? 'rgba(108, 111, 249, 0.1)' 
@@ -201,11 +132,3 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                     </Typography>
                 </Box>
 
-                {/* Submit */}
-                <Button type="submit" variant="contained" size="large" fullWidth>
-                    {t('createBudget')}
-                </Button>
-            </Stack>
-        </Box>
-    );
-};
