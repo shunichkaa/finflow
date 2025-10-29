@@ -50,6 +50,7 @@ const resources = {
             noData: 'Нет данных',
 
             dashboard: 'Главная',
+            'dashboard.subtitle': 'Управляйте своими финансами',
             analytics: 'Аналитика',
             budgets: 'Бюджеты',
             analyticsDescription: 'Подробная статистика ваших финансов',
@@ -393,6 +394,7 @@ const resources = {
             noData: 'No data',
 
             dashboard: 'Dashboard',
+            'dashboard.subtitle': 'Manage your finances',
             analytics: 'Analytics',
             budgets: 'Budgets',
             analyticsDescription: 'Detailed statistics of your finances',
@@ -730,6 +732,7 @@ const resources = {
             noData: 'Aucune donnée',
 
             dashboard: 'Tableau de bord',
+            'dashboard.subtitle': 'Gérez vos finances',
             analytics: 'Analytique',
             budgets: 'Budgets',
             analyticsDescription: 'Statistiques détaillées de vos finances',
@@ -1066,6 +1069,7 @@ const resources = {
             noData: 'Keine Daten',
 
             dashboard: 'Dashboard',
+            'dashboard.subtitle': 'Verwalten Sie Ihre Finanzen',
             analytics: 'Analytik',
             budgets: 'Budgets',
             analyticsDescription: 'Detaillierte Statistiken Ihrer Finanzen',
@@ -1402,6 +1406,7 @@ const resources = {
             noData: 'Sin datos',
 
             dashboard: 'Panel',
+            'dashboard.subtitle': 'Gestiona tus finanzas',
             analytics: 'Analítica',
             budgets: 'Presupuestos',
             analyticsDescription: 'Estadísticas detalladas de tus finanzas',
@@ -1738,6 +1743,7 @@ const resources = {
             noData: 'Nema podataka',
 
             dashboard: 'Početna',
+            'dashboard.subtitle': 'Upravljajte svojim finansijama',
             analytics: 'Analitika',
             budgets: 'Budžeti',
             analyticsDescription: 'Detaljna statistika vaših finansija',

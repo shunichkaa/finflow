@@ -273,13 +273,13 @@ export default function Profile() {
         const status = String(syncStatus);
         switch (status) {
             case 'syncing':
-                return t('sync.syncing', 'Синхронизация...');
+                return t('sync.syncing');
             case 'success':
-                return t('sync.upToDate', 'Данные синхронизированы');
+                return t('sync.upToDate');
             case 'error':
-                return t('sync.error', 'Ошибка синхронизации');
+                return t('sync.error');
             default:
-                return t('sync.ready', 'Готов к синхронизации');
+                return t('sync.ready');
         }
     };
 
@@ -362,7 +362,7 @@ export default function Profile() {
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 fontSize: {xs: '1rem', sm: '1.25rem'}
                             }}>
-                                {t('sync.status', 'Статус синхронизации')}
+                                {t('sync.status')}
                             </Typography>
                             <Typography variant="body2" sx={{
                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
@@ -399,7 +399,7 @@ export default function Profile() {
                             }
                         }}
                     >
-                        {isSyncing ? t('sync.syncing', 'Синхронизация...') : t('sync.syncNow', 'Синхронизировать')}
+                        {isSyncing ? t('sync.syncing') : t('sync.syncNow')}
                     </Button>
                 </Box>
             </Paper>

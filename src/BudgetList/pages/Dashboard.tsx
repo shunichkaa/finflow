@@ -81,7 +81,7 @@ const Dashboard = () => {
                             color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
                         }}
                     >
-                        Управляйте своими финансами
+                        {t('dashboard.subtitle')}
                     </Typography>
                 </Box>
 
