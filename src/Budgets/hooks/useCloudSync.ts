@@ -81,9 +81,13 @@ export const useCloudSync = (enabled: boolean) => {
     const setDailyReminderEnabled = useSettingsStore(state => state.setDailyReminderEnabled);
     const setNotificationsEnabled = useSettingsStore(state => state.setNotificationsEnabled);
 
+    // Флаг для предотвращения синхронизации во время загрузки данных из облака
+    const isLoadingFromCloudRef = useRef(false);
+
     const syncFromCloud = async () => {
         if (!session?.user?.id || !enabled) return;
 
+        isLoadingFromCloudRef.current = true;
         setStatus(prev => ({ ...prev, isSyncing: true, error: null }));
 
         try {
@@ -173,6 +177,11 @@ export const useCloudSync = (enabled: boolean) => {
                         lastSync: null,
                         error: errorMessage
                     });
+                } finally {
+                    // Сбрасываем флаг после небольшой задержки, чтобы избежать немедленной синхронизации
+                    setTimeout(() => {
+                        isLoadingFromCloudRef.current = false;
+                    }, 3000);
                 }
     };
 
@@ -305,16 +314,16 @@ export const useCloudSync = (enabled: boolean) => {
             return () => clearInterval(interval);
         }
     }, [enabled, session?.user?.id]);
-
+    
     useEffect(() => {
-        if (enabled && session?.user?.id && hasInitialLoaded(session.user.id)) {
+        if (enabled && session?.user?.id && hasInitialLoaded(session.user.id) && !isLoadingFromCloudRef.current) {
             const timeoutId = setTimeout(() => {
                 syncToCloud();
             }, 2000); // Debounce 2 секунды
 
             return () => clearTimeout(timeoutId);
         }
-    }, [transactions, budgets, goals]);
+    }, [transactions.length, budgets.length, goals.length, enabled, session?.user?.id]);
 
     useEffect(() => {
         if (enabled && session?.user?.id) {
