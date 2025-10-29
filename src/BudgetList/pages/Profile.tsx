@@ -17,7 +17,6 @@ import {
     Select,
     Snackbar,
     Switch,
-    TextField,
     Typography
 } from '@mui/material';
 import {
@@ -54,7 +53,6 @@ export default function Profile() {
         avatar,
         setAvatar,
         nickname,
-        setNickname,
         notificationsEnabled,
         setNotificationsEnabled,
         notificationTime,
@@ -843,6 +841,20 @@ export default function Profile() {
                             }}
                         >
                             {t('cancel')}
+                        </Button>
+                        <Button
+                            variant="contained"
+                            onClick={handleSaveProfile}
+                            sx={{
+                                background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                                color: '#FFFFFF',
+                                fontWeight: 'bold',
+                                '&:hover': {
+                                    background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
+                                }
+                            }}
+                        >
+                            {t('profile.saveChanges')}
                         </Button>
                     </Box>
                 </Box>

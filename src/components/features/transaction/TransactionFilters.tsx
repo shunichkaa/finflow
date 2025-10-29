@@ -138,4 +138,37 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         ))
                     )}
                 </TextField>
-
+                
+                <DatePickerField
+                    label={t('from')}
+                    value={dateFrom}
+                    onChange={onDateFromChange}
+                />
+                
+                <DatePickerField
+                    label={t('to')}
+                    value={dateTo}
+                    onChange={onDateToChange}
+                />
+                
+                <Box
+                    onClick={onReset}
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        '&:hover': {
+                            transform: 'scale(1.1)',
+                        }
+                    }}
+                >
+                    <ClearIcon sx={{ 
+                        color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                        fontSize: 24
+                    }} />
+                </Box>
+            </Box>
+        </Paper>
+    );
+};

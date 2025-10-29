@@ -4,7 +4,6 @@ import {
     DialogActions,
     Button,
     Box,
-    Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
@@ -83,7 +82,6 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
 
     const bgColor = mode === 'dark' ? '#272B3E' : '#FFFFFF';
     const borderColor = mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-    const selectedBg = mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.05)';
 
     return (
         <Dialog

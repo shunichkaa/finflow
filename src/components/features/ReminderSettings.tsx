@@ -6,7 +6,6 @@ import {
     FormControl,
     Select,
     MenuItem,
-    InputLabel,
     Button,
     Alert
 } from '@mui/material';
@@ -18,6 +17,7 @@ import {
 } from '@mui/icons-material';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 import { GlassCard } from '../ui/GlassCard';
+import { useTranslation } from 'react-i18next';
 
 export type ReminderFrequency = 'daily' | 'every3days' | 'weekly';
 
@@ -31,31 +31,33 @@ interface ReminderSettingsProps {
     onSettingsChange?: (settings: ReminderSettingsData) => void;
 }
 
-const REMINDER_MESSAGES = [
-    "Эй, твой кошелек скучает! Внеси расходы 💰",
-    "Время признаться, на что ты потратился сегодня 👀",
-    "Деньги не считают себя сами, знаешь ли 🤑",
-    "Пссс... забыл внести данные? Я помню всё 📊",
-    "Твой бюджет хочет с тобой поговорить 💬",
-    "Финансовый детектив на связи! Где расходы? 🕵️",
-    "Не будь как все, веди учёт! 🚀",
-    "Кто не ведёт учёт - тот не знает куда деньги ушли 🤷",
-    "Минутка честности: сколько потратил? 💳",
-    "Время обновить финансовую карму ✨",
-    "Сэр, ваши транзакции не внесут себя сами ⚡",
-    "Breaking news: твой бюджет требует внимания 📰",
-    "Чем дольше откладываешь - тем больше забудешь 🧠",
-    "Ваш личный бухгалтер напоминает... (это вы сами) 🤓",
-    "Danger zone! Данные устарели! ⚠️",
-    "Кажется, кто-то тратит деньги и молчит... 🤐",
-    "Финансовый детокс начинается с учёта 🧘",
-    "Alexa, внеси расходы! Ой, это не работает так... 🤖",
+// Reminder message keys - будут использоваться через i18n
+const REMINDER_MESSAGE_KEYS = [
+    'reminderMessages.walletMisses',
+    'reminderMessages.timeToAdmit',
+    'reminderMessages.moneyDontCount',
+    'reminderMessages.forgotToAdd',
+    'reminderMessages.budgetWantsToTalk',
+    'reminderMessages.financialDetective',
+    'reminderMessages.dontBeLikeOthers',
+    'reminderMessages.whoDoesntTrack',
+    'reminderMessages.minuteOfHonesty',
+    'reminderMessages.updateFinancialKarma',
+    'reminderMessages.sirTransactions',
+    'reminderMessages.breakingNews',
+    'reminderMessages.longerYouDelay',
+    'reminderMessages.personalAccountant',
+    'reminderMessages.dangerZone',
+    'reminderMessages.someoneSpends',
+    'reminderMessages.financialDetox',
+    'reminderMessages.alexaAddExpenses',
 ];
 
 const EMOJI_POOL = ['💰', '💸', '💵', '💴', '💶', '💷', '💳', '📊', '📈', '📉', '💼', '🎯', '🔥', '⚡', '✨', '🚀', '🎉', '💪', '🤔', '😎', '🕵️', '📱', '💬', '👀', '🤷', '🧠', '🤖', '🧘', '⚠️', '📰'];
 
 export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsChange }) => {
     const { mode } = useThemeMode();
+    const { t } = useTranslation();
     const [settings, setSettings] = useState<ReminderSettingsData>(() => {
         const saved = localStorage.getItem('reminder-settings');
         if (saved) {
@@ -101,7 +103,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
         }
     };
 
-    const handleFrequencyChange = (event: any) => {
+    const handleFrequencyChange = (event: { target: { value: unknown } }) => {
         setSettings(prev => ({ ...prev, frequency: event.target.value as ReminderFrequency }));
     };
 
@@ -110,26 +112,27 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
     };
 
     const getRandomMessage = (): string => {
-        const randomMessage = REMINDER_MESSAGES[Math.floor(Math.random() * REMINDER_MESSAGES.length)];
+        const randomKey = REMINDER_MESSAGE_KEYS[Math.floor(Math.random() * REMINDER_MESSAGE_KEYS.length)];
+        const randomMessage = t(randomKey);
         const randomEmoji = EMOJI_POOL[Math.floor(Math.random() * EMOJI_POOL.length)];
         return `${randomMessage} ${randomEmoji}`;
     };
 
     const handleTestNotification = async () => {
         if (!('Notification' in window)) {
-            alert('Ваш браузер не поддерживает уведомления');
+            alert(t('reminders.browserNoNotifications'));
             return;
         }
 
         if (Notification.permission === 'denied') {
-            alert('Разрешение на уведомления отклонено. Проверьте настройки браузера.');
+            alert(t('reminders.permissionDenied'));
             return;
         }
 
         if (Notification.permission === 'default') {
             const permission = await Notification.requestPermission();
             if (permission !== 'granted') {
-                alert('Необходимо разрешение для отправки уведомлений');
+                alert(t('reminders.permissionRequired'));
                 return;
             }
         }
@@ -140,7 +143,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
             if ('serviceWorker' in navigator) {
                 const registration = await navigator.serviceWorker.ready;
                 
-                await registration.showNotification('FinFlow - Напоминание', {
+                await registration.showNotification(t('reminders.notificationTitle'), {
                     body: testMessage,
                     icon: '/favicon.ico',
                     badge: '/favicon.ico',
@@ -152,7 +155,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                     }
                 });
             } else {
-                new Notification('FinFlow - Напоминание', {
+                new Notification(t('reminders.notificationTitle'), {
                     body: testMessage,
                     icon: '/favicon.ico',
                     badge: '/favicon.ico',
@@ -163,8 +166,8 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
             setTestNotificationSent(true);
             setTimeout(() => setTestNotificationSent(false), 3000);
         } catch (error) {
-            console.error('Ошибка отправки тестового уведомления:', error);
-            alert('Не удалось отправить уведомление. Проверьте консоль для деталей.');
+            console.error('Error sending test notification:', error);
+            alert(t('reminders.notificationFailed'));
         }
     };
 
@@ -179,7 +182,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                 }}
             >
                 <Alert severity="info" sx={{ mb: 2 }}>
-                    Ваш браузер не поддерживает push-уведомления. Используйте современный браузер для этой функции.
+                    {t('reminders.browserNotSupported')}
                 </Alert>
             </GlassCard>
         );
@@ -207,7 +210,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                         fontSize: { xs: '1.125rem', sm: '1.25rem' }
                     }}
                 >
-                    Напоминания
+                    {t('reminders.title')}
                 </Typography>
             </Box>
 
@@ -229,7 +232,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                 fontSize: { xs: '0.875rem', sm: '1rem' }
                             }}
                         >
-                            Включить напоминания
+                            {t('reminders.enable')}
                         </Typography>
                     </Box>
                     <Switch
@@ -262,7 +265,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                         fontSize: { xs: '0.875rem', sm: '0.95rem' }
                                     }}
                                 >
-                                    Частота
+                                    {t('reminders.frequency')}
                                 </Typography>
                             </Box>
                             <FormControl 
@@ -292,9 +295,9 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                     value={settings.frequency}
                                     onChange={handleFrequencyChange}
                                 >
-                                    <MenuItem value="daily">Каждый день</MenuItem>
-                                    <MenuItem value="every3days">Каждые 3 дня</MenuItem>
-                                    <MenuItem value="weekly">Раз в неделю</MenuItem>
+                                    <MenuItem value="daily">{t('reminders.frequencyDaily')}</MenuItem>
+                                    <MenuItem value="every3days">{t('reminders.frequencyEvery3Days')}</MenuItem>
+                                    <MenuItem value="weekly">{t('reminders.frequencyWeekly')}</MenuItem>
                                 </Select>
                             </FormControl>
                         </Box>
@@ -313,7 +316,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                         fontSize: { xs: '0.875rem', sm: '0.95rem' }
                                     }}
                                 >
-                                    Время
+                                    {t('reminders.time')}
                                 </Typography>
                             </Box>
                             <Box
@@ -365,7 +368,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                 },
                             }}
                         >
-                            {testNotificationSent ? 'Отправлено!' : 'Тестовое уведомление'}
+                            {testNotificationSent ? t('reminders.testNotificationSent') : t('reminders.testNotification')}
                         </Button>
                     </>
                 )}

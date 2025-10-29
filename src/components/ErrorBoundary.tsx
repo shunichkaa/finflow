@@ -175,6 +175,8 @@ export const useErrorHandler = () => {
         console.error('Error caught by useErrorHandler:', error, errorInfo);
         
         if (process.env.NODE_ENV === 'production') {
+            // В продакшене логируем ошибки, но не показываем пользователю
+            // Можно отправить в Sentry или другой сервис мониторинга
         }
     };
 };

@@ -1,38 +1,28 @@
-import {Alert, Box, Card, CardContent, Chip, IconButton, LinearProgress, Typography,} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import {Alert, Box, Card, CardContent, Typography,} from '@mui/material';
 import WarningIcon from '@mui/icons-material/Warning';
 import {useTranslation} from 'react-i18next';
 import {useFinanceStore} from '../../../Budgets/store/useFinanceStore.ts';
 import {useThemeMode} from '../../../Budgets/theme/ThemeContext';
-import {useSettingsStore} from '../../../Budgets/store/useSettingsStore.ts';
-import {getCategoryById, getCategoryIcon, getCategoryName} from '../../../Budgets/utils/categories.tsx';
+import {getCategoryById, getCategoryName} from '../../../Budgets/utils/categories.tsx';
 import {formatCurrency} from '../../../Budgets/utils/formatters.ts';
+import {useSettingsStore} from '../../../Budgets/store/useSettingsStore.ts';
 import {
     calculateBudgetSpent,
     getBudgetPercentage,
     getBudgetStatus,
-    getDaysLeftInPeriod,
 } from '../../../Budgets/utils/budgetCalculations.ts';
 
 interface BudgetListProps {
     onEdit?: (id: string) => void;
 }
 
-export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
+export const BudgetList: React.FC<BudgetListProps> = ({onEdit: _onEdit}) => {
     const {t} = useTranslation();
     const {mode} = useThemeMode();
     const budgets = useFinanceStore((state) => state.budgets);
     const transactions = useFinanceStore((state) => state.transactions);
-    const deleteBudget = useFinanceStore((state) => state.deleteBudget);
     const {currency} = useSettingsStore();
 
-    // Подсчет превышенных бюджетов
-    const exceededBudgets = budgets.filter((budget) => {
-        const spent = calculateBudgetSpent(budget, transactions);
-        const percentage = getBudgetPercentage(spent, budget.limit);
-        const status = getBudgetStatus(percentage);
-        return status === 'exceeded';
-    }).length;
 
     if (budgets.length === 0) {
         return null;
@@ -89,8 +79,6 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                     const spent = calculateBudgetSpent(budget, transactions);
                     const percentage = getBudgetPercentage(spent, budget.limit);
                     const status = getBudgetStatus(percentage);
-                    const remaining = budget.limit - spent;
-                    const daysLeft = getDaysLeftInPeriod(budget.period);
                     const categoryColor = category?.color || '#B5EAD7';
 
                     return (

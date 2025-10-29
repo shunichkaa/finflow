@@ -3,7 +3,6 @@ import {Box, Button, Container, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {useTranslation} from 'react-i18next';
 import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
-import {BudgetList} from '../../components/features/budget/BudgetList.tsx';
 import {BudgetForm} from '../../components/features/budget/BudgetForm.tsx';
 import {Modal} from '../../components/ui/Modal';
 import {useThemeMode} from '../../Budgets/theme/ThemeContext';
@@ -19,11 +18,6 @@ const Budgets: React.FC = () => {
     const editingBudget = useMemo(() => budgets.find(b => b.id === editingBudgetId) || null, [budgets, editingBudgetId]);
 
     // Функция для получения фона как в аналитике
-    const getCardBackground = () => {
-        return mode === 'dark'
-            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
-            : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)';
-    };
 
     return (
         <Container

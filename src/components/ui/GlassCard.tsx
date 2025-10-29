@@ -1,4 +1,4 @@
-import { Card, CardProps, Box, keyframes } from '@mui/material';
+import { Card, CardProps } from '@mui/material';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 interface GlassCardProps extends CardProps {
@@ -8,14 +8,6 @@ interface GlassCardProps extends CardProps {
     animated?: boolean;
 }
 
-const glow = keyframes`
-    0%, 100% {
-        opacity: 0.5;
-    }
-    50% {
-        opacity: 1;
-    }
-`;
 
 export const GlassCard: React.FC<GlassCardProps> = ({ 
     children, 

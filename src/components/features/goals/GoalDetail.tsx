@@ -51,8 +51,6 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
     const { addToGoal } = useGoalsStore();
     
     const [amount, setAmount] = useState('');
-    const [showMotivation, setShowMotivation] = useState(false);
-    const [motivationText, setMotivationText] = useState('');
 
     if (!goal) return null;
 

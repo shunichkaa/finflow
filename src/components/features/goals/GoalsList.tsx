@@ -4,7 +4,6 @@ import {
     CardContent,
     Typography,
     IconButton,
-    LinearProgress,
     Chip,
     Stack,
     Button,
@@ -17,7 +16,7 @@ import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
 import { useSettingsStore } from '../../../Budgets/store/useSettingsStore';
 import { useGoalsStore } from '../../../Budgets/store/useGoalsStore';
 import { Goal } from '../../../Budgets/types';
-import { formatCurrency, formatDate } from '../../../Budgets/utils/formatters';
+import { formatDate } from '../../../Budgets/utils/formatters';
 
 interface GoalsListProps {
     onEditGoal: (goal: Goal) => void;
@@ -27,7 +26,6 @@ interface GoalsListProps {
 export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) => {
     const { t } = useTranslation();
     const { mode } = useThemeMode();
-    const { currency } = useSettingsStore();
     const goals = useGoalsStore((state) => state.goals);
     const deleteGoal = useGoalsStore((state) => state.deleteGoal);
 
@@ -101,8 +99,8 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
         <Box>
             <Stack spacing={3}>
                 {sortedGoals.map((goal) => {
-                    const percentage = (goal.currentAmount / goal.targetAmount) * 100;
-                    const daysLeft = getDaysLeft(goal.targetDate);
+                    const _percentage = (goal.currentAmount / goal.targetAmount) * 100;
+                    const _daysLeft = getDaysLeft(goal.targetDate);
                     
                     return (
                         <Card

@@ -158,7 +158,7 @@ export const useCloudSync = (enabled: boolean) => {
                     if (typeof settingsData.daily_reminder_enabled === 'boolean') setDailyReminderEnabled(settingsData.daily_reminder_enabled);
                     if (typeof settingsData.notifications_enabled === 'boolean') setNotificationsEnabled(settingsData.notifications_enabled);
                 }
-            } catch (settingsErr) {
+            } catch (_settingsErr) {
                 console.log('User settings not found or error loading, using local settings');
             }
 

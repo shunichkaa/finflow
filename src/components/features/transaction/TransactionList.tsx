@@ -28,9 +28,6 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
     const storeTransactions = useFinanceStore((state) => state.transactions);
     const deleteTransaction = useFinanceStore((state) => state.deleteTransaction);
     const { currency } = useSettingsStore();
-    const [editingTxId, setEditingTxId] = useState<string | null>(null);
-    const [isEditOpen, setIsEditOpen] = useState(false);
-    const [isAddOpen, setIsAddOpen] = useState(false);
 
     const transactions = propTransactions || storeTransactions;
 

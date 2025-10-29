@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export type ReminderFrequency = 'daily' | 'every3days' | 'weekly';
 
@@ -8,31 +9,34 @@ interface ReminderSettings {
     time: string;
 }
 
-const REMINDER_MESSAGES = [
-    "Эй, твой кошелек скучает! Внеси расходы 💰",
-    "Время признаться, на что ты потратился сегодня 👀",
-    "Деньги не считают себя сами, знаешь ли 🤑",
-    "Пссс... забыл внести данные? Я помню всё 📊",
-    "Твой бюджет хочет с тобой поговорить 💬",
-    "Финансовый детектив на связи! Где расходы? 🕵️",
-    "Не будь как все, веди учёт! 🚀",
-    "Кто не ведёт учёт - тот не знает куда деньги ушли 🤷",
-    "Минутка честности: сколько потратил? 💳",
-    "Время обновить финансовую карму ✨",
-    "Сэр, ваши транзакции не внесут себя сами ⚡",
-    "Breaking news: твой бюджет требует внимания 📰",
-    "Чем дольше откладываешь - тем больше забудешь 🧠",
-    "Ваш личный бухгалтер напоминает... (это вы сами) 🤓",
-    "Danger zone! Данные устарели! ⚠️",
-    "Кажется, кто-то тратит деньги и молчит... 🤐",
-    "Финансовый детокс начинается с учёта 🧘",
-    "Alexa, внеси расходы! Ой, это не работает так... 🤖",
+// Reminder message keys - будут использоваться через i18n
+const REMINDER_MESSAGE_KEYS = [
+    'reminderMessages.walletMisses',
+    'reminderMessages.timeToAdmit',
+    'reminderMessages.moneyDontCount',
+    'reminderMessages.forgotToAdd',
+    'reminderMessages.budgetWantsToTalk',
+    'reminderMessages.financialDetective',
+    'reminderMessages.dontBeLikeOthers',
+    'reminderMessages.whoDoesntTrack',
+    'reminderMessages.minuteOfHonesty',
+    'reminderMessages.updateFinancialKarma',
+    'reminderMessages.sirTransactions',
+    'reminderMessages.breakingNews',
+    'reminderMessages.longerYouDelay',
+    'reminderMessages.personalAccountant',
+    'reminderMessages.dangerZone',
+    'reminderMessages.someoneSpends',
+    'reminderMessages.financialDetox',
+    'reminderMessages.alexaAddExpenses',
 ];
 
 const EMOJI_POOL = ['💰', '💸', '💵', '💴', '💶', '💷', '💳', '📊', '📈', '📉', '💼', '🎯', '🔥', '⚡', '✨', '🚀', '🎉', '💪', '🤔', '😎', '🕵️', '📱', '💬', '👀', '🤷', '🧠', '🤖', '🧘', '⚠️', '📰'];
 
-const getRandomMessage = (): string => {
-    const randomMessage = REMINDER_MESSAGES[Math.floor(Math.random() * REMINDER_MESSAGES.length)];
+// Функция для получения случайного сообщения (вызывается внутри useReminderSystem)
+const getRandomMessage = (t: (key: string) => string): string => {
+    const randomKey = REMINDER_MESSAGE_KEYS[Math.floor(Math.random() * REMINDER_MESSAGE_KEYS.length)];
+    const randomMessage = t(randomKey);
     const randomEmoji = EMOJI_POOL[Math.floor(Math.random() * EMOJI_POOL.length)];
     return `${randomMessage} ${randomEmoji}`;
 };
@@ -77,7 +81,7 @@ const shouldSendReminder = (
     return daysDiff >= daysUntilNext;
 };
 
-const sendReminder = async (message: string): Promise<void> => {
+const sendReminder = async (message: string, notificationTitle: string): Promise<void> => {
     if (!('Notification' in window)) {
         console.warn('Notifications not supported');
         return;
@@ -92,7 +96,7 @@ const sendReminder = async (message: string): Promise<void> => {
         if ('serviceWorker' in navigator) {
             const registration = await navigator.serviceWorker.ready;
             
-            await registration.showNotification('FinFlow - Напоминание', {
+            await registration.showNotification(notificationTitle, {
                 body: message,
                 icon: '/favicon.ico',
                 badge: '/favicon.ico',
@@ -105,7 +109,7 @@ const sendReminder = async (message: string): Promise<void> => {
                 }
             });
         } else {
-            new Notification('FinFlow - Напоминание', {
+            new Notification(notificationTitle, {
                 body: message,
                 icon: '/favicon.ico',
                 badge: '/favicon.ico',
@@ -121,6 +125,7 @@ const sendReminder = async (message: string): Promise<void> => {
 };
 
 export const useReminderSystem = () => {
+    const { t } = useTranslation();
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
     const lastCheckRef = useRef<string>('');
 
@@ -164,8 +169,9 @@ export const useReminderSystem = () => {
             lastCheckRef.current = currentMinute;
 
             if (shouldSendReminder(settings, lastSentDate)) {
-                const message = getRandomMessage();
-                await sendReminder(message);
+                const message = getRandomMessage(t);
+                const notificationTitle = t('reminders.notificationTitle');
+                await sendReminder(message, notificationTitle);
             }
         };
 
@@ -180,7 +186,7 @@ export const useReminderSystem = () => {
                 clearInterval(intervalRef.current);
             }
         };
-    }, []);
+    }, [t]);
 
     // Также слушаем изменения в localStorage (если открыто несколько вкладок)
     useEffect(() => {

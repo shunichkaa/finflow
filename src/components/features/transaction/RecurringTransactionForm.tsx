@@ -6,18 +6,12 @@ import {
     DialogActions,
     Button,
     TextField,
-    MenuItem,
     Box,
-    FormControl,
-    InputLabel,
-    Select,
     InputAdornment,
-    ToggleButtonGroup,
-    ToggleButton,
     Typography
 } from '@mui/material';
 import {useTranslation} from 'react-i18next';
-import {Repeat, TrendingUp, TrendingDown} from '@mui/icons-material';
+import {Repeat} from '@mui/icons-material';
 import {useRecurringStore} from "../../../Budgets/store/useRecurringStore.ts";
 import {RecurringFrequency, RecurringTransaction} from "../../../Budgets/types/recurring.ts";
 
@@ -26,19 +20,6 @@ interface RecurringTransactionFormProps {
     onClose: () => void;
     editingTransaction?: RecurringTransaction | null;
 }
-
-const expenseCategories = [
-    'food',
-    'transport',
-    'housing',
-    'entertainment',
-    'health',
-    'education',
-    'clothing',
-    'subscriptions',
-    'other'
-];
-const incomeCategories = ['salary', 'freelance', 'investment', 'gift'];
 
 export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> = ({open, onClose, editingTransaction}) => {
     const {t} = useTranslation();
@@ -54,7 +35,6 @@ export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> =
     const [endDate, setEndDate] = useState(editingTransaction?.endDate || '');
     const [dayOfMonth, setDayOfMonth] = useState(editingTransaction?.dayOfMonth?.toString() || '1');
 
-    const categories = type === 'income' ? incomeCategories : expenseCategories;
 
     // Обновляем состояние при изменении редактируемой транзакции
     useEffect(() => {

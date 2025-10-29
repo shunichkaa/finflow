@@ -105,29 +105,104 @@ export const RecurringTransactions: React.FC = () => {
                 </Alert>
             )}
 
-                                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mb: 1}}>
-                                                <Typography variant="h6" fontWeight="bold">
-                                                    {rec.description || t(`category.${rec.category}`)}
-                                                </Typography>
-                                                {isDue && <Chip label={t('due')} color="warning" size="small"
-												                icon={<Warning/>}/>}
-                                                {!rec.isActive &&
-													<Chip label={t('inactive')} size="small" variant="outlined"/>}
-                                            </Box>
+            <Box sx={{ mb: 3, display: 'flex', justifyContent: 'flex-end' }}>
+                <Button
+                    variant="contained"
+                    startIcon={<Add />}
+                    onClick={() => {
+                        setFormOpen(true);
+                        setEditingTransaction(null);
+                    }}
+                    sx={{
+                        background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                        color: '#FFFFFF',
+                    }}
+                >
+                    {t('addRecurring')}
+                </Button>
+            </Box>
 
-                                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-                                                <Schedule fontSize="small" color="action"/>
-                                                <Typography variant="body2" color="text.secondary">
-                                                    {t('nextPayment')}: {formatNextDue(rec.nextDue)}
-                                                </Typography>
-                                            </Box>
-
-                                            {rec.endDate && (
-                                                <Typography variant="caption" color="text.secondary">
-                                                    {t('until')}: {formatEndDate(rec.endDate)}
-                                                </Typography>
-                                            )}
+            {recurring.length === 0 ? (
+                <Box sx={{ textAlign: 'center', py: 8 }}>
+                    <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
+                        {t('noRecurringTransactions')}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        {t('addFirstRecurring')}
+                    </Typography>
+                </Box>
+            ) : (
+                <List>
+                    {recurring.map((rec) => {
+                        const isDue = dueRecurring.some(dr => dr.id === rec.id);
+                        return (
+                            <Card key={rec.id} sx={{ mb: 2 }}>
+                                <CardContent>
+                                    <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mb: 1, justifyContent: 'space-between'}}>
+                                        <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+                                            <Typography variant="h6" fontWeight="bold">
+                                                {rec.description || t(`category.${rec.category}`)}
+                                            </Typography>
+                                            {isDue && <Chip label={t('due')} color="warning" size="small"
+                                                            icon={<Warning/>}/>}
+                                            {!rec.isActive &&
+                                                <Chip label={t('inactive')} size="small" variant="outlined"/>}
                                         </Box>
+                                        <Typography variant="h6" fontWeight="bold" color={rec.type === 'income' ? 'success.main' : 'error.main'}>
+                                            {formatCurrency(rec.amount, currency)}
+                                        </Typography>
+                                    </Box>
+
+                                    <Box sx={{display: 'flex', alignItems: 'center', gap: 2, mb: 1}}>
+                                        <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+                                            <Repeat fontSize="small" color="action"/>
+                                            <Typography variant="body2" color="text.secondary">
+                                                {getFrequencyLabel(rec.frequency)}
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+                                            <Schedule fontSize="small" color="action"/>
+                                            <Typography variant="body2" color="text.secondary">
+                                                {t('nextPayment')}: {formatNextDue(rec.nextDue)}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+
+                                    {rec.endDate && (
+                                        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
+                                            {t('until')}: {formatEndDate(rec.endDate)}
+                                        </Typography>
+                                    )}
+
+                                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1, mt: 2 }}>
+                                        <IconButton
+                                            size="small"
+                                            onClick={() => {
+                                                setEditingTransaction(rec);
+                                                setFormOpen(true);
+                                            }}
+                                        >
+                                            <Edit />
+                                        </IconButton>
+                                        <IconButton
+                                            size="small"
+                                            onClick={() => deleteRecurring(rec.id)}
+                                            color="error"
+                                        >
+                                            <Delete />
+                                        </IconButton>
+                                        <Switch
+                                            checked={rec.isActive}
+                                            onChange={() => toggleRecurring(rec.id)}
+                                            size="small"
+                                        />
+                                    </Box>
+                                </CardContent>
+                            </Card>
+                        );
+                    })}
+                </List>
+            )}
 
             <RecurringTransactionForm 
                 open={formOpen} 

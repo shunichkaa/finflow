@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { useSwipeGesture } from "../../Budgets/hooks/useSwipeGesture.ts";
 
 
 interface NavItem {
@@ -181,4 +180,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                     </Box>
                 ))}
             </Box>
+        </Box>
+    );
+};
 
