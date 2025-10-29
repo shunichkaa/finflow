@@ -1,10 +1,18 @@
+import type { Goal } from '../types';
+
+interface StoredGoalsData {
+    state?: {
+        goals?: Goal[];
+    };
+}
+
 export const clearOldGoalsData = () => {
     try {
         const storedData = localStorage.getItem('goals-storage');
         if (storedData) {
-            const parsed = JSON.parse(storedData);
+            const parsed = JSON.parse(storedData) as StoredGoalsData;
             if (parsed?.state?.goals) {
-                const hasEmojiIcons = parsed.state.goals.some((goal: any) => {
+                const hasEmojiIcons = parsed.state.goals.some((goal: Goal) => {
                     const icon = goal.icon;
                     return icon && /[\u{1F300}-\u{1F9FF}]/u.test(icon);
                 });

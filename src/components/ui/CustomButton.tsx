@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import type { ButtonProps as MuiButtonProps } from '@mui/material/Button';
+import type { ButtonProps as MuiButtonProps } from '@mui/material';
 import { designTokens } from '../../Budgets/theme/designTokens';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
@@ -12,6 +12,9 @@ export interface CustomButtonProps extends Omit<MuiButtonProps, 'color' | 'varia
   children: React.ReactNode;
 }
 
+// Type for MUI sx prop styles
+type StyleObject = Record<string, string | number | object>;
+
 export const CustomButton: React.FC<CustomButtonProps> = ({ 
   variant = 'primary',
   size = 'medium',
@@ -21,7 +24,7 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
 }) => {
   const { mode } = useThemeMode();
 
-  const getVariantStyles = (): Record<string, any> => {
+  const getVariantStyles = (): StyleObject => {
     const isDark = mode === 'dark';
     
     switch (variant) {

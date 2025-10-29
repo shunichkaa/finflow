@@ -97,14 +97,15 @@ export const useGoalsStore = create<GoalsState>()(
         {
             name: 'goals-storage',
             version: 2,
-            migrate: (persistedState: any) => {
-                if (persistedState?.goals) {
-                    persistedState.goals = persistedState.goals.map((goal: Goal) => ({
+            migrate: (persistedState: unknown) => {
+                const state = persistedState as Partial<GoalsState> & { goals?: Goal[] };
+                if (state?.goals) {
+                    state.goals = state.goals.map((goal: Goal) => ({
                         ...goal,
                         icon: migrateGoalIcon(goal.icon)
                     }));
                 }
-                return persistedState as GoalsState;
+                return state as GoalsState;
             },
         }
     )
