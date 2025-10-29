@@ -98,16 +98,22 @@ export const DatePickerField: React.FC<DatePickerFieldProps> = ({
                         required,
                         fullWidth,
                         sx: {
-                            minWidth: fullWidth ? '100%' : 130,
+                            minWidth: fullWidth ? '100%' : {xs: 100, sm: 130},
+                            maxWidth: fullWidth ? '100%' : {xs: 120, sm: 130},
+                            flex: fullWidth ? '1 1 auto' : '0 0 auto',
                             '& .MuiOutlinedInput-root': {
-                                backgroundColor: mode === 'dark' ? 'rgba(80, 75, 70, 0.3)' : 'rgba(248, 229, 229, 0.4)',
+                                backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             },
                             '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? 'rgba(245, 245, 220, 0.8)' : 'rgba(101, 70, 51, 0.8)',
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
+                                '&.Mui-focused': {
+                                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                },
                             },
                             '& .MuiOutlinedInput-input': {
                                 padding: size === 'small' ? '8.5px 14px' : '16.5px 14px',
+                                fontSize: {xs: '0.75rem', sm: '0.875rem'},
                             },
                         },
                     },

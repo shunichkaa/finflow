@@ -91,24 +91,19 @@ const Dashboard = () => {
                     startIcon={<AddIcon/>}
                     onClick={() => setIsModalOpen(true)}
                     sx={{
-                        background: mode === 'dark'
-                            ? 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)'
-                            : 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                        background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                         color: '#FFFFFF',
                         fontWeight: 600,
-                        px: 4,
+                        px: {xs: 3, sm: 4},
                         py: 1.5,
                         borderRadius: 3,
                         textTransform: 'none',
-                        boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(108, 111, 249, 0.4)'
-                            : '0 8px 24px rgba(168, 163, 246, 0.4)',
+                        boxShadow: '0 8px 24px rgba(108, 111, 249, 0.4)',
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&:hover': {
                             transform: 'translateY(-2px)',
-                            boxShadow: mode === 'dark'
-                                ? '0 12px 32px rgba(108, 111, 249, 0.5)'
-                                : '0 12px 32px rgba(168, 163, 246, 0.5)',
+                            boxShadow: '0 12px 32px rgba(108, 111, 249, 0.5)',
+                            background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
                         }
                     }}
                 >
@@ -116,7 +111,7 @@ const Dashboard = () => {
                 </Button>
             </Box>
 
-            <Container maxWidth="xl" sx={{px: {xs: 0, sm: 0.5}, pb: 1}}>
+            <Container maxWidth="xl" sx={{px: {xs: 1, sm: 0.5}, pb: 1}}>
                 {/* Stats Cards */}
                 <StatsCards onFilterClick={handleStatsCardClick}/>
 

@@ -156,11 +156,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     }}
                 >
                     <MenuItem value="">{t('allCategories')}</MenuItem>
-                    {type === 'all' ? (
-                        <MenuItem value="" disabled>
-                            {t('selectTypeFirst') || 'Сначала выберите тип транзакции'}
-                        </MenuItem>
-                    ) : (
+                    {type === 'all' ? null : (
                         filteredCategories.map((cat) => (
                             <MenuItem key={cat.id} value={cat.id}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -172,43 +168,53 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     )}
                 </TextField>
 
-                {/* От */}
-                <DatePickerField
-                    label={t('from')}
-                    value={dateFrom}
-                    onChange={onDateFromChange}
-                />
+                {/* От, До и кнопка сброса на одной строке на мобилке */}
+                <Box sx={{
+                    display: 'flex',
+                    gap: { xs: 1, sm: 2 },
+                    alignItems: 'center',
+                    width: { xs: '100%', sm: 'auto' },
+                    flexDirection: { xs: 'row', sm: 'row' },
+                    flex: { xs: '1 1 auto', sm: 'none' }
+                }}>
+                    <DatePickerField
+                        label={t('from')}
+                        value={dateFrom}
+                        onChange={onDateFromChange}
+                        fullWidth={false}
+                    />
 
-                {/* До */}
-                <DatePickerField
-                    label={t('to')}
-                    value={dateTo}
-                    onChange={onDateToChange}
-                />
+                    <DatePickerField
+                        label={t('to')}
+                        value={dateTo}
+                        onChange={onDateToChange}
+                        fullWidth={false}
+                    />
 
-                {/* Кнопка сброса - только крестик */}
-                <Box
-                    onClick={onReset}
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: 40,
-                        height: 40,
-                        minWidth: 40,
-                        borderRadius: 2,
-                        border: `1px solid ${mode === 'dark' ? '#6C6FF9' : '#6C6FF9'}`,
-                        color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        '&:hover': {
-                            backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
-                            transform: 'translateY(-2px)',
-                        }
-                    }}
-                >
-                    <ClearIcon sx={{ fontSize: 20 }} />
+                    <Box
+                        onClick={onReset}
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: { xs: 40, sm: 40 },
+                            height: { xs: 40, sm: 40 },
+                            minWidth: { xs: 40, sm: 40 },
+                            borderRadius: 2,
+                            border: `1px solid ${mode === 'dark' ? '#6C6FF9' : '#6C6FF9'}`,
+                            color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                            background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            flexShrink: 0,
+                            '&:hover': {
+                                backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                                transform: 'translateY(-2px)',
+                            }
+                        }}
+                    >
+                        <ClearIcon sx={{ fontSize: 20 }} />
+                    </Box>
                 </Box>
             </Box>
         </Paper>

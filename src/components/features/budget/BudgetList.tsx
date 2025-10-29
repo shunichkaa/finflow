@@ -192,7 +192,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             }
                                         }}
                                     >
-                                        {getCategoryIcon(category?.icon || 'more', { xs: 24, sm: 32 })}
+                                        {getCategoryIcon(category?.icon || 'more', 32)}
                                     </IconButton>
                                     <Box sx={{ display: 'flex', gap: 0.5, flexShrink: 0 }}>
                                         <IconButton
@@ -232,8 +232,8 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                     {getCategoryName(budget.category, t)}
                                 </Typography>
 
-                                {/* Период и дни */}
-                                <Box sx={{ display: 'flex', gap: { xs: 0.75, sm: 1 }, alignItems: 'center', mb: { xs: 1.5, sm: 2 }, flexWrap: 'wrap' }}>
+                                {/* Период и дни - скрыто на мобилке */}
+                                <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: { xs: 0.75, sm: 1 }, alignItems: 'center', mb: { xs: 1.5, sm: 2 }, flexWrap: 'wrap' }}>
                                     <Chip
                                         label={t(budget.period === 'monthly' ? 'monthly' : 'weekly')}
                                         size="small"
@@ -267,7 +267,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                     </Typography>
                                 </Box>
 
-                                {/* Warning for exceeded */}
+                                {/* Warning for exceeded - упрощено на мобилке */}
                                 {status === 'exceeded' && (
                                         <Alert 
                                         severity="error" 
@@ -278,15 +278,16 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             border: mode === 'dark' ? '1px solid rgba(255, 179, 186, 0.3)' : '1px solid #FFB3BA',
                                             borderRadius: 3,
-                                            fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                                            fontSize: { xs: '0.7rem', sm: '0.875rem' },
+                                            py: { xs: 0.5, sm: 1 },
                                             '& .MuiAlert-icon': {
                                                 color: mode === 'dark' ? '#FFB3BA' : '#272B3E',
-                                                fontSize: { xs: '1.2rem', sm: '1.5rem' }
+                                                fontSize: { xs: '1rem', sm: '1.5rem' }
                                             },
                                             '& .MuiAlert-message': {
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 fontWeight: 500,
-                                                fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                                                fontSize: { xs: '0.7rem', sm: '0.875rem' },
                                                 overflow: 'hidden',
                                                 textOverflow: 'ellipsis'
                                             }
@@ -305,15 +306,16 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             border: mode === 'dark' ? '1px solid rgba(255, 215, 186, 0.3)' : '1px solid #FFD7BA',
                                             borderRadius: 3,
-                                            fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                                            fontSize: { xs: '0.7rem', sm: '0.875rem' },
+                                            py: { xs: 0.5, sm: 1 },
                                             '& .MuiAlert-icon': {
                                                 color: mode === 'dark' ? '#FFD7BA' : '#272B3E',
-                                                fontSize: { xs: '1.2rem', sm: '1.5rem' }
+                                                fontSize: { xs: '1rem', sm: '1.5rem' }
                                             },
                                             '& .MuiAlert-message': {
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 fontWeight: 500,
-                                                fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                                                fontSize: { xs: '0.7rem', sm: '0.875rem' },
                                                 overflow: 'hidden',
                                                 textOverflow: 'ellipsis'
                                             }
@@ -323,7 +325,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                     </Alert>
                                 )}
 
-                                {/* Осталось */}
+                                {/* Осталось - скрыто на мобилке */}
                                 {remaining > 0 && (
                                     <Box 
                                         sx={{ 
@@ -331,7 +333,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             mb: { xs: 1.5, sm: 2 },
                                             borderRadius: 2,
                                             backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
-                                            display: 'flex',
+                                            display: { xs: 'none', sm: 'flex' },
                                             alignItems: 'baseline',
                                             gap: { xs: 0.75, sm: 1 },
                                             flexWrap: 'wrap'

@@ -68,7 +68,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                             sx={{
                                 display: 'flex',
                                 py: 2,
-                                px: { xs: 1, sm: 2 },
+                                px: { xs: 2, sm: 2 },
                                 gap: { xs: 1, sm: 2 },
                                 flexDirection: { xs: 'column', sm: 'row' },
                                 alignItems: { xs: 'stretch', sm: 'center' },

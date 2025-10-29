@@ -253,21 +253,6 @@ export default function Profile() {
         }
     };
 
-    const getSyncStatusColor = () => {
-        // Безопасное преобразование типа
-        const status = String(syncStatus);
-        switch (status) {
-            case 'syncing':
-                return '#6C6FF9';
-            case 'error':
-                return '#FF3B3B';
-            case 'success':
-                return '#4CAF50';
-            default:
-                return mode === 'dark' ? '#FFFFFF' : '#272B3E';
-        }
-    };
-
     const getSyncStatusText = () => {
         // Безопасное преобразование типа
         const status = String(syncStatus);
@@ -365,7 +350,7 @@ export default function Profile() {
                 <List>
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
-                            <CloudSync sx={{color: getSyncStatusColor(), fontSize: {xs: 20, sm: 24}}}/>
+                            <CloudSync sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)', fontSize: {xs: 20, sm: 24}}}/>
                         </ListItemIcon>
                         <ListItemText
                             primary={t('sync.status')}
@@ -789,13 +774,14 @@ export default function Profile() {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: {xs: '90%', sm: 500},
-                        maxHeight: '90vh',
+                        width: {xs: '95%', sm: 500},
+                        maxWidth: {xs: '400px', sm: 500},
+                        maxHeight: {xs: '85vh', sm: '90vh'},
                         overflow: 'auto',
                         backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                         borderRadius: 3,
                         boxShadow: 24,
-                        p: 4,
+                        p: {xs: 2, sm: 4},
                     }}
                 >
                     <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
