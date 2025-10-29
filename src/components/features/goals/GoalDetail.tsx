@@ -36,17 +36,20 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
     const { t } = useTranslation();
     const { mode } = useThemeMode();
     const { currency } = useSettingsStore();
-    const { addToGoal } = useGoalsStore();
+    const { addToGoal, goals } = useGoalsStore();
     
     const [amount, setAmount] = useState('');
 
     if (!goal) return null;
 
-    const progress = (goal.currentAmount / goal.targetAmount) * 100;
-    const remaining = goal.targetAmount - goal.currentAmount;
+    // Получаем актуальную цель из стора, чтобы прогресс обновлялся сразу
+    const actualGoal = goals.find(g => g.id === goal.id) || goal;
 
-    const daysRemaining = goal.targetDate 
-        ? Math.ceil((new Date(goal.targetDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+    const progress = (actualGoal.currentAmount / actualGoal.targetAmount) * 100;
+    const remaining = actualGoal.targetAmount - actualGoal.currentAmount;
+
+    const daysRemaining = actualGoal.targetDate 
+        ? Math.ceil((new Date(actualGoal.targetDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
         : null;
 
     const dailyRecommendation = daysRemaining && daysRemaining > 0
@@ -56,16 +59,15 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
     const handleAddFunds = () => {
         const amountNum = parseFloat(amount);
         if (amountNum > 0) {
-            addToGoal(goal.id, amountNum);
-
+            addToGoal(actualGoal.id, amountNum);
             setAmount('');
         }
     };
 
     const handleWithdraw = () => {
         const amountNum = parseFloat(amount);
-        if (amountNum > 0 && amountNum <= goal.currentAmount) {
-            addToGoal(goal.id, -amountNum);
+        if (amountNum > 0 && amountNum <= actualGoal.currentAmount) {
+            addToGoal(actualGoal.id, -amountNum);
             setAmount('');
         }
     };
@@ -97,7 +99,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
                     }}
                 >
-                    {goal.name}
+                    {actualGoal.name}
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1 }}>
                     {onEdit && (
@@ -149,10 +151,10 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         />
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
                             <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
-                                {goal.currentAmount.toLocaleString()} {currency}
+                                {actualGoal.currentAmount.toLocaleString()} {currency}
                             </Typography>
                             <Typography variant="h6" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)' }}>
-                                {goal.targetAmount.toLocaleString()} {currency}
+                                {actualGoal.targetAmount.toLocaleString()} {currency}
                             </Typography>
                         </Box>
                     </Box>
@@ -240,7 +242,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                                     fullWidth
                                     startIcon={<RemoveIcon />}
                                     onClick={handleWithdraw}
-                                    disabled={!amount || parseFloat(amount) <= 0 || parseFloat(amount) > goal.currentAmount}
+                                    disabled={!amount || parseFloat(amount) <= 0 || parseFloat(amount) > actualGoal.currentAmount}
                                     sx={{
                                         borderColor: '#6C6FF9',
                                         color: '#6C6FF9',

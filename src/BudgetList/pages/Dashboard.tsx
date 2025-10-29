@@ -6,6 +6,7 @@ import {useFinanceStore} from '../../Budgets/store/useFinanceStore.ts';
 import {TransactionType} from '../../Budgets/types';
 import {StatsCards} from '../../components/features/StatsCards.tsx';
 import {TransactionList} from '../../components/features/transaction/TransactionList.tsx';
+import {TransactionFilters} from '../../components/features/transaction/TransactionFilters.tsx';
 import {GlassCard} from '../../components/ui/GlassCard.tsx';
 import {useTransactionFilters} from '../../Budgets/hooks/useTransactionFilters.ts';
 import {useThemeMode} from '../../Budgets/theme/ThemeContext';
@@ -16,7 +17,12 @@ const Dashboard = () => {
     const transactions = useFinanceStore((state) => state.transactions);
 
     const {
+        filters: { type, category, dateFrom, dateTo },
         setType,
+        setCategory,
+        setDateFrom,
+        setDateTo,
+        reset,
         filteredTransactions,
     } = useTransactionFilters(transactions);
     
@@ -68,6 +74,18 @@ const Dashboard = () => {
                 </Box>
 
                 <StatsCards onFilterClick={handleStatsCardClick}/>
+
+                <TransactionFilters
+                    type={type}
+                    category={category}
+                    dateFrom={dateFrom}
+                    dateTo={dateTo}
+                    onTypeChange={setType}
+                    onCategoryChange={setCategory}
+                    onDateFromChange={setDateFrom}
+                    onDateToChange={setDateTo}
+                    onReset={reset}
+                />
 
                 <GlassCard
                     sx={{
