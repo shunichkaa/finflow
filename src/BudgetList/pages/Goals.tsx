@@ -332,7 +332,7 @@ const Goals: React.FC = () => {
                     {editingGoal ? t('savingsGoal.editTitle', 'Edit Goal') : t('savingsGoal.createTitle', 'Create Goal')}
                 </DialogTitle>
 
-                <DialogContent sx={{pb: 3}}>
+                <DialogContent sx={{pb: 3, overflow: 'hidden'}}>
                     <Stack spacing={2.5} sx={{mt: 0.5}}>
                         <Box>
                             <Typography variant="body2"

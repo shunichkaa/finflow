@@ -287,28 +287,42 @@ export default function Profile() {
     const isSyncing = String(syncStatus) === 'syncing';
 
     return (
-        <Container maxWidth="md" sx={{py: 4}}>
-            <Typography variant="h4" gutterBottom sx={{mb: 4, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+        <Container maxWidth="md" sx={{py: {xs: 2, sm: 4}, px: {xs: 1, sm: 3}}}>
+            <Typography variant="h4" gutterBottom sx={{
+                mb: {xs: 2, sm: 4},
+                fontSize: {xs: '1.5rem', sm: '2rem'},
+                color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+            }}>
                 {t('profile')}
             </Typography>
 
             {/* Профиль пользователя */}
-            <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
-                <Box display="flex" alignItems="center" justifyContent="space-between">
-                    <Box display="flex" alignItems="center">
+            <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
+                <Box display="flex" alignItems="center" justifyContent="space-between" sx={{flexWrap: {xs: 'wrap', sm: 'nowrap'}, gap: {xs: 2, sm: 0}}}>
+                    <Box display="flex" alignItems="center" sx={{flex: 1, minWidth: 0}}>
                         <Avatar
                             src={avatar || undefined}
-                            sx={{width: 64, height: 64, mr: 2, backgroundColor: '#6C6FF9'}}
+                            sx={{width: {xs: 48, sm: 64}, height: {xs: 48, sm: 64}, mr: {xs: 1.5, sm: 2}, backgroundColor: '#6C6FF9', flexShrink: 0}}
                         >
-                            {!avatar && <Person fontSize="large"/>}
+                            {!avatar && <Person sx={{fontSize: {xs: 24, sm: 32}}}/>}
                         </Avatar>
-                        <Box>
-                            <Typography variant="h6" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                        <Box sx={{minWidth: 0, flex: 1}}>
+                            <Typography variant="h6" sx={{
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                fontSize: {xs: '1rem', sm: '1.25rem'},
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap'
+                            }}>
                                 {nickname || session?.user?.email || t('user')}
                             </Typography>
                             <Typography variant="body2" sx={{
                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
-                                mt: 0.5
+                                mt: 0.5,
+                                fontSize: {xs: '0.75rem', sm: '0.875rem'},
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap'
                             }}>
                                 {session?.user?.email}
                             </Typography>
@@ -322,33 +336,38 @@ export default function Profile() {
                             borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             borderRadius: 2,
-                            minWidth: 48,
-                            width: 48,
-                            height: 48,
+                            minWidth: {xs: 40, sm: 48},
+                            width: {xs: 40, sm: 48},
+                            height: {xs: 40, sm: 48},
                             p: 0,
+                            flexShrink: 0,
                             '&:hover': {
                                 borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
                                 backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
                             }
                         }}
                     >
-                        <Edit/>
+                        <Edit sx={{fontSize: {xs: 20, sm: 24}}}/>
                     </Button>
                 </Box>
             </Paper>
 
             {/* Статус синхронизации - ПЕРЕМЕЩЕНО ПОД АВАТАРКУ */}
-            <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
-                <Box display="flex" alignItems="center" justifyContent="space-between" sx={{mb: 2}}>
-                    <Box display="flex" alignItems="center" gap={1}>
-                        <CloudSync sx={{color: getSyncStatusColor(), fontSize: 24}}/>
-                        <Box>
-                            <Typography variant="h6" sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+            <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
+                <Box display="flex" flexDirection={{xs: 'column', sm: 'row'}} alignItems={{xs: 'flex-start', sm: 'center'}} justifyContent="space-between" sx={{mb: 2, gap: {xs: 2, sm: 0}}}>
+                    <Box display="flex" alignItems="center" gap={1} sx={{flex: 1, minWidth: 0}}>
+                        <CloudSync sx={{color: getSyncStatusColor(), fontSize: {xs: 20, sm: 24}, flexShrink: 0}}/>
+                        <Box sx={{minWidth: 0, flex: 1}}>
+                            <Typography variant="h6" sx={{
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                fontSize: {xs: '1rem', sm: '1.25rem'}
+                            }}>
                                 {t('sync.status', 'Статус синхронизации')}
                             </Typography>
                             <Typography variant="body2" sx={{
                                 color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
-                                fontStyle: 'italic'
+                                fontStyle: 'italic',
+                                fontSize: {xs: '0.75rem', sm: '0.875rem'}
                             }}>
                                 {getSyncStatusText()}
                             </Typography>
@@ -358,13 +377,16 @@ export default function Profile() {
                         variant="contained"
                         onClick={handleSyncNow}
                         disabled={isSyncing}
-                        startIcon={<CloudSync/>}
+                        startIcon={<CloudSync sx={{fontSize: {xs: 18, sm: 20}}}/>}
                         sx={{
                             background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                             color: '#FFFFFF',
                             fontWeight: 'bold',
                             borderRadius: 2,
-                            px: 3,
+                            px: {xs: 2, sm: 3},
+                            py: {xs: 1, sm: 1.5},
+                            fontSize: {xs: '0.875rem', sm: '1rem'},
+                            width: {xs: '100%', sm: 'auto'},
                             '&:hover': {
                                 background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
                                 transform: 'translateY(-1px)',
@@ -377,14 +399,18 @@ export default function Profile() {
                             }
                         }}
                     >
-                        {isSyncing ? t('sync.syncing', 'Синхронизация...') : t('data.syncNow', 'Синхронизировать')}
+                        {isSyncing ? t('sync.syncing', 'Синхронизация...') : t('sync.syncNow', 'Синхронизировать')}
                     </Button>
                 </Box>
             </Paper>
 
             {/* Настройки */}
-            <Paper sx={{p: 3, mb: 3, borderRadius: 3, minHeight: 300}}>
-                <Typography variant="h6" gutterBottom sx={{mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+            <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
+                <Typography variant="h6" gutterBottom sx={{
+                    mb: {xs: 2, sm: 3},
+                    fontSize: {xs: '1.125rem', sm: '1.25rem'},
+                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                }}>
                     {t('settings')}
                 </Typography>
 
@@ -426,11 +452,12 @@ export default function Profile() {
                             primary={t('settings.language')}
                             secondary={t('settings.languageSelect')}
                         />
-                        <FormControl size="small" sx={{minWidth: 120}}>
+                        <FormControl size="small" sx={{minWidth: {xs: 100, sm: 120}, ml: {xs: 1, sm: 0}}}>
                             <Select
                                 value={i18n?.language || 'ru'}
                                 onChange={(e) => changeLanguage(e.target.value)}
                                 sx={{
+                                    fontSize: {xs: '0.875rem', sm: '1rem'},
                                     '& .MuiSelect-select': {
                                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     },
@@ -457,11 +484,12 @@ export default function Profile() {
                             primary={t('settings.currency')}
                             secondary={t('settings.currencySelect')}
                         />
-                        <FormControl size="small" sx={{minWidth: 120}}>
+                        <FormControl size="small" sx={{minWidth: {xs: 100, sm: 120}, ml: {xs: 1, sm: 0}}}>
                             <Select
                                 value={currency || 'EUR'}
                                 onChange={(e) => handleCurrencyChange(e.target.value)}
                                 sx={{
+                                    fontSize: {xs: '0.875rem', sm: '1rem'},
                                     '& .MuiSelect-select': {
                                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     },
@@ -483,8 +511,12 @@ export default function Profile() {
             </Paper>
 
             {/* Уведомления */}
-            <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
-                <Typography variant="h6" gutterBottom sx={{mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+            <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
+                <Typography variant="h6" gutterBottom sx={{
+                    mb: {xs: 2, sm: 3},
+                    fontSize: {xs: '1.125rem', sm: '1.25rem'},
+                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                }}>
                     {t('notifications')}
                 </Typography>
 
@@ -552,12 +584,13 @@ export default function Profile() {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'space-between',
-                                pl: 7,
-                                pr: 2
+                                pl: {xs: 0, sm: 7},
+                                pr: {xs: 0, sm: 2},
+                                mt: {xs: 1, sm: 0}
                             }}>
                                 <Typography sx={{
                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
-                                    fontSize: '0.9rem'
+                                    fontSize: {xs: '0.875rem', sm: '0.9rem'}
                                 }}>
                                     {t('reminderTime')}
                                 </Typography>
@@ -654,12 +687,16 @@ export default function Profile() {
             </Paper>
 
             {/* Управление данными */}
-            <Paper sx={{p: 3, mb: 3, borderRadius: 3}}>
-                <Typography variant="h6" gutterBottom sx={{mb: 3, color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+            <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
+                <Typography variant="h6" gutterBottom sx={{
+                    mb: {xs: 2, sm: 3},
+                    fontSize: {xs: '1.125rem', sm: '1.25rem'},
+                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                }}>
                     {t('dataManagement')}
                 </Typography>
 
-                <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 2}}>
+                <Box sx={{display: 'flex', flexDirection: {xs: 'column', sm: 'row'}, flexWrap: 'wrap', gap: 2}}>
                     <Button
                         variant="outlined"
                         startIcon={<CloudSync/>}
@@ -674,12 +711,13 @@ export default function Profile() {
                             }
                         }}
                         sx={{
-                            flex: '1 1 auto',
-                            minWidth: '200px',
+                            flex: {xs: '1 1 100%', sm: '1 1 auto'},
+                            minWidth: {xs: '100%', sm: '200px'},
                             borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             borderRadius: 2,
-                            py: 1.5,
+                            py: {xs: 1.25, sm: 1.5},
+                            fontSize: {xs: '0.875rem', sm: '1rem'},
                             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
                                 borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
@@ -696,12 +734,13 @@ export default function Profile() {
                         startIcon={<Backup/>}
                         onClick={handleExportData}
                         sx={{
-                            flex: '1 1 auto',
-                            minWidth: '200px',
+                            flex: {xs: '1 1 100%', sm: '1 1 auto'},
+                            minWidth: {xs: '100%', sm: '200px'},
                             borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             borderRadius: 2,
-                            py: 1.5,
+                            py: {xs: 1.25, sm: 1.5},
+                            fontSize: {xs: '0.875rem', sm: '1rem'},
                             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
                                 borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
@@ -1007,7 +1046,10 @@ export default function Profile() {
                 open={timePickerOpen}
                 onClose={() => setTimePickerOpen(false)}
                 value={notificationTime}
-                onChange={setNotificationTime}
+                onChange={(time) => {
+                    setNotificationTime(time);
+                    setTimeout(() => triggerSync(), 100);
+                }}
             />
         </Container>
     );

@@ -6,6 +6,7 @@ import {
     Box,
     Typography,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 
 interface IOSTimePickerProps {
@@ -16,6 +17,7 @@ interface IOSTimePickerProps {
 }
 
 const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onChange }) => {
+    const { t } = useTranslation();
     const { mode } = useThemeMode();
     const [hours, setHours] = useState('00');
     const [minutes, setMinutes] = useState('00');
@@ -239,7 +241,7 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
                         }
                     }}
                 >
-                    ОК
+                    {t('timePicker.ok', 'OK')}
                 </Button>
             </DialogActions>
         </Dialog>
