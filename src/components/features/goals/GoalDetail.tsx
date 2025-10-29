@@ -233,11 +233,29 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                                 ? 'rgba(108, 111, 249, 0.1)' 
                                 : 'rgba(199, 206, 234, 0.2)',
                             border: `1px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : '#C7CEEA'}`,
+                            display: 'flex',
+                            flexDirection: { xs: 'row', sm: 'column' },
+                            alignItems: { xs: 'center', sm: 'flex-start' },
+                            justifyContent: { xs: 'space-between', sm: 'flex-start' },
+                            gap: { xs: 1, sm: 0.5 }
                         }}>
-                            <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
+                            <Typography 
+                                variant="caption" 
+                                sx={{ 
+                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
+                                    fontSize: { xs: '0.75rem', sm: '0.875rem' }
+                                }}
+                            >
                                 {t('goalDetail.remaining')}:
                             </Typography>
-                            <Typography variant="h5" fontWeight={700} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+                            <Typography 
+                                variant="h5" 
+                                fontWeight={700} 
+                                sx={{ 
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    fontSize: { xs: '1rem', sm: '1.5rem' }
+                                }}
+                            >
                                 {remaining.toLocaleString()} {currency}
                             </Typography>
                         </Box>

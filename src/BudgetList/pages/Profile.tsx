@@ -352,56 +352,56 @@ export default function Profile() {
                 </Box>
             </Paper>
 
-            {/* Статус синхронизации - ПЕРЕМЕЩЕНО ПОД АВАТАРКУ */}
+            {/* Статус синхронизации */}
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
-                <Box display="flex" flexDirection={{xs: 'column', sm: 'row'}} alignItems={{xs: 'flex-start', sm: 'center'}} justifyContent="space-between" sx={{mb: 2, gap: {xs: 2, sm: 0}}}>
-                    <Box display="flex" alignItems="center" gap={1} sx={{flex: 1, minWidth: 0}}>
-                        <CloudSync sx={{color: getSyncStatusColor(), fontSize: {xs: 20, sm: 24}, flexShrink: 0}}/>
-                        <Box sx={{minWidth: 0, flex: 1}}>
-                            <Typography variant="h6" sx={{
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                fontSize: {xs: '1rem', sm: '1.25rem'}
-                            }}>
-                                {t('sync.status')}
-                            </Typography>
-                            <Typography variant="body2" sx={{
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
-                                fontStyle: 'italic',
-                                fontSize: {xs: '0.75rem', sm: '0.875rem'}
-                            }}>
-                                {getSyncStatusText()}
-                            </Typography>
-                        </Box>
-                    </Box>
-                    <Button
-                        variant="contained"
-                        onClick={handleSyncNow}
-                        disabled={isSyncing}
-                        startIcon={<CloudSync sx={{fontSize: {xs: 18, sm: 20}}}/>}
-                        sx={{
-                            background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
-                            color: '#FFFFFF',
-                            fontWeight: 'bold',
-                            borderRadius: 2,
-                            px: {xs: 2, sm: 3},
-                            py: {xs: 1, sm: 1.5},
-                            fontSize: {xs: '0.875rem', sm: '1rem'},
-                            width: {xs: '100%', sm: 'auto'},
-                            '&:hover': {
-                                background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
-                                transform: 'translateY(-1px)',
-                                boxShadow: '0 6px 20px rgba(108, 111, 249, 0.4)',
-                            },
-                            '&:disabled': {
-                                background: 'linear-gradient(135deg, #9E9E9E 0%, #757575 100%)',
-                                transform: 'none',
-                                boxShadow: 'none',
-                            }
-                        }}
-                    >
-                        {isSyncing ? t('sync.syncing') : t('sync.syncNow')}
-                    </Button>
-                </Box>
+                <Typography variant="h6" gutterBottom sx={{
+                    mb: {xs: 2, sm: 3},
+                    fontSize: {xs: '1.125rem', sm: '1.25rem'},
+                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                }}>
+                    {t('sync.title')}
+                </Typography>
+
+                <List>
+                    <ListItem sx={{py: 1.5}}>
+                        <ListItemIcon>
+                            <CloudSync sx={{color: getSyncStatusColor(), fontSize: {xs: 20, sm: 24}}}/>
+                        </ListItemIcon>
+                        <ListItemText
+                            primary={t('sync.status')}
+                            secondary={getSyncStatusText()}
+                        />
+                        <Button
+                            variant="contained"
+                            onClick={handleSyncNow}
+                            disabled={isSyncing}
+                            startIcon={<CloudSync sx={{fontSize: {xs: 16, sm: 18}}}/>}
+                            sx={{
+                                background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                                color: '#FFFFFF',
+                                fontWeight: 'bold',
+                                borderRadius: 2,
+                                px: {xs: 1.5, sm: 2},
+                                py: {xs: 0.75, sm: 1},
+                                fontSize: {xs: '0.75rem', sm: '0.875rem'},
+                                minWidth: {xs: 'auto', sm: 120},
+                                ml: {xs: 1, sm: 2},
+                                '&:hover': {
+                                    background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
+                                    transform: 'translateY(-1px)',
+                                    boxShadow: '0 6px 20px rgba(108, 111, 249, 0.4)',
+                                },
+                                '&:disabled': {
+                                    background: 'linear-gradient(135deg, #9E9E9E 0%, #757575 100%)',
+                                    transform: 'none',
+                                    boxShadow: 'none',
+                                }
+                            }}
+                        >
+                            {isSyncing ? t('sync.syncing') : t('sync.syncNow')}
+                        </Button>
+                    </ListItem>
+                </List>
             </Paper>
 
             {/* Настройки */}

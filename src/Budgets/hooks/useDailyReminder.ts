@@ -20,10 +20,13 @@ export const useDailyReminder = () => {
         };
 
         const checkAndSendReminder = () => {
+            const settings = useSettingsStore.getState();
+            const currentNotificationTime = settings.notificationTime;
+            
             const now = new Date();
             const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
             
-            if (currentTime === notificationTime) {
+            if (currentTime === currentNotificationTime) {
                 const lastReminderDate = localStorage.getItem('lastReminderDate');
                 const today = now.toDateString();
 
@@ -39,14 +42,18 @@ export const useDailyReminder = () => {
                     });
 
                     if ('Notification' in window && Notification.permission === 'granted') {
-                        new Notification(`FinFlow - ${notificationTitle}`, {
-                            body: notificationMessage,
-                            icon: '/favicon.ico',
-                            badge: '/favicon.ico',
-                            tag: 'daily-reminder',
-                            requireInteraction: false,
-                            silent: false,
-                        });
+                        try {
+                            new Notification(`FinFlow - ${notificationTitle}`, {
+                                body: notificationMessage,
+                                icon: '/favicon.ico',
+                                badge: '/favicon.ico',
+                                tag: 'daily-reminder',
+                                requireInteraction: false,
+                                silent: false,
+                            });
+                        } catch (error) {
+                            console.error('Notification error:', error);
+                        }
                     }
 
                     localStorage.setItem('lastReminderDate', today);
@@ -61,6 +68,6 @@ export const useDailyReminder = () => {
         checkAndSendReminder();
 
         return () => clearInterval(interval);
-    }, [notificationsEnabled, dailyReminderEnabled, notificationTime, addNotification]);
+    }, [notificationsEnabled, dailyReminderEnabled, notificationTime, addNotification, t]);
 };
 

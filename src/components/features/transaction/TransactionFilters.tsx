@@ -7,9 +7,10 @@ import {
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useTranslation } from 'react-i18next';
+import { useMemo } from 'react';
 import { TransactionType } from '../../../Budgets/types';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
-import { ALL_CATEGORIES, getCategoryIcon, getCategoryName } from '../../../Budgets/utils/categories.tsx';
+import { getCategoriesByType, getCategoryIcon, getCategoryName } from '../../../Budgets/utils/categories.tsx';
 import { DatePickerField } from '../../ui/DatePickerField.tsx';
 
 interface TransactionFiltersProps {
@@ -37,6 +38,24 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                                                                       }) => {
     const { t } = useTranslation();
     const { mode } = useThemeMode();
+
+    const filteredCategories = useMemo(() => {
+        if (type === 'all') {
+            return [];
+        }
+        return getCategoriesByType(type);
+    }, [type]);
+
+    const handleTypeChange = (newType: TransactionType | 'all') => {
+        onTypeChange(newType);
+        if (newType !== 'all' && category) {
+            const categories = getCategoriesByType(newType);
+            const categoryBelongsToType = categories.some(cat => cat.id === category);
+            if (!categoryBelongsToType) {
+                onCategoryChange('');
+            }
+        }
+    };
 
     return (
         <Paper sx={{ 
@@ -82,7 +101,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     size="small"
                     label={t('type')}
                     value={type}
-                    onChange={(e) => onTypeChange(e.target.value as TransactionType | 'all')}
+                    onChange={(e) => handleTypeChange(e.target.value as TransactionType | 'all')}
                     sx={{
                         minWidth: { xs: '100%', sm: 140 },
                         flex: { sm: '1 1 auto' },
@@ -137,14 +156,20 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     }}
                 >
                     <MenuItem value="">{t('allCategories')}</MenuItem>
-                    {ALL_CATEGORIES.map((cat) => (
-                        <MenuItem key={cat.id} value={cat.id}>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                {getCategoryIcon(cat.icon, 16)}
-                                <span>{getCategoryName(cat.id, t)}</span>
-                            </Box>
+                    {type === 'all' ? (
+                        <MenuItem value="" disabled>
+                            {t('selectTypeFirst') || 'Сначала выберите тип транзакции'}
                         </MenuItem>
-                    ))}
+                    ) : (
+                        filteredCategories.map((cat) => (
+                            <MenuItem key={cat.id} value={cat.id}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    {getCategoryIcon(cat.icon, 16)}
+                                    <span>{getCategoryName(cat.id, t)}</span>
+                                </Box>
+                            </MenuItem>
+                        ))
+                    )}
                 </TextField>
 
                 {/* От */}

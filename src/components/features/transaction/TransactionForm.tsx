@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import {
     Box,
     Button,
@@ -40,6 +40,8 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, ini
         handleSubmit,
         formState: { errors },
         reset,
+        setValue,
+        watch,
     } = useForm<TransactionFormData>({
         defaultValues: {
             amount: initialTransaction ? String(initialTransaction.amount) : '',
@@ -50,6 +52,16 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, ini
     });
 
     const categories = useMemo(() => getCategoriesByType(type), [type]);
+    const currentCategory = watch('category');
+
+    useEffect(() => {
+        if (currentCategory && categories.length > 0) {
+            const categoryBelongsToType = categories.some(cat => cat.id === currentCategory);
+            if (!categoryBelongsToType) {
+                setValue('category', '');
+            }
+        }
+    }, [type, categories, setValue, currentCategory]);
 
     const onSubmit = (data: TransactionFormData) => {
         if (initialTransaction) {
