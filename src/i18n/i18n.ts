@@ -2292,6 +2292,7 @@ i18n
         detection: {
             order: ['localStorage', 'navigator', 'htmlTag'],
         },
+    })
+    .catch((error) => {
+        console.error('i18n initialization failed:', error);
     });
-
-export default i18n;
