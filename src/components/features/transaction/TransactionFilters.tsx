@@ -30,7 +30,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                                                                           category,
                                                                           dateFrom,
                                                                           dateTo,
-                                                                          onTypeChange,
+                                                                          onTypeChange: _onTypeChange,
                                                                           onCategoryChange,
                                                                           onDateFromChange,
                                                                           onDateToChange,
@@ -46,16 +46,6 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
         return getCategoriesByType(type);
     }, [type]);
 
-    const handleTypeChange = (newType: TransactionType | 'all') => {
-        onTypeChange(newType);
-        if (newType !== 'all' && category) {
-            const categories = getCategoriesByType(newType);
-            const categoryBelongsToType = categories.some(cat => cat.id === category);
-            if (!categoryBelongsToType) {
-                onCategoryChange('');
-            }
-        }
-    };
 
     return (
         <Paper sx={{ 

@@ -102,7 +102,6 @@ const sendReminder = async (message: string, notificationTitle: string): Promise
                 badge: '/favicon.ico',
                 tag: 'finflow-reminder',
                 requireInteraction: false,
-                vibrate: [200, 100, 200],
                 data: {
                     url: window.location.origin,
                     timestamp: Date.now()

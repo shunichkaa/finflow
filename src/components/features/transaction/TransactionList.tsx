@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Box, List, ListItem } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -10,8 +10,6 @@ import { useSettingsStore } from '../../../Budgets/store/useSettingsStore.ts';
 import { getCategoryById, getCategoryIcon, getCategoryName } from '../../../Budgets/utils/categories.tsx';
 import { formatDate } from '../../../Budgets/utils/formatters.ts';
 import { Transaction } from '../../../Budgets/types';
-import { Modal } from '../../ui/Modal.tsx';
-import { TransactionForm } from './TransactionForm.tsx';
 import { Text } from '../../ui/Text';
 import { CustomIconButton } from '../../ui/CustomIconButton';
 import { AmountDisplay } from '../../ui/AmountDisplay';
@@ -79,7 +77,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                             }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: designTokens.spacing.sm }}>
                                     <Box
-                                        onClick={() => { setEditingTxId(transaction.id); setIsEditOpen(true); }}
+                                        onClick={() => {}}
                                         role="button"
                                         aria-label={t('edit')}
                                         sx={{
@@ -146,7 +144,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                 gap: designTokens.spacing.md 
                             }}>
                                 <Box
-                                    onClick={() => { setEditingTxId(transaction.id); setIsEditOpen(true); }}
+                                    onClick={() => {}}
                                     role="button"
                                     aria-label={t('edit')}
                                     sx={{

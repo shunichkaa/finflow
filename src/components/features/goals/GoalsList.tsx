@@ -13,7 +13,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
-import { useSettingsStore } from '../../../Budgets/store/useSettingsStore';
 import { useGoalsStore } from '../../../Budgets/store/useGoalsStore';
 import { Goal } from '../../../Budgets/types';
 import { formatDate } from '../../../Budgets/utils/formatters';
@@ -99,7 +98,6 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
         <Box>
             <Stack spacing={3}>
                 {sortedGoals.map((goal) => {
-                    const _percentage = (goal.currentAmount / goal.targetAmount) * 100;
                     const _daysLeft = getDaysLeft(goal.targetDate);
                     
                     return (
@@ -187,16 +185,16 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                                 fontWeight: 'bold'
                                             }}
                                         />
-                                        {daysLeft !== null && (
+                                        {_daysLeft !== null && (
                                             <Chip
-                                                label={daysLeft > 0 ? `${daysLeft} ${t('daysLeft', 'дней осталось')}` : t('overdue', 'Просрочено')}
+                                                label={_daysLeft > 0 ? `${_daysLeft} ${t('daysLeft', 'дней осталось')}` : t('overdue', 'Просрочено')}
                                                 size="small"
                                                 variant="outlined"
                                                 sx={{
-                                                    borderColor: daysLeft > 0 
+                                                    borderColor: _daysLeft > 0 
                                                         ? (mode === 'dark' ? 'rgba(100, 200, 150, 0.5)' : 'rgba(254, 222, 233, 0.5)')
                                                         : (mode === 'dark' ? 'rgba(220, 100, 100, 0.5)' : 'rgba(255, 185, 141, 0.5)'),
-                                                    color: daysLeft > 0 
+                                                    color: _daysLeft > 0 
                                                         ? (mode === 'dark' ? 'rgba(100, 200, 150, 0.8)' : 'rgba(254, 222, 233, 0.8)')
                                                         : (mode === 'dark' ? 'rgba(220, 100, 100, 0.8)' : 'rgba(255, 185, 141, 0.8)'),
                                                 }}

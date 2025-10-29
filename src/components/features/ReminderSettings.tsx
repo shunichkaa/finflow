@@ -10,8 +10,8 @@ import {
     Alert
 } from '@mui/material';
 import {
-    Bell,
-    Clock,
+    Notifications,
+    AccessTime,
     CalendarToday,
     CheckCircle
 } from '@mui/icons-material';
@@ -149,7 +149,6 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                     badge: '/favicon.ico',
                     tag: 'test-reminder',
                     requireInteraction: false,
-                    vibrate: [200, 100, 200],
                     data: {
                         url: window.location.origin
                     }
@@ -198,7 +197,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
             }}
         >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
-                <Bell sx={{ 
+                <Notifications sx={{ 
                     color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                     fontSize: 28 
                 }} />
@@ -305,7 +304,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                         {/* Time Picker */}
                         <Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-                                <Clock sx={{ 
+                                <AccessTime sx={{ 
                                     color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
                                     fontSize: 20 
                                 }} />
@@ -351,7 +350,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                         <Button
                             variant="outlined"
                             onClick={handleTestNotification}
-                            startIcon={testNotificationSent ? <CheckCircle /> : <Bell />}
+                            startIcon={testNotificationSent ? <CheckCircle /> : <Notifications />}
                             sx={{
                                 borderColor: '#6C6FF9',
                                 color: '#6C6FF9',

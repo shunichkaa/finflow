@@ -1,4 +1,4 @@
-import {Alert, Box, Card, CardContent, Typography,} from '@mui/material';
+import {Alert, Box, Card, CardContent, LinearProgress, Typography,} from '@mui/material';
 import WarningIcon from '@mui/icons-material/Warning';
 import {useTranslation} from 'react-i18next';
 import {useFinanceStore} from '../../../Budgets/store/useFinanceStore.ts';

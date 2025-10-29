@@ -31,18 +31,6 @@ interface GoalDetailProps {
     onEdit?: () => void;
 }
 
-const motivationalPhrases = [
-    { text: "motivation.excellent", emoji: "🎯" },
-    { text: "motivation.great", emoji: "💪" },
-    { text: "motivation.keepGoing", emoji: "✨" },
-    { text: "motivation.stepByStep", emoji: "🌟" },
-    { text: "motivation.rightPath", emoji: "🚀" },
-    { text: "motivation.continue", emoji: "💎" },
-    { text: "motivation.everyRub", emoji: "💰" },
-    { text: "motivation.believe", emoji: "⭐" },
-    { text: "motivation.smallSteps", emoji: "🎪" },
-    { text: "motivation.almostThere", emoji: "🎁" },
-];
 
 export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onEdit }) => {
     const { t } = useTranslation();
@@ -70,13 +58,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
         if (amountNum > 0) {
             addToGoal(goal.id, amountNum);
 
-            const randomPhrase = motivationalPhrases[Math.floor(Math.random() * motivationalPhrases.length)];
-            setMotivationText(t(randomPhrase.text) + ' ' + randomPhrase.emoji);
-            setShowMotivation(true);
-            
             setAmount('');
-
-            setTimeout(() => setShowMotivation(false), 3000);
         }
     };
 
