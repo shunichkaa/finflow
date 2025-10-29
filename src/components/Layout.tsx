@@ -121,13 +121,44 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 display: {xs: 'none', sm: 'block'},
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 mr: 2,
-                                transition: 'all 0.2s ease',
+                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                transform: sidebarOpen ? 'rotate(0deg)' : 'rotate(0deg)',
                                 '&:hover': {
                                     background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                                    transform: 'scale(1.1)',
+                                },
+                                '& svg': {
+                                    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                 },
                             }}
                         >
-                            {sidebarOpen ? <ChevronLeft/> : <MenuIcon/>}
+                            <Box
+                                sx={{
+                                    position: 'relative',
+                                    width: 24,
+                                    height: 24,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <MenuIcon
+                                    sx={{
+                                        position: 'absolute',
+                                        opacity: sidebarOpen ? 0 : 1,
+                                        transform: sidebarOpen ? 'rotate(90deg) scale(0.8)' : 'rotate(0deg) scale(1)',
+                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    }}
+                                />
+                                <ChevronLeft
+                                    sx={{
+                                        position: 'absolute',
+                                        opacity: sidebarOpen ? 1 : 0,
+                                        transform: sidebarOpen ? 'rotate(0deg) scale(1)' : 'rotate(-90deg) scale(0.8)',
+                                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    }}
+                                />
+                            </Box>
                         </IconButton>
 
                         <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
@@ -302,7 +333,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         borderBottom: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
                         boxShadow: mode === 'dark' ? '0 2px 8px rgba(0, 0, 0, 0.3)' : '0 2px 8px rgba(39, 43, 62, 0.08)',
-                        transition: 'all 0.3s ease',
+                        transition: 'left 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         borderRadius: {xs: '20px', sm: 0},
                         margin: {xs: '8px', sm: 0},
                     }}
@@ -426,13 +457,17 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         '& .MuiDrawer-paper': {
                             boxSizing: 'border-box',
                             width: drawerWidth,
-                            transition: 'transform 0.3s ease',
-                            boxShadow: 'none',
+                            transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            boxShadow: mode === 'dark' 
+                                ? '4px 0 24px rgba(0, 0, 0, 0.4)'
+                                : '4px 0 24px rgba(39, 43, 62, 0.15)',
                             border: 'none',
                             overflowX: 'hidden',
                         },
                         '& .MuiBackdrop-root': {
                             backgroundColor: 'rgba(39, 43, 62, 0.5)',
+                            backdropFilter: 'blur(4px)',
+                            transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         }
                     }}
                 >
@@ -449,15 +484,24 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 width: sidebarOpen ? drawerWidth : 0,
                                 border: 'none',
                                 overflow: 'hidden',
-                                transition: 'width 0.3s ease',
-                                boxShadow: 'none',
+                                transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                boxShadow: sidebarOpen 
+                                    ? (mode === 'dark' 
+                                        ? '2px 0 12px rgba(0, 0, 0, 0.2)' 
+                                        : '2px 0 12px rgba(39, 43, 62, 0.08)')
+                                    : 'none',
                             },
                         }}
                         open={sidebarOpen}
                     >
                         <Box sx={{
                             opacity: sidebarOpen ? 1 : 0,
-                            transition: 'opacity 0.3s ease',
+                            visibility: sidebarOpen ? 'visible' : 'hidden',
+                            transition: sidebarOpen 
+                                ? 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s, visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s'
+                                : 'opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                            transform: sidebarOpen ? 'translateX(0)' : 'translateX(-10px)',
+                            transitionProperty: 'opacity, visibility, transform',
                         }}>
                             {drawer}
                         </Box>
@@ -472,7 +516,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         width: '100%',
                         mt: {xs: 8, sm: 9},
                         ml: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        transition: 'margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
                 >
                     {children ?? <Outlet/>}
