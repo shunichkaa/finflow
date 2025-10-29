@@ -2020,7 +2020,7 @@ const resources = {
             'currencies.kuna': 'Hrvatska kuna',
             'currencies.lira': 'Turska lira',
             'currencies.hryvnia': 'Ukrajinska grivna',
-            'currencies.tenge': 'Kazahstanski tenge',
+            'currencies.tenge': 'Kazahstanski tenge',   
             'currencies.byn': 'Bjeloruska rublja',
             'currencies.peso': 'Meksički pezos',
             'currencies.real': 'Brazilski real',
