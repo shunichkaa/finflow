@@ -24,6 +24,7 @@ import {GradientBackground} from './ui/GradientBackground';
 import {NotificationCenter} from './features/notification/NotificationCenter';
 import {useNotifications} from '../Budgets/hooks/useNotifications';
 import {useDailyReminder} from '../Budgets/hooks/useDailyReminder';
+import {useReminderSystem} from '../Budgets/hooks/useReminderSystem';
 
 const drawerWidth = 280;
 
@@ -47,6 +48,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     useNotifications();
 
     useDailyReminder();
+    
+    useReminderSystem();
 
     useEffect(() => {
         setMobileOpen(false);

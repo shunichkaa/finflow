@@ -135,3 +135,39 @@ self.addEventListener('sync', (event) => {
 async function doBackgroundSync() {
 	console.log('Syncing offline data...');
 }
+
+// Обработка кликов по уведомлениям
+self.addEventListener('notificationclick', (event) => {
+	console.log('Notification clicked:', event);
+	
+	event.notification.close();
+
+	const urlToOpen = event.notification.data?.url || self.location.origin;
+	
+	event.waitUntil(
+		clients.matchAll({
+			type: 'window',
+			includeUncontrolled: true
+		}).then((clientList) => {
+			// Проверяем, есть ли уже открытая вкладка с приложением
+			for (let i = 0; i < clientList.length; i++) {
+				const client = clientList[i];
+				const clientUrl = new URL(client.url);
+				const targetUrl = new URL(urlToOpen);
+				if (clientUrl.origin === targetUrl.origin && 'focus' in client) {
+					return client.focus();
+				}
+			}
+			
+			// Если нет открытой вкладки, открываем новую
+			if (clients.openWindow) {
+				return clients.openWindow(urlToOpen);
+			}
+		})
+	);
+});
+
+// Обработка закрытия уведомлений
+self.addEventListener('notificationclose', (event) => {
+	console.log('Notification closed:', event);
+});

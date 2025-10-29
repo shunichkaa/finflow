@@ -17,6 +17,19 @@ if (typeof window !== 'undefined') {
 import { clearOldGoalsData } from './Budgets/utils/clearOldData';
 clearOldGoalsData();
 
+// Регистрация Service Worker для уведомлений
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                console.log('Service Worker registered:', registration.scope);
+            })
+            .catch((error) => {
+                console.log('Service Worker registration failed:', error);
+            });
+    });
+}
+
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );

@@ -43,6 +43,7 @@ import {triggerSync} from '../../Budgets/utils/cloudSyncTrigger';
 import {supabase} from '../../lib/supabaseClient';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import IOSTimePicker from '../../components/ui/IOSTimePicker';
+import {ReminderSettings} from '../../components/features/ReminderSettings';
 
 export default function Profile() {
     const {t, i18n} = useTranslation();
@@ -659,6 +660,10 @@ export default function Profile() {
                 </List>
             </Paper>
 
+            <Box sx={{mb: {xs: 2, sm: 3}}}>
+                <ReminderSettings />
+            </Box>
+
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
                 <Typography variant="h6" gutterBottom sx={{
                     mb: {xs: 2, sm: 3},
@@ -802,3 +807,63 @@ export default function Profile() {
                             type="file"
                             ref={fileInputRef}
                             onChange={handleAvatarUpload}
+                            accept="image/*"
+                            style={{display: 'none'}}
+                        />
+                        <Button
+                            variant="outlined"
+                            startIcon={<PhotoCamera/>}
+                            onClick={() => fileInputRef.current?.click()}
+                            sx={{
+                                maxWidth: 250,
+                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                '&:hover': {
+                                    borderColor: '#6C6FF9',
+                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                }
+                            }}
+                        >
+                            {t('profile.changePhoto')}
+                        </Button>
+                    </Box>
+
+                    <Box display="flex" gap={2} justifyContent="flex-end" mt={3}>
+                        <Button
+                            variant="outlined"
+                            onClick={handleCloseEditModal}
+                            sx={{
+                                borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
+                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
+                                fontWeight: 'bold',
+                                '&:hover': {
+                                    borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)',
+                                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(39, 43, 62, 0.05)',
+                                }
+                            }}
+                        >
+                            {t('cancel')}
+                        </Button>
+                    </Box>
+                </Box>
+            </Modal>
+
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={() => setSnackbarOpen(false)}
+                message={snackbarMessage}
+            />
+
+            <IOSTimePicker
+                open={timePickerOpen}
+                onClose={() => setTimePickerOpen(false)}
+                value={notificationTime}
+                onChange={(time) => {
+                    setNotificationTime(time);
+                    setTimeout(() => triggerSync(), 100);
+                }}
+            />
+        </Container>
+    );
+}
