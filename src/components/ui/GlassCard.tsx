@@ -133,3 +133,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                 ...sx,
             }}
         >
+            {children}
+        </Card>
+    );
+};

@@ -116,6 +116,57 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                     )}
                 />
 
+                <Controller
+                    name="period"
+                    control={control}
+                    render={({field}) => (
+                        <ToggleButtonGroup
+                            {...field}
+                            exclusive
+                            fullWidth
+                            value={field.value}
+                            onChange={(_, value) => value && field.onChange(value)}
+                            sx={{
+                                '& .MuiToggleButton-root': {
+                                    borderColor: mode === 'dark' 
+                                        ? 'rgba(108, 111, 249, 0.3)' 
+                                        : 'rgba(108, 111, 249, 0.3)',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    '&.Mui-selected': {
+                                        backgroundColor: '#6C6FF9',
+                                        color: '#FFFFFF',
+                                        '&:hover': {
+                                            backgroundColor: '#5B5EE8',
+                                        },
+                                    },
+                                },
+                            }}
+                        >
+                            <ToggleButton value="monthly">{t('month')}</ToggleButton>
+                            <ToggleButton value="weekly">{t('week')}</ToggleButton>
+                        </ToggleButtonGroup>
+                    )}
+                />
+
+                <Controller
+                    name="limit"
+                    control={control}
+                    rules={{
+                        required: t('amountRequired'),
+                        min: {value: 0.01, message: t('amountMin')},
+                    }}
+                    render={({field}) => (
+                        <NumberInput
+                            {...field}
+                            label={t('limit')}
+                            error={!!errors.limit}
+                            helperText={errors.limit?.message}
+                            fullWidth
+                            required
+                        />
+                    )}
+                />
+
                 <Box sx={{
                     backgroundColor: mode === 'dark' 
                         ? 'rgba(108, 111, 249, 0.1)' 
@@ -131,4 +182,29 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                         {selectedPeriod === 'monthly' ? t('monthlyBudgetInfo') : t('weeklyBudgetInfo')}
                     </Typography>
                 </Box>
+
+                <Button
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                    sx={{
+                        background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                        color: '#FFFFFF',
+                        fontWeight: 600,
+                        py: 1.5,
+                        borderRadius: 2,
+                        textTransform: 'none',
+                        '&:hover': {
+                            background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 8px 24px rgba(108, 111, 249, 0.4)',
+                        }
+                    }}
+                >
+                    {initialBudget ? t('save') : t('create')}
+                </Button>
+            </Stack>
+        </Box>
+    );
+};
 

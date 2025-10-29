@@ -215,5 +215,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                             </Box>
                         </ListItem>
                     </Fragment>
-                );
-            })}
+                  );
+              })}
+          </List>
+    );
+};

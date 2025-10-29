@@ -281,3 +281,161 @@ export const Auth: React.FC = () => {
                         </Typography>
                     </Divider>
 
+                    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        {(error || success) && (
+                            <Alert 
+                                severity={error ? 'error' : 'success'}
+                                sx={{
+                                    borderRadius: 2,
+                                    backdropFilter: 'blur(20px)',
+                                }}
+                            >
+                                {error || success}
+                            </Alert>
+                        )}
+
+                        <TextField
+                            label={t('auth.email', 'Email')}
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            fullWidth
+                            required
+                            sx={{
+                                '& .MuiOutlinedInput-root': {
+                                    borderRadius: 2,
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(58, 58, 60, 0.3)' 
+                                        : 'rgba(252, 248, 245, 0.5)',
+                                    '& fieldset': {
+                                        borderColor: mode === 'dark' 
+                                            ? 'rgba(255, 255, 255, 0.2)' 
+                                            : 'rgba(108, 111, 249, 0.3)',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#6C6FF9',
+                                    },
+                                },
+                                '& .MuiInputLabel-root': {
+                                    color: mode === 'dark' 
+                                        ? 'rgba(255, 255, 255, 0.7)' 
+                                        : '#272B3E',
+                                },
+                            }}
+                        />
+
+                        <TextField
+                            label={t('auth.password', 'Пароль')}
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            fullWidth
+                            required
+                            sx={{
+                                '& .MuiOutlinedInput-root': {
+                                    borderRadius: 2,
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(58, 58, 60, 0.3)' 
+                                        : 'rgba(252, 248, 245, 0.5)',
+                                    '& fieldset': {
+                                        borderColor: mode === 'dark' 
+                                            ? 'rgba(255, 255, 255, 0.2)' 
+                                            : 'rgba(108, 111, 249, 0.3)',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#6C6FF9',
+                                    },
+                                },
+                                '& .MuiInputLabel-root': {
+                                    color: mode === 'dark' 
+                                        ? 'rgba(255, 255, 255, 0.7)' 
+                                        : '#272B3E',
+                                },
+                            }}
+                        />
+
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            fullWidth
+                            disabled={loading}
+                            startIcon={loading ? <CircularProgress size={20} /> : (authMode === 'login' ? <Login /> : <PersonAdd />)}
+                            sx={{
+                                py: 1.8,
+                                borderRadius: 3,
+                                background: 'linear-gradient(135deg, #6C6FF9 0%, #5B5EE8 100%)',
+                                color: '#FFFFFF',
+                                fontWeight: 600,
+                                textTransform: 'none',
+                                fontSize: '1rem',
+                                boxShadow: mode === 'dark' 
+                                    ? '0 8px 24px rgba(108, 111, 249, 0.4)'
+                                    : '0 8px 24px rgba(108, 111, 249, 0.3)',
+                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                '&:hover': {
+                                    background: 'linear-gradient(135deg, #5B5EE8 0%, #4A4DD7 100%)',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: mode === 'dark' 
+                                        ? '0 12px 32px rgba(108, 111, 249, 0.5)'
+                                        : '0 12px 32px rgba(108, 111, 249, 0.4)',
+                                },
+                                '&:active': {
+                                    transform: 'scale(0.98)',
+                                },
+                                '&:disabled': {
+                                    background: mode === 'dark' 
+                                        ? 'rgba(108, 111, 249, 0.3)' 
+                                        : 'rgba(108, 111, 249, 0.5)',
+                                }
+                            }}
+                        >
+                            {loading 
+                                ? t('auth.loading', 'Загрузка...') 
+                                : (authMode === 'login' 
+                                    ? t('auth.loginButton', 'Войти') 
+                                    : t('auth.signupButton', 'Зарегистрироваться'))
+                            }
+                        </Button>
+
+                        <Button
+                            type="button"
+                            variant="text"
+                            fullWidth
+                            onClick={() => {
+                                setAuthMode(authMode === 'login' ? 'signup' : 'login');
+                                setError('');
+                                setSuccess('');
+                            }}
+                            sx={{
+                                py: 1,
+                                color: mode === 'dark' 
+                                    ? 'rgba(255, 255, 255, 0.7)' 
+                                    : '#272B3E',
+                                textTransform: 'none',
+                                fontSize: '0.9rem',
+                                fontWeight: 500,
+                                '&:hover': {
+                                    backgroundColor: mode === 'dark' 
+                                        ? 'rgba(255, 255, 255, 0.05)' 
+                                        : 'rgba(108, 111, 249, 0.05)',
+                                }
+                            }}
+                        >
+                            {authMode === 'login' 
+                                ? t('auth.noAccount', 'Нет аккаунта?') 
+                                : t('auth.hasAccount', 'Уже есть аккаунт?')
+                            }
+                        </Button>
+                    </Box>
+                </Paper>
+            </Fade>
+        </Box>
+    );
+};
+

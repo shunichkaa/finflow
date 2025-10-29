@@ -1,14 +1,11 @@
 import {useState} from 'react';
-import {Box, Button, Container, Typography} from '@mui/material';
+import {Box, Container, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {useTranslation} from "react-i18next";
 import {useFinanceStore} from '../../Budgets/store/useFinanceStore.ts';
 import {TransactionType} from '../../Budgets/types';
 import {StatsCards} from '../../components/features/StatsCards.tsx';
 import {TransactionList} from '../../components/features/transaction/TransactionList.tsx';
-import {TransactionFilters} from '../../components/features/transaction/TransactionFilters.tsx';
-import {TransactionForm} from '../../components/features/transaction/TransactionForm.tsx';
-import {Modal} from '../../components/ui/Modal.tsx';
 import {GlassCard} from '../../components/ui/GlassCard.tsx';
 import {useTransactionFilters} from '../../Budgets/hooks/useTransactionFilters.ts';
 import {useThemeMode} from '../../Budgets/theme/ThemeContext';
@@ -16,20 +13,15 @@ import {useThemeMode} from '../../Budgets/theme/ThemeContext';
 const Dashboard = () => {
     const {t} = useTranslation();
     const {mode} = useThemeMode();
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const transactions = useFinanceStore((state) => state.transactions);
 
     const {
-        filters,
         setType,
-        setCategory,
-        setDateFrom,
-        setDateTo,
-        reset,
         filteredTransactions,
     } = useTransactionFilters(transactions);
+    
+    const [_isModalOpen, setIsModalOpen] = useState(false);
 
-    // Функция для получения фона карточек как в аналитике
     const getCardBackground = () => {
         return mode === 'dark'
             ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
@@ -144,5 +136,9 @@ const Dashboard = () => {
                     </Box>
                     <TransactionList transactions={filteredTransactions}/>
                 </GlassCard>
-            </Container>
+        </Container>
+    );
+};
+
+export default Dashboard;
 
