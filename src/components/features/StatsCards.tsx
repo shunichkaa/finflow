@@ -116,6 +116,7 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                         <Typography variant="h4" fontWeight="bold">
                             {stat.title === t('income') && '+'}
                             {stat.title === t('expense') && '-'}
+                            {stat.title === t('balance') && stat.value < 0 && '-'}
                             {formatCurrency(Math.abs(stat.value), currency)}
                         </Typography>
                     </CardContent>
