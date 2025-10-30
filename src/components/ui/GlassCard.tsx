@@ -12,8 +12,10 @@ interface GlassCardProps extends CardProps {
 export const GlassCard: React.FC<GlassCardProps> = ({ 
     children, 
     intensity = 'premium',
+    glowColor,
+    animated,
     sx,
-    ...props 
+    ...restProps 
 }) => {
     const { mode } = useThemeMode();
 
@@ -58,7 +60,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
 
     return (
         <Card
-            {...props}
+            {...restProps}
             sx={{
                 borderRadius: 2,
                 backdropFilter: `blur(${intensityValues.blur}) saturate(${intensityValues.saturation})`,
@@ -112,12 +114,12 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                            0 12px 28px #00000066, 
                            inset 0 1px 0 #FFFFFF33,
                            inset 0 -1px 0 #FFFFFF1A,
-                           0 0 40px #6C6FF933`
+                           0 0 40px ${glowColor || '#6C6FF933'}`
                         : `${intensityValues.hoverShadow} #6C6FF940, 
                            0 12px 28px #1F268726, 
                            inset 0 1px 0 #FFFFFFFF,
                            inset 0 -1px 0 #FFFFFF99,
-                           0 0 40px #6C6FF926`,
+                           0 0 40px ${glowColor || '#6C6FF926'}`,
                     border: mode === 'dark'
                         ? '1.5px solid #6C6FF94D'
                         : '1.5px solid #6C6FF966',

@@ -425,7 +425,7 @@ const Goals: React.FC = () => {
                             }}
                             sx={{
                                 '& .MuiInputBase-input': {
-                                    pr: {xs: 5, sm: 4}
+                                    pr: {xs: 8, sm: 6}
                                 }
                             }}
                         />
@@ -449,7 +449,7 @@ const Goals: React.FC = () => {
                             }}
                             sx={{
                                 '& .MuiInputBase-input': {
-                                    pr: {xs: 5, sm: 4}
+                                    pr: {xs: 8, sm: 6}
                                 }
                             }}
                         />
@@ -464,7 +464,10 @@ const Goals: React.FC = () => {
                                         fullWidth: true,
                                         sx: {
                                             '& .MuiInputBase-input': {
-                                                pr: {xs: 5, sm: 4}
+                                                pr: {xs: 8, sm: 6}
+                                            },
+                                            '& .MuiInputLabel-root': {
+                                                whiteSpace: 'nowrap'
                                             }
                                         }
                                     }

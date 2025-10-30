@@ -202,9 +202,9 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                 {settings.enabled && (
                     <>
                         <Box>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }} />
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.75 }} />
 
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1.5 }}>
                                 <Box
                                     onClick={() => setTimePickerOpen(true)}
                                     sx={{
