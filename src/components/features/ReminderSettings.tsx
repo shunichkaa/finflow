@@ -79,11 +79,9 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
     const [timePickerOpen, setTimePickerOpen] = useState(false);
 
     useEffect(() => {
-        setSupportsNotifications(
-            'Notification' in window && 
-            'serviceWorker' in navigator &&
-            'PushManager' in window
-        );
+        // iOS Safari не имеет PushManager для обычных вкладок, но поддерживает Notification API.
+        // Считаем поддержку достаточной, если доступен Notification API (с SW используем showNotification, иначе new Notification).
+        setSupportsNotifications(typeof window !== 'undefined' && 'Notification' in window);
     }, []);
 
     useEffect(() => {
