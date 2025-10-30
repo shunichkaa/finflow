@@ -253,7 +253,9 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                     <Typography
                         variant="h6"
                         sx={{
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                            color: settings.enabled
+                                ? (mode === 'dark' ? '#FFFFFF' : '#272B3E')
+                                : (mode === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(39,43,62,0.7)'),
                             fontWeight: 600,
                             fontSize: { xs: '1.125rem', sm: '1.25rem' }
                         }}

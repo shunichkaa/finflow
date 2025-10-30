@@ -25,6 +25,8 @@ import {NotificationCenter} from './features/notification/NotificationCenter';
 import {useNotifications} from '../Budgets/hooks/useNotifications';
 import {useDailyReminder} from '../Budgets/hooks/useDailyReminder';
 import {useReminderSystem} from '../Budgets/hooks/useReminderSystem';
+import {useBudgetNotifications} from '../Budgets/hooks/useBudgetNotifications';
+import {useRecurringNotifications} from '../Budgets/hooks/useRecurringNotifications';
 
 const drawerWidth = 280;
 
@@ -50,6 +52,9 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     useDailyReminder();
     
     useReminderSystem();
+
+    useBudgetNotifications();
+    useRecurringNotifications();
 
     useEffect(() => {
         setMobileOpen(false);
