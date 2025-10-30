@@ -27,11 +27,9 @@ import {
     Delete,
     Edit,
     Language,
-    Notifications as NotificationsIcon,
     Palette,
     Person,
-    PhotoCamera,
-    Schedule
+    PhotoCamera
 } from '@mui/icons-material';
 import {useTranslation} from 'react-i18next';
 import {useThemeMode} from '../Budgets/theme/ThemeContext';
@@ -53,6 +51,7 @@ export default function Profile() {
         avatar,
         setAvatar,
         nickname,
+        setNickname,
         notificationsEnabled,
         setNotificationsEnabled,
         notificationTime,
@@ -68,6 +67,7 @@ export default function Profile() {
 
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [timePickerOpen, setTimePickerOpen] = useState(false);
+    const [newNickname, setNewNickname] = useState(nickname || '');
     const [newEmail, setNewEmail] = useState('');
     const [_currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -184,6 +184,10 @@ export default function Profile() {
 
     const handleSaveProfile = async () => {
         try {
+            if (newNickname && newNickname !== nickname) {
+                setNickname(newNickname);
+                await triggerSync();
+            }
             if (newPassword) {
                 if (newPassword.length < 6) {
                     setSnackbarMessage(t('passwordTooShort'));
@@ -486,177 +490,7 @@ export default function Profile() {
                 </List>
             </Paper>
 
-            <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
-                <Typography variant="h6" gutterBottom sx={{
-                    mb: {xs: 2, sm: 3},
-                    fontSize: {xs: '1.125rem', sm: '1.25rem'},
-                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
-                }}>
-                    {t('notifications')}
-                </Typography>
-
-                <List>
-                    <ListItem sx={{py: 1.5}}>
-                        <ListItemIcon>
-                            <NotificationsIcon
-                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)'}}/>
-                        </ListItemIcon>
-                        <ListItemText
-                            primary={t('notifications.enable')}
-                            secondary={t('notifications.description')}
-                        />
-                        <Switch
-                            checked={notificationsEnabled}
-                            onChange={(e) => {
-                                const enabled = e.target.checked;
-                                setNotificationsEnabled(enabled);
-                                if (!enabled) {
-                                    setDailyReminderEnabled(false);
-                                }
-                                setTimeout(() => triggerSync(), 100);
-                            }}
-                            sx={{
-                                '& .MuiSwitch-switchBase.Mui-checked': {
-                                    color: '#6C6FF9',
-                                },
-                                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                    backgroundColor: '#6C6FF9',
-                                },
-                            }}
-                        />
-                    </ListItem>
-
-                    <ListItem sx={{flexDirection: 'column', alignItems: 'stretch', gap: 2, py: 1.5}}>
-                        <Box sx={{display: 'flex', alignItems: 'center'}}>
-                            <ListItemIcon>
-                                <Schedule
-                                    sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)'}}/>
-                            </ListItemIcon>
-                            <ListItemText
-                                primary={t('dailyReminder')}
-                                secondary={t('dailyReminderDescription')}
-                            />
-                            <Switch
-                                checked={dailyReminderEnabled}
-                                onChange={(e) => {
-                                    setDailyReminderEnabled(e.target.checked);
-                                    setTimeout(() => triggerSync(), 100);
-                                }}
-                                disabled={!notificationsEnabled}
-                                sx={{
-                                    '& .MuiSwitch-switchBase.Mui-checked': {
-                                        color: '#6C6FF9',
-                                    },
-                                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                        backgroundColor: '#6C6FF9',
-                                    },
-                                }}
-                            />
-                        </Box>
-
-                        {notificationsEnabled && dailyReminderEnabled && (
-                            <Box sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                                pl: {xs: 0, sm: 7},
-                                pr: {xs: 0, sm: 2},
-                                mt: {xs: 1, sm: 0}
-                            }}>
-                                <Typography sx={{
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
-                                    fontSize: {xs: '0.875rem', sm: '0.9rem'}
-                                }}>
-                                    {t('reminderTime')}
-                                </Typography>
-                                <Box
-                                    onClick={() => setTimePickerOpen(true)}
-                                    sx={{
-                                        display: 'inline-flex',
-                                        gap: 1,
-                                        alignItems: 'center',
-                                        cursor: 'pointer',
-                                    }}
-                                >
-                                    <Box
-                                        sx={{
-                                            width: '60px',
-                                            backgroundColor: mode === 'dark'
-                                                ? 'rgba(108, 111, 249, 0.15)'
-                                                : 'rgba(108, 111, 249, 0.08)',
-                                            borderRadius: '12px',
-                                            border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
-                                            padding: '10px 8px',
-                                            textAlign: 'center',
-                                            transition: 'all 0.3s ease',
-                                            '&:hover': {
-                                                backgroundColor: mode === 'dark'
-                                                    ? 'rgba(108, 111, 249, 0.2)'
-                                                    : 'rgba(108, 111, 249, 0.12)',
-                                                transform: 'translateY(-1px)',
-                                                borderColor: '#6C6FF9',
-                                            },
-                                        }}
-                                    >
-                                        <Typography
-                                            sx={{
-                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                                fontSize: '1.1rem',
-                                                fontWeight: 600,
-                                                fontFamily: 'system-ui, sans-serif',
-                                            }}
-                                        >
-                                            {notificationTime.split(':')[0]}
-                                        </Typography>
-                                    </Box>
-
-                                    <Typography
-                                        variant="h6"
-                                        sx={{
-                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                            fontWeight: 600,
-                                        }}
-                                    >
-                                        :
-                                    </Typography>
-
-                                    <Box
-                                        sx={{
-                                            width: '60px',
-                                            backgroundColor: mode === 'dark'
-                                                ? 'rgba(108, 111, 249, 0.15)'
-                                                : 'rgba(108, 111, 249, 0.08)',
-                                            borderRadius: '12px',
-                                            border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
-                                            padding: '10px 8px',
-                                            textAlign: 'center',
-                                            transition: 'all 0.3s ease',
-                                            '&:hover': {
-                                                backgroundColor: mode === 'dark'
-                                                    ? 'rgba(108, 111, 249, 0.2)'
-                                                    : 'rgba(108, 111, 249, 0.12)',
-                                                transform: 'translateY(-1px)',
-                                                borderColor: '#6C6FF9',
-                                            },
-                                        }}
-                                    >
-                                        <Typography
-                                            sx={{
-                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                                fontSize: '1.1rem',
-                                                fontWeight: 600,
-                                                fontFamily: 'system-ui, sans-serif',
-                                            }}
-                                        >
-                                            {notificationTime.split(':')[1]}
-                                        </Typography>
-                                    </Box>
-                                </Box>
-                            </Box>
-                        )}
-                    </ListItem>
-                </List>
-            </Paper>
+            
 
             <Box sx={{mb: {xs: 2, sm: 3}}}>
                 <ReminderSettings />
@@ -824,6 +658,43 @@ export default function Profile() {
                         >
                             {t('profile.changePhoto')}
                         </Button>
+                    </Box>
+
+                    <Box display="flex" flexDirection="column" gap={2}>
+                        <TextField
+                            label={t('profile.nickname', 'Nickname')}
+                            value={newNickname}
+                            onChange={(e) => setNewNickname(e.target.value)}
+                            fullWidth
+                        />
+                        <TextField
+                            label={t('email', 'Email')}
+                            value={newEmail}
+                            onChange={(e) => setNewEmail(e.target.value)}
+                            type="email"
+                            fullWidth
+                        />
+                        <TextField
+                            label={t('currentPassword', 'Current password')}
+                            value={_currentPassword}
+                            onChange={(e) => setCurrentPassword(e.target.value)}
+                            type="password"
+                            fullWidth
+                        />
+                        <TextField
+                            label={t('newPassword', 'New password')}
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            type="password"
+                            fullWidth
+                        />
+                        <TextField
+                            label={t('confirmPassword', 'Confirm password')}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            type="password"
+                            fullWidth
+                        />
                     </Box>
 
                     <Box display="flex" gap={2} justifyContent="flex-end" mt={3}>
