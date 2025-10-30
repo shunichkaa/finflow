@@ -159,7 +159,7 @@ export const NotificationCenter: React.FC = () => {
                 slotProps={{
                     paper: {
                         sx: {
-                            width: 380,
+                            width: { xs: '92vw', sm: 380 },
                             maxHeight: 480,
                             backgroundColor: mode === 'dark' ? '#1E2235' : '#FFFFFF',
                             border: mode === 'dark'
@@ -170,6 +170,7 @@ export const NotificationCenter: React.FC = () => {
                                 ? '0 12px 40px #00000080, inset 0 1px 0 #FFFFFF1A'
                                 : '0 12px 40px #272B3E26, inset 0 1px 0 #FFFFFFCC',
                             overflow: 'hidden',
+                            overflowX: 'hidden',
                             '&::before': {
                                 content: '""',
                                 position: 'absolute',
@@ -273,7 +274,7 @@ export const NotificationCenter: React.FC = () => {
                         </Typography>
                     </Box>
                 ) : (
-                    <Box sx={{ maxHeight: 360, overflow: 'auto' }}>
+                    <Box sx={{ maxHeight: 360, overflowY: 'auto', overflowX: 'hidden' }}>
                         {notifications.slice(0, 10).map((notification) => (
                             <MenuItem
                                 key={notification.id}
@@ -316,7 +317,8 @@ export const NotificationCenter: React.FC = () => {
                                                     color: getSeverityColor(notification.severity),
                                                     mb: 0.5,
                                                     fontSize: '0.9rem',
-                                                    lineHeight: 1.3
+                                                    lineHeight: 1.3,
+                                                    wordBreak: 'break-word'
                                                 }}
                                             >
                                                 {notification.title}
@@ -327,7 +329,8 @@ export const NotificationCenter: React.FC = () => {
                                                     color: mode === 'dark' ? '#FFFFFFCC' : '#272B3ECC',
                                                     mb: 1,
                                                     lineHeight: 1.4,
-                                                    fontSize: '0.85rem'
+                                                    fontSize: '0.85rem',
+                                                    wordBreak: 'break-word'
                                                 }}
                                             >
                                                 {notification.message}
