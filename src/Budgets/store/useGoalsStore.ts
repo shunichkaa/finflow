@@ -19,30 +19,30 @@ export const useGoalsStore = create<GoalsState>()(
     persist(
         (set) => ({
             goals: [],
-            
-            addGoal: (goalData: CreateGoalInput) => {
+
+                        addGoal: (goalData: CreateGoalInput) => {
                 const newGoal: Goal = {
                     ...goalData,
                     id: crypto.randomUUID(),
                     createdAt: new Date(),
                     isCompleted: false,
                 };
-                
-                set((state) => ({
+
+                                set((state) => ({
                     goals: [...state.goals, newGoal],
                 }));
-                
-                useNotificationStore.getState().addNotification({
+
+                                useNotificationStore.getState().addNotification({
                     type: 'goal',
                     severity: 'success',
                     title: 'Копилка создана',
                     message: `Копилка "${goalData.name}" успешно создана`,
                 });
-                
-                triggerSync();
+
+                                triggerSync();
             },
-            
-            updateGoal: (id: string, updates: Partial<Goal>) => {
+
+                        updateGoal: (id: string, updates: Partial<Goal>) => {
                 set((state) => ({
                     goals: state.goals.map((goal) =>
                         goal.id === id ? { ...goal, ...updates } : goal
@@ -50,15 +50,15 @@ export const useGoalsStore = create<GoalsState>()(
                 }));
                 triggerSync();
             },
-            
-            deleteGoal: (id: string) => {
+
+                        deleteGoal: (id: string) => {
                 set((state) => ({
                     goals: state.goals.filter((goal) => goal.id !== id),
                 }));
                 triggerSync();
             },
-            
-            addToGoal: (id: string, amount: number) => {
+
+                        addToGoal: (id: string, amount: number) => {
                 set((state) => ({
                     goals: state.goals.map((goal) => {
                         if (goal.id === id) {
@@ -74,8 +74,8 @@ export const useGoalsStore = create<GoalsState>()(
                 }));
                 triggerSync();
             },
-            
-            completeGoal: (id: string) => {
+
+                        completeGoal: (id: string) => {
                 set((state) => ({
                     goals: state.goals.map((goal) =>
                         goal.id === id ? { ...goal, isCompleted: true } : goal
@@ -83,8 +83,8 @@ export const useGoalsStore = create<GoalsState>()(
                 }));
                 triggerSync();
             },
-            
-            setGoals: (goals: Goal[]) => {
+
+                        setGoals: (goals: Goal[]) => {
                 const migratedGoals = goals.map(goal => ({
                     ...goal,
                     icon: migrateGoalIcon(goal.icon)

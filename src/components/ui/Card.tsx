@@ -39,8 +39,8 @@ export const Card: React.FC<CardProps> = ({
 
   const getVariantStyles = () => {
     const isDark = mode === 'dark';
-    
-    switch (variant) {
+
+        switch (variant) {
       case 'elevated':
         return {
           backgroundColor: isDark ? designTokens.colors.dark.surface : designTokens.colors.light.surface,

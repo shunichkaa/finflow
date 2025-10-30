@@ -128,8 +128,8 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
     componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
         console.error('ErrorBoundary caught an error:', error, errorInfo);
-        
-        this.setState({
+
+                this.setState({
             error: error,
             errorInfo: errorInfo,
         });
@@ -173,10 +173,8 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 export const useErrorHandler = () => {
     return (error: Error, errorInfo?: React.ErrorInfo) => {
         console.error('Error caught by useErrorHandler:', error, errorInfo);
-        
-        if (process.env.NODE_ENV === 'production') {
-            // В продакшене логируем ошибки, но не показываем пользователю
-            // Можно отправить в Sentry или другой сервис мониторинга
+
+                if (process.env.NODE_ENV === 'production') {
         }
     };
 };

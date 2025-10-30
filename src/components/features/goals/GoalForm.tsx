@@ -22,64 +22,64 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
     const { t } = useTranslation();
     const { mode } = useThemeMode();
     const { currency } = useSettingsStore();
-    
-    const [formData, setFormData] = useState<CreateGoalInput>({
+
+        const [formData, setFormData] = useState<CreateGoalInput>({
         name: initialGoal?.name || '',
         targetAmount: initialGoal?.targetAmount || 0,
         currentAmount: initialGoal?.currentAmount || 0,
         description: initialGoal?.description || '',
         targetDate: initialGoal?.targetDate || undefined,
     });
-    
-    const [errors, setErrors] = useState<Record<string, string>>({});
-    
-    const addGoal = useGoalsStore((state) => state.addGoal);
+
+        const [errors, setErrors] = useState<Record<string, string>>({});
+
+        const addGoal = useGoalsStore((state) => state.addGoal);
     const updateGoal = useGoalsStore((state) => state.updateGoal);
-    
-    const validateForm = (): boolean => {
+
+        const validateForm = (): boolean => {
         const newErrors: Record<string, string> = {};
-        
-        if (!formData.name.trim()) {
+
+                if (!formData.name.trim()) {
             newErrors.name = t('goalNameRequired', 'Название цели обязательно');
         }
-        
-        if (formData.targetAmount <= 0) {
+
+                if (formData.targetAmount <= 0) {
             newErrors.targetAmount = t('targetAmountRequired', 'Итоговая сумма должна быть больше 0');
         }
-        
-        if (formData.currentAmount < 0) {
+
+                if (formData.currentAmount < 0) {
             newErrors.currentAmount = t('currentAmountInvalid', 'Текущая сумма не может быть отрицательной');
         }
-        
-        if (formData.currentAmount > formData.targetAmount) {
+
+                if (formData.currentAmount > formData.targetAmount) {
             newErrors.currentAmount = t('currentAmountExceedsTarget', 'Текущая сумма не может превышать целевую');
         }
-        
-        setErrors(newErrors);
+
+                setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
-    
-    const handleSubmit = (e: React.FormEvent) => {
+
+        const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        
-        if (!validateForm()) return;
-        
-        if (initialGoal) {
+
+                if (!validateForm()) return;
+
+                if (initialGoal) {
             updateGoal(initialGoal.id, formData);
         } else {
             addGoal(formData);
         }
         onSuccess();
     };
-    
-    const handleInputChange = (field: keyof CreateGoalInput, value: string | number | Date | undefined) => {
+
+        const handleInputChange = (field: keyof CreateGoalInput, value: string | number | Date | undefined) => {
         setFormData(prev => ({ ...prev, [field]: value }));
         if (errors[field]) {
             setErrors(prev => ({ ...prev, [field]: '' }));
         }
     };
-    
-    return (
+
+        return (
         <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
             <Stack spacing={3}>
                 <Typography variant="h6" sx={{ 
@@ -89,8 +89,8 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                 }}>
                     {initialGoal ? t('editGoal', 'Редактировать цель') : t('createGoal', 'Создать цель')}
                 </Typography>
-                
-                <TextField
+
+                                <TextField
                     label={t('goalName', 'Название цели')}
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
@@ -107,8 +107,8 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                         },
                     }}
                 />
-                
-                <TextField
+
+                                <TextField
                     label={t('description', 'Описание')}
                     value={formData.description}
                     onChange={(e) => handleInputChange('description', e.target.value)}
@@ -125,8 +125,8 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                         },
                     }}
                 />
-                
-                <NumberInput
+
+                                <NumberInput
                     label={t('targetAmount', 'Итоговая сумма')}
                     value={String(formData.targetAmount)}
                     onChange={(value) => handleInputChange('targetAmount', parseFloat(value) || 0)}
@@ -153,8 +153,8 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                         },
                     }}
                 />
-                
-                <NumberInput
+
+                                <NumberInput
                     label={t('currentAmount', 'Текущая сумма')}
                     value={String(formData.currentAmount)}
                     onChange={(value) => handleInputChange('currentAmount', parseFloat(value) || 0)}
@@ -181,8 +181,8 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                         },
                     }}
                 />
-                
-                <TextField
+
+                                <TextField
                     label={t('targetDate', 'Целевая дата')}
                     type="date"
                     value={formData.targetDate ? formData.targetDate.toISOString().split('T')[0] : ''}
@@ -199,8 +199,8 @@ export const GoalForm: React.FC<GoalFormProps> = ({ initialGoal, onSuccess }) =>
                         },
                     }}
                 />
-                
-                <Button
+
+                                <Button
                     type="submit"
                     variant="contained"
                     fullWidth

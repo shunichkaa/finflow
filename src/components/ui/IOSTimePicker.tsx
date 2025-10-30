@@ -11,7 +11,7 @@ import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 interface IOSTimePickerProps {
     open: boolean;
     onClose: () => void;
-    value: string; // "HH:mm" format
+    value: string; 
     onChange: (time: string) => void;
 }
 
@@ -20,8 +20,8 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
     const { mode } = useThemeMode();
     const [hours, setHours] = useState('00');
     const [minutes, setMinutes] = useState('00');
-    
-    const hoursRef = useRef<HTMLDivElement>(null);
+
+        const hoursRef = useRef<HTMLDivElement>(null);
     const minutesRef = useRef<HTMLDivElement>(null);
     const isInitializing = useRef(false);
 
@@ -30,10 +30,9 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
             const [h, m] = value.split(':');
             setHours(h.padStart(2, '0'));
             setMinutes(m.padStart(2, '0'));
-            
-            isInitializing.current = true;
-            
-            // Скролл к выбранному значению
+
+                        isInitializing.current = true;
+
             setTimeout(() => {
                 if (hoursRef.current) {
                     hoursRef.current.scrollTop = parseInt(h) * 44;
@@ -41,8 +40,8 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
                 if (minutesRef.current) {
                     minutesRef.current.scrollTop = parseInt(m) * 44;
                 }
-                
-                setTimeout(() => {
+
+                                setTimeout(() => {
                     isInitializing.current = false;
                 }, 200);
             }, 100);
@@ -56,8 +55,8 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
 
     const handleScroll = (ref: React.RefObject<HTMLDivElement>, setter: (val: string) => void) => {
         if (!ref.current || isInitializing.current) return;
-        
-        const scrollTop = ref.current.scrollTop;
+
+                const scrollTop = ref.current.scrollTop;
         const itemHeight = 44;
         const index = Math.round(scrollTop / itemHeight);
         setter(String(index).padStart(2, '0'));

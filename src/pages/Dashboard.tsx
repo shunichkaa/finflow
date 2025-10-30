@@ -25,8 +25,8 @@ const Dashboard = () => {
         reset,
         filteredTransactions,
     } = useTransactionFilters(transactions);
-    
-    const [_isModalOpen, setIsModalOpen] = useState(false);
+
+        const [_isModalOpen, setIsModalOpen] = useState(false);
 
     const getCardBackground = () => {
         return mode === 'dark'

@@ -14,10 +14,9 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({ children
             sx={{
                 minHeight: '100vh',
                 position: 'relative',
-                // Минимализм: ТОЛЬКО #EFF0F6 для светлой темы
             background: mode === 'dark' 
-                ? '#272B3E' // Midnight Blue для темной темы
-                : '#F5F6FA', // Светлый фон для светлой темы
+                ? '#272B3E' 
+                : '#F5F6FA', 
                 backgroundSize: '100% 100%',
             }}
         >

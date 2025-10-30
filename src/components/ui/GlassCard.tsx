@@ -43,7 +43,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                     hoverShadow: '0 24px 80px',
                     scale: 1.02,
                 };
-            default: // medium
+            default: 
                 return {
                     blur: '40px',
                     saturation: '180%',

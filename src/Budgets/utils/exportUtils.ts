@@ -270,7 +270,6 @@ export const exportToPDF = (transactions: Transaction[], budgets: Budget[]) => {
 
     const printWindow = window.open('', '_blank');
     if (printWindow) {
-        // Modern approach to avoid deprecated document.write
         printWindow.document.open();
         printWindow.document.write(htmlContent);
         printWindow.document.close();

@@ -29,11 +29,9 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
     const deleteGoal = useGoalsStore((state) => state.deleteGoal);
 
     const sortedGoals = [...goals].sort((a, b) => {
-        // Сначала незавершенные цели, затем завершенные
         if (a.isCompleted !== b.isCompleted) {
             return a.isCompleted ? 1 : -1;
         }
-        // Затем по дате создания (новые сверху)
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
 
@@ -99,8 +97,8 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
             <Stack spacing={3}>
                 {sortedGoals.map((goal) => {
                     const _daysLeft = getDaysLeft(goal.targetDate);
-                    
-                    return (
+
+                                        return (
                         <Card
                             key={goal.id}
                             sx={{
@@ -139,8 +137,8 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                             </Typography>
                                         )}
                                     </Box>
-                                    
-                                    <Box sx={{ display: 'flex', gap: 1 }}>
+
+                                                                        <Box sx={{ display: 'flex', gap: 1 }}>
                                         <IconButton
                                             size="small"
                                             onClick={() => onEditGoal(goal)}
@@ -201,8 +199,8 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                             />
                                         )}
                                     </Box>
-                                    
-                                    {goal.targetDate && (
+
+                                                                        {goal.targetDate && (
                                         <Typography variant="caption" sx={{ 
                                             color: mode === 'dark' ? '#FFFFFF80' : '#0600AB80'
                                         }}>

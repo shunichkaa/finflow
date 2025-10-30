@@ -17,7 +17,6 @@ if (typeof window !== 'undefined') {
 import { clearOldGoalsData } from './Budgets/utils/clearOldData';
 clearOldGoalsData();
 
-// Регистрация Service Worker для уведомлений
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')

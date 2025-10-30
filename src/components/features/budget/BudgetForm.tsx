@@ -44,7 +44,6 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
 
     const selectedPeriod = watch('period');
 
-    // Категории без бюджетов
     const availableCategories = initialBudget
         ? EXPENSE_CATEGORIES
         : EXPENSE_CATEGORIES.filter((cat) => !budgets.some((b) => b.category === cat.id));

@@ -31,7 +31,6 @@ interface ReminderSettingsProps {
     onSettingsChange?: (settings: ReminderSettingsData) => void;
 }
 
-// Reminder message keys - будут использоваться через i18n
 const REMINDER_MESSAGE_KEYS = [
     'reminderMessages.walletMisses',
     'reminderMessages.timeToAdmit',
@@ -64,7 +63,6 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
             try {
                 return JSON.parse(saved);
             } catch {
-                // Fallback to defaults
             }
         }
         return {
@@ -73,14 +71,12 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
             time: '20:00'
         };
     });
-    
-    const [supportsNotifications, setSupportsNotifications] = useState(true);
+
+        const [supportsNotifications, setSupportsNotifications] = useState(true);
     const [testNotificationSent, setTestNotificationSent] = useState(false);
     const [timePickerOpen, setTimePickerOpen] = useState(false);
 
     useEffect(() => {
-        // iOS Safari не имеет PushManager для обычных вкладок, но поддерживает Notification API.
-        // Считаем поддержку достаточной, если доступен Notification API (с SW используем showNotification, иначе new Notification).
         setSupportsNotifications(typeof window !== 'undefined' && 'Notification' in window);
     }, []);
 
@@ -137,7 +133,6 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
     };
 
     const handleFrequencyChange = (_event: { target: { value: unknown } }) => {
-        // frequency controls removed
     };
 
     const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -180,12 +175,12 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
         }
 
         const testMessage = getRandomMessage();
-        
-        try {
+
+                try {
             if ('serviceWorker' in navigator) {
                 const registration = await navigator.serviceWorker.ready;
-                
-                await registration.showNotification(t('reminders.notificationTitle'), {
+
+                                await registration.showNotification(t('reminders.notificationTitle'), {
                     body: testMessage,
                     icon: '/favicon.ico',
                     badge: '/favicon.ico',
@@ -203,8 +198,8 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                     tag: 'test-reminder',
                 });
             }
-            
-            setTestNotificationSent(true);
+
+                        setTestNotificationSent(true);
             setTimeout(() => setTestNotificationSent(false), 3000);
         } catch (error) {
             console.error('Error sending test notification:', error);
@@ -253,12 +248,12 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                         {t('reminders.title')}
                     </Typography>
                 </Box>
-                {/* status chip removed */}
+                {}
             </Box>
-            {/* subtitle removed */}
+            {}
 
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                {/* Toggle Enable/Disable */}
+                {}
                 <Box sx={{ 
                     display: 'flex', 
                     alignItems: 'center', 
@@ -298,7 +293,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                 {settings.enabled && (
                     <>
 
-                        {/* Time Picker */}
+                        {}
                         <Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
                                 <AccessTime sx={{ 
@@ -391,7 +386,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                             />
                         </Box>
 
-                        {/* Test button removed */}
+                        {}
                     </>
                 )}
             </Box>

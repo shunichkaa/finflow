@@ -16,7 +16,7 @@ export const useBudgetNotifications = () => {
 
         const nowKey = () => {
             const now = new Date();
-            return `${now.getFullYear()}-${now.getMonth() + 1}`; // monthly key is enough for both monthly/weekly to avoid spam
+            return `${now.getFullYear()}-${now.getMonth() + 1}`; 
         };
 
         const checkBudgets = () => {

@@ -36,7 +36,6 @@ export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> =
     const [dayOfMonth, setDayOfMonth] = useState(editingTransaction?.dayOfMonth?.toString() || '1');
 
 
-    // Обновляем состояние при изменении редактируемой транзакции
     useEffect(() => {
         if (editingTransaction) {
             setType(editingTransaction.type);
@@ -52,8 +51,7 @@ export const RecurringTransactionForm: React.FC<RecurringTransactionFormProps> =
 
     const handleSubmit = () => {
         if (!amount || !category || parseFloat(amount) <= 0) return;
-        
-        // Валидация дня месяца
+
         const day = parseInt(dayOfMonth);
         if ((frequency === 'monthly' || frequency === 'yearly') && (day < 1 || day > 31)) {
             return;

@@ -50,8 +50,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     useNotifications();
 
     useDailyReminder();
-    
-    useReminderSystem();
+
+        useReminderSystem();
 
     useBudgetNotifications();
     useRecurringNotifications();

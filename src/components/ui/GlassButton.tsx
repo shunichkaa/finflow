@@ -32,7 +32,7 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
                     shadow: '0 8px 24px',
                     hoverShadow: '0 16px 40px',
                 };
-            default: // medium
+            default: 
                 return {
                     blur: '20px',
                     saturation: '180%',

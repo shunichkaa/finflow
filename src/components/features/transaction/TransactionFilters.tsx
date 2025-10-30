@@ -84,8 +84,8 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         fontSize: 24
                     }} />
                 </Box>
-                
-                <TextField
+
+                                <TextField
                     select
                     size="small"
                     label={t('category')}
@@ -128,20 +128,20 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         ))
                     )}
                 </TextField>
-                
-                <DatePickerField
+
+                                <DatePickerField
                     label={t('from')}
                     value={dateFrom}
                     onChange={onDateFromChange}
                 />
-                
-                <DatePickerField
+
+                                <DatePickerField
                     label={t('to')}
                     value={dateTo}
                     onChange={onDateToChange}
                 />
-                
-                <Box
+
+                                <Box
                     onClick={onReset}
                     sx={{
                         display: 'flex',

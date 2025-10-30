@@ -22,7 +22,6 @@ export const FinancialHealthScore: React.FC<FinancialHealthScoreProps> = ({
     const {t} = useTranslation();
     const { mode } = useThemeMode();
 
-    // Расчет скора (0-100)
     const savingsRate = income > 0 ? ((income - expenses) / income) * 100 : 0;
     const budgetScore = totalBudgets > 0 ? ((totalBudgets - budgetsExceeded) / totalBudgets) * 100 : 100;
     const healthScore = Math.round((savingsRate * 0.6 + budgetScore * 0.4));

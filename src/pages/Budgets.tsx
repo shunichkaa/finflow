@@ -18,7 +18,6 @@ const Budgets: React.FC = () => {
     const [editingBudgetId, setEditingBudgetId] = useState<string | null>(null);
     const editingBudget = useMemo(() => budgets.find(b => b.id === editingBudgetId) || null, [budgets, editingBudgetId]);
 
-    // Функция для получения фона как в аналитике
 
     return (
         <Container

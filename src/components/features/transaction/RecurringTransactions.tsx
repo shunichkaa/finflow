@@ -37,7 +37,6 @@ export const RecurringTransactions: React.FC = () => {
     const [editingTransaction, setEditingTransaction] = useState<RecurringTransaction | null>(null);
     const dueRecurring = getDueRecurring();
 
-    // Функции форматирования должны быть внутри компонента чтобы иметь доступ к t()
     const formatNextDue = (dateString?: string) => {
         if (!dateString) return '-';
 
@@ -60,7 +59,6 @@ export const RecurringTransactions: React.FC = () => {
         const now = new Date();
 
         dueRecurring.forEach(rec => {
-            // Добавляем транзакцию
             addTransaction({
                 amount: rec.amount,
                 category: rec.category,
@@ -69,8 +67,7 @@ export const RecurringTransactions: React.FC = () => {
                 type: rec.type,
             });
 
-            // Обновляем lastCreated в сторе повторяющихся транзакций
-            updateRecurring(rec.id, {lastCreated: now.toISOString()}); // Конвертируем в ISO string
+            updateRecurring(rec.id, {lastCreated: now.toISOString()}); 
         });
     };
 

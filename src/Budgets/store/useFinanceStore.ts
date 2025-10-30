@@ -43,15 +43,15 @@ export const useFinanceStore = create<FinanceStore>()(
                         },
                     ],
                 }));
-                
-                useNotificationStore.getState().addNotification({
+
+                                useNotificationStore.getState().addNotification({
                     type: 'reminder',
                     severity: 'success',
                     title: 'Транзакция добавлена',
                     message: `${transaction.type === 'income' ? 'Доход' : 'Расход'} на сумму ${transaction.amount} успешно добавлен`,
                 });
-                
-                triggerSync();
+
+                                triggerSync();
             },
 
             updateTransaction: (id, data) => {
@@ -86,15 +86,15 @@ export const useFinanceStore = create<FinanceStore>()(
                         },
                     ],
                 }));
-                
-                useNotificationStore.getState().addNotification({
+
+                                useNotificationStore.getState().addNotification({
                     type: 'budget',
                     severity: 'success',
                     title: 'Бюджет создан',
                     message: `Бюджет для категории "${budget.category}" успешно создан`,
                 });
-                
-                triggerSync();
+
+                                triggerSync();
             },
 
             updateBudget: (id, data) => {
@@ -133,72 +133,72 @@ export const useFinanceStore = create<FinanceStore>()(
                             id: uuid(),
                             type: 'income',
                             amount: 50000,
-                            category: '10', // Зарплата
+                            category: '10', 
                             description: 'Зарплата',
-                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 5), // 5 дней назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 5), 
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'income',
                             amount: 15000,
-                            category: '11', // Фриланс
+                            category: '11', 
                             description: 'Фриланс проект',
-                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 3), // 3 дня назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 3), 
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'expense',
                             amount: 25000,
-                            category: '1', // Еда и продукты
+                            category: '1', 
                             description: 'Продукты',
-                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 4), // 4 дня назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 4), 
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'expense',
                             amount: 8000,
-                            category: '2', // Транспорт
+                            category: '2', 
                             description: 'Транспорт',
-                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2), // 2 дня назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2), 
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'expense',
                             amount: 12000,
-                            category: '4', // Развлечения
+                            category: '4', 
                             description: 'Развлечения',
-                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1), // 1 день назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1), 
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'expense',
                             amount: 5000,
-                            category: '5', // Здоровье
+                            category: '5', 
                             description: 'Медицина',
-                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate()), // сегодня
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate()), 
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'income',
                             amount: 20000,
-                            category: '12', // Инвестиции
+                            category: '12', 
                             description: 'Дивиденды',
-                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7), // 7 дней назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7), 
                             createdAt: new Date(),
                         },
                         {
                             id: uuid(),
                             type: 'expense',
                             amount: 15000,
-                            category: '3', // Жильё
+                            category: '3', 
                             description: 'Коммунальные услуги',
-                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6), // 6 дней назад
+                            date: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6), 
                             createdAt: new Date(),
                         },
                     ];

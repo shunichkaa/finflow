@@ -101,27 +101,27 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                             <MoreHorizIcon sx={{ fontSize: 20 }} />
                                         )}
                                     </Box>
-                                    
-                                    <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+
+                                                                        <Box sx={{ flexGrow: 1, minWidth: 0 }}>
                                         <Text variant="body1" weight="semibold" noWrap>
                                             {categoryName}
                                         </Text>
                                     </Box>
-                                    
-                                    <AmountDisplay
+
+                                                                        <AmountDisplay
                                         amount={transaction.amount}
                                         currency={currency}
                                         type={transaction.type}
                                         size="large"
                                     />
                                 </Box>
-                                
-                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+
+                                                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                     <Text variant="caption" color="secondary">
                                         {formatDate(transaction.date)}
                                     </Text>
-                                    
-                                    <CustomIconButton
+
+                                                                        <CustomIconButton
                                         variant="danger"
                                         size="small"
                                         onClick={() => handleDelete(transaction.id)}
@@ -129,8 +129,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         <DeleteIcon fontSize="small" />
                                     </CustomIconButton>
                                 </Box>
-                                
-                                {transaction.description && (
+
+                                                                {transaction.description && (
                                     <Text variant="body2" color="secondary" sx={{ fontSize: designTokens.typography.fontSize.sm }}>
                                         {transaction.description}
                                     </Text>
@@ -198,8 +198,8 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         type={transaction.type}
                                         size="medium"
                                     />
-                                    
-                                    <CustomIconButton
+
+                                                                        <CustomIconButton
                                         variant="danger"
                                         size="small"
                                         onClick={() => handleDelete(transaction.id)}

@@ -10,7 +10,7 @@ export const calculateBudgetSpent = (
     let periodEnd: Date;
 
     if (budget.period === 'weekly') {
-        periodStart = startOfWeek(now, { weekStartsOn: 1 }); // Понедельник
+        periodStart = startOfWeek(now, { weekStartsOn: 1 }); 
         periodEnd = endOfWeek(now, { weekStartsOn: 1 });
     } else {
         periodStart = startOfMonth(now);
@@ -68,9 +68,9 @@ export const getDaysLeftInPeriod = (period: 'monthly' | 'weekly'): number => {
 
     const endOfToday = new Date(now);
     endOfToday.setHours(23, 59, 59, 999);
-    
-    const diff = periodEnd.getTime() - endOfToday.getTime();
+
+        const diff = periodEnd.getTime() - endOfToday.getTime();
     const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    
-    return Math.max(0, daysLeft);
+
+        return Math.max(0, daysLeft);
 };

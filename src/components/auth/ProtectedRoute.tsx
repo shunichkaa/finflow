@@ -28,8 +28,8 @@ export const ProtectedRoute = ({ children }: Props) => {
         console.error('Auth error in ProtectedRoute:', error);
         return <Navigate to="/login" replace />;
     }
-    
-    if (!session) {
+
+        if (!session) {
         return <Navigate to="/login" replace />;
     }
 

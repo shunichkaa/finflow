@@ -9,7 +9,6 @@ interface ReminderSettings {
     time: string;
 }
 
-// Reminder message keys - будут использоваться через i18n
 const REMINDER_MESSAGE_KEYS = [
     'reminderMessages.walletMisses',
     'reminderMessages.timeToAdmit',
@@ -33,7 +32,6 @@ const REMINDER_MESSAGE_KEYS = [
 
 const EMOJI_POOL = ['💰', '💸', '💵', '💴', '💶', '💷', '💳', '📊', '📈', '📉', '💼', '🎯', '🔥', '⚡', '✨', '🚀', '🎉', '💪', '🤔', '😎', '🕵️', '📱', '💬', '👀', '🤷', '🧠', '🤖', '🧘', '⚠️', '📰'];
 
-// Функция для получения случайного сообщения (вызывается внутри useReminderSystem)
 const getRandomMessage = (t: (key: string) => string): string => {
     const randomKey = REMINDER_MESSAGE_KEYS[Math.floor(Math.random() * REMINDER_MESSAGE_KEYS.length)];
     const randomMessage = t(randomKey);
@@ -62,13 +60,11 @@ const shouldSendReminder = (
 
     const now = new Date();
     const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-    
-    // Проверяем, настало ли время для отправки
+
     if (currentTime !== settings.time) {
         return false;
     }
 
-    // Если никогда не отправляли, отправляем
     if (!lastSentDate) {
         return true;
     }
@@ -77,7 +73,6 @@ const shouldSendReminder = (
     const daysDiff = Math.floor((now.getTime() - lastSent.getTime()) / (1000 * 60 * 60 * 24));
     const daysUntilNext = getDaysUntilNext(settings.frequency);
 
-    // Проверяем, прошло ли достаточно дней
     return daysDiff >= daysUntilNext;
 };
 
@@ -95,8 +90,8 @@ const sendReminder = async (message: string, notificationTitle: string): Promise
     try {
         if ('serviceWorker' in navigator) {
             const registration = await navigator.serviceWorker.ready;
-            
-            await registration.showNotification(notificationTitle, {
+
+                        await registration.showNotification(notificationTitle, {
                 body: message,
                 icon: '/favicon.ico',
                 badge: '/favicon.ico',
@@ -116,7 +111,6 @@ const sendReminder = async (message: string, notificationTitle: string): Promise
             });
         }
 
-        // Сохраняем время последней отправки
         localStorage.setItem('reminder-last-sent', new Date().toISOString());
     } catch (error) {
         console.error('Error sending reminder:', error);
@@ -148,7 +142,6 @@ export const useReminderSystem = () => {
                 return;
             }
 
-            // Проверяем разрешение на уведомления
             if (Notification.permission === 'default') {
                 await Notification.requestPermission();
             }
@@ -161,7 +154,6 @@ export const useReminderSystem = () => {
             const now = new Date();
             const currentMinute = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
-            // Проверяем не более одного раза в минуту
             if (lastCheckRef.current === currentMinute) {
                 return;
             }
@@ -174,10 +166,8 @@ export const useReminderSystem = () => {
             }
         };
 
-        // Проверяем каждую минуту
         intervalRef.current = setInterval(checkAndSendReminder, 60000);
 
-        // Проверяем сразу при монтировании
         checkAndSendReminder();
 
         return () => {
@@ -187,10 +177,8 @@ export const useReminderSystem = () => {
         };
     }, [t]);
 
-    // Также слушаем изменения в localStorage (если открыто несколько вкладок)
     useEffect(() => {
         const handleStorageChange = () => {
-            // Просто триггерим перепроверку через небольшую задержку
             setTimeout(() => {
                 const settingsJson = localStorage.getItem('reminder-settings');
                 if (settingsJson) {
@@ -200,7 +188,6 @@ export const useReminderSystem = () => {
                             localStorage.removeItem('reminder-last-sent');
                         }
                     } catch {
-                        // Ignore
                     }
                 }
             }, 1000);

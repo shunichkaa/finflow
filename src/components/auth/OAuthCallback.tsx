@@ -12,11 +12,10 @@ export const OAuthCallback = () => {
             try {
                 console.log('OAuth callback started');
 
-                // Проверяем URL параметры на наличие ошибок
                 const urlParams = new URLSearchParams(window.location.search);
                 const hashParams = new URLSearchParams(window.location.hash.substring(1));
-                
-                const errorParam = urlParams.get('error') || hashParams.get('error');
+
+                                const errorParam = urlParams.get('error') || hashParams.get('error');
                 const errorDescription = urlParams.get('error_description') || hashParams.get('error_description');
 
                 if (errorParam) {
@@ -25,7 +24,6 @@ export const OAuthCallback = () => {
                     return;
                 }
 
-                // Ждем обработки OAuth Supabase
                 const {data: {session}, error: sessionError} = await supabase.auth.getSession();
 
                 console.log('Session:', session);
@@ -41,7 +39,6 @@ export const OAuthCallback = () => {
                     console.log('OAuth success, redirecting to dashboard');
                     navigate('/dashboard', {replace: true});
                 } else {
-                    // Даем дополнительное время для обработки
                     setTimeout(async () => {
                         const {data: {session: retrySession}} = await supabase.auth.getSession();
                         if (retrySession) {

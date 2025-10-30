@@ -105,7 +105,6 @@ export const Auth: React.FC = () => {
                 setError(error.message);
                 setOauthLoading(null);
             }
-            // Не устанавливаем setOauthLoading(null) здесь, так как происходит редирект
         } catch (error: unknown) {
             console.error('OAuth catch error:', error);
             const errorMessage = error instanceof Error

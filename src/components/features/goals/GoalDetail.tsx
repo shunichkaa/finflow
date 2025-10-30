@@ -37,12 +37,11 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
     const { mode } = useThemeMode();
     const { currency } = useSettingsStore();
     const { addToGoal, goals } = useGoalsStore();
-    
-    const [amount, setAmount] = useState('');
+
+        const [amount, setAmount] = useState('');
 
     if (!goal) return null;
 
-    // Получаем актуальную цель из стора, чтобы прогресс обновлялся сразу
     const actualGoal = goals.find(g => g.id === goal.id) || goal;
 
     const progress = (actualGoal.currentAmount / actualGoal.targetAmount) * 100;

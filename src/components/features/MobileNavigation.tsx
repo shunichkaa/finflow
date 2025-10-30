@@ -58,7 +58,6 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
         }
     ];
 
-    // Скрываем навигацию при скролле вниз
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;

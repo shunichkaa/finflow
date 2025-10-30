@@ -46,8 +46,8 @@ export const AuthDebug: React.FC = () => {
             <Typography variant="h6" gutterBottom sx={{ color: '#272B3E' }}>
                 🔍 Auth Debug Information
             </Typography>
-            
-            <Box sx={{ mb: 2 }}>
+
+                        <Box sx={{ mb: 2 }}>
                 <Typography variant="body2" sx={{ color: '#654633CC' }}>
                     <strong>Loading:</strong> {loading ? 'Yes' : 'No'}
                 </Typography>

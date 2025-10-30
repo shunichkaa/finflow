@@ -181,8 +181,8 @@ const resources = {
             due: 'К оплате',
             until: 'До',
             yearly: 'Ежегодно',
-            
-            recurringTransactions: 'Повторяющиеся транзакции',
+
+                        recurringTransactions: 'Повторяющиеся транзакции',
             recurringTransaction: 'Повторяющаяся транзакция',
             recurringDescription: 'Автоматические платежи и поступления',
             addRecurring: 'Добавить повторяющуюся',
@@ -201,7 +201,6 @@ const resources = {
             nextPayment: 'Следующий платеж',
             confirmDeleteRecurring: 'Удалить повторяющуюся транзакцию?',
 
-            // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Создавайте цели накоплений для важных финансовых целей',
             'savingsGoal.createButton': 'Создать цель накопления',
             'savingsGoal.noGoals': 'У вас пока нет целей накоплений',
@@ -214,7 +213,6 @@ const resources = {
             'savingsGoal.currentAmount': 'Текущая сумма',
             'savingsGoal.targetDate': 'Целевая дата (необязательно)',
 
-            // Goal Detail translations
             'goalDetail.progress': 'Прогресс',
             'goalDetail.daysLeft': 'Дней до цели',
             'goalDetail.remaining': 'Осталось',
@@ -226,7 +224,6 @@ const resources = {
             'goalDetail.add': 'Добавить',
             'goalDetail.withdraw': 'Снять',
 
-            // Motivational phrases
             'motivation.excellent': 'Отличная работа! Ещё чуть-чуть!',
             'motivation.great': 'Ты молодец! Цель всё ближе!',
             'motivation.keepGoing': 'Так держать! Прогресс налицо!',
@@ -238,7 +235,6 @@ const resources = {
             'motivation.smallSteps': 'Маленькие шаги = большой результат!',
             'motivation.almostThere': 'Твоя цель уже близко!',
 
-            // Error pages translations
             'errorBoundary.title': 'Ой, что-то не так, уже исправляем...',
             'errorBoundary.goHome': 'Вернуться на главную',
             'errorBoundary.reload': 'Перезагрузить страницу',
@@ -252,7 +248,6 @@ const resources = {
             'notFound.description': 'К сожалению, запрашиваемая страница не существует или была перемещена.',
             'notFound.goHome': 'Вернуться на главную',
 
-            // Уведомления
             notifications: 'Уведомления',
             'notifications.title': 'Уведомления',
             'notifications.enable': 'Включить уведомления',
@@ -267,8 +262,7 @@ const resources = {
             reminderTime: 'Время напоминания',
             'dailyReminder.notificationTitle': 'Напоминание',
             'dailyReminder.notificationMessage': 'Не забудьте внести свои транзакции за сегодня! 📝',
-            
-            // Reminders System
+
             reminders: {
                 title: 'Напоминания',
                 enable: 'Включить напоминания',
@@ -286,8 +280,7 @@ const resources = {
                 notificationTitle: 'FinFlow - Напоминание',
                 browserNoNotifications: 'Ваш браузер не поддерживает уведомления'
             },
-            
-            // Reminder Messages
+
             reminderMessages: {
                 walletMisses: 'Эй, твой кошелек скучает! Внеси расходы',
                 timeToAdmit: 'Время признаться, на что ты потратился сегодня',
@@ -359,7 +352,6 @@ const resources = {
             dataLoadSuccess: '✅ Данные успешно загружены из облака',
             dataLoadError: '❌ Ошибка загрузки данных',
 
-            // Currencies
             'currencies.ruble': 'Российский рубль',
             'currencies.dollar': 'Доллар США',
             'currencies.euro': 'Евро',
@@ -392,7 +384,6 @@ const resources = {
             appName: 'FinFlow',
             tagline: 'Smart Finance Management',
 
-            // Аутентификация
             auth: {
                 fillAllFields: 'Please fill in all fields',
                 validEmail: 'Please enter a valid email',
@@ -560,8 +551,8 @@ const resources = {
             due: 'Due',
             until: 'Until',
             yearly: 'Yearly',
-            
-            recurringTransactions: 'Recurring Transactions',
+
+                        recurringTransactions: 'Recurring Transactions',
             recurringTransaction: 'Recurring Transaction',
             recurringDescription: 'Automatic payments and income',
             addRecurring: 'Add Recurring',
@@ -580,7 +571,6 @@ const resources = {
             nextPayment: 'Next Payment',
             confirmDeleteRecurring: 'Delete recurring transaction?',
 
-            // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Create savings goals for your important financial targets',
             'savingsGoal.createButton': 'Create Savings Goal',
             'savingsGoal.noGoals': 'You have no savings goals yet',
@@ -593,7 +583,6 @@ const resources = {
             'savingsGoal.currentAmount': 'Current amount',
             'savingsGoal.targetDate': 'Target date (optional)',
 
-            // Goal Detail translations
             'goalDetail.progress': 'Progress',
             'goalDetail.daysLeft': 'Days to goal',
             'goalDetail.remaining': 'Remaining',
@@ -605,7 +594,6 @@ const resources = {
             'goalDetail.add': 'Add',
             'goalDetail.withdraw': 'Withdraw',
 
-            // Motivational phrases
             'motivation.excellent': 'Excellent work! Just a little more!',
             'motivation.great': 'You\'re doing great! Goal is getting closer!',
             'motivation.keepGoing': 'Keep it up! Progress is visible!',
@@ -617,7 +605,6 @@ const resources = {
             'motivation.smallSteps': 'Small steps = big result!',
             'motivation.almostThere': 'Your goal is already close!',
 
-            // Error pages translations
             'errorBoundary.title': 'Oops, something went wrong, we\'re fixing it...',
             'errorBoundary.goHome': 'Return to main page',
             'errorBoundary.reload': 'Reload page',
@@ -631,7 +618,6 @@ const resources = {
             'notFound.description': 'Unfortunately, the requested page does not exist or has been moved.',
             'notFound.goHome': 'Return to main page',
 
-            // Notifications
             notifications: 'Notifications',
             'notifications.title': 'Notifications',
             'notifications.enable': 'Enable notifications',
@@ -646,8 +632,7 @@ const resources = {
             reminderTime: 'Reminder time',
             'dailyReminder.notificationTitle': 'Reminder',
             'dailyReminder.notificationMessage': 'Don\'t forget to add your transactions for today! 📝',
-            
-            // Reminders System
+
             reminders: {
                 title: 'Reminders',
                 enable: 'Enable reminders',
@@ -665,8 +650,7 @@ const resources = {
                 notificationTitle: 'FinFlow - Reminder',
                 browserNoNotifications: 'Your browser does not support notifications'
             },
-            
-            // Reminder Messages
+
             reminderMessages: {
                 walletMisses: 'Hey, your wallet misses you! Add expenses',
                 timeToAdmit: 'Time to admit what you spent today',
@@ -738,7 +722,6 @@ const resources = {
             dataLoadSuccess: '✅ Data successfully loaded from cloud',
             dataLoadError: '❌ Error loading data',
 
-            // Currencies
             'currencies.ruble': 'Russian Ruble',
             'currencies.dollar': 'US Dollar',
             'currencies.euro': 'Euro',
@@ -771,7 +754,6 @@ const resources = {
             appName: 'FinFlow',
             tagline: 'Gestion intelligente des finances',
 
-            // Аутентификация
             auth: {
                 fillAllFields: 'Veuillez remplir tous les champs',
                 validEmail: 'Veuillez entrer un email valide',
@@ -937,8 +919,8 @@ const resources = {
             due: 'Dû',
             until: 'Jusqu\'à',
             yearly: 'Annuel',
-            
-            recurringTransactions: 'Transactions récurrentes',
+
+                        recurringTransactions: 'Transactions récurrentes',
             recurringTransaction: 'Transaction récurrente',
             recurringDescription: 'Paiements et revenus automatiques',
             addRecurring: 'Ajouter une récurrente',
@@ -957,7 +939,6 @@ const resources = {
             nextPayment: 'Prochain paiement',
             confirmDeleteRecurring: 'Supprimer la transaction récurrente?',
 
-            // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Créez des objectifs d\'épargne pour vos cibles financières importantes',
             'savingsGoal.createButton': 'Créer un objectif d\'épargne',
             'savingsGoal.noGoals': 'Vous n\'avez pas encore d\'objectifs d\'épargne',
@@ -970,7 +951,6 @@ const resources = {
             'savingsGoal.currentAmount': 'Montant actuel',
             'savingsGoal.targetDate': 'Date cible (optionnel)',
 
-            // Goal Detail translations
             'goalDetail.progress': 'Progrès',
             'goalDetail.daysLeft': 'Jours jusqu\'à l\'objectif',
             'goalDetail.remaining': 'Restant',
@@ -982,7 +962,6 @@ const resources = {
             'goalDetail.add': 'Ajouter',
             'goalDetail.withdraw': 'Retirer',
 
-            // Motivational phrases
             'motivation.excellent': 'Excellent travail ! Encore un peu !',
             'motivation.great': 'Tu fais du bon travail ! L\'objectif se rapproche !',
             'motivation.keepGoing': 'Continue comme ça ! Le progrès est visible !',
@@ -994,7 +973,6 @@ const resources = {
             'motivation.smallSteps': 'Petits pas = grand résultat !',
             'motivation.almostThere': 'Ton objectif est déjà proche !',
 
-            // Error pages translations
             'errorBoundary.title': 'Oups, quelque chose ne va pas, nous corrigeons...',
             'errorBoundary.goHome': 'Retour à la page principale',
             'errorBoundary.reload': 'Recharger la page',
@@ -1008,7 +986,6 @@ const resources = {
             'notFound.description': 'Malheureusement, la page demandée n\'existe pas ou a été déplacée.',
             'notFound.goHome': 'Retour à la page principale',
 
-            // Notifications
             notifications: 'Notifications',
             'notifications.title': 'Notifications',
             'notifications.enable': 'Activer les notifications',
@@ -1023,8 +1000,7 @@ const resources = {
             reminderTime: 'Heure du rappel',
             'dailyReminder.notificationTitle': 'Rappel',
             'dailyReminder.notificationMessage': 'N\'oubliez pas d\'ajouter vos transactions d\'aujourd\'hui ! 📝',
-            
-            // Reminders System
+
             reminders: {
                 title: 'Rappels',
                 enable: 'Activer les rappels',
@@ -1042,8 +1018,7 @@ const resources = {
                 notificationTitle: 'FinFlow - Rappel',
                 browserNoNotifications: 'Votre navigateur ne prend pas en charge les notifications'
             },
-            
-            // Reminder Messages
+
             reminderMessages: {
                 walletMisses: 'Hé, ton portefeuille te manque ! Ajoute des dépenses',
                 timeToAdmit: 'Il est temps d\'admettre ce que tu as dépensé aujourd\'hui',
@@ -1116,7 +1091,6 @@ const resources = {
             dataLoadSuccess: '✅ Données chargées depuis le cloud',
             dataLoadError: '❌ Erreur de chargement des données',
 
-            // Currencies
             'currencies.ruble': 'Rouble russe',
             'currencies.dollar': 'Dollar américain',
             'currencies.euro': 'Euro',
@@ -1149,7 +1123,6 @@ const resources = {
             appName: 'FinFlow',
             tagline: 'Intelligente Finanzverwaltung',
 
-            // Аутентификация
             auth: {
                 fillAllFields: 'Bitte füllen Sie alle Felder aus',
                 validEmail: 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
@@ -1315,8 +1288,8 @@ const resources = {
             due: 'Fällig',
             until: 'Bis',
             yearly: 'Jährlich',
-            
-            recurringTransactions: 'Wiederkehrende Transaktionen',
+
+                        recurringTransactions: 'Wiederkehrende Transaktionen',
             recurringTransaction: 'Wiederkehrende Transaktion',
             recurringDescription: 'Automatische Zahlungen und Einnahmen',
             addRecurring: 'Wiederkehrende hinzufügen',
@@ -1335,7 +1308,6 @@ const resources = {
             nextPayment: 'Nächste Zahlung',
             confirmDeleteRecurring: 'Wiederkehrende Transaktion löschen?',
 
-            // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Erstellen Sie Sparziele für Ihre wichtigen finanziellen Ziele',
             'savingsGoal.createButton': 'Sparziel erstellen',
             'savingsGoal.noGoals': 'Sie haben noch keine Sparziele',
@@ -1348,7 +1320,6 @@ const resources = {
             'savingsGoal.currentAmount': 'Aktueller Betrag',
             'savingsGoal.targetDate': 'Zieldatum (optional)',
 
-            // Goal Detail translations
             'goalDetail.progress': 'Fortschritt',
             'goalDetail.daysLeft': 'Tage bis zum Ziel',
             'goalDetail.remaining': 'Verbleibend',
@@ -1360,7 +1331,6 @@ const resources = {
             'goalDetail.add': 'Hinzufügen',
             'goalDetail.withdraw': 'Abheben',
 
-            // Motivational phrases
             'motivation.excellent': 'Ausgezeichnete Arbeit! Noch ein bisschen mehr!',
             'motivation.great': 'Du machst das großartig! Das Ziel rückt näher!',
             'motivation.keepGoing': 'Mach weiter so! Der Fortschritt ist sichtbar!',
@@ -1372,7 +1342,6 @@ const resources = {
             'motivation.smallSteps': 'Kleine Schritte = großes Ergebnis!',
             'motivation.almostThere': 'Dein Ziel ist schon nah!',
 
-            // Error pages translations
             'errorBoundary.title': 'Ups, etwas ist schiefgelaufen, wir beheben es...',
             'errorBoundary.goHome': 'Zur Hauptseite zurückkehren',
             'errorBoundary.reload': 'Seite neu laden',
@@ -1386,7 +1355,6 @@ const resources = {
             'notFound.description': 'Leider existiert die angeforderte Seite nicht oder wurde verschoben.',
             'notFound.goHome': 'Zur Hauptseite zurückkehren',
 
-            // Notifications
             notifications: 'Benachrichtigungen',
             'notifications.title': 'Benachrichtigungen',
             'notifications.enable': 'Benachrichtigungen aktivieren',
@@ -1401,8 +1369,7 @@ const resources = {
             reminderTime: 'Erinnerungszeit',
             'dailyReminder.notificationTitle': 'Erinnerung',
             'dailyReminder.notificationMessage': 'Vergessen Sie nicht, Ihre Transaktionen für heute hinzuzufügen! 📝',
-            
-            // Reminders System
+
             reminders: {
                 title: 'Erinnerungen',
                 enable: 'Erinnerungen aktivieren',
@@ -1420,8 +1387,7 @@ const resources = {
                 notificationTitle: 'FinFlow - Erinnerung',
                 browserNoNotifications: 'Ihr Browser unterstützt keine Benachrichtigungen'
             },
-            
-            // Reminder Messages
+
             reminderMessages: {
                 walletMisses: 'Hey, dein Portemonnaie vermisst dich! Füge Ausgaben hinzu',
                 timeToAdmit: 'Zeit zuzugeben, was du heute ausgegeben hast',
@@ -1494,7 +1460,6 @@ const resources = {
             dataLoadSuccess: '✅ Daten erfolgreich aus der Cloud geladen',
             dataLoadError: '❌ Fehler beim Laden der Daten',
 
-            // Currencies
             'currencies.ruble': 'Russischer Rubel',
             'currencies.dollar': 'US-Dollar',
             'currencies.euro': 'Euro',
@@ -1527,7 +1492,6 @@ const resources = {
             appName: 'FinFlow',
             tagline: 'Gestión inteligente de finanzas',
 
-            // Аутентификация
             auth: {
                 fillAllFields: 'Por favor, complete todos los campos',
                 validEmail: 'Por favor, introduzca un email válido',
@@ -1693,8 +1657,8 @@ const resources = {
             due: 'A pagar',
             until: 'Hasta',
             yearly: 'Anual',
-            
-            recurringTransactions: 'Transacciones recurrentes',
+
+                        recurringTransactions: 'Transacciones recurrentes',
             recurringTransaction: 'Transacción recurrente',
             recurringDescription: 'Pagos e ingresos automáticos',
             addRecurring: 'Añadir recurrente',
@@ -1713,7 +1677,6 @@ const resources = {
             nextPayment: 'Próximo pago',
             confirmDeleteRecurring: '¿Eliminar transacción recurrente?',
 
-            // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Crea metas de ahorro para tus objetivos financieros importantes',
             'savingsGoal.createButton': 'Crear meta de ahorro',
             'savingsGoal.noGoals': 'Aún no tienes metas de ahorro',
@@ -1726,7 +1689,6 @@ const resources = {
             'savingsGoal.currentAmount': 'Cantidad actual',
             'savingsGoal.targetDate': 'Fecha objetivo (opcional)',
 
-            // Goal Detail translations
             'goalDetail.progress': 'Progreso',
             'goalDetail.daysLeft': 'Días hasta la meta',
             'goalDetail.remaining': 'Restante',
@@ -1738,7 +1700,6 @@ const resources = {
             'goalDetail.add': 'Agregar',
             'goalDetail.withdraw': 'Retirar',
 
-            // Motivational phrases
             'motivation.excellent': '¡Excelente trabajo! ¡Solo un poco más!',
             'motivation.great': '¡Lo estás haciendo genial! ¡La meta se acerca!',
             'motivation.keepGoing': '¡Sigue así! ¡El progreso es visible!',
@@ -1750,7 +1711,6 @@ const resources = {
             'motivation.smallSteps': '¡Pasos pequeños = gran resultado!',
             'motivation.almostThere': '¡Tu meta ya está cerca!',
 
-            // Error pages translations
             'errorBoundary.title': 'Ups, algo salió mal, lo estamos arreglando...',
             'errorBoundary.goHome': 'Volver a la página principal',
             'errorBoundary.reload': 'Recargar página',
@@ -1764,7 +1724,6 @@ const resources = {
             'notFound.description': 'Desafortunadamente, la página solicitada no existe o ha sido movida.',
             'notFound.goHome': 'Volver a la página principal',
 
-            // Notifications
             notifications: 'Notificaciones',
             'notifications.title': 'Notificaciones',
             'notifications.enable': 'Activar notificaciones',
@@ -1779,8 +1738,7 @@ const resources = {
             reminderTime: 'Hora del recordatorio',
             'dailyReminder.notificationTitle': 'Recordatorio',
             'dailyReminder.notificationMessage': '¡No olvides agregar tus transacciones de hoy! 📝',
-            
-            // Reminders System
+
             reminders: {
                 title: 'Recordatorios',
                 enable: 'Activar recordatorios',
@@ -1798,8 +1756,7 @@ const resources = {
                 notificationTitle: 'FinFlow - Recordatorio',
                 browserNoNotifications: 'Tu navegador no admite notificaciones'
             },
-            
-            // Reminder Messages
+
             reminderMessages: {
                 walletMisses: '¡Oye, tu billetera te extraña! Agrega gastos',
                 timeToAdmit: 'Hora de admitir en qué gastaste hoy',
@@ -1872,7 +1829,6 @@ const resources = {
             dataLoadSuccess: '✅ Datos cargados desde la nube correctamente',
             dataLoadError: '❌ Error al cargar los datos',
 
-            // Currencies
             'currencies.ruble': 'Rublo ruso',
             'currencies.dollar': 'Dólar estadounidense',
             'currencies.euro': 'Euro',
@@ -1905,7 +1861,6 @@ const resources = {
             appName: 'FinFlow',
             tagline: 'Pametno upravljanje finansijama',
 
-            // Аутентификация
             auth: {
                 fillAllFields: 'Molimo popunite sva polja',
                 validEmail: 'Molimo unesite važeću email adresu',
@@ -2071,8 +2026,8 @@ const resources = {
             due: 'Dospjelo',
             until: 'Do',
             yearly: 'Godišnje',
-            
-            recurringTransactions: 'Ponavljajuće transakcije',
+
+                        recurringTransactions: 'Ponavljajuće transakcije',
             recurringTransaction: 'Ponavljajuća transakcija',
             recurringDescription: 'Automatska plaćanja i prihodi',
             addRecurring: 'Dodaj ponavljajuću',
@@ -2091,7 +2046,6 @@ const resources = {
             nextPayment: 'Sljedeće plaćanje',
             confirmDeleteRecurring: 'Obrisati ponavljajuću transakciju?',
 
-            // Savings Goal specific translations
             'savingsGoal.goalDescription': 'Napravite ciljeve štednje za vaše važne finansijske ciljeve',
             'savingsGoal.createButton': 'Napravi cilj štednje',
             'savingsGoal.noGoals': 'Nemate ciljeva štednje još',
@@ -2104,7 +2058,6 @@ const resources = {
             'savingsGoal.currentAmount': 'Trenutni iznos',
             'savingsGoal.targetDate': 'Ciljani datum (opciono)',
 
-            // Goal Detail translations
             'goalDetail.progress': 'Napredak',
             'goalDetail.daysLeft': 'Dana do cilja',
             'goalDetail.remaining': 'Preostalo',
@@ -2116,7 +2069,6 @@ const resources = {
             'goalDetail.add': 'Dodaj',
             'goalDetail.withdraw': 'Podigni',
 
-            // Motivational phrases
             'motivation.excellent': 'Odličan rad! Još malo!',
             'motivation.great': 'Odlično radiš! Cilj se približava!',
             'motivation.keepGoing': 'Nastavi tako! Napredak je vidljiv!',
@@ -2128,7 +2080,6 @@ const resources = {
             'motivation.smallSteps': 'Mali koraci = veliki rezultat!',
             'motivation.almostThere': 'Tvoj cilj je već blizu!',
 
-            // Error pages translations
             'errorBoundary.title': 'Ups, nešto nije u redu, već popravljamo...',
             'errorBoundary.goHome': 'Vrati se na glavnu stranicu',
             'errorBoundary.reload': 'Ponovo učitaj stranicu',
@@ -2142,7 +2093,6 @@ const resources = {
             'notFound.description': 'Nažalost, tražena stranica ne postoji ili je premještena.',
             'notFound.goHome': 'Vrati se na glavnu stranicu',
 
-            // Notifications
             notifications: 'Obavještenja',
             'notifications.title': 'Obavještenja',
             'notifications.enable': 'Uključi obavještenja',
@@ -2157,8 +2107,7 @@ const resources = {
             reminderTime: 'Vrijeme podsjetnika',
             'dailyReminder.notificationTitle': 'Podsjetnik',
             'dailyReminder.notificationMessage': 'Ne zaboravite dodati svoje transakcije za danas! 📝',
-            
-            // Reminders System
+
             reminders: {
                 title: 'Podsjetnici',
                 enable: 'Uključi podsjetnike',
@@ -2176,8 +2125,7 @@ const resources = {
                 notificationTitle: 'FinFlow - Podsjetnik',
                 browserNoNotifications: 'Vaš pregledač ne podržava obavještenja'
             },
-            
-            // Reminder Messages
+
             reminderMessages: {
                 walletMisses: 'Hej, tvoj novčanik te nedostaje! Dodaj rashode',
                 timeToAdmit: 'Vrijeme da priznaš na šta si potrošio danas',
@@ -2250,7 +2198,6 @@ const resources = {
             dataLoadSuccess: '✅ Podaci su uspješno učitani iz oblaka',
             dataLoadError: '❌ Greška pri učitavanju podataka',
 
-            // Currencies
             'currencies.ruble': 'Ruska rublja',
             'currencies.dollar': 'Američki dolar',
             'currencies.euro': 'Euro',

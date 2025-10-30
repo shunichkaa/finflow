@@ -37,7 +37,7 @@ export const ExportData: React.FC = () => {
     };
 
     const handleExportPDF = () => {
-        exportToPDF(transactions, budgets); // Убрал третий параметр
+        exportToPDF(transactions, budgets); 
         handleClose();
     };
 

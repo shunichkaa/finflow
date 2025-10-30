@@ -5,8 +5,8 @@ interface SwipeConfig {
     onSwipeRight?: () => void;
     onSwipeUp?: () => void;
     onSwipeDown?: () => void;
-    threshold?: number; // минимальное расстояние свайпа
-    velocity?: number; // минимальная скорость
+    threshold?: number; 
+    velocity?: number; 
 }
 
 interface SwipeState {
@@ -53,7 +53,6 @@ export const useSwipeGesture = (config: SwipeConfig) => {
         const deltaY = touchCurrent.y - touchStart.current.y;
         const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-        // Определяем основное направление
         let direction: SwipeState['direction'] = null;
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
             direction = deltaX > 0 ? 'right' : 'left';
@@ -67,7 +66,6 @@ export const useSwipeGesture = (config: SwipeConfig) => {
             distance
         });
 
-        // Предотвращаем скролл при горизонтальном свайпе
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
             e.preventDefault();
         }
@@ -91,20 +89,17 @@ export const useSwipeGesture = (config: SwipeConfig) => {
             timeDelta
         );
 
-        // Проверяем условия для триггера свайпа
         const isThresholdMet = Math.abs(deltaX) > threshold || Math.abs(deltaY) > threshold;
         const isVelocityMet = velocity > velocityThreshold;
 
         if (isThresholdMet && isVelocityMet) {
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                // Горизонтальный свайп
                 if (deltaX > 0 && config.onSwipeRight) {
                     config.onSwipeRight();
                 } else if (deltaX < 0 && config.onSwipeLeft) {
                     config.onSwipeLeft();
                 }
             } else {
-                // Вертикальный свайп
                 if (deltaY > 0 && config.onSwipeDown) {
                     config.onSwipeDown();
                 } else if (deltaY < 0 && config.onSwipeUp) {
@@ -113,7 +108,6 @@ export const useSwipeGesture = (config: SwipeConfig) => {
             }
         }
 
-        // Сброс состояния
         touchStart.current = null;
         setSwipeState({
             isSwiping: false,

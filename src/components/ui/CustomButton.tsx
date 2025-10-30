@@ -25,8 +25,8 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
 
   const getVariantStyles = (): StyleObject => {
     const isDark = mode === 'dark';
-    
-    switch (variant) {
+
+        switch (variant) {
       case 'primary':
         return {
           backgroundColor: designTokens.colors.primary.main,

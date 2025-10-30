@@ -22,19 +22,19 @@ export const useDailyReminder = () => {
         const checkAndSendReminder = () => {
             const settings = useSettingsStore.getState();
             const currentNotificationTime = settings.notificationTime;
-            
-            const now = new Date();
+
+                        const now = new Date();
             const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-            
-            if (currentTime === currentNotificationTime) {
+
+                        if (currentTime === currentNotificationTime) {
                 const lastReminderDate = localStorage.getItem('lastReminderDate');
                 const today = now.toDateString();
 
                 if (lastReminderDate !== today) {
                     const notificationTitle = t('dailyReminder.notificationTitle', 'Reminder');
                     const notificationMessage = t('dailyReminder.notificationMessage', 'Don\'t forget to add your transactions for today! 📝');
-                    
-                    addNotification({
+
+                                        addNotification({
                         type: 'reminder',
                         severity: 'info',
                         title: notificationTitle,

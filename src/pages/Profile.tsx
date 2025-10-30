@@ -499,9 +499,9 @@ export default function Profile() {
                 </List>
             </Paper>
 
-            
 
-            <Box sx={{mb: {xs: 2, sm: 3}}}>
+
+                        <Box sx={{mb: {xs: 2, sm: 3}}}>
                 <ReminderSettings />
             </Box>
 

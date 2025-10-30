@@ -1,7 +1,7 @@
 
 export function exponentialSmoothing(data: number[], alpha: number): number[] {
     if (data.length === 0) return [];
-    if (alpha < 0 || alpha > 1) alpha = 0.3; // Валидация alpha
+    if (alpha < 0 || alpha > 1) alpha = 0.3; 
     const result: number[] = [data[0]];
     for (let i = 1; i < data.length; i++) {
         result.push(alpha * data[i] + (1 - alpha) * result[i - 1]);
@@ -17,8 +17,8 @@ export function linearRegression(data: { x: number; y: number }[]) {
             predict: (_x: number) => 0
         };
     }
-    
-    const n = data.length;
+
+        const n = data.length;
     const sumX = data.reduce((sum, p) => sum + p.x, 0);
     const sumY = data.reduce((sum, p) => sum + p.y, 0);
     const sumXY = data.reduce((sum, p) => sum + p.x * p.y, 0);
@@ -53,7 +53,7 @@ export function forecastNextMonth(expenses: number[]): number {
 
 export function predictDepletion(balance: number, dailyExpenses: number): number {
     if (dailyExpenses <= 0) return Infinity;
-    return Math.ceil(balance / dailyExpenses); // в днях
+    return Math.ceil(balance / dailyExpenses); 
 }
 
 export function recommendedDailyLimit(monthlyIncome: number, fixedExpenses: number, avgVariableExpenses: number): number {

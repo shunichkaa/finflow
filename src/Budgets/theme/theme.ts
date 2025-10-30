@@ -5,49 +5,49 @@ const lightThemeOptions: ThemeOptions = {
     palette: {
         mode: 'light',
         primary: {
-            main: '#6C6FF9', // Cornflower Blue
-            light: '#6C6FF9', // Maya Blue
-            dark: '#272B3E', // Midnight Blue
+            main: '#6C6FF9', 
+            light: '#6C6FF9', 
+            dark: '#272B3E', 
             contrastText: '#FFFFFF',
         },
         secondary: {
-            main: '#6C6FF9', // Maya Blue
+            main: '#6C6FF9', 
             light: '#6C6FF9',
             dark: '#272B3E',
             contrastText: '#FFFFFF',
         },
         error: {
-            main: '#6C6FF9', // Используем основной цвет
+            main: '#6C6FF9', 
             light: '#6C6FF9',
             dark: '#272B3E',
             contrastText: '#FFFFFF',
         },
         success: {
-            main: '#6C6FF9', // Maya Blue
+            main: '#6C6FF9', 
             light: '#6C6FF9',
             dark: '#272B3E',
             contrastText: '#FFFFFF',
         },
         warning: {
-            main: '#6C6FF9', // Cornflower Blue
+            main: '#6C6FF9', 
             light: '#6C6FF9',
             dark: '#272B3E',
             contrastText: '#FFFFFF',
         },
         info: {
-            main: '#6C6FF9', // Maya Blue
+            main: '#6C6FF9', 
             light: '#6C6FF9',
             dark: '#272B3E',
             contrastText: '#FFFFFF',
         },
         background: {
-            default: '#F5F6FA', // Светлый фон
-            paper: '#FFFFFF', // Crystal White - карточки
+            default: '#F5F6FA', 
+            paper: '#FFFFFF', 
         },
         text: {
-            primary: '#272B3E', // Midnight Blue
-            secondary: '#272B3E', // Midnight Blue (используем тот же)
-            disabled: '#EFF0F6', // Athens Gray
+            primary: '#272B3E', 
+            secondary: '#272B3E', 
+            disabled: '#EFF0F6', 
         },
         divider: '#272B3E1A',
     },
@@ -70,59 +70,59 @@ const lightThemeOptions: ThemeOptions = {
         ].join(','),
         h1: {
             fontWeight: 700,
-            fontSize: '32px', // Увеличено для округлого шрифта
+            fontSize: '32px', 
             letterSpacing: '-0.02em',
             lineHeight: 1.3,
             color: '#272B3E',
         },
         h2: {
             fontWeight: 600,
-            fontSize: '26px', // Увеличено
+            fontSize: '26px', 
             letterSpacing: '-0.01em',
             lineHeight: 1.4,
             color: '#272B3E',
         },
         h3: {
             fontWeight: 600,
-            fontSize: '20px', // Увеличено
+            fontSize: '20px', 
             letterSpacing: '0em',
             lineHeight: 1.5,
             color: '#272B3E',
         },
         h4: {
             fontWeight: 500,
-            fontSize: '18px', // Увеличено
+            fontSize: '18px', 
             letterSpacing: '0em',
             lineHeight: 1.5,
             color: '#272B3E',
         },
         h5: {
             fontWeight: 500,
-            fontSize: '16px', // Увеличено
+            fontSize: '16px', 
             letterSpacing: '0em',
             lineHeight: 1.5,
         },
         h6: {
             fontWeight: 500,
-            fontSize: '15px', // Увеличено
+            fontSize: '15px', 
             letterSpacing: '0em',
             lineHeight: 1.5,
         },
         body1: {
-            fontSize: '17px', // Увеличено для лучшей читаемости
+            fontSize: '17px', 
             fontWeight: 400,
             lineHeight: 1.6,
             letterSpacing: '0em',
         },
         body2: {
-            fontSize: '15px', // Увеличено
+            fontSize: '15px', 
             fontWeight: 400,
             lineHeight: 1.5,
             letterSpacing: '0em',
         },
         button: {
             fontWeight: 500,
-            fontSize: '16px', // Увеличено
+            fontSize: '16px', 
             letterSpacing: '0em',
             textTransform: 'none',
         },
@@ -387,7 +387,7 @@ const lightThemeOptions: ThemeOptions = {
                 },
                 bar: {
                     borderRadius: 8,
-                    background: '#6C6FF9', // Плоский цвет
+                    background: '#6C6FF9', 
                     boxShadow: 'none',
                 },
             },
@@ -787,44 +787,44 @@ const darkThemeOptions: ThemeOptions = {
     palette: {
         mode: 'dark',
         primary: {
-            main: '#6C6FF9', // Maya Blue - основной акцент в темной теме
+            main: '#6C6FF9', 
             light: '#6C6FF9',
             dark: '#6C6FF9',
             contrastText: '#FFFFFF',
         },
         secondary: {
-            main: '#6C6FF9', // Cornflower Blue
+            main: '#6C6FF9', 
             light: '#6C6FF9',
             dark: '#6C6FF9',
             contrastText: '#FFFFFF',
         },
         error: {
-            main: '#FFB3BA', // Пастельный красный
+            main: '#FFB3BA', 
             light: '#FFB3BA',
             dark: '#FFB3BA',
             contrastText: '#272B3E',
         },
         success: {
-            main: '#B5EAD7', // Пастельный зеленый
+            main: '#B5EAD7', 
             light: '#B5EAD7',
             dark: '#B5EAD7',
             contrastText: '#272B3E',
         },
         warning: {
-            main: '#FFD7BA', // Пастельный оранжевый
+            main: '#FFD7BA', 
             light: '#FFD7BA',
             dark: '#FFD7BA',
             contrastText: '#272B3E',
         },
         info: {
-            main: '#6C6FF9', // Maya Blue
+            main: '#6C6FF9', 
             light: '#6C6FF9',
             dark: '#6C6FF9',
             contrastText: '#FFFFFF',
         },
         background: {
-            default: '#272B3E', // Midnight Blue - единый темный фон
-            paper: '#272B3E', // Тот же цвет для карточек
+            default: '#272B3E', 
+            paper: '#272B3E', 
         },
         text: {
             primary: '#FFFFFF',

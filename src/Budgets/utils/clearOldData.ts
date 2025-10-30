@@ -16,8 +16,8 @@ export const clearOldGoalsData = () => {
                     const icon = goal.icon;
                     return icon && /[\u{1F300}-\u{1F9FF}]/u.test(icon);
                 });
-                
-                if (hasEmojiIcons) {
+
+                                if (hasEmojiIcons) {
                     console.log('Detected old emoji icons in goals, clearing storage for migration...');
                     localStorage.removeItem('goals-storage');
                     window.location.reload();

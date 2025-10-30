@@ -53,8 +53,8 @@ export const useCloudSync = (enabled: boolean) => {
         lastSync: null,
         error: null
     });
-    
-    const getInitialLoadKey = (userId: string) => `cloud-sync-initial-load-${userId}`;
+
+        const getInitialLoadKey = (userId: string) => `cloud-sync-initial-load-${userId}`;
     const hasInitialLoaded = (userId: string) => {
         return localStorage.getItem(getInitialLoadKey(userId)) === 'true';
     };
@@ -69,8 +69,8 @@ export const useCloudSync = (enabled: boolean) => {
     const setTransactions = useFinanceStore(state => state.setTransactions);
     const setBudgets = useFinanceStore(state => state.setBudgets);
     const setGoals = useGoalsStore(state => state.setGoals);
-    
-    const avatar = useSettingsStore(state => state.avatar);
+
+        const avatar = useSettingsStore(state => state.avatar);
     const nickname = useSettingsStore(state => state.nickname);
     const notificationTime = useSettingsStore(state => state.notificationTime);
     const dailyReminderEnabled = useSettingsStore(state => state.dailyReminderEnabled);
@@ -271,14 +271,14 @@ export const useCloudSync = (enabled: boolean) => {
             console.error('Sync to cloud error:', error);
             const errorMessage = error instanceof Error ? error.message : 'Sync failed';
             console.error('Error details:', errorMessage);
-            
-            if (error instanceof Error && error.message.includes('relation')) {
+
+                        if (error instanceof Error && error.message.includes('relation')) {
                 console.error('❌ Таблицы не созданы в Supabase! Выполните SQL миграцию из supabase_migration.sql');
             } else if (error instanceof Error && error.message.includes('policy')) {
                 console.error('❌ RLS политики блокируют доступ! Проверьте настройки безопасности в Supabase');
             }
-            
-            setStatus({
+
+                        setStatus({
                 isSyncing: false,
                 lastSync: null,
                 error: errorMessage
@@ -288,13 +288,13 @@ export const useCloudSync = (enabled: boolean) => {
     };
 
     const prevUserIdRef = useRef<string | null>(null);
-    
-    useEffect(() => {
+
+        useEffect(() => {
         if (enabled && session?.user?.id) {
             const userChanged = prevUserIdRef.current !== session.user.id;
             prevUserIdRef.current = session.user.id;
-            
-            if (userChanged || !hasInitialLoaded(session.user.id)) {
+
+                        if (userChanged || !hasInitialLoaded(session.user.id)) {
                 console.log('🔄 Loading data from cloud for user:', session.user.id);
                 syncFromCloud().then(() => {
                     markInitialLoaded(session.user.id);
@@ -312,8 +312,8 @@ export const useCloudSync = (enabled: boolean) => {
             return () => clearInterval(interval);
         }
     }, [enabled, session?.user?.id]);
-    
-    useEffect(() => {
+
+        useEffect(() => {
         if (enabled && session?.user?.id && hasInitialLoaded(session.user.id) && !isLoadingFromCloudRef.current) {
             const timeoutId = setTimeout(() => {
                 syncToCloud();

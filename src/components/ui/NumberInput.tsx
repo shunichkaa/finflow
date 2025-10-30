@@ -11,36 +11,36 @@ export const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
     ({ value, onChange, allowDecimal = true, ...props }, ref) => {
         const formatNumber = (num: string): string => {
             const cleaned = num.replace(/[^\d.,]/g, '');
-            
-            const normalized = cleaned.replace(',', '.');
-            
-            const parts = normalized.split('.');
+
+                        const normalized = cleaned.replace(',', '.');
+
+                        const parts = normalized.split('.');
             let integerPart = parts[0];
             const decimalPart = parts[1];
-            
-            integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-            
-            
-            if (allowDecimal && decimalPart !== undefined) {
+
+                        integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+
+                                    if (allowDecimal && decimalPart !== undefined) {
                 return `${integerPart}.${decimalPart}`;
             }
-            
-            return integerPart;
+
+                        return integerPart;
         };
 
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             const inputValue = e.target.value;
-            
-            const cleanValue = inputValue.replace(/\s/g, '');
-            
-            if (allowDecimal) {
+
+                        const cleanValue = inputValue.replace(/\s/g, '');
+
+                        if (allowDecimal) {
                 if (!/^[\d.,]*$/.test(cleanValue)) return;
                 if ((cleanValue.match(/[.,]/g) || []).length > 1) return;
             } else {
                 if (!/^\d*$/.test(cleanValue)) return;
             }
-            
-            onChange(cleanValue.replace(',', '.'));
+
+                        onChange(cleanValue.replace(',', '.'));
         };
 
         const displayValue = formatNumber(String(value || ''));
