@@ -135,7 +135,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             backgroundColor: mode === 'dark' ? '#FFB3BA33' : '#FFB3BA',
                                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             border: mode === 'dark' ? '1px solid #FFB3BA4D' : '1px solid #FFB3BA',
-                                            borderRadius: 3,
+                                            borderRadius: 2,
                                             fontSize: { xs: '0.7rem', sm: '0.875rem' },
                                             py: { xs: 0.5, sm: 1 },
                                             '& .MuiAlert-icon': {
@@ -163,7 +163,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                                             backgroundColor: mode === 'dark' ? '#FFD7BA33' : '#FFD7BA',
                                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             border: mode === 'dark' ? '1px solid #FFD7BA4D' : '1px solid #FFD7BA',
-                                            borderRadius: 3,
+                                            borderRadius: 2,
                                             fontSize: { xs: '0.7rem', sm: '0.875rem' },
                                             py: { xs: 0.5, sm: 1 },
                                             '& .MuiAlert-icon': {

@@ -277,15 +277,22 @@ export default function Profile() {
 
     return (
         <Container maxWidth="md" sx={{py: {xs: 2, sm: 4}, px: {xs: 1, sm: 3}}}>
-            <Typography variant="h4" gutterBottom sx={{
-                mb: {xs: 2, sm: 4},
-                fontSize: {xs: typography.fontSize['2xl'], sm: '2rem'},
-                color: mode === 'dark' ? '#FFFFFF' : colors.text.primary,
-                fontFamily: typography.fontFamily.primary,
-                fontWeight: typography.fontWeight.bold
-            }}>
-                {t('profile')}
-            </Typography>
+            <Box sx={{ mb: { xs: 2, sm: 4 } }}>
+                <Typography variant="h4" gutterBottom sx={{
+                    fontSize: {xs: typography.fontSize['2xl'], sm: '2rem'},
+                    color: mode === 'dark' ? '#FFFFFF' : colors.text.primary,
+                    fontFamily: typography.fontFamily.primary,
+                    fontWeight: typography.fontWeight.bold,
+                    mb: 1
+                }}>
+                    {t('profile')}
+                </Typography>
+                <Typography variant="body1" sx={{
+                    color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99'
+                }}>
+                    {t('profile.subtitle', 'Управление профилем и настройками')}
+                </Typography>
+            </Box>
 
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
                 <Box display="flex" alignItems="center" justifyContent="space-between" sx={{flexWrap: {xs: 'wrap', sm: 'nowrap'}, gap: {xs: 2, sm: 0}}}>

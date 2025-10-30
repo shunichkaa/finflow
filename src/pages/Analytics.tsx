@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import {Box, Card, CardContent, Container, Paper, ToggleButton, ToggleButtonGroup, Typography, Chip} from '@mui/material';
+import {Box, Card, CardContent, Container, Paper, ToggleButton, ToggleButtonGroup, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next';
 import {useSettingsStore} from "../Budgets/store/useSettingsStore";
 import {useFinanceStore} from "../Budgets/store/useFinanceStore";
@@ -97,18 +97,21 @@ const Analytics: React.FC = () => {
             <Box sx={{mb: 3, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2, flexWrap: 'wrap'}}>
                 <Box>
                     <Typography
-                        variant="h5"
+                        variant="h4"
                         fontWeight="700"
-                        sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}
+                        sx={{
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                            fontSize: { xs: '1.5rem', sm: '2rem' },
+                            mb: 0.5
+                        }}
                     >
-                        {t('welcome', 'Добро пожаловать')}{nickname ? `, ${nickname}!` : '!'}
+                        {t('analytics')}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99' }}>
+                    <Typography variant="body2" sx={{ color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99' }}>
                         {t('analytics.subtitle', 'Анализ ваших финансов и трендов')}
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                    <Chip label={t(period)} color="default" sx={{ bgcolor: mode === 'dark' ? '#FFFFFF14' : '#0000000A', color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }} />
                     <ToggleButtonGroup
                         value={period}
                         exclusive
@@ -149,7 +152,7 @@ const Analytics: React.FC = () => {
             <Box
                 sx={{
                     display: 'grid',
-                    gridTemplateColumns: {xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)'},
+                    gridTemplateColumns: {xs: 'repeat(2, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)'},
                     gap: {xs: 1.5, sm: 2, md: 3},
                     mb: 4
                 }}
