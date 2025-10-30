@@ -227,7 +227,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
         );
     }
 
-    const enabledTextColor = mode === 'dark' ? '#FFFFFF' : '#272B3E';
+    const enabledTextColor = 'rgb(39, 43, 62)';
     const disabledTextColor = mode === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(39,43,62,0.7)';
 
     return (
