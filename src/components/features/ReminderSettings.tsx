@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, Alert, Paper } from '@mui/material';
-import { Notifications, AccessTime } from '@mui/icons-material';
+import { Notifications } from '@mui/icons-material';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
  
 import { colors } from '../../styles/colors';
-import { typography } from '../../styles/typography';
 import { Toggle } from '../ui/Toggle';
 import { useTranslation } from 'react-i18next';
 import IOSTimePicker from '../ui/IOSTimePicker';
@@ -183,7 +182,9 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                 transition: 'color 0.2s ease, font-weight 0.2s ease'
                             }}
                         >
-                            {t('reminders.enable')}
+                            {settings.enabled
+                                ? t('reminders.disable', 'Выключить напоминания')
+                                : t('reminders.enable', 'Включить напоминания')}
                         </Typography>
                     </Box>
                     <Toggle
@@ -203,21 +204,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                 {settings.enabled && (
                     <>
                         <Box>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-                                <AccessTime sx={{ 
-                                    color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
-                                    fontSize: 20 
-                                }} />
-                                <Typography
-                                    sx={{
-                                        color: settings.enabled ? enabledTextColor : disabledTextColor,
-                                        fontWeight: 500,
-                                        fontSize: { xs: typography.fontSize.sm, sm: '0.95rem' }
-                                    }}
-                                >
-                                    {t('reminders.time')}
-                                </Typography>
-                            </Box>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }} />
 
                             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2 }}>
                                 <Box
