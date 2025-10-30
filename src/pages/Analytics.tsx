@@ -123,9 +123,45 @@ const Analytics: React.FC = () => {
                             border: mode === 'dark' ? '1px solid #FFFFFF1F' : '1px solid #E5E7EB',
                         }}
                     >
-                        <ToggleButton value="week" sx={{ borderRadius: 2, px: 2.5, py: 1, textTransform: 'none' }}>{t('week')}</ToggleButton>
-                        <ToggleButton value="month" sx={{ borderRadius: 2, px: 2.5, py: 1, textTransform: 'none' }}>{t('month')}</ToggleButton>
-                        <ToggleButton value="year" sx={{ borderRadius: 2, px: 2.5, py: 1, textTransform: 'none' }}>{t('year')}</ToggleButton>
+                        <ToggleButton 
+                            value="week" 
+                            sx={{ 
+                                borderRadius: 2, px: 2.5, py: 1, textTransform: 'none',
+                                '&.Mui-selected': {
+                                    backgroundColor: '#6C6FF914',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                                },
+                                '&.Mui-selected:hover': { backgroundColor: '#6C6FF926' }
+                            }}
+                        >
+                            {t('week')}
+                        </ToggleButton>
+                        <ToggleButton 
+                            value="month" 
+                            sx={{ 
+                                borderRadius: 2, px: 2.5, py: 1, textTransform: 'none',
+                                '&.Mui-selected': {
+                                    backgroundColor: '#6C6FF914',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                                },
+                                '&.Mui-selected:hover': { backgroundColor: '#6C6FF926' }
+                            }}
+                        >
+                            {t('month')}
+                        </ToggleButton>
+                        <ToggleButton 
+                            value="year" 
+                            sx={{ 
+                                borderRadius: 2, px: 2.5, py: 1, textTransform: 'none',
+                                '&.Mui-selected': {
+                                    backgroundColor: '#6C6FF914',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                                },
+                                '&.Mui-selected:hover': { backgroundColor: '#6C6FF926' }
+                            }}
+                        >
+                            {t('year')}
+                        </ToggleButton>
                     </ToggleButtonGroup>
                 </Box>
             </Box>
