@@ -113,18 +113,15 @@ const Dashboard = () => {
                 >
                     <Box sx={{
                         display: 'flex',
-                        justifyContent: 'space-between',
                         alignItems: 'center',
                         gap: 2,
-                        mb: 3,
-                        flexDirection: { xs: 'column', sm: 'row' },
-                        alignSelf: 'stretch'
+                        mb: 3
                     }}>
                         <Typography variant="h6" sx={{
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             fontWeight: 600,
                             letterSpacing: '-0.01em',
-                            alignSelf: { xs: 'flex-start', sm: 'auto' }
+                            flexGrow: 1
                         }}>
                             {t('transactions')} ({filteredTransactions.length})
                         </Typography>
@@ -137,8 +134,8 @@ const Dashboard = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                width: { xs: 44, sm: 36 },
-                                height: { xs: 44, sm: 36 },
+                                width: { xs: 36, sm: 36 },
+                                height: { xs: 36, sm: 36 },
                                 borderRadius: '50%',
                                 background: '#6C6FF9',
                                 color: '#FFFFFF',
@@ -155,7 +152,7 @@ const Dashboard = () => {
                                 }
                             }}
                         >
-                            <AddIcon sx={{fontSize: { xs: 22, sm: 20 }}}/>
+                            <AddIcon sx={{fontSize: 20}}/>
                         </Box>
                     </Box>
                     <TransactionList transactions={filteredTransactions}/>
