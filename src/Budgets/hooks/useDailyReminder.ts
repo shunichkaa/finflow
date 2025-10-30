@@ -38,10 +38,10 @@ export const useDailyReminder = () => {
 
                     console.log('[DailyReminder] Sending web notification');
                     sendNotification(`FinFlow - ${notificationTitle}`, notificationMessage, {
-                        tag: 'daily-reminder',
-                        requireInteraction: false,
-                        silent: false,
-                    });
+                                tag: 'daily-reminder',
+                                requireInteraction: false,
+                                silent: false,
+                            });
 
                     localStorage.setItem('lastReminderDate', today);
                 }

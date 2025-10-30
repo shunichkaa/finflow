@@ -89,7 +89,7 @@ async function handleStaticRequest(request) {
 	const cache = await caches.open(CACHE_NAME);
 	const cachedResponse = await cache.match(request);
 
-    if (cachedResponse) {
+	if (cachedResponse) {
 		fetch(request).then(response => {
 			if (response.ok) {
 				cache.put(request, response);

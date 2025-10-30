@@ -178,10 +178,10 @@ export default function Profile() {
         setEditModalOpen(false);
         // Defer heavier state resets to after the close to avoid UI jank
         setTimeout(() => {
-            setNewEmail('');
-            setCurrentPassword('');
-            setNewPassword('');
-            setConfirmPassword('');
+        setNewEmail('');
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
         }, 150);
     };
 
@@ -278,15 +278,15 @@ export default function Profile() {
     return (
         <Container maxWidth="md" sx={{py: {xs: 2, sm: 4}, px: {xs: 1, sm: 3}}}>
             <Box sx={{ mb: { xs: 2, sm: 4 } }}>
-                <Typography variant="h4" gutterBottom sx={{
-                    fontSize: {xs: typography.fontSize['2xl'], sm: '2rem'},
-                    color: mode === 'dark' ? '#FFFFFF' : colors.text.primary,
-                    fontFamily: typography.fontFamily.primary,
+            <Typography variant="h4" gutterBottom sx={{
+                fontSize: {xs: typography.fontSize['2xl'], sm: '2rem'},
+                color: mode === 'dark' ? '#FFFFFF' : colors.text.primary,
+                fontFamily: typography.fontFamily.primary,
                     fontWeight: typography.fontWeight.bold,
                     mb: 1
-                }}>
-                    {t('profile')}
-                </Typography>
+            }}>
+                {t('profile')}
+            </Typography>
                 <Typography variant="body1" sx={{
                     color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99'
                 }}>
@@ -361,13 +361,23 @@ export default function Profile() {
                 </Typography>
 
                 <List>
-                    <ListItem sx={{py: 1.5}}>
+                    <ListItem sx={{ py: 1.5, alignItems: 'flex-start' }}>
                         <ListItemIcon>
                             <CloudSync sx={{color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99', fontSize: {xs: 20, sm: 24}}}/>
                         </ListItemIcon>
                         <ListItemText
                             primary={t('sync.status')}
                             secondary={getSyncStatusText()}
+                            sx={{
+                                pr: { xs: 1, sm: 2 },
+                                mr: { xs: 1, sm: 2 },
+                                '& .MuiListItemText-primary': {
+                                    whiteSpace: 'nowrap',
+                                },
+                                '& .MuiListItemText-secondary': {
+                                    whiteSpace: 'normal',
+                                }
+                            }}
                         />
                         <Button
                             variant="contained"
@@ -384,6 +394,7 @@ export default function Profile() {
                                 fontSize: {xs: '0.75rem', sm: '0.875rem'},
                                 minWidth: {xs: 'auto', sm: 120},
                                 ml: {xs: 1, sm: 2},
+                                alignSelf: 'flex-start',
                                 '&:hover': {
                                     background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
                                     transform: 'translateY(-1px)',
