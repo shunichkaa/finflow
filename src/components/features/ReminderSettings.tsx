@@ -241,6 +241,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                         : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)'),
                 border: mode === 'dark' ? '1px solid rgba(108, 111, 249, 0.25)' : '1px solid rgba(108, 111, 249, 0.2)',
                 transition: 'box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease',
+                color: settings.enabled ? enabledTextColor : disabledTextColor,
                 '&:hover': {
                     transform: 'translateY(-1px)',
                     boxShadow: mode === 'dark'
