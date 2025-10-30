@@ -4,7 +4,8 @@ import {
     Typography,
     Switch,
     Button,
-    Alert
+    Alert,
+    Paper
 } from '@mui/material';
 import {
     Notifications,
@@ -215,18 +216,11 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
 
     if (!supportsNotifications) {
         return (
-            <GlassCard
-                sx={{
-                    p: 3,
-                    background: mode === 'dark'
-                        ? 'linear-gradient(135deg, #6C6FF933 0%, #6C6FF959 100%)'
-                        : 'linear-gradient(135deg, #EFF0F6CC 0%, #EFF0F6E6 100%)',
-                }}
-            >
+            <Paper sx={{ p: 3, borderRadius: 3, bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF', border: mode === 'dark' ? '1px solid rgba(255,255,255,0.1)' : '1px solid #E5E7EB' }}>
                 <Alert severity="info" sx={{ mb: 2 }}>
                     {t('reminders.browserNotSupported')}
                 </Alert>
-            </GlassCard>
+            </Paper>
         );
     }
 
@@ -234,23 +228,14 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
     const disabledTextColor = mode === 'dark' ? '#FFFFFFB3' : '#272B3EB3';
 
     return (
-        <GlassCard
+        <Paper
+            elevation={0}
             sx={{
                 p: { xs: 2, sm: 3 },
-                background: settings.enabled
-                    ? (mode === 'dark' ? '#0F0F23F2' : '#FFFFFF')
-                    : (mode === 'dark'
-                        ? 'linear-gradient(135deg, #6C6FF933 0%, #6C6FF959 100%)'
-                        : 'linear-gradient(135deg, #EFF0F6CC 0%, #EFF0F6E6 100%)'),
-                border: mode === 'dark' ? '1px solid #6C6FF940' : '1px solid #6C6FF933',
-                transition: 'box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease',
+                borderRadius: 3,
+                bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
+                border: mode === 'dark' ? '1px solid rgba(255,255,255,0.1)' : '1px solid #E5E7EB',
                 color: settings.enabled ? enabledTextColor : disabledTextColor,
-                '&:hover': {
-                    transform: 'translateY(-1px)',
-                    boxShadow: mode === 'dark'
-                        ? '0 10px 24px #6C6FF940'
-                        : '0 10px 24px #6C6FF940'
-                }
             }}
         >
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1.5, mb: 1.5 }}>
@@ -412,7 +397,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                     </>
                 )}
             </Box>
-        </GlassCard>
+        </Paper>
     );
 };
 
