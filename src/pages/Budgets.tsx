@@ -83,7 +83,10 @@ const Budgets: React.FC = () => {
                 </Button>
             </Box>
 
-            <BudgetList />
+            <BudgetList onEdit={(id) => {
+                setEditingBudgetId(id);
+                setIsModalOpen(true);
+            }} />
 
             <Modal open={isModalOpen} onClose={() => {
                 setIsModalOpen(false);

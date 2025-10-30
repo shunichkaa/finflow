@@ -16,7 +16,7 @@ interface BudgetListProps {
     onEdit?: (id: string) => void;
 }
 
-export const BudgetList: React.FC<BudgetListProps> = ({onEdit: _onEdit}) => {
+export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
     const {t} = useTranslation();
     const {mode} = useThemeMode();
     const budgets = useFinanceStore((state) => state.budgets);
@@ -98,13 +98,18 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit: _onEdit}) => {
                                   position: 'relative',
                                   overflow: 'hidden',
                                   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                  cursor: onEdit ? 'pointer' : 'default',
                                   '&:hover': {
                                       transform: 'translateY(-2px)',
                                       boxShadow: mode === 'dark'
                                           ? '0 16px 48px #00000066, 0 8px 20px #0000004D, inset 0 1px 0 #FFFFFF14'
                                           : '0 16px 48px #1F268733, 0 8px 20px #00000026, inset 0 1px 0 #FFFFFFB3',
                                   },
-                              }}>
+                              }}
+                              onClick={() => onEdit && onEdit(budget.id)}
+                              role={onEdit ? 'button' : undefined}
+                              aria-label={onEdit ? t('editBudget') : undefined}
+                        >
                             <Box sx={{ p: { xs: 2, sm: 3 }, display: 'flex', flexDirection: 'column', height: '100%' }}>
                                 <Typography 
                                     variant="h6" 
