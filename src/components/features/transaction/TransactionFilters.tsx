@@ -61,102 +61,97 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
         }}>
             <Box sx={{ 
                 display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center', 
-                gap: 2, 
                 flexDirection: { xs: 'column', sm: 'row' },
+                gap: 1.5,
                 width: '100%'
             }}>
-                <Box 
-                    onClick={onReset}
-                    sx={{ 
-                        display: { xs: 'none', sm: 'flex' }, 
-                        alignItems: 'center', 
-                        cursor: 'pointer',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        '&:hover': {
-                            transform: 'scale(1.1)',
-                        }
-                    }}
-                >
-                    <FilterListIcon sx={{ 
-                        color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                        fontSize: 24
-                    }} />
+                {/* Row 1: Category (xs), full row; on desktop shows with the rest */}
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                    <Box 
+                        onClick={onReset}
+                        sx={{ 
+                            display: { xs: 'none', sm: 'flex' }, 
+                            alignItems: 'center', 
+                            cursor: 'pointer',
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            '&:hover': { transform: 'scale(1.1)' }
+                        }}
+                    >
+                        <FilterListIcon sx={{ color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9', fontSize: 24 }} />
+                    </Box>
+
+                    <TextField
+                        select
+                        size="small"
+                        label={t('category')}
+                        value={category}
+                        onChange={(e) => onCategoryChange(e.target.value)}
+                        SelectProps={{
+                            MenuProps: { PaperProps: { style: { maxHeight: 300 } } },
+                        }}
+                        sx={{
+                            minWidth: { xs: '100%', sm: 180 },
+                            maxWidth: { xs: '100%', sm: 280 },
+                            '& .MuiOutlinedInput-root': {
+                                backgroundColor: mode === 'dark' ? '#FFFFFF0D' : '#FFFFFF',
+                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E',
+                                '&.Mui-focused': { color: '#6C6FF9' },
+                            }
+                        }}
+                    >
+                        <MenuItem value="">{t('allCategories')}</MenuItem>
+                        {type === 'all' ? null : (
+                            filteredCategories.map((cat) => (
+                                <MenuItem key={cat.id} value={cat.id}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                        {getCategoryIcon(cat.icon, 16)}
+                                        <span>{getCategoryName(cat.id, t)}</span>
+                                    </Box>
+                                </MenuItem>
+                            ))
+                        )}
+                    </TextField>
                 </Box>
 
-                                <TextField
-                    select
-                    size="small"
-                    label={t('category')}
-                    value={category}
-                    onChange={(e) => onCategoryChange(e.target.value)}
-                    SelectProps={{
-                        MenuProps: {
-                            PaperProps: {
-                                style: {
-                                    maxHeight: 300,
-                                },
-                            },
-                        },
-                    }}
-                    sx={{
-                        minWidth: { xs: '100%', sm: 180 },
-                        flex: { sm: '1 1 auto' },
-                        maxWidth: { sm: 280 },
-                        '& .MuiOutlinedInput-root': {
-                            backgroundColor: mode === 'dark' ? '#FFFFFF0D' : '#FFFFFF',
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                        },
-                        '& .MuiInputLabel-root': {
-                            color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E',
-                            '&.Mui-focused': {
-                                color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                            },
-                        }
-                    }}
-                >
-                    <MenuItem value="">{t('allCategories')}</MenuItem>
-                    {type === 'all' ? null : (
-                        filteredCategories.map((cat) => (
-                            <MenuItem key={cat.id} value={cat.id}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                    {getCategoryIcon(cat.icon, 16)}
-                                    <span>{getCategoryName(cat.id, t)}</span>
-                                </Box>
-                            </MenuItem>
-                        ))
-                    )}
-                </TextField>
+                {/* Row 2 (xs): Dates + clear in one line; on sm+ appears inline with category */}
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1.5,
+                    flexWrap: { xs: 'nowrap', sm: 'wrap' },
+                    overflowX: { xs: 'auto', sm: 'visible' },
+                    width: '100%'
+                }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                        <DatePickerField
+                            label={t('from')}
+                            value={dateFrom}
+                            onChange={onDateFromChange}
+                        />
 
-                                <DatePickerField
-                    label={t('from')}
-                    value={dateFrom}
-                    onChange={onDateFromChange}
-                />
+                        <DatePickerField
+                            label={t('to')}
+                            value={dateTo}
+                            onChange={onDateToChange}
+                        />
+                    </Box>
 
-                                <DatePickerField
-                    label={t('to')}
-                    value={dateTo}
-                    onChange={onDateToChange}
-                />
-
-                                <Box
-                    onClick={onReset}
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        '&:hover': {
-                            transform: 'scale(1.1)',
-                        }
-                    }}
-                >
-                    <ClearIcon sx={{ 
-                        color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                        fontSize: 24
-                    }} />
+                    <Box
+                        onClick={onReset}
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            '&:hover': { transform: 'scale(1.1)' },
+                            ml: 'auto'
+                        }}
+                    >
+                        <ClearIcon sx={{ color: '#6C6FF9', fontSize: 24 }} />
+                    </Box>
                 </Box>
             </Box>
         </Paper>
