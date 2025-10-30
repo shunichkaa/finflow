@@ -86,10 +86,10 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, ini
     };
 
     return (
-        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={3}>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ p: { xs: 1, sm: 0 } }}>
+            <Stack spacing={{ xs: 2, sm: 3 }}>
                 <Box>
-                    <Typography variant="subtitle2" gutterBottom>
+                    <Typography variant="subtitle2" gutterBottom sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}>
                         {t('type')}
                     </Typography>
                     <ToggleButtonGroup
@@ -98,6 +98,12 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, ini
                         onChange={(_, newType) => newType && setType(newType)}
                         fullWidth
                         color={type === 'income' ? 'success' : 'error'}
+                        sx={{
+                            '& .MuiToggleButton-root': {
+                                py: { xs: 1.25, sm: 1 },
+                                fontSize: { xs: '0.95rem', sm: '0.875rem' },
+                            }
+                        }}
                     >
                         <ToggleButton value="expense">{t('expense')}</ToggleButton>
                         <ToggleButton value="income">{t('income')}</ToggleButton>
@@ -122,6 +128,11 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, ini
                             fullWidth
                             required
                             allowDecimal={true}
+                            sx={{
+                                '& .MuiInputBase-root': {
+                                    minHeight: { xs: 48, sm: 44 }
+                                }
+                            }}
                         />
                     )}
                 />
@@ -139,6 +150,11 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, ini
                         helperText={errors.category?.message}
                         fullWidth
                         required
+                        sx={{
+                            '& .MuiInputBase-root': {
+                                minHeight: { xs: 48, sm: 44 }
+                            }
+                        }}
                         SelectProps={{
                             MenuProps: {
                                 PaperProps: {
@@ -172,6 +188,11 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, ini
                             multiline
                             rows={2}
                             fullWidth
+                            sx={{
+                                '& .MuiInputBase-root': {
+                                    minHeight: { xs: 48, sm: 44 }
+                                }
+                            }}
                         />
                     )}
                 />
@@ -195,6 +216,7 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess, ini
                     size="large"
                     color={type === 'income' ? 'success' : 'error'}
                     fullWidth
+                    sx={{ minHeight: { xs: 48, sm: 44 }, fontSize: { xs: '1rem', sm: '0.95rem' } }}
                 >
                     {initialTransaction ? t('save') : t('addTransaction')}
                 </Button>
