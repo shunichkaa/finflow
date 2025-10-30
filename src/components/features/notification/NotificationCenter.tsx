@@ -159,8 +159,8 @@ export const NotificationCenter: React.FC = () => {
                 slotProps={{
                     paper: {
                         sx: {
-                            width: { xs: '92vw', sm: 380 },
-                            maxHeight: 480,
+                            width: { xs: '94vw', sm: 420 },
+                            maxHeight: 520,
                             backgroundColor: mode === 'dark' ? '#1E2235' : '#FFFFFF',
                             border: mode === 'dark'
                                 ? '1px solid #FFFFFF1F'
@@ -274,7 +274,7 @@ export const NotificationCenter: React.FC = () => {
                         </Typography>
                     </Box>
                 ) : (
-                    <Box sx={{ maxHeight: 360, overflowY: 'auto', overflowX: 'hidden' }}>
+                    <Box sx={{ maxHeight: 420, overflowY: 'auto', overflowX: 'hidden', px: 0.5 }}>
                         {notifications.slice(0, 10).map((notification) => (
                             <MenuItem
                                 key={notification.id}
@@ -285,11 +285,9 @@ export const NotificationCenter: React.FC = () => {
                                     backgroundColor: getNotificationBackground(notification.read, notification.severity),
                                     borderLeft: !notification.read ? `3px solid ${getSeverityColor(notification.severity)}` : 'none',
                                     transition: 'all 0.2s ease',
+                                    alignItems: 'flex-start',
                                     '&:hover': {
-                                        backgroundColor: mode === 'dark'
-                                            ? '#FFFFFF14'
-                                            : '#6C6FF914',
-                                        transform: 'translateX(4px)',
+                                        backgroundColor: mode === 'dark' ? '#FFFFFF14' : '#6C6FF914',
                                     },
                                     '&:not(:last-child)': {
                                         borderBottom: mode === 'dark'
@@ -318,7 +316,9 @@ export const NotificationCenter: React.FC = () => {
                                                     mb: 0.5,
                                                     fontSize: '0.9rem',
                                                     lineHeight: 1.3,
-                                                    wordBreak: 'break-word'
+                                                    wordBreak: 'break-word',
+                                                    whiteSpace: 'normal',
+                                                    overflowWrap: 'anywhere'
                                                 }}
                                             >
                                                 {notification.title}
@@ -330,7 +330,9 @@ export const NotificationCenter: React.FC = () => {
                                                     mb: 1,
                                                     lineHeight: 1.4,
                                                     fontSize: '0.85rem',
-                                                    wordBreak: 'break-word'
+                                                    wordBreak: 'break-word',
+                                                    whiteSpace: 'normal',
+                                                    overflowWrap: 'anywhere'
                                                 }}
                                             >
                                                 {notification.message}
