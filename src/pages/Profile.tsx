@@ -591,6 +591,9 @@ export default function Profile() {
                 open={editModalOpen}
                 onClose={handleCloseEditModal}
                 aria-labelledby="edit-profile-modal"
+                disablePortal
+                container={typeof window !== 'undefined' ? () => document.getElementById('root') as Element : undefined}
+                keepMounted
             >
                 <Box
                     sx={{
