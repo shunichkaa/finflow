@@ -68,6 +68,7 @@ const Dashboard = () => {
                         variant="body1"
                         sx={{
                             color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99',
+                            mb: 2
                         }}
                     >
                         {t('dashboard.subtitle')}

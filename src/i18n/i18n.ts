@@ -41,6 +41,13 @@ const resources = {
             logout: 'Выйти',
             optional: 'необязательно',
             create: 'Создать',
+            email: 'Email',
+            currentPassword: 'Current password',
+            newPassword: 'New password',
+            confirmPassword: 'Confirm password',
+            currentPassword: 'Текущий пароль',
+            newPassword: 'Новый пароль',
+            confirmPassword: 'Подтверждение пароля',
 
             balance: 'Баланс',
             income: 'Доходы',

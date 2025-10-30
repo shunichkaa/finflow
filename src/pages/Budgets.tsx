@@ -31,7 +31,7 @@ const Budgets: React.FC = () => {
                 }),
             }}
         >
-            <Box sx={{mb: 4}}>
+            <Box sx={{mb: 4, overflow: 'visible'}}>
                 <Typography
                     variant="h4"
                     gutterBottom
