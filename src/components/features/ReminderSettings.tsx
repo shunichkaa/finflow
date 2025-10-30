@@ -227,10 +227,11 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                         <Typography
                             sx={{
                                 color: settings.enabled
-                                    ? (mode === 'dark' ? '#FFFFFF' : '#272B3E')
+                                    ? (mode === 'dark' ? '#FFFFFF' : '#111111')
                                     : (mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(39, 43, 62, 0.6)'),
-                                fontWeight: 500,
-                                fontSize: { xs: '0.875rem', sm: '1rem' }
+                                fontWeight: settings.enabled ? 700 : 500,
+                                fontSize: { xs: '0.9rem', sm: '1.05rem' },
+                                transition: 'color 0.2s ease, font-weight 0.2s ease'
                             }}
                         >
                             {t('reminders.enable')}
