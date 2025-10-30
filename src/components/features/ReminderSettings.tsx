@@ -165,9 +165,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                     justifyContent: 'space-between',
                     p: 2,
                     borderRadius: 2,
-                    backgroundColor: settings.enabled
-                        ? (mode === 'dark' ? '#FFFFFF0A' : '#FFFFFF')
-                        : (mode === 'dark' ? '#6C6FF91A' : '#6C6FF90D'),
+                    backgroundColor: 'transparent',
                 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                         <Notifications sx={{ 
@@ -177,8 +175,8 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                         <Typography
                             sx={{
                                 color: settings.enabled ? enabledTextColor : disabledTextColor,
-                                fontWeight: settings.enabled ? 700 : 500,
-                                fontSize: { xs: '0.9rem', sm: '1.05rem' },
+                                fontWeight: 500,
+                                fontSize: { xs: '0.95rem', sm: '1rem' },
                                 transition: 'color 0.2s ease, font-weight 0.2s ease'
                             }}
                         >
@@ -227,7 +225,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                             py: 1.25,
                                             px: 2,
                                             textAlign: 'center',
-                        	                transition: 'all 0.2s ease',
+                                            transition: 'all 0.2s ease',
                                             '&:hover': {
                                                 backgroundColor: settings.enabled
                                                     ? (mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6')
