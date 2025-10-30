@@ -226,7 +226,9 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                         <Typography
                             sx={{
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                color: settings.enabled
+                                    ? (mode === 'dark' ? '#FFFFFF' : '#272B3E')
+                                    : (mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(39, 43, 62, 0.6)'),
                                 fontWeight: 500,
                                 fontSize: { xs: '0.875rem', sm: '1rem' }
                             }}
