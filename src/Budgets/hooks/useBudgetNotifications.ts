@@ -5,17 +5,18 @@ import { useNotificationStore } from '../store/useNotificationStore';
 import { calculateBudgetSpent, getBudgetPercentage } from '../utils/budgetCalculations';
 import { getCategoryName } from '../utils/categories';
 import { useTranslation } from 'react-i18next';
+import { sendNotification } from '../utils/webNotifications';
 
 export const useBudgetNotifications = () => {
     const { t } = useTranslation();
     const budgets = useFinanceStore(state => state.budgets);
     const transactions = useFinanceStore(state => state.transactions);
-    const { notificationsEnabled } = useSettingsStore();
+    const { notificationsEnabled, budgetAlertsEnabled, budgetWarningThreshold } = useSettingsStore();
     const addNotification = useNotificationStore(state => state.addNotification);
     const lastNotifiedRef = useRef<Record<string, string>>({});
 
     useEffect(() => {
-        if (!notificationsEnabled || budgets.length === 0) return;
+        if (!notificationsEnabled || !budgetAlertsEnabled || budgets.length === 0) return;
 
         const nowKey = () => {
             const now = new Date();
@@ -38,14 +39,18 @@ export const useBudgetNotifications = () => {
                         title: 'Бюджет превышен',
                         message: `Вы превысили бюджет по категории "${categoryLabel}". Потрачено ${spent.toFixed(2)} / лимит ${b.limit.toFixed(2)}.`
                     });
+                    console.log('[BudgetNotifications] Exceeded:', categoryLabel, spent, b.limit);
+                    sendNotification('⚠️ Превышен бюджет!', `Категория "${categoryLabel}": потрачено ${spent.toFixed(2)} из ${b.limit.toFixed(2)}`, { tag: `budget-${b.id}-exceeded` });
                     lastNotifiedRef.current[notifyKeyExceeded] = keyScope;
-                } else if (pct >= 80 && lastNotifiedRef.current[notifyKeyWarning] !== keyScope) {
+                } else if (pct >= (budgetWarningThreshold || 80) && pct < 100 && lastNotifiedRef.current[notifyKeyWarning] !== keyScope) {
                     addNotification({
                         type: 'budget',
                         severity: 'warning',
                         title: 'Близко к лимиту бюджета',
                         message: `Вы израсходовали ${pct.toFixed(0)}% бюджета по категории "${categoryLabel}".`
                     });
+                    console.log('[BudgetNotifications] Warning:', categoryLabel, pct);
+                    sendNotification('⚡ Внимание!', `Вы потратили ${pct.toFixed(0)}% бюджета категории "${categoryLabel}"`, { tag: `budget-${b.id}-warning` });
                     lastNotifiedRef.current[notifyKeyWarning] = keyScope;
                 }
             });
@@ -54,7 +59,7 @@ export const useBudgetNotifications = () => {
         const interval = setInterval(checkBudgets, 60_000);
         checkBudgets();
         return () => clearInterval(interval);
-    }, [notificationsEnabled, budgets, transactions, addNotification]);
+    }, [notificationsEnabled, budgetAlertsEnabled, budgetWarningThreshold, budgets, transactions, addNotification]);
 };
 
 

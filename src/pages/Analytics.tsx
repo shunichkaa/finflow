@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import {Box, Card, CardContent, Container, Paper, ToggleButton, ToggleButtonGroup, Typography} from '@mui/material';
+import {Box, Card, CardContent, Container, Paper, ToggleButton, ToggleButtonGroup, Typography, Chip} from '@mui/material';
 import {useTranslation} from 'react-i18next';
 import {useSettingsStore} from "../Budgets/store/useSettingsStore";
 import {useFinanceStore} from "../Budgets/store/useFinanceStore";
@@ -18,7 +18,7 @@ const Analytics: React.FC = () => {
     const {mode} = useThemeMode();
     const [period, setPeriod] = useState<Period>('month');
     const transactions = useFinanceStore(state => state.transactions);
-    const {currency} = useSettingsStore();
+    const {currency, nickname} = useSettingsStore();
 
     const filteredTransactions = useMemo(() => {
         const now = new Date();
@@ -63,11 +63,12 @@ const Analytics: React.FC = () => {
         return {income, expenses, balance, savingsRate};
     }, [filteredTransactions]);
 
-    const getCardBackground = () => {
-        return mode === 'dark'
-            ? 'linear-gradient(135deg, #6C6FF933 0%, #6C6FF959 100%)'
-            : 'linear-gradient(135deg, #EFF0F6CC 0%, #EFF0F6E6 100%)';
-    };
+    const cardBackgrounds = [
+        mode === 'dark' ? '#BBF7D033' : '#DBFBE6', // greenish
+        mode === 'dark' ? '#FDE68A33' : '#FFF6CC', // yellow
+        mode === 'dark' ? '#FCA5A533' : '#FFE1E1', // red
+        mode === 'dark' ? '#C7D2FE33' : '#EAEFFF', // purple/blue
+    ];
 
     const getPaperBackground = () => {
         return mode === 'dark'
@@ -93,32 +94,37 @@ const Analytics: React.FC = () => {
                 }),
             }}
         >
-            <Box sx={{mb: 4}}>
-                <Typography
-                    variant="h4"
-                    gutterBottom
-                    fontWeight="700"
-                    sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                        mb: 1
-                    }}
-                >
-                    {t('analytics')}
-                </Typography>
-                <Typography
-                    variant="body1"
-                    sx={{
-                        color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99',
-                    }}
-                >
-                    {t('analytics.subtitle', 'Анализ ваших финансов и трендов')}
-                </Typography>
-                <Typography variant="body1" sx={{
-                    textAlign: 'left',
-                    color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99',
-                }}>
-                    {t('analyticsDescription')}
-                </Typography>
+            <Box sx={{mb: 3, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2, flexWrap: 'wrap'}}>
+                <Box>
+                    <Typography
+                        variant="h5"
+                        fontWeight="700"
+                        sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}
+                    >
+                        {t('welcome', 'Добро пожаловать')}{nickname ? `, ${nickname}!` : '!'}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99' }}>
+                        {t('analytics.subtitle', 'Анализ ваших финансов и трендов')}
+                    </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                    <Chip label={t(period)} color="default" sx={{ bgcolor: mode === 'dark' ? '#FFFFFF14' : '#0000000A', color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }} />
+                    <ToggleButtonGroup
+                        value={period}
+                        exclusive
+                        onChange={(_, value) => value && setPeriod(value)}
+                        sx={{
+                            bgcolor: mode === 'dark' ? '#FFFFFF0D' : '#FFFFFF',
+                            borderRadius: 3,
+                            p: 0.5,
+                            border: mode === 'dark' ? '1px solid #FFFFFF1F' : '1px solid #E5E7EB',
+                        }}
+                    >
+                        <ToggleButton value="week" sx={{ borderRadius: 2, px: 2.5, py: 1, textTransform: 'none' }}>{t('week')}</ToggleButton>
+                        <ToggleButton value="month" sx={{ borderRadius: 2, px: 2.5, py: 1, textTransform: 'none' }}>{t('month')}</ToggleButton>
+                        <ToggleButton value="year" sx={{ borderRadius: 2, px: 2.5, py: 1, textTransform: 'none' }}>{t('year')}</ToggleButton>
+                    </ToggleButtonGroup>
+                </Box>
             </Box>
 
             {filteredTransactions.length === 0 && transactions.length > 0 && (
@@ -138,103 +144,7 @@ const Analytics: React.FC = () => {
                 </Box>
             )}
 
-            <Box sx={{mb: 4, display: 'flex', justifyContent: 'flex-start'}}>
-                <ToggleButtonGroup
-                    value={period}
-                    exclusive
-                    onChange={(_, value) => value && setPeriod(value)}
-                    sx={{
-                        bgcolor: mode === 'dark' ? '#6C6FF933' : '#FFFFFFCC',
-                        borderRadius: 3,
-                        p: 0.5,
-                        boxShadow: mode === 'dark'
-                            ? '0 4px 12px #6C6FF94D'
-                            : '0 4px 12px #6C6FF933',
-                        border: mode === 'dark'
-                            ? '1px solid #6C6FF966'
-                            : '1px solid #6C6FF94D',
-                    }}
-                >
-                    <ToggleButton
-                        value="week"
-                        sx={{
-                            borderRadius: 2,
-                            px: 3,
-                            py: 1.5,
-                            minWidth: '100px',
-                            fontWeight: 'bold',
-                            textTransform: 'none',
-                            textAlign: 'center',
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                            '&.Mui-selected': {
-                                bgcolor: mode === 'dark'
-                                    ? '#6C6FF980'
-                                    : '#6C6FF94D',
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                '&:hover': {
-                                    bgcolor: mode === 'dark'
-                                        ? '#6C6FF999'
-                                        : '#6C6FF966',
-                                }
-                            }
-                        }}
-                    >
-                        {t('week')}
-                    </ToggleButton>
-                    <ToggleButton
-                        value="month"
-                        sx={{
-                            borderRadius: 2,
-                            px: 3,
-                            py: 1.5,
-                            minWidth: '100px',
-                            fontWeight: 'bold',
-                            textTransform: 'none',
-                            textAlign: 'center',
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                            '&.Mui-selected': {
-                                bgcolor: mode === 'dark'
-                                    ? '#6C6FF980'
-                                    : '#6C6FF94D',
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                '&:hover': {
-                                    bgcolor: mode === 'dark'
-                                        ? '#6C6FF999'
-                                        : '#6C6FF966',
-                                }
-                            }
-                        }}
-                    >
-                        {t('month')}
-                    </ToggleButton>
-                    <ToggleButton
-                        value="year"
-                        sx={{
-                            borderRadius: 2,
-                            px: 3,
-                            py: 1.5,
-                            minWidth: '100px',
-                            fontWeight: 'bold',
-                            textTransform: 'none',
-                            textAlign: 'center',
-                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                            '&.Mui-selected': {
-                                bgcolor: mode === 'dark'
-                                    ? '#6C6FF980'
-                                    : '#6C6FF94D',
-                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                '&:hover': {
-                                    bgcolor: mode === 'dark'
-                                        ? '#6C6FF999'
-                                        : '#6C6FF966',
-                                }
-                            }
-                        }}
-                    >
-                        {t('year')}
-                    </ToggleButton>
-                </ToggleButtonGroup>
-            </Box>
+            
 
             <Box
                 sx={{
@@ -248,7 +158,7 @@ const Analytics: React.FC = () => {
                     elevation={3}
                     sx={{
                         borderRadius: 3,
-                        background: getCardBackground(),
+                        background: cardBackgrounds[0],
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
@@ -280,7 +190,7 @@ const Analytics: React.FC = () => {
                     elevation={3}
                     sx={{
                         borderRadius: 3,
-                        background: getCardBackground(),
+                        background: cardBackgrounds[1],
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
@@ -312,7 +222,7 @@ const Analytics: React.FC = () => {
                     elevation={3}
                     sx={{
                         borderRadius: 3,
-                        background: getCardBackground(),
+                        background: cardBackgrounds[2],
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
@@ -344,7 +254,7 @@ const Analytics: React.FC = () => {
                     elevation={3}
                     sx={{
                         borderRadius: 3,
-                        background: getCardBackground(),
+                        background: cardBackgrounds[3],
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'

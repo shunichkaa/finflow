@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNotificationStore } from '../store/useNotificationStore';
-import {notificationService} from "../utils/notificationService.ts";
+import { notificationService } from '../utils/notificationService';
 
 
 export function useNotifications() {

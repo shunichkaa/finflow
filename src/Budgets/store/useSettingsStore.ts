@@ -12,6 +12,9 @@ interface SettingsStore {
     notificationsEnabled: boolean;
     notificationTime: string;
     dailyReminderEnabled: boolean;
+    budgetAlertsEnabled: boolean;
+    budgetWarningThreshold: number; // percent
+    monthEndReportEnabled: boolean;
     setLanguage: (language: Language) => void;
     setCurrency: (currency: Currency) => void;
     setAvatar: (avatar: string | null) => void;
@@ -19,6 +22,9 @@ interface SettingsStore {
     setNotificationsEnabled: (enabled: boolean) => void;
     setNotificationTime: (time: string) => void;
     setDailyReminderEnabled: (enabled: boolean) => void;
+    setBudgetAlertsEnabled: (enabled: boolean) => void;
+    setBudgetWarningThreshold: (threshold: number) => void;
+    setMonthEndReportEnabled: (enabled: boolean) => void;
 }
 
 export const useSettingsStore = create<SettingsStore>()(
@@ -31,6 +37,9 @@ export const useSettingsStore = create<SettingsStore>()(
             notificationsEnabled: true,
             notificationTime: '20:00',
             dailyReminderEnabled: true,
+            budgetAlertsEnabled: true,
+            budgetWarningThreshold: 80,
+            monthEndReportEnabled: true,
 
             setLanguage: (language) => set({ language }),
             setCurrency: (currency) => set({ currency }),
@@ -39,6 +48,9 @@ export const useSettingsStore = create<SettingsStore>()(
             setNotificationsEnabled: (enabled) => set({ notificationsEnabled: enabled }),
             setNotificationTime: (time) => set({ notificationTime: time }),
             setDailyReminderEnabled: (enabled) => set({ dailyReminderEnabled: enabled }),
+            setBudgetAlertsEnabled: (enabled) => set({ budgetAlertsEnabled: enabled }),
+            setBudgetWarningThreshold: (threshold) => set({ budgetWarningThreshold: threshold }),
+            setMonthEndReportEnabled: (enabled) => set({ monthEndReportEnabled: enabled }),
         }),
         {
             name: 'finflow-settings',

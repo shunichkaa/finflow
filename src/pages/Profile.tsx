@@ -179,10 +179,13 @@ export default function Profile() {
 
     const handleCloseEditModal = () => {
         setEditModalOpen(false);
-        setNewEmail('');
-        setCurrentPassword('');
-        setNewPassword('');
-        setConfirmPassword('');
+        // Defer heavier state resets to after the close to avoid UI jank
+        setTimeout(() => {
+            setNewEmail('');
+            setCurrentPassword('');
+            setNewPassword('');
+            setConfirmPassword('');
+        }, 150);
     };
 
     const handleSaveProfile = async () => {
@@ -601,9 +604,6 @@ export default function Profile() {
                 open={editModalOpen}
                 onClose={handleCloseEditModal}
                 aria-labelledby="edit-profile-modal"
-                disablePortal
-                container={typeof window !== 'undefined' ? () => document.getElementById('root') as Element : undefined}
-                keepMounted
             >
                 <Box
                     sx={{

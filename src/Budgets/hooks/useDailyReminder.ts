@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSettingsStore } from '../store/useSettingsStore';
 import { useNotificationStore } from '../store/useNotificationStore';
+import { requestNotificationPermission, sendNotification } from '../utils/webNotifications';
 
 export const useDailyReminder = () => {
     const { t } = useTranslation();
@@ -12,12 +13,6 @@ export const useDailyReminder = () => {
         if (!notificationsEnabled || !dailyReminderEnabled) {
             return;
         }
-
-        const requestNotificationPermission = async () => {
-            if ('Notification' in window && Notification.permission === 'default') {
-                await Notification.requestPermission();
-            }
-        };
 
         const checkAndSendReminder = () => {
             const settings = useSettingsStore.getState();
@@ -41,20 +36,12 @@ export const useDailyReminder = () => {
                         message: notificationMessage,
                     });
 
-                    if ('Notification' in window && Notification.permission === 'granted') {
-                        try {
-                            new Notification(`FinFlow - ${notificationTitle}`, {
-                                body: notificationMessage,
-                                icon: '/favicon.ico',
-                                badge: '/favicon.ico',
-                                tag: 'daily-reminder',
-                                requireInteraction: false,
-                                silent: false,
-                            });
-                        } catch (error) {
-                            console.error('Notification error:', error);
-                        }
-                    }
+                    console.log('[DailyReminder] Sending web notification');
+                    sendNotification(`FinFlow - ${notificationTitle}`, notificationMessage, {
+                        tag: 'daily-reminder',
+                        requireInteraction: false,
+                        silent: false,
+                    });
 
                     localStorage.setItem('lastReminderDate', today);
                 }
