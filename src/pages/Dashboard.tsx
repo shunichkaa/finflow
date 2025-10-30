@@ -58,7 +58,8 @@ const Dashboard = () => {
                         fontWeight="700"
                         sx={{
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                            mb: 1
+                            mb: 1,
+                            fontSize: { xs: '1.5rem', sm: '2rem' }
                         }}
                     >
                         {t('dashboard')}
@@ -113,12 +114,16 @@ const Dashboard = () => {
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
+                        gap: 2,
                         mb: 3,
+                        flexDirection: { xs: 'column', sm: 'row' },
+                        alignSelf: 'stretch'
                     }}>
                         <Typography variant="h6" sx={{
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             fontWeight: 600,
-                            letterSpacing: '-0.01em'
+                            letterSpacing: '-0.01em',
+                            alignSelf: { xs: 'flex-start', sm: 'auto' }
                         }}>
                             {t('transactions')} ({filteredTransactions.length})
                         </Typography>
@@ -131,8 +136,8 @@ const Dashboard = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                width: 36,
-                                height: 36,
+                                width: { xs: 44, sm: 36 },
+                                height: { xs: 44, sm: 36 },
                                 borderRadius: '50%',
                                 background: '#6C6FF9',
                                 color: '#FFFFFF',
@@ -149,7 +154,7 @@ const Dashboard = () => {
                                 }
                             }}
                         >
-                            <AddIcon sx={{fontSize: 20}}/>
+                            <AddIcon sx={{fontSize: { xs: 22, sm: 20 }}}/>
                         </Box>
                     </Box>
                     <TransactionList transactions={filteredTransactions}/>
