@@ -7,7 +7,9 @@ import {
     Select,
     MenuItem,
     Button,
-    Alert
+    Alert,
+    Chip,
+    Divider
 } from '@mui/material';
 import {
     Notifications,
@@ -117,6 +119,11 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
         setSettings(prev => ({ ...prev, time }));
     };
 
+    const getNextReminderText = (): string => {
+        const [hh, mm] = settings.time.split(':');
+        return `${hh}:${mm}`;
+    };
+
     const getRandomMessage = (): string => {
         const randomKey = REMINDER_MESSAGE_KEYS[Math.floor(Math.random() * REMINDER_MESSAGE_KEYS.length)];
         const randomMessage = t(randomKey);
@@ -200,24 +207,52 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                 background: mode === 'dark'
                     ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
                     : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)',
+                border: mode === 'dark' ? '1px solid rgba(108, 111, 249, 0.25)' : '1px solid rgba(108, 111, 249, 0.2)',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                '&:hover': {
+                    transform: 'translateY(-1px)',
+                    boxShadow: mode === 'dark'
+                        ? '0 10px 24px rgba(108, 111, 249, 0.25)'
+                        : '0 10px 24px rgba(108, 111, 249, 0.25)'
+                }
             }}
         >
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
-                <Notifications sx={{ 
-                    color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
-                    fontSize: 28 
-                }} />
-                <Typography
-                    variant="h6"
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1.5, mb: 1.5 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                    <Notifications sx={{ 
+                        color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                        fontSize: 28 
+                    }} />
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                            fontWeight: 600,
+                            fontSize: { xs: '1.125rem', sm: '1.25rem' }
+                        }}
+                    >
+                        {t('reminders.title')}
+                    </Typography>
+                </Box>
+                <Chip
+                    size="small"
+                    label={settings.enabled ? t('enabled', 'Enabled') : t('disabled', 'Disabled')}
                     sx={{
-                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         fontWeight: 600,
-                        fontSize: { xs: '1.125rem', sm: '1.25rem' }
+                        color: settings.enabled ? '#155724' : (mode === 'dark' ? '#FFFFFF' : '#272B3E'),
+                        backgroundColor: settings.enabled
+                            ? (mode === 'dark' ? 'rgba(76, 175, 80, 0.2)' : 'rgba(76, 175, 80, 0.15)')
+                            : (mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(39,43,62,0.05)')
                     }}
-                >
-                    {t('reminders.title')}
-                </Typography>
+                />
             </Box>
+            <Typography sx={{
+                color: mode === 'dark' ? 'rgba(255,255,255,0.8)' : 'rgba(39,43,62,0.7)',
+                mb: 2,
+                fontSize: { xs: '0.85rem', sm: '0.95rem' }
+            }}>
+                {t('reminders.subtitle', 'Небольшие напоминания помогут не забывать о расходах и целях')}
+            </Typography>
 
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {/* Toggle Enable/Disable */}
@@ -259,6 +294,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
 
                 {settings.enabled && (
                     <>
+                        <Divider sx={{ my: 0.5, borderColor: mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(39,43,62,0.08)' }} />
                         {/* Frequency Selection */}
                         <Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
@@ -444,6 +480,17 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                             />
                         </Box>
 
+                        {/* Next reminder info */}
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1 }}>
+                            <CheckCircle sx={{ color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9', fontSize: 18 }} />
+                            <Typography sx={{
+                                color: mode === 'dark' ? 'rgba(255,255,255,0.9)' : 'rgba(39,43,62,0.8)',
+                                fontSize: { xs: '0.85rem', sm: '0.95rem' }
+                            }}>
+                                {t('reminders.nextAt', 'Следующее напоминание в')} {getNextReminderText()}
+                            </Typography>
+                        </Box>
+
                         {/* Test Notification Button */}
                         <Button
                             variant="outlined"
@@ -463,6 +510,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                     transform: 'translateY(-2px)',
                                     boxShadow: '0 4px 12px rgba(108, 111, 249, 0.3)',
                                 },
+                                alignSelf: 'flex-start'
                             }}
                         >
                             {testNotificationSent ? t('reminders.testNotificationSent') : t('reminders.testNotification')}
