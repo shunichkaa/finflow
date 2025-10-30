@@ -1,10 +1,10 @@
 
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
-import Budgets from "./BudgetList/pages/Budgets";
-import Dashboard from "./BudgetList/pages/Dashboard";
-import Analytics from "./BudgetList/pages/Analytics";
-import Goals from "./BudgetList/pages/Goals";
-import Profile from "./BudgetList/pages/Profile";
+import Budgets from "./pages/Budgets";
+import Dashboard from "./pages/Dashboard";
+import Analytics from "./pages/Analytics";
+import Goals from "./pages/Goals";
+import Profile from "./pages/Profile";
 import {Auth} from "./components/auth/Auth";
 import {ProtectedRoute} from "./components/auth/ProtectedRoute";
 import {Layout} from "./components/Layout";
