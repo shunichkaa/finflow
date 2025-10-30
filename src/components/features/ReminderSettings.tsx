@@ -3,19 +3,12 @@ import {
     Box,
     Typography,
     Switch,
-    FormControl,
-    Select,
-    MenuItem,
     Button,
-    Alert,
-    Chip,
-    Divider
+    Alert
 } from '@mui/material';
 import {
     Notifications,
-    AccessTime,
-    CalendarToday,
-    CheckCircle
+    AccessTime
 } from '@mui/icons-material';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 import { GlassCard } from '../ui/GlassCard';
@@ -94,21 +87,55 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
         onSettingsChange?.(settings);
     }, [settings, onSettingsChange]);
 
-    const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const enabled = event.target.checked;
-        setSettings(prev => ({ ...prev, enabled }));
-        
-        if (enabled && Notification.permission === 'default') {
-            Notification.requestPermission().then(permission => {
-                if (permission !== 'granted') {
-                    setSettings(prev => ({ ...prev, enabled: false }));
-                }
-            });
+    const sendVerificationNotification = async () => {
+        if (!('Notification' in window)) {
+            alert(t('reminders.browserNoNotifications'));
+            return;
+        }
+
+        if (Notification.permission === 'denied') {
+            alert(t('reminders.permissionDenied'));
+            return;
+        }
+
+        if (Notification.permission === 'default') {
+            const permission = await Notification.requestPermission();
+            if (permission !== 'granted') {
+                alert(t('reminders.permissionRequired'));
+                return;
+            }
+        }
+
+        try {
+            const body = t('reminders.enabledTest', 'Напоминания включены. Пример уведомления.');
+            if ('serviceWorker' in navigator) {
+                const registration = await navigator.serviceWorker.ready;
+                await registration.showNotification(t('reminders.notificationTitle'), {
+                    body,
+                    icon: '/favicon.ico',
+                    badge: '/favicon.ico',
+                    tag: 'verify-reminder',
+                    requireInteraction: false
+                });
+            } else {
+                new Notification(t('reminders.notificationTitle'), { body, icon: '/favicon.ico', badge: '/favicon.ico', tag: 'verify-reminder' });
+            }
+        } catch (e) {
+            alert(t('reminders.notificationFailed'));
         }
     };
 
-    const handleFrequencyChange = (event: { target: { value: unknown } }) => {
-        setSettings(prev => ({ ...prev, frequency: event.target.value as ReminderFrequency }));
+    const handleToggle = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const enabled = event.target.checked;
+        setSettings(prev => ({ ...prev, enabled }));
+
+        if (enabled) {
+            await sendVerificationNotification();
+        }
+    };
+
+    const handleFrequencyChange = (_event: { target: { value: unknown } }) => {
+        // frequency controls removed
     };
 
     const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -234,25 +261,9 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                         {t('reminders.title')}
                     </Typography>
                 </Box>
-                <Chip
-                    size="small"
-                    label={settings.enabled ? t('enabled', 'Enabled') : t('disabled', 'Disabled')}
-                    sx={{
-                        fontWeight: 600,
-                        color: settings.enabled ? '#155724' : (mode === 'dark' ? '#FFFFFF' : '#272B3E'),
-                        backgroundColor: settings.enabled
-                            ? (mode === 'dark' ? 'rgba(76, 175, 80, 0.2)' : 'rgba(76, 175, 80, 0.15)')
-                            : (mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(39,43,62,0.05)')
-                    }}
-                />
+                {/* status chip removed */}
             </Box>
-            <Typography sx={{
-                color: mode === 'dark' ? 'rgba(255,255,255,0.8)' : 'rgba(39,43,62,0.7)',
-                mb: 2,
-                fontSize: { xs: '0.85rem', sm: '0.95rem' }
-            }}>
-                {t('reminders.subtitle', 'Небольшие напоминания помогут не забывать о расходах и целях')}
-            </Typography>
+            {/* subtitle removed */}
 
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {/* Toggle Enable/Disable */}
@@ -294,57 +305,6 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
 
                 {settings.enabled && (
                     <>
-                        <Divider sx={{ my: 0.5, borderColor: mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(39,43,62,0.08)' }} />
-                        {/* Frequency Selection */}
-                        <Box>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-                                <CalendarToday sx={{ 
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
-                                    fontSize: 20 
-                                }} />
-                                <Typography
-                                    sx={{
-                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(39, 43, 62, 0.8)',
-                                        fontWeight: 500,
-                                        fontSize: { xs: '0.875rem', sm: '0.95rem' }
-                                    }}
-                                >
-                                    {t('reminders.frequency')}
-                                </Typography>
-                            </Box>
-                            <FormControl 
-                                fullWidth
-                                size="small"
-                                sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                        backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.15)' : 'rgba(255, 255, 255, 0.6)',
-                                        borderRadius: 2,
-                                        '& fieldset': {
-                                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)',
-                                        },
-                                        '&:hover fieldset': {
-                                            borderColor: '#6C6FF9',
-                                        },
-                                        '&.Mui-focused fieldset': {
-                                            borderColor: '#6C6FF9',
-                                        },
-                                    },
-                                    '& .MuiSelect-select': {
-                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                        fontSize: { xs: '0.875rem', sm: '0.95rem' },
-                                    },
-                                }}
-                            >
-                                <Select
-                                    value={settings.frequency}
-                                    onChange={handleFrequencyChange}
-                                >
-                                    <MenuItem value="daily">{t('reminders.frequencyDaily')}</MenuItem>
-                                    <MenuItem value="every3days">{t('reminders.frequencyEvery3Days')}</MenuItem>
-                                    <MenuItem value="weekly">{t('reminders.frequencyWeekly')}</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Box>
 
                         {/* Time Picker */}
                         <Box>
@@ -376,13 +336,14 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                 >
                                     <Box
                                         sx={{
-                                            width: 64,
+                                            minWidth: 140,
                                             backgroundColor: mode === 'dark'
                                                 ? 'rgba(108, 111, 249, 0.15)'
                                                 : 'rgba(108, 111, 249, 0.08)',
                                             borderRadius: '12px',
                                             border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
                                             py: 1.25,
+                                            px: 2,
                                             textAlign: 'center',
                                             transition: 'all 0.2s ease',
                                             '&:hover': {
@@ -402,49 +363,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                                 fontFamily: 'system-ui, sans-serif',
                                             }}
                                         >
-                                            {settings.time.split(':')[0]}
-                                        </Typography>
-                                    </Box>
-
-                                    <Typography
-                                        variant="h6"
-                                        sx={{
-                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                            fontWeight: 700,
-                                        }}
-                                    >
-                                        :
-                                    </Typography>
-
-                                    <Box
-                                        sx={{
-                                            width: 64,
-                                            backgroundColor: mode === 'dark'
-                                                ? 'rgba(108, 111, 249, 0.15)'
-                                                : 'rgba(108, 111, 249, 0.08)',
-                                            borderRadius: '12px',
-                                            border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
-                                            py: 1.25,
-                                            textAlign: 'center',
-                                            transition: 'all 0.2s ease',
-                                            '&:hover': {
-                                                backgroundColor: mode === 'dark'
-                                                    ? 'rgba(108, 111, 249, 0.2)'
-                                                    : 'rgba(108, 111, 249, 0.12)',
-                                                transform: 'translateY(-1px)',
-                                                borderColor: '#6C6FF9',
-                                            },
-                                        }}
-                                    >
-                                        <Typography
-                                            sx={{
-                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                                fontSize: '1.1rem',
-                                                fontWeight: 700,
-                                                fontFamily: 'system-ui, sans-serif',
-                                            }}
-                                        >
-                                            {settings.time.split(':')[1]}
+                                            {getNextReminderText()}
                                         </Typography>
                                     </Box>
                                 </Box>
@@ -466,7 +385,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                         }
                                     }}
                                 >
-                                    {t('change', 'Change')}
+                                    {t('reminders.changeTime', 'Изменить время')}
                                 </Button>
                             </Box>
 
@@ -480,41 +399,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                             />
                         </Box>
 
-                        {/* Next reminder info */}
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1 }}>
-                            <CheckCircle sx={{ color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9', fontSize: 18 }} />
-                            <Typography sx={{
-                                color: mode === 'dark' ? 'rgba(255,255,255,0.9)' : 'rgba(39,43,62,0.8)',
-                                fontSize: { xs: '0.85rem', sm: '0.95rem' }
-                            }}>
-                                {t('reminders.nextAt', 'Следующее напоминание в')} {getNextReminderText()}
-                            </Typography>
-                        </Box>
-
-                        {/* Test Notification Button */}
-                        <Button
-                            variant="outlined"
-                            onClick={handleTestNotification}
-                            startIcon={testNotificationSent ? <CheckCircle /> : <Notifications />}
-                            sx={{
-                                borderColor: '#6C6FF9',
-                                color: '#6C6FF9',
-                                borderRadius: 2,
-                                py: 1.25,
-                                fontSize: { xs: '0.875rem', sm: '0.95rem' },
-                                fontWeight: 500,
-                                transition: 'all 0.3s ease',
-                                '&:hover': {
-                                    borderColor: '#6C6FF9',
-                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.2)' : 'rgba(108, 111, 249, 0.1)',
-                                    transform: 'translateY(-2px)',
-                                    boxShadow: '0 4px 12px rgba(108, 111, 249, 0.3)',
-                                },
-                                alignSelf: 'flex-start'
-                            }}
-                        >
-                            {testNotificationSent ? t('reminders.testNotificationSent') : t('reminders.testNotification')}
-                        </Button>
+                        {/* Test button removed */}
                     </>
                 )}
             </Box>
