@@ -34,7 +34,8 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit: _onEdit}) => {
                     flex: 1, 
                     minWidth: 0,
                     backgroundColor: mode === 'dark' ? 'rgba(168, 163, 246, 0.15)' : 'rgba(168, 163, 246, 0.3)',
-                    border: mode === 'dark' ? '1px solid rgba(168, 163, 246, 0.3)' : '1px solid rgba(168, 163, 246, 0.4)'
+                    border: mode === 'dark' ? '1px solid rgba(168, 163, 246, 0.3)' : '1px solid rgba(168, 163, 246, 0.4)',
+                    mb: { xs: 2, sm: 3 }
                 }}>
                     <CardContent sx={{ 
                         display: 'flex', 
