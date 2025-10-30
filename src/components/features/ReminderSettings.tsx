@@ -227,6 +227,9 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
         );
     }
 
+    const enabledTextColor = mode === 'dark' ? '#FFFFFF' : '#272B3E';
+    const disabledTextColor = mode === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(39,43,62,0.7)';
+
     return (
         <GlassCard
             sx={{
@@ -253,9 +256,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                     <Typography
                         variant="h6"
                         sx={{
-                            color: settings.enabled
-                                ? (mode === 'dark' ? '#FFFFFF' : '#272B3E')
-                                : (mode === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(39,43,62,0.7)'),
+                            color: settings.enabled ? enabledTextColor : disabledTextColor,
                             fontWeight: 600,
                             fontSize: { xs: '1.125rem', sm: '1.25rem' }
                         }}
@@ -317,7 +318,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                 }} />
                                 <Typography
                                     sx={{
-                                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(39, 43, 62, 0.8)',
+                                        color: settings.enabled ? enabledTextColor : disabledTextColor,
                                         fontWeight: 500,
                                         fontSize: { xs: '0.875rem', sm: '0.95rem' }
                                     }}
