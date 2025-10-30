@@ -20,22 +20,24 @@ interface ModalProps {
 
 export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children }) => {
     const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const { mode } = useThemeMode();
 
     return (
         <Dialog
             open={open}
             onClose={onClose}
-            fullScreen={fullScreen}
+            fullScreen={false}
             maxWidth="sm"
             fullWidth
             scroll="paper"
             PaperProps={{
                 sx: {
-                    borderRadius: fullScreen ? 0 : 3,
+                    borderRadius: 3,
                     bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
-                    maxHeight: fullScreen ? '100vh' : 'calc(100vh - 64px)',
+                    maxHeight: 'calc(100vh - 64px)',
+                    width: { xs: '95%', sm: 'auto' },
+                    m: { xs: 2, sm: 3 },
                 },
             }}
         >
