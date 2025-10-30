@@ -55,12 +55,9 @@ export default function Profile() {
         setAvatar,
         nickname,
         setNickname,
-        notificationsEnabled,
-        setNotificationsEnabled,
         notificationTime,
         setNotificationTime,
-        dailyReminderEnabled,
-        setDailyReminderEnabled
+        
     } = useSettingsStore();
     const {session, loading: authLoading} = useAuth();
     const [snackbarOpen, setSnackbarOpen] = useState(false);

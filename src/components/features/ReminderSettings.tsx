@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import {
-    Box,
-    Typography,
-    Switch,
-    Button,
-    Alert,
-    Paper
-} from '@mui/material';
-import { Notifications } from '@mui/icons-material';
+import { Box, Typography, Button, Alert, Paper } from '@mui/material';
+import { Notifications, AccessTime } from '@mui/icons-material';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
-import { GlassCard } from '../ui/GlassCard';
+ 
 import { colors } from '../../styles/colors';
 import { typography } from '../../styles/typography';
 import { Toggle } from '../ui/Toggle';
 import { useTranslation } from 'react-i18next';
- 
+import IOSTimePicker from '../ui/IOSTimePicker';
 import { useSettingsStore } from '../../Budgets/store/useSettingsStore';
 import { requestNotificationPermission } from '../../Budgets/utils/webNotifications';
 
@@ -30,36 +23,10 @@ interface ReminderSettingsProps {
     onSettingsChange?: (settings: ReminderSettingsData) => void;
 }
 
-const REMINDER_MESSAGE_KEYS = [
-    'reminderMessages.walletMisses',
-    'reminderMessages.timeToAdmit',
-    'reminderMessages.moneyDontCount',
-    'reminderMessages.forgotToAdd',
-    'reminderMessages.budgetWantsToTalk',
-    'reminderMessages.financialDetective',
-    'reminderMessages.dontBeLikeOthers',
-    'reminderMessages.whoDoesntTrack',
-    'reminderMessages.minuteOfHonesty',
-    'reminderMessages.updateFinancialKarma',
-    'reminderMessages.sirTransactions',
-    'reminderMessages.breakingNews',
-    'reminderMessages.longerYouDelay',
-    'reminderMessages.personalAccountant',
-    'reminderMessages.dangerZone',
-    'reminderMessages.someoneSpends',
-    'reminderMessages.financialDetox',
-    'reminderMessages.alexaAddExpenses',
-];
-
-const EMOJI_POOL = ['💰', '💸', '💵', '💴', '💶', '💷', '💳', '📊', '📈', '📉', '💼', '🎯', '🔥', '⚡', '✨', '🚀', '🎉', '💪', '🤔', '😎', '🕵️', '📱', '💬', '👀', '🤷', '🧠', '🤖', '🧘', '⚠️', '📰'];
+ 
 
 export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsChange }) => {
-    const {
-        notificationsEnabled,
-        setNotificationsEnabled,
-        dailyReminderEnabled,
-        setDailyReminderEnabled,
-    } = useSettingsStore();
+    const { setNotificationsEnabled } = useSettingsStore();
     const { mode } = useThemeMode();
     const { t } = useTranslation();
     const [settings, setSettings] = useState<ReminderSettingsData>(() => {
@@ -78,8 +45,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
     });
 
         const [supportsNotifications, setSupportsNotifications] = useState(true);
-    const [testNotificationSent, setTestNotificationSent] = useState(false);
-    
+    const [timePickerOpen, setTimePickerOpen] = useState(false);
 
     useEffect(() => {
         setSupportsNotifications(typeof window !== 'undefined' && 'Notification' in window);
@@ -140,66 +106,16 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
         }
     };
 
-    const handleFrequencyChange = (_event: { target: { value: unknown } }) => {};
-
-    const getRandomMessage = (): string => {
-        const randomKey = REMINDER_MESSAGE_KEYS[Math.floor(Math.random() * REMINDER_MESSAGE_KEYS.length)];
-        const randomMessage = t(randomKey);
-        const randomEmoji = EMOJI_POOL[Math.floor(Math.random() * EMOJI_POOL.length)];
-        return `${randomMessage} ${randomEmoji}`;
+    const handleTimePickerChange = (time: string) => {
+        setSettings(prev => ({ ...prev, time }));
     };
 
-    const handleTestNotification = async () => {
-        if (!('Notification' in window)) {
-            alert(t('reminders.browserNoNotifications'));
-            return;
-        }
-
-        if (Notification.permission === 'denied') {
-            alert(t('reminders.permissionDenied'));
-            return;
-        }
-
-        if (Notification.permission === 'default') {
-            const permission = await Notification.requestPermission();
-            if (permission !== 'granted') {
-                alert(t('reminders.permissionRequired'));
-                return;
-            }
-        }
-
-        const testMessage = getRandomMessage();
-
-                try {
-            if ('serviceWorker' in navigator) {
-                const registration = await navigator.serviceWorker.ready;
-
-                                await registration.showNotification(t('reminders.notificationTitle'), {
-                    body: testMessage,
-                    icon: '/favicon.ico',
-                    badge: '/favicon.ico',
-                    tag: 'test-reminder',
-                    requireInteraction: false,
-                    data: {
-                        url: window.location.origin
-                    }
-                });
-            } else {
-                new Notification(t('reminders.notificationTitle'), {
-                    body: testMessage,
-                    icon: '/favicon.ico',
-                    badge: '/favicon.ico',
-                    tag: 'test-reminder',
-                });
-            }
-
-                        setTestNotificationSent(true);
-            setTimeout(() => setTestNotificationSent(false), 3000);
-        } catch (error) {
-            console.error('Error sending test notification:', error);
-            alert(t('reminders.notificationFailed'));
-        }
+    const getNextReminderText = (): string => {
+        const [hh, mm] = settings.time.split(':');
+        return `${hh}:${mm}`;
     };
+
+ 
 
     if (!supportsNotifications) {
         return (
@@ -285,7 +201,99 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                 </Box>
 
                 {settings.enabled && (
-                    <Box sx={{ mt: 1 }} />
+                    <>
+                        <Box>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
+                                <AccessTime sx={{ 
+                                    color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
+                                    fontSize: 20 
+                                }} />
+                                <Typography
+                                    sx={{
+                                        color: settings.enabled ? enabledTextColor : disabledTextColor,
+                                        fontWeight: 500,
+                                        fontSize: { xs: typography.fontSize.sm, sm: '0.95rem' }
+                                    }}
+                                >
+                                    {t('reminders.time')}
+                                </Typography>
+                            </Box>
+
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2 }}>
+                                <Box
+                                    onClick={() => setTimePickerOpen(true)}
+                                    sx={{
+                                        display: 'inline-flex',
+                                        gap: 1,
+                                        alignItems: 'center',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            minWidth: 140,
+                                            backgroundColor: settings.enabled
+                                                ? (mode === 'dark' ? '#FFFFFF0F' : '#EFF0F6')
+                                                : (mode === 'dark' ? '#6C6FF926' : '#6C6FF914'),
+                                            borderRadius: '12px',
+                                            border: `2px solid ${settings.enabled ? (mode === 'dark' ? '#FFFFFF1F' : '#EFF0F6') : (mode === 'dark' ? '#6C6FF94D' : '#6C6FF933' )}`,
+                                            py: 1.25,
+                                            px: 2,
+                                            textAlign: 'center',
+                        	                transition: 'all 0.2s ease',
+                                            '&:hover': {
+                                                backgroundColor: settings.enabled
+                                                    ? (mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6')
+                                                    : (mode === 'dark' ? '#6C6FF933' : '#6C6FF91F') ,
+                                                transform: 'translateY(-1px)',
+                                                borderColor: settings.enabled ? (mode === 'dark' ? '#FFFFFF33' : '#EFF0F6') : '#6C6FF9',
+                                            },
+                                        }}
+                                    >
+                                        <Typography
+                                            sx={{
+                                                color: settings.enabled ? enabledTextColor : disabledTextColor,
+                                                fontSize: '1.1rem',
+                                                fontWeight: 700,
+                                                fontFamily: 'system-ui, sans-serif',
+                                            }}
+                                        >
+                                            {getNextReminderText()}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+
+                                <Button
+                                    variant="outlined"
+                                    onClick={() => setTimePickerOpen(true)}
+                                    sx={{
+                                        borderColor: '#6C6FF9',
+                                        color: '#6C6FF9',
+                                        borderRadius: 2,
+                                        px: 2.5,
+                                        py: 1,
+                                        fontWeight: 600,
+                                        textTransform: 'none',
+                                        '&:hover': {
+                                            borderColor: '#6C6FF9',
+                                            backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#6C6FF914'
+                                        }
+                                    }}
+                                >
+                                    {t('reminders.changeTime', 'Изменить время')}
+                                </Button>
+                            </Box>
+
+                            <IOSTimePicker
+                                open={timePickerOpen}
+                                onClose={() => setTimePickerOpen(false)}
+                                value={settings.time}
+                                onChange={(time) => {
+                                    handleTimePickerChange(time);
+                                }}
+                            />
+                        </Box>
+                    </>
                 )}
             </Box>
         </Paper>
