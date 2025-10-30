@@ -102,32 +102,33 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions: 
                                         )}
                                     </Box>
 
-                                                                        <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+                                    <Box sx={{ flexGrow: 1, minWidth: 0 }}>
                                         <Text variant="body1" weight="semibold" noWrap>
                                             {categoryName}
                                         </Text>
                                     </Box>
 
-                                                                        <AmountDisplay
-                                        amount={transaction.amount}
-                                        currency={currency}
-                                        type={transaction.type}
-                                        size="large"
-                                    />
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: designTokens.spacing.xs }}>
+                                        <AmountDisplay
+                                            amount={transaction.amount}
+                                            currency={currency}
+                                            type={transaction.type}
+                                            size="medium"
+                                        />
+                                        <CustomIconButton
+                                            variant="danger"
+                                            size="small"
+                                            onClick={() => handleDelete(transaction.id)}
+                                        >
+                                            <DeleteIcon fontSize="small" />
+                                        </CustomIconButton>
+                                    </Box>
                                 </Box>
 
-                                                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                     <Text variant="caption" color="secondary">
                                         {formatDate(transaction.date)}
                                     </Text>
-
-                                                                        <CustomIconButton
-                                        variant="danger"
-                                        size="small"
-                                        onClick={() => handleDelete(transaction.id)}
-                                    >
-                                        <DeleteIcon fontSize="small" />
-                                    </CustomIconButton>
                                 </Box>
 
                                                                 {transaction.description && (

@@ -26,6 +26,7 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
     const {mode} = useThemeMode();
     const addBudget = useFinanceStore((state) => state.addBudget);
     const updateBudget = useFinanceStore((state) => state.updateBudget);
+    const removeBudget = useFinanceStore((state) => state.deleteBudget);
     const budgets = useFinanceStore((state) => state.budgets);
 
     const {
@@ -66,6 +67,14 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
         onSuccess?.();
     };
 
+    const handleDelete = () => {
+        if (!initialBudget) return;
+        if (confirm(t('confirmDeleteBudget'))) {
+            removeBudget(initialBudget.id);
+            onSuccess?.();
+        }
+    };
+
     if (availableCategories.length === 0) {
         return (
             <Box sx={{textAlign: 'center', py: 4}}>
@@ -93,6 +102,28 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                             fullWidth
                             required
                             disabled={!!initialBudget}
+                            sx={{
+                                '& .MuiInputBase-input': {
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                },
+                                '& .MuiSelect-select': {
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                },
+                                '& .MuiSelect-select.Mui-disabled': {
+                                    WebkitTextFillColor: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    opacity: 1,
+                                },
+                                '& .MuiInputLabel-root': {
+                                    color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
+                                },
+                                '& .MuiInputLabel-root.Mui-disabled': {
+                                    color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
+                                },
+                                '& .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: mode === 'dark' ? '#FFFFFF1A' : '#E5E7EB',
+                                }
+                            }}
                             SelectProps={{
                                 MenuProps: {
                                     PaperProps: {
@@ -202,6 +233,29 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                 >
                     {initialBudget ? t('save') : t('create')}
                 </Button>
+
+                {initialBudget && (
+                    <Button
+                        variant="outlined"
+                        fullWidth
+                        onClick={handleDelete}
+                        sx={{
+                            mt: 1,
+                            py: 1.5,
+                            borderRadius: 2,
+                            borderColor: '#FF3B3B',
+                            color: '#FF3B3B',
+                            textTransform: 'none',
+                            fontWeight: 600,
+                            '&:hover': {
+                                borderColor: '#FF3B3B',
+                                backgroundColor: 'rgba(255,59,59,0.06)'
+                            }
+                        }}
+                    >
+                        {t('delete')}
+                    </Button>
+                )}
             </Stack>
         </Box>
     );

@@ -361,7 +361,12 @@ export default function Profile() {
                 </Typography>
 
                 <List>
-                    <ListItem sx={{ py: 1.5, alignItems: 'flex-start' }}>
+                    <ListItem sx={{ 
+                        py: 1.5, 
+                        alignItems: { xs: 'stretch', sm: 'center' },
+                        flexDirection: { xs: 'column', sm: 'row' },
+                        gap: { xs: 1, sm: 0 }
+                    }}>
                         <ListItemIcon>
                             <CloudSync sx={{color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99', fontSize: {xs: 20, sm: 24}}}/>
                         </ListItemIcon>
@@ -369,16 +374,19 @@ export default function Profile() {
                             primary={t('sync.status')}
                             secondary={getSyncStatusText()}
                             sx={{
-                                pr: { xs: 1, sm: 2 },
-                                mr: { xs: 1, sm: 2 },
+                                pr: { xs: 0, sm: 2 },
+                                mr: { xs: 0, sm: 2 },
+                                flexGrow: 1,
+                                minWidth: 0,
                                 '& .MuiListItemText-primary': {
-                                    whiteSpace: 'nowrap',
+                                    whiteSpace: { xs: 'normal', sm: 'nowrap' },
                                 },
                                 '& .MuiListItemText-secondary': {
                                     whiteSpace: 'normal',
                                 }
                             }}
                         />
+                        <Box sx={{ ml: { xs: 0, sm: 2 }, mt: { xs: 0.5, sm: 0 }, alignSelf: { xs: 'flex-start', sm: 'center' } }}>
                         <Button
                             variant="contained"
                             onClick={handleSyncNow}
@@ -393,8 +401,7 @@ export default function Profile() {
                                 py: {xs: 0.75, sm: 1},
                                 fontSize: {xs: '0.75rem', sm: '0.875rem'},
                                 minWidth: {xs: 'auto', sm: 120},
-                                ml: {xs: 1, sm: 2},
-                                alignSelf: 'flex-start',
+                                ml: {xs: 0, sm: 2},
                                 '&:hover': {
                                     background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
                                     transform: 'translateY(-1px)',
@@ -409,6 +416,7 @@ export default function Profile() {
                         >
                             {isSyncing ? t('sync.syncing') : t('sync.syncNow')}
                         </Button>
+                        </Box>
                     </ListItem>
                 </List>
             </Paper>
