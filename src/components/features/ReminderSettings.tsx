@@ -234,11 +234,13 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
         <GlassCard
             sx={{
                 p: { xs: 2, sm: 3 },
-                background: mode === 'dark'
-                    ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
-                    : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)',
+                background: settings.enabled
+                    ? (mode === 'dark' ? 'rgba(15,15,35,0.95)' : '#FFFFFF')
+                    : (mode === 'dark'
+                        ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
+                        : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)'),
                 border: mode === 'dark' ? '1px solid rgba(108, 111, 249, 0.25)' : '1px solid rgba(108, 111, 249, 0.2)',
-                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease',
                 '&:hover': {
                     transform: 'translateY(-1px)',
                     boxShadow: mode === 'dark'
@@ -248,7 +250,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
             }}
         >
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1.5, mb: 1.5 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                     <Notifications sx={{ 
                         color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                         fontSize: 28 
@@ -276,14 +278,14 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                     justifyContent: 'space-between',
                     p: 2,
                     borderRadius: 2,
-                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.05)',
+                    backgroundColor: settings.enabled
+                        ? (mode === 'dark' ? 'rgba(255,255,255,0.04)' : '#FFFFFF')
+                        : (mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.05)'),
                 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                         <Typography
                             sx={{
-                                color: settings.enabled
-                                    ? (mode === 'dark' ? '#FFFFFF' : '#111111')
-                                    : (mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(39, 43, 62, 0.6)'),
+                                color: settings.enabled ? enabledTextColor : disabledTextColor,
                                 fontWeight: settings.enabled ? 700 : 500,
                                 fontSize: { xs: '0.9rem', sm: '1.05rem' },
                                 transition: 'color 0.2s ease, font-weight 0.2s ease'
@@ -340,27 +342,27 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                     <Box
                                         sx={{
                                             minWidth: 140,
-                                            backgroundColor: mode === 'dark'
-                                                ? 'rgba(108, 111, 249, 0.15)'
-                                                : 'rgba(108, 111, 249, 0.08)',
+                                            backgroundColor: settings.enabled
+                                                ? (mode === 'dark' ? 'rgba(255,255,255,0.06)' : '#EFF0F6')
+                                                : (mode === 'dark' ? 'rgba(108, 111, 249, 0.15)' : 'rgba(108, 111, 249, 0.08)'),
                                             borderRadius: '12px',
-                                            border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
+                                            border: `2px solid ${settings.enabled ? (mode === 'dark' ? 'rgba(255,255,255,0.12)' : '#EFF0F6') : (mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)' )}`,
                                             py: 1.25,
                                             px: 2,
                                             textAlign: 'center',
                                             transition: 'all 0.2s ease',
                                             '&:hover': {
-                                                backgroundColor: mode === 'dark'
-                                                    ? 'rgba(108, 111, 249, 0.2)'
-                                                    : 'rgba(108, 111, 249, 0.12)',
+                                                backgroundColor: settings.enabled
+                                                    ? (mode === 'dark' ? 'rgba(255,255,255,0.1)' : '#EFF0F6')
+                                                    : (mode === 'dark' ? 'rgba(108, 111, 249, 0.2)' : 'rgba(108, 111, 249, 0.12)') ,
                                                 transform: 'translateY(-1px)',
-                                                borderColor: '#6C6FF9',
+                                                borderColor: settings.enabled ? (mode === 'dark' ? 'rgba(255,255,255,0.2)' : '#EFF0F6') : '#6C6FF9',
                                             },
                                         }}
                                     >
                                         <Typography
                                             sx={{
-                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                                color: settings.enabled ? enabledTextColor : disabledTextColor,
                                                 fontSize: '1.1rem',
                                                 fontWeight: 700,
                                                 fontFamily: 'system-ui, sans-serif',
