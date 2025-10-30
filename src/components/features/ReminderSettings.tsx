@@ -12,6 +12,9 @@ import {
 } from '@mui/icons-material';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 import { GlassCard } from '../ui/GlassCard';
+import { colors } from '../../styles/colors';
+import { typography } from '../../styles/typography';
+import { Toggle } from '../ui/Toggle';
 import { useTranslation } from 'react-i18next';
 import IOSTimePicker from '../ui/IOSTimePicker';
 
@@ -295,15 +298,15 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                             {t('reminders.enable')}
                         </Typography>
                     </Box>
-                    <Switch
+                    <Toggle
                         checked={settings.enabled}
                         onChange={handleToggle}
                         sx={{
                             '& .MuiSwitch-switchBase.Mui-checked': {
-                                color: '#6C6FF9',
+                                color: colors.primary,
                             },
                             '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                backgroundColor: '#6C6FF9',
+                                backgroundColor: colors.primary,
                             },
                         }}
                     />
@@ -323,7 +326,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                     sx={{
                                         color: settings.enabled ? enabledTextColor : disabledTextColor,
                                         fontWeight: 500,
-                                        fontSize: { xs: '0.875rem', sm: '0.95rem' }
+                                        fontSize: { xs: typography.fontSize.sm, sm: '0.95rem' }
                                     }}
                                 >
                                     {t('reminders.time')}
