@@ -156,7 +156,7 @@ const Goals: React.FC = () => {
                     {t('savings', 'Savings')}
                 </Typography>
                 <Typography variant="body1"
-                            sx={{color: mode === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(6, 0, 171, 0.6)'}}>
+                            sx={{color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99'}}>
                     {t('savingsGoal.goalDescription', 'Create savings goals for your important financial targets')}
                 </Typography>
             </Box>
@@ -175,11 +175,11 @@ const Goals: React.FC = () => {
                         borderRadius: 3,
                         textTransform: 'none',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(108,111,249,0.4)'
-                            : '0 8px 24px rgba(168,163,246,0.4)',
+                            ? '0 8px 24px #6C6FF966'
+                            : '0 8px 24px #A8A3F666',
                         '&:hover': {
                             transform: 'translateY(-2px)',
-                            boxShadow: '0 12px 32px rgba(108,111,249,0.5)',
+                            boxShadow: '0 12px 32px #6C6FF980',
                         }
                     }}
                 >
@@ -194,8 +194,8 @@ const Goals: React.FC = () => {
                     </Typography>
                     <Typography variant="body2" sx={{
                         color: mode === 'dark'
-                            ? 'rgba(255,255,255,0.5)'
-                            : 'rgba(39,43,62,0.5)'
+                            ? '#FFFFFF80'
+                            : '#272B3E80'
                     }}>
                         {t('savingsGoal.createFirstGoal', 'Create your first savings goal to get started')}
                     </Typography>
@@ -273,7 +273,7 @@ const Goals: React.FC = () => {
                                                 borderRadius: 2,
                                                 mb: 1,
                                                 backgroundColor: mode === 'dark'
-                                                    ? 'rgba(255,255,255,0.1)'
+                                                    ? '#FFFFFF1A'
                                                     : '#EFF0F6',
                                                 '& .MuiLinearProgress-bar': {
                                                     borderRadius: 2,
@@ -292,8 +292,8 @@ const Goals: React.FC = () => {
                                             <Typography variant="body2" fontWeight="500"
                                                         sx={{
                                                             color: mode === 'dark'
-                                                                ? 'rgba(255,255,255,0.5)'
-                                                                : 'rgba(39,43,62,0.5)',
+                                                                ? '#FFFFFF80'
+                                                                : '#272B3E80',
                                                             fontSize: '0.9rem'
                                                         }}>
                                                 {goal.targetAmount.toLocaleString()} {currency}
@@ -316,8 +316,8 @@ const Goals: React.FC = () => {
                     sx: {
                         borderRadius: 4,
                         background: mode === 'dark'
-                            ? 'rgba(15,15,35,0.95)'
-                            : 'rgba(255,255,255,0.95)',
+                            ? '#0F0F23F2'
+                            : '#FFFFFFF2',
                         backdropFilter: 'blur(20px)',
                         m: {xs: 2, sm: 3},
                     }
@@ -338,8 +338,8 @@ const Goals: React.FC = () => {
                             <Typography variant="body2"
                                         sx={{
                                             color: mode === 'dark'
-                                                ? 'rgba(255,255,255,0.7)'
-                                                : 'rgba(39,43,62,0.7)',
+                                                ? '#FFFFFFB3'
+                                                : '#272B3EB3',
                                             mb: 1.5,
                                             fontWeight: 500
                                         }}>
@@ -370,8 +370,8 @@ const Goals: React.FC = () => {
                                                 backgroundColor: isSelected
                                                     ? `${iconData.color}30`
                                                     : mode === 'dark'
-                                                        ? 'rgba(255,255,255,0.05)'
-                                                        : 'rgba(39,43,62,0.05)',
+                                                        ? '#FFFFFF0D'
+                                                        : '#272B3E0D',
                                                 border: `2px solid ${isSelected ? iconData.color : 'transparent'}`,
                                                 transition: 'all 0.2s ease',
                                                 '&:hover': {
@@ -379,8 +379,8 @@ const Goals: React.FC = () => {
                                                     backgroundColor: isSelected
                                                         ? `${iconData.color}30`
                                                         : mode === 'dark'
-                                                            ? 'rgba(255,255,255,0.1)'
-                                                            : 'rgba(39,43,62,0.1)',
+                                                            ? '#FFFFFF1A'
+                                                            : '#272B3E1A',
                                                 }
                                             }}
                                         >
@@ -490,11 +490,11 @@ const Goals: React.FC = () => {
                                     textTransform: 'none',
                                     minWidth: {xs: '200px', sm: 'auto'},
                                     boxShadow: mode === 'dark'
-                                        ? '0 8px 24px rgba(108,111,249,0.4)'
-                                        : '0 8px 24px rgba(168,163,246,0.4)',
+                                        ? '0 8px 24px #6C6FF966'
+                                        : '0 8px 24px #A8A3F666',
                                     '&:hover': {
                                         transform: 'translateY(-2px)',
-                                        boxShadow: '0 12px 32px rgba(108,111,249,0.5)',
+                                        boxShadow: '0 12px 32px #6C6FF980',
                                     }
                                 }}
                             >

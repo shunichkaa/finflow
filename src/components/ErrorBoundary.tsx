@@ -45,8 +45,8 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ resetError }) => {
                     p: 4,
                     textAlign: 'center',
                     borderRadius: 3,
-                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.25)',
-                    border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(148, 163, 184, 0.1)',
+                    backgroundColor: mode === 'dark' ? '#FFFFFF0D' : '#FFFFFF40',
+                    border: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #94A3B81A',
                 }}
             >
                 {}
@@ -54,7 +54,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ resetError }) => {
                     sx={{
                         fontSize: '4rem',
                         mb: 2,
-                        color: 'rgba(255, 185, 141, 0.8)',
+                        color: '#FFB98DCC',
                     }}
                 >
                     ⚠️
@@ -71,18 +71,18 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ resetError }) => {
                         onClick={handleGoHome}
                         sx={{
                         background: mode === 'dark' 
-                            ? 'rgba(108, 111, 249, 0.8)'
-                            : 'rgba(168, 163, 246, 0.8)',
+                            ? '#6C6FF9CC'
+                            : '#A8A3F6CC',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             fontWeight: 'bold',
                             '&:hover': {
                                 background: mode === 'dark' 
-                                    ? 'rgba(108, 111, 249, 1)'
-                                    : 'rgba(168, 163, 246, 1)',
+                                    ? '#6C6FF9FF'
+                                    : '#A8A3F6FF',
                                 transform: 'translateY(-2px)',
                                 boxShadow: mode === 'dark' 
-                                    ? '0 6px 20px rgba(108, 111, 249, 0.4)'
-                                    : '0 6px 20px rgba(168, 163, 246, 0.4)',
+                                    ? '0 6px 20px #6C6FF966'
+                                    : '0 6px 20px #A8A3F666',
                             }
                         }}
                     >
@@ -92,11 +92,11 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ resetError }) => {
                         variant="outlined"
                         onClick={handleReload}
                         sx={{
-                            borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(6, 0, 171, 0.3)',
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
+                            borderColor: mode === 'dark' ? '#FFFFFF4D' : '#0600AB4D',
+                            color: mode === 'dark' ? '#FFFFFFB3' : '#0600ABB3',
                             '&:hover': {
-                                borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 0, 171, 0.5)',
-                                backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(6, 0, 171, 0.04)',
+                                borderColor: mode === 'dark' ? '#FFFFFF80' : '#0600AB80',
+                                backgroundColor: mode === 'dark' ? '#FFFFFF0A' : '#0600AB0A',
                             },
                         }}
                     >

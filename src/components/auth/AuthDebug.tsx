@@ -36,9 +36,9 @@ export const AuthDebug: React.FC = () => {
                 top: 20,
                 right: 20,
                 maxWidth: 300,
-                background: 'rgba(255, 255, 255, 0.95)',
+                background: '#FFFFFFF2',
                 backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
+                border: '1px solid #FFFFFF33',
                 borderRadius: 3,
                 zIndex: 10
             }}
@@ -48,22 +48,22 @@ export const AuthDebug: React.FC = () => {
             </Typography>
             
             <Box sx={{ mb: 2 }}>
-                <Typography variant="body2" sx={{ color: 'rgba(101, 70, 51, 0.8)' }}>
+                <Typography variant="body2" sx={{ color: '#654633CC' }}>
                     <strong>Loading:</strong> {loading ? 'Yes' : 'No'}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'rgba(101, 70, 51, 0.8)' }}>
+                <Typography variant="body2" sx={{ color: '#654633CC' }}>
                     <strong>Error:</strong> {error || 'None'}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'rgba(101, 70, 51, 0.8)' }}>
+                <Typography variant="body2" sx={{ color: '#654633CC' }}>
                     <strong>Session:</strong> {session ? 'Active' : 'None'}
                 </Typography>
                 {session && (
-                    <Typography variant="body2" sx={{ color: 'rgba(101, 70, 51, 0.8)' }}>
+                    <Typography variant="body2" sx={{ color: '#654633CC' }}>
                         <strong>User ID:</strong> {session.user?.id}
                     </Typography>
                 )}
                 {session && (
-                    <Typography variant="body2" sx={{ color: 'rgba(101, 70, 51, 0.8)' }}>
+                    <Typography variant="body2" sx={{ color: '#654633CC' }}>
                         <strong>Email:</strong> {session.user?.email}
                     </Typography>
                 )}
@@ -74,11 +74,11 @@ export const AuthDebug: React.FC = () => {
                     variant="outlined" 
                     onClick={handleTestConnection}
                     sx={{
-                        borderColor: 'rgba(101, 70, 51, 0.3)',
+                        borderColor: '#6546334D',
                         color: '#272B3E',
                         '&:hover': {
-                            borderColor: 'rgba(101, 70, 51, 0.6)',
-                            backgroundColor: 'rgba(101, 70, 51, 0.1)',
+                            borderColor: '#65463399',
+                            backgroundColor: '#6546331A',
                         }
                     }}
                 >
@@ -90,11 +90,11 @@ export const AuthDebug: React.FC = () => {
                         color="error" 
                         onClick={handleSignOut}
                         sx={{
-                            borderColor: 'rgba(255, 185, 141, 0.6)',
+                            borderColor: '#FFB98D99',
                             color: '#272B3E',
                             '&:hover': {
-                                borderColor: 'rgba(255, 185, 141, 0.8)',
-                                backgroundColor: 'rgba(255, 185, 141, 0.1)',
+                                borderColor: '#FFB98DCC',
+                                backgroundColor: '#FFB98D1A',
                             }
                         }}
                     >
@@ -104,7 +104,7 @@ export const AuthDebug: React.FC = () => {
             </Box>
 
             <Box sx={{ mt: 2 }}>
-                <Typography variant="caption" sx={{ color: 'rgba(101, 70, 51, 0.6)' }}>
+                <Typography variant="caption" sx={{ color: '#65463399' }}>
                     Check browser console for detailed logs
                 </Typography>
             </Box>

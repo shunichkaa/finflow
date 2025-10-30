@@ -76,13 +76,13 @@ export const NotificationCenter: React.FC = () => {
     const getNotificationBackground = (read: boolean, severity: string) => {
         if (!read) {
             if (severity === 'error') {
-                return mode === 'dark' ? 'rgba(255, 107, 107, 0.1)' : 'rgba(255, 107, 107, 0.05)';
+                return mode === 'dark' ? '#FF6B6B1A' : '#FF6B6B0D';
             } else if (severity === 'warning') {
-                return mode === 'dark' ? 'rgba(255, 209, 102, 0.1)' : 'rgba(255, 209, 102, 0.05)';
+                return mode === 'dark' ? '#FFD1661A' : '#FFD1660D';
             } else if (severity === 'success') {
-                return mode === 'dark' ? 'rgba(6, 214, 160, 0.1)' : 'rgba(6, 214, 160, 0.05)';
+                return mode === 'dark' ? '#06D6A01A' : '#06D6A00D';
             }
-            return mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.05)';
+            return mode === 'dark' ? '#6C6FF91A' : '#6C6FF90D';
         }
         return 'transparent';
     };
@@ -93,7 +93,7 @@ export const NotificationCenter: React.FC = () => {
                 onClick={handleOpen}
                 sx={{
                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(39, 43, 62, 0.03)',
+                    backgroundColor: mode === 'dark' ? '#FFFFFF0D' : '#272B3E08',
                     borderRadius: '12px',
                     width: { xs: 44, sm: 48 },
                     height: { xs: 44, sm: 48 },
@@ -102,16 +102,16 @@ export const NotificationCenter: React.FC = () => {
                     padding: 0,
                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     border: mode === 'dark'
-                        ? '1px solid rgba(255, 255, 255, 0.1)'
-                        : '1px solid rgba(39, 43, 62, 0.08)',
+                        ? '1px solid #FFFFFF1A'
+                        : '1px solid #272B3E14',
                     '&:hover': {
                         backgroundColor: mode === 'dark'
-                            ? 'rgba(108, 111, 249, 0.2)'
-                            : 'rgba(108, 111, 249, 0.08)',
+                            ? '#6C6FF933'
+                            : '#6C6FF914',
                         transform: 'translateY(-2px)',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 25px rgba(108, 111, 249, 0.3)'
-                            : '0 8px 25px rgba(108, 111, 249, 0.15)',
+                            ? '0 8px 25px #6C6FF94D'
+                            : '0 8px 25px #6C6FF926',
                     },
                     '&:active': {
                         transform: 'translateY(0)',
@@ -131,7 +131,7 @@ export const NotificationCenter: React.FC = () => {
                             minWidth: 20,
                             height: 20,
                             borderRadius: 10,
-                            boxShadow: `0 2px 8px ${unreadCount > 0 ? 'rgba(255, 59, 59, 0.4)' : 'rgba(108, 111, 249, 0.4)'}`,
+                            boxShadow: `0 2px 8px ${unreadCount > 0 ? '#FF3B3B66' : '#6C6FF966'}`,
                             ...(unreadCount > 0 && {
                                 animation: 'pulse 2s infinite',
                                 '@keyframes pulse': {
@@ -163,12 +163,12 @@ export const NotificationCenter: React.FC = () => {
                             maxHeight: 480,
                             backgroundColor: mode === 'dark' ? '#1E2235' : '#FFFFFF',
                             border: mode === 'dark'
-                                ? '1px solid rgba(255, 255, 255, 0.12)'
+                                ? '1px solid #FFFFFF1F'
                                 : '1px solid #EFF0F6',
                             borderRadius: 3,
                             boxShadow: mode === 'dark'
-                                ? '0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                                : '0 12px 40px rgba(39, 43, 62, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+                                ? '0 12px 40px #00000080, inset 0 1px 0 #FFFFFF1A'
+                                : '0 12px 40px #272B3E26, inset 0 1px 0 #FFFFFFCC',
                             overflow: 'hidden',
                             '&::before': {
                                 content: '""',
@@ -178,8 +178,8 @@ export const NotificationCenter: React.FC = () => {
                                 right: 0,
                                 height: '1px',
                                 background: mode === 'dark'
-                                    ? 'linear-gradient(90deg, transparent, rgba(108, 111, 249, 0.5), transparent)'
-                                    : 'linear-gradient(90deg, transparent, rgba(108, 111, 249, 0.3), transparent)',
+                                    ? 'linear-gradient(90deg, transparent, #6C6FF980, transparent)'
+                                    : 'linear-gradient(90deg, transparent, #6C6FF94D, transparent)',
                             }
                         }
                     }
@@ -211,12 +211,12 @@ export const NotificationCenter: React.FC = () => {
                                 borderRadius: 2,
                                 minWidth: 'auto',
                                 backgroundColor: mode === 'dark'
-                                    ? 'rgba(108, 111, 249, 0.1)'
-                                    : 'rgba(108, 111, 249, 0.05)',
+                                    ? '#6C6FF91A'
+                                    : '#6C6FF90D',
                                 '&:hover': {
                                     backgroundColor: mode === 'dark'
-                                        ? 'rgba(108, 111, 249, 0.2)'
-                                        : 'rgba(108, 111, 249, 0.1)',
+                                        ? '#6C6FF933'
+                                        : '#6C6FF91A',
                                     transform: 'translateY(-1px)',
                                 }
                             }}
@@ -226,7 +226,7 @@ export const NotificationCenter: React.FC = () => {
                     )}
                 </Box>
                 <Divider sx={{
-                    borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
+                    borderColor: mode === 'dark' ? '#FFFFFF1A' : '#272B3E1A',
                     mb: 1
                 }} />
 
@@ -238,8 +238,8 @@ export const NotificationCenter: React.FC = () => {
                                 height: 64,
                                 borderRadius: '50%',
                                 backgroundColor: mode === 'dark'
-                                    ? 'rgba(108, 111, 249, 0.1)'
-                                    : 'rgba(108, 111, 249, 0.05)',
+                                    ? '#6C6FF91A'
+                                    : '#6C6FF90D',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
@@ -249,14 +249,14 @@ export const NotificationCenter: React.FC = () => {
                             <NotificationsIcon
                                 sx={{
                                     fontSize: 28,
-                                    color: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.4)'
+                                    color: mode === 'dark' ? '#6C6FF980' : '#6C6FF966'
                                 }}
                             />
                         </Box>
                         <Typography
                             variant="body1"
                             sx={{
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
+                                color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
                                 fontWeight: 600,
                                 mb: 0.5
                             }}
@@ -266,7 +266,7 @@ export const NotificationCenter: React.FC = () => {
                         <Typography
                             variant="body2"
                             sx={{
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.4)'
+                                color: mode === 'dark' ? '#FFFFFF80' : '#272B3E66'
                             }}
                         >
                             {t('notifications.noNotificationsDesc', 'Новых уведомлений нет')}
@@ -286,14 +286,14 @@ export const NotificationCenter: React.FC = () => {
                                     transition: 'all 0.2s ease',
                                     '&:hover': {
                                         backgroundColor: mode === 'dark'
-                                            ? 'rgba(255, 255, 255, 0.08)'
-                                            : 'rgba(108, 111, 249, 0.08)',
+                                            ? '#FFFFFF14'
+                                            : '#6C6FF914',
                                         transform: 'translateX(4px)',
                                     },
                                     '&:not(:last-child)': {
                                         borderBottom: mode === 'dark'
-                                            ? '1px solid rgba(255, 255, 255, 0.05)'
-                                            : '1px solid rgba(39, 43, 62, 0.05)'
+                                            ? '1px solid #FFFFFF0D'
+                                            : '1px solid #272B3E0D'
                                     }
                                 }}
                             >
@@ -324,7 +324,7 @@ export const NotificationCenter: React.FC = () => {
                                             <Typography
                                                 variant="body2"
                                                 sx={{
-                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.8)',
+                                                    color: mode === 'dark' ? '#FFFFFFCC' : '#272B3ECC',
                                                     mb: 1,
                                                     lineHeight: 1.4,
                                                     fontSize: '0.85rem'
@@ -335,7 +335,7 @@ export const NotificationCenter: React.FC = () => {
                                             <Typography
                                                 variant="caption"
                                                 sx={{
-                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)',
+                                                    color: mode === 'dark' ? '#FFFFFF80' : '#272B3E80',
                                                     fontSize: '0.75rem'
                                                 }}
                                             >

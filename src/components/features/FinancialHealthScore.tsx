@@ -70,8 +70,8 @@ export const FinancialHealthScore: React.FC<FinancialHealthScoreProps> = ({
                         borderRadius: 6,
                         mb: 2,
                         backgroundColor: mode === 'dark' 
-                            ? 'rgba(255, 255, 255, 0.1)' 
-                            : 'rgba(6, 0, 171, 0.1)',
+                            ? '#FFFFFF1A' 
+                            : '#0600AB1A',
                         '& .MuiLinearProgress-bar': {
                             borderRadius: 4,
                             background: `linear-gradient(90deg, ${getScoreColor(healthScore)} 0%, ${getScoreColor(healthScore)}CC 100%)`,

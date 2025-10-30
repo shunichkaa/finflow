@@ -77,9 +77,9 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                     sx={{
                         backdropFilter: 'blur(40px) saturate(180%)',
                         background: mode === 'dark' 
-                            ? 'rgba(15, 15, 35, 0.4)'
-                            : 'rgba(255, 255, 255, 0.2)',
-                        border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.2)',
+                            ? '#0F0F2366'
+                            : '#FFFFFF33',
+                        border: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #FFFFFF33',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         position: 'relative',
                         overflow: 'hidden',
@@ -92,16 +92,16 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                             left: 0,
                             right: 0,
                             height: '1px',
-                            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                            background: 'linear-gradient(90deg, transparent, #FFFFFF66, transparent)',
                         },
                         '&:hover': onFilterClick ? {
                             transform: 'translateY(-8px) scale(1.02)',
                             boxShadow: mode === 'dark' 
-                                ? '0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-                                : '0 20px 60px rgba(6, 0, 171, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                                ? '0 20px 60px #00000066, inset 0 1px 0 #FFFFFF33'
+                                : '0 20px 60px #0600AB33, inset 0 1px 0 #FFFFFF66',
                             background: mode === 'dark' 
-                                ? 'rgba(15, 15, 35, 0.6)'
-                                : 'rgba(255, 255, 255, 0.3)',
+                                ? '#0F0F2399'
+                                : '#FFFFFF4D',
                         } : {},
                     }}
                     onClick={() => onFilterClick && stat.filterType && onFilterClick(stat.filterType)}

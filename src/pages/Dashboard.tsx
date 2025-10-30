@@ -30,8 +30,8 @@ const Dashboard = () => {
 
     const getCardBackground = () => {
         return mode === 'dark'
-            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
-            : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)';
+            ? 'linear-gradient(135deg, #6C6FF933 0%, #6C6FF959 100%)'
+            : 'linear-gradient(135deg, #EFF0F6CC 0%, #EFF0F6E6 100%)';
     };
 
     const handleStatsCardClick = (type: TransactionType | 'all') => {
@@ -66,7 +66,7 @@ const Dashboard = () => {
                     <Typography
                         variant="body1"
                         sx={{
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
+                            color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99',
                         }}
                     >
                         {t('dashboard.subtitle')}
@@ -93,17 +93,17 @@ const Dashboard = () => {
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         background: getCardBackground(),
                         border: mode === 'dark'
-                            ? '1px solid rgba(108, 111, 249, 0.3)'
-                            : '1px solid rgba(239, 240, 246, 0.3)',
+                            ? '1px solid #6C6FF94D'
+                            : '1px solid #EFF0F64D',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(108, 111, 249, 0.15)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.2)',
+                            ? '0 8px 24px #6C6FF926'
+                            : '0 8px 24px #6C6FF933',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         '&:hover': {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 30px rgba(108, 111, 249, 0.25)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.3)',
+                                ? '0 12px 30px #6C6FF940'
+                                : '0 12px 30px #6C6FF94D',
                         }
                     }}
                     id="transactions-list"
@@ -137,12 +137,12 @@ const Dashboard = () => {
                                 background: '#6C6FF9',
                                 color: '#FFFFFF',
                                 cursor: 'pointer',
-                                boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
+                                boxShadow: '0 2px 8px #6C6FF94D',
                                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                 '&:hover': {
                                     background: '#6C6FF9',
                                     transform: 'scale(1.1)',
-                                    boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
+                                    boxShadow: '0 4px 12px #6C6FF966',
                                 },
                                 '&:active': {
                                     transform: 'scale(0.95)',

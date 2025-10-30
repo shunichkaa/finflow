@@ -30,8 +30,8 @@ export const Input: React.FC<InputProps> = ({
                     border-none
                     outline-none
                     transition-all duration-300
-                    shadow-[inset_-3px_-3px_8px_rgba(255,255,255,0.5),inset_3px_3px_8px_rgba(174,174,192,0.5)]
-                    focus:shadow-[inset_-4px_-4px_10px_rgba(255,255,255,0.6),inset_4px_4px_10px_rgba(174,174,192,0.6),0_0_0_3px_rgba(108,111,249,0.15)]
+                    shadow-[inset_-3px_-3px_8px_#FFFFFF80,inset_3px_3px_8px_#AEAEC080]
+                    focus:shadow-[inset_-4px_-4px_10px_#FFFFFF99,inset_4px_4px_10px_#AEAEC099,0_0_0_3px_#6C6FF926]
                     ${className}
                 `.trim().replace(/\s+/g, ' ')}
                 {...props}

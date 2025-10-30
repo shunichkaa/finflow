@@ -15,11 +15,11 @@ const GradientBar: React.FC<GradientBarProps> = ({
                                                      title,
                                                      subtitle,
                                                      height = 200,
-                                                     glowColor = 'rgba(255, 255, 255, 0.1)'
+                                                     glowColor = '#FFFFFF1A'
                                                  }) => {
     const { mode } = useThemeMode();
 
-    const borderColor = mode === 'dark' ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.08)';
+    const borderColor = mode === 'dark' ? '#FFFFFF2E' : '#00000014';
 
     return (
         <Box
@@ -29,7 +29,7 @@ const GradientBar: React.FC<GradientBarProps> = ({
                 width: '100%',
                 borderRadius: 4,
                 background: gradient,
-                boxShadow: `0 8px 32px ${glowColor}, 0 2px 8px rgba(0, 0, 0, 0.1)`,
+                boxShadow: `0 8px 32px ${glowColor}, 0 2px 8px #0000001A`,
                 backdropFilter: 'blur(20px) saturate(180%)',
                 border: `1px solid ${borderColor}`,
                 overflow: 'hidden',
@@ -41,7 +41,7 @@ const GradientBar: React.FC<GradientBarProps> = ({
                     left: 0,
                     right: 0,
                     height: '1px',
-                    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                    background: 'linear-gradient(90deg, transparent, #FFFFFF66, transparent)',
                 },
                 '&::after': {
                     content: '""',
@@ -56,7 +56,7 @@ const GradientBar: React.FC<GradientBarProps> = ({
                 },
                 '&:hover': {
                     transform: 'translateY(-4px) scale(1.02)',
-                    boxShadow: `0 16px 48px ${glowColor}, 0 4px 16px rgba(0, 0, 0, 0.15)`,
+                    boxShadow: `0 16px 48px ${glowColor}, 0 4px 16px #00000026`,
                 },
             }}
         >
@@ -74,7 +74,7 @@ const GradientBar: React.FC<GradientBarProps> = ({
                     sx={{
                         color: 'white',
                         fontWeight: 600,
-                        textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                        textShadow: '0 2px 8px #0000004D',
                         mb: subtitle ? 0.5 : 0,
                     }}
                 >
@@ -84,8 +84,8 @@ const GradientBar: React.FC<GradientBarProps> = ({
                     <Typography
                         variant="body2"
                         sx={{
-                            color: 'rgba(255, 255, 255, 0.8)',
-                            textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)',
+                            color: '#FFFFFFCC',
+                            textShadow: '0 1px 4px #0000004D',
                         }}
                     >
                         {subtitle}
@@ -109,25 +109,25 @@ export const GradientCharts: React.FC = () => {
             gradient: 'linear-gradient(135deg, #EFF0F6 0%, #6C6FF9 100%)',
             title: 'Доходы',
             subtitle: 'Месячная статистика',
-            glowColor: 'rgba(108, 111, 249, 0.3)',
+            glowColor: '#6C6FF94D',
         },
         {
             gradient: 'linear-gradient(135deg, #FFE5F1 0%, #6C6FF9 50%, #6C6FF9 100%)',
             title: 'Расходы',
             subtitle: 'По категориям',
-            glowColor: 'rgba(0, 51, 255, 0.3)',
+            glowColor: '#0033FF4D',
         },
         {
             gradient: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 50%, #6C6FF9 100%)',
             title: 'Бюджет',
             subtitle: 'Остаток средств',
-            glowColor: 'rgba(108, 111, 249, 0.3)',
+            glowColor: '#6C6FF94D',
         },
         {
             gradient: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 50%, #272B3E 100%)',
             title: 'Сбережения',
             subtitle: 'Накопления',
-            glowColor: 'rgba(0, 51, 255, 0.4)',
+            glowColor: '#0033FF66',
         },
     ];
 

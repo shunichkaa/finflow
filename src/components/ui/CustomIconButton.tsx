@@ -43,9 +43,9 @@ export const CustomIconButton: React.FC<CustomIconButtonProps> = ({
             case 'danger':
                 return {
                     backgroundColor: 'transparent',
-                    color: isDark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
+                    color: isDark ? '#FFFFFFB3' : '#00000099',
                     '&:hover': {
-                        backgroundColor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.04)',
+                        backgroundColor: isDark ? '#FFFFFF1A' : '#0000000A',
                         color: isDark ? '#ffffff' : '#000000',
                         transform: 'scale(1.05)',
                     },
@@ -55,7 +55,7 @@ export const CustomIconButton: React.FC<CustomIconButtonProps> = ({
                     backgroundColor: 'transparent',
                     color: isDark ? designTokens.colors.dark.text : designTokens.colors.light.text,
                     '&:hover': {
-                        backgroundColor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
+                        backgroundColor: isDark ? '#FFFFFF1A' : '#272B3E1A',
                         transform: 'scale(1.1)',
                     },
                 };

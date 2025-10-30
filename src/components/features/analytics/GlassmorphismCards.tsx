@@ -14,12 +14,12 @@ const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
                                                                  title,
                                                                  subtitle,
                                                                  icon,
-                                                                 gradient = 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-                                                                 glowColor = 'rgba(255, 255, 255, 0.1)'
+                                                                 gradient = 'linear-gradient(135deg, #FFFFFF1A 0%, #FFFFFF0D 100%)',
+                                                                 glowColor = '#FFFFFF1A'
                                                              }) => {
     const { mode } = useThemeMode();
 
-    const borderColor = mode === 'dark' ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.08)';
+    const borderColor = mode === 'dark' ? '#FFFFFF2E' : '#00000014';
 
     return (
         <Box
@@ -31,7 +31,7 @@ const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
                 background: gradient,
                 backdropFilter: 'blur(40px) saturate(180%)',
                 border: `1px solid ${borderColor}`,
-                boxShadow: `0 8px 32px ${glowColor}, 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)`,
+                boxShadow: `0 8px 32px ${glowColor}, 0 2px 8px #0000001A, inset 0 1px 0 #FFFFFF1A`,
                 overflow: 'hidden',
                 transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                 cursor: 'pointer',
@@ -42,7 +42,7 @@ const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
                     left: 0,
                     right: 0,
                     height: '1px',
-                    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
+                    background: 'linear-gradient(90deg, transparent, #FFFFFF66, transparent)',
                 },
                 '&::after': {
                     content: '""',
@@ -58,7 +58,7 @@ const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
                 },
                 '&:hover': {
                     transform: 'translateY(-8px) scale(1.02)',
-                    boxShadow: `0 20px 60px ${glowColor}, 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)`,
+                    boxShadow: `0 20px 60px ${glowColor}, 0 8px 20px #00000026, inset 0 1px 0 #FFFFFF33`,
                     '&::after': {
                         opacity: 0.1,
                     },
@@ -87,9 +87,9 @@ const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
                             width: 48,
                             height: 48,
                             borderRadius: '50%',
-                            background: 'rgba(255, 255, 255, 0.1)',
+                            background: '#FFFFFF1A',
                             backdropFilter: 'blur(10px)',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
+                            border: '1px solid #FFFFFF33',
                         }}
                     >
                         {icon}
@@ -102,7 +102,7 @@ const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
                         color: 'white',
                         fontWeight: 600,
                         textAlign: 'center',
-                        textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                        textShadow: '0 2px 8px #0000004D',
                         mb: subtitle ? 0.5 : 0,
                     }}
                 >
@@ -113,9 +113,9 @@ const GlassmorphismCard: React.FC<GlassmorphismCardProps> = ({
                     <Typography
                         variant="body2"
                         sx={{
-                            color: 'rgba(255, 255, 255, 0.8)',
+                            color: '#FFFFFFCC',
                             textAlign: 'center',
-                            textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)',
+                            textShadow: '0 1px 4px #0000004D',
                         }}
                     >
                         {subtitle}
@@ -133,38 +133,38 @@ export const GlassmorphismCards: React.FC = () => {
         {
             title: 'Development',
             subtitle: 'Low-code platforms',
-            gradient: 'linear-gradient(135deg, rgba(0, 51, 255, 0.2) 0%, rgba(0, 51, 255, 0.1) 100%)',
-            glowColor: 'rgba(0, 51, 255, 0.3)',
+            gradient: 'linear-gradient(135deg, #0033FF33 0%, #0033FF1A 100%)',
+            glowColor: '#0033FF4D',
         },
         {
             title: 'Support',
             subtitle: 'Customer service',
-            gradient: 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.1) 100%)',
-            glowColor: 'rgba(108, 111, 249, 0.3)',
+            gradient: 'linear-gradient(135deg, #6C6FF933 0%, #6C6FF91A 100%)',
+            glowColor: '#6C6FF94D',
         },
         {
             title: 'Design',
             subtitle: 'UI/UX Design',
-            gradient: 'linear-gradient(135deg, rgba(255, 204, 242, 0.2) 0%, rgba(255, 204, 242, 0.1) 100%)',
-            glowColor: 'rgba(255, 204, 242, 0.3)',
+            gradient: 'linear-gradient(135deg, #FFCCF233 0%, #FFCCF21A 100%)',
+            glowColor: '#FFCCF24D',
         },
         {
             title: 'DataLens',
             subtitle: 'Yandex',
-            gradient: 'linear-gradient(135deg, rgba(6, 0, 175, 0.2) 0%, rgba(6, 0, 175, 0.1) 100%)',
-            glowColor: 'rgba(6, 0, 175, 0.3)',
+            gradient: 'linear-gradient(135deg, #0600AF33 0%, #0600AF1A 100%)',
+            glowColor: '#0600AF4D',
         },
         {
             title: 'Data Integration',
             subtitle: 'Analytics',
-            gradient: 'linear-gradient(135deg, rgba(0, 0, 61, 0.2) 0%, rgba(0, 0, 61, 0.1) 100%)',
-            glowColor: 'rgba(0, 0, 61, 0.3)',
+            gradient: 'linear-gradient(135deg, #00003D33 0%, #00003D1A 100%)',
+            glowColor: '#00003D4D',
         },
         {
             title: 'Dashboards',
             subtitle: 'Reports',
-            gradient: 'linear-gradient(135deg, rgba(242, 230, 238, 0.2) 0%, rgba(242, 230, 238, 0.1) 100%)',
-            glowColor: 'rgba(242, 230, 238, 0.3)',
+            gradient: 'linear-gradient(135deg, #F2E6EE33 0%, #F2E6EE1A 100%)',
+            glowColor: '#F2E6EE4D',
         },
     ];
 

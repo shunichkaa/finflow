@@ -65,20 +65,20 @@ const Analytics: React.FC = () => {
 
     const getCardBackground = () => {
         return mode === 'dark'
-            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
-            : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)';
+            ? 'linear-gradient(135deg, #6C6FF933 0%, #6C6FF959 100%)'
+            : 'linear-gradient(135deg, #EFF0F6CC 0%, #EFF0F6E6 100%)';
     };
 
     const getPaperBackground = () => {
         return mode === 'dark'
-            ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.15) 0%, rgba(108, 111, 249, 0.25) 100%)'
-            : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)';
+            ? 'linear-gradient(135deg, #6C6FF926 0%, #6C6FF940 100%)'
+            : 'linear-gradient(135deg, #EFF0F6CC 0%, #EFF0F6E6 100%)';
     };
 
     const getTopExpensesBackground = () => {
         return mode === 'dark'
-            ? 'rgba(108, 111, 249, 0.15)'
-            : 'rgba(239, 240, 246, 0.8)';
+            ? '#6C6FF926'
+            : '#EFF0F6CC';
     };
 
     return (
@@ -108,14 +108,14 @@ const Analytics: React.FC = () => {
                 <Typography
                     variant="body1"
                     sx={{
-                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
+                        color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99',
                     }}
                 >
                     {t('analytics.subtitle', 'Анализ ваших финансов и трендов')}
                 </Typography>
                 <Typography variant="body1" sx={{
                     textAlign: 'left',
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
+                    color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99',
                 }}>
                     {t('analyticsDescription')}
                 </Typography>
@@ -126,11 +126,11 @@ const Analytics: React.FC = () => {
                     mb: 3,
                     p: 2,
                     borderRadius: 2,
-                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(239, 240, 246, 0.1)',
-                    border: mode === 'dark' ? '1px solid rgba(108, 111, 249, 0.3)' : '1px solid rgba(239, 240, 246, 0.3)'
+                    backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#EFF0F61A',
+                    border: mode === 'dark' ? '1px solid #6C6FF94D' : '1px solid #EFF0F64D'
                 }}>
                     <Typography variant="body2" sx={{
-                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.7)',
+                        color: mode === 'dark' ? '#FFFFFFCC' : '#272B3EB3',
                         textAlign: 'center'
                     }}>
                         {t('noDataForPeriod', 'Нет данных для выбранного периода. Показаны все доступные транзакции.')}
@@ -144,15 +144,15 @@ const Analytics: React.FC = () => {
                     exclusive
                     onChange={(_, value) => value && setPeriod(value)}
                     sx={{
-                        bgcolor: mode === 'dark' ? 'rgba(108, 111, 249, 0.2)' : 'rgba(255, 255, 255, 0.8)',
+                        bgcolor: mode === 'dark' ? '#6C6FF933' : '#FFFFFFCC',
                         borderRadius: 3,
                         p: 0.5,
                         boxShadow: mode === 'dark'
-                            ? '0 4px 12px rgba(108, 111, 249, 0.3)'
-                            : '0 4px 12px rgba(108, 111, 249, 0.2)',
+                            ? '0 4px 12px #6C6FF94D'
+                            : '0 4px 12px #6C6FF933',
                         border: mode === 'dark'
-                            ? '1px solid rgba(108, 111, 249, 0.4)'
-                            : '1px solid rgba(108, 111, 249, 0.3)',
+                            ? '1px solid #6C6FF966'
+                            : '1px solid #6C6FF94D',
                     }}
                 >
                     <ToggleButton
@@ -168,13 +168,13 @@ const Analytics: React.FC = () => {
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark'
-                                    ? 'rgba(108, 111, 249, 0.5)'
-                                    : 'rgba(108, 111, 249, 0.3)',
+                                    ? '#6C6FF980'
+                                    : '#6C6FF94D',
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&:hover': {
                                     bgcolor: mode === 'dark'
-                                        ? 'rgba(108, 111, 249, 0.6)'
-                                        : 'rgba(108, 111, 249, 0.4)',
+                                        ? '#6C6FF999'
+                                        : '#6C6FF966',
                                 }
                             }
                         }}
@@ -194,13 +194,13 @@ const Analytics: React.FC = () => {
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark'
-                                    ? 'rgba(108, 111, 249, 0.5)'
-                                    : 'rgba(108, 111, 249, 0.3)',
+                                    ? '#6C6FF980'
+                                    : '#6C6FF94D',
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&:hover': {
                                     bgcolor: mode === 'dark'
-                                        ? 'rgba(108, 111, 249, 0.6)'
-                                        : 'rgba(108, 111, 249, 0.4)',
+                                        ? '#6C6FF999'
+                                        : '#6C6FF966',
                                 }
                             }
                         }}
@@ -220,13 +220,13 @@ const Analytics: React.FC = () => {
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             '&.Mui-selected': {
                                 bgcolor: mode === 'dark'
-                                    ? 'rgba(108, 111, 249, 0.5)'
-                                    : 'rgba(108, 111, 249, 0.3)',
+                                    ? '#6C6FF980'
+                                    : '#6C6FF94D',
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&:hover': {
                                     bgcolor: mode === 'dark'
-                                        ? 'rgba(108, 111, 249, 0.6)'
-                                        : 'rgba(108, 111, 249, 0.4)',
+                                        ? '#6C6FF999'
+                                        : '#6C6FF966',
                                 }
                             }
                         }}
@@ -252,19 +252,19 @@ const Analytics: React.FC = () => {
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(108, 111, 249, 0.15)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.2)',
+                            ? '0 8px 24px #6C6FF926'
+                            : '0 8px 24px #6C6FF933',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 30px rgba(108, 111, 249, 0.25)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.3)',
+                                ? '0 12px 30px #6C6FF940'
+                                : '0 12px 30px #6C6FF94D',
                         }
                     }}
                 >
                     <CardContent sx={{p: 3}}>
                         <Typography variant="body2" sx={{
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(39, 43, 62, 0.8)',
+                            color: mode === 'dark' ? '#FFFFFFE6' : '#272B3ECC',
                             mb: 1
                         }}>
                             {t('income')}
@@ -284,19 +284,19 @@ const Analytics: React.FC = () => {
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(108, 111, 249, 0.15)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.2)',
+                            ? '0 8px 24px #6C6FF926'
+                            : '0 8px 24px #6C6FF933',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 30px rgba(108, 111, 249, 0.25)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.3)',
+                                ? '0 12px 30px #6C6FF940'
+                                : '0 12px 30px #6C6FF94D',
                         }
                     }}
                 >
                     <CardContent sx={{p: 3}}>
                         <Typography variant="body2" sx={{
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(39, 43, 62, 0.8)',
+                            color: mode === 'dark' ? '#FFFFFFE6' : '#272B3ECC',
                             mb: 1
                         }}>
                             {t('expense')}
@@ -316,19 +316,19 @@ const Analytics: React.FC = () => {
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(108, 111, 249, 0.15)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.2)',
+                            ? '0 8px 24px #6C6FF926'
+                            : '0 8px 24px #6C6FF933',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 30px rgba(108, 111, 249, 0.25)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.3)',
+                                ? '0 12px 30px #6C6FF940'
+                                : '0 12px 30px #6C6FF94D',
                         }
                     }}
                 >
                     <CardContent sx={{p: 3}}>
                         <Typography variant="body2" sx={{
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(39, 43, 62, 0.8)',
+                            color: mode === 'dark' ? '#FFFFFFE6' : '#272B3ECC',
                             mb: 1
                         }}>
                             {t('balance')}
@@ -348,19 +348,19 @@ const Analytics: React.FC = () => {
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(108, 111, 249, 0.15)'
-                            : '0 8px 24px rgba(108, 111, 249, 0.2)',
+                            ? '0 8px 24px #6C6FF926'
+                            : '0 8px 24px #6C6FF933',
                         '&:hover': {
                             transform: 'translateY(-4px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 30px rgba(108, 111, 249, 0.25)'
-                                : '0 12px 30px rgba(108, 111, 249, 0.3)',
+                                ? '0 12px 30px #6C6FF940'
+                                : '0 12px 30px #6C6FF94D',
                         }
                     }}
                 >
                     <CardContent sx={{p: 3}}>
                         <Typography variant="body2" sx={{
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(39, 43, 62, 0.8)',
+                            color: mode === 'dark' ? '#FFFFFFE6' : '#272B3ECC',
                             mb: 1
                         }}>
                             {t('savingsRate')}
@@ -386,8 +386,8 @@ const Analytics: React.FC = () => {
                         borderRadius: 3,
                         background: getPaperBackground(),
                         border: mode === 'dark'
-                            ? '1px solid rgba(108, 111, 249, 0.3)'
-                            : '1px solid rgba(239, 240, 246, 0.3)',
+                            ? '1px solid #6C6FF94D'
+                            : '1px solid #EFF0F64D',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         minHeight: '500px',
                         display: 'flex',
@@ -395,8 +395,8 @@ const Analytics: React.FC = () => {
                         '&:hover': {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark'
-                                ? '0 8px 25px rgba(108, 111, 249, 0.2)'
-                                : '0 8px 25px rgba(108, 111, 249, 0.15)',
+                                ? '0 8px 25px #6C6FF933'
+                                : '0 8px 25px #6C6FF926',
                         }
                     }}
                 >
@@ -424,8 +424,8 @@ const Analytics: React.FC = () => {
                         borderRadius: 3,
                         background: getPaperBackground(),
                         border: mode === 'dark'
-                            ? '1px solid rgba(108, 111, 249, 0.3)'
-                            : '1px solid rgba(239, 240, 246, 0.3)',
+                            ? '1px solid #6C6FF94D'
+                            : '1px solid #EFF0F64D',
                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                         minHeight: '500px',
                         display: 'flex',
@@ -433,8 +433,8 @@ const Analytics: React.FC = () => {
                         '&:hover': {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark'
-                                ? '0 8px 25px rgba(108, 111, 249, 0.2)'
-                                : '0 8px 25px rgba(108, 111, 249, 0.15)',
+                                ? '0 8px 25px #6C6FF933'
+                                : '0 8px 25px #6C6FF926',
                         }
                     }}
                 >
@@ -466,8 +466,8 @@ const Analytics: React.FC = () => {
                     position: 'relative',
                     overflow: 'hidden',
                     border: mode === 'dark'
-                        ? '1px solid rgba(108, 111, 249, 0.3)'
-                        : '1px solid rgba(239, 240, 246, 0.3)',
+                        ? '1px solid #6C6FF94D'
+                        : '1px solid #EFF0F64D',
                 }}
             >
                 <Box>
@@ -492,21 +492,21 @@ const Analytics: React.FC = () => {
                                         alignItems: 'center',
                                         p: {xs: 1.5, sm: 2},
                                         bgcolor: mode === 'dark'
-                                            ? 'rgba(232, 244, 253, 0.1)'
-                                            : 'rgba(255, 255, 255, 0.6)',
+                                            ? '#E8F4FD1A'
+                                            : '#FFFFFF99',
                                         borderRadius: 2,
                                         border: mode === 'dark'
-                                            ? '1px solid rgba(108, 111, 249, 0.4)'
-                                            : '1px solid rgba(239, 240, 246, 0.4)',
+                                            ? '1px solid #6C6FF966'
+                                            : '1px solid #EFF0F666',
                                         transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                                         '&:hover': {
                                             bgcolor: mode === 'dark'
-                                                ? 'rgba(232, 244, 253, 0.15)'
-                                                : 'rgba(255, 255, 255, 0.8)',
+                                                ? '#E8F4FD26'
+                                                : '#FFFFFFCC',
                                             transform: 'translateY(-2px)',
                                             boxShadow: mode === 'dark'
-                                                ? '0 8px 25px rgba(108, 111, 249, 0.3)'
-                                                : '0 8px 25px rgba(239, 240, 246, 0.3)',
+                                                ? '0 8px 25px #6C6FF94D'
+                                                : '0 8px 25px #EFF0F64D',
                                         }
                                     }}
                                 >
@@ -517,8 +517,8 @@ const Analytics: React.FC = () => {
                                                 height: {xs: 32, sm: 36},
                                                 borderRadius: '50%',
                                                 bgcolor: mode === 'dark'
-                                                    ? (index === 0 ? 'rgba(108, 111, 249, 0.5)' : index === 1 ? 'rgba(108, 111, 249, 0.4)' : index === 2 ? 'rgba(108, 111, 249, 0.3)' : index === 3 ? 'rgba(108, 111, 249, 0.2)' : 'rgba(108, 111, 249, 0.1)')
-                                                    : (index === 0 ? 'rgba(108, 111, 249, 0.3)' : index === 1 ? 'rgba(108, 111, 249, 0.25)' : index === 2 ? 'rgba(108, 111, 249, 0.2)' : index === 3 ? 'rgba(108, 111, 249, 0.15)' : 'rgba(108, 111, 249, 0.1)'),
+                                                    ? (index === 0 ? '#6C6FF980' : index === 1 ? '#6C6FF966' : index === 2 ? '#6C6FF94D' : index === 3 ? '#6C6FF933' : '#6C6FF91A')
+                                                    : (index === 0 ? '#6C6FF94D' : index === 1 ? '#6C6FF940' : index === 2 ? '#6C6FF933' : index === 3 ? '#6C6FF926' : '#6C6FF91A'),
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
@@ -526,8 +526,8 @@ const Analytics: React.FC = () => {
                                                 fontSize: {xs: '0.9rem', sm: '1rem'},
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 border: mode === 'dark'
-                                                    ? '2px solid rgba(108, 111, 249, 0.3)'
-                                                    : '2px solid rgba(108, 111, 249, 0.2)',
+                                                    ? '2px solid #6C6FF94D'
+                                                    : '2px solid #6C6FF933',
                                             }}
                                         >
                                             {index + 1}
@@ -538,14 +538,14 @@ const Analytics: React.FC = () => {
                                                 {getCategoryName(transaction.category, t)}
                                             </Typography>
                                             <Typography variant="caption" sx={{
-                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.7)',
+                                                color: mode === 'dark' ? '#FFFFFFCC' : '#272B3EB3',
                                                 fontSize: '0.7rem'
                                             }}>
                                                 {formatDate(transaction.date)}
                                             </Typography>
                                             {transaction.description && (
                                                 <Typography variant="caption" sx={{
-                                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.7)',
+                                                    color: mode === 'dark' ? '#FFFFFFCC' : '#272B3EB3',
                                                     display: 'block',
                                                     fontSize: '0.7rem'
                                                 }}>
@@ -566,7 +566,7 @@ const Analytics: React.FC = () => {
                         {filteredTransactions.filter(t => t.type === 'expense').length === 0 && (
                             <Box sx={{textAlign: 'center', py: 4}}>
                                 <Typography sx={{
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(39, 43, 62, 0.7)',
+                                    color: mode === 'dark' ? '#FFFFFFCC' : '#272B3EB3',
                                     fontSize: '1.1rem'
                                 }}>
                                     {t('noTransactionData')}

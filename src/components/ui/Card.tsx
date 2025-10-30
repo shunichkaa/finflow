@@ -36,9 +36,9 @@ export const Card: React.FC<CardProps> = ({
         };
       case 'glass':
         return {
-          backgroundColor: isDark ? 'rgba(39, 43, 62, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+          backgroundColor: isDark ? '#272B3ECC' : '#FFFFFFCC',
           backdropFilter: 'blur(10px)',
-          border: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)'}`,
+          border: `1px solid ${isDark ? '#FFFFFF1A' : '#272B3E1A'}`,
           boxShadow: isDark ? designTokens.shadows.glow : designTokens.shadows.lg,
         };
       default:

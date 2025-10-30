@@ -303,7 +303,7 @@ export default function Profile() {
                                 {nickname || session?.user?.email || t('user')}
                             </Typography>
                             <Typography variant="body2" sx={{
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
+                                color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
                                 mt: 0.5,
                                 fontSize: {xs: '0.75rem', sm: '0.875rem'},
                                 overflow: 'hidden',
@@ -319,7 +319,7 @@ export default function Profile() {
                         variant="outlined"
                         onClick={handleEditProfile}
                         sx={{
-                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                            borderColor: mode === 'dark' ? '#6C6FF980' : '#6C6FF980',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             borderRadius: 2,
                             minWidth: {xs: 40, sm: 48},
@@ -328,8 +328,8 @@ export default function Profile() {
                             p: 0,
                             flexShrink: 0,
                             '&:hover': {
-                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
-                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                borderColor: mode === 'dark' ? '#6C6FF9CC' : '#6C6FF9CC',
+                                backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#6C6FF91A',
                             }
                         }}
                     >
@@ -350,7 +350,7 @@ export default function Profile() {
                 <List>
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
-                            <CloudSync sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)', fontSize: {xs: 20, sm: 24}}}/>
+                            <CloudSync sx={{color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99', fontSize: {xs: 20, sm: 24}}}/>
                         </ListItemIcon>
                         <ListItemText
                             primary={t('sync.status')}
@@ -374,7 +374,7 @@ export default function Profile() {
                                 '&:hover': {
                                     background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
                                     transform: 'translateY(-1px)',
-                                    boxShadow: '0 6px 20px rgba(108, 111, 249, 0.4)',
+                                    boxShadow: '0 6px 20px #6C6FF966',
                                 },
                                 '&:disabled': {
                                     background: 'linear-gradient(135deg, #9E9E9E 0%, #757575 100%)',
@@ -402,7 +402,7 @@ export default function Profile() {
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
                             <Palette
-                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)'}}/>
+                                sx={{color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99'}}/>
                         </ListItemIcon>
                         <ListItemText
                             primary={t('theme.dark')}
@@ -428,7 +428,7 @@ export default function Profile() {
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
                             <Language
-                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)'}}/>
+                                sx={{color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99'}}/>
                         </ListItemIcon>
                         <ListItemText
                             primary={t('settings.language')}
@@ -459,7 +459,7 @@ export default function Profile() {
                     <ListItem sx={{py: 1.5}}>
                         <ListItemIcon>
                             <AttachMoney
-                                sx={{color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)'}}/>
+                                sx={{color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99'}}/>
                         </ListItemIcon>
                         <ListItemText
                             primary={t('settings.currency')}
@@ -523,15 +523,15 @@ export default function Profile() {
                         sx={{
                             flex: {xs: '1 1 100%', sm: '1 1 auto'},
                             minWidth: {xs: '100%', sm: '200px'},
-                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                            borderColor: mode === 'dark' ? '#6C6FF980' : '#6C6FF980',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             borderRadius: 2,
                             py: {xs: 1.25, sm: 1.5},
                             fontSize: {xs: '0.875rem', sm: '1rem'},
                             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
-                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
-                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                borderColor: mode === 'dark' ? '#6C6FF9CC' : '#6C6FF9CC',
+                                backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#6C6FF91A',
                                 transform: 'translateY(-2px)',
                             }
                         }}
@@ -546,15 +546,15 @@ export default function Profile() {
                         sx={{
                             flex: {xs: '1 1 100%', sm: '1 1 auto'},
                             minWidth: {xs: '100%', sm: '200px'},
-                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                            borderColor: mode === 'dark' ? '#6C6FF980' : '#6C6FF980',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             borderRadius: 2,
                             py: {xs: 1.25, sm: 1.5},
                             fontSize: {xs: '0.875rem', sm: '1rem'},
                             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
-                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.8)' : 'rgba(108, 111, 249, 0.8)',
-                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                borderColor: mode === 'dark' ? '#6C6FF9CC' : '#6C6FF9CC',
+                                backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#6C6FF91A',
                                 transform: 'translateY(-2px)',
                             }
                         }}
@@ -577,7 +577,7 @@ export default function Profile() {
                             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             '&:hover': {
                                 borderColor: '#FF3B3B',
-                                backgroundColor: 'rgba(255, 59, 59, 0.1)',
+                                backgroundColor: '#FF3B3B1A',
                                 transform: 'translateY(-2px)',
                             }
                         }}
@@ -619,10 +619,10 @@ export default function Profile() {
                             onClick={handleCloseEditModal}
                             size="small"
                             sx={{
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
+                                color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
                                 '&:hover': {
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(39, 43, 62, 0.1)',
+                                    backgroundColor: mode === 'dark' ? '#FFFFFF1A' : '#272B3E1A',
                                 }
                             }}
                         >
@@ -652,11 +652,11 @@ export default function Profile() {
                             onClick={() => fileInputRef.current?.click()}
                             sx={{
                                 maxWidth: 250,
-                                borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                borderColor: mode === 'dark' ? '#6C6FF980' : '#6C6FF980',
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&:hover': {
                                     borderColor: '#6C6FF9',
-                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                    backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#6C6FF91A',
                                 }
                             }}
                         >
@@ -706,12 +706,12 @@ export default function Profile() {
                             variant="outlined"
                             onClick={handleCloseEditModal}
                             sx={{
-                                borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(39, 43, 62, 0.3)',
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
+                                borderColor: mode === 'dark' ? '#FFFFFF4D' : '#272B3E4D',
+                                color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
                                 fontWeight: 'bold',
                                 '&:hover': {
-                                    borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)',
-                                    backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(39, 43, 62, 0.05)',
+                                    borderColor: mode === 'dark' ? '#FFFFFF80' : '#272B3E80',
+                                    backgroundColor: mode === 'dark' ? '#FFFFFF0D' : '#272B3E0D',
                                 }
                             }}
                         >

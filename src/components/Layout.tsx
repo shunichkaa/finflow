@@ -96,14 +96,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             flexDirection: 'column',
             height: '100vh',
             backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
-            borderRight: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
+            borderRight: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #EFF0F6',
             transition: 'all 0.3s ease',
             position: 'relative',
             overflow: 'hidden',
         }}>
             <Box sx={{
                 backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
-                borderBottom: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
+                borderBottom: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #EFF0F6',
                 position: 'relative',
             }}>
                 <Toolbar sx={{minHeight: {xs: 64, sm: 70}}}>
@@ -132,7 +132,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                 transform: sidebarOpen ? 'rotate(0deg)' : 'rotate(0deg)',
                                 '&:hover': {
-                                    background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                                    background: mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6',
                                     transform: 'scale(1.1)',
                                 },
                                 '& svg': {
@@ -227,17 +227,17 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     transition: 'background-color 0.2s ease, color 0.2s ease',
                                     background: 'transparent',
                                     '&.Mui-selected': {
-                                        background: mode === 'dark' ? 'rgba(108, 111, 249, 0.15)' : '#EFF0F6',
+                                        background: mode === 'dark' ? '#6C6FF926' : '#EFF0F6',
                                         color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                         '&:hover': {
-                                            background: mode === 'dark' ? 'rgba(108, 111, 249, 0.15)' : '#EFF0F6',
+                                            background: mode === 'dark' ? '#6C6FF926' : '#EFF0F6',
                                         }
                                     },
                                     '&:hover': {
-                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
+                                        background: mode === 'dark' ? '#FFFFFF0D' : '#EFF0F6',
                                     },
                                     '&:focus': {
-                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#EFF0F6',
+                                        background: mode === 'dark' ? '#FFFFFF0D' : '#EFF0F6',
                                     },
                                     '& .MuiTouchRipple-root': {
                                         display: 'none',
@@ -259,7 +259,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
             </Box>
 
             <Divider sx={{
-                borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6'
+                borderColor: mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6'
             }}/>
             <Box sx={{p: 2, display: 'flex', flexDirection: 'column', gap: 1.5}}>
                 <Button
@@ -285,10 +285,10 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         borderColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         fontWeight: 500,
-                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
+                        background: mode === 'dark' ? '#FFFFFF0D' : '#FFFFFF',
                         transition: 'all 0.2s ease',
                         '&:hover': {
-                            background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                            background: mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6',
                             borderColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                         },
                     }}
@@ -307,14 +307,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         fontWeight: 600,
                         textTransform: 'none',
                         boxShadow: mode === 'dark'
-                            ? '0 2px 8px rgba(108, 111, 249, 0.2)'
-                            : '0 2px 8px rgba(108, 111, 249, 0.2)',
+                            ? '0 2px 8px #6C6FF933'
+                            : '0 2px 8px #6C6FF933',
                         transition: 'all 0.2s ease',
                         '&:hover': {
                             background: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                             boxShadow: mode === 'dark'
-                                ? '0 4px 12px rgba(108, 111, 249, 0.3)'
-                                : '0 4px 12px rgba(108, 111, 249, 0.3)',
+                                ? '0 4px 12px #6C6FF94D'
+                                : '0 4px 12px #6C6FF94D',
                         },
                     }}
                 >
@@ -339,8 +339,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         zIndex: (theme) => theme.zIndex.drawer - 1,
                         backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                        borderBottom: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
-                        boxShadow: mode === 'dark' ? '0 2px 8px rgba(0, 0, 0, 0.3)' : '0 2px 8px rgba(39, 43, 62, 0.08)',
+                        borderBottom: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #EFF0F6',
+                        boxShadow: mode === 'dark' ? '0 2px 8px #0000004D' : '0 2px 8px #272B3E14',
                         transition: 'left 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         borderRadius: {xs: '20px', sm: 0},
                         margin: {xs: '8px', sm: 0},
@@ -368,7 +368,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     padding: 0,
                                     transition: 'all 0.2s ease',
                                     '&:hover': {
-                                        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)',
+                                        backgroundColor: mode === 'dark' ? '#FFFFFF14' : '#0000000A',
                                         transform: 'scale(1.06)',
                                     },
                                     '&:active': {
@@ -389,7 +389,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                     mr: 2,
                                     transition: 'all 0.2s ease',
                                     '&:hover': {
-                                        background: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                                        background: mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6',
                                     },
                                 }}
                             >
@@ -409,7 +409,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             transition: 'all 0.2s ease',
                                             '&:hover': {
-                                                background: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                                background: mode === 'dark' ? '#6C6FF91A' : '#6C6FF91A',
                                             },
                                         }}
                                     >
@@ -434,14 +434,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                             borderRadius: 2,
                                             px: 2,
                                             py: 0.75,
-                                            borderColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.5)' : 'rgba(108, 111, 249, 0.5)',
+                                            borderColor: mode === 'dark' ? '#6C6FF980' : '#6C6FF980',
                                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                             fontWeight: 500,
                                             textTransform: 'none',
                                             transition: 'all 0.2s ease',
                                             '&:hover': {
                                                 borderColor: '#6C6FF9',
-                                                backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                                backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#6C6FF91A',
                                             },
                                         }}
                                     >
@@ -467,13 +467,13 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             width: drawerWidth,
                             transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                             boxShadow: mode === 'dark' 
-                                ? '4px 0 24px rgba(0, 0, 0, 0.4)'
-                                : '4px 0 24px rgba(39, 43, 62, 0.15)',
+                                ? '4px 0 24px #00000066'
+                                : '4px 0 24px #272B3E26',
                             border: 'none',
                             overflowX: 'hidden',
                         },
                         '& .MuiBackdrop-root': {
-                            backgroundColor: 'rgba(39, 43, 62, 0.5)',
+                            backgroundColor: '#272B3E80',
                             backdropFilter: 'blur(4px)',
                             transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         }
@@ -495,8 +495,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                 boxShadow: sidebarOpen 
                                     ? (mode === 'dark' 
-                                        ? '2px 0 12px rgba(0, 0, 0, 0.2)' 
-                                        : '2px 0 12px rgba(39, 43, 62, 0.08)')
+                                        ? '2px 0 12px #00000033' 
+                                        : '2px 0 12px #272B3E14')
                                     : 'none',
                             },
                         }}

@@ -75,7 +75,7 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
             >
                 <Typography
                     sx={{
-                        color: noDataTextColor || (mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)'),
+                        color: noDataTextColor || (mode === 'dark' ? '#FFFFFFB3' : '#0600ABB3'),
                         textAlign: noDataTextAlign,
                         fontSize: '1rem'
                     }}
@@ -98,8 +98,8 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
             alignItems: 'center',
             justifyContent: 'center',
             background: mode === 'dark'
-                ? 'rgba(255, 255, 255, 0.02)'
-                : 'radial-gradient(circle at 50% 50%, rgba(108, 111, 249, 0.05) 0%, rgba(255, 204, 242, 0.03) 50%, transparent 100%)',
+                ? '#FFFFFF05'
+                : 'radial-gradient(circle at 50% 50%, #6C6FF90D 0%, #FFCCF208 50%, transparent 100%)',
             borderRadius: 4,
             overflow: 'visible'
         }}>
@@ -115,7 +115,7 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                 <Typography sx={{
                     fontSize: '14px',
                     fontWeight: 500,
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)',
+                    color: mode === 'dark' ? '#FFFFFFB3' : '#272B3EB3',
                     mb: 0.5,
                     fontFamily: 'Nunito, system-ui, sans-serif'
                 }}>
@@ -132,7 +132,7 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                 <Typography sx={{
                     fontSize: '12px',
                     fontWeight: 500,
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)',
+                    color: mode === 'dark' ? '#FFFFFF80' : '#272B3E80',
                     mt: 0.5,
                     fontFamily: 'Nunito, system-ui, sans-serif'
                 }}>
@@ -163,7 +163,7 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                                 key={`cell-${index}`}
                                 fill={GRADIENT_COLORS[index % GRADIENT_COLORS.length]}
                                 style={{
-                                    filter: 'drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.1))',
+                                    filter: 'drop-shadow(0px 4px 12px #0000001A)',
                                     transition: 'all 0.3s ease'
                                 }}
                             />
@@ -174,11 +174,11 @@ export const ExpensesPieChart: React.FC<ExpensesPieChartProps> = ({
                         separator=" "
                         contentStyle={{
                             backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
-                            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(108, 111, 249, 0.2)',
+                            border: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #6C6FF933',
                             borderRadius: '12px',
                             boxShadow: mode === 'dark'
-                                ? '0 8px 24px rgba(0, 0, 0, 0.5)'
-                                : '0 8px 24px rgba(108, 111, 249, 0.15)',
+                                ? '0 8px 24px #00000080'
+                                : '0 8px 24px #6C6FF926',
                             fontSize: '14px',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             padding: '12px 16px',

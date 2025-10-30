@@ -50,13 +50,13 @@ Body text: 14px+, Regular (400)
 ### Тени (минимальные, плоские)
 ```css
 /* Карточки */
-box-shadow: 0 2px 8px rgba(39, 43, 62, 0.08);
+box-shadow: 0 2px 8px #272B3E14;
 
 /* Hover состояние */
-box-shadow: 0 4px 12px rgba(39, 43, 62, 0.12);
+box-shadow: 0 4px 12px #272B3E1F;
 
 /* Кнопки */
-box-shadow: 0 1px 3px rgba(39, 43, 62, 0.1);
+box-shadow: 0 1px 3px #272B3E1A;
 ```
 
 ### Границы

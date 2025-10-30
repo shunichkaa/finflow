@@ -216,8 +216,8 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                 sx={{
                     p: 3,
                     background: mode === 'dark'
-                        ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
-                        : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)',
+                        ? 'linear-gradient(135deg, #6C6FF933 0%, #6C6FF959 100%)'
+                        : 'linear-gradient(135deg, #EFF0F6CC 0%, #EFF0F6E6 100%)',
                 }}
             >
                 <Alert severity="info" sx={{ mb: 2 }}>
@@ -227,26 +227,26 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
         );
     }
 
-    const enabledTextColor = 'rgb(39, 43, 62)';
-    const disabledTextColor = mode === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(39,43,62,0.7)';
+    const enabledTextColor = '#272B3E';
+    const disabledTextColor = mode === 'dark' ? '#FFFFFFB3' : '#272B3EB3';
 
     return (
         <GlassCard
             sx={{
                 p: { xs: 2, sm: 3 },
                 background: settings.enabled
-                    ? (mode === 'dark' ? 'rgba(15,15,35,0.95)' : '#FFFFFF')
+                    ? (mode === 'dark' ? '#0F0F23F2' : '#FFFFFF')
                     : (mode === 'dark'
-                        ? 'linear-gradient(135deg, rgba(108, 111, 249, 0.2) 0%, rgba(108, 111, 249, 0.35) 100%)'
-                        : 'linear-gradient(135deg, rgba(239, 240, 246, 0.8) 0%, rgba(239, 240, 246, 0.9) 100%)'),
-                border: mode === 'dark' ? '1px solid rgba(108, 111, 249, 0.25)' : '1px solid rgba(108, 111, 249, 0.2)',
+                        ? 'linear-gradient(135deg, #6C6FF933 0%, #6C6FF959 100%)'
+                        : 'linear-gradient(135deg, #EFF0F6CC 0%, #EFF0F6E6 100%)'),
+                border: mode === 'dark' ? '1px solid #6C6FF940' : '1px solid #6C6FF933',
                 transition: 'box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease',
                 color: settings.enabled ? enabledTextColor : disabledTextColor,
                 '&:hover': {
                     transform: 'translateY(-1px)',
                     boxShadow: mode === 'dark'
-                        ? '0 10px 24px rgba(108, 111, 249, 0.25)'
-                        : '0 10px 24px rgba(108, 111, 249, 0.25)'
+                        ? '0 10px 24px #6C6FF940'
+                        : '0 10px 24px #6C6FF940'
                 }
             }}
         >
@@ -280,8 +280,8 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                     p: 2,
                     borderRadius: 2,
                     backgroundColor: settings.enabled
-                        ? (mode === 'dark' ? 'rgba(255,255,255,0.04)' : '#FFFFFF')
-                        : (mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.05)'),
+                        ? (mode === 'dark' ? '#FFFFFF0A' : '#FFFFFF')
+                        : (mode === 'dark' ? '#6C6FF91A' : '#6C6FF90D'),
                 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                         <Typography
@@ -316,7 +316,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                         <Box>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
                                 <AccessTime sx={{ 
-                                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.6)',
+                                    color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
                                     fontSize: 20 
                                 }} />
                                 <Typography
@@ -344,20 +344,20 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                         sx={{
                                             minWidth: 140,
                                             backgroundColor: settings.enabled
-                                                ? (mode === 'dark' ? 'rgba(255,255,255,0.06)' : '#EFF0F6')
-                                                : (mode === 'dark' ? 'rgba(108, 111, 249, 0.15)' : 'rgba(108, 111, 249, 0.08)'),
+                                                ? (mode === 'dark' ? '#FFFFFF0F' : '#EFF0F6')
+                                                : (mode === 'dark' ? '#6C6FF926' : '#6C6FF914'),
                                             borderRadius: '12px',
-                                            border: `2px solid ${settings.enabled ? (mode === 'dark' ? 'rgba(255,255,255,0.12)' : '#EFF0F6') : (mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)' )}`,
+                                            border: `2px solid ${settings.enabled ? (mode === 'dark' ? '#FFFFFF1F' : '#EFF0F6') : (mode === 'dark' ? '#6C6FF94D' : '#6C6FF933' )}`,
                                             py: 1.25,
                                             px: 2,
                                             textAlign: 'center',
                                             transition: 'all 0.2s ease',
                                             '&:hover': {
                                                 backgroundColor: settings.enabled
-                                                    ? (mode === 'dark' ? 'rgba(255,255,255,0.1)' : '#EFF0F6')
-                                                    : (mode === 'dark' ? 'rgba(108, 111, 249, 0.2)' : 'rgba(108, 111, 249, 0.12)') ,
+                                                    ? (mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6')
+                                                    : (mode === 'dark' ? '#6C6FF933' : '#6C6FF91F') ,
                                                 transform: 'translateY(-1px)',
-                                                borderColor: settings.enabled ? (mode === 'dark' ? 'rgba(255,255,255,0.2)' : '#EFF0F6') : '#6C6FF9',
+                                                borderColor: settings.enabled ? (mode === 'dark' ? '#FFFFFF33' : '#EFF0F6') : '#6C6FF9',
                                             },
                                         }}
                                     >
@@ -387,7 +387,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                         textTransform: 'none',
                                         '&:hover': {
                                             borderColor: '#6C6FF9',
-                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.08)'
+                                            backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#6C6FF914'
                                         }
                                     }}
                                 >

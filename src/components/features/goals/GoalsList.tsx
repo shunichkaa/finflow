@@ -55,13 +55,13 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
         return (
             <Box sx={{ textAlign: 'center', py: 8 }}>
                 <Typography variant="h6" sx={{ 
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)', 
+                    color: mode === 'dark' ? '#FFFFFFB3' : '#0600ABB3', 
                     mb: 2 
                 }}>
                     {t('noGoals', 'У вас пока нет целей')}
                 </Typography>
                 <Typography variant="body2" sx={{ 
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 0, 171, 0.5)',
+                    color: mode === 'dark' ? '#FFFFFF80' : '#0600AB80',
                     mb: 3
                 }}>
                     {t('createFirstGoal', 'Создайте свою первую цель для начала накоплений')}
@@ -72,8 +72,8 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                     onClick={onAddGoal}
                     sx={{
                         backgroundColor: mode === 'dark' 
-                            ? 'rgba(100, 200, 150, 0.8)'
-                            : 'rgba(254, 222, 233, 0.8)',
+                            ? '#64C896CC'
+                            : '#FEDEE9CC',
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         fontWeight: '600',
                         px: 4,
@@ -82,8 +82,8 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                         textTransform: 'none',
                         '&:hover': {
                             backgroundColor: mode === 'dark' 
-                                ? 'rgba(100, 200, 150, 0.9)'
-                                : 'rgba(254, 222, 233, 0.9)',
+                                ? '#64C896E6'
+                                : '#FEDEE9E6',
                             transform: 'translateY(-2px)',
                         }
                     }}
@@ -106,18 +106,18 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                             sx={{
                                 borderRadius: 3,
                                 background: mode === 'dark' 
-                                    ? 'rgba(6, 0, 171, 0.8)'
-                                    : 'rgba(234, 234, 244, 0.8)',
+                                    ? '#0600ABCC'
+                                    : '#EAEAF4CC',
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 border: mode === 'dark' 
-                                    ? '1px solid rgba(6, 0, 171, 0.3)'
-                                    : '1px solid rgba(234, 234, 244, 0.3)',
+                                    ? '1px solid #0600AB4D'
+                                    : '1px solid #EAEAF44D',
                                 transition: 'all 0.3s ease',
                                 '&:hover': {
                                     transform: 'translateY(-2px)',
                                     boxShadow: mode === 'dark' 
-                                        ? '0 8px 25px rgba(6, 0, 171, 0.3)'
-                                        : '0 8px 25px rgba(234, 234, 244, 0.3)',
+                                        ? '0 8px 25px #0600AB4D'
+                                        : '0 8px 25px #EAEAF44D',
                                 }
                             }}
                         >
@@ -132,7 +132,7 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                         </Typography>
                                         {goal.description && (
                                             <Typography variant="body2" sx={{ 
-                                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
+                                                color: mode === 'dark' ? '#FFFFFFB3' : '#0600ABB3',
                                                 mb: 2
                                             }}>
                                                 {goal.description}
@@ -145,11 +145,11 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                             size="small"
                                             onClick={() => onEditGoal(goal)}
                                             sx={{
-                                                color: mode === 'dark' ? 'rgba(100, 200, 150, 0.8)' : 'rgba(254, 222, 233, 0.8)',
+                                                color: mode === 'dark' ? '#64C896CC' : '#FEDEE9CC',
                                                 '&:hover': {
                                                     backgroundColor: mode === 'dark' 
-                                                        ? 'rgba(100, 200, 150, 0.1)' 
-                                                        : 'rgba(254, 222, 233, 0.1)',
+                                                        ? '#64C8961A' 
+                                                        : '#FEDEE91A',
                                                 }
                                             }}
                                         >
@@ -159,11 +159,11 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                             size="small"
                                             onClick={() => handleDelete(goal.id)}
                                             sx={{
-                                                color: mode === 'dark' ? 'rgba(220, 100, 100, 0.8)' : 'rgba(255, 185, 141, 0.8)',
+                                                color: mode === 'dark' ? '#DC6464CC' : '#FFB98DCC',
                                                 '&:hover': {
                                                     backgroundColor: mode === 'dark' 
-                                                        ? 'rgba(220, 100, 100, 0.1)' 
-                                                        : 'rgba(255, 185, 141, 0.1)',
+                                                        ? '#DC64641A' 
+                                                        : '#FFB98D1A',
                                                 }
                                             }}
                                         >
@@ -179,8 +179,8 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                             size="small"
                                             sx={{
                                                 backgroundColor: goal.isCompleted 
-                                                    ? (mode === 'dark' ? 'rgba(100, 200, 150, 0.3)' : 'rgba(254, 222, 233, 0.5)')
-                                                    : (mode === 'dark' ? 'rgba(255, 185, 141, 0.3)' : 'rgba(255, 185, 141, 0.5)'),
+                                                    ? (mode === 'dark' ? '#64C8964D' : '#FEDEE980')
+                                                    : (mode === 'dark' ? '#FFB98D4D' : '#FFB98D80'),
                                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                                 fontWeight: 'bold'
                                             }}
@@ -192,11 +192,11 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                                 variant="outlined"
                                                 sx={{
                                                     borderColor: _daysLeft > 0 
-                                                        ? (mode === 'dark' ? 'rgba(100, 200, 150, 0.5)' : 'rgba(254, 222, 233, 0.5)')
-                                                        : (mode === 'dark' ? 'rgba(220, 100, 100, 0.5)' : 'rgba(255, 185, 141, 0.5)'),
+                                                        ? (mode === 'dark' ? '#64C89680' : '#FEDEE980')
+                                                        : (mode === 'dark' ? '#DC646480' : '#FFB98D80'),
                                                     color: _daysLeft > 0 
-                                                        ? (mode === 'dark' ? 'rgba(100, 200, 150, 0.8)' : 'rgba(254, 222, 233, 0.8)')
-                                                        : (mode === 'dark' ? 'rgba(220, 100, 100, 0.8)' : 'rgba(255, 185, 141, 0.8)'),
+                                                        ? (mode === 'dark' ? '#64C896CC' : '#FEDEE9CC')
+                                                        : (mode === 'dark' ? '#DC6464CC' : '#FFB98DCC'),
                                                 }}
                                             />
                                         )}
@@ -204,7 +204,7 @@ export const GoalsList: React.FC<GoalsListProps> = ({ onEditGoal, onAddGoal }) =
                                     
                                     {goal.targetDate && (
                                         <Typography variant="caption" sx={{ 
-                                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 0, 171, 0.5)'
+                                            color: mode === 'dark' ? '#FFFFFF80' : '#0600AB80'
                                         }}>
                                             {t('targetDate', 'Цель до')}: {formatDate(goal.targetDate)}
                                         </Typography>

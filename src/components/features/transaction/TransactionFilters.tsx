@@ -52,11 +52,11 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
             p: 2.5, 
             mb: 2,
             backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
-            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #EFF0F6',
+            border: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #EFF0F6',
             borderRadius: 3,
             boxShadow: mode === 'dark' 
-                ? '0 2px 8px rgba(0, 0, 0, 0.3)' 
-                : '0 2px 8px rgba(39, 43, 62, 0.08)',
+                ? '0 2px 8px #0000004D' 
+                : '0 2px 8px #272B3E14',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         }}>
             <Box sx={{ 
@@ -105,11 +105,11 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                         flex: { sm: '1 1 auto' },
                         maxWidth: { sm: 280 },
                         '& .MuiOutlinedInput-root': {
-                            backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
+                            backgroundColor: mode === 'dark' ? '#FFFFFF0D' : '#FFFFFF',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         },
                         '& .MuiInputLabel-root': {
-                            color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
+                            color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E',
                             '&.Mui-focused': {
                                 color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                             },

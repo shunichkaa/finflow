@@ -54,14 +54,14 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
                 borderRadius: 4,
                 backdropFilter: `blur(${intensityValues.blur}) saturate(${intensityValues.saturation})`,
                 backgroundColor: mode === 'dark' 
-                    ? 'rgba(28, 28, 30, 0.8)'
-                    : 'rgba(252, 248, 245, 0.7)',
+                    ? '#1C1C1ECC'
+                    : '#FCF8F5B3',
                 border: mode === 'dark'
-                    ? '1px solid rgba(255, 255, 255, 0.1)'
-                    : '1px solid rgba(252, 248, 245, 0.9)',
+                    ? '1px solid #FFFFFF1A'
+                    : '1px solid #FCF8F5E6',
                 boxShadow: mode === 'dark'
-                    ? `${intensityValues.shadow} rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)`
-                    : `${intensityValues.shadow} rgba(31, 38, 135, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)`,
+                    ? `${intensityValues.shadow} #0000004D, 0 2px 8px #00000033, inset 0 1px 0 #FFFFFF1A`
+                    : `${intensityValues.shadow} #1F268726, 0 2px 8px #0000001A, inset 0 1px 0 #FFFFFF99`,
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 position: 'relative',
                 overflow: 'hidden',
@@ -73,18 +73,18 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
                         left: '-100%',
                         width: '100%',
                         height: '100%',
-                        background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                        background: 'linear-gradient(90deg, transparent, #FFFFFF33, transparent)',
                         transition: 'left 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                     },
                 }),
                 '&:hover': {
                     transform: 'translateY(-2px)',
                     boxShadow: mode === 'dark'
-                        ? `${intensityValues.hoverShadow} rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15)`
-                        : `${intensityValues.hoverShadow} rgba(31, 38, 135, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6)`,
+                        ? `${intensityValues.hoverShadow} #00000066, 0 4px 12px #0000004D, inset 0 1px 0 #FFFFFF26`
+                        : `${intensityValues.hoverShadow} #1F268733, 0 4px 12px #00000026, inset 0 1px 0 #FFFFFF99`,
                     backgroundColor: mode === 'dark' 
-                        ? 'rgba(28, 28, 30, 0.9)'
-                        : 'rgba(252, 248, 245, 0.85)',
+                        ? '#1C1C1EE6'
+                        : '#FCF8F5D9',
                     ...(shimmer && {
                         '&::before': {
                             left: '100%',

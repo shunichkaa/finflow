@@ -95,7 +95,7 @@ export const ExportMenu: React.FC = () => {
                     sx: {
                         bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                         backdropFilter: 'blur(10px)',
-                        border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.1)',
+                        border: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #0000001A',
                     }
                 }}
             >

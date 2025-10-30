@@ -154,7 +154,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                 width: '100%'
             }}>
                 <Typography sx={{
-                    color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)',
+                    color: mode === 'dark' ? '#FFFFFFB3' : '#0600ABB3',
                     fontSize: '1rem',
                     textAlign: 'center'
                 }}>
@@ -174,8 +174,8 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
             alignItems: 'center',
             justifyContent: 'center',
             background: mode === 'dark'
-                ? 'rgba(255, 255, 255, 0.02)'
-                : 'radial-gradient(circle at 50% 50%, rgba(108, 111, 249, 0.05) 0%, rgba(255, 204, 242, 0.03) 50%, transparent 100%)',
+                ? '#FFFFFF05'
+                : 'radial-gradient(circle at 50% 50%, #6C6FF90D 0%, #FFCCF208 50%, transparent 100%)',
             borderRadius: 4,
             overflow: 'hidden'
         }}>
@@ -203,7 +203,7 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                     </defs>
                     <CartesianGrid
                         strokeDasharray="8 8"
-                        stroke={mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(108, 111, 249, 0.15)'}
+                        stroke={mode === 'dark' ? '#FFFFFF14' : '#6C6FF926'}
                         strokeWidth={1}
                     />
                     <XAxis
@@ -215,11 +215,11 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         }}
                         interval={period === 'year' ? 1 : period === 'month' ? 4 : 0}
                         axisLine={{
-                            stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(108, 111, 249, 0.2)',
+                            stroke: mode === 'dark' ? '#FFFFFF26' : '#6C6FF933',
                             strokeWidth: 1.5
                         }}
                         tickLine={{
-                            stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(108, 111, 249, 0.2)'
+                            stroke: mode === 'dark' ? '#FFFFFF26' : '#6C6FF933'
                         }}
                     />
                     <YAxis
@@ -230,11 +230,11 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         }}
                         tickFormatter={formatYAxisTick}
                         axisLine={{
-                            stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(108, 111, 249, 0.2)',
+                            stroke: mode === 'dark' ? '#FFFFFF26' : '#6C6FF933',
                             strokeWidth: 1.5
                         }}
                         tickLine={{
-                            stroke: mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(108, 111, 249, 0.2)'
+                            stroke: mode === 'dark' ? '#FFFFFF26' : '#6C6FF933'
                         }}
                         width={40}
                         domain={[0, maxValue]}
@@ -245,13 +245,13 @@ export const IncomeExpenseTrendChart: React.FC<IncomeExpenseTrendChartProps> = (
                         formatter={(value: number) => [formatCurrency(value, currency), '']}
                         labelFormatter={(label) => `${t('date')}: ${label}`}
                         contentStyle={{
-                            backgroundColor: mode === 'dark' ? '#272B3E' : 'rgba(252, 248, 245, 0.98)',
-                            border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(108, 111, 249, 0.3)',
+                            backgroundColor: mode === 'dark' ? '#272B3E' : '#FCF8F5FA',
+                            border: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #6C6FF94D',
                             borderRadius: '16px',
                             backdropFilter: 'blur(40px) saturate(180%)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
-                                : '0 12px 40px rgba(108, 111, 249, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+                                ? '0 12px 40px #00000080, inset 0 1px 0 #FFFFFF1A'
+                                : '0 12px 40px #6C6FF94D, inset 0 1px 0 #FFFFFF99',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             padding: '12px 16px',
                             fontWeight: 600,

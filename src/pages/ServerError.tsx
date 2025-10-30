@@ -27,7 +27,7 @@ const ServerError: React.FC = () => {
                     textAlign: 'center',
                     borderRadius: 3,
                     backgroundColor: '#F5F6FA',
-                    border: '1px solid rgba(148, 163, 184, 0.1)',
+                    border: '1px solid #94A3B81A',
                 }}
             >
                 {}
@@ -61,8 +61,8 @@ const ServerError: React.FC = () => {
                         size="large"
                         sx={{
                         background: mode === 'dark' 
-                            ? 'rgba(101, 70, 51, 0.5)'
-                            : 'rgba(234, 234, 244, 0.5)',
+                            ? '#65463380'
+                            : '#EAEAF480',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             fontWeight: 'bold',
                             px: 4,
@@ -70,12 +70,12 @@ const ServerError: React.FC = () => {
                             borderRadius: 2,
                             '&:hover': {
                             background: mode === 'dark' 
-                                ? 'rgba(101, 70, 51, 0.7)'
-                                : 'rgba(234, 234, 244, 0.7)',
+                                ? '#654633B3'
+                                : '#EAEAF4B3',
                                 transform: 'translateY(-2px)',
                                 boxShadow: mode === 'dark' 
-                                    ? '0 6px 20px rgba(101, 70, 51, 0.4)'
-                                    : '0 6px 20px rgba(234, 234, 244, 0.4)',
+                                    ? '0 6px 20px #65463366'
+                                    : '0 6px 20px #EAEAF466',
                             },
                         }}
                     >
@@ -93,7 +93,7 @@ const ServerError: React.FC = () => {
                             borderRadius: 2,
                             '&:hover': {
                                 borderColor: '#272B3E',
-                                backgroundColor: 'rgba(100, 116, 139, 0.04)',
+                                backgroundColor: '#64748B0A',
                             },
                         }}
                     >

@@ -102,11 +102,11 @@ export const DatePickerField: React.FC<DatePickerFieldProps> = ({
                             maxWidth: fullWidth ? '100%' : {xs: 120, sm: 130},
                             flex: fullWidth ? '1 1 auto' : '0 0 auto',
                             '& .MuiOutlinedInput-root': {
-                                backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF',
+                                backgroundColor: mode === 'dark' ? '#FFFFFF0D' : '#FFFFFF',
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                             },
                             '& .MuiInputLabel-root': {
-                                color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : '#272B3E',
+                                color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E',
                                 '&.Mui-focused': {
                                     color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                 },

@@ -28,9 +28,9 @@ export const Button: React.FC<ButtonProps> = ({
             bg-white
             text-[#272B3E]
             rounded-[20px] md:rounded-[24px]
-            shadow-[-10px_-10px_20px_rgba(255,255,255,0.8),10px_10px_20px_rgba(174,174,192,0.4)]
-            hover:shadow-[-12px_-12px_24px_rgba(255,255,255,0.9),12px_12px_24px_rgba(174,174,192,0.5)]
-            active:shadow-[inset_-5px_-5px_10px_rgba(255,255,255,0.5),inset_5px_5px_10px_rgba(174,174,192,0.5)]
+            shadow-[-10px_-10px_20px_#FFFFFFCC,10px_10px_20px_#AEAEC066]
+            hover:shadow-[-12px_-12px_24px_#FFFFFFE6,12px_12px_24px_#AEAEC080]
+            active:shadow-[inset_-5px_-5px_10px_#FFFFFF80,inset_5px_5px_10px_#AEAEC080]
             hover:translate-y-[-1px]
             active:translate-y-0
         `.trim().replace(/\s+/g, ' '),
@@ -38,16 +38,16 @@ export const Button: React.FC<ButtonProps> = ({
             bg-[#F5F6FA]
             text-[#272B3E]
             rounded-[20px] md:rounded-[24px]
-            shadow-[-8px_-8px_16px_rgba(255,255,255,0.8),8px_8px_16px_rgba(174,174,192,0.3)]
-            hover:shadow-[-10px_-10px_20px_rgba(255,255,255,0.9),10px_10px_20px_rgba(174,174,192,0.4)]
-            active:shadow-[inset_-5px_-5px_10px_rgba(255,255,255,0.5),inset_5px_5px_10px_rgba(174,174,192,0.5)]
+            shadow-[-8px_-8px_16px_#FFFFFFCC,8px_8px_16px_#AEAEC04D]
+            hover:shadow-[-10px_-10px_20px_#FFFFFFE6,10px_10px_20px_#AEAEC066]
+            active:shadow-[inset_-5px_-5px_10px_#FFFFFF80,inset_5px_5px_10px_#AEAEC080]
         `.trim().replace(/\s+/g, ' '),
         icon: `
             bg-white
             rounded-[16px]
-            shadow-[-8px_-8px_16px_rgba(255,255,255,0.8),8px_8px_16px_rgba(174,174,192,0.3)]
-            hover:shadow-[-10px_-10px_20px_rgba(255,255,255,0.9),10px_10px_20px_rgba(174,174,192,0.4)]
-            active:shadow-[inset_-5px_-5px_10px_rgba(255,255,255,0.5),inset_5px_5px_10px_rgba(174,174,192,0.5)]
+            shadow-[-8px_-8px_16px_#FFFFFFCC,8px_8px_16px_#AEAEC04D]
+            hover:shadow-[-10px_-10px_20px_#FFFFFFE6,10px_10px_20px_#AEAEC066]
+            active:shadow-[inset_-5px_-5px_10px_#FFFFFF80,inset_5px_5px_10px_#AEAEC080]
             flex items-center justify-center
         `.trim().replace(/\s+/g, ' ')
     };

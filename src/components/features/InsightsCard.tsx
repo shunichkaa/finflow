@@ -49,7 +49,7 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
         <Card sx={{ 
             borderRadius: 3, 
             boxShadow: 2,
-            backgroundColor: mode === 'dark' ? 'rgba(15, 15, 35, 0.8)' : 'rgba(255, 255, 255, 0.25)',
+            backgroundColor: mode === 'dark' ? '#0F0F23CC' : '#FFFFFF40',
             color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
         }}>
             <CardContent>
@@ -64,7 +64,7 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
                             mb: 2,
                             p: 1.5,
                             borderRadius: 2,
-                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(168, 163, 246, 0.05)'
+                            backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#A8A3F60D'
                         }}
                     >
                         <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -88,7 +88,7 @@ export const InsightsCard: React.FC<InsightsCardProps> = ({ insights }) => {
                             {insight.title}
                         </Typography>
 
-                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.7)' }}>
+                        <Typography variant="body2" sx={{ color: mode === 'dark' ? '#FFFFFFB3' : '#0600ABB3' }}>
                             {insight.description}
                         </Typography>
                     </Box>

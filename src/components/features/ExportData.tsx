@@ -49,21 +49,21 @@ export const ExportData: React.FC = () => {
                 onClick={handleClick}
                 sx={{
                  background: mode === 'dark'
-                     ? 'rgba(255, 185, 141, 0.8)'
-                     : 'rgba(255, 185, 141, 0.8)',
+                     ? '#FFB98DCC'
+                     : '#FFB98DCC',
                     color: mode === 'dark' ? '#272B3E' : '#272B3E',
                     fontWeight: 'bold',
                     border: mode === 'dark' 
-                        ? '2px solid rgba(255, 185, 141, 0.6)'
-                        : '2px solid rgba(255, 185, 141, 0.6)',
+                        ? '2px solid #FFB98D99'
+                        : '2px solid #FFB98D99',
                     '&:hover': {
                         background: mode === 'dark' 
-                            ? 'rgba(255, 185, 141, 1)'
-                            : 'rgba(255, 185, 141, 1)',
+                            ? '#FFB98DFF'
+                            : '#FFB98DFF',
                         transform: 'translateY(-2px)',
                         boxShadow: mode === 'dark' 
-                            ? '0 8px 25px rgba(255, 185, 141, 0.4)'
-                            : '0 8px 25px rgba(255, 185, 141, 0.4)',
+                            ? '0 8px 25px #FFB98D66'
+                            : '0 8px 25px #FFB98D66',
                     }
                 }}
             >

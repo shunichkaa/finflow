@@ -49,7 +49,7 @@ const lightThemeOptions: ThemeOptions = {
             secondary: '#272B3E', // Midnight Blue (используем тот же)
             disabled: '#EFF0F6', // Athens Gray
         },
-        divider: 'rgba(39, 43, 62, 0.1)',
+        divider: '#272B3E1A',
     },
     typography: {
         fontFamily: [
@@ -178,28 +178,28 @@ const lightThemeOptions: ThemeOptions = {
                     background: '#FFFFFF',
                     border: 'none',
                     color: '#272B3E',
-                    boxShadow: '0 1px 3px rgba(39, 43, 62, 0.1)',
+                    boxShadow: '0 1px 3px #272B3E1A',
                     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                     '&:hover': {
-                        boxShadow: '0 4px 12px rgba(39, 43, 62, 0.12)',
+                        boxShadow: '0 4px 12px #272B3E1F',
                         transform: 'translateY(-1px)',
                     },
                     '&:active': {
                         transform: 'translateY(0)',
-                        boxShadow: '0 1px 3px rgba(39, 43, 62, 0.1)',
+                        boxShadow: '0 1px 3px #272B3E1A',
                     },
                 },
                 contained: {
                     background: '#6C6FF9',
                     color: '#FFFFFF',
                     border: 'none',
-                    boxShadow: '0 2px 8px rgba(108, 111, 249, 0.2)',
+                    boxShadow: '0 2px 8px #6C6FF933',
                     '&:hover': {
                         background: '#6C6FF9',
-                        boxShadow: '0 4px 12px rgba(108, 111, 249, 0.3)',
+                        boxShadow: '0 4px 12px #6C6FF94D',
                     },
                     '&:active': {
-                        boxShadow: '0 1px 4px rgba(108, 111, 249, 0.2)',
+                        boxShadow: '0 1px 4px #6C6FF933',
                     },
                 },
                 outlined: {
@@ -224,10 +224,10 @@ const lightThemeOptions: ThemeOptions = {
                     background: '#FFFFFF',
                     border: 'none',
                     padding: '24px',
-                    boxShadow: '0 2px 8px rgba(39, 43, 62, 0.08)',
+                    boxShadow: '0 2px 8px #272B3E14',
                     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                     '&:hover': {
-                        boxShadow: '0 4px 12px rgba(39, 43, 62, 0.12)',
+                        boxShadow: '0 4px 12px #272B3E1F',
                         transform: 'translateY(-2px)',
                     },
                 },
@@ -239,17 +239,17 @@ const lightThemeOptions: ThemeOptions = {
                     borderRadius: 12,
                     background: '#FFFFFF',
                     border: 'none',
-                    boxShadow: '0 2px 8px rgba(39, 43, 62, 0.08)',
+                    boxShadow: '0 2px 8px #272B3E14',
                     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 },
                 elevation1: {
-                    boxShadow: '0 1px 4px rgba(39, 43, 62, 0.06)',
+                    boxShadow: '0 1px 4px #272B3E0F',
                 },
                 elevation2: {
-                    boxShadow: '0 2px 8px rgba(39, 43, 62, 0.08)',
+                    boxShadow: '0 2px 8px #272B3E14',
                 },
                 elevation3: {
-                    boxShadow: '0 4px 12px rgba(39, 43, 62, 0.12)',
+                    boxShadow: '0 4px 12px #272B3E1F',
                 },
             },
         },
@@ -258,7 +258,7 @@ const lightThemeOptions: ThemeOptions = {
                 root: {
                     background: '#FFFFFF',
                     borderBottom: 'none',
-                    boxShadow: '0 2px 8px rgba(39, 43, 62, 0.08)',
+                    boxShadow: '0 2px 8px #272B3E14',
                     color: '#272B3E',
                 },
             },
@@ -268,7 +268,7 @@ const lightThemeOptions: ThemeOptions = {
                 paper: {
                     background: '#FFFFFF',
                     borderRight: 'none',
-                    boxShadow: '2px 0 8px rgba(39, 43, 62, 0.08)',
+                    boxShadow: '2px 0 8px #272B3E14',
                 },
             },
         },
@@ -320,7 +320,7 @@ const lightThemeOptions: ThemeOptions = {
                     borderRadius: 8,
                     background: '#FFFFFF',
                     border: 'none',
-                    boxShadow: '0 4px 12px rgba(39, 43, 62, 0.12)',
+                    boxShadow: '0 4px 12px #272B3E1F',
                     marginTop: '8px',
                     padding: '8px',
                 },
@@ -354,7 +354,7 @@ const lightThemeOptions: ThemeOptions = {
                     borderRadius: 12,
                     background: '#FFFFFF',
                     border: 'none',
-                    boxShadow: '0 8px 24px rgba(39, 43, 62, 0.15)',
+                    boxShadow: '0 8px 24px #272B3E26',
                     padding: '32px',
                 },
             },
@@ -415,7 +415,7 @@ const lightThemeOptions: ThemeOptions = {
                         width: 20,
                         height: 20,
                         background: '#FFFFFF',
-                        boxShadow: '0 1px 3px rgba(39, 43, 62, 0.2)',
+                        boxShadow: '0 1px 3px #272B3E33',
                     },
                     '& .MuiSwitch-track': {
                         borderRadius: 13,
@@ -455,7 +455,7 @@ const lightThemeOptions: ThemeOptions = {
                     color: '#FFFFFF',
                     fontSize: '0.875rem',
                     padding: '8px 12px',
-                    boxShadow: '0 2px 8px rgba(39, 43, 62, 0.2)',
+                    boxShadow: '0 2px 8px #272B3E33',
                 },
             },
         },
@@ -538,9 +538,9 @@ const lightThemeOptions: ThemeOptions = {
                     width: 16,
                     height: 16,
                     background: '#6C6FF9',
-                    boxShadow: '0 2px 4px rgba(39, 43, 62, 0.2)',
+                    boxShadow: '0 2px 4px #272B3E33',
                     '&:hover': {
-                        boxShadow: '0 3px 6px rgba(39, 43, 62, 0.3)',
+                        boxShadow: '0 3px 6px #272B3E4D',
                     },
                 },
             },
@@ -550,7 +550,7 @@ const lightThemeOptions: ThemeOptions = {
                 root: {
                     borderRadius: 12,
                     background: '#FFFFFF',
-                    boxShadow: '0 2px 8px rgba(39, 43, 62, 0.08)',
+                    boxShadow: '0 2px 8px #272B3E14',
                     marginBottom: 12,
                     '&:before': {
                         display: 'none',
@@ -717,15 +717,15 @@ const lightThemeOptions: ThemeOptions = {
                 root: {
                     background: '#6C6FF9',
                     color: '#FFFFFF',
-                    boxShadow: '0 4px 12px rgba(108, 111, 249, 0.3)',
+                    boxShadow: '0 4px 12px #6C6FF94D',
                     transition: 'all 0.2s ease',
                     '&:hover': {
                         background: '#6C6FF9',
-                        boxShadow: '0 6px 16px rgba(108, 111, 249, 0.4)',
+                        boxShadow: '0 6px 16px #6C6FF966',
                         transform: 'translateY(-2px)',
                     },
                     '&:active': {
-                        boxShadow: '0 2px 8px rgba(108, 111, 249, 0.3)',
+                        boxShadow: '0 2px 8px #6C6FF94D',
                         transform: 'translateY(0)',
                     },
                 },
@@ -736,7 +736,7 @@ const lightThemeOptions: ThemeOptions = {
                 root: {
                     background: '#FFFFFF',
                     borderTop: '1px solid #EFF0F6',
-                    boxShadow: '0 -2px 8px rgba(39, 43, 62, 0.08)',
+                    boxShadow: '0 -2px 8px #272B3E14',
                 },
             },
         },
@@ -829,9 +829,9 @@ const darkThemeOptions: ThemeOptions = {
         text: {
             primary: '#FFFFFF',
             secondary: '#FFFFFF',
-            disabled: 'rgba(255, 255, 255, 0.5)',
+            disabled: '#FFFFFF80',
         },
-        divider: 'rgba(255, 255, 255, 0.1)',
+        divider: '#FFFFFF1A',
     },
     typography: {
         fontFamily: [
@@ -924,15 +924,15 @@ const darkThemeOptions: ThemeOptions = {
                     height: '10px',
                 },
                 '::-webkit-scrollbar-track': {
-                    background: 'rgba(255, 255, 255, 0.1)',
+                    background: '#FFFFFF1A',
                     borderRadius: '10px',
                 },
                 '::-webkit-scrollbar-thumb': {
-                    background: 'rgba(108, 111, 249, 0.4)',
+                    background: '#6C6FF966',
                     borderRadius: '10px',
                     transition: 'all 0.3s ease',
                     '&:hover': {
-                        background: 'rgba(108, 111, 249, 0.6)',
+                        background: '#6C6FF999',
                     },
                 },
                 body: {
@@ -952,28 +952,28 @@ const darkThemeOptions: ThemeOptions = {
                     fontSize: '14px',
                     fontWeight: 500,
                     textTransform: 'none',
-                    background: 'rgba(255, 255, 255, 0.05)',
+                    background: '#FFFFFF0D',
                     border: 'none',
                     color: '#FFFFFF',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                    boxShadow: '0 2px 8px #0000004D',
                     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                     '&:hover': {
-                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
+                        boxShadow: '0 4px 12px #00000066',
                         transform: 'translateY(-1px)',
                     },
                     '&:active': {
                         transform: 'translateY(0)',
-                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                        boxShadow: '0 2px 8px #0000004D',
                     },
                 },
                 contained: {
                     background: '#6C6FF9',
                     color: '#FFFFFF',
                     border: 'none',
-                    boxShadow: '0 2px 8px rgba(100, 199, 248, 0.3)',
+                    boxShadow: '0 2px 8px #64C7F84D',
                     '&:hover': {
                         background: '#6C6FF9',
-                        boxShadow: '0 4px 12px rgba(100, 199, 248, 0.4)',
+                        boxShadow: '0 4px 12px #64C7F866',
                     },
                 },
             },
@@ -982,13 +982,13 @@ const darkThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     borderRadius: 12,
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    background: '#FFFFFF0D',
+                    border: '1px solid #FFFFFF1A',
                     padding: '24px',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                    boxShadow: '0 2px 8px #0000004D',
                     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                     '&:hover': {
-                        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
+                        boxShadow: '0 4px 12px #00000066',
                         transform: 'translateY(-2px)',
                     },
                 },
@@ -998,19 +998,19 @@ const darkThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     borderRadius: 12,
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                    background: '#FFFFFF0D',
+                    border: '1px solid #FFFFFF1A',
+                    boxShadow: '0 2px 8px #0000004D',
                     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 },
                 elevation1: {
-                    boxShadow: '0 1px 4px rgba(0, 0, 0, 0.2)',
+                    boxShadow: '0 1px 4px #00000033',
                 },
                 elevation2: {
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                    boxShadow: '0 2px 8px #0000004D',
                 },
                 elevation3: {
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
+                    boxShadow: '0 4px 12px #00000066',
                 },
             },
         },
@@ -1018,8 +1018,8 @@ const darkThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     background: '#272B3E',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                    borderBottom: '1px solid #FFFFFF1A',
+                    boxShadow: '0 2px 8px #0000004D',
                     color: '#FFFFFF',
                 },
             },
@@ -1028,8 +1028,8 @@ const darkThemeOptions: ThemeOptions = {
             styleOverrides: {
                 paper: {
                     background: '#272B3E',
-                    borderRight: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '2px 0 8px rgba(0, 0, 0, 0.3)',
+                    borderRight: '1px solid #FFFFFF1A',
+                    boxShadow: '2px 0 8px #0000004D',
                 },
             },
         },
@@ -1038,14 +1038,14 @@ const darkThemeOptions: ThemeOptions = {
                 root: {
                     '& .MuiOutlinedInput-root': {
                         borderRadius: 8,
-                        background: 'rgba(255, 255, 255, 0.05)',
+                        background: '#FFFFFF0D',
                         color: '#FFFFFF',
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '& fieldset': {
-                            borderColor: 'rgba(255, 255, 255, 0.1)',
+                            borderColor: '#FFFFFF1A',
                         },
                         '&:hover fieldset': {
-                            borderColor: 'rgba(100, 199, 248, 0.3)',
+                            borderColor: '#64C7F84D',
                         },
                         '&.Mui-focused fieldset': {
                             borderColor: '#6C6FF9',
@@ -1058,12 +1058,12 @@ const darkThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     borderRadius: 8,
-                    background: 'rgba(255, 255, 255, 0.05)',
+                    background: '#FFFFFF0D',
                     '& fieldset': {
-                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderColor: '#FFFFFF1A',
                     },
                     '&:hover fieldset': {
-                        borderColor: 'rgba(100, 199, 248, 0.3)',
+                        borderColor: '#64C7F84D',
                     },
                     '&.Mui-focused fieldset': {
                         borderColor: '#6C6FF9',
@@ -1076,8 +1076,8 @@ const darkThemeOptions: ThemeOptions = {
                 paper: {
                     borderRadius: 8,
                     background: '#272B3E',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                    border: '1px solid #FFFFFF1A',
+                    boxShadow: '0 2px 8px #0000004D',
                 },
             },
         },
@@ -1090,12 +1090,12 @@ const darkThemeOptions: ThemeOptions = {
                     background: 'transparent',
                     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                     '&:hover': {
-                        background: 'rgba(255, 255, 255, 0.05)',
+                        background: '#FFFFFF0D',
                     },
                     '&.Mui-selected': {
-                        background: 'rgba(100, 199, 248, 0.15)',
+                        background: '#64C7F826',
                         '&:hover': {
-                            background: 'rgba(100, 199, 248, 0.2)',
+                            background: '#64C7F833',
                         },
                     },
                 },
@@ -1106,8 +1106,8 @@ const darkThemeOptions: ThemeOptions = {
                 paper: {
                     borderRadius: 12,
                     background: '#272B3E',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                    border: '1px solid #FFFFFF1A',
+                    boxShadow: '0 2px 8px #0000004D',
                 },
             },
         },
@@ -1115,12 +1115,12 @@ const darkThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     borderRadius: 16,
-                    background: 'rgba(255, 255, 255, 0.1)',
+                    background: '#FFFFFF1A',
                     color: '#FFFFFF',
                     boxShadow: 'none',
                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     '&:hover': {
-                        background: 'rgba(100, 199, 248, 0.2)',
+                        background: '#64C7F833',
                         color: '#6C6FF9',
                         transform: 'translateY(-2px)',
                     },
@@ -1132,7 +1132,7 @@ const darkThemeOptions: ThemeOptions = {
                 root: {
                     height: 8,
                     borderRadius: 8,
-                    background: 'rgba(255, 255, 255, 0.1)',
+                    background: '#FFFFFF1A',
                     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 },
                 bar: {
@@ -1163,11 +1163,11 @@ const darkThemeOptions: ThemeOptions = {
                     '& .MuiSwitch-thumb': {
                         width: 27,
                         height: 27,
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+                        boxShadow: '0 2px 4px #0000004D',
                     },
                     '& .MuiSwitch-track': {
                         borderRadius: 31 / 2,
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                        backgroundColor: '#FFFFFF33',
                         opacity: 1,
                     },
                 },
@@ -1178,7 +1178,7 @@ const darkThemeOptions: ThemeOptions = {
                 root: {
                     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                     '&:hover': {
-                        background: 'rgba(108, 111, 249, 0.15)',
+                        background: '#6C6FF926',
                         transform: 'scale(1.1)',
                     },
                     '&:active': {
@@ -1192,7 +1192,7 @@ const darkThemeOptions: ThemeOptions = {
                 tooltip: {
                     borderRadius: 12,
                     backdropFilter: 'blur(40px)',
-                    background: 'rgba(58, 58, 60, 0.95)',
+                    background: '#3A3A3CF2',
                     fontSize: '0.875rem',
                     padding: '8px 12px',
                 },

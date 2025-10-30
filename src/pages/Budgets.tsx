@@ -47,7 +47,7 @@ const Budgets: React.FC = () => {
                 <Typography
                     variant="body1"
                     sx={{
-                        color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(6, 0, 171, 0.6)',
+                        color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99',
                         mb: 3
                     }}
                 >
@@ -69,14 +69,14 @@ const Budgets: React.FC = () => {
                         borderRadius: 3,
                         textTransform: 'none',
                         boxShadow: mode === 'dark'
-                            ? '0 8px 24px rgba(108, 111, 249, 0.4)'
-                            : '0 8px 24px rgba(168, 163, 246, 0.4)',
+                            ? '0 8px 24px #6C6FF966'
+                            : '0 8px 24px #A8A3F666',
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                         '&:hover': {
                             transform: 'translateY(-2px)',
                             boxShadow: mode === 'dark'
-                                ? '0 12px 32px rgba(108, 111, 249, 0.5)'
-                                : '0 12px 32px rgba(168, 163, 246, 0.5)',
+                                ? '0 12px 32px #6C6FF980'
+                                : '0 12px 32px #A8A3F680',
                         }
                     }}
                 >

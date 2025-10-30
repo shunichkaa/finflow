@@ -75,13 +75,13 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
         fontWeight: isSelected ? 600 : 400,
         color: isSelected 
             ? (mode === 'dark' ? '#FFFFFF' : '#000000')
-            : (mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)'),
+            : (mode === 'dark' ? '#FFFFFF4D' : '#0000004D'),
         transition: 'all 0.2s ease',
         fontFamily: 'Nunito, system-ui, sans-serif',
     });
 
     const bgColor = mode === 'dark' ? '#272B3E' : '#FFFFFF';
-    const borderColor = mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+    const borderColor = mode === 'dark' ? '#FFFFFF1A' : '#0000001A';
 
     return (
         <Dialog
@@ -93,8 +93,8 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
                     backgroundColor: bgColor,
                     minWidth: '320px',
                     boxShadow: mode === 'dark' 
-                        ? '0 20px 60px rgba(0, 0, 0, 0.5)' 
-                        : '0 20px 60px rgba(0, 0, 0, 0.15)',
+                        ? '0 20px 60px #00000080' 
+                        : '0 20px 60px #00000026',
                 }
             }}
         >
@@ -203,7 +203,7 @@ const IOSTimePicker: React.FC<IOSTimePickerProps> = ({ open, onClose, value, onC
                         boxShadow: 'none',
                         '&:hover': {
                             backgroundColor: '#5B5EE8',
-                            boxShadow: '0 4px 12px rgba(108, 111, 249, 0.3)',
+                            boxShadow: '0 4px 12px #6C6FF94D',
                         }
                     }}
                 >

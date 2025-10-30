@@ -33,8 +33,8 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit: _onEdit}) => {
                 <Card elevation={2} sx={{
                     flex: 1, 
                     minWidth: 0,
-                    backgroundColor: mode === 'dark' ? 'rgba(168, 163, 246, 0.15)' : 'rgba(168, 163, 246, 0.3)',
-                    border: mode === 'dark' ? '1px solid rgba(168, 163, 246, 0.3)' : '1px solid rgba(168, 163, 246, 0.4)',
+                    backgroundColor: mode === 'dark' ? '#A8A3F626' : '#A8A3F64D',
+                    border: mode === 'dark' ? '1px solid #A8A3F64D' : '1px solid #A8A3F666',
                     mb: { xs: 2, sm: 3 }
                 }}>
                     <CardContent sx={{ 
@@ -89,20 +89,20 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit: _onEdit}) => {
                                   display: 'flex', 
                                   flexDirection: 'column',
                                   backdropFilter: 'blur(40px) saturate(180%)',
-                                  backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(252, 248, 245, 0.7)',
-                                  border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(252, 248, 245, 0.9)',
+                                  backgroundColor: mode === 'dark' ? '#FFFFFF0D' : '#FCF8F5B3',
+                                  border: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #FCF8F5E6',
                                   borderRadius: 2,
                                   boxShadow: mode === 'dark' 
-                                      ? '0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
-                                      : '0 8px 32px rgba(31, 38, 135, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6)',
+                                      ? '0 8px 32px #0000004D, 0 2px 8px #00000033, inset 0 1px 0 #FFFFFF0D'
+                                      : '0 8px 32px #1F268726, 0 2px 8px #0000001A, inset 0 1px 0 #FFFFFF99',
                                   position: 'relative',
                                   overflow: 'hidden',
                                   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                   '&:hover': {
                                       transform: 'translateY(-2px)',
                                       boxShadow: mode === 'dark'
-                                          ? '0 16px 48px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
-                                          : '0 16px 48px rgba(31, 38, 135, 0.2), 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.7)',
+                                          ? '0 16px 48px #00000066, 0 8px 20px #0000004D, inset 0 1px 0 #FFFFFF14'
+                                          : '0 16px 48px #1F268733, 0 8px 20px #00000026, inset 0 1px 0 #FFFFFFB3',
                                   },
                               }}>
                             <Box sx={{ p: { xs: 2, sm: 3 }, display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -127,9 +127,9 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit: _onEdit}) => {
                                         icon={<WarningIcon/>} 
                                         sx={{
                                             mb: { xs: 1.5, sm: 2 },
-                                            backgroundColor: mode === 'dark' ? 'rgba(255, 179, 186, 0.2)' : '#FFB3BA',
+                                            backgroundColor: mode === 'dark' ? '#FFB3BA33' : '#FFB3BA',
                                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                            border: mode === 'dark' ? '1px solid rgba(255, 179, 186, 0.3)' : '1px solid #FFB3BA',
+                                            border: mode === 'dark' ? '1px solid #FFB3BA4D' : '1px solid #FFB3BA',
                                             borderRadius: 3,
                                             fontSize: { xs: '0.7rem', sm: '0.875rem' },
                                             py: { xs: 0.5, sm: 1 },
@@ -155,9 +155,9 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit: _onEdit}) => {
                                         severity="warning" 
                                         sx={{
                                             mb: { xs: 1.5, sm: 2 },
-                                            backgroundColor: mode === 'dark' ? 'rgba(255, 215, 186, 0.2)' : '#FFD7BA',
+                                            backgroundColor: mode === 'dark' ? '#FFD7BA33' : '#FFD7BA',
                                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                            border: mode === 'dark' ? '1px solid rgba(255, 215, 186, 0.3)' : '1px solid #FFD7BA',
+                                            border: mode === 'dark' ? '1px solid #FFD7BA4D' : '1px solid #FFD7BA',
                                             borderRadius: 3,
                                             fontSize: { xs: '0.7rem', sm: '0.875rem' },
                                             py: { xs: 0.5, sm: 1 },

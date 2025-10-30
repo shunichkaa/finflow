@@ -112,7 +112,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                             sx={{
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 '&:hover': {
-                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.1)',
+                                    backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#6C6FF91A',
                                 }
                             }}
                         >
@@ -129,7 +129,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                 <Stack spacing={3}>
                     <Box>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                            <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
+                            <Typography variant="body2" sx={{ color: mode === 'dark' ? '#FFFFFFB3' : '#272B3EB3' }}>
                                 {t('goalDetail.progress')}
                             </Typography>
                             <Typography variant="body2" fontWeight={600} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
@@ -142,7 +142,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                             sx={{
                                 height: 12,
                                 borderRadius: 2,
-                                bgcolor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#EFF0F6',
+                                bgcolor: mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6',
                                 '& .MuiLinearProgress-bar': {
                                     bgcolor: '#6C6FF9',
                                     borderRadius: 2,
@@ -153,7 +153,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                             <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                                 {actualGoal.currentAmount.toLocaleString()} {currency}
                             </Typography>
-                            <Typography variant="h6" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(39, 43, 62, 0.5)' }}>
+                            <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF80' : '#272B3E80' }}>
                                 {actualGoal.targetAmount.toLocaleString()} {currency}
                             </Typography>
                         </Box>
@@ -165,11 +165,11 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                                 p: 2,
                                 borderRadius: 2,
                                 background: mode === 'dark' 
-                                    ? 'rgba(108, 111, 249, 0.1)' 
-                                    : 'rgba(199, 206, 234, 0.2)',
-                                border: `1px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : '#C7CEEA'}`,
+                                    ? '#6C6FF91A' 
+                                    : '#C7CEEA33',
+                                border: `1px solid ${mode === 'dark' ? '#6C6FF94D' : '#C7CEEA'}`,
                             }}>
-                                <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
+                                <Typography variant="caption" sx={{ color: mode === 'dark' ? '#FFFFFFB3' : '#272B3EB3' }}>
                                     {t('goalDetail.daysLeft')}:
                                 </Typography>
                                 <Typography variant="h5" fontWeight={700} sx={{ color: daysRemaining > 0 ? '#6C6FF9' : '#FFB3BA' }}>
@@ -182,7 +182,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         <Box sx={{
                             p: 2,
                             borderRadius: 2,
-                            background: 'linear-gradient(135deg, rgba(181, 234, 215, 0.1) 0%, rgba(181, 234, 215, 0.2) 100%)',
+                            background: 'linear-gradient(135deg, #B5EAD71A 0%, #B5EAD733 100%)',
                             border: '1px solid #B5EAD7',
                             display: 'flex',
                             alignItems: 'center',
@@ -190,7 +190,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                         }}>
                             <TrendingUpIcon sx={{ color: '#B5EAD7', fontSize: 32 }} />
                             <Box>
-                                <Typography variant="caption" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(39, 43, 62, 0.7)' }}>
+                                <Typography variant="caption" sx={{ color: mode === 'dark' ? '#FFFFFFB3' : '#272B3EB3' }}>
                                     {t('goalDetail.recommendedDaily')}
                                 </Typography>
                                 <Typography variant="h6" fontWeight={700} sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
@@ -213,7 +213,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                                 allowDecimal={true}
                                 InputProps={{
                                     endAdornment: (
-                                        <Typography variant="body2" sx={{ color: mode === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(39, 43, 62, 0.6)' }}>
+                                        <Typography variant="body2" sx={{ color: mode === 'dark' ? '#FFFFFF99' : '#272B3E99' }}>
                                             {currency}
                                         </Typography>
                                     ),
@@ -231,7 +231,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                                         color: '#FFFFFF',
                                         '&:hover': {
                                             background: '#6C6FF9',
-                                            boxShadow: '0 4px 12px rgba(108, 111, 249, 0.4)',
+                                            boxShadow: '0 4px 12px #6C6FF966',
                                         },
                                     }}
                                 >
@@ -248,7 +248,7 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                                         color: '#6C6FF9',
                                         '&:hover': {
                                             borderColor: '#6C6FF9',
-                                            background: 'rgba(108, 111, 249, 0.05)',
+                                            background: '#6C6FF90D',
                                         },
                                     }}
                                 >

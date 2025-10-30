@@ -93,8 +93,8 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                 transition: 'transform 0.3s ease',
                 display: { xs: 'block', md: 'none' },
                 backdropFilter: 'blur(10px)',
-                backgroundColor: 'rgba(248, 250, 252, 0.95)',
-                borderTop: '1px solid rgba(148, 163, 184, 0.2)',
+                backgroundColor: '#F8FAFCF2',
+                borderTop: '1px solid #94A3B833',
                 padding: '8px 0',
             }}
         >
@@ -127,11 +127,11 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
                             transition: 'all 0.2s ease',
                             color: activeItem === item.id ? '#6C6FF9' : '#272B3E',
                             '&:active': {
-                                backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                                backgroundColor: '#0EA5E91A',
                                 transform: 'scale(0.95)',
                             },
                             '&:hover': {
-                                backgroundColor: 'rgba(14, 165, 233, 0.05)',
+                                backgroundColor: '#0EA5E90D',
                             },
                         }}
                     >

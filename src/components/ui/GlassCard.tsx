@@ -64,20 +64,20 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                 backdropFilter: `blur(${intensityValues.blur}) saturate(${intensityValues.saturation})`,
                 WebkitBackdropFilter: `blur(${intensityValues.blur}) saturate(${intensityValues.saturation})`,
                 backgroundColor: mode === 'dark' 
-                    ? 'rgba(28, 28, 30, 0.75)'
-                    : 'rgba(255, 255, 255, 0.45)',
+                    ? '#1C1C1EBF'
+                    : '#FFFFFF73',
                 border: mode === 'dark'
-                    ? '1.5px solid rgba(255, 255, 255, 0.18)'
-                    : '1.5px solid rgba(255, 255, 255, 0.6)',
+                    ? '1.5px solid #FFFFFF2E'
+                    : '1.5px solid #FFFFFF99',
                 boxShadow: mode === 'dark'
-                    ? `${intensityValues.shadow} rgba(0, 0, 0, 0.5), 
-                       0 4px 12px rgba(0, 0, 0, 0.3), 
-                       inset 0 1px 0 rgba(255, 255, 255, 0.15),
-                       inset 0 -1px 0 rgba(255, 255, 255, 0.05)`
-                    : `${intensityValues.shadow} rgba(108, 111, 249, 0.12), 
-                       0 4px 12px rgba(31, 38, 135, 0.08), 
-                       inset 0 1px 0 rgba(255, 255, 255, 0.8),
-                       inset 0 -1px 0 rgba(255, 255, 255, 0.4)`,
+                    ? `${intensityValues.shadow} #00000080, 
+                       0 4px 12px #0000004D, 
+                       inset 0 1px 0 #FFFFFF26,
+                       inset 0 -1px 0 #FFFFFF0D`
+                    : `${intensityValues.shadow} #6C6FF91F, 
+                       0 4px 12px #1F268714, 
+                       inset 0 1px 0 #FFFFFFCC,
+                       inset 0 -1px 0 #FFFFFF66`,
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 position: 'relative',
                 overflow: 'hidden',
@@ -89,8 +89,8 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                     width: '200%',
                     height: '100%',
                     background: mode === 'dark'
-                        ? 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent)'
-                        : 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent)',
+                        ? 'linear-gradient(90deg, transparent, #FFFFFF08, transparent)'
+                        : 'linear-gradient(90deg, transparent, #FFFFFF99, transparent)',
                     pointerEvents: 'none',
                 },
                 '&::after': {
@@ -101,26 +101,26 @@ export const GlassCard: React.FC<GlassCardProps> = ({
                     right: 0,
                     height: '2px',
                     background: mode === 'dark'
-                        ? 'linear-gradient(90deg, transparent, rgba(108, 111, 249, 0.5), transparent)'
-                        : 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent)',
+                        ? 'linear-gradient(90deg, transparent, #6C6FF980, transparent)'
+                        : 'linear-gradient(90deg, transparent, #FFFFFFE6, transparent)',
                     opacity: 0.6,
                 },
                 '&:hover': {
                     transform: `translateY(-4px) scale(${intensityValues.scale})`,
                     boxShadow: mode === 'dark'
-                        ? `${intensityValues.hoverShadow} rgba(108, 111, 249, 0.3), 
-                           0 12px 28px rgba(0, 0, 0, 0.4), 
-                           inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                           inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-                           0 0 40px rgba(108, 111, 249, 0.2)`
-                        : `${intensityValues.hoverShadow} rgba(108, 111, 249, 0.25), 
-                           0 12px 28px rgba(31, 38, 135, 0.15), 
-                           inset 0 1px 0 rgba(255, 255, 255, 1),
-                           inset 0 -1px 0 rgba(255, 255, 255, 0.6),
-                           0 0 40px rgba(108, 111, 249, 0.15)`,
+                        ? `${intensityValues.hoverShadow} #6C6FF94D, 
+                           0 12px 28px #00000066, 
+                           inset 0 1px 0 #FFFFFF33,
+                           inset 0 -1px 0 #FFFFFF1A,
+                           0 0 40px #6C6FF933`
+                        : `${intensityValues.hoverShadow} #6C6FF940, 
+                           0 12px 28px #1F268726, 
+                           inset 0 1px 0 #FFFFFFFF,
+                           inset 0 -1px 0 #FFFFFF99,
+                           0 0 40px #6C6FF926`,
                     border: mode === 'dark'
-                        ? '1.5px solid rgba(108, 111, 249, 0.3)'
-                        : '1.5px solid rgba(108, 111, 249, 0.4)',
+                        ? '1.5px solid #6C6FF94D'
+                        : '1.5px solid #6C6FF966',
                 },
                 ...sx,
             }}
