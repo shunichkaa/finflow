@@ -18,7 +18,7 @@ const Analytics: React.FC = () => {
     const {mode} = useThemeMode();
     const [period, setPeriod] = useState<Period>('month');
     const transactions = useFinanceStore(state => state.transactions);
-    const {currency, nickname} = useSettingsStore();
+    const {currency} = useSettingsStore();
 
     const filteredTransactions = useMemo(() => {
         const now = new Date();

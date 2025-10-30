@@ -1,13 +1,12 @@
-const CACHE_NAME = 'finflow-v1.2';
+const CACHE_NAME = 'finflow-v1.3';
 const API_CACHE = 'finflow-api-v1';
 
 const STATIC_URLS = [
 	'/',
-	'/static/css/main.css',
-	'/static/js/main.js',
 	'/manifest.json',
-	'/icon-192.png',
-	'/icon-512.png'
+	'/favicon.ico',
+	'/logo192.png',
+	'/logo512.png'
 ];
 
 const CACHE_STRATEGIES = {
@@ -90,7 +89,7 @@ async function handleStaticRequest(request) {
 	const cache = await caches.open(CACHE_NAME);
 	const cachedResponse = await cache.match(request);
 
-	if (cachedResponse) {
+    if (cachedResponse) {
 		fetch(request).then(response => {
 			if (response.ok) {
 				cache.put(request, response);
@@ -120,9 +119,10 @@ async function handleImageRequest(request) {
 }
 
 function isStaticAsset(url) {
-	return url.pathname.startsWith('/static/') ||
-		url.pathname.endsWith('.css') ||
-		url.pathname.endsWith('.js');
+    // Avoid caching built JS/CSS chunks and Vite prebundles to prevent outdated optimize deps
+    const isBundle = url.pathname.includes('/assets/') || url.pathname.includes('/node_modules/.vite');
+    if (isBundle) return false;
+    return STATIC_URLS.includes(url.pathname);
 }
 
 self.addEventListener('sync', (event) => {
