@@ -34,15 +34,15 @@ import {
     Schedule
 } from '@mui/icons-material';
 import {useTranslation} from 'react-i18next';
-import {useThemeMode} from '../../Budgets/theme/ThemeContext';
-import {Currency, useSettingsStore} from '../../Budgets/store/useSettingsStore';
-import {useAuth} from '../../Budgets/hooks/useAuth';
-import {useCloudSync} from '../../Budgets/hooks/useCloudSync';
-import {triggerSync} from '../../Budgets/utils/cloudSyncTrigger';
-import {supabase} from '../../lib/supabaseClient';
+import {useThemeMode} from '../Budgets/theme/ThemeContext';
+import {Currency, useSettingsStore} from '../Budgets/store/useSettingsStore';
+import {useAuth} from '../Budgets/hooks/useAuth';
+import {useCloudSync} from '../Budgets/hooks/useCloudSync';
+import {triggerSync} from '../Budgets/utils/cloudSyncTrigger';
+import {supabase} from '../lib/supabaseClient';
 import getSymbolFromCurrency from 'currency-symbol-map';
-import IOSTimePicker from '../../components/ui/IOSTimePicker';
-import {ReminderSettings} from '../../components/features/ReminderSettings';
+import IOSTimePicker from '../components/ui/IOSTimePicker';
+import {ReminderSettings} from '../components/features/ReminderSettings';
 
 export default function Profile() {
     const {t, i18n} = useTranslation();

@@ -1,15 +1,15 @@
 import React, {useMemo, useState} from 'react';
 import {Box, Card, CardContent, Container, Paper, ToggleButton, ToggleButtonGroup, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next';
-import {useSettingsStore} from "../../Budgets/store/useSettingsStore";
-import {useFinanceStore} from "../../Budgets/store/useFinanceStore";
-import {formatCurrency} from "../../Budgets/utils/formatters";
-import {IncomeExpenseTrendChart} from "../../components/features/analytics/IncomeExpenseTrendChart.tsx";
-import {ExpensesPieChart} from "../../components/features/analytics/ExpensesPieChart.tsx";
-import {getCategoryName} from "../../Budgets/utils/categories";
-import { formatDate } from "../../Budgets/utils/formatters";
-import {useThemeMode} from "../../Budgets/theme/ThemeContext";
-import {AmountDisplay} from "../../components/ui/AmountDisplay";
+import {useSettingsStore} from "../Budgets/store/useSettingsStore";
+import {useFinanceStore} from "../Budgets/store/useFinanceStore";
+import {formatCurrency} from "../Budgets/utils/formatters";
+import {IncomeExpenseTrendChart} from "../components/features/analytics/IncomeExpenseTrendChart.tsx";
+import {ExpensesPieChart} from "../components/features/analytics/ExpensesPieChart.tsx";
+import {getCategoryName} from "../Budgets/utils/categories";
+import { formatDate } from "../Budgets/utils/formatters";
+import {useThemeMode} from "../Budgets/theme/ThemeContext";
+import {AmountDisplay} from "../components/ui/AmountDisplay";
 
 type Period = 'week' | 'month' | 'year';
 

@@ -2,11 +2,11 @@ import React, {useMemo, useState} from 'react';
 import {Box, Button, Container, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {useTranslation} from 'react-i18next';
-import {useFinanceStore} from '../../Budgets/store/useFinanceStore';
-import {BudgetList} from '../../components/features/budget/BudgetList.tsx';
-import {BudgetForm} from '../../components/features/budget/BudgetForm.tsx';
-import {Modal} from '../../components/ui/Modal';
-import {useThemeMode} from '../../Budgets/theme/ThemeContext';
+import {useFinanceStore} from '../Budgets/store/useFinanceStore';
+import {BudgetList} from '../components/features/budget/BudgetList.tsx';
+import {BudgetForm} from '../components/features/budget/BudgetForm.tsx';
+import {Modal} from '../components/ui/Modal';
+import {useThemeMode} from '../Budgets/theme/ThemeContext';
 
 const Budgets: React.FC = () => {
     const {t} = useTranslation();
