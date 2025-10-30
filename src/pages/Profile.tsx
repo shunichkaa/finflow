@@ -40,6 +40,8 @@ import {useCloudSync} from '../Budgets/hooks/useCloudSync';
 import {triggerSync} from '../Budgets/utils/cloudSyncTrigger';
 import {supabase} from '../lib/supabaseClient';
 import getSymbolFromCurrency from 'currency-symbol-map';
+import { typography } from '../styles/typography';
+import { colors } from '../styles/colors';
 import IOSTimePicker from '../components/ui/IOSTimePicker';
 import {ReminderSettings} from '../components/features/ReminderSettings';
 
@@ -277,8 +279,10 @@ export default function Profile() {
         <Container maxWidth="md" sx={{py: {xs: 2, sm: 4}, px: {xs: 1, sm: 3}}}>
             <Typography variant="h4" gutterBottom sx={{
                 mb: {xs: 2, sm: 4},
-                fontSize: {xs: '1.5rem', sm: '2rem'},
-                color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                fontSize: {xs: typography.fontSize['2xl'], sm: '2rem'},
+                color: mode === 'dark' ? '#FFFFFF' : colors.text.primary,
+                fontFamily: typography.fontFamily.primary,
+                fontWeight: typography.fontWeight.bold
             }}>
                 {t('profile')}
             </Typography>
@@ -341,8 +345,10 @@ export default function Profile() {
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
                 <Typography variant="h6" gutterBottom sx={{
                     mb: {xs: 2, sm: 3},
-                    fontSize: {xs: '1.125rem', sm: '1.25rem'},
-                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                    fontSize: {xs: typography.fontSize.lg, sm: typography.fontSize.xl},
+                    color: mode === 'dark' ? '#FFFFFF' : colors.text.primary,
+                    fontFamily: typography.fontFamily.primary,
+                    fontWeight: typography.fontWeight.semibold
                 }}>
                     {t('sync.title')}
                 </Typography>
@@ -392,8 +398,10 @@ export default function Profile() {
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
                 <Typography variant="h6" gutterBottom sx={{
                     mb: {xs: 2, sm: 3},
-                    fontSize: {xs: '1.125rem', sm: '1.25rem'},
-                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                    fontSize: {xs: typography.fontSize.lg, sm: typography.fontSize.xl},
+                    color: mode === 'dark' ? '#FFFFFF' : colors.text.primary,
+                    fontFamily: typography.fontFamily.primary,
+                    fontWeight: typography.fontWeight.semibold
                 }}>
                     {t('settings')}
                 </Typography>
@@ -500,8 +508,10 @@ export default function Profile() {
             <Paper sx={{p: {xs: 2, sm: 3}, mb: {xs: 2, sm: 3}, borderRadius: 3}}>
                 <Typography variant="h6" gutterBottom sx={{
                     mb: {xs: 2, sm: 3},
-                    fontSize: {xs: '1.125rem', sm: '1.25rem'},
-                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E'
+                    fontSize: {xs: typography.fontSize.lg, sm: typography.fontSize.xl},
+                    color: mode === 'dark' ? '#FFFFFF' : colors.text.primary,
+                    fontFamily: typography.fontFamily.primary,
+                    fontWeight: typography.fontWeight.semibold
                 }}>
                     {t('dataManagement')}
                 </Typography>
