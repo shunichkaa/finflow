@@ -18,6 +18,7 @@ import {
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
 import { GlassCard } from '../ui/GlassCard';
 import { useTranslation } from 'react-i18next';
+import IOSTimePicker from '../ui/IOSTimePicker';
 
 export type ReminderFrequency = 'daily' | 'every3days' | 'weekly';
 
@@ -76,6 +77,7 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
     
     const [supportsNotifications, setSupportsNotifications] = useState(true);
     const [testNotificationSent, setTestNotificationSent] = useState(false);
+    const [timePickerOpen, setTimePickerOpen] = useState(false);
 
     useEffect(() => {
         setSupportsNotifications(
@@ -109,6 +111,10 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
 
     const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSettings(prev => ({ ...prev, time: event.target.value }));
+    };
+
+    const handleTimePickerChange = (time: string) => {
+        setSettings(prev => ({ ...prev, time }));
     };
 
     const getRandomMessage = (): string => {
@@ -321,30 +327,119 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                     {t('reminders.time')}
                                 </Typography>
                             </Box>
-                            <Box
-                                component="input"
-                                type="time"
+
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2 }}>
+                                <Box
+                                    onClick={() => setTimePickerOpen(true)}
+                                    sx={{
+                                        display: 'inline-flex',
+                                        gap: 1,
+                                        alignItems: 'center',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            width: 64,
+                                            backgroundColor: mode === 'dark'
+                                                ? 'rgba(108, 111, 249, 0.15)'
+                                                : 'rgba(108, 111, 249, 0.08)',
+                                            borderRadius: '12px',
+                                            border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
+                                            py: 1.25,
+                                            textAlign: 'center',
+                                            transition: 'all 0.2s ease',
+                                            '&:hover': {
+                                                backgroundColor: mode === 'dark'
+                                                    ? 'rgba(108, 111, 249, 0.2)'
+                                                    : 'rgba(108, 111, 249, 0.12)',
+                                                transform: 'translateY(-1px)',
+                                                borderColor: '#6C6FF9',
+                                            },
+                                        }}
+                                    >
+                                        <Typography
+                                            sx={{
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                                fontSize: '1.1rem',
+                                                fontWeight: 700,
+                                                fontFamily: 'system-ui, sans-serif',
+                                            }}
+                                        >
+                                            {settings.time.split(':')[0]}
+                                        </Typography>
+                                    </Box>
+
+                                    <Typography
+                                        variant="h6"
+                                        sx={{
+                                            color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                            fontWeight: 700,
+                                        }}
+                                    >
+                                        :
+                                    </Typography>
+
+                                    <Box
+                                        sx={{
+                                            width: 64,
+                                            backgroundColor: mode === 'dark'
+                                                ? 'rgba(108, 111, 249, 0.15)'
+                                                : 'rgba(108, 111, 249, 0.08)',
+                                            borderRadius: '12px',
+                                            border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
+                                            py: 1.25,
+                                            textAlign: 'center',
+                                            transition: 'all 0.2s ease',
+                                            '&:hover': {
+                                                backgroundColor: mode === 'dark'
+                                                    ? 'rgba(108, 111, 249, 0.2)'
+                                                    : 'rgba(108, 111, 249, 0.12)',
+                                                transform: 'translateY(-1px)',
+                                                borderColor: '#6C6FF9',
+                                            },
+                                        }}
+                                    >
+                                        <Typography
+                                            sx={{
+                                                color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                                fontSize: '1.1rem',
+                                                fontWeight: 700,
+                                                fontFamily: 'system-ui, sans-serif',
+                                            }}
+                                        >
+                                            {settings.time.split(':')[1]}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+
+                                <Button
+                                    variant="outlined"
+                                    onClick={() => setTimePickerOpen(true)}
+                                    sx={{
+                                        borderColor: '#6C6FF9',
+                                        color: '#6C6FF9',
+                                        borderRadius: 2,
+                                        px: 2.5,
+                                        py: 1,
+                                        fontWeight: 600,
+                                        textTransform: 'none',
+                                        '&:hover': {
+                                            borderColor: '#6C6FF9',
+                                            backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.1)' : 'rgba(108, 111, 249, 0.08)'
+                                        }
+                                    }}
+                                >
+                                    {t('change', 'Change')}
+                                </Button>
+                            </Box>
+
+                            <IOSTimePicker
+                                open={timePickerOpen}
+                                onClose={() => setTimePickerOpen(false)}
                                 value={settings.time}
-                                onChange={handleTimeChange}
-                                sx={{
-                                    width: '100%',
-                                    p: 1.5,
-                                    borderRadius: 2,
-                                    border: `2px solid ${mode === 'dark' ? 'rgba(108, 111, 249, 0.3)' : 'rgba(108, 111, 249, 0.2)'}`,
-                                    backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.15)' : 'rgba(255, 255, 255, 0.6)',
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    fontSize: { xs: '0.875rem', sm: '1rem' },
-                                    fontFamily: 'system-ui, sans-serif',
-                                    outline: 'none',
-                                    transition: 'all 0.3s ease',
-                                    '&:focus': {
-                                        borderColor: '#6C6FF9',
-                                        boxShadow: `0 0 0 3px ${mode === 'dark' ? 'rgba(108, 111, 249, 0.2)' : 'rgba(108, 111, 249, 0.15)'}`,
-                                    },
-                                    '&:hover': {
-                                        borderColor: '#6C6FF9',
-                                        backgroundColor: mode === 'dark' ? 'rgba(108, 111, 249, 0.2)' : 'rgba(255, 255, 255, 0.8)',
-                                    },
+                                onChange={(time) => {
+                                    handleTimePickerChange(time);
                                 }}
                             />
                         </Box>
