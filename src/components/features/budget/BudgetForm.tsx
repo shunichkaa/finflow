@@ -103,7 +103,10 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                             required
                             disabled={!!initialBudget}
                             sx={{
-                                '& .MuiInputBase-input': {
+                                '& .MuiInputLabel-root': {
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                },
+                                '& .MuiInputLabel-root.Mui-focused': {
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 },
                                 '& .MuiSelect-select': {
@@ -114,15 +117,6 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                     opacity: 1,
                                 },
-                                '& .MuiInputLabel-root': {
-                                    color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
-                                },
-                                '& .MuiInputLabel-root.Mui-disabled': {
-                                    color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99',
-                                },
-                                '& .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: mode === 'dark' ? '#FFFFFF1A' : '#E5E7EB',
-                                }
                             }}
                             SelectProps={{
                                 MenuProps: {

@@ -5,7 +5,6 @@ import {
     DialogTitle,
     DialogContent,
     IconButton,
-    useMediaQuery,
     useTheme,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -20,7 +19,6 @@ interface ModalProps {
 
 export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children }) => {
     const theme = useTheme();
-    const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const { mode } = useThemeMode();
 
     return (
