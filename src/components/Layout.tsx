@@ -382,21 +382,23 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 <MenuIcon sx={{ fontSize: 24, fontWeight: 500 }} />
                             </IconButton>
 
-                            <IconButton
-                                color="inherit"
-                                onClick={() => setSidebarOpen(!sidebarOpen)}
-                                sx={{
-                                    display: {xs: 'none', sm: 'block'},
-                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                    mr: 2,
-                                    transition: 'all 0.2s ease',
-                                    '&:hover': {
-                                        background: mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6',
-                                    },
-                                }}
-                            >
-                                <MenuIcon/>
-                            </IconButton>
+                            {!sidebarOpen && (
+                                <IconButton
+                                    color="inherit"
+                                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                                    sx={{
+                                        display: {xs: 'none', sm: 'block'},
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        mr: 2,
+                                        transition: 'all 0.2s ease',
+                                        '&:hover': {
+                                            background: mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6',
+                                        },
+                                    }}
+                                >
+                                    <MenuIcon/>
+                                </IconButton>
+                            )}
                         </Box>
 
                         <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>

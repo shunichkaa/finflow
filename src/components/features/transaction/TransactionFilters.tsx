@@ -49,7 +49,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
 
     return (
         <Paper sx={{ 
-            p: 2.5, 
+            p: { xs: 1.5, sm: 2, md: 2.5 }, 
             mb: 2,
             backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
             border: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #EFF0F6',

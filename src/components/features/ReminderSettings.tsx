@@ -136,8 +136,11 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                 p: { xs: 2, sm: 3 },
                 borderRadius: 3,
                 bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
-                border: mode === 'dark' ? '1px solid rgba(255,255,255,0.1)' : '1px solid #E5E7EB',
+                border: mode === 'dark' ? '1px solid rgba(255,255,255,0.2)' : '1px solid #E5E7EB',
                 color: settings.enabled ? enabledTextColor : disabledTextColor,
+                boxShadow: mode === 'dark' 
+                    ? '0 2px 8px rgba(0,0,0,0.3)' 
+                    : '0 2px 8px rgba(0,0,0,0.08)',
             }}
         >
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1.5, mb: 1.5 }}>

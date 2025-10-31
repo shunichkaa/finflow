@@ -105,6 +105,9 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                             sx={{
                                 '& .MuiInputLabel-root': {
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    whiteSpace: 'nowrap',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
                                 },
                                 '& .MuiInputLabel-root.Mui-focused': {
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
@@ -151,11 +154,14 @@ export const BudgetForm: React.FC<BudgetFormProps> = ({onSuccess, initialBudget}
                             value={field.value}
                             onChange={(_, value) => value && field.onChange(value)}
                             sx={{
+                                width: '100%',
                                 '& .MuiToggleButton-root': {
                                     borderColor: mode === 'dark' 
                                         ? '#6C6FF94D' 
                                         : '#6C6FF94D',
                                     color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                    flex: 1,
+                                    minWidth: 0,
                                     '&.Mui-selected': {
                                         backgroundColor: '#6C6FF9',
                                         color: '#FFFFFF',

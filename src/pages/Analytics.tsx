@@ -94,8 +94,8 @@ const Analytics: React.FC = () => {
                 }),
             }}
         >
-            <Box sx={{mb: 3, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2, flexWrap: 'wrap'}}>
-                <Box>
+            <Box sx={{mb: 3}}>
+                <Box sx={{mb: 2}}>
                     <Typography
                         variant="h4"
                         fontWeight="700"
@@ -219,7 +219,12 @@ const Analytics: React.FC = () => {
                             {t('income')}
                         </Typography>
                         <Typography variant="h5" fontWeight="bold"
-                                    sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                                    sx={{
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        whiteSpace: 'nowrap',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis'
+                                    }}>
                             {formatCurrency(stats.income, currency)}
                         </Typography>
                     </CardContent>
@@ -251,7 +256,12 @@ const Analytics: React.FC = () => {
                             {t('expense')}
                         </Typography>
                         <Typography variant="h5" fontWeight="bold"
-                                    sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                                    sx={{
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        whiteSpace: 'nowrap',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis'
+                                    }}>
                             {formatCurrency(stats.expenses, currency)}
                         </Typography>
                     </CardContent>
@@ -283,7 +293,12 @@ const Analytics: React.FC = () => {
                             {t('balance')}
                         </Typography>
                         <Typography variant="h5" fontWeight="bold"
-                                    sx={{color: mode === 'dark' ? '#FFFFFF' : '#272B3E'}}>
+                                    sx={{
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        whiteSpace: 'nowrap',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis'
+                                    }}>
                             {formatCurrency(stats.balance, currency)}
                         </Typography>
                     </CardContent>

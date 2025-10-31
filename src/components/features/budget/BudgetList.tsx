@@ -42,8 +42,8 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                         justifyContent: 'space-between', 
                         alignItems: 'center',
                         px: { xs: 1.5, sm: 2 },
-                        py: { xs: 1.5, sm: 2 },
-                        '&:last-child': { pb: { xs: 1.5, sm: 2 } }
+                        py: { xs: 1, sm: 1.5 },
+                        '&:last-child': { pb: { xs: 1, sm: 1.5 } }
                     }}>
                         <Typography 
                             variant="body2" 
@@ -62,7 +62,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                             fontWeight="bold" 
                             sx={{ 
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                fontSize: { xs: '1.5rem', sm: '2.125rem' }
+                                fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2.125rem' }
                             }}
                         >
                             {budgets.length}

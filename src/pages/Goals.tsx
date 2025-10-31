@@ -245,6 +245,7 @@ const Goals: React.FC = () => {
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
+                                                p: 0.75,
                                             }}
                                         >
                                             <IconComponent sx={{fontSize: 32, color: iconData.color}}/>
@@ -332,7 +333,7 @@ const Goals: React.FC = () => {
                     {editingGoal ? t('savingsGoal.editTitle', 'Edit Goal') : t('savingsGoal.createTitle', 'Create Goal')}
                 </DialogTitle>
 
-                <DialogContent sx={{pb: 3, overflowY: 'auto', maxHeight: { xs: '70vh', sm: 'none' }}}>
+                <DialogContent sx={{pb: 3, overflowY: { xs: 'auto', sm: 'visible' }, overflowX: 'hidden', maxHeight: { xs: '70vh', sm: 'none' }}}>
                     <Stack spacing={2.5} sx={{mt: 0.5}}>
                         <Box>
                             <Typography variant="body2"
@@ -425,7 +426,10 @@ const Goals: React.FC = () => {
                             }}
                             sx={{
                                 '& .MuiInputBase-input': {
-                                    pr: {xs: 8, sm: 6}
+                                    pr: {xs: 8, sm: 6},
+                                    whiteSpace: 'nowrap',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
                                 }
                             }}
                         />

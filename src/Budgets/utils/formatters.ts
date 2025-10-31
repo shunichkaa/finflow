@@ -30,11 +30,12 @@ export const formatCurrency = (amount: number, currency: Currency = 'EUR') => {
     };
 
     const language = useSettingsStore.getState().language || 'ru';
-    return new Intl.NumberFormat(language, {
+    const formatted = new Intl.NumberFormat(language, {
         style: 'decimal',
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
-    }).format(amount) + ' ' + currencySymbols[currency];
+    }).format(amount);
+    return `${formatted} ${currencySymbols[currency]}`;
 };
 
 export const formatDate = (date: Date) => {

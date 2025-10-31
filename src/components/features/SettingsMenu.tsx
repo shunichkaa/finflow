@@ -16,7 +16,7 @@ import { useSettingsStore, Currency, Language } from '../../Budgets/store/useSet
 
 export const SettingsMenu: React.FC = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const { currency, setCurrency, language, setLanguage } = useSettingsStore();
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -55,7 +55,7 @@ export const SettingsMenu: React.FC = () => {
                     <ListItemIcon>
                         <LanguageIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Language</ListItemText>
+                    <ListItemText>{t('settings.language')}</ListItemText>
                 </MenuItem>
 
                 {languages.map((lang) => (
@@ -83,7 +83,7 @@ export const SettingsMenu: React.FC = () => {
                     <ListItemIcon>
                         <AttachMoneyIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText>Currency</ListItemText>
+                    <ListItemText>{t('settings.currency')}</ListItemText>
                 </MenuItem>
 
                 {currencies.map((curr) => (

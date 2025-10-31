@@ -30,7 +30,7 @@ const Dashboard = () => {
 
     const getCardBackground = () => {
         return mode === 'dark'
-            ? 'linear-gradient(135deg, #6C6FF933 0%, #6C6FF959 100%)'
+            ? 'linear-gradient(135deg, #6C6FF926 0%, #6C6FF940 100%)'
             : 'linear-gradient(135deg, #EFF0F6CC 0%, #EFF0F6E6 100%)';
     };
 
@@ -49,6 +49,13 @@ const Dashboard = () => {
                     easing: theme.transitions.easing.easeInOut,
                     duration: theme.transitions.duration.complex,
                 }),
+                '& ::-webkit-scrollbar': {
+                    display: 'none',
+                },
+                '&': {
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                },
             }}
         >
                 <Box sx={{textAlign: {xs: 'center', sm: 'left'}}}>
