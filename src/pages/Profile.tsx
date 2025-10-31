@@ -362,50 +362,75 @@ export default function Profile() {
 
                 <List>
                     <ListItem sx={{ 
-                        py: 1.5, 
-                        alignItems: { xs: 'stretch', sm: 'center' },
+                        py: { xs: 2, sm: 1.5 }, 
+                        px: 0,
+                        alignItems: { xs: 'flex-start', sm: 'center' },
                         flexDirection: { xs: 'column', sm: 'row' },
-                        gap: { xs: 1, sm: 0 }
+                        gap: { xs: 1.5, sm: 0 }
                     }}>
-                        <ListItemIcon>
-                            <CloudSync sx={{color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99', fontSize: {xs: 20, sm: 24}}}/>
-                        </ListItemIcon>
-                        <ListItemText
-                            primary={t('sync.status')}
-                            secondary={getSyncStatusText()}
-                            sx={{
-                                pr: { xs: 0, sm: 2 },
-                                mr: { xs: 0, sm: 2 },
-                                flexGrow: 1,
-                                minWidth: 0,
-                                '& .MuiListItemText-primary': {
-                                    whiteSpace: { xs: 'normal', sm: 'nowrap' },
-                                },
-                                '& .MuiListItemText-secondary': {
-                                    whiteSpace: 'normal',
-                                }
-                            }}
-                        />
-                        <Box sx={{ ml: { xs: 0, sm: 2 }, mt: { xs: 0.5, sm: 0 }, alignSelf: { xs: 'flex-start', sm: 'center' } }}>
+                        <Box sx={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            width: { xs: '100%', sm: 'auto' },
+                            gap: 1.5
+                        }}>
+                            <ListItemIcon sx={{ 
+                                minWidth: { xs: 40, sm: 56 },
+                                alignItems: { xs: 'flex-start', sm: 'center' },
+                                pt: { xs: 0.5, sm: 0 }
+                            }}>
+                                <CloudSync sx={{color: mode === 'dark' ? '#FFFFFFB3' : '#272B3E99', fontSize: {xs: 24, sm: 28}}}/>
+                            </ListItemIcon>
+                            <ListItemText
+                                primary={t('sync.status')}
+                                secondary={getSyncStatusText()}
+                                sx={{
+                                    pr: { xs: 0, sm: 2 },
+                                    mr: { xs: 0, sm: 2 },
+                                    flexGrow: 1,
+                                    minWidth: 0,
+                                    m: 0,
+                                    '& .MuiListItemText-primary': {
+                                        whiteSpace: 'normal',
+                                        fontSize: { xs: '0.95rem', sm: '1rem' },
+                                        fontWeight: 500,
+                                        mb: 0.5
+                                    },
+                                    '& .MuiListItemText-secondary': {
+                                        whiteSpace: 'normal',
+                                        fontSize: { xs: '0.875rem', sm: '0.875rem' },
+                                    }
+                                }}
+                            />
+                        </Box>
+                        <Box sx={{ 
+                            width: { xs: '100%', sm: 'auto' },
+                            mt: { xs: 0.5, sm: 0 }, 
+                            alignSelf: { xs: 'stretch', sm: 'center' }
+                        }}>
                         <Button
                             variant="contained"
                             onClick={handleSyncNow}
                             disabled={isSyncing}
-                            startIcon={<CloudSync sx={{fontSize: {xs: 16, sm: 18}}}/>}
+                            startIcon={<CloudSync sx={{fontSize: {xs: 18, sm: 20}}}/>}
                             sx={{
                                 background: 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
                                 color: '#FFFFFF',
-                                fontWeight: 'bold',
-                                borderRadius: 2,
-                                px: {xs: 1.5, sm: 2},
-                                py: {xs: 0.75, sm: 1},
-                                fontSize: {xs: '0.75rem', sm: '0.875rem'},
-                                minWidth: {xs: 'auto', sm: 120},
-                                ml: {xs: 0, sm: 2},
+                                fontWeight: 600,
+                                borderRadius: 3,
+                                px: {xs: 3, sm: 3},
+                                py: {xs: 1.25, sm: 1.5},
+                                fontSize: {xs: '0.875rem', sm: '0.938rem'},
+                                width: { xs: '100%', sm: 'auto' },
+                                minWidth: { xs: 0, sm: 140 },
+                                textTransform: 'none',
+                                boxShadow: mode === 'dark'
+                                    ? '0 4px 12px #6C6FF966'
+                                    : '0 4px 12px #6C6FF94D',
                                 '&:hover': {
                                     background: 'linear-gradient(135deg, #5B5EE8 0%, #5B5EE8 100%)',
-                                    transform: 'translateY(-1px)',
-                                    boxShadow: '0 6px 20px #6C6FF966',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: '0 6px 20px #6C6FF980',
                                 },
                                 '&:disabled': {
                                     background: 'linear-gradient(135deg, #9E9E9E 0%, #757575 100%)',
