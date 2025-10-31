@@ -5,7 +5,6 @@ import {
     DialogTitle,
     DialogContent,
     IconButton,
-    useTheme,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useThemeMode } from '../../Budgets/theme/ThemeContext';
@@ -18,7 +17,6 @@ interface ModalProps {
 }
 
 export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children }) => {
-    const theme = useTheme();
     const { mode } = useThemeMode();
 
     return (
