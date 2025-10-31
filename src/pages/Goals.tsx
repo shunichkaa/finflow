@@ -68,6 +68,7 @@ const Goals: React.FC = () => {
     const goals = useGoalsStore((state) => state.goals);
     const addGoal = useGoalsStore((state) => state.addGoal);
     const updateGoal = useGoalsStore((state) => state.updateGoal);
+    const deleteGoal = useGoalsStore((state) => state.deleteGoal);
 
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedIcon, setSelectedIcon] = useState('savings');
@@ -138,6 +139,16 @@ const Goals: React.FC = () => {
         setOpenDialog(false);
     };
 
+    const handleDeleteGoal = () => {
+        if (!editingGoal) return;
+        
+        if (confirm(t('confirmDeleteGoal', 'Вы уверены, что хотите удалить эту цель?'))) {
+            deleteGoal(editingGoal);
+            setOpenDialog(false);
+            setEditingGoal(null);
+        }
+    };
+
     const sortedGoals = [...goals].sort((a, b) => {
         if (a.isCompleted !== b.isCompleted) return a.isCompleted ? 1 : -1;
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
@@ -161,7 +172,7 @@ const Goals: React.FC = () => {
                 </Typography>
             </Box>
 
-            <Box sx={{mb: 3}}>
+            <Box sx={{mb: 5}}>
                 <Button
                     variant="contained"
                     startIcon={<AddIcon/>}
@@ -373,7 +384,7 @@ const Goals: React.FC = () => {
                                                     : mode === 'dark'
                                                         ? '#FFFFFF0D'
                                                         : '#272B3E0D',
-                                                border: `2px solid ${isSelected ? iconData.color : 'transparent'}`,
+                                                border: 'none',
                                                 transition: 'all 0.2s ease',
                                                 '&:hover': {
                                                     transform: 'scale(1.05)',
@@ -386,7 +397,7 @@ const Goals: React.FC = () => {
                                             }}
                                         >
                                             <IconComponent sx={{
-                                                fontSize: 20,
+                                                fontSize: { xs: 28, sm: 32 },
                                                 color: isSelected
                                                     ? iconData.color
                                                     : (mode === 'dark' ? '#fff' : '#272B3E'),
@@ -481,9 +492,35 @@ const Goals: React.FC = () => {
 
                         <Box sx={{
                             display: 'flex',
-                            justifyContent: {xs: 'center', sm: 'flex-end'},
+                            flexDirection: {xs: 'column', sm: 'row'},
+                            gap: 2,
+                            justifyContent: {xs: 'center', sm: 'space-between'},
                             pt: 2
                         }}>
+                            {editingGoal && (
+                                <Button
+                                    variant="outlined"
+                                    onClick={handleDeleteGoal}
+                                    sx={{
+                                        borderColor: '#FF3B3B',
+                                        color: '#FF3B3B',
+                                        fontWeight: 600,
+                                        px: {xs: 6, sm: 4},
+                                        py: 1.5,
+                                        borderRadius: 3,
+                                        textTransform: 'none',
+                                        minWidth: {xs: '200px', sm: 'auto'},
+                                        order: {xs: 2, sm: 1},
+                                        '&:hover': {
+                                            borderColor: '#FF3B3B',
+                                            backgroundColor: 'rgba(255,59,59,0.06)',
+                                            transform: 'translateY(-2px)',
+                                        }
+                                    }}
+                                >
+                                    {t('delete', 'Удалить')}
+                                </Button>
+                            )}
                             <Button
                                 variant="contained"
                                 onClick={handleSaveGoal}
@@ -499,6 +536,7 @@ const Goals: React.FC = () => {
                                     boxShadow: mode === 'dark'
                                         ? '0 8px 24px #6C6FF966'
                                         : '0 8px 24px #A8A3F666',
+                                    order: {xs: 1, sm: 2},
                                     '&:hover': {
                                         transform: 'translateY(-2px)',
                                         boxShadow: '0 12px 32px #6C6FF980',

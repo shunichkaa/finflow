@@ -126,8 +126,8 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
         );
     }
 
-    const enabledTextColor = '#272B3E';
-    const disabledTextColor = mode === 'dark' ? '#FFFFFFB3' : '#272B3EB3';
+    const enabledTextColor = mode === 'dark' ? '#FFFFFF' : '#272B3E';
+    const disabledTextColor = mode === 'dark' ? '#FFFFFFCC' : '#272B3EB3';
 
     return (
         <Paper
@@ -221,20 +221,20 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                         sx={{
                                             minWidth: 140,
                                             backgroundColor: settings.enabled
-                                                ? (mode === 'dark' ? '#FFFFFF0F' : '#EFF0F6')
+                                                ? (mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6')
                                                 : (mode === 'dark' ? '#6C6FF926' : '#6C6FF914'),
                                             borderRadius: '12px',
-                                            border: `2px solid ${settings.enabled ? (mode === 'dark' ? '#FFFFFF1F' : '#EFF0F6') : (mode === 'dark' ? '#6C6FF94D' : '#6C6FF933' )}`,
+                                            border: `2px solid ${settings.enabled ? (mode === 'dark' ? '#FFFFFF33' : '#EFF0F6') : (mode === 'dark' ? '#6C6FF966' : '#6C6FF933' )}`,
                                             py: 1.25,
                                             px: 2,
                                             textAlign: 'center',
                                             transition: 'all 0.2s ease',
                                             '&:hover': {
                                                 backgroundColor: settings.enabled
-                                                    ? (mode === 'dark' ? '#FFFFFF1A' : '#EFF0F6')
+                                                    ? (mode === 'dark' ? '#FFFFFF26' : '#EFF0F6')
                                                     : (mode === 'dark' ? '#6C6FF933' : '#6C6FF91F') ,
                                                 transform: 'translateY(-1px)',
-                                                borderColor: settings.enabled ? (mode === 'dark' ? '#FFFFFF33' : '#EFF0F6') : '#6C6FF9',
+                                                borderColor: settings.enabled ? (mode === 'dark' ? '#FFFFFF4D' : '#EFF0F6') : '#6C6FF9',
                                             },
                                         }}
                                     >
@@ -255,16 +255,18 @@ export const ReminderSettings: React.FC<ReminderSettingsProps> = ({ onSettingsCh
                                     variant="outlined"
                                     onClick={() => setTimePickerOpen(true)}
                                     sx={{
-                                        borderColor: '#6C6FF9',
-                                        color: '#6C6FF9',
+                                        borderColor: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
+                                        color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9',
                                         borderRadius: 2,
                                         px: 2.5,
                                         py: 1,
                                         fontWeight: 600,
                                         textTransform: 'none',
+                                        borderWidth: mode === 'dark' ? '2px' : '1px',
                                         '&:hover': {
                                             borderColor: '#6C6FF9',
-                                            backgroundColor: mode === 'dark' ? '#6C6FF91A' : '#6C6FF914'
+                                            backgroundColor: mode === 'dark' ? '#6C6FF91F' : '#6C6FF914',
+                                            borderWidth: mode === 'dark' ? '2px' : '1px',
                                         }
                                     }}
                                 >

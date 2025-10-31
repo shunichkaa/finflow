@@ -14,9 +14,10 @@ import {
 
 interface BudgetListProps {
     onEdit?: (id: string) => void;
+    createButton?: React.ReactNode;
 }
 
-export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
+export const BudgetList: React.FC<BudgetListProps> = ({onEdit, createButton}) => {
     const {t} = useTranslation();
     const {mode} = useThemeMode();
     const budgets = useFinanceStore((state) => state.budgets);
@@ -30,26 +31,34 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
 
     return (
         <Box>
-                <Card elevation={2} sx={{
-                    flex: 1, 
-                    minWidth: 0,
-                    backgroundColor: mode === 'dark' ? '#A8A3F626' : '#A8A3F64D',
-                    border: mode === 'dark' ? '1px solid #A8A3F64D' : '1px solid #A8A3F666',
-                    mb: { xs: 2, sm: 3 }
+                <Box sx={{ 
+                    display: 'flex', 
+                    gap: { xs: 1.5, sm: 3, md: 4 }, 
+                    mb: { xs: 2, sm: 2 },
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    flexWrap: { xs: 'nowrap', sm: 'nowrap' }
                 }}>
+                    <Card elevation={2} sx={{
+                        flex: { xs: 1, sm: '1 1 auto' }, 
+                        minWidth: 0,
+                        maxWidth: { xs: 'none', sm: '400px', md: '350px' },
+                        backgroundColor: mode === 'dark' ? '#A8A3F626' : '#A8A3F64D',
+                        border: mode === 'dark' ? '1px solid #A8A3F64D' : '1px solid #A8A3F666',
+                    }}>
                     <CardContent sx={{ 
                         display: 'flex', 
                         justifyContent: 'space-between', 
                         alignItems: 'center',
-                        px: { xs: 1.5, sm: 2 },
-                        py: { xs: 1, sm: 1.5 },
-                        '&:last-child': { pb: { xs: 1, sm: 1.5 } }
+                        px: { xs: 1.25, sm: 1.5 },
+                        py: { xs: 0.75, sm: 1 },
+                        '&:last-child': { pb: { xs: 0.75, sm: 1 } }
                     }}>
                         <Typography 
                             variant="body2" 
                             sx={{ 
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                                fontSize: { xs: '0.75rem', sm: '0.813rem' },
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',
                                 whiteSpace: 'nowrap'
@@ -62,13 +71,19 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit}) => {
                             fontWeight="bold" 
                             sx={{ 
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                                fontSize: { xs: '1.25rem', sm: '1.75rem', md: '2.125rem' }
+                                fontSize: { xs: '1.25rem', sm: '1.5rem' }
                             }}
                         >
                             {budgets.length}
                         </Typography>
                     </CardContent>
-                </Card>
+                    </Card>
+                    {createButton && (
+                        <Box sx={{ flexShrink: 0 }}>
+                            {createButton}
+                        </Box>
+                    )}
+                </Box>
 
             <Box sx={{
                 display: 'grid', 

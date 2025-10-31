@@ -128,7 +128,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                             color="inherit"
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             sx={{
-                                display: {xs: 'none', sm: 'block'},
+                                display: {xs: 'none', sm: 'flex'},
                                 color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 mr: 2,
                                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -139,6 +139,7 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                 },
                                 '& svg': {
                                     transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                    color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                                 },
                             }}
                         >
@@ -158,6 +159,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                         opacity: sidebarOpen ? 0 : 1,
                                         transform: sidebarOpen ? 'rotate(90deg) scale(0.8)' : 'rotate(0deg) scale(1)',
                                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        fontSize: 24,
                                     }}
                                 />
                                 <ChevronLeft
@@ -166,6 +169,8 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                                         opacity: sidebarOpen ? 1 : 0,
                                         transform: sidebarOpen ? 'rotate(0deg) scale(1)' : 'rotate(-90deg) scale(0.8)',
                                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                                        fontSize: 24,
                                     }}
                                 />
                             </Box>

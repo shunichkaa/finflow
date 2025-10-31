@@ -290,7 +290,7 @@ export default function Profile() {
                 <Typography variant="body1" sx={{
                     color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99'
                 }}>
-                    {t('profile.subtitle', 'Управление профилем и настройками')}
+                    {t('profile.subtitle')}
                 </Typography>
             </Box>
 

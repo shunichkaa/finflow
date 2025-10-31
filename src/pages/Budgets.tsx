@@ -52,41 +52,46 @@ const Budgets: React.FC = () => {
                 >
                     {t('budgetsDescription')}
                 </Typography>
-
-                <Button
-                    variant="contained"
-                    startIcon={<AddIcon/>}
-                    onClick={() => setIsModalOpen(true)}
-                    sx={{
-                        background: mode === 'dark'
-                            ? 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)'
-                            : 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
-                        color: '#FFFFFF',
-                        fontWeight: 600,
-                        px: 4,
-                        py: 1.5,
-                        borderRadius: 3,
-                        textTransform: 'none',
-                        boxShadow: mode === 'dark'
-                            ? '0 8px 24px #6C6FF966'
-                            : '0 8px 24px #A8A3F666',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        '&:hover': {
-                            transform: 'translateY(-2px)',
-                            boxShadow: mode === 'dark'
-                                ? '0 12px 32px #6C6FF980'
-                                : '0 12px 32px #A8A3F680',
-                        }
-                    }}
-                >
-                    {t('createBudget')}
-                </Button>
             </Box>
 
-            <BudgetList onEdit={(id) => {
-                setEditingBudgetId(id);
-                setIsModalOpen(true);
-            }} />
+            <BudgetList 
+                onEdit={(id) => {
+                    setEditingBudgetId(id);
+                    setIsModalOpen(true);
+                }}
+                createButton={
+                    <Button
+                        variant="contained"
+                        startIcon={<AddIcon sx={{ fontSize: { xs: 18, sm: 20 } }} />}
+                        onClick={() => setIsModalOpen(true)}
+                        sx={{
+                            background: mode === 'dark'
+                                ? 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)'
+                                : 'linear-gradient(135deg, #6C6FF9 0%, #6C6FF9 100%)',
+                            color: '#FFFFFF',
+                            fontWeight: 600,
+                            px: { xs: 2, sm: 4 },
+                            py: { xs: 1, sm: 1.5 },
+                            borderRadius: 3,
+                            textTransform: 'none',
+                            fontSize: { xs: '0.813rem', sm: '1rem' },
+                            whiteSpace: 'nowrap',
+                            boxShadow: mode === 'dark'
+                                ? '0 8px 24px #6C6FF966'
+                                : '0 8px 24px #A8A3F666',
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            '&:hover': {
+                                transform: 'translateY(-2px)',
+                                boxShadow: mode === 'dark'
+                                    ? '0 12px 32px #6C6FF980'
+                                    : '0 12px 32px #A8A3F680',
+                            }
+                        }}
+                    >
+                        {t('createBudget')}
+                    </Button>
+                }
+            />
 
             <Modal open={isModalOpen} onClose={() => {
                 setIsModalOpen(false);

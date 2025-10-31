@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
 import { TransactionType } from '../../../Budgets/types';
 import { useThemeMode } from '../../../Budgets/theme/ThemeContext';
-import { getCategoriesByType, getCategoryIcon, getCategoryName } from '../../../Budgets/utils/categories.tsx';
+import { getCategoriesByType, getCategoryIcon, getCategoryName, ALL_CATEGORIES } from '../../../Budgets/utils/categories.tsx';
 import { DatePickerField } from '../../ui/DatePickerField.tsx';
 
 interface TransactionFiltersProps {
@@ -41,7 +41,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
 
     const filteredCategories = useMemo(() => {
         if (type === 'all') {
-            return [];
+            return ALL_CATEGORIES;
         }
         return getCategoriesByType(type);
     }, [type]);
@@ -49,7 +49,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
 
     return (
         <Paper sx={{ 
-            p: { xs: 1.5, sm: 2, md: 2.5 }, 
+            p: { xs: 1, sm: 1.25, md: 1.5 }, 
             mb: 2,
             backgroundColor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
             border: mode === 'dark' ? '1px solid #FFFFFF1A' : '1px solid #EFF0F6',
@@ -62,11 +62,11 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
             <Box sx={{ 
                 display: 'flex', 
                 flexDirection: { xs: 'column', sm: 'row' },
-                gap: 1.5,
+                gap: { xs: 1, sm: 1.25 },
                 width: '100%'
             }}>
                 {/* Row 1: Category (xs), full row; on desktop shows with the rest */}
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, px: { xs: 0.5, sm: 0 } }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, px: { xs: 0.5, sm: 0 } }}>
                 <Box 
                     onClick={onReset}
                     sx={{ 
@@ -77,7 +77,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                             '&:hover': { transform: 'scale(1.1)' }
                     }}
                 >
-                        <FilterListIcon sx={{ color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9', fontSize: 24 }} />
+                        <FilterListIcon sx={{ color: mode === 'dark' ? '#6C6FF9' : '#6C6FF9', fontSize: 20 }} />
                 </Box>
 
                                 <TextField
@@ -90,8 +90,8 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                             MenuProps: { PaperProps: { style: { maxHeight: 300 } } },
                     }}
                         sx={{
-                            minWidth: { xs: '100%', sm: 180 },
-                            maxWidth: { xs: '100%', sm: 280 },
+                            minWidth: { xs: '100%', sm: 160 },
+                            maxWidth: { xs: '100%', sm: 240 },
                         '& .MuiOutlinedInput-root': {
                             backgroundColor: mode === 'dark' ? '#FFFFFF0D' : '#FFFFFF',
                             color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
@@ -104,16 +104,14 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                     }}
                 >
                     <MenuItem value="">{t('allCategories')}</MenuItem>
-                    {type === 'all' ? null : (
-                        filteredCategories.map((cat) => (
-                            <MenuItem key={cat.id} value={cat.id}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                    {getCategoryIcon(cat.icon, 16)}
-                                    <span>{getCategoryName(cat.id, t)}</span>
-                                </Box>
-                            </MenuItem>
-                        ))
-                    )}
+                    {filteredCategories.map((cat) => (
+                        <MenuItem key={cat.id} value={cat.id}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                {getCategoryIcon(cat.icon, 16)}
+                                <span>{getCategoryName(cat.id, t)}</span>
+                            </Box>
+                        </MenuItem>
+                    ))}
                 </TextField>
                 </Box>
 
@@ -121,13 +119,13 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                 <Box sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 1.5,
+                    gap: { xs: 1, sm: 1.25 },
                     flexWrap: { xs: 'nowrap', sm: 'wrap' },
                     overflowX: { xs: 'auto', sm: 'visible' },
                     px: { xs: 0.5, sm: 0 },
                     width: '100%'
                 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 1.25 } }}>
                                 <DatePickerField
                     label={t('from')}
                     value={dateFrom}
@@ -152,7 +150,7 @@ export const TransactionFilters: React.FC<TransactionFiltersProps> = ({
                             ml: 'auto'
                     }}
                 >
-                        <ClearIcon sx={{ color: '#6C6FF9', fontSize: 24 }} />
+                        <ClearIcon sx={{ color: '#6C6FF9', fontSize: 20 }} />
                     </Box>
                 </Box>
             </Box>

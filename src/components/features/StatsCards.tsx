@@ -106,19 +106,46 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ onFilterClick }) => {
                     }}
                     onClick={() => onFilterClick && stat.filterType && onFilterClick(stat.filterType)}
                 >
-                    <CardContent>
-                        <Box sx={{ position: 'absolute', right: 16, top: 16, opacity: mode === 'dark' ? 0.2 : 0.3 }}>
-                            {stat.icon}
+                    <CardContent sx={{ position: 'relative', pr: { xs: 4, sm: 6 }, pb: { xs: 2, sm: 2.5 }, overflow: 'hidden' }}>
+                        <Box sx={{ position: 'absolute', right: 8, top: 8, opacity: mode === 'dark' ? 0.2 : 0.3, zIndex: 0 }}>
+                            <Box sx={{ fontSize: { xs: 32, sm: 36, md: 40 } }}>
+                                {stat.icon}
+                            </Box>
                         </Box>
-                        <Typography variant="body2" sx={{ opacity: mode === 'dark' ? 0.8 : 0.9, mb: 1 }}>
+                        <Typography variant="body2" sx={{ opacity: mode === 'dark' ? 0.8 : 0.9, mb: 1.5, position: 'relative', zIndex: 1 }}>
                             {stat.title}
                         </Typography>
-                        <Typography variant="h4" fontWeight="bold">
-                            {stat.title === t('income') && '+'}
-                            {stat.title === t('expense') && '-'}
-                            {stat.title === t('balance') && stat.value < 0 && '-'}
-                            {formatCurrency(Math.abs(stat.value), currency)}
-                        </Typography>
+                        <Box sx={{ 
+                            position: 'relative', 
+                            zIndex: 1,
+                            maxWidth: 'calc(100% - 50px)',
+                            minHeight: { xs: '2.5rem', sm: '3rem' },
+                        }}>
+                            <Typography 
+                                variant="h4" 
+                                fontWeight="bold"
+                                sx={{
+                                    lineHeight: 1.1,
+                                    fontSize: { 
+                                        xs: '0.875rem', 
+                                        sm: '1rem', 
+                                        md: '1.2rem',
+                                        lg: '1.4rem'
+                                    },
+                                    whiteSpace: 'normal',
+                                    wordBreak: 'break-word',
+                                    overflowWrap: 'break-word',
+                                    maxWidth: '100%',
+                                    display: 'block',
+                                }}
+                                title={`${stat.title === t('income') ? '+' : ''}${stat.title === t('expense') ? '-' : ''}${stat.title === t('balance') && stat.value < 0 ? '-' : ''}${formatCurrency(Math.abs(stat.value), currency)}`}
+                            >
+                                {stat.title === t('income') && '+'}
+                                {stat.title === t('expense') && '-'}
+                                {stat.title === t('balance') && stat.value < 0 && '-'}
+                                {formatCurrency(Math.abs(stat.value), currency)}
+                            </Typography>
+                        </Box>
                     </CardContent>
                 </Card>
             ))}

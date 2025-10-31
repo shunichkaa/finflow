@@ -83,19 +83,31 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                     bgcolor: mode === 'dark' ? '#272B3E' : '#FFFFFF',
                 },
             }}
+            slotProps={{
+                backdrop: {
+                    sx: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    }
+                }
+            }}
         >
-            <DialogTitle sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                pb: 2,
-            }}>
+            <DialogTitle 
+                component="div"
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    pb: 2,
+                }}
+            >
                 <Typography 
+                    component="h2"
                     variant="h4" 
                     fontWeight={700} 
                     sx={{ 
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
                         fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
+                        m: 0,
                     }}
                 >
                     {actualGoal.name}
@@ -149,10 +161,10 @@ export const GoalDetail: React.FC<GoalDetailProps> = ({ goal, open, onClose, onE
                             }}
                         />
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
-                            <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
+                            <Typography component="div" variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF' : '#272B3E' }}>
                                 {actualGoal.currentAmount.toLocaleString()} {currency}
                             </Typography>
-                            <Typography variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF80' : '#272B3E80' }}>
+                            <Typography component="div" variant="h6" sx={{ color: mode === 'dark' ? '#FFFFFF80' : '#272B3E80' }}>
                                 {actualGoal.targetAmount.toLocaleString()} {currency}
                             </Typography>
                         </Box>
