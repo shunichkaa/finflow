@@ -3,7 +3,6 @@ import { persist } from 'zustand/middleware';
 import { v4 as uuid } from 'uuid';
 import type { Transaction, Budget, CreateTransactionInput, CreateBudgetInput } from '../types';
 import { triggerSync } from '../utils/cloudSyncTrigger';
-import { useNotificationStore } from './useNotificationStore';
 
 
 export interface FinanceStore {
@@ -44,14 +43,7 @@ export const useFinanceStore = create<FinanceStore>()(
                     ],
                 }));
 
-                                useNotificationStore.getState().addNotification({
-                    type: 'reminder',
-                    severity: 'success',
-                    title: 'Транзакция добавлена',
-                    message: `${transaction.type === 'income' ? 'Доход' : 'Расход'} на сумму ${transaction.amount} успешно добавлен`,
-                });
-
-                                triggerSync();
+                triggerSync();
             },
 
             updateTransaction: (id, data) => {
@@ -87,14 +79,7 @@ export const useFinanceStore = create<FinanceStore>()(
                     ],
                 }));
 
-                                useNotificationStore.getState().addNotification({
-                    type: 'budget',
-                    severity: 'success',
-                    title: 'Бюджет создан',
-                    message: `Бюджет для категории "${budget.category}" успешно создан`,
-                });
-
-                                triggerSync();
+                triggerSync();
             },
 
             updateBudget: (id, data) => {

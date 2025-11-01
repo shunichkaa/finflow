@@ -44,7 +44,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit, createButton}) =>
                         fontWeight: 600
                     }}
                 >
-                    {t('noBudgets') || 'Нет бюджетов'}
+                    {t('noBudgets')}
                 </Typography>
                 <Typography
                     variant="body2"
@@ -55,7 +55,7 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit, createButton}) =>
                         maxWidth: '400px'
                     }}
                 >
-                    {t('noBudgetsDescription') || 'Создайте первый бюджет, чтобы начать контролировать расходы'}
+                    {t('noBudgetsDescription')}
                 </Typography>
                 {createButton && (
                     <Box sx={{ width: '100%', maxWidth: { xs: '100%', sm: '300px' } }}>

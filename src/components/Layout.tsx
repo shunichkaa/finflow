@@ -21,13 +21,6 @@ import {useThemeMode} from '../Budgets/theme/ThemeContext';
 import {useSettingsStore} from '../Budgets/store/useSettingsStore';
 import {supabase} from '../lib/supabaseClient';
 import {GradientBackground} from './ui/GradientBackground';
-import {NotificationCenter} from './features/notification/NotificationCenter';
-import {useNotifications} from '../Budgets/hooks/useNotifications';
-import {useDailyReminder} from '../Budgets/hooks/useDailyReminder';
-import {useReminderSystem} from '../Budgets/hooks/useReminderSystem';
-import {useBudgetNotifications} from '../Budgets/hooks/useBudgetNotifications';
-import {useRecurringNotifications} from '../Budgets/hooks/useRecurringNotifications';
-import {useMonthEndNotifications} from '../Budgets/hooks/useMonthEndNotifications';
 
 const drawerWidth = 280;
 
@@ -47,16 +40,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
     const [sidebarOpen, setSidebarOpen] = useState(defaultSidebarOpen);
 
     const isLoginPage = location.pathname === '/login';
-
-    useNotifications();
-
-    useDailyReminder();
-
-        useReminderSystem();
-
-    useBudgetNotifications();
-    useRecurringNotifications();
-    useMonthEndNotifications();
 
     useEffect(() => {
         setMobileOpen(false);
@@ -407,8 +390,6 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                         </Box>
 
                         <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-                            <NotificationCenter/>
-
                             {!sidebarOpen && !isLoginPage && (
                                 <>
                                     <IconButton
