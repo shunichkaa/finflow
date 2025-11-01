@@ -21,24 +21,32 @@ const Budgets: React.FC = () => {
 
     return (
         <Container
-            maxWidth="xl"
+            maxWidth={false}
             sx={{
-                py: {xs: 0.5, sm: 1},
-                px: {xs: 0.5, sm: 1, md: 1.5},
+                py: {xs: 1, sm: 1},
+                px: {xs: 1, sm: 1, md: 1.5},
+                width: '100%',
+                maxWidth: { xs: '100%', sm: '100%', md: '1536px' },
+                boxSizing: 'border-box',
                 transition: (theme) => theme.transitions.create(['padding', 'transform'], {
                     easing: theme.transitions.easing.easeInOut,
                     duration: theme.transitions.duration.complex,
                 }),
             }}
         >
-            <Box sx={{mb: 4, overflow: 'visible'}}>
+            <Box sx={{
+                mb: { xs: 3, sm: 4 },
+                overflow: 'visible',
+                width: '100%'
+            }}>
                 <Typography
                     variant="h4"
                     gutterBottom
                     fontWeight="700"
                     sx={{
                         color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
-                        mb: 1
+                        mb: 1,
+                        fontSize: { xs: '1.5rem', sm: '2rem' }
                     }}
                 >
                     {t('budgets')}
@@ -47,7 +55,8 @@ const Budgets: React.FC = () => {
                     variant="body1"
                     sx={{
                         color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99',
-                        mb: 3
+                        mb: 3,
+                        fontSize: { xs: '0.875rem', sm: '1rem' }
                     }}
                 >
                     {t('budgetsDescription')}
@@ -76,6 +85,7 @@ const Budgets: React.FC = () => {
                             textTransform: 'none',
                             fontSize: { xs: '0.813rem', sm: '1rem' },
                             whiteSpace: 'nowrap',
+                            width: { xs: '100%', sm: 'auto' },
                             boxShadow: mode === 'dark'
                                 ? '0 8px 24px #6C6FF966'
                                 : '0 8px 24px #A8A3F666',

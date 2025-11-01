@@ -529,11 +529,14 @@ export const Layout: React.FC<LayoutProps> = ({children, defaultSidebarOpen = tr
                     component="main"
                     sx={{
                         flexGrow: 1,
-                        p: {xs: 2, sm: 3},
+                        p: {xs: 0, sm: 3},
                         width: '100%',
+                        maxWidth: '100%',
                         mt: {xs: 8, sm: 9},
                         ml: {sm: (sidebarOpen && !isLoginPage) ? `${drawerWidth}px` : 0},
                         transition: 'margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        overflowX: 'hidden',
+                        boxSizing: 'border-box',
                     }}
                 >
                     {children ?? <Outlet/>}

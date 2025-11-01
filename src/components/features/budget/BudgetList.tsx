@@ -24,24 +24,63 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit, createButton}) =>
     const transactions = useFinanceStore((state) => state.transactions);
     const {currency} = useSettingsStore();
 
-
     if (budgets.length === 0) {
-        return null;
+        return (
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                py: { xs: 4, sm: 6 },
+                px: { xs: 2, sm: 4 },
+                textAlign: 'center'
+            }}>
+                <Typography
+                    variant="h6"
+                    sx={{
+                        color: mode === 'dark' ? '#FFFFFF' : '#272B3E',
+                        mb: 1,
+                        fontSize: { xs: '1rem', sm: '1.25rem' },
+                        fontWeight: 600
+                    }}
+                >
+                    {t('noBudgets') || 'Нет бюджетов'}
+                </Typography>
+                <Typography
+                    variant="body2"
+                    sx={{
+                        color: mode === 'dark' ? '#FFFFFFB3' : '#0600AB99',
+                        mb: { xs: 3, sm: 4 },
+                        fontSize: { xs: '0.813rem', sm: '0.875rem' },
+                        maxWidth: '400px'
+                    }}
+                >
+                    {t('noBudgetsDescription') || 'Создайте первый бюджет, чтобы начать контролировать расходы'}
+                </Typography>
+                {createButton && (
+                    <Box sx={{ width: '100%', maxWidth: { xs: '100%', sm: '300px' } }}>
+                        {createButton}
+                    </Box>
+                )}
+            </Box>
+        );
     }
 
     return (
-        <Box>
+        <Box sx={{ width: '100%', overflow: 'hidden' }}>
                 <Box sx={{ 
                     display: 'flex', 
-                    gap: { xs: 1.5, sm: 3, md: 4 }, 
+                    gap: { xs: 1, sm: 3, md: 4 }, 
                     mb: { xs: 2, sm: 2 },
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    flexWrap: { xs: 'nowrap', sm: 'nowrap' }
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    alignItems: { xs: 'stretch', sm: 'center' },
+                    flexWrap: 'nowrap',
+                    width: '100%'
                 }}>
                     <Card elevation={2} sx={{
-                        flex: { xs: 1, sm: '1 1 auto' }, 
+                        flex: { xs: 'none', sm: '1 1 auto' }, 
                         minWidth: 0,
+                        width: { xs: '100%', sm: 'auto' },
                         maxWidth: { xs: 'none', sm: '400px', md: '350px' },
                         backgroundColor: mode === 'dark' ? '#A8A3F626' : '#A8A3F64D',
                         border: mode === 'dark' ? '1px solid #A8A3F64D' : '1px solid #A8A3F666',
@@ -79,7 +118,10 @@ export const BudgetList: React.FC<BudgetListProps> = ({onEdit, createButton}) =>
                     </CardContent>
                     </Card>
                     {createButton && (
-                        <Box sx={{ flexShrink: 0 }}>
+                        <Box sx={{ 
+                            flexShrink: 0,
+                            width: { xs: '100%', sm: 'auto' }
+                        }}>
                             {createButton}
                         </Box>
                     )}

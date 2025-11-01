@@ -146,6 +146,7 @@ const lightThemeOptions: ThemeOptions = {
                     width: 100%;
                     height: 100%;
                     overflow: auto;
+                    overflow-x: hidden;
                 }
                 
                 body {
@@ -154,6 +155,7 @@ const lightThemeOptions: ThemeOptions = {
                     min-height: 100vh;
                     margin: 0;
                     padding: 0;
+                    overflow-x: hidden;
                 }
                 
                 
@@ -918,6 +920,7 @@ const darkThemeOptions: ThemeOptions = {
                     width: '100%',
                     height: '100%',
                     overflow: 'auto',
+                    overflowX: 'hidden',
                 },
                 '::-webkit-scrollbar': {
                     width: '10px',
@@ -941,6 +944,7 @@ const darkThemeOptions: ThemeOptions = {
                     minHeight: '100vh',
                     margin: 0,
                     padding: 0,
+                    overflowX: 'hidden',
                 },
             },
         },
